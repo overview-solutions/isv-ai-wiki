@@ -152,6 +152,10 @@ body {
   padding: 2.5rem 2.5rem 4rem;
 }
 
+#main.wide {
+  max-width: 920px;
+}
+
 /* Section */
 .section { display: none; }
 .section.active { display: block; }
@@ -223,6 +227,105 @@ body {
 .tag-active   { background: var(--green-50);  color: var(--green); }
 .tag-pilot    { background: var(--amber-50);  color: var(--amber); }
 .tag-planning { background: var(--teal-50);   color: var(--teal); }
+.tag-retired  { background: var(--bg-3);     color: var(--text-3); }
+.tag-pending  { background: var(--purple-50); color: var(--purple); }
+
+.project-section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 1.5rem 0 0.75rem;
+}
+
+.project-section-label:first-child { margin-top: 0; }
+
+.map-embed {
+  margin: 1rem 0 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+}
+
+.map-embed-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+}
+
+.map-embed-toolbar a { color: var(--green); text-decoration: none; }
+.map-embed-toolbar a:hover { text-decoration: underline; }
+
+.funded-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0;
+}
+
+.stat-chip {
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-2);
+  color: var(--text-2);
+}
+
+.stat-chip strong { color: var(--text); font-weight: 500; }
+
+.funded-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 380px;
+  overflow-y: auto;
+  margin-top: 0.75rem;
+}
+
+.funded-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.funded-row-name { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.funded-row-meta { font-size: 12px; color: var(--text-2); margin-top: 3px; }
+
+.toolkit-note {
+  margin-top: 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  background: var(--green-50);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.toolkit-note-title { font-weight: 500; color: var(--green); margin-bottom: 4px; font-size: 13px; }
+.toolkit-note p { color: var(--text-2); margin: 0; }
 
 /* Standards list */
 .standard-row {
@@ -553,9 +656,13 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
       Mission
     </div>
-    <div class="nav-item" data-section="projects" onclick="showSection('projects')">
+    <div class="nav-item" data-section="funded" onclick="showSection('funded')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Funded projects
+    </div>
+    <div class="nav-item" data-section="tech" onclick="showSection('tech')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Projects
+      Tech committee
     </div>
     <div class="nav-item" data-section="standards" onclick="showSection('standards')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
@@ -608,7 +715,7 @@ code {
     <div class="wiki-body" id="content-mission">
       <p>IEEE Smart Village integrates sustainable electricity, education, and entrepreneurial solutions to empower off-grid communities worldwide — bringing the world to the village through advanced technology for energy, communications, water, and sanitation.</p>
       <p>Every project addresses at least two of ISV's three pillars: <strong>Energy</strong> (solar-based electricity and micro-utilities), <strong>Education</strong> (digital classrooms, vocational training, SECI-based adult learning), and <strong>Entrepreneurship</strong> (community-owned energy businesses). These align with UN SDGs 7, 4, and 8.</p>
-      <p>The Technology Committee connects this field model to open interoperability work — microgrid standards (OpenAMI), metering and AMI protocols, spatial asset models, and remote monitoring — so community deployments scale without vendor lock-in.</p>
+      <p>The Technology Committee maintains open engineering initiatives — standards, monitoring tools, and interoperability layers — that support funded field projects without replacing them.</p>
     </div>
     <div class="ai-panel" id="ai-mission">
       <div class="ai-panel-label">AI editor — mission</div>
@@ -629,66 +736,101 @@ code {
     </div>
   </div>
 
-  <!-- PROJECTS -->
-  <div class="section" id="sec-projects">
+  <!-- FUNDED PROJECTS -->
+  <div class="section" id="sec-funded">
     <div class="section-header">
       <div>
-        <div class="section-title">Active projects</div>
-        <div class="section-sub">Field deployments and development initiatives</div>
+        <div class="section-title">Funded Solar PV projects</div>
+        <div class="section-sub">ISV seed-funded NGO deployments — energy, education, and enterprise in the field</div>
       </div>
-      <button class="edit-btn" onclick="toggleAI('projects')">
+    </div>
+    <div id="content-funded">
+      <div class="wiki-body">
+        <p>These are the core ISV mission: in-country NGO and entrepreneur partners running solar micro-utilities under tranche-based project agreements. Each addresses at least two of the three pillars and is tracked on the map below.</p>
+      </div>
+      <div class="funded-stats" id="funded-stats">
+        <span class="stat-chip">Loading map data…</span>
+      </div>
+      <div class="map-embed">
+        <iframe
+          title="IEEE Smart Village project map"
+          src="map-embed.html"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-embed-toolbar">
+          <span>Site locations on OpenStreetMap power infrastructure</span>
+          <span>
+            <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">Full map</a>
+            ·
+            <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">Source</a>
+          </span>
+        </div>
+      </div>
+      <div class="project-section-label">Active programs</div>
+      <div class="funded-list" id="funded-list"></div>
+      <div class="toolkit-note">
+        <div class="toolkit-note-title">Deployment toolkit</div>
+        <p>Many funded sites use ISV-designed hardware — the <strong>SunBlazer</strong> community charging station and <strong>Portable Battery Kit (PBK)</strong> — rather than custom one-off systems. Specs live on the <a href="https://linktr.ee/isv_tech" target="_blank">Tech Committee Linktree</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH COMMITTEE -->
+  <div class="section" id="sec-tech">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Technology Committee initiatives</div>
+        <div class="section-sub">Volunteer engineering efforts aligned to support funded field projects</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('tech')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
         Edit with AI
       </button>
     </div>
-    <div id="content-projects">
+    <div id="content-tech">
+      <div class="wiki-body">
+        <p>These are not PSA-funded field deployments. They are side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
+      </div>
       <div class="project-grid">
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
-            <span class="project-name">SunBlazer — Community Solar Charging Station</span>
+            <span class="project-name">Smart Village Project Map</span>
           </div>
-          <div class="project-desc">~1 kW modular PV community charging station in the ISV toolkit — portable, rapidly deployable, and built from widely available local materials. Continually updated (SunBlazer IV generation). Local entrepreneurs franchise stations; ISV also plans micro-grids for eventual integration with national grid extension where utilities arrive.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Portable Battery Kit (PBK)</span>
-          </div>
-          <div class="project-desc">Hot-swappable lead-acid battery kits leased to homes and micro-entrepreneurs for lighting and device charging. Remains a core part of NGO energy businesses even as sites move from SunBlazer-only to AC/DC micro-grids — monthly fees below kerosene and candles, with a low upfront security deposit.</div>
+          <div class="project-desc">Maintains the <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated funded deployments on OpenStreetMap power layers, synced from ISV grant records. Powers the map on the Funded projects page.</div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
             <span class="project-name">OpenAMI — Open Microgrid Interface</span>
           </div>
-          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible.</div>
+          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible — targets open alternatives to proprietary utility GIS schemas.</div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
             <span class="project-name">Drone Ops — Crop Health &amp; Environmental Monitoring</span>
           </div>
-          <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement in remote rural and equatorial communities.</div>
+          <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement — supporting agricultural productivity at funded village sites.</div>
         </div>
       </div>
     </div>
-    <div class="ai-panel" id="ai-projects">
-      <div class="ai-panel-label">AI editor — projects</div>
-      <textarea class="ai-input" id="input-projects" placeholder="e.g. 'Add a new project called OpenSolar Kenya with status Active'"></textarea>
+    <div class="ai-panel" id="ai-tech">
+      <div class="ai-panel-label">AI editor — tech committee</div>
+      <textarea class="ai-input" id="input-tech" placeholder="e.g. 'Add a mesh networking initiative for remote meter telemetry'"></textarea>
       <div class="ai-actions">
-        <button class="btn-generate" id="run-projects" onclick="runAI('projects')">
+        <button class="btn-generate" id="run-tech" onclick="runAI('tech')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Generate
         </button>
-        <button class="btn-cancel" onclick="toggleAI('projects')">Cancel</button>
-        <div class="spinner" id="spin-projects"></div>
-        <button class="btn-apply" id="apply-projects" onclick="applyContent('projects')">
+        <button class="btn-cancel" onclick="toggleAI('tech')">Cancel</button>
+        <div class="spinner" id="spin-tech"></div>
+        <button class="btn-apply" id="apply-tech" onclick="applyContent('tech')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           Apply
         </button>
       </div>
-      <div class="ai-result" id="result-projects"></div>
+      <div class="ai-result" id="result-tech"></div>
     </div>
   </div>
 
@@ -814,7 +956,7 @@ code {
       </div>
       <div class="wiki-body">
         <p>ISV maintains open datasets and schema definitions under permissive licenses. All microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
-        <p>The <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">Smart Village Project Map</a> geolocates funded deployments worldwide against OpenStreetMap power infrastructure. LiDAR and hyperspectral datasets support crop health and environmental monitoring; ADCP and sensor time-series feed the PostGIS/TimescaleDB schema in <code>schema/</code>.</p>
+        <p>Funded deployment locations live on the <a href="#" onclick="showSection('funded');return false">Funded projects map</a> (sourced from <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a>). Microgrid topology follows the OpenAMI GeoJSON schema; sensor time-series use the PostGIS/TimescaleDB definitions in <code>schema/</code>.</p>
       </div>
       <div class="db-note">
         <div class="db-note-title">Database architecture</div>
@@ -1012,14 +1154,95 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['mission','projects','standards','data','team','resources'];
+const SECTIONS = ['mission','funded','tech','standards','data','team','resources'];
+const GEOJSON_URL = 'https://overview-solutions.github.io/RemoteMonitorMap/projects.geojson';
 const aiResults = {};
+let fundedDataLoaded = false;
 
 function showSection(id) {
   SECTIONS.forEach(s => {
     document.getElementById('sec-' + s).classList.toggle('active', s === id);
-    document.querySelector(`[data-section="${s}"]`).classList.toggle('active', s === id);
+    document.querySelector(`[data-section="${s}"]`)?.classList.toggle('active', s === id);
   });
+  document.getElementById('main').classList.toggle('wide', id === 'funded');
+  if (id === 'funded') loadFundedProjects();
+}
+
+function normalizeName(name) {
+  return (name || '').replace(/\s+/g, ' ').trim();
+}
+
+function statusTag(code) {
+  if (code === 'A') return ['Active', 'tag-active'];
+  if (code === 'R') return ['Retired', 'tag-retired'];
+  return ['Pending', 'tag-pending'];
+}
+
+async function loadFundedProjects() {
+  if (fundedDataLoaded) return;
+  const statsEl = document.getElementById('funded-stats');
+  const listEl = document.getElementById('funded-list');
+  if (!statsEl || !listEl) return;
+
+  try {
+    const resp = await fetch(GEOJSON_URL);
+    if (!resp.ok) throw new Error('Map data unavailable');
+    const geo = await resp.json();
+    const byProject = new Map();
+
+    (geo.features || []).forEach(f => {
+      const p = f.properties || {};
+      const name = normalizeName(p['Project Name']);
+      if (!name) return;
+      const key = name.toLowerCase();
+      const row = {
+        name,
+        acronym: (p.Acronym || '').trim(),
+        country: (p.Country || p.Location || '').trim(),
+        org: (p['Organization Contracted'] || '').trim(),
+        link: (p.Link || '').trim(),
+        years: (p['Years Active'] || '').trim(),
+        status: (p['Retired / Active / Pending (Future)'] || '').trim(),
+        desc: (p['Project Description'] || '').trim()
+      };
+      const prev = byProject.get(key);
+      if (!prev || (!prev.acronym && row.acronym) || (!prev.desc && row.desc)) {
+        byProject.set(key, row);
+      }
+    });
+
+    const projects = Array.from(byProject.values());
+    const active = projects.filter(p => p.status === 'A');
+    const countries = new Set(active.map(p => p.country).filter(Boolean));
+    const sites = (geo.features || []).filter(f => f.properties?.['Retired / Active / Pending (Future)'] === 'A').length;
+
+    statsEl.innerHTML = [
+      `<span class="stat-chip"><strong>${active.length}</strong> active programs</span>`,
+      `<span class="stat-chip"><strong>${countries.size}</strong> countries</span>`,
+      `<span class="stat-chip"><strong>${sites}</strong> mapped sites</span>`
+    ].join('');
+
+    active.sort((a, b) => a.country.localeCompare(b.country) || a.name.localeCompare(b.name));
+    listEl.innerHTML = active.map(p => {
+      const [label, cls] = statusTag(p.status);
+      const title = p.acronym ? `${p.name} (${p.acronym})` : p.name;
+      const meta = [p.country, p.org, p.years].filter(Boolean).join(' · ');
+      const linkStart = p.link ? `<a href="${p.link}" target="_blank" rel="noopener">` : '';
+      const linkEnd = p.link ? '</a>' : '';
+      return `<div class="funded-row">
+        <div>
+          <div class="funded-row-name">${linkStart}${title}${linkEnd}</div>
+          <div class="funded-row-meta">${meta}</div>
+        </div>
+        <span class="tag ${cls}">${label}</span>
+      </div>`;
+    }).join('');
+
+    fundedDataLoaded = true;
+  } catch (e) {
+    statsEl.innerHTML = `<span class="stat-chip">Map list unavailable — use the <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">full map</a></span>`;
+    listEl.innerHTML = `<p style="font-size:13px;color:var(--text-2)">Could not load project data. The embedded map above still works — open the full map for site details.</p>`;
+  }
 }
 
 function toggleAI(sec) {

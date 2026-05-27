@@ -92,17 +92,29 @@ CREATE TABLE standards (
 
 INSERT INTO wiki_pages (slug, title, content) VALUES
   ('mission',   'Mission',       '{"body": "IEEE Smart Village accelerates sustainable energy access."}'),
-  ('projects',  'Projects',      '{}'),
+  ('funded',    'Funded Projects', '{}'),
+  ('tech',      'Tech Committee',  '{}'),
   ('standards', 'Standards',     '{}'),
   ('data',      'Open Data',     '{}'),
   ('team',      'Team',          '{}'),
   ('resources', 'Resources',     '{}');
 
-INSERT INTO projects (name, slug, status, description) VALUES
-  ('SunBlazer — Community Solar Charging Station', 'sunblazer',    'active',   '~1 kW portable PV charging station; SunBlazer IV generation; plans for national grid integration.'),
-  ('Portable Battery Kit (PBK)',                 'pbk',          'active',   'Hot-swappable battery kits leased to homes; core of NGO energy businesses alongside micro-grids.'),
-  ('OpenAMI — Open Microgrid Interface',     'openami',      'active',   'GeoJSON-based data model for interoperable microgrid asset management.'),
-  ('Drone Ops — Crop Health & Environmental Monitoring', 'drone-ops',    'active',   'BVLOS LiDAR and hyperspectral flights for crop health, vegetation analysis, and environmental monitoring.');
+INSERT INTO projects (name, slug, status, description, metadata) VALUES
+  ('Smart Village Project Map', 'project-map', 'active',
+   'RemoteMonitorMap — geolocated funded deployments on OSM power layers.',
+   '{"kind":"tech"}'),
+  ('OpenAMI — Open Microgrid Interface', 'openami', 'active',
+   'GeoJSON data model for interoperable microgrid asset management.',
+   '{"kind":"tech"}'),
+  ('Drone Ops — Crop Health & Environmental Monitoring', 'drone-ops', 'active',
+   'BVLOS aerial monitoring for crop health and environmental measurement.',
+   '{"kind":"tech"}'),
+  ('SunBlazer — Community Solar Charging Station', 'sunblazer', 'active',
+   'Portable PV charging station deployed at funded field sites.',
+   '{"kind":"toolkit"}'),
+  ('Portable Battery Kit (PBK)', 'pbk', 'active',
+   'Hot-swappable battery kits leased through NGO energy businesses.',
+   '{"kind":"toolkit"}');
 
 INSERT INTO standards (name, abbreviation, description, category, relevance) VALUES
   ('IEEE Smart Energy Profile', 'IEEE 2030.5', 'RESTful protocol for DER communication.', 'comms', 'Core compatibility target for OpenAMI data model.'),
