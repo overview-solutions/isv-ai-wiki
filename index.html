@@ -606,13 +606,13 @@ code {
       </button>
     </div>
     <div class="wiki-body" id="content-mission">
-      <p>IEEE Smart Village (ISV) accelerates sustainable energy access for underserved communities globally — with a focus on open data standards, microgrid architecture, and community-led deployment models.</p>
-      <p>Our working group bridges technical standards bodies and field practitioners, developing interoperable frameworks that outlast individual projects and enable communities to own their energy future.</p>
-      <p>Core focus areas: rural electrification, distributed energy resource (DER) coordination, open microgrid standards (OpenAMI), and measurement frameworks for long-term community resilience.</p>
+      <p>IEEE Smart Village integrates sustainable electricity, education, and entrepreneurial solutions to empower off-grid communities worldwide — bringing the world to the village through advanced technology for energy, communications, water, and sanitation.</p>
+      <p>Every project addresses at least two of ISV's three pillars: <strong>Energy</strong> (solar-based electricity and micro-utilities), <strong>Education</strong> (digital classrooms, vocational training, SECI-based adult learning), and <strong>Entrepreneurship</strong> (community-owned energy businesses). These align with UN SDGs 7, 4, and 8.</p>
+      <p>The Technology Committee connects this field model to open interoperability work — microgrid standards (OpenAMI), metering and AMI protocols, spatial asset models, and remote monitoring — so community deployments scale without vendor lock-in.</p>
     </div>
     <div class="ai-panel" id="ai-mission">
       <div class="ai-panel-label">AI editor — mission</div>
-      <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Add a paragraph about tidal energy work in Kake, Alaska' or 'Make this more concise'"></textarea>
+      <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Add a paragraph about rural microgrid deployments' or 'Make this more concise'"></textarea>
       <div class="ai-actions">
         <button class="btn-generate" id="run-mission" onclick="runAI('mission')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -646,36 +646,36 @@ code {
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
-            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
+            <span class="project-name">SunBlazer — Community Solar Charging Station</span>
           </div>
-          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible. Kake, Alaska tidal+solar deployment as reference implementation.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-pilot">Pilot</span>
-            <span class="project-name">Kake, Alaska — Tidal + Solar Microgrid</span>
-          </div>
-          <div class="project-desc">Tidal energy feasibility and ADCP measurement methodology for remote Alaskan community. FERC permitting pathway under development within IEEE Smart Village funding framework.</div>
+          <div class="project-desc">~1 kW modular PV community charging station in the ISV toolkit — portable, rapidly deployable, and built from widely available local materials. Continually updated (SunBlazer IV generation). Local entrepreneurs franchise stations; ISV also plans micro-grids for eventual integration with national grid extension where utilities arrive.</div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
-            <span class="project-name">Drone MRV — Climate Intervention Monitoring</span>
+            <span class="project-name">Portable Battery Kit (PBK)</span>
           </div>
-          <div class="project-desc">BVLOS LiDAR and hyperspectral drone operations for measurement, reporting, and verification of carbon and methane in remote and equatorial environments.</div>
+          <div class="project-desc">Hot-swappable lead-acid battery kits leased to homes and micro-entrepreneurs for lighting and device charging. Remains a core part of NGO energy businesses even as sites move from SunBlazer-only to AC/DC micro-grids — monthly fees below kerosene and candles, with a low upfront security deposit.</div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">Earth Brain — Interview Series</span>
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
           </div>
-          <div class="project-desc">Documentary interview series profiling grassroots electrification work globally. ACRE Insights (Kenya) identified as first subject following IEEE Power Africa, Rwanda.</div>
+          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Drone Ops — Crop Health &amp; Environmental Monitoring</span>
+          </div>
+          <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement in remote rural and equatorial communities.</div>
         </div>
       </div>
     </div>
     <div class="ai-panel" id="ai-projects">
       <div class="ai-panel-label">AI editor — projects</div>
-      <textarea class="ai-input" id="input-projects" placeholder="e.g. 'Add a new project called OpenSolar Kenya with status Active' or 'Update Kake project with FERC approval milestone'"></textarea>
+      <textarea class="ai-input" id="input-projects" placeholder="e.g. 'Add a new project called OpenSolar Kenya with status Active'"></textarea>
       <div class="ai-actions">
         <button class="btn-generate" id="run-projects" onclick="runAI('projects')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -706,17 +706,52 @@ code {
     </div>
     <div id="content-standards">
       <div class="standard-row">
+        <div class="standard-icon">🔌</div>
+        <div>
+          <div class="standard-name">IEEE 1547-2018 — DER Interconnection</div>
+          <div class="standard-desc">Interconnection and interoperability of distributed energy resources with the grid — voltage ride-through, power quality, and export limits. Foundation for behind-the-meter solar, storage, and microgrid tie-in.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">🏘️</div>
+        <div>
+          <div class="standard-name">IEEE 2030.7 — Microgrid Controllers</div>
+          <div class="standard-desc">Specification for microgrid controller functions: islanding, reconnection, load and DER coordination. Complements IEEE 2030.9 planning guidance for community-scale deployments.</div>
+        </div>
+      </div>
+      <div class="standard-row">
         <div class="standard-icon">⚡</div>
         <div>
           <div class="standard-name">IEEE 2030.5 — Smart Energy Profile</div>
-          <div class="standard-desc">RESTful protocol for DER communication. Core compatibility target for the OpenAMI data model.</div>
+          <div class="standard-desc">RESTful protocol for DER communication between devices, gateways, and head-end systems. Core compatibility target for the OpenAMI data model.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">📡</div>
+        <div>
+          <div class="standard-name">OpenADR 2.0 / 3.0 — Automated Demand Response</div>
+          <div class="standard-desc">Open standard for price, event, and load-control signals between utilities (VTN) and customer sites or DER (VEN). Enables demand response, curtailment, and flexible load dispatch — the grid-to-customer complement to IEEE 2030.5 device messaging in microgrid and AMI deployments.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">📊</div>
+        <div>
+          <div class="standard-name">DLMS/COSEM — IEC 62056</div>
+          <div class="standard-desc">Application-layer protocol for smart meter readout, prepaid/STS tokens, and remote disconnect. Required for vendor-interoperable AMI stacks; DCUs act as DLMS client to meters and server to the head-end system.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">🏷️</div>
+        <div>
+          <div class="standard-name">OBIS — IEC 62056-6-1</div>
+          <div class="standard-desc">Object Identification System codes that label every meter register — import/export energy, voltage, power factor, harmonics. Maps physical quantities to DLMS/COSEM data objects across meter vendors.</div>
         </div>
       </div>
       <div class="standard-row">
         <div class="standard-icon">☀️</div>
         <div>
           <div class="standard-name">SunSpec Alliance — Modbus / SunSpec JSON</div>
-          <div class="standard-desc">Device-level communication standards for solar inverters and storage. OpenAMI models align to SunSpec object definitions.</div>
+          <div class="standard-desc">Device-level models (e.g. Model 1, 11, 213) for inverters, storage, and subpanel metering. OpenAMI MQTT reporting aligns to SunSpec schemas for behind-the-meter DER visibility.</div>
         </div>
       </div>
       <div class="standard-row">
@@ -727,16 +762,16 @@ code {
         </div>
       </div>
       <div class="standard-row">
-        <div class="standard-icon">🛸</div>
+        <div class="standard-icon">🔗</div>
         <div>
-          <div class="standard-name">FAA BVLOS — Remote ID / UAS Integration</div>
-          <div class="standard-desc">Beyond visual line of sight operations framework for infrastructure inspection and environmental MRV using the CensysTech Sentaero 6.</div>
+          <div class="standard-name">Esri Utility Network — Electric Distribution &amp; Transmission</div>
+          <div class="standard-desc">Industry reference model for utility GIS topology — devices, junctions, lines, terminals, subnetworks, and connectivity rules for unbalanced distribution and transmission networks. ISV is developing an open-source equivalent aligned to OpenAMI GeoJSON and PostGIS, so microgrid operators get the same asset and connectivity semantics without ArcGIS lock-in.</div>
         </div>
       </div>
     </div>
     <div class="ai-panel" id="ai-standards">
       <div class="ai-panel-label">AI editor — standards</div>
-      <textarea class="ai-input" id="input-standards" placeholder="e.g. 'Add IEC 61850 as a relevant standard for substation automation'"></textarea>
+      <textarea class="ai-input" id="input-standards" placeholder="e.g. 'Add IEEE 519 for harmonic control' or 'Add IEC 61968 CIM for MDMS integration'"></textarea>
       <div class="ai-actions">
         <button class="btn-generate" id="run-standards" onclick="runAI('standards')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -779,7 +814,7 @@ code {
       </div>
       <div class="wiki-body">
         <p>ISV maintains open datasets and schema definitions under permissive licenses. All microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
-        <p>LiDAR point cloud datasets from infrastructure inspection flights are processed through open classification pipelines. Tidal resource data from ADCP deployments — including candidate sites such as Kake, AK — will be published to support community energy planning and FERC applications.</p>
+        <p>The <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">Smart Village Project Map</a> geolocates funded deployments worldwide against OpenStreetMap power infrastructure. LiDAR and hyperspectral datasets support crop health and environmental monitoring; ADCP and sensor time-series feed the PostGIS/TimescaleDB schema in <code>schema/</code>.</p>
       </div>
       <div class="db-note">
         <div class="db-note-title">Database architecture</div>
@@ -875,6 +910,55 @@ code {
         </div>
       </div>
       <div class="resource-row">
+        <div class="standard-icon">🔧</div>
+        <div>
+          <div class="resource-name">ISV Technologies — Linktree</div>
+          <div class="resource-desc"><a href="https://linktr.ee/isv_tech" target="_blank">linktr.ee/isv_tech</a> — curated index from the Technology Committee: wiki, project map, SunBlazer docs, portfolio briefs, and proposal intake forms.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📖</div>
+        <div>
+          <div class="resource-name">IEEE Smart Village Wiki</div>
+          <div class="resource-desc"><a href="http://wiki.smartvillage.ieee.org/" target="_blank">wiki.smartvillage.ieee.org</a> — DokuWiki with technologies (SunBlazer, PBK), standards, working group pages, and field documentation.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🗺️</div>
+        <div>
+          <div class="resource-name">Smart Village Project Map</div>
+          <div class="resource-desc"><a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">RemoteMonitorMap</a> — global map of ISV-funded deployments on OpenStreetMap power layers. Source: <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">GitHub</a>.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📋</div>
+        <div>
+          <div class="resource-name">ISV 2022 Portfolio of Project Briefs</div>
+          <div class="resource-desc"><a href="https://drive.google.com/file/d/1PHWLemf_nbjp2tA_pk5Jbweo-noGu5Ub/view" target="_blank">PDF</a> — two-page briefs on funded NGO projects, three-pillar approach, and ISV operating model (May 2022).</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📝</div>
+        <div>
+          <div class="resource-name">Business Proposal Intake Guidelines</div>
+          <div class="resource-desc"><a href="https://drive.google.com/file/d/1d6RYrpp6FBh9bC09yMgdpF-iercLW40t/view" target="_blank">PDF</a> — how to apply: three pillars, regional working group contacts, seed funding up to $25k (follow-on to $200k), and tranche-based agreements.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📄</div>
+        <div>
+          <div class="resource-name">Project Intake Details</div>
+          <div class="resource-desc"><a href="https://drive.google.com/file/d/1nhD3694tdBX3OLRAFy0-DlB3lTeralAr/view" target="_blank">PDF</a> — 2024 Alaska trip report and project intake documentation from the Technology Committee.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">☀️</div>
+        <div>
+          <div class="resource-name">SunBlazer IV Documentation</div>
+          <div class="resource-desc"><a href="https://drive.google.com/drive/folders/1CRyJIIwomfakESt-I66JKZF5sY9vf2wX" target="_blank">Google Drive folder</a> — specs, drawings, and field docs for the current SunBlazer generation.</div>
+        </div>
+      </div>
+      <div class="resource-row">
         <div class="standard-icon">⚡</div>
         <div>
           <div class="resource-name">SunSpec Alliance</div>
@@ -882,17 +966,10 @@ code {
         </div>
       </div>
       <div class="resource-row">
-        <div class="standard-icon">🗺️</div>
+        <div class="standard-icon">🗂️</div>
         <div>
           <div class="resource-name">OpenAMI Schema Repository</div>
           <div class="resource-desc">GeoJSON microgrid data model — open source, MIT license. See <code>schema/</code> in this repo.</div>
-        </div>
-      </div>
-      <div class="resource-row">
-        <div class="standard-icon">📄</div>
-        <div>
-          <div class="resource-name">Kake, AK Feasibility Study</div>
-          <div class="resource-desc">Tidal + solar microgrid technical and economic analysis. ADCP methodology and FERC pathway documentation.</div>
         </div>
       </div>
       <div class="callout">

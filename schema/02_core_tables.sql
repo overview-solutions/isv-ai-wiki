@@ -7,7 +7,7 @@
 
 CREATE TABLE wiki_pages (
   id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  slug         TEXT UNIQUE NOT NULL,          -- e.g. 'mission', 'kake-alaska'
+  slug         TEXT UNIQUE NOT NULL,          -- e.g. 'mission', 'openami'
   title        TEXT NOT NULL,
   content      JSONB NOT NULL DEFAULT '{}',   -- flexible section blocks
   metadata     JSONB NOT NULL DEFAULT '{}',
@@ -99,10 +99,10 @@ INSERT INTO wiki_pages (slug, title, content) VALUES
   ('resources', 'Resources',     '{}');
 
 INSERT INTO projects (name, slug, status, description) VALUES
+  ('SunBlazer — Community Solar Charging Station', 'sunblazer',    'active',   '~1 kW portable PV charging station; SunBlazer IV generation; plans for national grid integration.'),
+  ('Portable Battery Kit (PBK)',                 'pbk',          'active',   'Hot-swappable battery kits leased to homes; core of NGO energy businesses alongside micro-grids.'),
   ('OpenAMI — Open Microgrid Interface',     'openami',      'active',   'GeoJSON-based data model for interoperable microgrid asset management.'),
-  ('Kake, Alaska — Tidal + Solar Microgrid', 'kake-alaska',  'pilot',    'Tidal energy feasibility and ADCP measurement for remote Alaskan community.'),
-  ('Drone MRV — Climate Monitoring',         'drone-mrv',    'active',   'BVLOS LiDAR and hyperspectral operations for MRV of carbon and methane.'),
-  ('Earth Brain — Interview Series',         'earth-brain',  'planning', 'Documentary series profiling grassroots electrification globally.');
+  ('Drone Ops — Crop Health & Environmental Monitoring', 'drone-ops',    'active',   'BVLOS LiDAR and hyperspectral flights for crop health, vegetation analysis, and environmental monitoring.');
 
 INSERT INTO standards (name, abbreviation, description, category, relevance) VALUES
   ('IEEE Smart Energy Profile', 'IEEE 2030.5', 'RESTful protocol for DER communication.', 'comms', 'Core compatibility target for OpenAMI data model.'),
