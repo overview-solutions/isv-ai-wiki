@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEEE Smart Village — Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11;
+  --green-50: #EAF3DE;
+  --green-200: #97C459;
+  --amber: #BA7517;
+  --amber-50: #FAEEDA;
+  --teal: #0F6E56;
+  --teal-50: #E1F5EE;
+  --purple: #534AB7;
+  --purple-50: #EEEDFE;
+  --bg: #ffffff;
+  --bg-2: #f7f6f3;
+  --bg-3: #f0efe9;
+  --text: #1c1c1a;
+  --text-2: #5a5a55;
+  --text-3: #9a9990;
+  --border: rgba(0,0,0,0.08);
+  --border-2: rgba(0,0,0,0.14);
+  --sidebar-w: 210px;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18181a;
+    --bg-2: #222224;
+    --bg-3: #2a2a2c;
+    --text: #e8e7e0;
+    --text-2: #9a9890;
+    --text-3: #5a5a55;
+    --border: rgba(255,255,255,0.08);
+    --border-2: rgba(255,255,255,0.14);
+    --green-50: #1a2e0a;
+    --amber-50: #2a1e08;
+    --teal-50: #082018;
+    --purple-50: #16143a;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+#sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  background: var(--bg-2);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-logo {
+  padding: 1.25rem 1rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: var(--green);
+  color: var(--green-50);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.logo-name { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.logo-sub  { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+
+.nav-group {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 0 1rem 0.4rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 1rem;
+  font-size: 13px;
+  color: var(--text-2);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.1s, color 0.1s;
+  text-decoration: none;
+}
+
+.nav-item:hover { background: var(--bg-3); color: var(--text); }
+.nav-item.active { color: var(--green); border-left-color: var(--green); background: var(--bg); font-weight: 500; }
+.nav-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.sidebar-bottom { margin-top: auto; padding: 0.75rem 1rem; border-top: 1px solid var(--border); }
+
+.api-status {
+  font-size: 11px;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.api-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--text-3);
+  flex-shrink: 0;
+}
+
+.api-dot.connected { background: var(--green); }
+
+/* Main */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  max-width: 760px;
+  padding: 2.5rem 2.5rem 4rem;
+}
+
+/* Section */
+.section { display: none; }
+.section.active { display: block; }
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title { font-size: 22px; font-weight: 500; }
+.section-sub { font-size: 13px; color: var(--text-2); margin-top: 4px; }
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-family: var(--font);
+  padding: 6px 12px;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.1s, color 0.1s;
+}
+
+.edit-btn:hover { background: var(--bg-3); color: var(--text); }
+.edit-btn svg { width: 13px; height: 13px; }
+
+/* Wiki body */
+.wiki-body { font-size: 15px; line-height: 1.8; color: var(--text); }
+.wiki-body p { margin-bottom: 0.85rem; }
+
+/* Project cards */
+.project-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.project-name { font-size: 14px; font-weight: 500; }
+.project-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.tag-active   { background: var(--green-50);  color: var(--green); }
+.tag-pilot    { background: var(--amber-50);  color: var(--amber); }
+.tag-planning { background: var(--teal-50);   color: var(--teal); }
+
+/* Standards list */
+.standard-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.standard-row:last-child { border-bottom: none; }
+
+.standard-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+
+.standard-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+.standard-desc { font-size: 13px; color: var(--text-2); }
+
+/* Tags row */
+.tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+
+.tag-chip {
+  font-size: 12px;
+  padding: 3px 10px;
+  border: 1px solid var(--border-2);
+  border-radius: 20px;
+  color: var(--text-2);
+  background: var(--bg-2);
+}
+
+/* Team grid */
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.team-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--bg);
+}
+
+.team-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--green-50);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.team-name { font-size: 14px; font-weight: 500; }
+.team-role { font-size: 12px; color: var(--text-2); }
+.team-focus { font-size: 12px; color: var(--text-2); margin-top: 4px; line-height: 1.4; }
+
+.add-card {
+  border: 1px dashed var(--border-2);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--text-3);
+  font-size: 12px;
+  transition: border-color 0.15s, color 0.15s;
+  text-align: center;
+  min-height: 100px;
+}
+
+.add-card:hover { border-color: var(--green); color: var(--green); }
+
+/* Resources */
+.resource-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.resource-row:last-of-type { border-bottom: none; }
+.resource-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+.resource-desc { font-size: 13px; color: var(--text-2); }
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 8px;
+  background: var(--amber-50);
+  font-size: 13px;
+  color: var(--amber);
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+/* AI Panel */
+.ai-panel {
+  margin-top: 1.25rem;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--bg-2);
+  display: none;
+}
+
+.ai-panel.open { display: block; }
+
+.ai-panel-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.ai-input {
+  width: 100%;
+  padding: 9px 11px;
+  font-size: 13px;
+  font-family: var(--font);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+  min-height: 68px;
+  margin-bottom: 0.6rem;
+}
+
+.ai-input:focus { outline: none; border-color: var(--green); }
+
+.ai-actions { display: flex; align-items: center; gap: 8px; }
+
+.btn-generate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-family: var(--font);
+  font-weight: 500;
+  padding: 7px 13px;
+  border: 1px solid var(--green);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--green);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.btn-generate:hover { background: var(--green-50); }
+.btn-generate:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-cancel {
+  font-size: 12px;
+  font-family: var(--font);
+  padding: 7px 11px;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.btn-apply {
+  font-size: 12px;
+  font-family: var(--font);
+  padding: 7px 11px;
+  border: 1px solid var(--teal);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  display: none;
+}
+
+.btn-apply.show { display: inline-flex; align-items: center; gap: 4px; }
+
+.ai-result {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  display: none;
+}
+
+.ai-result.show { display: block; }
+
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid var(--border-2);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* API Key Modal */
+#api-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+#api-modal.open { display: flex; }
+
+.modal-box {
+  background: var(--bg);
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem;
+}
+
+.modal-title { font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; }
+.modal-sub { font-size: 13px; color: var(--text-2); margin-bottom: 1rem; line-height: 1.5; }
+
+.modal-input {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 9px 11px;
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  background: var(--bg-2);
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.modal-input:focus { outline: none; border-color: var(--green); }
+
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+.btn-save {
+  font-size: 13px;
+  font-family: var(--font);
+  padding: 7px 14px;
+  border: none;
+  border-radius: 7px;
+  background: var(--green);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-close {
+  font-size: 13px;
+  font-family: var(--font);
+  padding: 7px 14px;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+/* DB callout */
+.db-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--purple);
+  border-radius: 8px;
+  background: var(--purple-50);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.db-note-title { font-weight: 500; color: var(--purple); margin-bottom: 4px; font-size: 13px; }
+.db-note p { color: var(--text-2); margin: 0; }
+
+code {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--bg-3);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--teal);
+}
+
+@media (max-width: 600px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 1.5rem 1rem 3rem; }
+  .team-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">ISV</div>
+    <div class="logo-name">Smart Village</div>
+    <div class="logo-sub">IEEE Working Group</div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Navigation</div>
+    <div class="nav-item active" data-section="mission" onclick="showSection('mission')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+      Mission
+    </div>
+    <div class="nav-item" data-section="projects" onclick="showSection('projects')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Projects
+    </div>
+    <div class="nav-item" data-section="standards" onclick="showSection('standards')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      Standards
+    </div>
+    <div class="nav-item" data-section="data" onclick="showSection('data')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      Open data
+    </div>
+    <div class="nav-item" data-section="team" onclick="showSection('team')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team
+    </div>
+    <div class="nav-item" data-section="resources" onclick="showSection('resources')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Resources
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label">Schema</div>
+    <a class="nav-item" href="schema/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      SQL files
+    </a>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="api-status" onclick="openApiModal()">
+      <div class="api-dot" id="api-dot"></div>
+      <span id="api-status-text">AI editor: not configured</span>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- MISSION -->
+  <div class="section active" id="sec-mission">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Mission</div>
+        <div class="section-sub">What IEEE Smart Village is building toward</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('mission')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div class="wiki-body" id="content-mission">
+      <p>IEEE Smart Village (ISV) accelerates sustainable energy access for underserved communities globally — with a focus on open data standards, microgrid architecture, and community-led deployment models.</p>
+      <p>Our working group bridges technical standards bodies and field practitioners, developing interoperable frameworks that outlast individual projects and enable communities to own their energy future.</p>
+      <p>Core focus areas: rural electrification, distributed energy resource (DER) coordination, open microgrid standards (OpenAMI), and measurement frameworks for long-term community resilience.</p>
+    </div>
+    <div class="ai-panel" id="ai-mission">
+      <div class="ai-panel-label">AI editor — mission</div>
+      <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Add a paragraph about tidal energy work in Kake, Alaska' or 'Make this more concise'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-mission" onclick="runAI('mission')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('mission')">Cancel</button>
+        <div class="spinner" id="spin-mission"></div>
+        <button class="btn-apply" id="apply-mission" onclick="applyContent('mission')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-mission"></div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section" id="sec-projects">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Active projects</div>
+        <div class="section-sub">Field deployments and development initiatives</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('projects')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div id="content-projects">
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
+          </div>
+          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible. Kake, Alaska tidal+solar deployment as reference implementation.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-pilot">Pilot</span>
+            <span class="project-name">Kake, Alaska — Tidal + Solar Microgrid</span>
+          </div>
+          <div class="project-desc">Tidal energy feasibility and ADCP measurement methodology for remote Alaskan community. FERC permitting pathway under development within IEEE Smart Village funding framework.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Drone MRV — Climate Intervention Monitoring</span>
+          </div>
+          <div class="project-desc">BVLOS LiDAR and hyperspectral drone operations for measurement, reporting, and verification of carbon and methane in remote and equatorial environments.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-planning">Planning</span>
+            <span class="project-name">Earth Brain — Interview Series</span>
+          </div>
+          <div class="project-desc">Documentary interview series profiling grassroots electrification work globally. ACRE Insights (Kenya) identified as first subject following IEEE Power Africa, Rwanda.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-panel" id="ai-projects">
+      <div class="ai-panel-label">AI editor — projects</div>
+      <textarea class="ai-input" id="input-projects" placeholder="e.g. 'Add a new project called OpenSolar Kenya with status Active' or 'Update Kake project with FERC approval milestone'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-projects" onclick="runAI('projects')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('projects')">Cancel</button>
+        <div class="spinner" id="spin-projects"></div>
+        <button class="btn-apply" id="apply-projects" onclick="applyContent('projects')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-projects"></div>
+    </div>
+  </div>
+
+  <!-- STANDARDS -->
+  <div class="section" id="sec-standards">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Standards</div>
+        <div class="section-sub">Frameworks and protocols ISV develops and adopts</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('standards')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div id="content-standards">
+      <div class="standard-row">
+        <div class="standard-icon">⚡</div>
+        <div>
+          <div class="standard-name">IEEE 2030.5 — Smart Energy Profile</div>
+          <div class="standard-desc">RESTful protocol for DER communication. Core compatibility target for the OpenAMI data model.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">☀️</div>
+        <div>
+          <div class="standard-name">SunSpec Alliance — Modbus / SunSpec JSON</div>
+          <div class="standard-desc">Device-level communication standards for solar inverters and storage. OpenAMI models align to SunSpec object definitions.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">🗺️</div>
+        <div>
+          <div class="standard-name">GeoJSON — OpenAMI Spatial Schema</div>
+          <div class="standard-desc">ISV-developed GeoJSON schema for microgrid asset mapping, topology, and grid interconnection data. PostGIS compatible.</div>
+        </div>
+      </div>
+      <div class="standard-row">
+        <div class="standard-icon">🛸</div>
+        <div>
+          <div class="standard-name">FAA BVLOS — Remote ID / UAS Integration</div>
+          <div class="standard-desc">Beyond visual line of sight operations framework for infrastructure inspection and environmental MRV using the CensysTech Sentaero 6.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-panel" id="ai-standards">
+      <div class="ai-panel-label">AI editor — standards</div>
+      <textarea class="ai-input" id="input-standards" placeholder="e.g. 'Add IEC 61850 as a relevant standard for substation automation'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-standards" onclick="runAI('standards')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('standards')">Cancel</button>
+        <div class="spinner" id="spin-standards"></div>
+        <button class="btn-apply" id="apply-standards" onclick="applyContent('standards')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-standards"></div>
+    </div>
+  </div>
+
+  <!-- DATA -->
+  <div class="section" id="sec-data">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Open data</div>
+        <div class="section-sub">Datasets, schemas, and open repositories</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('data')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div id="content-data">
+      <div class="tags-row">
+        <span class="tag-chip">GeoJSON</span>
+        <span class="tag-chip">OpenAMI</span>
+        <span class="tag-chip">LiDAR</span>
+        <span class="tag-chip">Hyperspectral</span>
+        <span class="tag-chip">ADCP</span>
+        <span class="tag-chip">Tidal</span>
+        <span class="tag-chip">NDVI</span>
+        <span class="tag-chip">TimescaleDB</span>
+        <span class="tag-chip">PostGIS</span>
+      </div>
+      <div class="wiki-body">
+        <p>ISV maintains open datasets and schema definitions under permissive licenses. All microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
+        <p>LiDAR point cloud datasets from infrastructure inspection flights are processed through open classification pipelines. Tidal resource data from ADCP deployments — including candidate sites such as Kake, AK — will be published to support community energy planning and FERC applications.</p>
+      </div>
+      <div class="db-note">
+        <div class="db-note-title">Database architecture</div>
+        <p>This wiki is designed to connect to a PostgreSQL backend with <code>PostGIS</code> for spatial assets, <code>TimescaleDB</code> for sensor time-series, and optionally <code>pgvector</code> for semantic search. See the <code>schema/</code> directory for full SQL definitions.</p>
+      </div>
+    </div>
+    <div class="ai-panel" id="ai-data">
+      <div class="ai-panel-label">AI editor — open data</div>
+      <textarea class="ai-input" id="input-data" placeholder="e.g. 'Add a section about our GitHub repository structure and licensing'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-data" onclick="runAI('data')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('data')">Cancel</button>
+        <div class="spinner" id="spin-data"></div>
+        <button class="btn-apply" id="apply-data" onclick="applyContent('data')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-data"></div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section" id="sec-team">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Team</div>
+        <div class="section-sub">Leadership and key collaborators</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('team')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div id="content-team">
+      <div class="team-grid">
+        <div class="team-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div class="team-avatar">AO</div>
+            <div>
+              <div class="team-name">Adam Overview</div>
+              <div class="team-role">Open Data & Drone Ops</div>
+            </div>
+          </div>
+          <div class="team-focus">BVLOS operations, LiDAR, OpenAMI GeoJSON schema lead, IEEE Smart Village advisory</div>
+        </div>
+        <div class="add-card" onclick="document.getElementById('input-team').value='Add a new team member card'; toggleAI(\'team\'); document.getElementById(\'input-team\').focus()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Add team member
+        </div>
+      </div>
+    </div>
+    <div class="ai-panel" id="ai-team">
+      <div class="ai-panel-label">AI editor — team</div>
+      <textarea class="ai-input" id="input-team" placeholder="e.g. 'Add Dr. Jane Smith, Energy Policy Lead, focused on FERC regulatory frameworks'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-team" onclick="runAI('team')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('team')">Cancel</button>
+        <div class="spinner" id="spin-team"></div>
+        <button class="btn-apply" id="apply-team" onclick="applyContent('team')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-team"></div>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="section" id="sec-resources">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Resources</div>
+        <div class="section-sub">Links, papers, and working documents</div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('resources')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit with AI
+      </button>
+    </div>
+    <div id="content-resources">
+      <div class="resource-row">
+        <div class="standard-icon">🌐</div>
+        <div>
+          <div class="resource-name">IEEE Smart Village — Main Site</div>
+          <div class="resource-desc"><a href="https://ieeesmartvillage.org" target="_blank">ieeesmartvillage.org</a> — membership, news, grants, and field reports.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">⚡</div>
+        <div>
+          <div class="resource-name">SunSpec Alliance</div>
+          <div class="resource-desc"><a href="https://sunspec.org" target="_blank">sunspec.org</a> — open standards for solar and storage device interoperability.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🗺️</div>
+        <div>
+          <div class="resource-name">OpenAMI Schema Repository</div>
+          <div class="resource-desc">GeoJSON microgrid data model — open source, MIT license. See <code>schema/</code> in this repo.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📄</div>
+        <div>
+          <div class="resource-name">Kake, AK Feasibility Study</div>
+          <div class="resource-desc">Tidal + solar microgrid technical and economic analysis. ADCP methodology and FERC pathway documentation.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div><strong>Hosting:</strong> Deploy this site via GitHub Pages (Settings → Pages → Deploy from branch: <code>main</code>, folder: <code>/</code>). Free SSL, auto-renews — no cert expiry ever again.</div>
+      </div>
+    </div>
+    <div class="ai-panel" id="ai-resources">
+      <div class="ai-panel-label">AI editor — resources</div>
+      <textarea class="ai-input" id="input-resources" placeholder="e.g. 'Add a link to the Airminers community with a description of its relevance to ISV's MRV work'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-resources" onclick="runAI('resources')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('resources')">Cancel</button>
+        <div class="spinner" id="spin-resources"></div>
+        <button class="btn-apply" id="apply-resources" onclick="applyContent('resources')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-resources"></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- API Key Modal -->
+<div id="api-modal">
+  <div class="modal-box">
+    <div class="modal-title">Configure AI editor</div>
+    <div class="modal-sub">Enter your Anthropic API key to enable AI-assisted editing. Stored locally in your browser — never sent anywhere except directly to Anthropic.</div>
+    <input class="modal-input" type="password" id="api-key-input" placeholder="sk-ant-...">
+    <div class="modal-actions">
+      <button class="btn-close" onclick="closeApiModal()">Cancel</button>
+      <button class="btn-save" onclick="saveApiKey()">Save key</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS = ['mission','projects','standards','data','team','resources'];
+const aiResults = {};
+
+function showSection(id) {
+  SECTIONS.forEach(s => {
+    document.getElementById('sec-' + s).classList.toggle('active', s === id);
+    document.querySelector(`[data-section="${s}"]`).classList.toggle('active', s === id);
+  });
+}
+
+function toggleAI(sec) {
+  const panel = document.getElementById('ai-' + sec);
+  const isOpen = panel.classList.contains('open');
+  SECTIONS.forEach(s => document.getElementById('ai-' + s).classList.remove('open'));
+  if (!isOpen) panel.classList.add('open');
+}
+
+async function runAI(sec) {
+  const apiKey = localStorage.getItem('isv_api_key');
+  if (!apiKey) { openApiModal(); return; }
+
+  const instruction = document.getElementById('input-' + sec).value.trim();
+  if (!instruction) return;
+
+  const currentContent = document.getElementById('content-' + sec).innerText;
+  const runBtn = document.getElementById('run-' + sec);
+  const spinner = document.getElementById('spin-' + sec);
+  const resultEl = document.getElementById('result-' + sec);
+  const applyBtn = document.getElementById('apply-' + sec);
+
+  runBtn.disabled = true;
+  spinner.style.display = 'inline-block';
+  resultEl.classList.remove('show');
+  applyBtn.classList.remove('show');
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `You are editing a section of the IEEE Smart Village wiki.\n\nSection: "${sec}"\n\nCurrent content:\n${currentContent}\n\nEdit instruction: ${instruction}\n\nReturn ONLY the revised plain text content (no HTML, no markdown, no preamble). Professional, concise.`
+        }]
+      })
+    });
+    const data = await resp.json();
+    const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('') || 'No response received.';
+    aiResults[sec] = text;
+    resultEl.textContent = text;
+    resultEl.classList.add('show');
+    applyBtn.classList.add('show');
+  } catch(e) {
+    resultEl.textContent = 'Error: ' + e.message;
+    resultEl.classList.add('show');
+  }
+
+  runBtn.disabled = false;
+  spinner.style.display = 'none';
+}
+
+function applyContent(sec) {
+  if (!aiResults[sec]) return;
+  const el = document.getElementById('content-' + sec);
+  const paras = aiResults[sec].split('\n\n').filter(Boolean);
+  el.innerHTML = paras.map(p => `<p>${p}</p>`).join('');
+  localStorage.setItem('isv_content_' + sec, aiResults[sec]);
+  document.getElementById('ai-' + sec).classList.remove('open');
+}
+
+function openApiModal() {
+  const existing = localStorage.getItem('isv_api_key') || '';
+  document.getElementById('api-key-input').value = existing;
+  document.getElementById('api-modal').classList.add('open');
+}
+
+function closeApiModal() {
+  document.getElementById('api-modal').classList.remove('open');
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (key) {
+    localStorage.setItem('isv_api_key', key);
+    updateApiStatus();
+  }
+  closeApiModal();
+}
+
+function updateApiStatus() {
+  const key = localStorage.getItem('isv_api_key');
+  const dot = document.getElementById('api-dot');
+  const txt = document.getElementById('api-status-text');
+  if (key) {
+    dot.classList.add('connected');
+    txt.textContent = 'AI editor: ready';
+  } else {
+    dot.classList.remove('connected');
+    txt.textContent = 'AI editor: click to configure';
+  }
+}
+
+// Restore saved content
+SECTIONS.forEach(sec => {
+  const saved = localStorage.getItem('isv_content_' + sec);
+  if (saved) {
+    const el = document.getElementById('content-' + sec);
+    if (el) {
+      const paras = saved.split('\n\n').filter(Boolean);
+      el.innerHTML = paras.map(p => `<p>${p}</p>`).join('');
+    }
+  }
+});
+
+// Close modal on backdrop click
+document.getElementById('api-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeApiModal();
+});
+
+updateApiStatus();
+</script>
+</body>
+</html>
