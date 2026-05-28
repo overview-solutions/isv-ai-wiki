@@ -153,8 +153,106 @@ body {
 }
 
 #main.wide {
-  max-width: 920px;
+  max-width: 960px;
 }
+
+#main.notes-wide {
+  max-width: none;
+  width: calc(100vw - var(--sidebar-w) - 4rem);
+}
+
+.nav-sub {
+  padding: 0.15rem 0 0.5rem;
+}
+
+.nav-sub-item {
+  display: block;
+  padding: 5px 1rem 5px 2.35rem;
+  font-size: 12px;
+  color: var(--text-3);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.1s, color 0.1s;
+  line-height: 1.35;
+}
+
+.nav-sub-item:hover {
+  color: var(--text-2);
+  background: var(--bg-3);
+}
+
+.nav-sub-item.active {
+  color: var(--green);
+  border-left-color: var(--green);
+  background: var(--bg);
+  font-weight: 500;
+}
+
+.notes-embed {
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.notes-embed iframe {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 11rem);
+  min-height: 560px;
+  border: 0;
+  background: var(--bg);
+}
+
+.notes-embed-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+}
+
+.notes-embed-toolbar a {
+  color: var(--green);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.notes-embed-toolbar a:hover { text-decoration: underline; }
+
+.notes-index {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.notes-index-item {
+  display: block;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.1s, background 0.1s;
+}
+
+.notes-index-item:hover,
+.notes-index-item.active {
+  border-color: var(--green);
+  background: var(--green-50);
+}
+
+.notes-index-title { font-size: 14px; font-weight: 500; }
+.notes-index-meta { font-size: 12px; color: var(--text-2); margin-top: 3px; }
 
 /* Section */
 .section { display: none; }
@@ -664,6 +762,13 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       Tech committee
     </div>
+    <div class="nav-item" data-section="notes" onclick="showSection('notes')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Meeting notes
+    </div>
+    <div class="nav-sub" id="nav-sub-notes">
+      <div class="nav-sub-item active" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
+    </div>
     <div class="nav-item" data-section="standards" onclick="showSection('standards')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Standards
@@ -812,6 +917,13 @@ code {
             <span class="project-name">Drone Ops — Crop Health &amp; Environmental Monitoring</span>
           </div>
           <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement — supporting agricultural productivity at funded village sites.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-pilot">Notes</span>
+            <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
+          </div>
+          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a></div>
         </div>
       </div>
     </div>
@@ -1066,6 +1178,13 @@ code {
         </div>
       </div>
       <div class="resource-row">
+        <div class="standard-icon">📡</div>
+        <div>
+          <div class="resource-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes</a> — STS/SMS token path, redundant NAN channels, CIU/phone relay proposal, and call action items.</div>
+        </div>
+      </div>
+      <div class="resource-row">
         <div class="standard-icon">🗺️</div>
         <div>
           <div class="resource-name">Smart Village Project Map</div>
@@ -1138,6 +1257,34 @@ code {
     </div>
   </div>
 
+  <!-- MEETING NOTES -->
+  <div class="section" id="sec-notes">
+    <div class="section-header">
+      <div>
+        <div class="section-title" id="notes-section-title">Meeting notes</div>
+        <div class="section-sub" id="notes-section-sub">Technology Committee call notes — preview below</div>
+      </div>
+    </div>
+    <div id="content-notes">
+      <div class="wiki-body">
+        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. The topology diagram toggles between <strong>Current</strong> and <strong>Proposed relay</strong> inside the preview.</p>
+      </div>
+      <div class="notes-index" id="notes-index">
+        <a class="notes-index-item active" href="#" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28');return false">
+          <div class="notes-index-title">Metering &amp; comms topology</div>
+          <div class="notes-index-meta">28 May 2026 · STS · SMS · DLMS · redundant NAN · CIU/phone relay</div>
+        </a>
+      </div>
+      <div class="notes-embed">
+        <div class="notes-embed-toolbar">
+          <span id="notes-embed-label">28 May 2026 · Metering &amp; comms topology</span>
+          <a href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Open in new tab</a>
+        </div>
+        <iframe id="notes-frame" title="Meeting notes preview" src="tech-comm-2026-05-28-metering-topology.html?embed=1"></iframe>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- API Key Modal -->
@@ -1154,19 +1301,70 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['mission','funded','tech','standards','data','team','resources'];
+const SECTIONS = ['mission','funded','tech','notes','standards','data','team','resources'];
+const MEETING_NOTES = {
+  'metering-2026-05-28': {
+    title: 'Metering & comms topology',
+    date: '28 May 2026',
+    sub: 'STS · SMS · DLMS · redundant NAN · CIU/phone relay',
+    src: 'tech-comm-2026-05-28-metering-topology.html?embed=1',
+    standalone: 'tech-comm-2026-05-28-metering-topology.html'
+  }
+};
 const GEOJSON_URL = 'https://overview-solutions.github.io/RemoteMonitorMap/projects.geojson';
 const aiResults = {};
 let fundedDataLoaded = false;
+let activeNoteId = 'metering-2026-05-28';
 
-function showSection(id) {
+function showSection(id, options = {}) {
   SECTIONS.forEach(s => {
     document.getElementById('sec-' + s).classList.toggle('active', s === id);
     document.querySelector(`[data-section="${s}"]`)?.classList.toggle('active', s === id);
   });
-  document.getElementById('main').classList.toggle('wide', id === 'funded');
+  const main = document.getElementById('main');
+  main.classList.toggle('wide', id === 'funded');
+  main.classList.toggle('notes-wide', id === 'notes');
   if (id === 'funded') loadFundedProjects();
+  if (id === 'notes' && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
 }
+
+function refreshNotePreview(noteId) {
+  const note = MEETING_NOTES[noteId];
+  if (!note) return;
+  document.querySelectorAll('.nav-sub-item[data-note]').forEach(el => {
+    el.classList.toggle('active', el.dataset.note === noteId);
+  });
+  document.querySelectorAll('.notes-index-item[data-note]').forEach(el => {
+    el.classList.toggle('active', el.dataset.note === noteId);
+  });
+  const frame = document.getElementById('notes-frame');
+  const nextSrc = note.src;
+  if (frame && frame.getAttribute('src') !== nextSrc) frame.setAttribute('src', nextSrc);
+  const label = document.getElementById('notes-embed-label');
+  if (label) label.textContent = `${note.date} · ${note.title}`;
+  const sub = document.getElementById('notes-section-sub');
+  if (sub) sub.textContent = `${note.date} · ${note.sub}`;
+  const standalone = document.querySelector('.notes-embed-toolbar a[target="_blank"]');
+  if (standalone) standalone.setAttribute('href', note.standalone);
+}
+
+function showNote(noteId, updateHash = true) {
+  if (!MEETING_NOTES[noteId]) return;
+  activeNoteId = noteId;
+  showSection('notes', { skipNoteRefresh: true });
+  refreshNotePreview(noteId);
+  if (updateHash) history.replaceState(null, '', `#notes/${noteId}`);
+}
+
+function initFromHash() {
+  const raw = location.hash.replace(/^#/, '');
+  if (!raw.startsWith('notes')) return;
+  const noteId = raw.split('/')[1] || 'metering-2026-05-28';
+  if (MEETING_NOTES[noteId]) showNote(noteId, false);
+}
+
+window.addEventListener('hashchange', initFromHash);
+document.addEventListener('DOMContentLoaded', initFromHash);
 
 function normalizeName(name) {
   return (name || '').replace(/\s+/g, ' ').trim();
