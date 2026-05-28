@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit in diagrams.net · ISV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11; --green-50: #EAF3DE;
+  --bg: #fff; --bg-2: #f7f6f3; --text: #1c1c1a; --text-2: #5a5a55;
+  --border: rgba(0,0,0,0.08); --font: 'DM Sans', system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #18181a; --bg-2: #222224; --text: #e8e7e0; --text-2: #9a9890; --green-50: #1a2e0a; }
+}
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; margin: 0; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+a { color: var(--green); }
+.back { font-size: 13px; margin-bottom: 1.25rem; }
+.back a { color: var(--text-2); text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 24px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { color: var(--text-2); font-size: 14px; margin-bottom: 1.5rem; }
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; background: var(--bg-2); margin-bottom: 1rem; }
+.card h2 { font-size: 15px; font-weight: 500; margin: 0 0 0.5rem; }
+.card p, .card li { font-size: 14px; color: var(--text-2); margin: 0 0 0.65rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.85rem 0 0.25rem; }
+.btn { display: inline-block; font-size: 13px; padding: 8px 14px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.btn.primary { background: var(--green); color: white; border-color: var(--green); }
+.btn:hover { opacity: 0.92; }
+ol { padding-left: 1.25rem; margin: 0; }
+li { margin-bottom: 0.45rem; }
+code { font-family: var(--mono); font-size: 12px; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+.callout { border-left: 3px solid var(--green); background: var(--green-50); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; font-size: 13px; margin: 1rem 0; color: var(--text-2); }
+.preview { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); padding: 0.5rem; margin-top: 0.75rem; }
+.preview object { width: 100%; height: 220px; display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="back"><a href="../../index.html#notes/metering-2026-05-28">&larr; Meeting notes</a> · <a href="editing-guide.html">Editing guide</a></p>
+  <h1>Edit in diagrams.net</h1>
+  <p class="sub" id="subtitle">Metering topology SVG</p>
+
+  <div class="callout">
+    diagrams.net cannot load this SVG from a URL automatically. The wiki SVG is plain vector markup (not a native <code>.drawio</code> file). Use the steps below — it takes about 10 seconds.
+  </div>
+
+  <div class="card">
+    <h2>Quick start</h2>
+    <ol>
+      <li>Open diagrams.net (button below).</li>
+      <li><strong>File &rarr; Open from &rarr; Device</strong> and choose the SVG you saved, <em>or</em> drag the SVG file from Finder onto the canvas.</li>
+      <li>Edit, then <strong>File &rarr; Export as &rarr; SVG</strong> and replace <code id="filename">metering-topology.svg</code> in the repo.</li>
+    </ol>
+    <div class="links">
+      <a class="btn primary" id="open-diagrams" href="https://app.diagrams.net/" target="_blank" rel="noopener">1. Open diagrams.net</a>
+      <a class="btn primary" id="download-svg" href="metering-topology.svg" download>2. Download SVG</a>
+      <a class="btn" id="view-svg" href="metering-topology.svg" target="_blank" rel="noopener">View SVG</a>
+    </div>
+    <div class="preview">
+      <object id="preview" type="image/svg+xml" data="metering-topology.svg" aria-label="Diagram preview"></object>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>After export</h2>
+    <p>Re-check the <strong>Current / Proposed relay</strong> toggle in the meeting notes. If draw.io removed custom classes, re-add <code>class="proposed-only"</code> on <code>proposed-edges</code> and <code>phone-relay</code> (see editing guide).</p>
+  </div>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const fileParam = params.get('file') || 'metering-topology.svg';
+const siteRoot = location.href.replace(/\/technical-notes\/diagrams\/[^?#]*.*$/, '/');
+const svgUrl = fileParam.includes('/')
+  ? new URL(fileParam.replace(/^\//, ''), siteRoot).href
+  : new URL(fileParam, location.href.replace(/[^/]+$/, '')).href;
+const fileName = fileParam.split('/').pop() || 'metering-topology.svg';
+
+document.getElementById('subtitle').textContent = fileName;
+document.getElementById('filename').textContent = fileName;
+document.getElementById('download-svg').href = svgUrl;
+document.getElementById('download-svg').download = fileName;
+document.getElementById('view-svg').href = svgUrl;
+document.getElementById('preview').data = svgUrl;
+</script>
+</body>
+</html>

@@ -64,10 +64,10 @@ li { margin-bottom: 0.35rem; }
     <h2>2. Edit visually in diagrams.net (easiest)</h2>
     <p><a href="https://app.diagrams.net/" target="_blank" rel="noopener">diagrams.net</a> can open the SVG directly when it is hosted on the web:</p>
     <div class="links">
-      <a class="btn primary" id="diagrams-net-edit" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net (SVG loaded)</a>
+      <a class="btn primary" id="diagrams-net-edit" href="diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
       <a class="btn" href="https://inkscape.org/" target="_blank" rel="noopener">Inkscape (desktop)</a>
     </div>
-    <p style="margin-top:0.75rem">Or open manually: File &rarr; Open from &rarr; Device &rarr; select <code>metering-topology.svg</code> (required for local-only drafts).</p>
+    <p style="margin-top:0.75rem">Opens a short launcher: download the SVG, open diagrams.net, then <strong>File &rarr; Open from &rarr; Device</strong> (diagrams.net cannot auto-load plain SVG from a URL).</p>
     <ol>
       <li>Move boxes, add arrows, change labels</li>
       <li>File &rarr; Export as &rarr; SVG (keep <code>proposed-only</code> classes if possible)</li>
@@ -99,19 +99,12 @@ li { margin-bottom: 0.35rem; }
   </div>
 </div>
 <script>
-const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
 const SVG_PATH = 'metering-topology.svg';
 
-function publicSvgUrl(relativePath) {
-  const path = `technical-notes/diagrams/${relativePath.replace(/^\//, '')}`;
-  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-    return `${WIKI_PAGES_ORIGIN}/${path}`;
-  }
-  return new URL(path, location.href).href;
-}
-
 function diagramsNetEditUrl(relativePath) {
-  return `https://app.diagrams.net/?url=${encodeURIComponent(publicSvgUrl(relativePath))}`;
+  const page = new URL('diagrams-edit.html', location.href);
+  page.searchParams.set('file', relativePath.replace(/^\//, ''));
+  return page.href;
 }
 
 const el = document.getElementById('diagrams-net-edit');

@@ -219,19 +219,12 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </ul>
 </div>
 <script>
-const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
 const SVG_PATH = 'technical-notes/diagrams/metering-topology.svg';
 
-function publicSvgUrl(relativePath) {
-  const path = relativePath.replace(/^\//, '');
-  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-    return `${WIKI_PAGES_ORIGIN}/${path}`;
-  }
-  return new URL(path, location.href).href;
-}
-
 function diagramsNetEditUrl(relativePath) {
-  return `https://app.diagrams.net/?url=${encodeURIComponent(publicSvgUrl(relativePath))}`;
+  const page = new URL('technical-notes/diagrams/diagrams-edit.html', location.href);
+  page.searchParams.set('file', relativePath.replace(/^\//, ''));
+  return page.href;
 }
 
 ['diagrams-net-edit', 'panel-diagrams-net'].forEach(id => {
