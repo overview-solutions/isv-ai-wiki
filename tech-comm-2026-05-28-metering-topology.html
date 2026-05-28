@@ -69,36 +69,39 @@ th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
 .actions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; align-items: flex-start; }
 .actions li::before { content: "○"; color: var(--text-3); flex-shrink: 0; }
 html.embed .back,
-html.embed #notes-back-btn,
-html.embed #edit-diagram-guide { display: none; }
-.edit-guide {
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--teal);
-  background: var(--teal-50);
-  border-radius: 0 8px 8px 0;
-  padding: 0.85rem 1rem;
-  margin-bottom: 1.25rem;
-  font-size: 13px;
-  line-height: 1.55;
+html.embed #notes-back-btn { display: none; }
+.panel-edit-steps {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border);
 }
-.edit-guide strong { color: var(--teal); display: block; margin-bottom: 0.25rem; }
-.edit-guide code { font-size: 12px; }
-.edit-guide-links { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
-.edit-guide-links a {
+.panel-edit-steps strong {
+  display: block;
+  color: var(--teal);
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 0.35rem;
+}
+.panel-edit-hint {
+  margin: 0.45rem 0 0;
+  font-size: 11px;
+  color: var(--text-2);
+}
+.panel-edit-links { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.panel-edit-links a {
   display: inline-block;
   font-size: 12px;
   padding: 5px 10px;
   border-radius: 7px;
   border: 1px solid var(--border-2);
-  background: var(--bg);
-  color: var(--green);
+  background: var(--green);
+  color: var(--green-50);
   text-decoration: none;
+  font-weight: 500;
 }
-.edit-guide-links a.primary { background: var(--green); color: var(--green-50); border-color: var(--green); }
-.edit-guide-links a:hover { opacity: 0.92; }
-.panel-toolbar-links { display: flex; flex-wrap: wrap; gap: 0.65rem; font-size: 12px; }
-.panel-toolbar-links a { color: var(--green); text-decoration: none; }
-.panel-toolbar-links a:hover { text-decoration: underline; }
+.panel-edit-links a:hover { opacity: 0.92; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
 @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
@@ -128,23 +131,10 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     Handshakes and keys — DLMS, OEM, and STS each use different key hierarchies. DCU/NAN uplink fails often due to telecom topology (trees, walls, Cameroon rainy season), not meter hardware alone.
   </div>
 
-  <div class="edit-guide" id="edit-diagram-guide">
-    <strong>Editing the network diagram (SVG)</strong>
-    The topology map is a standalone
-    <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG</a>
-    file &mdash; boxes and arrows only. Tables and notes below stay in this HTML page.
-    <div class="edit-guide-links">
-      <a class="primary" href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
-    </div>
-  </div>
-
   <div class="panel">
     <div class="panel-head">
       <span class="panel-title">Communication topology — redundant channels</span>
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem">
-        <div class="panel-toolbar-links">
-          <a href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
-        </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-left:auto">
         <div class="toggle">
         <button type="button" class="active" data-view="current">Current</button>
         <button type="button" data-view="proposed">Proposed relay</button>
@@ -152,6 +142,14 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       </div>
     </div>
     <div class="panel-body">
+      <div class="panel-edit-steps">
+        <strong>How to edit diagram</strong>
+        <div class="panel-edit-links">
+          <a href="technical-notes/diagrams/metering-topology.svg" download>1. Download SVG</a>
+          <a href="https://app.diagrams.net/" target="_blank" rel="noopener">2. Import into diagrams.net</a>
+        </div>
+        <p class="panel-edit-hint">In diagrams.net: <strong>File &rarr; Import From &rarr; Device</strong></p>
+      </div>
       <div class="diagram-wrap">
         <object
           id="topology-diagram"

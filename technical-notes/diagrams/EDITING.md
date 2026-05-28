@@ -28,15 +28,10 @@ Toggle **Current** / **Proposed relay** to check both views.
 
 Use **Import From**, not **Open From**. Open From shows *Not a diagram file* for this SVG.
 
-1. Download `metering-topology.svg` from **Edit in diagrams.net** in the wiki (or from the repo)
-2. Open [diagrams.net](https://app.diagrams.net/)
-3. **File → Import From… → Device** and select the downloaded file
-4. Edit boxes, arrows, labels visually (or drag the SVG onto the canvas)
-5. **File → Export as → SVG**
-6. Replace `metering-topology.svg` in the repo
-7. **Important after export:** re-add `class="proposed-only"` on the proposed relay group and phone-relay node if draw.io strips custom classes (see Option 3 below)
-
-Wiki shortcut: **Edit in diagrams.net** opens `diagrams-edit.html` with these steps.
+1. **Download SVG** from the meeting notes page
+2. Open [diagrams.net](https://app.diagrams.net/) and **File → Import From… → Device**
+3. Edit, **File → Export as → SVG**, replace `metering-topology.svg` in the repo
+4. **Important after export:** re-add `class="proposed-only"` if draw.io strips custom classes (see Option 3 below)
 
 ### Inkscape — free desktop app
 
