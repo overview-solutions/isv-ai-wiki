@@ -50,39 +50,35 @@ li { margin-bottom: 0.35rem; }
     is an open XML format for diagrams. Boxes, lines, and labels are plain text coordinates &mdash; not a PNG. Zoom without blur; edit in code or visual tools.
   </div>
 
-  <div class="card">
-    <h2>1. Open the diagram file</h2>
-    <p>Repo path (edit in Cursor or clone from GitHub):</p>
-    <p><code>isv-ai-wiki/technical-notes/diagrams/metering-topology.svg</code></p>
+  <div class="card" id="diagrams-net">
+    <h2>1. Edit visually in diagrams.net</h2>
+    <p><a href="https://app.diagrams.net/" target="_blank" rel="noopener">diagrams.net</a> (free, browser or desktop):</p>
     <div class="links">
-      <a class="btn primary" href="metering-topology.svg" target="_blank" rel="noopener">View SVG in browser</a>
-      <a class="btn" href="../../index.html#notes/metering-2026-05-28">Preview in wiki</a>
+      <a class="btn primary" href="metering-topology.svg" download>1. Download SVG</a>
+      <a class="btn primary" href="https://app.diagrams.net/" target="_blank" rel="noopener">2. Open diagrams.net</a>
     </div>
-  </div>
-
-  <div class="card">
-    <h2>2. Edit visually in diagrams.net (easiest)</h2>
-    <p><a href="https://app.diagrams.net/" target="_blank" rel="noopener">diagrams.net</a> can open the SVG directly when it is hosted on the web:</p>
-    <div class="links">
-      <a class="btn primary" id="diagrams-net-edit" href="diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
-      <a class="btn" href="https://inkscape.org/" target="_blank" rel="noopener">Inkscape (desktop)</a>
+    <div class="callout" style="margin-top:0.85rem">
+      Use <strong>Import From</strong>, not <strong>Open From</strong>. Open From shows &ldquo;Not a diagram file&rdquo; for this SVG.
     </div>
-    <p style="margin-top:0.75rem">Opens a short launcher: download the SVG, open diagrams.net, then <strong>File &rarr; Open from &rarr; Device</strong> (diagrams.net cannot auto-load plain SVG from a URL).</p>
     <ol>
-      <li>Move boxes, add arrows, change labels</li>
-      <li>File &rarr; Export as &rarr; SVG (keep <code>proposed-only</code> classes if possible)</li>
-      <li>Replace the file in the repo and refresh the wiki</li>
+      <li>Download <code>metering-topology.svg</code> (button above).</li>
+      <li>Open diagrams.net in a new tab.</li>
+      <li><strong>File &rarr; Import From&hellip; &rarr; Device</strong> and select the downloaded file.</li>
+      <li>Edit boxes, arrows, and labels.</li>
+      <li><strong>File &rarr; Export as &rarr; SVG</strong>. Replace the file in the repo and refresh the wiki.</li>
     </ol>
+    <p>Or drag the SVG file from Finder onto the canvas.</p>
   </div>
 
   <div class="card">
-    <h2>3. Edit in Cursor (small text tweaks)</h2>
+    <h2>2. Edit in Cursor (small text tweaks)</h2>
+    <p>Repo path: <code>isv-ai-wiki/technical-notes/diagrams/metering-topology.svg</code></p>
     <p>Open the <code>.svg</code> file. Each box is a <code>&lt;rect&gt;</code>, each label a <code>&lt;text&gt;</code>, each arrow a <code>&lt;line&gt;</code> or <code>&lt;path&gt;</code>.</p>
     <p>Install the <strong>SVG Preview</strong> extension for a side-by-side preview. Use ASCII-only punctuation in labels (no smart dashes).</p>
   </div>
 
   <div class="card">
-    <h2>4. Preview locally</h2>
+    <h2>3. Preview locally</h2>
     <p>From the <code>isv-ai-wiki</code> folder:</p>
     <p><code>./preview.sh</code></p>
     <p>Then open <a href="http://localhost:8765/index.html#notes/metering-2026-05-28">http://localhost:8765/index.html#notes/metering-2026-05-28</a></p>
@@ -98,17 +94,5 @@ li { margin-bottom: 0.35rem; }
     <p>Stats, tables, field notes, and action items live in <code>tech-comm-2026-05-28-metering-topology.html</code>.</p>
   </div>
 </div>
-<script>
-const SVG_PATH = 'metering-topology.svg';
-
-function diagramsNetEditUrl(relativePath) {
-  const page = new URL('diagrams-edit.html', location.href);
-  page.searchParams.set('file', relativePath.replace(/^\//, ''));
-  return page.href;
-}
-
-const el = document.getElementById('diagrams-net-edit');
-if (el) el.href = diagramsNetEditUrl(SVG_PATH);
-</script>
 </body>
 </html>

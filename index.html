@@ -1518,11 +1518,10 @@ code {
         <div class="diagram-source-title">Edit the network topology diagram</div>
         <p>The map is an <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG</a> file (Scalable Vector Graphics) — editable in Cursor, diagrams.net, or Inkscape. Tables and call notes stay in the HTML page; only boxes and arrows live in the SVG.</p>
         <div class="diagram-source-links">
-          <a class="diagram-link primary" id="notes-link-svg" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">Open diagram file (SVG)</a>
-          <a class="diagram-link" id="notes-link-guide" href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
-          <a class="diagram-link" id="notes-link-diagrams-net" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+          <a class="diagram-link primary" id="notes-link-diagrams-net" href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
+          <a class="diagram-link" id="notes-link-guide" href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">Cursor / advanced</a>
         </div>
-        <p id="notes-diagrams-net-hint" style="margin:0.55rem 0 0;font-size:12px;color:var(--text-3);">Opens a launcher page: download the SVG, open diagrams.net, then File &rarr; Open from &rarr; Device. Plain SVG cannot auto-load from a URL in diagrams.net.</p>
+        <p id="notes-diagrams-net-hint" style="margin:0.55rem 0 0;font-size:12px;color:var(--text-3);">Download the SVG first, then open diagrams.net. Use <strong>File &rarr; Import From &rarr; Device</strong>, not Open From.</p>
       </div>
       <div class="notes-index" id="notes-index">
         <a class="notes-index-item active" href="#" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28');return false">
@@ -1534,8 +1533,7 @@ code {
         <div class="notes-embed-toolbar">
           <span id="notes-embed-label">28 May 2026 · Metering &amp; comms topology</span>
           <div class="notes-embed-toolbar-links">
-            <a id="notes-toolbar-svg" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">SVG source</a>
-            <a id="notes-toolbar-diagrams" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+            <a id="notes-toolbar-diagrams" href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
             <a id="notes-toolbar-standalone" href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
@@ -1643,17 +1641,11 @@ function refreshNotePreview(noteId) {
   if (label) label.textContent = `${note.date} · ${note.title}`;
   const sub = document.getElementById('notes-section-sub');
   if (sub) sub.textContent = `${note.date} · ${note.sub}`;
-  const svgLink = document.getElementById('notes-link-svg');
   const guideLink = document.getElementById('notes-link-guide');
-  const toolbarSvg = document.getElementById('notes-toolbar-svg');
-  const toolbarGuide = document.getElementById('notes-toolbar-guide');
+  const diagramsLink = document.getElementById('notes-link-diagrams-net');
   const toolbarDiagrams = document.getElementById('notes-toolbar-diagrams');
   const toolbarStandalone = document.getElementById('notes-toolbar-standalone');
-  const diagramsLink = document.getElementById('notes-link-diagrams-net');
-  if (note.diagramSvg && svgLink) svgLink.href = note.diagramSvg;
   if (note.diagramGuide && guideLink) guideLink.href = note.diagramGuide;
-  if (note.diagramSvg && toolbarSvg) toolbarSvg.href = note.diagramSvg;
-  if (note.diagramGuide && toolbarGuide) toolbarGuide.href = note.diagramGuide;
   if (note.diagramSvg && diagramsLink) diagramsLink.href = diagramsNetEditUrl(note.diagramSvg);
   if (note.diagramSvg && toolbarDiagrams) toolbarDiagrams.href = diagramsNetEditUrl(note.diagramSvg);
   if (note.standalone && toolbarStandalone) toolbarStandalone.href = note.standalone;

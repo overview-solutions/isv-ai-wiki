@@ -35,40 +35,31 @@ ol { padding-left: 1.25rem; margin: 0; }
 li { margin-bottom: 0.45rem; }
 code { font-family: var(--mono); font-size: 12px; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
 .callout { border-left: 3px solid var(--green); background: var(--green-50); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; font-size: 13px; margin: 1rem 0; color: var(--text-2); }
-.preview { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); padding: 0.5rem; margin-top: 0.75rem; }
-.preview object { width: 100%; height: 220px; display: block; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <p class="back"><a href="../../index.html#notes/metering-2026-05-28">&larr; Meeting notes</a> · <a href="editing-guide.html">Editing guide</a></p>
+  <p class="back"><a href="../../index.html#notes/metering-2026-05-28">&larr; Meeting notes</a> · <a href="editing-guide.html#diagrams-net">Full editing guide</a></p>
   <h1>Edit in diagrams.net</h1>
   <p class="sub" id="subtitle">Metering topology SVG</p>
 
   <div class="callout">
-    diagrams.net cannot load this SVG from a URL automatically. The wiki SVG is plain vector markup (not a native <code>.drawio</code> file). Use the steps below — it takes about 10 seconds.
+    Use <strong>Import From</strong>, not <strong>Open From</strong>. Open From shows &ldquo;Not a diagram file&rdquo; for this SVG.
   </div>
 
   <div class="card">
-    <h2>Quick start</h2>
-    <ol>
-      <li>Open diagrams.net (button below).</li>
-      <li><strong>File &rarr; Open from &rarr; Device</strong> and choose the SVG you saved, <em>or</em> drag the SVG file from Finder onto the canvas.</li>
-      <li>Edit, then <strong>File &rarr; Export as &rarr; SVG</strong> and replace <code id="filename">metering-topology.svg</code> in the repo.</li>
-    </ol>
+    <h2>Steps</h2>
     <div class="links">
-      <a class="btn primary" id="open-diagrams" href="https://app.diagrams.net/" target="_blank" rel="noopener">1. Open diagrams.net</a>
-      <a class="btn primary" id="download-svg" href="metering-topology.svg" download>2. Download SVG</a>
-      <a class="btn" id="view-svg" href="metering-topology.svg" target="_blank" rel="noopener">View SVG</a>
+      <a class="btn primary" id="download-svg" href="metering-topology.svg" download>1. Download SVG</a>
+      <a class="btn primary" href="https://app.diagrams.net/" target="_blank" rel="noopener">2. Open diagrams.net</a>
     </div>
-    <div class="preview">
-      <object id="preview" type="image/svg+xml" data="metering-topology.svg" aria-label="Diagram preview"></object>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>After export</h2>
-    <p>Re-check the <strong>Current / Proposed relay</strong> toggle in the meeting notes. If draw.io removed custom classes, re-add <code>class="proposed-only"</code> on <code>proposed-edges</code> and <code>phone-relay</code> (see editing guide).</p>
+    <ol>
+      <li>Download <code id="filename">metering-topology.svg</code> (button above).</li>
+      <li>Open <a href="https://app.diagrams.net/" target="_blank" rel="noopener">diagrams.net</a> in a new tab.</li>
+      <li><strong>File &rarr; Import From&hellip; &rarr; Device</strong> and select the downloaded file.</li>
+      <li>Edit boxes, arrows, and labels.</li>
+      <li><strong>File &rarr; Export as &rarr; SVG</strong>, then replace the file in the repo.</li>
+    </ol>
   </div>
 </div>
 <script>
@@ -79,13 +70,10 @@ const svgUrl = fileParam.includes('/')
   ? new URL(fileParam.replace(/^\//, ''), siteRoot).href
   : new URL(fileParam, location.href.replace(/[^/]+$/, '')).href;
 const fileName = fileParam.split('/').pop() || 'metering-topology.svg';
-
 document.getElementById('subtitle').textContent = fileName;
 document.getElementById('filename').textContent = fileName;
 document.getElementById('download-svg').href = svgUrl;
 document.getElementById('download-svg').download = fileName;
-document.getElementById('view-svg').href = svgUrl;
-document.getElementById('preview').data = svgUrl;
 </script>
 </body>
 </html>

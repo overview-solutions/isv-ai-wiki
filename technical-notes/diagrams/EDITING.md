@@ -26,17 +26,17 @@ Toggle **Current** / **Proposed relay** to check both views.
 
 ### diagrams.net (draw.io) — free, browser or desktop
 
-**Edit in diagrams.net** (from the wiki sidebar) opens `diagrams-edit.html`, a short launcher with download + step-by-step instructions.
+Use **Import From**, not **Open From**. Open From shows *Not a diagram file* for this SVG.
 
-diagrams.net **cannot auto-load plain SVG from a URL** (`?url=` and `#U` only work for native `.drawio` / `.xml` files, or SVG exported from draw.io with embedded diagram data). Our topology SVG is hand-authored vector markup.
+1. Download `metering-topology.svg` from **Edit in diagrams.net** in the wiki (or from the repo)
+2. Open [diagrams.net](https://app.diagrams.net/)
+3. **File → Import From… → Device** and select the downloaded file
+4. Edit boxes, arrows, labels visually (or drag the SVG onto the canvas)
+5. **File → Export as → SVG**
+6. Replace `metering-topology.svg` in the repo
+7. **Important after export:** re-add `class="proposed-only"` on the proposed relay group and phone-relay node if draw.io strips custom classes (see Option 3 below)
 
-**Workflow:**
-1. Click **Edit in diagrams.net** (or open `diagrams-edit.html`)
-2. **Download SVG**, then open [diagrams.net](https://app.diagrams.net/)
-3. **File → Open from → Device** (or drag the file onto the canvas)
-4. Edit boxes, arrows, labels visually
-5. **File → Export as → SVG**, replace `metering-topology.svg` in the repo
-6. **Important after export:** re-add `class="proposed-only"` on the proposed relay group and phone-relay node if draw.io strips custom classes (see Option 3 below)
+Wiki shortcut: **Edit in diagrams.net** opens `diagrams-edit.html` with these steps.
 
 ### Inkscape — free desktop app
 

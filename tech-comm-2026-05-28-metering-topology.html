@@ -134,9 +134,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG</a>
     file &mdash; boxes and arrows only. Tables and notes below stay in this HTML page.
     <div class="edit-guide-links">
-      <a class="primary" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">Open diagram file</a>
-      <a href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
-      <a id="diagrams-net-edit" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+      <a class="primary" href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
     </div>
   </div>
 
@@ -145,9 +143,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       <span class="panel-title">Communication topology — redundant channels</span>
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem">
         <div class="panel-toolbar-links">
-          <a href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">SVG source</a>
-          <a href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
-          <a id="panel-diagrams-net" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+          <a href="technical-notes/diagrams/diagrams-edit.html" target="_blank" rel="noopener">Edit in diagrams.net</a>
         </div>
         <div class="toggle">
         <button type="button" class="active" data-view="current">Current</button>
@@ -163,7 +159,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           type="image/svg+xml"
           data="technical-notes/diagrams/metering-topology.svg"
           title="Metering communication topology with redundant channels">
-          <p>Diagram failed to load. Open <a href="technical-notes/diagrams/metering-topology.svg">metering-topology.svg</a> directly.</p>
+          <p>Diagram failed to load.</p>
         </object>
       </div>
       <div class="legend">
@@ -219,19 +215,6 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </ul>
 </div>
 <script>
-const SVG_PATH = 'technical-notes/diagrams/metering-topology.svg';
-
-function diagramsNetEditUrl(relativePath) {
-  const page = new URL('technical-notes/diagrams/diagrams-edit.html', location.href);
-  page.searchParams.set('file', relativePath.replace(/^\//, ''));
-  return page.href;
-}
-
-['diagrams-net-edit', 'panel-diagrams-net'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.href = diagramsNetEditUrl(SVG_PATH);
-});
-
 const topologyObject = document.getElementById('topology-diagram');
 
 function getTopologySvgRoot() {
