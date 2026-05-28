@@ -1477,13 +1477,13 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title">Technical notes</div>
-        <div class="section-sub" id="tech-notes-section-sub">Industry publications, standards, and references — curated by ISV Tech Comm</div>
+        <div class="section-sub" id="tech-notes-section-sub">Industry publications, standards, and references — submit via catalog.json</div>
       </div>
     </div>
     <div id="content-tech-notes">
       <div class="wiki-body">
-        <p><strong>Meeting notes</strong> capture what we discussed internally. <strong>Technical notes</strong> track external sources — standards, papers, vendor specs, and open tools — with an ISV relevance summary so the team can share and discuss them in one place.</p>
-        <p>To add a record, edit <code>technical-notes/catalog.json</code> in this repo and refresh. Each entry needs a title, publisher, URL, tags, summary, and <code>isvRelevance</code> field.</p>
+        <p><strong>Meeting notes</strong> capture what we discussed internally. <strong>Technical notes</strong> are for team submissions — standards, papers, vendor specs, and open tools — each with a short ISV relevance summary.</p>
+        <p>No entries yet. To add one, edit <code>technical-notes/catalog.json</code> in this repo and refresh. Each entry needs a title, publisher, URL, tags, summary, and <code>isvRelevance</code> field.</p>
       </div>
       <div class="tech-notes-filters" id="tech-notes-filters"></div>
       <div class="tech-notes-layout">
@@ -1491,7 +1491,7 @@ code {
           <div class="tech-notes-detail-empty">Loading catalog…</div>
         </div>
         <div class="tech-notes-detail" id="tech-notes-detail">
-          <div class="tech-notes-detail-empty">Select a publication from the list, or use the sidebar shortcuts.</div>
+          <div class="tech-notes-detail-empty">No submissions yet.</div>
         </div>
       </div>
     </div>
@@ -1602,6 +1602,7 @@ async function loadTechnicalNotes() {
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
     if (activeTechNoteId) renderTechnicalNoteDetail(activeTechNoteId);
+    else renderTechnicalNotesEmptyDetail();
     return;
   }
   const listEl = document.getElementById('tech-notes-list');
@@ -1614,9 +1615,7 @@ async function loadTechnicalNotes() {
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
-    if (!activeTechNoteId && techNotesCatalog.length) {
-      showTechNote(techNotesCatalog[0].id, false);
-    }
+    renderTechnicalNotesEmptyDetail();
   } catch (err) {
     if (listEl) {
       listEl.innerHTML = '<div class="tech-notes-detail-empty">Could not load technical-notes/catalog.json. Run ./preview.sh from isv-ai-wiki (local server required).</div>';
@@ -1647,6 +1646,10 @@ function renderTechnicalNotesFilters() {
   const el = document.getElementById('tech-notes-filters');
   if (!el) return;
   const tags = getTechNoteTags();
+  if (!tags.length) {
+    el.innerHTML = '';
+    return;
+  }
   el.innerHTML = ['all', ...tags].map(tag => (
     `<button type="button" class="filter-chip${tag === activeTechFilter ? ' active' : ''}" onclick="setTechFilter('${tag}')">${tag === 'all' ? 'All' : escapeHtml(tag)}</button>`
   )).join('');
@@ -1667,6 +1670,10 @@ function renderTechnicalNotesList() {
   const listEl = document.getElementById('tech-notes-list');
   if (!listEl) return;
   const items = filteredTechNotes();
+  if (!techNotesCatalog.length) {
+    listEl.innerHTML = '<div class="tech-notes-detail-empty">No submissions yet.</div>';
+    return;
+  }
   if (!items.length) {
     listEl.innerHTML = '<div class="tech-notes-detail-empty">No publications match this filter.</div>';
     return;
@@ -1678,6 +1685,16 @@ function renderTechnicalNotesList() {
       <div class="tech-pub-tags">${(item.tags || []).slice(0, 4).map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('')}</div>
     </button>
   `).join('');
+}
+
+function renderTechnicalNotesEmptyDetail() {
+  const detailEl = document.getElementById('tech-notes-detail');
+  const subEl = document.getElementById('tech-notes-section-sub');
+  if (!detailEl || activeTechNoteId) return;
+  detailEl.innerHTML = `
+    <div class="tech-notes-detail-empty">Submissions will appear here. Edit <code>technical-notes/catalog.json</code> to add a publication, standard, or reference.</div>
+  `;
+  if (subEl) subEl.textContent = 'Industry publications, standards, and references — submit via catalog.json';
 }
 
 function renderTechnicalNoteDetail(id) {
