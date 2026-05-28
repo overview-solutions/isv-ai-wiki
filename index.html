@@ -254,6 +254,245 @@ body {
 .notes-index-title { font-size: 14px; font-weight: 500; }
 .notes-index-meta { font-size: 12px; color: var(--text-2); margin-top: 3px; }
 
+.diagram-source {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  background: var(--teal-50);
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.diagram-source-title {
+  font-weight: 500;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+  font-size: 13px;
+}
+
+.diagram-source p {
+  margin: 0 0 0.65rem;
+  color: var(--text-2);
+  font-size: 13px;
+}
+
+.diagram-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.diagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-family: var(--font);
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border-2);
+  background: var(--bg);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.diagram-link:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.diagram-link.primary {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.diagram-link.primary:hover {
+  opacity: 0.92;
+  color: white;
+}
+
+.notes-embed-toolbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.notes-embed-toolbar-links a {
+  color: var(--green);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.notes-embed-toolbar-links a:hover { text-decoration: underline; }
+
+.nav-label-knowledge {
+  margin-top: 0.35rem;
+}
+
+.tech-notes-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.tech-notes-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.filter-chip {
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.filter-chip:hover { background: var(--bg-3); color: var(--text); }
+.filter-chip.active { background: var(--teal-50); color: var(--teal); border-color: var(--teal); font-weight: 500; }
+
+.tech-notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  max-height: calc(100vh - 14rem);
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.tech-pub-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  cursor: pointer;
+  font-family: var(--font);
+  color: inherit;
+  transition: border-color 0.1s, background 0.1s;
+}
+
+.tech-pub-card:hover,
+.tech-pub-card.active {
+  border-color: var(--teal);
+  background: var(--teal-50);
+}
+
+.tech-pub-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.tech-pub-meta { font-size: 11px; color: var(--text-2); margin-top: 3px; line-height: 1.4; }
+
+.tech-pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 6px;
+}
+
+.tech-tag {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 20px;
+  background: var(--bg-3);
+  color: var(--text-3);
+}
+
+.tech-notes-detail {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  min-height: 280px;
+}
+
+.tech-notes-detail-empty {
+  color: var(--text-3);
+  font-size: 13px;
+  padding: 2rem 0.5rem;
+}
+
+.tech-detail-type {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+.tech-detail-title { font-size: 18px; font-weight: 500; line-height: 1.35; margin-bottom: 0.35rem; }
+.tech-detail-publisher { font-size: 13px; color: var(--text-2); margin-bottom: 1rem; }
+
+.tech-detail-block { margin-bottom: 1rem; }
+.tech-detail-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.25rem;
+}
+
+.tech-detail-body { font-size: 14px; line-height: 1.65; color: var(--text); }
+
+.tech-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.btn-primary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-family: var(--font);
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--green);
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary-link:hover { opacity: 0.92; }
+
+.btn-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-family: var(--font);
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-2);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-secondary-link:hover { background: var(--bg-3); color: var(--text); }
+
+@media (max-width: 800px) {
+  .tech-notes-layout { grid-template-columns: 1fr; }
+  .tech-notes-list { max-height: none; }
+}
+
 /* Section */
 .section { display: none; }
 .section.active { display: block; }
@@ -769,6 +1008,12 @@ code {
     <div class="nav-sub" id="nav-sub-notes">
       <div class="nav-sub-item active" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
     </div>
+    <div class="nav-label nav-label-knowledge">Knowledge base</div>
+    <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      Technical notes
+    </div>
+    <div class="nav-sub" id="nav-sub-tech-notes"></div>
     <div class="nav-item" data-section="standards" onclick="showSection('standards')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Standards
@@ -1267,7 +1512,17 @@ code {
     </div>
     <div id="content-notes">
       <div class="wiki-body">
-        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. The topology diagram toggles between <strong>Current</strong> and <strong>Proposed relay</strong> inside the preview.</p>
+        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. Related industry sources live under <a href="#" onclick="showSection('tech-notes');return false">Technical notes</a>.</p>
+      </div>
+      <div class="diagram-source" id="notes-diagram-source">
+        <div class="diagram-source-title">Edit the network topology diagram</div>
+        <p>The map is an <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG</a> file (Scalable Vector Graphics) — editable in Cursor, diagrams.net, or Inkscape. Tables and call notes stay in the HTML page; only boxes and arrows live in the SVG.</p>
+        <div class="diagram-source-links">
+          <a class="diagram-link primary" id="notes-link-svg" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">Open diagram file (SVG)</a>
+          <a class="diagram-link" id="notes-link-guide" href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
+          <a class="diagram-link" id="notes-link-diagrams-net" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+        </div>
+        <p id="notes-diagrams-net-hint" style="margin:0.55rem 0 0;font-size:12px;color:var(--text-3);">Local preview opens the last GitHub Pages copy in diagrams.net. For unpublished edits, use File &rarr; Open from &rarr; Device in diagrams.net instead.</p>
       </div>
       <div class="notes-index" id="notes-index">
         <a class="notes-index-item active" href="#" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28');return false">
@@ -1278,9 +1533,38 @@ code {
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
           <span id="notes-embed-label">28 May 2026 · Metering &amp; comms topology</span>
-          <a href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Open in new tab</a>
+          <div class="notes-embed-toolbar-links">
+            <a id="notes-toolbar-svg" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">SVG source</a>
+            <a id="notes-toolbar-diagrams" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+            <a id="notes-toolbar-standalone" href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Full page</a>
+          </div>
         </div>
         <iframe id="notes-frame" title="Meeting notes preview" src="tech-comm-2026-05-28-metering-topology.html?embed=1"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL NOTES -->
+  <div class="section" id="sec-tech-notes">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Technical notes</div>
+        <div class="section-sub" id="tech-notes-section-sub">Industry publications, standards, and references — curated by ISV Tech Comm</div>
+      </div>
+    </div>
+    <div id="content-tech-notes">
+      <div class="wiki-body">
+        <p><strong>Meeting notes</strong> capture what we discussed internally. <strong>Technical notes</strong> track external sources — standards, papers, vendor specs, and open tools — with an ISV relevance summary so the team can share and discuss them in one place.</p>
+        <p>To add a record, edit <code>technical-notes/catalog.json</code> in this repo and refresh. Each entry needs a title, publisher, URL, tags, summary, and <code>isvRelevance</code> field.</p>
+      </div>
+      <div class="tech-notes-filters" id="tech-notes-filters"></div>
+      <div class="tech-notes-layout">
+        <div class="tech-notes-list" id="tech-notes-list">
+          <div class="tech-notes-detail-empty">Loading catalog…</div>
+        </div>
+        <div class="tech-notes-detail" id="tech-notes-detail">
+          <div class="tech-notes-detail-empty">Select a publication from the list, or use the sidebar shortcuts.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1301,20 +1585,28 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['mission','funded','tech','notes','standards','data','team','resources'];
+const SECTIONS = ['mission','funded','tech','notes','tech-notes','standards','data','team','resources'];
 const MEETING_NOTES = {
   'metering-2026-05-28': {
     title: 'Metering & comms topology',
     date: '28 May 2026',
     sub: 'STS · SMS · DLMS · redundant NAN · CIU/phone relay',
     src: 'tech-comm-2026-05-28-metering-topology.html?embed=1',
-    standalone: 'tech-comm-2026-05-28-metering-topology.html'
+    standalone: 'tech-comm-2026-05-28-metering-topology.html',
+    diagramSvg: 'technical-notes/diagrams/metering-topology.svg',
+    diagramGuide: 'technical-notes/diagrams/editing-guide.html'
   }
 };
+const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json';
+const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
 const GEOJSON_URL = 'https://overview-solutions.github.io/RemoteMonitorMap/projects.geojson';
 const aiResults = {};
 let fundedDataLoaded = false;
 let activeNoteId = 'metering-2026-05-28';
+let techNotesCatalog = [];
+let techNotesLoaded = false;
+let activeTechNoteId = null;
+let activeTechFilter = 'all';
 
 function showSection(id, options = {}) {
   SECTIONS.forEach(s => {
@@ -1323,9 +1615,22 @@ function showSection(id, options = {}) {
   });
   const main = document.getElementById('main');
   main.classList.toggle('wide', id === 'funded');
-  main.classList.toggle('notes-wide', id === 'notes');
+  main.classList.toggle('notes-wide', id === 'notes' || id === 'tech-notes');
   if (id === 'funded') loadFundedProjects();
   if (id === 'notes' && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
+  if (id === 'tech-notes') loadTechnicalNotes();
+}
+
+function publicSvgUrl(relativePath) {
+  const path = relativePath.replace(/^\//, '');
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    return `${WIKI_PAGES_ORIGIN}/${path}`;
+  }
+  return new URL(path, location.href).href;
+}
+
+function diagramsNetEditUrl(relativePath) {
+  return `https://app.diagrams.net/?url=${encodeURIComponent(publicSvgUrl(relativePath))}`;
 }
 
 function refreshNotePreview(noteId) {
@@ -1344,8 +1649,22 @@ function refreshNotePreview(noteId) {
   if (label) label.textContent = `${note.date} · ${note.title}`;
   const sub = document.getElementById('notes-section-sub');
   if (sub) sub.textContent = `${note.date} · ${note.sub}`;
-  const standalone = document.querySelector('.notes-embed-toolbar a[target="_blank"]');
-  if (standalone) standalone.setAttribute('href', note.standalone);
+  const svgLink = document.getElementById('notes-link-svg');
+  const guideLink = document.getElementById('notes-link-guide');
+  const toolbarSvg = document.getElementById('notes-toolbar-svg');
+  const toolbarGuide = document.getElementById('notes-toolbar-guide');
+  const toolbarDiagrams = document.getElementById('notes-toolbar-diagrams');
+  const toolbarStandalone = document.getElementById('notes-toolbar-standalone');
+  const diagramsLink = document.getElementById('notes-link-diagrams-net');
+  if (note.diagramSvg && svgLink) svgLink.href = note.diagramSvg;
+  if (note.diagramGuide && guideLink) guideLink.href = note.diagramGuide;
+  if (note.diagramSvg && toolbarSvg) toolbarSvg.href = note.diagramSvg;
+  if (note.diagramGuide && toolbarGuide) toolbarGuide.href = note.diagramGuide;
+  if (note.diagramSvg && diagramsLink) diagramsLink.href = diagramsNetEditUrl(note.diagramSvg);
+  if (note.diagramSvg && toolbarDiagrams) toolbarDiagrams.href = diagramsNetEditUrl(note.diagramSvg);
+  if (note.standalone && toolbarStandalone) toolbarStandalone.href = note.standalone;
+  const sourceBox = document.getElementById('notes-diagram-source');
+  if (sourceBox) sourceBox.style.display = note.diagramSvg ? 'block' : 'none';
 }
 
 function showNote(noteId, updateHash = true) {
@@ -1358,13 +1677,160 @@ function showNote(noteId, updateHash = true) {
 
 function initFromHash() {
   const raw = location.hash.replace(/^#/, '');
-  if (!raw.startsWith('notes')) return;
-  const noteId = raw.split('/')[1] || 'metering-2026-05-28';
-  if (MEETING_NOTES[noteId]) showNote(noteId, false);
+  if (raw.startsWith('notes')) {
+    const noteId = raw.split('/')[1] || 'metering-2026-05-28';
+    if (MEETING_NOTES[noteId]) showNote(noteId, false);
+    return;
+  }
+  if (raw.startsWith('tech-notes')) {
+    const pubId = raw.split('/')[1] || null;
+    showSection('tech-notes');
+    loadTechnicalNotes().then(() => {
+      if (pubId) showTechNote(pubId, false);
+    });
+  }
 }
 
 window.addEventListener('hashchange', initFromHash);
 document.addEventListener('DOMContentLoaded', initFromHash);
+
+async function loadTechnicalNotes() {
+  if (techNotesLoaded) {
+    renderTechnicalNotesNav();
+    renderTechnicalNotesFilters();
+    renderTechnicalNotesList();
+    if (activeTechNoteId) renderTechnicalNoteDetail(activeTechNoteId);
+    return;
+  }
+  const listEl = document.getElementById('tech-notes-list');
+  try {
+    const resp = await fetch(TECH_NOTES_CATALOG_URL);
+    if (!resp.ok) throw new Error('Catalog unavailable');
+    const data = await resp.json();
+    techNotesCatalog = Array.isArray(data.items) ? data.items : [];
+    techNotesLoaded = true;
+    renderTechnicalNotesNav();
+    renderTechnicalNotesFilters();
+    renderTechnicalNotesList();
+    if (!activeTechNoteId && techNotesCatalog.length) {
+      showTechNote(techNotesCatalog[0].id, false);
+    }
+  } catch (err) {
+    if (listEl) {
+      listEl.innerHTML = '<div class="tech-notes-detail-empty">Could not load technical-notes/catalog.json. Run ./preview.sh from isv-ai-wiki (local server required).</div>';
+    }
+  }
+}
+
+function getTechNoteTags() {
+  const tags = new Set();
+  techNotesCatalog.forEach(item => (item.tags || []).forEach(t => tags.add(t)));
+  return Array.from(tags).sort();
+}
+
+function renderTechnicalNotesNav() {
+  const nav = document.getElementById('nav-sub-tech-notes');
+  if (!nav) return;
+  nav.innerHTML = techNotesCatalog.slice(0, 6).map(item => (
+    `<div class="nav-sub-item${item.id === activeTechNoteId ? ' active' : ''}" data-tech-note="${item.id}" onclick="showTechNote('${item.id}')">${escapeHtml(shortNavTitle(item))}</div>`
+  )).join('');
+}
+
+function shortNavTitle(item) {
+  const t = item.title || 'Untitled';
+  return t.length > 34 ? `${t.slice(0, 31)}…` : t;
+}
+
+function renderTechnicalNotesFilters() {
+  const el = document.getElementById('tech-notes-filters');
+  if (!el) return;
+  const tags = getTechNoteTags();
+  el.innerHTML = ['all', ...tags].map(tag => (
+    `<button type="button" class="filter-chip${tag === activeTechFilter ? ' active' : ''}" onclick="setTechFilter('${tag}')">${tag === 'all' ? 'All' : escapeHtml(tag)}</button>`
+  )).join('');
+}
+
+function setTechFilter(tag) {
+  activeTechFilter = tag;
+  renderTechnicalNotesFilters();
+  renderTechnicalNotesList();
+}
+
+function filteredTechNotes() {
+  if (activeTechFilter === 'all') return techNotesCatalog;
+  return techNotesCatalog.filter(item => (item.tags || []).includes(activeTechFilter));
+}
+
+function renderTechnicalNotesList() {
+  const listEl = document.getElementById('tech-notes-list');
+  if (!listEl) return;
+  const items = filteredTechNotes();
+  if (!items.length) {
+    listEl.innerHTML = '<div class="tech-notes-detail-empty">No publications match this filter.</div>';
+    return;
+  }
+  listEl.innerHTML = items.map(item => `
+    <button type="button" class="tech-pub-card${item.id === activeTechNoteId ? ' active' : ''}" data-tech-note="${item.id}" onclick="showTechNote('${item.id}')">
+      <div class="tech-pub-title">${escapeHtml(item.title)}</div>
+      <div class="tech-pub-meta">${escapeHtml(item.publisher || '')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
+      <div class="tech-pub-tags">${(item.tags || []).slice(0, 4).map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('')}</div>
+    </button>
+  `).join('');
+}
+
+function renderTechnicalNoteDetail(id) {
+  const detailEl = document.getElementById('tech-notes-detail');
+  const subEl = document.getElementById('tech-notes-section-sub');
+  const item = techNotesCatalog.find(x => x.id === id);
+  if (!detailEl || !item) return;
+
+  const related = (item.relatedMeetingNotes || [])
+    .filter(nid => MEETING_NOTES[nid])
+    .map(nid => `<button type="button" class="btn-secondary-link" onclick="showNote('${nid}')">Meeting note: ${escapeHtml(MEETING_NOTES[nid].title)}</button>`)
+    .join('');
+
+  detailEl.innerHTML = `
+    <div class="tech-detail-type">${escapeHtml(item.type || 'reference')}</div>
+    <div class="tech-detail-title">${escapeHtml(item.title)}</div>
+    <div class="tech-detail-publisher">${escapeHtml(item.publisher || '')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
+    <div class="tech-detail-block">
+      <div class="tech-detail-label">Summary</div>
+      <div class="tech-detail-body">${escapeHtml(item.summary || '')}</div>
+    </div>
+    <div class="tech-detail-block">
+      <div class="tech-detail-label">Why ISV cares</div>
+      <div class="tech-detail-body">${escapeHtml(item.isvRelevance || '')}</div>
+    </div>
+    <div class="tech-detail-actions">
+      ${item.url ? `<a class="btn-primary-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open source ↗</a>` : ''}
+      ${related}
+    </div>
+  `;
+
+  if (subEl) subEl.textContent = `${item.publisher || 'Reference'} · ${(item.tags || []).slice(0, 3).join(' · ') || 'technical note'}`;
+}
+
+function showTechNote(id, updateHash = true) {
+  if (!techNotesLoaded) {
+    loadTechnicalNotes().then(() => showTechNote(id, updateHash));
+    return;
+  }
+  if (!techNotesCatalog.find(x => x.id === id)) return;
+  activeTechNoteId = id;
+  showSection('tech-notes', { skipNoteRefresh: true });
+  renderTechnicalNotesNav();
+  renderTechnicalNotesList();
+  renderTechnicalNoteDetail(id);
+  if (updateHash) history.replaceState(null, '', `#tech-notes/${id}`);
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 function normalizeName(name) {
   return (name || '').replace(/\s+/g, ' ').trim();

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ISV metering topology - edit guide: technical-notes/diagrams/EDITING.md -->
+<svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering communication topology with redundant channels">
+  <style>
+    .proposed-only { display: none; }
+    svg.show-proposed .proposed-only { display: block; }
+    text { font-family: "DM Sans", system-ui, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#888"/></marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#3B6D11"/></marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#B42318"/></marker>
+  </defs>
+
+  <text x="20" y="28" fill="#9a9990" font-size="11">TOKEN PATH</text>
+  <text x="20" y="148" fill="#9a9990" font-size="11">LOCAL FIELD (redundant)</text>
+  <text x="20" y="298" fill="#9a9990" font-size="11">NAN - parallel channels</text>
+  <text x="20" y="418" fill="#9a9990" font-size="11">UPLINK - parallel WAN</text>
+
+  <g id="bands">
+    <rect x="12" y="36" width="836" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="12" y="156" width="836" height="120" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="12" y="306" width="836" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+    <rect x="12" y="426" width="836" height="78" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+  </g>
+
+  <g id="nodes-token">
+    <g class="node"><rect x="40" y="52" width="120" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="100" y="72" text-anchor="middle" font-size="12" font-weight="600">STS Server</text><text x="100" y="86" text-anchor="middle" font-size="9" fill="#666">one-way tokens</text></g>
+    <g class="node"><rect x="220" y="52" width="100" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/><text x="270" y="72" text-anchor="middle" font-size="12" font-weight="600">SMS</text><text x="270" y="86" text-anchor="middle" font-size="9" fill="#666">GSM / LTE</text></g>
+    <g class="node"><rect x="380" y="52" width="130" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11"/><text x="445" y="72" text-anchor="middle" font-size="12" font-weight="600">Mobile Phone</text><text x="445" y="86" text-anchor="middle" font-size="9" fill="#666">app + token</text></g>
+    <g class="node"><rect x="720" y="52" width="120" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/><text x="780" y="72" text-anchor="middle" font-size="12" font-weight="600">Cloud / HES</text><text x="780" y="86" text-anchor="middle" font-size="9" fill="#666">all meters</text></g>
+  </g>
+
+  <g id="nodes-local">
+    <g class="node"><rect x="280" y="172" width="90" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="325" y="192" text-anchor="middle" font-size="12" font-weight="600">CIU</text><text x="325" y="206" text-anchor="middle" font-size="9" fill="#666">keypad / stats</text></g>
+    <g class="node"><rect x="420" y="172" width="130" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11"/><text x="485" y="192" text-anchor="middle" font-size="12" font-weight="600">DIN Rail Meter</text><text x="485" y="206" text-anchor="middle" font-size="9" fill="#666">DLMS + proprietary</text></g>
+    <g class="node"><rect x="600" y="172" width="110" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="655" y="192" text-anchor="middle" font-size="12" font-weight="600">MacFi Driver</text><text x="655" y="206" text-anchor="middle" font-size="9" fill="#666">OEM keys</text></g>
+    <text x="380" y="168" font-size="9" fill="#666">BLE / RF</text>
+    <text x="545" y="168" font-size="9" fill="#666">proprietary</text>
+    <g id="phone-relay" class="node proposed-only"><rect x="720" y="172" width="110" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="775" y="192" text-anchor="middle" font-size="11" font-weight="600">Phone relay</text><text x="775" y="206" text-anchor="middle" font-size="9" fill="#666">LTE uplink</text></g>
+  </g>
+
+  <g id="nodes-nan">
+    <g class="node"><rect x="180" y="322" width="110" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="235" y="342" text-anchor="middle" font-size="12" font-weight="600">RF Mesh</text><text x="235" y="356" text-anchor="middle" font-size="9" fill="#666">Sub-1G / Wi-SUN</text></g>
+    <g class="node"><rect x="340" y="322" width="90" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="385" y="342" text-anchor="middle" font-size="12" font-weight="600">PLC</text><text x="385" y="356" text-anchor="middle" font-size="9" fill="#666">G3 / PRIME</text></g>
+    <g class="node"><rect x="490" y="322" width="100" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="540" y="342" text-anchor="middle" font-size="12" font-weight="600">Repeater</text><text x="540" y="356" text-anchor="middle" font-size="9" fill="#666">RF relay</text></g>
+    <g class="node"><rect x="660" y="322" width="120" height="44" rx="6" fill="#FEE4E2" stroke="#B42318" stroke-width="1.5"/><text x="720" y="342" text-anchor="middle" font-size="12" font-weight="600">DCU</text><text x="720" y="356" text-anchor="middle" font-size="9" fill="#666">often fails</text></g>
+  </g>
+
+  <g id="nodes-uplink">
+    <g class="node"><rect x="560" y="442" width="130" height="44" rx="6" fill="#FEE4E2" stroke="#B42318" stroke-dasharray="4 3"/><text x="625" y="462" text-anchor="middle" font-size="12" font-weight="600">DCU to LTE WAN</text><text x="625" y="476" text-anchor="middle" font-size="9" fill="#666">GPRS / 4G SIM</text></g>
+  </g>
+
+  <g id="edges-current">
+    <line x1="160" y1="74" x2="218" y2="74" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="189" y="66" text-anchor="middle" font-size="9" fill="#666">token</text>
+    <line x1="320" y1="74" x2="378" y2="74" stroke="#175CD3" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="349" y="66" text-anchor="middle" font-size="9" fill="#175CD3">SMS</text>
+    <path d="M 445 96 L 445 130 L 325 130 L 325 170" fill="none" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="445" y1="96" x2="445" y2="170" stroke="#3B6D11" stroke-width="1.5" marker-end="url(#arr-green)"/>
+    <line x1="325" y1="216" x2="418" y2="194" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="550" y1="194" x2="598" y2="194" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
+    <path d="M 485 216 L 485 280 L 235 280 L 235 320" fill="none" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
+    <path d="M 485 216 L 485 280 L 385 280 L 385 320" fill="none" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="540" y1="366" x2="658" y2="366" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
+    <path d="M 485 216 L 540 280 L 540 320" fill="none" stroke="#BA7517" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+    <line x1="290" y1="344" x2="658" y2="344" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
+    <line x1="410" y1="344" x2="658" y2="344" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
+    <line x1="720" y1="366" x2="720" y2="440" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
+    <line x1="690" y1="464" x2="780" y2="96" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
+  </g>
+
+  <g id="proposed-edges" class="proposed-only">
+    <line x1="510" y1="74" x2="700" y2="74" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
+    <text x="605" y="66" text-anchor="middle" font-size="9" fill="#0F6E56">LTE backup uplink</text>
+    <line x1="510" y1="194" x2="718" y2="194" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
+    <text x="615" y="186" text-anchor="middle" font-size="9" fill="#0F6E56">meter stats relay</text>
+    <line x1="775" y1="216" x2="775" y2="52" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
+  </g>
+</svg>

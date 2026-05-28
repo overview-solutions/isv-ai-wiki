@@ -51,7 +51,7 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .toggle button { font-family: var(--font); font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border-2); background: transparent; color: var(--text-2); cursor: pointer; }
 .toggle button.active { background: var(--green-50); color: var(--green); border-color: var(--green); font-weight: 500; }
 .diagram-wrap { overflow-x: auto; }
-svg.diagram { display: block; min-width: 860px; width: 100%; height: auto; }
+.diagram-object { display: block; min-width: 860px; width: 100%; height: 520px; border: 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 1rem; font-size: 12px; color: var(--text-2); }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-line { width: 28px; height: 0; border-top: 2px solid; }
@@ -69,7 +69,36 @@ th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
 .actions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; align-items: flex-start; }
 .actions li::before { content: "○"; color: var(--text-3); flex-shrink: 0; }
 html.embed .back,
-html.embed #notes-back-btn { display: none; }
+html.embed #notes-back-btn,
+html.embed #edit-diagram-guide { display: none; }
+.edit-guide {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  background: var(--teal-50);
+  border-radius: 0 8px 8px 0;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.edit-guide strong { color: var(--teal); display: block; margin-bottom: 0.25rem; }
+.edit-guide code { font-size: 12px; }
+.edit-guide-links { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
+.edit-guide-links a {
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border-2);
+  background: var(--bg);
+  color: var(--green);
+  text-decoration: none;
+}
+.edit-guide-links a.primary { background: var(--green); color: var(--green-50); border-color: var(--green); }
+.edit-guide-links a:hover { opacity: 0.92; }
+.panel-toolbar-links { display: flex; flex-wrap: wrap; gap: 0.65rem; font-size: 12px; }
+.panel-toolbar-links a { color: var(--green); text-decoration: none; }
+.panel-toolbar-links a:hover { text-decoration: underline; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
 @media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
@@ -99,97 +128,43 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     Handshakes and keys — DLMS, OEM, and STS each use different key hierarchies. DCU/NAN uplink fails often due to telecom topology (trees, walls, Cameroon rainy season), not meter hardware alone.
   </div>
 
+  <div class="edit-guide" id="edit-diagram-guide">
+    <strong>Editing the network diagram (SVG)</strong>
+    The topology map is a standalone
+    <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG</a>
+    file &mdash; boxes and arrows only. Tables and notes below stay in this HTML page.
+    <div class="edit-guide-links">
+      <a class="primary" href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">Open diagram file</a>
+      <a href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
+      <a id="diagrams-net-edit" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+    </div>
+  </div>
+
   <div class="panel">
     <div class="panel-head">
       <span class="panel-title">Communication topology — redundant channels</span>
-      <div class="toggle">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem">
+        <div class="panel-toolbar-links">
+          <a href="technical-notes/diagrams/metering-topology.svg" target="_blank" rel="noopener">SVG source</a>
+          <a href="technical-notes/diagrams/editing-guide.html" target="_blank" rel="noopener">How to edit</a>
+          <a id="panel-diagrams-net" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net</a>
+        </div>
+        <div class="toggle">
         <button type="button" class="active" data-view="current">Current</button>
         <button type="button" data-view="proposed">Proposed relay</button>
+        </div>
       </div>
     </div>
     <div class="panel-body">
       <div class="diagram-wrap">
-        <svg class="diagram" viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering communication topology with redundant channels">
-          <defs>
-            <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#888"/></marker>
-            <marker id="arr-green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#3B6D11"/></marker>
-            <marker id="arr-red" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#B42318"/></marker>
-          </defs>
-
-          <!-- Layer labels -->
-          <text x="20" y="28" fill="#9a9990" font-size="11" font-family="DM Sans, sans-serif">TOKEN PATH</text>
-          <text x="20" y="148" fill="#9a9990" font-size="11" font-family="DM Sans, sans-serif">LOCAL FIELD (redundant)</text>
-          <text x="20" y="298" fill="#9a9990" font-size="11" font-family="DM Sans, sans-serif">NAN — parallel channels</text>
-          <text x="20" y="418" fill="#9a9990" font-size="11" font-family="DM Sans, sans-serif">UPLINK — parallel WAN</text>
-
-          <!-- Layer bands -->
-          <rect x="12" y="36" width="836" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
-          <rect x="12" y="156" width="836" height="120" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
-          <rect x="12" y="306" width="836" height="88" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
-          <rect x="12" y="426" width="836" height="78" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
-
-          <!-- Nodes: token path -->
-          <g class="node"><rect x="40" y="52" width="120" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="100" y="72" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">STS Server</text><text x="100" y="86" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">one-way tokens</text></g>
-          <g class="node"><rect x="220" y="52" width="100" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/><text x="270" y="72" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">SMS</text><text x="270" y="86" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">GSM / LTE</text></g>
-          <g class="node"><rect x="380" y="52" width="130" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11"/><text x="445" y="72" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">Mobile Phone</text><text x="445" y="86" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">app + token</text></g>
-
-          <!-- Nodes: local field -->
-          <g class="node"><rect x="280" y="172" width="90" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="325" y="192" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">CIU</text><text x="325" y="206" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">keypad · stats</text></g>
-          <g class="node"><rect x="420" y="172" width="130" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11"/><text x="485" y="192" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">DIN Rail Meter</text><text x="485" y="206" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">DLMS + proprietary</text></g>
-          <g class="node"><rect x="600" y="172" width="110" height="44" rx="6" fill="#f7f6f3" stroke="#ccc"/><text x="655" y="192" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">MacFi Driver</text><text x="655" y="206" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">OEM keys</text></g>
-
-          <!-- Local link labels -->
-          <text x="380" y="168" font-size="9" fill="#666" font-family="DM Sans">BLE / RF</text>
-          <text x="545" y="168" font-size="9" fill="#666" font-family="DM Sans">proprietary</text>
-
-          <!-- Nodes: NAN parallel -->
-          <g class="node"><rect x="180" y="322" width="110" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="235" y="342" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">RF Mesh</text><text x="235" y="356" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">Sub-1G · Wi-SUN</text></g>
-          <g class="node"><rect x="340" y="322" width="90" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="385" y="342" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">PLC</text><text x="385" y="356" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">G3 · PRIME</text></g>
-          <g class="node"><rect x="490" y="322" width="100" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/><text x="540" y="342" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">Repeater</text><text x="540" y="356" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">RF relay</text></g>
-          <g class="node"><rect x="660" y="322" width="120" height="44" rx="6" fill="#FEE4E2" stroke="#B42318" stroke-width="1.5"/><text x="720" y="342" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">DCU</text><text x="720" y="356" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">often fails</text></g>
-
-          <!-- Nodes: uplink -->
-          <g class="node"><rect x="560" y="442" width="130" height="44" rx="6" fill="#FEE4E2" stroke="#B42318" stroke-dasharray="4 3"/><text x="625" y="462" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">DCU → LTE WAN</text><text x="625" y="476" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">GPRS / 4G SIM</text></g>
-          <g class="node"><rect x="720" y="52" width="120" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/><text x="780" y="72" text-anchor="middle" font-size="12" font-weight="600" font-family="DM Sans">Cloud / HES</text><text x="780" y="86" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">all meters</text></g>
-
-          <!-- Proposed phone relay node (hidden by default via class) -->
-          <g id="phone-relay" style="display:none"><rect x="720" y="172" width="110" height="44" rx="6" fill="#E1F5EE" stroke="#0F6E56"/><text x="775" y="192" text-anchor="middle" font-size="11" font-weight="600" font-family="DM Sans">Phone relay</text><text x="775" y="206" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">LTE uplink</text></g>
-
-          <!-- Edges: token path -->
-          <line x1="160" y1="74" x2="218" y2="74" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-          <text x="189" y="66" text-anchor="middle" font-size="9" fill="#666" font-family="DM Sans">token</text>
-          <line x1="320" y1="74" x2="378" y2="74" stroke="#175CD3" stroke-width="2" marker-end="url(#arr)"/>
-          <text x="349" y="66" text-anchor="middle" font-size="9" fill="#175CD3" font-family="DM Sans">SMS</text>
-
-          <!-- Edges: local redundant -->
-          <path d="M 445 96 L 445 130 L 325 130 L 325 170" fill="none" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-          <line x1="445" y1="96" x2="445" y2="170" stroke="#3B6D11" stroke-width="1.5" marker-end="url(#arr-green)"/>
-          <line x1="325" y1="216" x2="418" y2="194" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-          <line x1="550" y1="194" x2="598" y2="194" stroke="#888" stroke-width="1.5" marker-end="url(#arr)"/>
-
-          <!-- Edges: meter to NAN parallel -->
-          <path d="M 485 216 L 485 280 L 235 280 L 235 320" fill="none" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
-          <path d="M 485 216 L 485 280 L 385 280 L 385 320" fill="none" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
-          <line x1="540" y1="366" x2="658" y2="366" stroke="#BA7517" stroke-width="1.5" marker-end="url(#arr)"/>
-          <path d="M 485 216 L 540 280 L 540 320" fill="none" stroke="#BA7517" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arr)"/>
-
-          <!-- NAN to DCU (failure prone) -->
-          <line x1="290" y1="344" x2="658" y2="344" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
-          <line x1="410" y1="344" x2="658" y2="344" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
-
-          <!-- DCU to cloud -->
-          <line x1="720" y1="366" x2="720" y2="440" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
-          <line x1="690" y1="464" x2="780" y2="96" stroke="#B42318" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arr-red)"/>
-
-          <!-- Proposed: phone cellular backup -->
-          <g id="proposed-edges" style="display:none">
-            <line x1="510" y1="74" x2="700" y2="74" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
-            <text x="605" y="66" text-anchor="middle" font-size="9" fill="#0F6E56" font-family="DM Sans">LTE backup uplink</text>
-            <line x1="510" y1="194" x2="718" y2="194" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
-            <text x="615" y="186" text-anchor="middle" font-size="9" fill="#0F6E56" font-family="DM Sans">meter stats relay</text>
-            <line x1="775" y1="216" x2="775" y2="52" stroke="#0F6E56" stroke-width="2" marker-end="url(#arr-green)"/>
-          </g>
-        </svg>
+        <object
+          id="topology-diagram"
+          class="diagram-object"
+          type="image/svg+xml"
+          data="technical-notes/diagrams/metering-topology.svg"
+          title="Metering communication topology with redundant channels">
+          <p>Diagram failed to load. Open <a href="technical-notes/diagrams/metering-topology.svg">metering-topology.svg</a> directly.</p>
+        </object>
       </div>
       <div class="legend">
         <span class="legend-item"><span class="legend-line" style="border-color:#888"></span> Working path</span>
@@ -244,14 +219,48 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </ul>
 </div>
 <script>
+const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
+const SVG_PATH = 'technical-notes/diagrams/metering-topology.svg';
+
+function publicSvgUrl(relativePath) {
+  const path = relativePath.replace(/^\//, '');
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    return `${WIKI_PAGES_ORIGIN}/${path}`;
+  }
+  return new URL(path, location.href).href;
+}
+
+function diagramsNetEditUrl(relativePath) {
+  return `https://app.diagrams.net/?url=${encodeURIComponent(publicSvgUrl(relativePath))}`;
+}
+
+['diagrams-net-edit', 'panel-diagrams-net'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.href = diagramsNetEditUrl(SVG_PATH);
+});
+
+const topologyObject = document.getElementById('topology-diagram');
+
+function getTopologySvgRoot() {
+  return topologyObject?.contentDocument?.documentElement || null;
+}
+
+function setTopologyView(proposed) {
+  const svgRoot = getTopologySvgRoot();
+  if (svgRoot) svgRoot.classList.toggle('show-proposed', proposed);
+  const legendProposed = document.getElementById('legend-proposed');
+  if (legendProposed) legendProposed.style.display = proposed ? 'flex' : 'none';
+}
+
+if (topologyObject) {
+  topologyObject.addEventListener('load', () => setTopologyView(false));
+}
+
 document.querySelectorAll('.toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.toggle button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const proposed = btn.dataset.view === 'proposed';
-    document.getElementById('proposed-edges').style.display = proposed ? 'block' : 'none';
-    document.getElementById('phone-relay').style.display = proposed ? 'block' : 'none';
-    document.getElementById('legend-proposed').style.display = proposed ? 'flex' : 'none';
+    setTopologyView(btn.dataset.view === 'proposed');
   });
 });
 </script>

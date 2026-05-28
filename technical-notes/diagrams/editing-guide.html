@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to edit the metering topology SVG · ISV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11; --green-50: #EAF3DE;
+  --teal: #0F6E56; --teal-50: #E1F5EE;
+  --bg: #fff; --bg-2: #f7f6f3; --text: #1c1c1a; --text-2: #5a5a55;
+  --border: rgba(0,0,0,0.08); --font: 'DM Sans', system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #18181a; --bg-2: #222224; --text: #e8e7e0; --text-2: #9a9890; --green-50: #1a2e0a; --teal-50: #082018; }
+}
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; margin: 0; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+a { color: var(--green); }
+.back { font-size: 13px; margin-bottom: 1.25rem; }
+.back a { color: var(--text-2); text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 24px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { color: var(--text-2); font-size: 14px; margin-bottom: 1.5rem; }
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 1rem; background: var(--bg-2); margin-bottom: 1rem; }
+.card h2 { font-size: 15px; font-weight: 500; margin: 0 0 0.5rem; }
+.card p { margin: 0 0 0.65rem; font-size: 14px; color: var(--text-2); }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.btn { display: inline-block; font-size: 13px; padding: 7px 12px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.btn.primary { background: var(--green); color: white; border-color: var(--green); }
+.btn:hover { opacity: 0.92; }
+code { font-family: var(--mono); font-size: 12px; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+ol { padding-left: 1.25rem; font-size: 14px; }
+li { margin-bottom: 0.35rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; font-size: 13px; margin: 1rem 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="back"><a href="../../index.html#notes/metering-2026-05-28">&larr; Meeting notes</a></p>
+  <h1>How to edit the topology diagram</h1>
+  <p class="sub">Metering &amp; comms network map &middot; SVG source file</p>
+
+  <div class="callout">
+    <strong>What is SVG?</strong>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank" rel="noopener">SVG (Scalable Vector Graphics)</a>
+    is an open XML format for diagrams. Boxes, lines, and labels are plain text coordinates &mdash; not a PNG. Zoom without blur; edit in code or visual tools.
+  </div>
+
+  <div class="card">
+    <h2>1. Open the diagram file</h2>
+    <p>Repo path (edit in Cursor or clone from GitHub):</p>
+    <p><code>isv-ai-wiki/technical-notes/diagrams/metering-topology.svg</code></p>
+    <div class="links">
+      <a class="btn primary" href="metering-topology.svg" target="_blank" rel="noopener">View SVG in browser</a>
+      <a class="btn" href="../../index.html#notes/metering-2026-05-28">Preview in wiki</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2. Edit visually in diagrams.net (easiest)</h2>
+    <p><a href="https://app.diagrams.net/" target="_blank" rel="noopener">diagrams.net</a> can open the SVG directly when it is hosted on the web:</p>
+    <div class="links">
+      <a class="btn primary" id="diagrams-net-edit" href="https://app.diagrams.net/" target="_blank" rel="noopener">Edit in diagrams.net (SVG loaded)</a>
+      <a class="btn" href="https://inkscape.org/" target="_blank" rel="noopener">Inkscape (desktop)</a>
+    </div>
+    <p style="margin-top:0.75rem">Or open manually: File &rarr; Open from &rarr; Device &rarr; select <code>metering-topology.svg</code> (required for local-only drafts).</p>
+    <ol>
+      <li>Move boxes, add arrows, change labels</li>
+      <li>File &rarr; Export as &rarr; SVG (keep <code>proposed-only</code> classes if possible)</li>
+      <li>Replace the file in the repo and refresh the wiki</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>3. Edit in Cursor (small text tweaks)</h2>
+    <p>Open the <code>.svg</code> file. Each box is a <code>&lt;rect&gt;</code>, each label a <code>&lt;text&gt;</code>, each arrow a <code>&lt;line&gt;</code> or <code>&lt;path&gt;</code>.</p>
+    <p>Install the <strong>SVG Preview</strong> extension for a side-by-side preview. Use ASCII-only punctuation in labels (no smart dashes).</p>
+  </div>
+
+  <div class="card">
+    <h2>4. Preview locally</h2>
+    <p>From the <code>isv-ai-wiki</code> folder:</p>
+    <p><code>./preview.sh</code></p>
+    <p>Then open <a href="http://localhost:8765/index.html#notes/metering-2026-05-28">http://localhost:8765/index.html#notes/metering-2026-05-28</a></p>
+  </div>
+
+  <div class="card">
+    <h2>Proposed relay toggle</h2>
+    <p>Green &ldquo;proposed&rdquo; paths use <code>class="proposed-only"</code> on <code>proposed-edges</code> and <code>phone-relay</code>. Keep that class if you re-export from draw.io.</p>
+  </div>
+
+  <div class="card">
+    <h2>What stays in HTML (not SVG)</h2>
+    <p>Stats, tables, field notes, and action items live in <code>tech-comm-2026-05-28-metering-topology.html</code>.</p>
+  </div>
+</div>
+<script>
+const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
+const SVG_PATH = 'metering-topology.svg';
+
+function publicSvgUrl(relativePath) {
+  const path = `technical-notes/diagrams/${relativePath.replace(/^\//, '')}`;
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    return `${WIKI_PAGES_ORIGIN}/${path}`;
+  }
+  return new URL(path, location.href).href;
+}
+
+function diagramsNetEditUrl(relativePath) {
+  return `https://app.diagrams.net/?url=${encodeURIComponent(publicSvgUrl(relativePath))}`;
+}
+
+const el = document.getElementById('diagrams-net-edit');
+if (el) el.href = diagramsNetEditUrl(SVG_PATH);
+</script>
+</body>
+</html>
