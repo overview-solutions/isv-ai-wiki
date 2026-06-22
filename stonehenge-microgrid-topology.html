@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circles of Power · ISV-HCK-001 · ISV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11; --green-50: #EAF3DE;
+  --amber: #BA7517; --amber-50: #FAEEDA;
+  --teal: #0F6E56; --teal-50: #E1F5EE;
+  --bg: #ffffff; --bg-2: #f7f6f3;
+  --text: #1c1c1a; --text-2: #5a5a55; --text-3: #9a9990;
+  --border: rgba(0,0,0,0.08);
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18181a; --bg-2: #222224;
+    --text: #e8e7e0; --text-2: #9a9890; --text-3: #5a5a55;
+    --border: rgba(255,255,255,0.08);
+    --green-50: #1a2e0a; --amber-50: #2a1e08; --teal-50: #082018;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.75rem; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+.stat { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; background: var(--bg-2); }
+.stat-val { font-size: 22px; font-weight: 500; color: var(--teal); }
+.stat-label { font-size: 12px; color: var(--text-2); margin-top: 2px; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+p, li { font-size: 14px; margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+.links a {
+  display: inline-block; font-size: 12px; padding: 5px 10px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="back"><a href="index.html#tech-reports/isv-hck-2025-circles-of-power">← ISV Knowledge Base · Technical reports</a></div>
+  <h1>Circles of Power: village metering economics &amp; open DER stack</h1>
+  <p class="sub">ISV-HCK-001 · Open Energy Hackathon · SF Climate Week · Earth Day 2025</p>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">$600–1.5k</div><div class="stat-label">Typical legacy prepaid meter (problem)</div></div>
+    <div class="stat"><div class="stat-val">~$58</div><div class="stat-label">Target per-household metering (pole EMS prototype)</div></div>
+    <div class="stat"><div class="stat-val">Feeder</div><div class="stat-label">Natural boundary for a village DER market</div></div>
+  </div>
+
+  <div class="callout">
+    <strong>Problems we are trying to solve</strong>
+    Rural mini-grid operators often cannot afford per-customer AMI. Without metering they cannot bill reliably, detect theft, or maintain systems. Below the feeder, devices speak STS, DLMS, OEM, MODBUS, and proprietary RF — while utilities and aggregators need IEEE 2030.5 and SunSpec-shaped data. The 2025 hack tested open pole-mount EMS hardware and protocol gateways against these constraints.
+  </div>
+
+  <h2>What came out of the hackathon</h2>
+  <ul>
+    <li><strong>Street Pole EMS Box</strong> (ISV + NESL + Energy IOT) — ESP32, three meters + relays per pole, SunSpec JSON over MQTT; branches on <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">github.com/energy-iot/ems-dev</a></li>
+    <li><strong>Feeder-level DER market</strong> — Post Road Foundation: geofence is the distribution feeder, not the whole utility territory</li>
+    <li><strong>Anchor customers</strong> — ISV grant requirement; a paying business stabilizes village O&amp;M (maps to field reality, not metaphor)</li>
+    <li><strong>NILM</strong> — aggregate signature disaggregation as a path to lighter-weight telemetry</li>
+  </ul>
+
+  <h2>Appendix: Stonehenge topology metaphor</h2>
+  <p>One modeling device from the original essay — a mnemonic mapping monument features to microgrid roles (Altar = aggregator, Sarsen/lintels = pole EMS + lines, Heelstone = anchor customer, etc.). Useful for workshops; not a product spec.</p>
+  <table>
+    <thead><tr><th>Feature</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Altar</td><td>Aggregator / head-end (billing, theft detection, cloud uplink)</td></tr>
+      <tr><td>Avenue</td><td>Grid tie (IEEE 2030.5 when connected)</td></tr>
+      <tr><td>Sarsen + lintels</td><td>Street Pole EMS boxes and last-mile wiring</td></tr>
+      <tr><td>Heelstone</td><td>Anchor customer</td></tr>
+      <tr><td>Station stones</td><td>EV / Sun Blazer charging hubs</td></tr>
+      <tr><td>Bluestone / rings</td><td>Solar PV and AC vs DC load zones</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="index.html#notes/metering-2026-05-28">Tech Comm · Metering &amp; comms topology (May 2026)</a></li>
+    <li><a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI technical reference</a></li>
+    <li><a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank" rel="noopener">Original Medium post</a></li>
+  </ul>
+</div>
+</body>
+</html>

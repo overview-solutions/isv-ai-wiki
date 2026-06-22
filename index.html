@@ -428,6 +428,49 @@ body {
 
 .btn-secondary-link:hover { background: var(--bg-3); color: var(--text); }
 
+.tech-problems {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: var(--bg-2);
+  margin-bottom: 1rem;
+}
+.tech-problems-title { font-size: 13px; font-weight: 500; margin-bottom: 0.5rem; }
+.tech-problems ul { margin: 0; padding-left: 1.2rem; font-size: 13px; color: var(--text-2); }
+.tech-problems li { margin-bottom: 0.35rem; }
+
+.tech-code-legend {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-2);
+  margin-bottom: 1rem;
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.tech-code-legend summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  font-size: 13px;
+}
+.tech-code-legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.5rem 1rem;
+  margin-top: 0.65rem;
+}
+.tech-code-legend dt { font-family: var(--mono); font-size: 11px; color: var(--text); }
+.tech-code-legend dd { margin: 0 0 0.35rem; }
+
+.tech-pub-code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 0.25rem;
+}
+
 @media (max-width: 800px) {
   .tech-notes-layout { grid-template-columns: 1fr; }
   .tech-notes-list { max-height: none; }
@@ -1025,12 +1068,19 @@ code {
       Meeting notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
-      <div class="nav-sub-item active" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
+      <div class="nav-sub-item active" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
+    </div>
+    <div class="nav-item" data-section="power-africa" onclick="showSection('power-africa')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Power Africa Workshop
+    </div>
+    <div class="nav-sub" id="nav-sub-power-africa">
+      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="power-africa" onclick="showNote('power-africa-2026-workshop-planning')">Jun 2026 · Workshop planning</div>
     </div>
     <div class="nav-label nav-label-knowledge">Knowledge base</div>
     <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-      Technical notes
+      Technical reports
     </div>
     <div class="nav-sub" id="nav-sub-tech-notes"></div>
     <div class="nav-item" data-section="standards" onclick="showSection('standards')">
@@ -1085,6 +1135,7 @@ code {
       <p>IEEE Smart Village integrates sustainable electricity, education, and entrepreneurial solutions to empower off-grid communities worldwide — bringing the world to the village through advanced technology for energy, communications, water, and sanitation.</p>
       <p>Every project addresses at least two of ISV's three pillars: <strong>Energy</strong> (solar-based electricity and micro-utilities), <strong>Education</strong> (digital classrooms, vocational training, SECI-based adult learning), and <strong>Entrepreneurship</strong> (community-owned energy businesses). These align with UN SDGs 7, 4, and 8.</p>
       <p>The Technology Committee maintains open engineering initiatives — standards, monitoring tools, and interoperability layers — that support funded field projects without replacing them.</p>
+      <p>Across funded mini-grids, the recurring engineering problems are: <strong>metering costs</strong> that can double project budgets, <strong>inability to bill and detect theft</strong> without per-customer meters, <strong>protocol fragmentation</strong> (STS, DLMS, OEM, MODBUS) below the feeder, and <strong>unreliable rural backhaul</strong> when DCUs fail. See <a href="#" onclick="showSection('tech-notes');return false">Technical reports</a> and <a href="#" onclick="showNote('metering-2026-05-28');return false">May 2026 Tech Comm notes</a>.</p>
     </div>
     <div class="ai-panel" id="ai-mission">
       <div class="ai-panel-label">AI editor — mission</div>
@@ -1184,10 +1235,31 @@ code {
         </div>
         <div class="project-card">
           <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Street Pole EMS Box</span>
+          </div>
+          <div class="project-desc">Open pole-mount gateway (ISV + NESL + <a href="https://github.com/energy-iot/ems-dev/" target="_blank">Energy IOT</a>): three meters per box, remote disconnect, SunSpec JSON over MQTT — aimed at ~$58/household metering vs ~$1k legacy AMI. Prototype from the 2025 Open Energy Hackathon; problem framing in <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a>.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-pilot">Hackathon</span>
+            <span class="project-name">Open Energy Hackathon — SF Climate Week 2025</span>
+          </div>
+          <div class="project-desc">Earth Day hack at Port Labs (Oakland) on affordable village metering, DER protocol gaps, and IEEE 2030.5 / SunSpec integration. Writeup: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
             <span class="tag tag-pilot">Notes</span>
             <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
           </div>
-          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a></div>
+          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-planning">Planning</span>
+            <span class="project-name">Power Africa Conference — Workshop</span>
+          </div>
+          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a></div>
         </div>
       </div>
     </div>
@@ -1241,7 +1313,7 @@ code {
         <div class="standard-icon">⚡</div>
         <div>
           <div class="standard-name">IEEE 2030.5 — Smart Energy Profile</div>
-          <div class="standard-desc">RESTful protocol for DER communication between devices, gateways, and head-end systems. Core compatibility target for the OpenAMI data model.</div>
+          <div class="standard-desc">RESTful protocol for DER communication between devices, gateways, and head-end systems. Core compatibility target for OpenAMI — the utility-facing layer above a village feeder when grid-connected.</div>
         </div>
       </div>
       <div class="standard-row">
@@ -1269,7 +1341,7 @@ code {
         <div class="standard-icon">☀️</div>
         <div>
           <div class="standard-name">SunSpec Alliance — Modbus / SunSpec JSON</div>
-          <div class="standard-desc">Device-level models (e.g. Model 1, 11, 213) for inverters, storage, and subpanel metering. OpenAMI MQTT reporting aligns to SunSpec schemas for behind-the-meter DER visibility.</div>
+          <div class="standard-desc">Device-level models (e.g. Model 1, 11, 213) for inverters, storage, and subpanel metering. OpenAMI MQTT reporting aligns to SunSpec schemas — the common payload pole EMS gateways translate toward regardless of MODBUS, CAN, or RF underneath.</div>
         </div>
       </div>
       <div class="standard-row">
@@ -1421,6 +1493,55 @@ code {
     </div>
     <div id="content-resources">
       <div class="resource-row">
+        <div class="standard-icon">🏛️</div>
+        <div>
+          <div class="resource-name">Circles of Power — Open Energy Hackathon 2025</div>
+          <div class="resource-desc"><a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium essay</a> · <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">Technical report ISV-HCK-001</a> — village metering economics, EMS hardware, SunSpec/MQTT stack.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📦</div>
+        <div>
+          <div class="resource-name">Street Pole EMS Box — ems-dev</div>
+          <div class="resource-desc"><a href="https://github.com/energy-iot/ems-dev/" target="_blank">github.com/energy-iot/ems-dev</a> — open hardware/firmware from the hackathon; SunSpec gateway, three meters per pole box.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">⚡</div>
+        <div>
+          <div class="resource-name">Energy IOT · Open Energy Hackathon</div>
+          <div class="resource-desc"><a href="https://github.com/energy-iot" target="_blank">Energy IOT GitHub</a> — host org for SF Climate Week DER hack (Port Labs, Earth Day 2025).</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🔋</div>
+        <div>
+          <div class="resource-name">EnAccess Foundation</div>
+          <div class="resource-desc"><a href="https://enaccess.org" target="_blank">enaccess.org</a> · <a href="https://github.com/enaccess" target="_blank">github.com/enaccess</a> — Netherlands-based nonprofit (est. 2018) publishing open-source, hardware-agnostic tools for energy access. ~56 public repos covering PAYGO, prepaid metering, IoT comms, and decentralized utility management — directly applicable to ISV's metering/comms topology work.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🪙</div>
+        <div>
+          <div class="resource-name">OpenPAYGO Token — EnAccess</div>
+          <div class="resource-desc"><a href="https://github.com/enaccess/OpenPAYGO-Token" target="_blank">OpenPAYGO-Token</a> · <a href="https://github.com/enaccess/OpenPAYGO-python" target="_blank">OpenPAYGO-python</a> · <a href="https://github.com/enaccess/OpenPAYGO-HW" target="_blank">OpenPAYGO-HW</a> — open, device-agnostic token system for Pay-as-you-go functionality. An open alternative to STS-style prepaid tokens discussed in the metering topology note.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🏭</div>
+        <div>
+          <div class="resource-name">MicroPowerManager — EnAccess</div>
+          <div class="resource-desc"><a href="https://github.com/enaccess/micropowermanager" target="_blank">micropowermanager</a> — open-source management tool for decentralized utilities: customer accounts, prepaid billing, meter integration, and reporting for mini-grids and SHS operators.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📟</div>
+        <div>
+          <div class="resource-name">OpenSmartMeter &amp; Cicada-FW — EnAccess</div>
+          <div class="resource-desc"><a href="https://github.com/enaccess/OpenSmartMeter" target="_blank">OpenSmartMeter</a> — low-cost, OEM-agnostic GSM prepaid smart meter with a customizable API. <a href="https://github.com/enaccess/Cicada-FW" target="_blank">Cicada-FW</a> — bi-directional IoT comms module for embedded energy-access devices.</div>
+        </div>
+      </div>
+      <div class="resource-row">
         <div class="standard-icon">🌐</div>
         <div>
           <div class="resource-name">IEEE Smart Village — Main Site</div>
@@ -1531,7 +1652,7 @@ code {
     </div>
     <div id="content-notes">
       <div class="wiki-body">
-        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. Related industry sources live under <a href="#" onclick="showSection('tech-notes');return false">Technical notes</a>.</p>
+        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. Background reports and problem framing: <a href="#" onclick="showSection('tech-notes');return false">Technical reports</a>.</p>
       </div>
       <div class="notes-index" id="notes-index">
         <a class="notes-index-item active" href="#" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28');return false">
@@ -1551,26 +1672,70 @@ code {
     </div>
   </div>
 
-  <!-- TECHNICAL NOTES -->
+  <!-- POWER AFRICA WORKSHOP -->
+  <div class="section" id="sec-power-africa">
+    <div class="section-header">
+      <div>
+        <div class="section-title" id="power-africa-section-title">Power Africa Workshop</div>
+        <div class="section-sub" id="power-africa-section-sub">Conference hands-on track · planning notes</div>
+      </div>
+    </div>
+    <div id="content-power-africa">
+      <div class="wiki-body">
+        <p>Planning notes for the IEEE Smart Village workshop at the annual PES/IAS Power Africa conference. ISV has run workshops at Power Africa since 2012 — electricity, education, and enterprise for off-grid communities. Select a session below.</p>
+      </div>
+      <div class="notes-index" id="power-africa-index">
+        <a class="notes-index-item active" href="#" data-note="power-africa-2026-workshop-planning" onclick="showNote('power-africa-2026-workshop-planning');return false">
+          <div class="notes-index-title">Workshop planning</div>
+          <div class="notes-index-meta">Jun 2026 · Glenn &amp; Mike · kits · budget · schedule</div>
+        </a>
+      </div>
+      <div class="notes-embed">
+        <div class="notes-embed-toolbar">
+          <span id="power-africa-embed-label">Jun 2026 · Workshop planning</span>
+          <div class="notes-embed-toolbar-links">
+            <a id="power-africa-toolbar-standalone" href="power-africa-2026-workshop-planning.html" target="_blank" rel="noopener">Full page</a>
+          </div>
+        </div>
+        <iframe id="power-africa-frame" title="Power Africa Workshop notes preview" src="power-africa-2026-workshop-planning.html?embed=1"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL REPORTS -->
   <div class="section" id="sec-tech-notes">
     <div class="section-header">
       <div>
-        <div class="section-title">Technical notes</div>
-        <div class="section-sub" id="tech-notes-section-sub">Industry publications, standards, and references — submit via catalog.json</div>
+        <div class="section-title">Technical reports</div>
+        <div class="section-sub" id="tech-notes-section-sub">Dev Labs research reports · Cottonspace · GitHub</div>
       </div>
     </div>
     <div id="content-tech-notes">
-      <div class="wiki-body">
-        <p><strong>Meeting notes</strong> capture what we discussed internally. <strong>Technical notes</strong> are for team submissions — standards, papers, vendor specs, and open tools — each with a short ISV relevance summary.</p>
-        <p>No entries yet. To add one, edit <code>technical-notes/catalog.json</code> in this repo and refresh. Each entry needs a title, publisher, URL, tags, summary, and <code>isvRelevance</code> field.</p>
+      <div class="tech-problems">
+        <div class="tech-problems-title">What these reports support</div>
+        <ul>
+          <li><strong>Affordable metering</strong> — legacy prepaid meters at $600–$1,500 can match or exceed generation CAPEX</li>
+          <li><strong>Billing &amp; O&amp;M revenue</strong> — operators need per-customer reads, disconnect, and anchor load</li>
+          <li><strong>Theft &amp; unmetered load</strong> — illegal taps and tangled lines hide on aggregate feeders</li>
+          <li><strong>Protocol translation</strong> — STS, DLMS, OEM, and MODBUS must converge on open schemas (SunSpec, 2030.5)</li>
+          <li><strong>Rural comms</strong> — redundant paths when DCU / NAN uplinks fail (see meeting notes)</li>
+        </ul>
       </div>
+      <div class="wiki-body">
+        <p>Indexed summaries here; full documents on Cottonspace or in this wiki. Dev Labs reports sync from <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a>. Refresh Cottonspace entries with <code>python3 technical-notes/sync-catalog.py</code>.</p>
+      </div>
+      <details class="tech-code-legend" id="tech-code-legend">
+        <summary>Report ID key — what EMG-REG-008 means</summary>
+        <p id="tech-code-legend-intro" style="margin-top:0.5rem"></p>
+        <div class="tech-code-legend-grid" id="tech-code-legend-grid"></div>
+      </details>
       <div class="tech-notes-filters" id="tech-notes-filters"></div>
       <div class="tech-notes-layout">
         <div class="tech-notes-list" id="tech-notes-list">
           <div class="tech-notes-detail-empty">Loading catalog…</div>
         </div>
         <div class="tech-notes-detail" id="tech-notes-detail">
-          <div class="tech-notes-detail-empty">No submissions yet.</div>
+          <div class="tech-notes-detail-empty">Select a report from the list.</div>
         </div>
       </div>
     </div>
@@ -1592,9 +1757,14 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['mission','funded','tech','notes','tech-notes','standards','data','team','resources'];
+const SECTIONS = ['mission','funded','tech','notes','power-africa','tech-notes','standards','data','team','resources'];
+const NOTE_GROUPS = {
+  'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
+  'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }
+};
 const MEETING_NOTES = {
   'metering-2026-05-28': {
+    group: 'tech-comm',
     title: 'Metering & comms topology',
     date: '28 May 2026',
     sub: 'STS · SMS · DLMS · redundant NAN · CIU/phone relay',
@@ -1602,15 +1772,28 @@ const MEETING_NOTES = {
     standalone: 'tech-comm-2026-05-28-metering-topology.html',
     diagramSvg: 'technical-notes/diagrams/metering-topology.svg',
     diagramGuide: 'technical-notes/diagrams/editing-guide.html'
+  },
+  'power-africa-2026-workshop-planning': {
+    group: 'power-africa',
+    title: 'Workshop planning',
+    date: 'Jun 2026',
+    sub: 'Glenn & Mike · kits · budget · schedule · Nairobi shipping',
+    src: 'power-africa-2026-workshop-planning.html?embed=1',
+    standalone: 'power-africa-2026-workshop-planning.html'
   }
 };
 const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json';
+const COTTONSPACE_REPORTS_URL = 'https://sattal.cottonspace.com/reports';
+const DEV_LABS_GITHUB_REPO = 'https://github.com/rahulbhargavain/openami-smart-village';
+const DEV_LABS_GITHUB_REPORTS = `${DEV_LABS_GITHUB_REPO}/tree/main/reports`;
 const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
 const GEOJSON_URL = 'https://overview-solutions.github.io/RemoteMonitorMap/projects.geojson';
 const aiResults = {};
 let fundedDataLoaded = false;
 let activeNoteId = 'metering-2026-05-28';
 let techNotesCatalog = [];
+let techNotesCatalogs = [];
+let techNotesCodeGuide = null;
 let techNotesLoaded = false;
 let activeTechNoteId = null;
 let activeTechFilter = 'all';
@@ -1642,48 +1825,71 @@ function showSection(id, options = {}) {
   });
   const main = document.getElementById('main');
   main.classList.toggle('wide', id === 'funded');
-  main.classList.toggle('notes-wide', id === 'notes' || id === 'tech-notes');
+  main.classList.toggle('notes-wide', id === 'notes' || id === 'power-africa' || id === 'tech-notes');
   if (id === 'funded') loadFundedProjects();
-  if (id === 'notes' && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
+  if ((id === 'notes' || id === 'power-africa') && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
   if (id === 'tech-notes') loadTechnicalNotes();
+}
+
+function getNoteGroup(noteId) {
+  return MEETING_NOTES[noteId]?.group || 'tech-comm';
+}
+
+function getNoteSection(noteId) {
+  return NOTE_GROUPS[getNoteGroup(noteId)]?.section || 'notes';
 }
 
 function refreshNotePreview(noteId) {
   const note = MEETING_NOTES[noteId];
   if (!note) return;
+  const group = getNoteGroup(noteId);
   document.querySelectorAll('.nav-sub-item[data-note]').forEach(el => {
     el.classList.toggle('active', el.dataset.note === noteId);
   });
   document.querySelectorAll('.notes-index-item[data-note]').forEach(el => {
     el.classList.toggle('active', el.dataset.note === noteId);
+    if (el.closest('#notes-index')) el.style.display = getNoteGroup(el.dataset.note) === 'tech-comm' ? '' : 'none';
+    if (el.closest('#power-africa-index')) el.style.display = getNoteGroup(el.dataset.note) === 'power-africa' ? '' : 'none';
   });
-  const frame = document.getElementById('notes-frame');
+  const frameId = group === 'power-africa' ? 'power-africa-frame' : 'notes-frame';
+  const labelId = group === 'power-africa' ? 'power-africa-embed-label' : 'notes-embed-label';
+  const subId = group === 'power-africa' ? 'power-africa-section-sub' : 'notes-section-sub';
+  const toolbarId = group === 'power-africa' ? 'power-africa-toolbar-standalone' : 'notes-toolbar-standalone';
+  const frame = document.getElementById(frameId);
   const nextSrc = note.src;
   if (frame && frame.getAttribute('src') !== nextSrc) frame.setAttribute('src', nextSrc);
-  const label = document.getElementById('notes-embed-label');
+  const label = document.getElementById(labelId);
   if (label) label.textContent = `${note.date} · ${note.title}`;
-  const sub = document.getElementById('notes-section-sub');
+  const sub = document.getElementById(subId);
   if (sub) sub.textContent = `${note.date} · ${note.sub}`;
-  const toolbarStandalone = document.getElementById('notes-toolbar-standalone');
+  const toolbarStandalone = document.getElementById(toolbarId);
   if (note.standalone && toolbarStandalone) toolbarStandalone.href = note.standalone;
 }
 
 function showNote(noteId, updateHash = true) {
   if (!MEETING_NOTES[noteId]) return;
   activeNoteId = noteId;
-  showSection('notes', { skipNoteRefresh: true });
+  const sectionId = getNoteSection(noteId);
+  showSection(sectionId, { skipNoteRefresh: true });
   refreshNotePreview(noteId);
-  if (updateHash) history.replaceState(null, '', `#notes/${noteId}`);
+  if (updateHash) history.replaceState(null, '', `#${sectionId}/${noteId}`);
 }
 
 function initFromHash() {
   const raw = location.hash.replace(/^#/, '');
-  if (raw.startsWith('notes')) {
-    const noteId = raw.split('/')[1] || 'metering-2026-05-28';
+  if (raw.startsWith('notes') || raw.startsWith('power-africa')) {
+    const section = raw.split('/')[0];
+    const defaultNote = NOTE_GROUPS[section === 'power-africa' ? 'power-africa' : 'tech-comm']?.defaultNote;
+    const noteId = raw.split('/')[1] || defaultNote;
     if (MEETING_NOTES[noteId]) showNote(noteId, false);
     return;
   }
-  if (raw.startsWith('tech-notes')) {
+  if (raw.startsWith('concepts/stonehenge')) {
+    showSection('tech-notes');
+    loadTechnicalNotes().then(() => showTechNote('isv-hck-2025-circles-of-power', false));
+    return;
+  }
+  if (raw.startsWith('tech-reports') || raw.startsWith('tech-notes')) {
     const pubId = raw.split('/')[1] || null;
     showSection('tech-notes');
     loadTechnicalNotes().then(() => {
@@ -1701,6 +1907,7 @@ document.addEventListener('DOMContentLoaded', initFromHash);
 
 async function loadTechnicalNotes() {
   if (techNotesLoaded) {
+    renderReportCodeLegend();
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
@@ -1713,12 +1920,21 @@ async function loadTechnicalNotes() {
     const resp = await fetch(TECH_NOTES_CATALOG_URL);
     if (!resp.ok) throw new Error('Catalog unavailable');
     const data = await resp.json();
+    techNotesCatalogs = Array.isArray(data.catalogs) ? data.catalogs : [];
     techNotesCatalog = Array.isArray(data.items) ? data.items : [];
+    techNotesCodeGuide = data.reportCodeGuide || null;
     techNotesLoaded = true;
+    renderReportCodeLegend();
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
-    renderTechnicalNotesEmptyDetail();
+    if (!activeTechNoteId && techNotesCatalog.length) {
+      showTechNote(techNotesCatalog[0].id, false);
+    } else if (activeTechNoteId) {
+      renderTechnicalNoteDetail(activeTechNoteId);
+    } else {
+      renderTechnicalNotesEmptyDetail();
+    }
   } catch (err) {
     if (listEl) {
       listEl.innerHTML = '<div class="tech-notes-detail-empty">Could not load technical-notes/catalog.json. Run ./preview.sh from isv-ai-wiki (local server required).</div>';
@@ -1726,47 +1942,78 @@ async function loadTechnicalNotes() {
   }
 }
 
-function getTechNoteTags() {
-  const tags = new Set();
-  techNotesCatalog.forEach(item => (item.tags || []).forEach(t => tags.add(t)));
-  return Array.from(tags).sort();
+function explainReportCode(code) {
+  if (!code) return '';
+  const g = techNotesCodeGuide;
+  if (g?.special?.[code]) return g.special[code];
+  const parts = code.split('-');
+  if (parts.length === 3 && parts[1] === 'SSA' && /^V\d/.test(parts[2])) {
+    const series = g?.series?.[parts[0]] || parts[0];
+    return `${series} · SSA vehicle assessment · #${parts[2].replace(/^V/, '')}`;
+  }
+  if (parts.length === 3) {
+    const series = g?.series?.[parts[0]] || parts[0];
+    const type = g?.types?.[parts[1]] || parts[1];
+    return `${series} · ${type} · #${parts[2]}`;
+  }
+  return code;
+}
+
+function renderReportCodeLegend() {
+  const intro = document.getElementById('tech-code-legend-intro');
+  const grid = document.getElementById('tech-code-legend-grid');
+  const g = techNotesCodeGuide;
+  if (!intro || !grid || !g) return;
+  intro.textContent = g.summary || 'Report IDs use {Series}-{Type}-{Number}.';
+  const entries = [];
+  Object.entries(g.series || {}).forEach(([k, v]) => entries.push([k, v]));
+  Object.entries(g.types || {}).forEach(([k, v]) => entries.push([k, v]));
+  grid.innerHTML = entries.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join('');
+}
+
+function getTechNoteCategories() {
+  const cats = new Set();
+  techNotesCatalog.forEach(item => { if (item.category) cats.add(item.category); });
+  return Array.from(cats).sort();
 }
 
 function renderTechnicalNotesNav() {
   const nav = document.getElementById('nav-sub-tech-notes');
   if (!nav) return;
-  nav.innerHTML = techNotesCatalog.slice(0, 6).map(item => (
+  nav.innerHTML = techNotesCatalog.slice(0, 8).map(item => (
     `<div class="nav-sub-item${item.id === activeTechNoteId ? ' active' : ''}" data-tech-note="${item.id}" onclick="showTechNote('${item.id}')">${escapeHtml(shortNavTitle(item))}</div>`
   )).join('');
 }
 
 function shortNavTitle(item) {
+  const cat = item.category || 'Report';
   const t = item.title || 'Untitled';
-  return t.length > 34 ? `${t.slice(0, 31)}…` : t;
+  const short = t.length > 28 ? `${t.slice(0, 25)}…` : t;
+  return `${cat} · ${short}`;
 }
 
 function renderTechnicalNotesFilters() {
   const el = document.getElementById('tech-notes-filters');
   if (!el) return;
-  const tags = getTechNoteTags();
-  if (!tags.length) {
+  const categories = getTechNoteCategories();
+  if (!categories.length) {
     el.innerHTML = '';
     return;
   }
-  el.innerHTML = ['all', ...tags].map(tag => (
-    `<button type="button" class="filter-chip${tag === activeTechFilter ? ' active' : ''}" onclick="setTechFilter('${tag}')">${tag === 'all' ? 'All' : escapeHtml(tag)}</button>`
+  el.innerHTML = ['all', ...categories].map(cat => (
+    `<button type="button" class="filter-chip${cat === activeTechFilter ? ' active' : ''}" onclick="setTechFilter('${escapeHtml(cat).replace(/'/g, "\\'")}')">${cat === 'all' ? 'All categories' : escapeHtml(cat)}</button>`
   )).join('');
 }
 
-function setTechFilter(tag) {
-  activeTechFilter = tag;
+function setTechFilter(cat) {
+  activeTechFilter = cat;
   renderTechnicalNotesFilters();
   renderTechnicalNotesList();
 }
 
 function filteredTechNotes() {
   if (activeTechFilter === 'all') return techNotesCatalog;
-  return techNotesCatalog.filter(item => (item.tags || []).includes(activeTechFilter));
+  return techNotesCatalog.filter(item => item.category === activeTechFilter);
 }
 
 function renderTechnicalNotesList() {
@@ -1778,16 +2025,21 @@ function renderTechnicalNotesList() {
     return;
   }
   if (!items.length) {
-    listEl.innerHTML = '<div class="tech-notes-detail-empty">No publications match this filter.</div>';
+    listEl.innerHTML = '<div class="tech-notes-detail-empty">No reports match this filter.</div>';
     return;
   }
   listEl.innerHTML = items.map(item => `
     <button type="button" class="tech-pub-card${item.id === activeTechNoteId ? ' active' : ''}" data-tech-note="${item.id}" onclick="showTechNote('${item.id}')">
       <div class="tech-pub-title">${escapeHtml(item.title)}</div>
-      <div class="tech-pub-meta">${escapeHtml(item.publisher || '')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
+      <div class="tech-pub-meta">${escapeHtml(item.category || item.type || 'report')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
+      ${item.reportCode ? `<div class="tech-pub-code" title="${escapeHtml(explainReportCode(item.reportCode))}">${escapeHtml(item.reportCode)} — ${escapeHtml(explainReportCode(item.reportCode))}</div>` : ''}
       <div class="tech-pub-tags">${(item.tags || []).slice(0, 4).map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('')}</div>
     </button>
   `).join('');
+}
+
+function getSourceCatalog(id) {
+  return techNotesCatalogs.find(c => c.id === id);
 }
 
 function renderTechnicalNotesEmptyDetail() {
@@ -1795,9 +2047,9 @@ function renderTechnicalNotesEmptyDetail() {
   const subEl = document.getElementById('tech-notes-section-sub');
   if (!detailEl || activeTechNoteId) return;
   detailEl.innerHTML = `
-    <div class="tech-notes-detail-empty">Submissions will appear here. Edit <code>technical-notes/catalog.json</code> to add a publication, standard, or reference.</div>
+    <div class="tech-notes-detail-empty">Select a report from the list, or browse the <a href="${COTTONSPACE_REPORTS_URL}" target="_blank" rel="noopener">Dev Labs library ↗</a> · <a href="${DEV_LABS_GITHUB_REPORTS}" target="_blank" rel="noopener">GitHub source ↗</a>.</div>
   `;
-  if (subEl) subEl.textContent = 'Industry publications, standards, and references — submit via catalog.json';
+  if (subEl) subEl.textContent = 'Dev Labs research reports · Cottonspace · GitHub';
 }
 
 function renderTechnicalNoteDetail(id) {
@@ -1806,15 +2058,22 @@ function renderTechnicalNoteDetail(id) {
   const item = techNotesCatalog.find(x => x.id === id);
   if (!detailEl || !item) return;
 
+  const sourceCat = item.sourceCatalog ? getSourceCatalog(item.sourceCatalog) : null;
+  const githubRepo = sourceCat?.githubRepo || DEV_LABS_GITHUB_REPO;
+  const githubLink = item.githubUrl || (item.sourceFile ? `${githubRepo}/blob/main/${item.sourceFile}` : `${githubRepo}/tree/main/reports`);
+  const codeLine = item.reportCode
+    ? `<div class="tech-detail-publisher" style="margin-top:-0.5rem;margin-bottom:1rem"><span style="font-family:var(--mono);font-size:12px">${escapeHtml(item.reportCode)}</span> — ${escapeHtml(explainReportCode(item.reportCode))}</div>`
+    : '';
   const related = (item.relatedMeetingNotes || [])
     .filter(nid => MEETING_NOTES[nid])
     .map(nid => `<button type="button" class="btn-secondary-link" onclick="showNote('${nid}')">Meeting note: ${escapeHtml(MEETING_NOTES[nid].title)}</button>`)
     .join('');
 
   detailEl.innerHTML = `
-    <div class="tech-detail-type">${escapeHtml(item.type || 'reference')}</div>
+    <div class="tech-detail-type">${escapeHtml(item.category || item.type || 'report')}</div>
     <div class="tech-detail-title">${escapeHtml(item.title)}</div>
     <div class="tech-detail-publisher">${escapeHtml(item.publisher || '')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
+    ${codeLine}
     <div class="tech-detail-block">
       <div class="tech-detail-label">Summary</div>
       <div class="tech-detail-body">${escapeHtml(item.summary || '')}</div>
@@ -1824,12 +2083,15 @@ function renderTechnicalNoteDetail(id) {
       <div class="tech-detail-body">${escapeHtml(item.isvRelevance || '')}</div>
     </div>
     <div class="tech-detail-actions">
-      ${item.url ? `<a class="btn-primary-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open source ↗</a>` : ''}
+      ${item.url ? `<a class="btn-primary-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open full report ↗</a>` : ''}
+      ${item.mediumUrl ? `<a class="btn-secondary-link" href="${escapeHtml(item.mediumUrl)}" target="_blank" rel="noopener">Original Medium post ↗</a>` : ''}
+      ${sourceCat ? `<a class="btn-secondary-link" href="${escapeHtml(sourceCat.url)}" target="_blank" rel="noopener">${escapeHtml(sourceCat.title)} ↗</a>` : ''}
+      ${item.githubUrl ? `<a class="btn-secondary-link" href="${escapeHtml(githubLink)}" target="_blank" rel="noopener">View on GitHub ↗</a>` : ''}
       ${related}
     </div>
   `;
 
-  if (subEl) subEl.textContent = `${item.publisher || 'Reference'} · ${(item.tags || []).slice(0, 3).join(' · ') || 'technical note'}`;
+  if (subEl) subEl.textContent = `${item.category || 'Report'} · ${explainReportCode(item.reportCode) || item.publisher || ''}`;
 }
 
 function showTechNote(id, updateHash = true) {
@@ -1843,7 +2105,7 @@ function showTechNote(id, updateHash = true) {
   renderTechnicalNotesNav();
   renderTechnicalNotesList();
   renderTechnicalNoteDetail(id);
-  if (updateHash) history.replaceState(null, '', `#tech-notes/${id}`);
+  if (updateHash) history.replaceState(null, '', `#tech-reports/${id}`);
 }
 
 function escapeHtml(str) {

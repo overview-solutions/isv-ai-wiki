@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Africa Workshop — Planning · Jun 2026 · ISV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11; --green-50: #EAF3DE;
+  --amber: #BA7517; --amber-50: #FAEEDA;
+  --teal: #0F6E56; --teal-50: #E1F5EE;
+  --bg: #ffffff; --bg-2: #f7f6f3; --bg-3: #f0efe9;
+  --text: #1c1c1a; --text-2: #5a5a55; --text-3: #9a9990;
+  --border: rgba(0,0,0,0.08); --border-2: rgba(0,0,0,0.14);
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18181a; --bg-2: #222224; --bg-3: #2a2a2c;
+    --text: #e8e7e0; --text-2: #9a9890; --text-3: #5a5a55;
+    --border: rgba(255,255,255,0.08); --border-2: rgba(255,255,255,0.14);
+    --green-50: #1a2e0a; --amber-50: #2a1e08; --teal-50: #082018;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.75rem; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+.stat { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; background: var(--bg-2); }
+.stat-val { font-size: 22px; font-weight: 500; }
+.stat-label { font-size: 12px; color: var(--text-2); margin-top: 2px; }
+.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--amber); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; color: var(--text); }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.actions { list-style: none; padding: 0; }
+.actions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; align-items: flex-start; }
+.actions li::before { content: "○"; color: var(--text-3); flex-shrink: 0; }
+.todo { color: var(--text-2); font-style: italic; }
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html#power-africa/power-africa-2026-workshop-planning">← ISV Knowledge Base · Power Africa Workshop</a></div>
+  <h1>Workshop planning</h1>
+  <p class="sub">Power Africa Conference · Glenn Algie &amp; Mike Wilson · Jun 2026</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#power-africa/power-africa-2026-workshop-planning" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Power Africa Workshop</a></p>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val">20</div><div class="stat-label">Kits on hand (not for sale)</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">Cabinets</div></div>
+    <div class="stat"><div class="stat-val">8 hr</div><div class="stat-label">Total workshop time (3 sessions)</div></div>
+  </div>
+
+  <div class="callout">
+    <strong>Main goal</strong>
+    Formalize workshop sessions — define structure, budget, room layout, and materials so the conference hands-on track is ready to run. Kits are for workshop use only; not trying to sell them.
+  </div>
+
+  <h2>Session schedule</h2>
+  <table>
+    <thead><tr><th>When</th><th>Duration</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Monday morning (pre-session)</td><td>30 min</td><td>Warren Scott, SteamaCo — before workshop starts</td></tr>
+      <tr><td>Monday morning</td><td>4 hr</td><td>Workshop session</td></tr>
+      <tr><td>Tuesday evening</td><td>2 hr</td><td><span class="todo">Slot for Sandra / 10 Power video (5–10 min) — TBD</span></td></tr>
+      <tr><td>Saturday morning</td><td>2 hr</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Guests &amp; featured content</h2>
+  <table>
+    <thead><tr><th>Who</th><th>When</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Warren Scott, SteamaCo</td><td>Monday morning · 30 min pre-session</td><td>Before workshop starts</td></tr>
+      <tr><td>Sandra, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a> (Haiti)</td><td>TBD · 5–10 min video</td><td>Native projects in the Americas; women-owned; creative business cases — place somewhere in agenda</td></tr>
+      <tr><td>EnAccess</td><td>Workshop sessions</td><td>Attending workshop</td></tr>
+      <tr><td>Aaron, <a href="https://nearlyfreeenergy.com/" target="_blank" rel="noopener">NearlyFree Energy</a></td><td>Workshop sessions</td><td>Interested in attending</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Workshop session summary</h2>
+  <p class="todo">One paragraph describing the workshop session — to be drafted.</p>
+
+  <h2>Planning checklist</h2>
+  <ul>
+    <li><strong>Kits</strong> — have enough for 20; workshop use only, not for sale</li>
+    <li><strong>Cabinets</strong> — 3 cabinets to ship / set up in the room</li>
+    <li><strong>Budget</strong> — determine total cost including duties, shipping, and kit procurement (under $1,000 target)</li>
+    <li><strong>Room arrangement</strong> — how should the workshop space be laid out for hands-on work?</li>
+    <li><strong>Materials</strong> — what needs to be prepped before the conference?</li>
+    <li><strong>Shipping address</strong> — get delivery address from Albert in Nairobi</li>
+    <li><strong>Non-ISV participants</strong> — some workshop attendees are not ISV members; confirm each is registered for the conference (1-day registration to cover costs)</li>
+  </ul>
+
+  <h2>Open action items</h2>
+  <ul class="actions">
+    <li>Finalize budget (kits, duties, shipping)</li>
+    <li>Decide room layout and table/power requirements</li>
+    <li>Prep workshop materials and kit contents list</li>
+    <li>Draft one-paragraph workshop session description</li>
+    <li>Contact Albert (Nairobi) for shipping address</li>
+    <li>Place Sandra / 10 Power video (5–10 min) in agenda</li>
+    <li>Confirm non-ISV workshop participants have 1-day conference registration</li>
+  </ul>
+
+  <h2>Related events</h2>
+  <ul>
+    <li><a href="https://hub.wri.org/events/2026/10/open-source-energy-access-symposium-2026" target="_blank" rel="noopener">OSEAS 2026 — Open Source in Energy Access Symposium</a> · Kigali, Rwanda · 26–28 Oct 2026 · <a href="https://www.oseas.org/" target="_blank" rel="noopener">oseas.org</a></li>
+  </ul>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="index.html#tech-reports/isv-hck-2025-circles-of-power">ISV-HCK-001 · Circles of Power</a> — village metering economics and EMS hackathon work</li>
+    <li><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">Street Pole EMS Box (ems-dev)</a></li>
+    <li><a href="index.html#notes/metering-2026-05-28">Tech Comm — Metering &amp; comms topology</a></li>
+  </ul>
+</div>
+</body>
+</html>

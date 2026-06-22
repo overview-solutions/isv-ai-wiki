@@ -19,13 +19,16 @@ Open [http://localhost:8765/index.html](http://localhost:8765/index.html) — us
 | Section | What it is |
 |---------|------------|
 | **Meeting notes** | Internal Tech Comm call notes (tables, action items, embedded diagrams) |
-| **Technical notes** | Team submissions — papers, standards, vendor refs (`catalog.json`, starts empty) |
+| **Technical reports** | Dev Labs + ISV reports (`catalog.json`) — summaries here, full docs linked |
 | **Everything else** | Mission, funded projects map, standards, team, resources |
 
 Direct links (live site):
 
 - [Metering topology meeting note](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)
-- [Technical notes](https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-notes)
+- [Circles of Power · ISV-HCK-001](https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-reports/isv-hck-2025-circles-of-power)
+- [Technical reports](https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-reports)
+- [Dev Labs report library](https://sattal.cottonspace.com/reports) (full documents)
+- [Source repo — openami-smart-village](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports) (reports on GitHub)
 
 ---
 
@@ -37,26 +40,56 @@ Direct links (live site):
 2. Register the note in `index.html` → `MEETING_NOTES` (sidebar + iframe preview).
 3. Push to `main` — GitHub Pages updates in ~1 min.
 
-### Technical notes (publications & references)
+### Technical reports
 
-Edit `technical-notes/catalog.json` — one object per submission:
+Reports are **indexed** in the wiki, **hosted** on Cottonspace, and **maintained** in GitHub:
+
+- Browse summaries in the wiki → **Technical reports** sidebar
+- Open the full document via **Open full report ↗**
+- Live library: [sattal.cottonspace.com/reports](https://sattal.cottonspace.com/reports)
+- Source repo: [github.com/rahulbhargavain/openami-smart-village](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports)
+
+Reports use IDs like **EMG-TRD-005** = *Emerging markets · Technical reference · #005*. See the collapsible key on the Technical reports page. Cottonspace entries sync via:
+
+```bash
+cd isv-ai-wiki
+python3 technical-notes/sync-catalog.py
+```
+
+Wiki-only entries (e.g. **ISV-HCK-001**) have `"syncProtected": true` and are preserved by the sync script.
+
+To add ISV-specific context manually, edit fields in `technical-notes/catalog.json`:
 
 ```json
 {
   "id": "short-slug",
+  "reportCode": "EMG-XXX-000",
   "title": "…",
-  "publisher": "…",
-  "published": "2024",
-  "type": "paper",
-  "tags": ["metering", "AMI"],
-  "url": "https://…",
+  "publisher": "Cottonspace Dev Labs",
+  "published": "May 2026",
+  "type": "technical-reference",
+  "category": "Technical Reference",
+  "tags": ["OpenAMI", "metering"],
+  "url": "https://sattal.cottonspace.com/reports/your-report.html",
+  "sourceFile": "reports/your-report.html",
+  "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/your-report.html",
+  "sourceCatalog": "cottonspace-dev-labs",
   "summary": "What it is.",
   "isvRelevance": "Why ISV cares.",
   "relatedMeetingNotes": ["metering-2026-05-28"]
 }
 ```
 
-Refresh the wiki. Entries show under **Technical notes** in the sidebar.
+**Integration options** (current vs future):
+
+| Approach | What it does |
+|----------|----------------|
+| **Catalog index** *(now)* | Wiki lists metadata; links out to Cottonspace for the full report |
+| **Catalog sync script** *(now)* | `technical-notes/sync-catalog.py` pulls from openami-smart-village GitHub |
+| **Self-hosted copy** *(future)* | Mirror report HTML into this repo for offline / archival |
+| **Iframe embed** *(future)* | Show report inline in the detail panel (needs Cottonspace embed consent) |
+
+Refresh the wiki after editing the catalog. Old `#tech-notes/…` links still work; new links use `#tech-reports/…`.
 
 ### Network diagram (SVG)
 
@@ -79,8 +112,10 @@ isv-ai-wiki/
 ├── index.html                          # Wiki shell + navigation
 ├── preview.sh                          # Local server (port 8765)
 ├── tech-comm-*-*.html                  # Meeting note pages
+├── stonehenge-microgrid-topology.html  # Open Energy Hackathon concept (Apr 2025)
 ├── technical-notes/
-│   ├── catalog.json                    # Technical notes submissions
+│   ├── catalog.json                    # Technical reports index
+│   ├── sync-catalog.py                 # Sync from openami-smart-village GitHub
 │   └── diagrams/                       # SVG diagrams for meeting notes
 ├── js/                                 # Funded projects map embed
 ├── schema/                             # Optional Postgres schema (future)
