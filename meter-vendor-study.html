@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Village Metering Vendor Study · ISV Tech Comm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #3B6D11; --green-50: #EAF3DE;
+  --amber: #BA7517; --amber-50: #FAEEDA;
+  --teal: #0F6E56; --teal-50: #E1F5EE;
+  --red: #B42318; --red-50: #FEE4E2;
+  --bg: #ffffff; --bg-2: #f7f6f3; --bg-3: #f0efe9;
+  --text: #1c1c1a; --text-2: #5a5a55; --text-3: #9a9990;
+  --border: rgba(0,0,0,0.08); --border-2: rgba(0,0,0,0.14);
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18181a; --bg-2: #222224; --bg-3: #2a2a2c;
+    --text: #e8e7e0; --text-2: #9a9890; --text-3: #5a5a55;
+    --border: rgba(255,255,255,0.08); --border-2: rgba(255,255,255,0.14);
+    --green-50: #1a2e0a; --amber-50: #2a1e08; --teal-50: #082018; --red-50: #2a0a08;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.lead { font-size: 15px; line-height: 1.65; margin-bottom: 1.25rem; max-width: 52rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; color: var(--text); }
+p, li { font-size: 14px; margin-bottom: 0.5rem; }
+ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+.src { font-size: 10px; color: var(--text-3); white-space: nowrap; }
+.src a { color: var(--text-2); text-decoration: none; }
+.src a:hover { text-decoration: underline; color: var(--green); }
+.layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 1.25rem; }
+.layer { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem; background: var(--bg-2); font-size: 13px; }
+.layer strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal); margin-bottom: 0.35rem; }
+.layer span { color: var(--text-2); font-size: 12px; line-height: 1.45; }
+.method-box {
+  border: 1px solid var(--border); border-radius: 10px; padding: 1rem;
+  background: var(--bg-2); margin-bottom: 1.25rem; font-size: 13px;
+}
+.method-stats { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.65rem 0; }
+.method-stat { padding: 0.45rem 0.7rem; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: 12px; }
+.method-stat strong { display: block; font-size: 18px; font-weight: 500; color: var(--teal); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-bottom: 1rem; font-size: 12px; color: var(--text-2); }
+.pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.pill-green { background: var(--green-50); color: var(--green); }
+.pill-amber { background: var(--amber-50); color: var(--amber); }
+.pill-red { background: var(--red-50); color: var(--red); }
+.pill-gray { background: var(--bg-3); color: var(--text-3); }
+.pill-teal { background: var(--teal-50); color: var(--teal); }
+.role { font-size: 11px; color: var(--text-2); }
+.note-cell { font-size: 11px; color: var(--text-2); line-height: 1.4; max-width: 220px; }
+.contact-cell { font-size: 11px; line-height: 1.45; min-width: 180px; }
+.contact-cell a { word-break: break-all; }
+.contact-isv { color: var(--amber); font-size: 10px; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 1.25rem; border: 1px solid var(--border); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 860px; }
+th, td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 11px; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td code { font-family: var(--mono); font-size: 10px; }
+.val-doc { color: var(--green); font-weight: 500; }
+.val-claim { color: var(--amber); font-weight: 500; }
+.val-no { color: var(--red); font-weight: 500; }
+.val-na { color: var(--text-3); }
+.val-unknown { color: var(--text-3); font-style: italic; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 13px; }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout-warn strong { color: var(--amber); }
+.enum-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-bottom: 1rem; font-size: 12px; }
+.enum-grid div { padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-2); }
+.enum-grid dt { font-weight: 500; font-size: 11px; margin-bottom: 0.15rem; }
+.enum-grid dd { color: var(--text-2); margin: 0; line-height: 1.4; }
+.sources { font-size: 12px; line-height: 1.5; }
+.sources li { margin-bottom: 0.35rem; }
+.sources .tag { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--bg-3); color: var(--text-2); margin-right: 4px; }
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+@media (max-width: 720px) { .layers { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="wrap">
+  <div class="back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Village metering vendor study</h1>
+  <p class="sub">Researched pass · Jun 2026 · pipeline + layered protocol benchmark · citations required for every score</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1rem">
+    <a href="index.html#meter-study" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
+    · <a href="index.html" style="font-size:14px">Home</a>
+  </p>
+
+  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Cells are filled only where a cited source supports the claim. Unknown stays <code>—</code>.</p>
+
+  <div class="method-box">
+    <strong>Research method (this pass)</strong>
+    <p style="margin:0.5rem 0 0">Web review of vendor product pages, technical PDFs, and third-party industry reports. ISV internal notes (DokuWiki, Tech Comm) used only where marked <span class="tag">ISV</span>. No hands-on interop testing in this pass — nothing marked <code>tested</code>.</p>
+    <div class="method-stats">
+      <div class="method-stat"><strong>8</strong>independent / industry sources</div>
+      <div class="method-stat"><strong>20</strong>vendor-primary sources</div>
+      <div class="method-stat"><strong>3</strong>ISV-internal sources</div>
+      <div class="method-stat"><strong>51</strong>total citations</div>
+    </div>
+  </div>
+
+  <div class="layers">
+    <div class="layer"><strong>Field — meter / CIU</strong><span>DLMS/COSEM · STS · Modbus · proprietary RF/OEM</span></div>
+    <div class="layer"><strong>Edge — DCU / EMS</strong><span>DLMS client/server · RF mesh / PLC · LTE uplink</span></div>
+    <div class="layer"><strong>Cloud — platform</strong><span>IEEE 2030.5 · REST/MQTT · proprietary HES/MDMS</span></div>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>Dead ends this pass (honest gaps)</strong>
+    Public API specs not found for SteamaCo Nimbus or SparkMeter ThunderCloud. Inhemeter DLMS interoperability manuals appear partner-gated (ISV reports NDA). Hexing, Kelin, Schneider, Jinco, GroWatts, Studer, Dohon — no verified product/protocol docs retrieved. Published $/meter pricing is rare; industry reports give ranges only, not vendor list prices.
+  </div>
+
+  <h2>Scoring legend</h2>
+  <div class="enum-grid">
+    <div><dt>Protocol cell</dt><dd><code>doc</code> manual/datasheet · <code>claim</code> marketing only · <code>no</code> contrary evidence · <code>—</code> not researched · <code>N/A</code> wrong layer</dd></div>
+    <div><dt>Confidence</dt><dd>T0 marketing · T1 datasheet/brochure · T2 third-party or integration guide · T3 field/ISV hands-on</dd></div>
+    <div><dt>$/connection</dt><dd>Industry band from independent reports unless ISV quote noted</dd></div>
+  </div>
+
+  <h2>Vendor contacts (for follow-up)</h2>
+  <p style="font-size:13px;color:var(--text-2);margin-bottom:0.75rem">Official channels only — each row cites a source. <span class="contact-isv">ISV prior contact</span> = earlier ISV outreach, not independently verified. Use contact forms where no email is published.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>Website</th><th>Email / phone</th><th>Address / region</th><th>Form / portal</th><th>ISV prior contact</th><th>Notes</th><th>Src</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Donsun</strong></td>
+          <td><a href="https://www.donsuntech.com" target="_blank" rel="noopener">donsuntech.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@donsuntech.com">info@donsuntech.com</a><br><a href="mailto:sd@donsuntech.com">sd@donsuntech.com</a><br>+86 755 86565087</td>
+          <td class="contact-cell">Shenzhen Software Park, Nanshan, Shenzhen</td>
+          <td class="val-unknown">—</td>
+          <td class="contact-cell contact-isv"><a href="mailto:sd@donsuntech.com">sd@donsuntech.com</a></td>
+          <td class="note-cell">Sales contact from ISV proposal PDF matches catalog</td>
+          <td class="src"><a href="#s28">[28]</a><a href="#s47">[47]</a></td>
+        </tr>
+        <tr>
+          <td><strong>SteamaCo</strong></td>
+          <td><a href="https://steama.co" target="_blank" rel="noopener">steama.co</a></td>
+          <td class="contact-cell">UK: +44 161 505 2012<br>Africa: +234 908 797 2825</td>
+          <td class="contact-cell">Abuja, Nigeria (Africa office listed)</td>
+          <td><a href="https://steama.co/contact" target="_blank" rel="noopener">Contact form</a></td>
+          <td class="contact-cell contact-isv">Warren Scott<br><a href="mailto:warren@steama.co">warren@steama.co</a></td>
+          <td class="note-cell">No public sales email on contact page; API/partner docs behind customer login</td>
+          <td class="src"><a href="#s32">[32]</a><a href="#s48">[48]</a></td>
+        </tr>
+        <tr>
+          <td><strong>New Sun Road</strong></td>
+          <td><a href="https://newsunroad.com" target="_blank" rel="noopener">newsunroad.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@newsunroad.com">info@newsunroad.com</a><br>+1 510-550-5252</td>
+          <td class="contact-cell">Richmond Field Station, Richmond, CA</td>
+          <td><a href="https://newsunroad.com/contact/" target="_blank" rel="noopener">Contact form</a></td>
+          <td class="contact-cell contact-isv">Adrienne Pierce<br><a href="mailto:apierce@newsunroad.com">apierce@newsunroad.com</a></td>
+          <td class="note-cell">Sales inquiry option on form</td>
+          <td class="src"><a href="#s33">[33]</a><a href="#s49">[49]</a></td>
+        </tr>
+        <tr>
+          <td><strong>SparkMeter</strong></td>
+          <td><a href="https://www.sparkmeter.io" target="_blank" rel="noopener">sparkmeter.io</a></td>
+          <td class="contact-cell"><a href="mailto:contact@sparkmeter.io">contact@sparkmeter.io</a> (general)<br><a href="mailto:support@sparkmeter.io">support@sparkmeter.io</a> (customers)</td>
+          <td class="contact-cell">Washington DC area (EFC lists HQ)</td>
+          <td><a href="https://www.sparkmeter.io/company/request-a-quote" target="_blank" rel="noopener">Request quote</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Quote/demo via web form; ThunderCloud login separate</td>
+          <td class="src"><a href="#s34">[34]</a><a href="#s13">[13]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Inhemeter</strong></td>
+          <td><a href="https://www.inhemeter.com" target="_blank" rel="noopener">inhemeter.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@inhemeter.com">info@inhemeter.com</a><br><a href="mailto:service@inhemeter.com">service@inhemeter.com</a> (support)<br>+86 755 26616686</td>
+          <td class="contact-cell">Nanshan, Shenzhen</td>
+          <td><a href="https://www.inhemeter.com/en/Contact.aspx" target="_blank" rel="noopener">Contact page</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">DLMS interop docs reported partner-gated (ISV)</td>
+          <td class="src"><a href="#s35">[35]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Mojec</strong></td>
+          <td><a href="https://www.mojecglobal.com" target="_blank" rel="noopener">mojecglobal.com</a></td>
+          <td class="contact-cell"><a href="mailto:support@mojec.com">support@mojec.com</a><br>Lagos / Abuja: 014537736</td>
+          <td class="contact-cell">Lagos &amp; Abuja, Nigeria</td>
+          <td><a href="https://mojecglobal.com/contact-us.html" target="_blank" rel="noopener">Contact + live chat</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Terms page also lists power@mojec.com, admin@mojec.com</td>
+          <td class="src"><a href="#s36">[36]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Calin</strong></td>
+          <td><a href="http://www.calinmeter.com" target="_blank" rel="noopener">calinmeter.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@calinmeter.com">info@calinmeter.com</a><br>+86 15815515503 (WhatsApp)</td>
+          <td class="contact-cell">Universal Intelligence Center, Shenzhen</td>
+          <td><a href="http://www.calinmeter.com/lxwm" target="_blank" rel="noopener">Contact page</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Separate export site szcalinmeter.com also exists — verify which entity you need</td>
+          <td class="src"><a href="#s37">[37]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Okra</strong></td>
+          <td><a href="https://www.okrasolar.com" target="_blank" rel="noopener">okrasolar.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@okrasolar.com">info@okrasolar.com</a></td>
+          <td class="contact-cell">Nigeria / Cambodia ops (case studies)</td>
+          <td><a href="https://www.okrasolar.com/contact" target="_blank" rel="noopener">Contact form</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Harvest platform login separate; 3 business day reply stated on form</td>
+          <td class="src"><a href="#s38">[38]</a><a href="#s19">[19]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Hexing</strong></td>
+          <td><a href="https://www.hxgroup.com/en/" target="_blank" rel="noopener">hxgroup.com</a></td>
+          <td class="contact-cell"><a href="mailto:marketing@hxgroup.com">marketing@hxgroup.com</a><br>+86 571 28020769 (HQ)<br>+86 571 28289672 (meter division)</td>
+          <td class="contact-cell">Hangzhou, China; regional offices on contact page</td>
+          <td><a href="https://www.hxgroup.com/en/about/contact" target="_blank" rel="noopener">Regional contacts</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Africa: info@hexingsa.co.za (+27 011 078 0400) listed on group contact page</td>
+          <td class="src"><a href="#s41">[41]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Kelin</strong></td>
+          <td><a href="https://www.sinokeelectric.com" target="_blank" rel="noopener">sinokeelectric.com</a></td>
+          <td class="contact-cell">+86 311 85231911 (trade listing)<br><a href="mailto:ke1911@kldcop.com">ke1911@kldcop.com</a> (LinkedIn only)</td>
+          <td class="contact-cell">Shijiazhuang, Hebei, China</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Shijiazhuang Kelin Electric — STS/DLMS meters cited on trade sites; no contact page retrieved this pass</td>
+          <td class="src"><a href="#s50">[50]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Schneider</strong></td>
+          <td><a href="https://www.se.com" target="_blank" rel="noopener">se.com</a></td>
+          <td class="contact-cell">US support: 877-342-5173</td>
+          <td class="contact-cell">Global — regional offices</td>
+          <td><a href="https://www.se.com/ww/en/about-us/contact/" target="_blank" rel="noopener">Get a quote / contact</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">No single microgrid sales email; use online inquiry</td>
+          <td class="src"><a href="#s45">[45]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Victron</strong></td>
+          <td><a href="https://www.victronenergy.com" target="_blank" rel="noopener">victronenergy.com</a></td>
+          <td class="contact-cell"><a href="mailto:sales@victronenergy.com">sales@victronenergy.com</a><br>+31 (0)36 5359700</td>
+          <td class="contact-cell">Almere, Netherlands (HQ)</td>
+          <td><a href="https://www.victronenergy.com/contact" target="_blank" rel="noopener">Regional sales managers</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Generation monitoring — dealer network for installs</td>
+          <td class="src"><a href="#s39">[39]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Enphase</strong></td>
+          <td><a href="https://enphase.com" target="_blank" rel="noopener">enphase.com</a></td>
+          <td class="contact-cell"><a href="mailto:commercialsales@enphaseenergy.com">commercialsales@enphaseenergy.com</a><br>(833) 963-3820, option 5</td>
+          <td class="contact-cell">US-focused commercial line</td>
+          <td><a href="https://enphase.com/installers/commercial" target="_blank" rel="noopener">Commercial inquiry form</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">2030.5 / SunSpec docs on support site</td>
+          <td class="src"><a href="#s40">[40]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Deye</strong></td>
+          <td><a href="https://www.deyeinverter.com" target="_blank" rel="noopener">deyeinverter.com</a></td>
+          <td class="contact-cell"><a href="mailto:market@deye.com.cn">market@deye.com.cn</a> (sales)<br>+86 574 8612 0560</td>
+          <td class="contact-cell">Ningbo, China</td>
+          <td><a href="https://www.deyeinverter.com/contact/" target="_blank" rel="noopener">Contact page</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Inverter / hybrid — not revenue metering</td>
+          <td class="src"><a href="#s51">[51]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Fronius</strong></td>
+          <td><a href="https://www.fronius.com" target="_blank" rel="noopener">fronius.com</a></td>
+          <td class="contact-cell"><a href="mailto:pv-sales-usa@fronius.com">pv-sales-usa@fronius.com</a> (US solar sales)</td>
+          <td class="contact-cell">US + global regional offices</td>
+          <td><a href="https://www.fronius.com/en-us/usa/solar-energy/installers-partners/service-support/fronius-solutions-partner" target="_blank" rel="noopener">Partner inquiry</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Modbus/SunSpec integration common via Venus OS</td>
+          <td class="src"><a href="#s44">[44]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Growatt</strong> <span class="role">(watchlist: GroWatts)</span></td>
+          <td><a href="https://en.growatt.com" target="_blank" rel="noopener">growatt.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@growatt.com">info@growatt.com</a> (sales)<br><a href="mailto:service@growatt.com">service@growatt.com</a><br>+86 755 29515888 (HQ)</td>
+          <td class="contact-cell">Shenzhen HQ; many regional offices</td>
+          <td><a href="https://en.growatt.com/support/contact" target="_blank" rel="noopener">Global office list</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Original watchlist spelling “GroWatts” likely means Growatt</td>
+          <td class="src"><a href="#s43">[43]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Studer</strong></td>
+          <td><a href="https://studer-innotec.com" target="_blank" rel="noopener">studer-innotec.com</a></td>
+          <td class="contact-cell"><a href="mailto:info@studer-innotec.com">info@studer-innotec.com</a><br>+41 27 205 60 80</td>
+          <td class="contact-cell">Sion, Switzerland</td>
+          <td><a href="https://studer-innotec.com/contact/" target="_blank" rel="noopener">Contact form</a></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Off-grid inverter/charger — not revenue metering</td>
+          <td class="src"><a href="#s42">[42]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Jinco</strong></td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Not identified this pass. If meant <strong>JinkoSolar</strong>: <a href="https://jinkosolar.us/professionals/" target="_blank" rel="noopener">jinkosolar.us/professionals</a> (regional forms; us.cs@jinkosolar.com for US product Q&amp;A)</td>
+          <td class="src">—</td>
+        </tr>
+        <tr>
+          <td><strong>Dohon</strong></td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Brand not identified. Possible confusion with <strong>Eastron</strong> (东鸿) DIN-rail Modbus meters: <a href="mailto:sales@eastrongroup.com">sales@eastrongroup.com</a>, +86 400-996-9296 — <em>not verified as same company</em></td>
+          <td class="src"><a href="#s46">[46]</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Pipeline tracker</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Brand</th><th>System</th><th>Role</th><th>Outreach</th><th>Brochure</th><th>Pricing</th><th>Field refs</th><th>STS</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Donsun</strong></td>
+          <td>DS series meters + DSC100 DCU</td>
+          <td class="role">meter + DCU</td>
+          <td><span class="pill pill-green">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s28">[28]</a></span></td>
+          <td><span class="pill pill-amber">ISV quote</span> <span class="src">ISV</span></td>
+          <td class="note-cell">Deployed in multiple African utilities per vendor trade listings <span class="src"><a href="#s5">[5]</a></span></td>
+          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s4">[4]</a><a href="#s28">[28]</a></span></td>
+          <td class="note-cell">SteamaCo lists Savi meters as Donsun-supplied <span class="src"><a href="#s6">[6]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>SteamaCo</strong></td>
+          <td>Nimbus AMI + Savi meters + DCU</td>
+          <td class="role">full-stack</td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Kenya mini-grid deployments cited (e.g. Kudura) <span class="src"><a href="#s7">[7]</a></span></td>
+          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s2">[2]</a></span></td>
+          <td class="note-cell">API exists; public developer portal not found <span class="src"><a href="#s1">[1]</a><a href="#s8">[8]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>New Sun Road</strong></td>
+          <td>Stellar Edge + Microgrid OS</td>
+          <td class="role">platform</td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Vendor claims 1,000+ microgrids / 21 countries <span class="src"><a href="#s10">[10]</a></span></td>
+          <td class="val-na">N/A</td>
+          <td class="note-cell">Not a revenue meter — edge controller + cloud OS</td>
+        </tr>
+        <tr>
+          <td><strong>SparkMeter</strong></td>
+          <td>ThunderCloud + RF mesh meters</td>
+          <td class="role">full-stack</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s9">[9]</a></span></td>
+          <td><span class="pill pill-red">quote only</span> <span class="src"><a href="#s13">[13]</a></span></td>
+          <td class="note-cell">22 countries per EFC profile; Haiti, Kenya, Tanzania listed <span class="src"><a href="#s9">[9]</a></span></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Proprietary mesh + cloud; no public DLMS spec found <span class="src"><a href="#s9">[9]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Inhemeter</strong></td>
+          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
+          <td class="role">meter</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="val-unknown">—</td>
+          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s14">[14]</a></span></td>
+          <td class="note-cell">Partner DLMS docs gated per ISV field notes <span class="src">ISV</span></td>
+        </tr>
+        <tr>
+          <td><strong>Mojec</strong></td>
+          <td>STS prepay + AMI (Nigeria)</td>
+          <td class="role">meter + AMI</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s16">[16]</a><a href="#s17">[17]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">IBEDC vending; Port Harcourt &amp; Ikeja AMR cited <span class="src"><a href="#s16">[16]</a></span></td>
+          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s16">[16]</a></span></td>
+          <td class="note-cell">DLMS mentioned in Mojec AMI deck <span class="src"><a href="#s17">[17]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Calin</strong></td>
+          <td>CAM168-G / CAM368-G etc.</td>
+          <td class="role">meter</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s18">[18]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="val-unknown">—</td>
+          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s18">[18]</a></span></td>
+          <td class="note-cell">DLMS/COSEM + STS on same product lines</td>
+        </tr>
+        <tr>
+          <td><strong>Okra</strong></td>
+          <td>Pod + Harvest platform</td>
+          <td class="role">mesh nanogrid</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s19">[19]</a><a href="#s20">[20]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Haiti, Cambodia, Philippines case studies <span class="src"><a href="#s20">[20]</a><a href="#s21">[21]</a></span></td>
+          <td class="val-na">N/A</td>
+          <td class="note-cell">DC mesh + prepaid billing — not utility DLMS AMI</td>
+        </tr>
+        <tr>
+          <td>Hexing · Kelin</td>
+          <td>Utility AMI</td>
+          <td class="role">meter</td>
+          <td colspan="7" class="val-unknown">Named in industry minigrid meter examples (Hexing HXP100DII) <span class="src"><a href="#s22">[22]</a></span> — no vendor protocol sheets retrieved this pass</td>
+        </tr>
+        <tr>
+          <td>Schneider · Jinco · GroWatts · Studer · Dohon</td>
+          <td>—</td>
+          <td class="role">mixed</td>
+          <td colspan="7" class="val-unknown">On original watch list — no verified protocol documentation retrieved this pass</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Technical benchmark — meters &amp; AMI</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>SunSpec</th><th>2030.5</th><th>NAN / WAN</th><th>Northbound</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Donsun</strong></td>
+          <td>DS1000/1600/3000, DSC100 DCU</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>RF, PLC, GPRS/3G/4G on DCU; RS-485 DLMS HDLC <span class="src"><a href="#s28">[28]</a><a href="#s29">[29]</a></span></td>
+          <td>DLMS → HES (HES not bundled)</td>
+          <td><code>—</code> <span class="src">ISV quote only</span></td>
+          <td>T1</td>
+          <td class="note-cell">IEC 62056 + STS on DS1000 brochure <span class="src"><a href="#s4">[4]</a></span>; DSC100 DLMS+DL/T698 <span class="src"><a href="#s28">[28]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Inhemeter</strong></td>
+          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC, RF, GPRS, 3G/4G, NB-IoT modules <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
+          <td>DLMS COSEM server; CIU via PLC/RF</td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">OBIS/IEC62056-21 optical on brochure <span class="src"><a href="#s15">[15]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Calin</strong></td>
+          <td>CAM168-G, CAM368-G</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC / RF / GPRS / LoRa options <span class="src"><a href="#s18">[18]</a></span></td>
+          <td>DLMS to AMI head-end</td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">IEC62055 + IEC62056 on product page</td>
+        </tr>
+        <tr>
+          <td><strong>Mojec</strong></td>
+          <td>STS prepay + PLC AMI</td>
+          <td class="val-claim">claim</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC NAN; GPRS WAN via concentrator <span class="src"><a href="#s16">[16]</a></span></td>
+          <td>Proprietary AMI + STS vending</td>
+          <td><code>—</code></td>
+          <td>T1–T2</td>
+          <td class="note-cell">DLMS/COSM in AMI slide deck <span class="src"><a href="#s17">[17]</a></span>; STS on R&amp;D page</td>
+        </tr>
+        <tr>
+          <td><strong>SparkMeter</strong></td>
+          <td>ThunderCloud + mesh meters</td>
+          <td class="val-no">no public</td>
+          <td class="val-unknown">—</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>Proprietary RF mesh; low-bandwidth IP uplink <span class="src"><a href="#s9">[9]</a><a href="#s13">[13]</a></span></td>
+          <td>ThunderCloud (proprietary)</td>
+          <td><code>$40–110</code> band <span class="src"><a href="#s22">[22]</a></span></td>
+          <td>T2</td>
+          <td class="note-cell">EFC lists ~$80 MSR — single data point, not verified quote <span class="src"><a href="#s9">[9]</a></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Technical benchmark — platforms &amp; full stacks</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>SunSpec</th><th>2030.5</th><th>Northbound</th><th>Lock-in</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>SteamaCo</strong></td>
+          <td>Nimbus AMI + Savi</td>
+          <td class="val-doc">interop</td>
+          <td class="val-doc">doc</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>REST API (customer login); MPM plugin sync <span class="src"><a href="#s1">[1]</a><a href="#s30">[30]</a></span></td>
+          <td><span class="pill pill-amber">partner</span></td>
+          <td><code>platform</code> + SaaS <span class="src"><a href="#s23">[23]</a></span></td>
+          <td>T1–T2</td>
+          <td class="note-cell">Claims DLMS/COSEM interoperable HES/MDMS <span class="src"><a href="#s3">[3]</a></span>; Savi STS + mobile money <span class="src"><a href="#s2">[2]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>New Sun Road</strong></td>
+          <td>Stellar Edge + OS</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>Modbus RTU, CAN, REST cloud UI <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
+          <td><span class="pill pill-teal">agnostic</span></td>
+          <td><code>platform</code></td>
+          <td>T1</td>
+          <td class="note-cell">Modbus RTU documented; SunSpec not claimed on vendor pages</td>
+        </tr>
+        <tr>
+          <td><strong>Okra</strong></td>
+          <td>Harvest + Pod</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>Harvest cloud; mobile money + cash <span class="src"><a href="#s19">[19]</a></span></td>
+          <td><span class="pill pill-amber">closed</span></td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">Prepaid kWh or daily rate in Harvest <span class="src"><a href="#s19">[19]</a></span>; no public API spec</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Generation-side monitoring (not revenue meters)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>DLMS</th><th>SunSpec</th><th>2030.5</th><th>Transport</th><th>Notes</th><th>Sources</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Victron</strong></td>
+          <td class="val-na">N/A</td>
+          <td class="val-claim">integrates</td>
+          <td class="val-na">N/A</td>
+          <td>Modbus-TCP gateway via GX; proprietary VE.Bus closed <span class="src"><a href="#s24">[24]</a><a href="#s25">[25]</a></span></td>
+          <td class="note-cell">GX exposes Victron register map (not SunSpec-native). Venus OS can read SunSpec inverters via Modbus.</td>
+          <td class="src"><a href="#s24">[24]</a><a href="#s25">[25]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Enphase</strong></td>
+          <td class="val-na">N/A</td>
+          <td class="val-doc">700 range</td>
+          <td class="val-doc">client</td>
+          <td>IQ Gateway REST; SunSpec Modbus TCP (support-enabled) <span class="src"><a href="#s26">[26]</a><a href="#s27">[27]</a></span></td>
+          <td class="note-cell">2030.5 as utility-grid client, not village prepaid layer. CT metering via local API.</td>
+          <td class="src"><a href="#s26">[26]</a><a href="#s27">[27]</a></td>
+        </tr>
+        <tr>
+          <td><strong>Deye · Fronius</strong></td>
+          <td class="val-na">N/A</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Not researched this pass — Fronius commonly integrated via Modbus/SunSpec in Victron docs <span class="src"><a href="#s25">[25]</a></span></td>
+          <td class="src">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Industry cost bands (independent — for comparison only)</h2>
+  <div class="tbl-wrap">
+    <table style="min-width:0">
+      <thead><tr><th>Metric</th><th>Range</th><th>Context</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Installed smart meter (all types)</td><td>$11–$55</td><td>12 providers surveyed; prepaid avg ~$41</td><td class="src"><a href="#s23">[23]</a></td></tr>
+        <tr><td>Single-phase smart meter hardware</td><td>$40–$60</td><td>Meter only</td><td class="src"><a href="#s22">[22]</a></td></tr>
+        <tr><td>Meter + DCU/antenna/accessories</td><td>$80–$110</td><td>Per connection</td><td class="src"><a href="#s22">[22]</a></td></tr>
+        <tr><td>SaaS / software licence</td><td>5–20% of hardware / yr; ~$0.80–$1/customer/mo cited</td><td>Can rival low ARPU</td><td class="src"><a href="#s22">[22]</a><a href="#s23">[23]</a></td></tr>
+        <tr><td>ISV field anecdote (legacy prepay)</td><td>$600–$1,500</td><td>Sparkmeter-class deployments — ISV problem framing, not a price list</td><td class="src">ISV <a href="index.html#notes/metering-2026-05-28">notes</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Key findings</h2>
+  <ul>
+    <li><strong>Donsun + SteamaCo link verified:</strong> SteamaCo’s product page states Savi meters are “provided by Donsun Shenzhen” <span class="src"><a href="#s6">[6]</a></span> — same hardware family ISV is evaluating.</li>
+    <li><strong>DLMS + STS often co-exist</strong> on West Africa / China utility meters (Donsun, Inhemeter, Calin, Mojec) per datasheets — but <em>key hierarchies differ</em> from OEM stacks (see Tech Comm topology notes).</li>
+    <li><strong>SparkMeter</strong> is a proprietary mesh + ThunderCloud stack in public materials; no DLMS interoperability documentation found <span class="src"><a href="#s9">[9]</a><a href="#s13">[13]</a></span>.</li>
+    <li><strong>IEEE 2030.5</strong> appears on grid-tied DER gateways (Enphase utility client) — not on village prepaid meters. Do not score 2030.5 at the meter row.</li>
+    <li><strong>SunSpec</strong> is documented for Enphase SunSpec-700 Modbus and Victron’s integration with SunSpec inverters — not for Donsun/Inhemeter revenue meters.</li>
+  </ul>
+
+  <h2>Sources bibliography</h2>
+  <p style="font-size:13px;color:var(--text-2)"><span class="tag">V</span> vendor · <span class="tag">I</span> independent/industry · <span class="tag">ISV</span> internal</p>
+  <ol class="sources" id="sources">
+    <li id="s1"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/off-grid-smart-metering-platform" target="_blank" rel="noopener">Off-grid IoT smart metering platform</a> (API, DCU, Savi)</li>
+    <li id="s2"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/savi-meters" target="_blank" rel="noopener">Savi smart meters</a> (STS, GPRS/PLC/RF mesh, AES-128)</li>
+    <li id="s3"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/nimbus-ami" target="_blank" rel="noopener">Nimbus AMI</a> (DLMS/COSEM interoperable claim, MDMS/HES)</li>
+    <li id="s4"><span class="tag">V</span> Donsun trade listing — <a href="https://www.ukrainiantrade.com/products/STS-Prepayment-Energy-Meter.html" target="_blank" rel="noopener">DS1000 STS brochure text</a> (IEC 62056, IEC 62055, STS association claim)</li>
+    <li id="s5"><span class="tag">V</span> Donsun trade listing — <a href="https://www.icelandictrade.com/all-products/Smart-Prepayment-Energy-Meter.html" target="_blank" rel="noopener">Smart prepayment meter</a> (Africa deployment countries listed)</li>
+    <li id="s6"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/products" target="_blank" rel="noopener">Products</a> (Savi provided by Donsun Shenzhen)</li>
+    <li id="s7"><span class="tag">I</span> UKRI Energy Catalyst — <a href="https://energycatalyst.ukri.org/casestudies/video-steamaco-deploying-a-cloud-based-connectivity-solution-to-make-clean-power-more-accessible/" target="_blank" rel="noopener">SteamaCo Kenya case study</a></li>
+    <li id="s8"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/tscs" target="_blank" rel="noopener">Terms &amp; Conditions</a> (API/UI interfaces, customer login)</li>
+    <li id="s9"><span class="tag">I</span> Engineering for Change — <a href="https://www.engineeringforchange.org/solutions/product/sparkmeter/" target="_blank" rel="noopener">SparkMeter product profile</a> (mesh, ThunderCloud, countries, ~$80 MSR)</li>
+    <li id="s10"><span class="tag">V</span> New Sun Road — <a href="https://newsunroad.com/" target="_blank" rel="noopener">Homepage</a> (deployment scale claims)</li>
+    <li id="s11"><span class="tag">V</span> New Sun Road — <a href="https://newsunroad.com/stellar-edge/" target="_blank" rel="noopener">Stellar Edge</a> (Modbus, CAN, USB, RJ-45)</li>
+    <li id="s12"><span class="tag">ISV</span> New Sun Road — <a href="https://wiki.smartvillage.ieee.org/_media/home:technologies:monitor:stellar_edge_3.0_data_sheet.docx.pdf" target="_blank" rel="noopener">Stellar Edge 3.0 datasheet</a> (RS-485 Modbus RTU, IP54)</li>
+    <li id="s13"><span class="tag">V</span> SparkMeter — <a href="https://www.sparkmeter.io/" target="_blank" rel="noopener">Homepage</a> (mesh, minigrid focus; quote on request)</li>
+    <li id="s14"><span class="tag">V</span> Inhemeter — <a href="https://www.inhemeter.com/en/ProductInfo.aspx?id=1292" target="_blank" rel="noopener">i210-a1 product page</a> (STS, PLC/RF/GPRS)</li>
+    <li id="s15"><span class="tag">V</span> Inhemeter — <a href="https://www.inhemeter.com/en/productinfo.aspx?id=1283" target="_blank" rel="noopener">i310 product page</a> (DLMS/COSEM, STS, NB-IoT)</li>
+    <li id="s16"><span class="tag">V</span> Mojec — <a href="https://www.mojecglobal.com/r-and-d.html" target="_blank" rel="noopener">R&amp;D page</a> (STS, PLC AMI, IBEDC vending)</li>
+    <li id="s17"><span class="tag">V</span> Mojec — <a href="https://www.slideshare.net/slideshow/mojecpdf/262529117" target="_blank" rel="noopener">AMI slide deck</a> (DLMS/COSM, GPRS concentrator architecture)</li>
+    <li id="s18"><span class="tag">V</span> Calin — <a href="http://www.calinmeter.com/productinfo/975325.html" target="_blank" rel="noopener">CAM168-G product page</a> (DLMS/COSEM + STS)</li>
+    <li id="s19"><span class="tag">V</span> Okra — <a href="https://www.okrasolar.com/harvest" target="_blank" rel="noopener">Harvest platform</a> (billing, tariffs, mobile money)</li>
+    <li id="s20"><span class="tag">I</span> Okra — <a href="https://www.okrasolar.com/case-study/alina-eneji-scaling-up-mesh-grids-in-rural-haiti" target="_blank" rel="noopener">Haiti mesh-grid case study</a></li>
+    <li id="s21"><span class="tag">I</span> PFAN — <a href="https://pfan.net/projects_and_stories/okra-solar/" target="_blank" rel="noopener">Okra Solar profile</a> (Cambodia, Philippines, Indonesia)</li>
+    <li id="s22"><span class="tag">I</span> CrossBoundary — <a href="https://medium.com/@CrossBoundary/smart-meters-provide-a-cost-effective-way-of-operating-mini-grids-927d8e4d2ad4" target="_blank" rel="noopener">Smart meters for mini-grids</a> ($40–110, SaaS, Hexing example)</li>
+    <li id="s23"><span class="tag">I</span> Energy 4 Impact — <a href="https://www.energy4impact.org/sites/default/files/2024-09/billing_models_for_minigrids_april_2019.pdf" target="_blank" rel="noopener">Billing models for minigrids</a> (PDF, $11–55 installed, SparkMeter/SteamaCo cited)</li>
+    <li id="s24"><span class="tag">V</span> Victron — <a href="https://www.victronenergy.com/upload/documents/Technical-Information-Data-communication-with-Victron-Energy-products_EN.pdf" target="_blank" rel="noopener">Data communication technical note</a> (Modbus-TCP, VE.Bus closed)</li>
+    <li id="s25"><span class="tag">V</span> Victron — <a href="https://www.victronenergy.com/live/ccgx:modbustcp_faq" target="_blank" rel="noopener">GX Modbus-TCP manual</a></li>
+    <li id="s26"><span class="tag">V</span> Enphase — <a href="https://enphase.com/download/enphase-energy-system-integration-ieee-20305-servers" target="_blank" rel="noopener">IEEE 2030.5 utility server integration</a></li>
+    <li id="s27"><span class="tag">V</span> Enphase — <a href="https://enphase.com/en-gb/download/ac-coupling-victron-battery-inverters-using-modbus-tcpip" target="_blank" rel="noopener">SunSpec 700 Modbus TCP</a> (support-enabled)</li>
+    <li id="s28"><span class="tag">ISV</span> ISV DokuWiki — <a href="https://wiki.smartvillage.ieee.org/_media/home:technologies:monitor:donsun_proposal_to_reic_cameroon_2_.pdf" target="_blank" rel="noopener">Donsun REIc Cameroon proposal PDF</a> (DSC100 DLMS, STS meters)</li>
+    <li id="s29"><span class="tag">ISV</span> ISV DokuWiki — <a href="https://wiki.smartvillage.ieee.org/home:technologies:micropowermanager?do=export_pdf" target="_blank" rel="noopener">MicroPowerManager / Donsun DSC100 notes</a></li>
+    <li id="s30"><span class="tag">I</span> MicroPowerManager — <a href="https://micropowermanager.io/integrations-guide/steama-meter-integration.html" target="_blank" rel="noopener">SteamaCo integration guide</a> (third-party API sync)</li>
+    <li id="s31"><span class="tag">I</span> STS Association — <a href="https://www.sts.org.za/who-we-are/what-is-the-sts-and-who-is-the-sts-association/" target="_blank" rel="noopener">What is STS</a> (IEC 62055, DLMS token carrier note)</li>
+    <li id="s32"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/contact" target="_blank" rel="noopener">Contact page</a> (phones, web form; Abuja address)</li>
+    <li id="s33"><span class="tag">V</span> New Sun Road — <a href="https://newsunroad.com/contact/" target="_blank" rel="noopener">Contact page</a> (info@newsunroad.com, +1 510-550-5252)</li>
+    <li id="s34"><span class="tag">V</span> SparkMeter — <a href="https://www.sparkmeter.io/customer-service.html" target="_blank" rel="noopener">Customer service</a> (contact@, support@sparkmeter.io)</li>
+    <li id="s35"><span class="tag">V</span> Inhemeter — <a href="https://www.inhemeter.com/en/Contact.aspx" target="_blank" rel="noopener">Contact page</a> (info@, service@inhemeter.com)</li>
+    <li id="s36"><span class="tag">V</span> Mojec — <a href="https://mojecglobal.com/contact-us.html" target="_blank" rel="noopener">Contact page</a> (support@mojec.com)</li>
+    <li id="s37"><span class="tag">V</span> Calin — <a href="http://www.calinmeter.com/lxwm" target="_blank" rel="noopener">Contact page</a> (info@calinmeter.com)</li>
+    <li id="s38"><span class="tag">V</span> Okra — <a href="https://github.com/okrasolar" target="_blank" rel="noopener">GitHub organization</a> (info@okrasolar.com)</li>
+    <li id="s39"><span class="tag">V</span> Victron — <a href="https://www.victronenergy.com/contact" target="_blank" rel="noopener">Contact page</a> (sales@victronenergy.com)</li>
+    <li id="s40"><span class="tag">V</span> Enphase — <a href="https://enphase.com/installers/commercial" target="_blank" rel="noopener">Commercial installers page</a> (commercialsales@enphaseenergy.com)</li>
+    <li id="s41"><span class="tag">V</span> Hexing — <a href="https://www.hxgroup.com/en/about/contact" target="_blank" rel="noopener">Group contact page</a> (marketing@hxgroup.com, regional emails)</li>
+    <li id="s42"><span class="tag">V</span> Studer — <a href="https://studer-innotec.com/contact/" target="_blank" rel="noopener">Contact page</a> (info@studer-innotec.com)</li>
+    <li id="s43"><span class="tag">V</span> Growatt — <a href="https://en.growatt.com/support/contact" target="_blank" rel="noopener">Global contact page</a> (info@growatt.com, regional offices)</li>
+    <li id="s44"><span class="tag">V</span> Fronius — <a href="https://www.fronius.com/en-us/usa/solar-energy/installers-partners/service-support/fronius-solutions-partner" target="_blank" rel="noopener">Solutions partner page</a> (pv-sales-usa@fronius.com)</li>
+    <li id="s45"><span class="tag">V</span> Schneider — <a href="https://www.se.com/ww/en/about-us/contact/" target="_blank" rel="noopener">Contact / get a quote</a></li>
+    <li id="s46"><span class="tag">V</span> Eastron — <a href="https://www.eastrongroup.com/contact/" target="_blank" rel="noopener">Contact page</a> (sales@eastrongroup.com — possible Dohon/Eastron confusion, unverified)</li>
+    <li id="s47"><span class="tag">ISV</span> ISV DokuWiki — <a href="https://wiki.smartvillage.ieee.org/home:technologies:monitor:donsun" target="_blank" rel="noopener">Donsun monitor notes</a> (sd@donsuntech.com)</li>
+    <li id="s48"><span class="tag">ISV</span> ISV DokuWiki — <a href="https://wiki.smartvillage.ieee.org/home:technologies:monitor:steamaco" target="_blank" rel="noopener">SteamaCo monitor notes</a> (warren@steama.co)</li>
+    <li id="s49"><span class="tag">ISV</span> ISV DokuWiki — <a href="https://wiki.smartvillage.ieee.org/home:technologies:monitor:newsunroad" target="_blank" rel="noopener">New Sun Road monitor notes</a> (apierce@newsunroad.com)</li>
+    <li id="s50"><span class="tag">I</span> LinkedIn — <a href="https://www.linkedin.com/company/shijiazhuang-kelin-electric-co." target="_blank" rel="noopener">Shijiazhuang Kelin Electric</a> (ke1911@kldcop.com — not on vendor homepage this pass)</li>
+    <li id="s51"><span class="tag">V</span> Deye — <a href="https://www.deyeinverter.com/contact/" target="_blank" rel="noopener">Contact page</a> (market@deye.com.cn)</li>
+  </ol>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="index.html#notes/metering-2026-05-28">Tech Comm — Metering &amp; comms topology</a></li>
+    <li><a href="index.html#standards">Standards</a></li>
+    <li><a href="http://34.125.138.210/home:technologies:monitor:study" target="_blank" rel="noopener">Original DokuWiki study</a></li>
+  </ul>
+</div>
+</body>
+</html>

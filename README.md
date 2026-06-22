@@ -2,6 +2,8 @@
 
 Static wiki for the IEEE Smart Village working group. **No install, no build step** — HTML files + GitHub Pages.
 
+**AI assistants:** read [`AGENTS.md`](AGENTS.md) first — navigation, trust hierarchy, meter benchmark framework, and contributor rules.
+
 ## Try it (30 seconds)
 
 **Live:** [overview-solutions.github.io/isv-ai-wiki](https://overview-solutions.github.io/isv-ai-wiki)
