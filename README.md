@@ -111,6 +111,12 @@ Text-only tweaks: edit the `.svg` in Cursor (see `technical-notes/diagrams/EDITI
 
 ```
 isv-ai-wiki/
+├── tasks/
+│   └── tasks.json                    # Follow-ups: status, assignee, meeting link
+├── tasks.html                        # Full task board (standalone)
+├── css/isv-tasks.css                 # Follow-up panels + task table styles
+├── js/isv-tasks.js                   # Loads tasks.json, renders panels
+├── js/isv-theme.js                   # Theme toggle (default light, localStorage)
 ├── index.html                          # Wiki shell + navigation
 ├── preview.sh                          # Local server (port 8765)
 ├── tech-comm-*-*.html                  # Meeting note pages

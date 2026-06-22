@@ -6,26 +6,9 @@
 <title>Village Metering Vendor Study · ISV Tech Comm</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css">
+<script src="js/isv-theme.js"></script>
 <style>
-:root {
-  --green: #3B6D11; --green-50: #EAF3DE;
-  --amber: #BA7517; --amber-50: #FAEEDA;
-  --teal: #0F6E56; --teal-50: #E1F5EE;
-  --red: #B42318; --red-50: #FEE4E2;
-  --bg: #ffffff; --bg-2: #f7f6f3; --bg-3: #f0efe9;
-  --text: #1c1c1a; --text-2: #5a5a55; --text-3: #9a9990;
-  --border: rgba(0,0,0,0.08); --border-2: rgba(0,0,0,0.14);
-  --font: 'DM Sans', system-ui, sans-serif;
-  --mono: 'DM Mono', monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #18181a; --bg-2: #222224; --bg-3: #2a2a2c;
-    --text: #e8e7e0; --text-2: #9a9890; --text-3: #5a5a55;
-    --border: rgba(255,255,255,0.08); --border-2: rgba(255,255,255,0.14);
-    --green-50: #1a2e0a; --amber-50: #2a1e08; --teal-50: #082018; --red-50: #2a0a08;
-  }
-}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
 a { color: var(--green); }
@@ -95,6 +78,13 @@ html.embed h1 { font-size: 20px; }
 </style>
 </head>
 <body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
 <script>
 if (new URLSearchParams(location.search).get('embed') === '1') {
   document.documentElement.classList.add('embed');

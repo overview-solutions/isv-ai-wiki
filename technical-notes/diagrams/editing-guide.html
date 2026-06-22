@@ -6,17 +6,9 @@
 <title>How to edit the metering topology SVG · ISV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/isv-theme.css">
+<script src="../../js/isv-theme.js"></script>
 <style>
-:root {
-  --green: #3B6D11; --green-50: #EAF3DE;
-  --teal: #0F6E56; --teal-50: #E1F5EE;
-  --bg: #fff; --bg-2: #f7f6f3; --text: #1c1c1a; --text-2: #5a5a55;
-  --border: rgba(0,0,0,0.08); --font: 'DM Sans', system-ui, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #18181a; --bg-2: #222224; --text: #e8e7e0; --text-2: #9a9890; --green-50: #1a2e0a; --teal-50: #082018; }
-}
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; margin: 0; }
 .wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
 a { color: var(--green); }
@@ -39,6 +31,13 @@ li { margin-bottom: 0.35rem; }
 </style>
 </head>
 <body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="../../index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
 <div class="wrap">
   <p class="back"><a href="../../index.html#notes/metering-2026-05-28">&larr; Meeting notes</a></p>
   <h1>How to edit the topology diagram</h1>

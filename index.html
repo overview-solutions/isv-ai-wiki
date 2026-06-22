@@ -6,45 +6,15 @@
 <title>IEEE Smart Village — Knowledge Base</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/isv-tasks.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/isv-tasks.js"></script>
 <style>
 :root {
-  --green: #3B6D11;
-  --green-50: #EAF3DE;
-  --green-200: #97C459;
-  --amber: #BA7517;
-  --amber-50: #FAEEDA;
-  --teal: #0F6E56;
-  --teal-50: #E1F5EE;
-  --purple: #534AB7;
-  --purple-50: #EEEDFE;
-  --bg: #ffffff;
-  --bg-2: #f7f6f3;
-  --bg-3: #f0efe9;
-  --text: #1c1c1a;
-  --text-2: #5a5a55;
-  --text-3: #9a9990;
-  --border: rgba(0,0,0,0.08);
-  --border-2: rgba(0,0,0,0.14);
   --sidebar-w: 210px;
   --font: 'DM Sans', system-ui, sans-serif;
   --mono: 'DM Mono', monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #18181a;
-    --bg-2: #222224;
-    --bg-3: #2a2a2c;
-    --text: #e8e7e0;
-    --text-2: #9a9890;
-    --text-3: #5a5a55;
-    --border: rgba(255,255,255,0.08);
-    --border-2: rgba(255,255,255,0.14);
-    --green-50: #1a2e0a;
-    --amber-50: #2a1e08;
-    --teal-50: #082018;
-    --purple-50: #16143a;
-  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -72,30 +42,32 @@ body {
 }
 
 .sidebar-logo {
-  padding: 1.25rem 1rem 1rem;
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem 1rem;
+  border: none;
   border-bottom: 1px solid var(--border);
+  background: transparent;
   cursor: pointer;
   transition: background 0.1s;
+  text-align: left;
+  font: inherit;
 }
 
 .sidebar-logo:hover { background: var(--bg-3); }
-
-.logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 7px;
-  background: var(--green);
-  color: var(--green-50);
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 8px;
+.sidebar-logo:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
 }
 
-.logo-name { font-size: 13px; font-weight: 500; line-height: 1.3; }
-.logo-sub  { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.sidebar-theme-bar {
+  padding: 0 1rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-theme-bar .theme-toggle {
+  margin-bottom: 0;
+}
 
 .nav-group {
   padding: 0.75rem 0;
@@ -580,6 +552,11 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+.section-header > div {
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--green);
+}
+
 .section-title { font-size: 22px; font-weight: 500; }
 .section-sub { font-size: 13px; color: var(--text-2); margin-top: 4px; }
 
@@ -606,6 +583,36 @@ body {
 /* Wiki body */
 .wiki-body { font-size: 15px; line-height: 1.8; color: var(--text); }
 .wiki-body p { margin-bottom: 0.85rem; }
+
+.tech-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .tech-hero {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.tech-committee-logo {
+  margin: 0;
+  flex-shrink: 0;
+  width: min(220px, 72vw);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.tech-committee-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 /* Project cards */
 .project-grid { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -1129,17 +1136,27 @@ code {
 </head>
 <body>
 
+<button type="button" class="theme-toggle theme-toggle--icon mobile-theme-btn" data-isv-theme-toggle aria-label="Switch to dark mode">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
 <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar" onclick="toggleMobileMenu()">
   <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
   <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
 </button>
 <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeMobileMenu()" aria-hidden="true"></div>
 
-<nav id="sidebar">
-  <div class="sidebar-logo" role="button" tabindex="0" onclick="showSection('home')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showSection('home')}">
-    <div class="logo-mark">ISV</div>
-    <div class="logo-name">Smart Village</div>
-    <div class="logo-sub">IEEE Working Group</div>
+<nav id="sidebar" class="isv-sidebar">
+  <button type="button" class="sidebar-logo" aria-label="Home — IEEE Smart Village Knowledge Base" onclick="showSection('home')">
+    <img src="assets/isv-logo.png" alt="" class="sidebar-logo-img" width="178" height="48">
+  </button>
+
+  <div class="sidebar-theme-bar">
+    <button type="button" class="theme-toggle" data-isv-theme-toggle aria-label="Switch to dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <span class="theme-toggle-label">Dark mode</span>
+    </button>
   </div>
 
   <div class="nav-group">
@@ -1163,6 +1180,10 @@ code {
     <div class="nav-item" data-section="notes" onclick="showSection('notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Meeting notes
+    </div>
+    <div class="nav-item" data-section="tasks" onclick="showSection('tasks')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Tasks
     </div>
     <div class="nav-sub" id="nav-sub-notes">
       <div class="nav-sub-item active" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
@@ -1278,6 +1299,10 @@ code {
           <strong>Tech committee</strong>
           <span>OpenAMI, project map, EMS hardware, drone ops — volunteer engineering</span>
         </a>
+        <a class="home-quick-card" href="#" onclick="showSection('tasks');return false">
+          <strong>Tasks &amp; follow-ups</strong>
+          <span>Action items from meetings — status, assignee, completion</span>
+        </a>
         <a class="home-quick-card" href="#" onclick="showNote('metering-2026-05-28');return false">
           <strong>Meeting notes</strong>
           <span>Tech Comm call notes — metering, comms, action items</span>
@@ -1387,8 +1412,13 @@ code {
       </button>
     </div>
     <div id="content-tech">
-      <div class="wiki-body">
-        <p>These are not PSA-funded field deployments. They are side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
+      <div class="tech-hero">
+        <div class="wiki-body">
+          <p>These are not PSA-funded field deployments. They are side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
+        </div>
+        <figure class="tech-committee-logo">
+          <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
+        </figure>
       </div>
       <div class="project-grid">
         <div class="project-card">
@@ -1431,7 +1461,14 @@ code {
             <span class="tag tag-pilot">Notes</span>
             <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
           </div>
-          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a></div>
+          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a> · <a href="#" onclick="showSection('tasks');return false">Follow-ups</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Tracker</span>
+            <span class="project-name">Follow-ups &amp; tasks</span>
+          </div>
+          <div class="project-desc">14 open action items from Tech Comm and Power Africa planning — status, assignee, completion %. <a href="#" onclick="showSection('tasks');return false">Open task board →</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
@@ -1828,6 +1865,20 @@ code {
     </div>
   </div>
 
+  <!-- TASKS -->
+  <div class="section" id="sec-tasks">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Follow-ups &amp; tasks</div>
+        <div class="section-sub">Action items from meetings — who owns what, and how far along</div>
+      </div>
+    </div>
+    <div id="content-tasks">
+      <p class="wiki-body" style="margin-bottom:1rem;font-size:14px;color:var(--text-2)">Use <strong>Add task</strong> below to capture follow-ups. Link a meeting to connect notes; share with the team by copying the JSON into <code>tasks/tasks.json</code>.</p>
+      <div id="tasks-root"><p style="color:var(--text-3);font-size:14px">Loading tasks…</p></div>
+    </div>
+  </div>
+
   <!-- MEETING NOTES -->
   <div class="section" id="sec-notes">
     <div class="section-header">
@@ -1967,7 +2018,7 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['home','mission','funded','tech','notes','power-africa','meter-study','tech-notes','standards','data','team','resources'];
+const SECTIONS = ['home','mission','funded','tech','notes','tasks','power-africa','meter-study','tech-notes','standards','data','team','resources'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
   'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }
@@ -2035,9 +2086,10 @@ function showSection(id, options = {}) {
   });
   const main = document.getElementById('main');
   main.classList.toggle('wide', id === 'funded');
-  main.classList.toggle('notes-wide', id === 'notes' || id === 'power-africa' || id === 'meter-study' || id === 'tech-notes');
+  main.classList.toggle('notes-wide', id === 'notes' || id === 'power-africa' || id === 'meter-study' || id === 'tech-notes' || id === 'tasks');
   if (id === 'funded') loadFundedProjects();
   if ((id === 'notes' || id === 'power-africa') && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
+  if (id === 'tasks' && window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
   if (id === 'tech-notes') loadTechnicalNotes();
   if (!options.skipHash) {
     const base = location.pathname + location.search;
@@ -2097,6 +2149,11 @@ function initFromHash() {
   }
   if (raw === 'meter-study') {
     showSection('meter-study', { skipHash: true });
+    return;
+  }
+  if (raw === 'tasks' || raw.startsWith('tasks?')) {
+    showSection('tasks', { skipHash: true });
+    if (window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
     return;
   }
   if (raw.startsWith('notes') || raw.startsWith('power-africa')) {
@@ -2536,6 +2593,10 @@ document.getElementById('api-modal').addEventListener('click', function(e) {
 });
 
 updateApiStatus();
+['notes-frame', 'power-africa-frame', 'meter-study-frame'].forEach(function (id) {
+  var f = document.getElementById(id);
+  if (f && window.ISVTheme) ISVTheme.syncFrame(f);
+});
 </script>
 </body>
 </html>
