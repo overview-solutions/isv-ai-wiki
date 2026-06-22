@@ -781,52 +781,6 @@ body {
   background: var(--bg-2);
 }
 
-/* Team grid */
-.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-
-.team-card {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  background: var(--bg);
-}
-
-.team-avatar {
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: var(--green-50);
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-
-.team-name { font-size: 14px; font-weight: 500; }
-.team-role { font-size: 12px; color: var(--text-2); }
-.team-focus { font-size: 12px; color: var(--text-2); margin-top: 4px; line-height: 1.4; }
-
-.add-card {
-  border: 1px dashed var(--border-2);
-  border-radius: 10px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-  color: var(--text-3);
-  font-size: 12px;
-  transition: border-color 0.15s, color 0.15s;
-  text-align: center;
-  min-height: 100px;
-}
-
-.add-card:hover { border-color: var(--green); color: var(--green); }
-
 /* Resources */
 .resource-row {
   display: flex;
@@ -1129,8 +1083,6 @@ code {
 
   .home-blocks,
   .home-quick-grid { grid-template-columns: 1fr; }
-
-  .team-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -1212,10 +1164,6 @@ code {
     <div class="nav-item" data-section="data" onclick="showSection('data')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
       Open data
-    </div>
-    <div class="nav-item" data-section="team" onclick="showSection('team')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Team
     </div>
     <div class="nav-item" data-section="resources" onclick="showSection('resources')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -1653,55 +1601,6 @@ code {
     </div>
   </div>
 
-  <!-- TEAM -->
-  <div class="section" id="sec-team">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Team</div>
-        <div class="section-sub">Leadership and key collaborators</div>
-      </div>
-      <button class="edit-btn" onclick="toggleAI('team')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        Edit with AI
-      </button>
-    </div>
-    <div id="content-team">
-      <div class="team-grid">
-        <div class="team-card">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div class="team-avatar">AO</div>
-            <div>
-              <div class="team-name">Adam Overview</div>
-              <div class="team-role">Open Data & Drone Ops</div>
-            </div>
-          </div>
-          <div class="team-focus">BVLOS operations, LiDAR, OpenAMI GeoJSON schema lead, IEEE Smart Village advisory</div>
-        </div>
-        <div class="add-card" onclick="document.getElementById('input-team').value='Add a new team member card'; toggleAI(\'team\'); document.getElementById(\'input-team\').focus()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          Add team member
-        </div>
-      </div>
-    </div>
-    <div class="ai-panel" id="ai-team">
-      <div class="ai-panel-label">AI editor — team</div>
-      <textarea class="ai-input" id="input-team" placeholder="e.g. 'Add Dr. Jane Smith, Energy Policy Lead, focused on FERC regulatory frameworks'"></textarea>
-      <div class="ai-actions">
-        <button class="btn-generate" id="run-team" onclick="runAI('team')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Generate
-        </button>
-        <button class="btn-cancel" onclick="toggleAI('team')">Cancel</button>
-        <div class="spinner" id="spin-team"></div>
-        <button class="btn-apply" id="apply-team" onclick="applyContent('team')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Apply
-        </button>
-      </div>
-      <div class="ai-result" id="result-team"></div>
-    </div>
-  </div>
-
   <!-- RESOURCES -->
   <div class="section" id="sec-resources">
     <div class="section-header">
@@ -1874,7 +1773,7 @@ code {
       </div>
     </div>
     <div id="content-tasks">
-      <p class="wiki-body" style="margin-bottom:1rem;font-size:14px;color:var(--text-2)">Use <strong>Add task</strong> below to capture follow-ups. Link a meeting to connect notes; share with the team by copying the JSON into <code>tasks/tasks.json</code>.</p>
+      <p class="wiki-body" style="margin-bottom:1rem;font-size:14px;color:var(--text-2)">Use <strong>Add task</strong> to capture follow-ups, or click a task to <strong>update status</strong> and post comments. History saves on this device until login and git sync are added.</p>
       <div id="tasks-root"><p style="color:var(--text-3);font-size:14px">Loading tasks…</p></div>
     </div>
   </div>
@@ -2018,7 +1917,7 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['home','mission','funded','tech','notes','tasks','power-africa','meter-study','tech-notes','standards','data','team','resources'];
+const SECTIONS = ['home','mission','funded','tech','notes','tasks','power-africa','meter-study','tech-notes','standards','data','resources'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
   'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }

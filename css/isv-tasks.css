@@ -162,7 +162,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
-  min-width: 800px;
+  min-width: 860px;
 }
 
 .tasks-table th,
@@ -462,8 +462,239 @@ a.task-tag:hover {
   color: var(--text-3);
 }
 
+.task-open-link {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.task-open-link:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.task-update-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.task-update-link:hover {
+  text-decoration: underline;
+}
+
+.task-actions-col {
+  white-space: nowrap;
+}
+
+.task-pill-edited {
+  background: var(--amber-50);
+  color: var(--amber);
+  display: block;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+/* Task detail & history */
+.task-detail-back {
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.task-detail-back a {
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+.task-detail-back a:hover {
+  color: var(--green);
+}
+
+.task-detail {
+  margin-bottom: 1.5rem;
+}
+
+.task-detail-head {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-2);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.task-detail-id {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 0.35rem;
+}
+
+.task-detail-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 0.65rem;
+  line-height: 1.35;
+}
+
+.task-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.task-detail-meta a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.task-detail-meta a:hover {
+  text-decoration: underline;
+}
+
+.task-detail-tags {
+  margin-top: 0.65rem;
+}
+
+.task-detail-notes {
+  margin: 0.75rem 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+
+.task-update-panel,
+.task-history-panel {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  padding: 1rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.task-panel-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+}
+
+.task-panel-lead {
+  font-size: 12px;
+  color: var(--text-3);
+  margin: 0 0 0.85rem;
+  line-height: 1.45;
+}
+
+.task-update-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.task-update-flash {
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  background: var(--green-50);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 13px;
+}
+
+.task-update-flash p {
+  margin: 0.5rem 0;
+  color: var(--text-2);
+}
+
+.task-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--border);
+  margin-left: 0.35rem;
+}
+
+.task-history-item {
+  position: relative;
+  padding: 0 0 1rem 1rem;
+  margin-left: 0.35rem;
+}
+
+.task-history-item::before {
+  content: "";
+  position: absolute;
+  left: -0.55rem;
+  top: 0.35rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg-3);
+  border: 2px solid var(--border-2);
+}
+
+.task-history-status_change::before {
+  background: var(--amber-50);
+  border-color: var(--amber);
+}
+
+.task-history-created::before,
+.task-history-imported::before {
+  background: var(--green-50);
+  border-color: var(--green);
+}
+
+.task-history-comment::before {
+  background: var(--blue-50);
+  border-color: var(--blue);
+}
+
+.task-history-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  font-size: 12px;
+  margin-bottom: 0.2rem;
+}
+
+.task-history-label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.task-history-meta time {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.task-history-by {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 0.15rem;
+}
+
+.task-history-comment {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.task-history-empty {
+  font-size: 13px;
+  color: var(--text-3);
+  margin: 0;
+}
+
 @media (max-width: 520px) {
   .task-create-form {
+    grid-template-columns: 1fr;
+  }
+
+  .task-update-form {
     grid-template-columns: 1fr;
   }
 }

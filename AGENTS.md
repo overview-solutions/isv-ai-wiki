@@ -68,7 +68,7 @@ isv-ai-wiki/
 
 Registered sections (`SECTIONS` in `index.html`):
 
-| `home` · `mission` · `funded` · `tech` · `notes` · `tasks` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `team` · `resources`
+| `home` · `mission` · `funded` · `tech` · `notes` · `tasks` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
 
 ### Hash URLs (stable deep links)
 

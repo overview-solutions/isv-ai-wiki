@@ -6,7 +6,10 @@
 
   var TASKS_URL = 'tasks/tasks.json';
   var LOCAL_KEY = 'isv-user-tasks';
+  var OVERLAY_KEY = 'isv-task-overlays';
+  var AUTHOR_KEY = 'isv-task-author';
   var FLASH_KEY = 'isv-task-created-flash';
+  var UPDATE_FLASH_KEY = 'isv-task-updated-flash';
   var GITHUB_TASKS_EDIT = 'https://github.com/overview-solutions/isv-ai-wiki/edit/main/tasks/tasks.json';
   var cache = null;
   var loadPromise = null;
@@ -40,17 +43,93 @@
     loadPromise = null;
   }
 
+  function updateLocalTask(taskId, updater) {
+    var list = getLocalTasks();
+    var idx = list.findIndex(function (t) { return t.id === taskId; });
+    if (idx < 0) return false;
+    list[idx] = updater(list[idx]);
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(list));
+    cache = null;
+    loadPromise = null;
+    return true;
+  }
+
+  function getOverlays() {
+    try {
+      return JSON.parse(localStorage.getItem(OVERLAY_KEY) || '{}');
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveOverlay(taskId, overlay) {
+    var all = getOverlays();
+    all[taskId] = overlay;
+    localStorage.setItem(OVERLAY_KEY, JSON.stringify(all));
+    cache = null;
+    loadPromise = null;
+  }
+
+  function getStoredAuthor() {
+    return localStorage.getItem(AUTHOR_KEY) || '';
+  }
+
+  function setStoredAuthor(name) {
+    if (name) localStorage.setItem(AUTHOR_KEY, name);
+  }
+
+  function applyOverlayToTask(task) {
+    var overlay = getOverlays()[task.id];
+    var merged = Object.assign({}, task);
+    if (overlay) {
+      ['status', 'assignee', 'deadline', 'priority', 'notes'].forEach(function (k) {
+        if (overlay[k] != null && overlay[k] !== '') merged[k] = overlay[k];
+      });
+      if (overlay.tags) merged.tags = overlay.tags;
+      merged._localEdits = true;
+    }
+    merged.history = buildTaskHistory(merged, overlay && overlay.history);
+    return merged;
+  }
+
+  function buildTaskHistory(task, overlayHistory) {
+    var base = task.history && task.history.length
+      ? task.history.slice()
+      : [{
+          at: task._createdAt || '1970-01-01T00:00:00.000Z',
+          type: 'created',
+          status: task.status || 'not_started',
+          by: 'tasks.json',
+          comment: 'Task recorded in catalog'
+        }];
+    var extra = overlayHistory || [];
+    return base.concat(extra).sort(function (a, b) {
+      return new Date(a.at).getTime() - new Date(b.at).getTime();
+    });
+  }
+
+  function findTaskById(data, taskId) {
+    return (data.tasks || []).find(function (t) { return t.id === taskId; }) || null;
+  }
+
   function mergeWithLocal(data) {
     var serverIds = {};
-    (data.tasks || []).forEach(function (t) {
+    var tasks = (data.tasks || []).map(function (t) {
       if (t.id) serverIds[t.id] = true;
+      return applyOverlayToTask(t);
     });
     var local = getLocalTasks().filter(function (t) {
       return t.id && !serverIds[t.id];
+    }).map(function (t) {
+      var copy = Object.assign({}, t);
+      copy.history = buildTaskHistory(copy, null);
+      return copy;
     });
-    if (!local.length) return data;
+    if (!local.length) {
+      return Object.assign({}, data, { tasks: tasks });
+    }
     return Object.assign({}, data, {
-      tasks: (data.tasks || []).concat(local)
+      tasks: tasks.concat(local)
     });
   }
 
@@ -149,6 +228,7 @@
     });
     var tags = taskTags(task);
     if (tags.length) copy.tags = tags;
+    if (task.history && task.history.length) copy.history = task.history;
     return JSON.stringify(copy, null, 2);
   }
 
@@ -311,12 +391,229 @@
               '<span>Notes <span class="task-form-optional">(optional)</span></span>' +
               '<textarea name="notes" rows="2" placeholder="Context from the call…"></textarea>' +
             '</label>' +
+            '<label class="task-form-field task-form-field-wide">' +
+              '<span>Your name <span class="task-form-optional">(for history — login coming later)</span></span>' +
+              '<input type="text" name="author" placeholder="Who is creating this?" value="' + escapeHtml(getStoredAuthor()) + '">' +
+            '</label>' +
             '<div class="task-create-actions">' +
               '<button type="submit" class="task-create-submit">Create task</button>' +
             '</div>' +
           '</form>' +
         '</div>' +
       '</div>';
+  }
+
+  function formatHistoryWhen(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, {
+      year: 'numeric', month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit'
+    });
+  }
+
+  function historyEntryLabel(data, entry) {
+    if (entry.type === 'created') {
+      return 'Created · ' + escapeHtml(statusLabel(data, entry.status || 'not_started'));
+    }
+    if (entry.type === 'imported') return 'Imported from catalog';
+    if (entry.type === 'status_change') {
+      return 'Status · ' +
+        escapeHtml(statusLabel(data, entry.from || '')) +
+        ' → ' +
+        escapeHtml(statusLabel(data, entry.to || ''));
+    }
+    if (entry.type === 'comment') return 'Comment';
+    return escapeHtml(entry.type || 'Update');
+  }
+
+  function renderHistoryTimeline(data, history) {
+    if (!history || !history.length) {
+      return '<p class="task-history-empty">No activity yet.</p>';
+    }
+    var items = history.slice().reverse().map(function (entry) {
+      return '<li class="task-history-item task-history-' + escapeHtml(entry.type || 'update') + '">' +
+        '<div class="task-history-meta">' +
+          '<span class="task-history-label">' + historyEntryLabel(data, entry) + '</span>' +
+          '<time datetime="' + escapeHtml(entry.at || '') + '">' + escapeHtml(formatHistoryWhen(entry.at)) + '</time>' +
+        '</div>' +
+        (entry.by ? '<div class="task-history-by">' + escapeHtml(entry.by) + '</div>' : '') +
+        (entry.comment ? '<div class="task-history-comment">' + escapeHtml(entry.comment) + '</div>' : '') +
+      '</li>';
+    }).join('');
+    return '<ol class="task-history">' + items + '</ol>';
+  }
+
+  function renderUpdateFlash(task) {
+    var flash = null;
+    try {
+      flash = JSON.parse(sessionStorage.getItem(UPDATE_FLASH_KEY) || 'null');
+      sessionStorage.removeItem(UPDATE_FLASH_KEY);
+    } catch (e) {
+      sessionStorage.removeItem(UPDATE_FLASH_KEY);
+    }
+    if (!flash || flash.taskId !== task.id) return '';
+    var snippet = taskToJsonSnippet(task);
+    var needsGit = !task._local;
+    return '<div class="task-update-flash">' +
+      '<strong>Update saved on this device</strong>' +
+      (needsGit
+        ? '<p>Progress is stored locally until synced. Copy the updated task (with <code>history</code>) into <code>tasks/tasks.json</code>:</p>' +
+          '<pre class="task-json-snippet">' + escapeHtml(snippet) + '</pre>' +
+          '<div class="task-create-flash-actions">' +
+            '<button type="button" class="task-copy-json">Copy JSON</button>' +
+            '<a class="task-github-edit" href="' + GITHUB_TASKS_EDIT + '" target="_blank" rel="noopener">Edit tasks.json on GitHub ↗</a>' +
+          '</div>'
+        : '<p>Change recorded in your local draft task.</p>') +
+    '</div>';
+  }
+
+  function statusOptionsHtml(data, current) {
+    return ['not_started', 'in_progress', 'blocked', 'done'].map(function (s) {
+      return '<option value="' + s + '"' + (current === s ? ' selected' : '') + '>' +
+        escapeHtml(statusLabel(data, s)) + '</option>';
+    }).join('');
+  }
+
+  function renderTaskDetail(data, task, options) {
+    var m = data.meetings && data.meetings[task.meeting];
+    var meetLabel = m ? m.title + ' · ' + m.date : (task.meeting || '—');
+    var meetHref = task.meeting ? meetingLink(task.meeting, data) : '';
+    var tags = taskTags(task);
+    var backHref = wikiTasksHref(buildListQuery(options));
+    var badges = '';
+    if (task._local) badges += ' <span class="task-pill task-pill-draft">Draft</span>';
+    if (task._localEdits) badges += ' <span class="task-pill task-pill-edited" title="Local edits not yet in git">Local edits</span>';
+
+    return '<div class="task-detail">' +
+      '<p class="task-detail-back"><a href="' + escapeHtml(backHref) + '">← All tasks</a></p>' +
+      renderUpdateFlash(task) +
+      '<div class="task-detail-head">' +
+        '<div class="task-detail-id">' + escapeHtml(task.id) + badges + '</div>' +
+        '<h2 class="task-detail-title">' + escapeHtml(task.title) + '</h2>' +
+        '<div class="task-detail-meta">' +
+          '<span class="' + pillClass(task.status) + '">' + escapeHtml(statusLabel(data, task.status)) + '</span>' +
+          '<span>Assignee: <strong>' + escapeHtml(task.assignee || 'Unassigned') + '</strong></span>' +
+          (task.deadline ? '<span>Due: <strong class="' + (isDeadlineOverdue(task.deadline, task.status) ? 'task-deadline-overdue' : '') + '">' + escapeHtml(formatDeadline(task.deadline)) + '</strong></span>' : '') +
+          (task.priority ? '<span>Priority: <strong>' + escapeHtml(task.priority) + '</strong></span>' : '') +
+          (meetHref ? '<span>Meeting: <a href="' + meetHref + '">' + escapeHtml(meetLabel) + '</a></span>' : '') +
+        '</div>' +
+        (tags.length ? '<div class="task-detail-tags">' + renderTagsHtml(tags, { filterable: true }) + '</div>' : '') +
+        (task.notes ? '<p class="task-detail-notes">' + escapeHtml(task.notes) + '</p>' : '') +
+      '</div>' +
+      '<div class="task-update-panel">' +
+        '<h3 class="task-panel-title">Post an update</h3>' +
+        '<p class="task-panel-lead">Change status and/or leave a comment. History is saved on this device until login and git sync are added.</p>' +
+        '<form id="task-update-form" class="task-update-form">' +
+          '<label class="task-form-field">' +
+            '<span>Status</span>' +
+            '<select name="status">' + statusOptionsHtml(data, task.status) + '</select>' +
+          '</label>' +
+          '<label class="task-form-field">' +
+            '<span>Your name</span>' +
+            '<input type="text" name="author" value="' + escapeHtml(getStoredAuthor()) + '" placeholder="Who is posting this update?">' +
+          '</label>' +
+          '<label class="task-form-field task-form-field-wide">' +
+            '<span>Comment <span class="task-form-optional">(optional)</span></span>' +
+            '<textarea name="comment" rows="3" placeholder="What changed? Blockers, next steps, links…"></textarea>' +
+          '</label>' +
+          '<div class="task-create-actions">' +
+            '<button type="submit" class="task-create-submit">Save update</button>' +
+          '</div>' +
+        '</form>' +
+      '</div>' +
+      '<div class="task-history-panel">' +
+        '<h3 class="task-panel-title">History</h3>' +
+        renderHistoryTimeline(data, task.history) +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildListQuery(options) {
+    options = options || {};
+    var q = new URLSearchParams();
+    if (options.meeting) q.set('meeting', options.meeting);
+    if (options.status) q.set('status', options.status);
+    if (options.assignee) q.set('assignee', options.assignee);
+    if (options.tag) q.set('tag', options.tag);
+    var s = q.toString();
+    return s ? '?' + s : '';
+  }
+
+  function postTaskUpdate(taskId, payload) {
+    return loadTasks().then(function (data) {
+      var task = findTaskById(data, taskId);
+      if (!task) throw new Error('Task not found');
+
+      var author = (payload.author || getStoredAuthor() || 'Anonymous').trim();
+      setStoredAuthor(author);
+      var newStatus = payload.status || task.status;
+      var comment = (payload.comment || '').trim();
+      var statusChanged = newStatus !== task.status;
+
+      if (!statusChanged && !comment) return null;
+
+      var entry = {
+        at: new Date().toISOString(),
+        by: author,
+        type: statusChanged ? 'status_change' : 'comment'
+      };
+      if (comment) entry.comment = comment;
+      if (statusChanged) {
+        entry.from = task.status;
+        entry.to = newStatus;
+      }
+
+      if (task._local) {
+        updateLocalTask(taskId, function (t) {
+          if (statusChanged) t.status = newStatus;
+          t.history = (t.history || []).concat([entry]);
+          return t;
+        });
+      } else {
+        var overlay = getOverlays()[taskId] || {};
+        if (statusChanged) overlay.status = newStatus;
+        overlay.history = (overlay.history || []).concat([entry]);
+        overlay._updatedAt = entry.at;
+        saveOverlay(taskId, overlay);
+      }
+
+      invalidateCache();
+      return entry;
+    });
+  }
+
+  function bindTaskDetail(data, taskId, options) {
+    var form = document.getElementById('task-update-form');
+    if (form) {
+      form.onsubmit = function (e) {
+        e.preventDefault();
+        postTaskUpdate(taskId, {
+          status: form.status.value,
+          author: form.author.value,
+          comment: form.comment.value
+        }).then(function (entry) {
+          if (!entry) return;
+          sessionStorage.setItem(UPDATE_FLASH_KEY, JSON.stringify({ taskId: taskId }));
+          renderTaskPage(Object.assign({}, options, { task: taskId }));
+        });
+      };
+    }
+
+    document.querySelectorAll('.task-copy-json').forEach(function (btn) {
+      btn.onclick = function () {
+        var pre = btn.closest('.task-update-flash, .task-create-flash');
+        var json = pre && pre.querySelector('.task-json-snippet')
+          ? pre.querySelector('.task-json-snippet').textContent
+          : '';
+        if (!json || !navigator.clipboard || !navigator.clipboard.writeText) return;
+        navigator.clipboard.writeText(json).then(function () {
+          btn.textContent = 'Copied!';
+          setTimeout(function () { btn.textContent = 'Copy JSON'; }, 2000);
+        });
+      };
+    });
   }
 
   function renderFlashBanner() {
@@ -383,6 +680,15 @@
         if (deadline) task.deadline = deadline;
         var tags = normalizeTags(form.tags.value || '');
         if (tags.length) task.tags = tags;
+        var author = (form.author && form.author.value || getStoredAuthor() || task.assignee || 'Anonymous').trim();
+        setStoredAuthor(author);
+        task.history = [{
+          at: task._createdAt,
+          type: 'created',
+          status: task.status,
+          by: author,
+          comment: notes || undefined
+        }];
 
         saveLocalTask(task);
         sessionStorage.setItem(FLASH_KEY, JSON.stringify({ task: task }));
@@ -422,14 +728,16 @@
       });
       var list = sorted.map(function (t) {
         var tags = taskTags(t);
+        var taskHref = wikiTasksHref('task=' + encodeURIComponent(t.id));
         return '<li>' +
           '<span class="' + pillClass(t.status) + '">' + escapeHtml(statusLabel(data, t.status)) + '</span>' +
-          '<span class="task-title">' + escapeHtml(t.title) +
+          '<span class="task-title"><a class="task-open-link" href="' + escapeHtml(taskHref) + '">' + escapeHtml(t.title) + '</a>' +
             (tags.length ? '<span class="task-tags-inline">' + renderTagsHtml(tags, { filterable: true }) + '</span>' : '') +
           '</span>' +
           '<span class="task-meta">Assigned: <strong>' + escapeHtml(t.assignee || 'Unassigned') + '</strong>' +
           (t.deadline ? ' · Due: <strong class="' + (isDeadlineOverdue(t.deadline, t.status) ? 'task-deadline-overdue' : '') + '">' + escapeHtml(formatDeadline(t.deadline)) + '</strong>' : '') +
-          (t.notes ? ' · ' + escapeHtml(t.notes) : '') + '</span>' +
+          (t.notes ? ' · ' + escapeHtml(t.notes) : '') +
+          ' · <a class="task-update-link" href="' + escapeHtml(taskHref) + '">Update</a></span>' +
           '</li>';
       }).join('');
 
@@ -488,6 +796,20 @@
       var hashOptsEarly = parseTasksHash();
       if (!filterTag && hashOptsEarly.tag) filterTag = hashOptsEarly.tag;
 
+      var viewTaskId = options.task || hashOptsEarly.task || params.get('task') || '';
+
+      if (viewTaskId) {
+        var detailTask = findTaskById(data, viewTaskId);
+        if (!detailTask) {
+          root.innerHTML = '<div class="tasks-empty">Task <code>' + escapeHtml(viewTaskId) + '</code> not found. <a href="' + escapeHtml(wikiTasksHref('')) + '">Back to list</a></div>';
+          return;
+        }
+        root.innerHTML = renderTaskDetail(data, detailTask, options);
+        bindTaskDetail(data, viewTaskId, options);
+        history.replaceState(null, '', '#tasks?task=' + encodeURIComponent(viewTaskId));
+        return;
+      }
+
       var all = data.tasks || [];
       var stats = completionStats(all);
       var assignees = [];
@@ -536,10 +858,12 @@
           ? '<a href="' + meetHref + '">' + escapeHtml(meetLabel) + '</a>'
           : escapeHtml(meetLabel);
         var draft = t._local ? ' <span class="task-pill task-pill-draft" title="Saved on this device — add to tasks.json to share">Draft</span>' : '';
+        if (t._localEdits) draft += ' <span class="task-pill task-pill-edited" title="Local progress not yet in git">Edited</span>';
         var tags = taskTags(t);
-        return '<tr>' +
+        var taskHref = wikiTasksHref('task=' + encodeURIComponent(t.id));
+        return '<tr class="task-row-clickable" data-task-id="' + escapeHtml(t.id) + '">' +
           '<td class="task-id">' + escapeHtml(t.id) + draft + '</td>' +
-          '<td>' + escapeHtml(t.title) +
+          '<td><a class="task-open-link" href="' + escapeHtml(taskHref) + '">' + escapeHtml(t.title) + '</a>' +
             (t.notes ? '<div style="font-size:11px;color:var(--text-3);margin-top:2px">' + escapeHtml(t.notes) + '</div>' : '') +
           '</td>' +
           '<td class="task-tags-col">' + renderTagsHtml(tags, { filterable: true }) + '</td>' +
@@ -547,6 +871,7 @@
           '<td>' + escapeHtml(t.assignee || 'Unassigned') + '</td>' +
           '<td class="task-deadline-col">' + renderDeadlineCell(t.deadline, t.status) + '</td>' +
           '<td>' + meetCell + '</td>' +
+          '<td class="task-actions-col"><a class="task-update-link" href="' + escapeHtml(taskHref) + '">Update</a></td>' +
           '</tr>';
       }).join('');
 
@@ -586,10 +911,10 @@
         '</div>' +
         '<div class="tasks-table-wrap">' +
           (filtered.length
-            ? '<table class="tasks-table"><thead><tr><th>ID</th><th>Task</th><th>Tags</th><th>Status</th><th>Assignee</th><th>Deadline</th><th>Meeting</th></tr></thead><tbody>' + rows + '</tbody></table>'
+            ? '<table class="tasks-table"><thead><tr><th>ID</th><th>Task</th><th>Tags</th><th>Status</th><th>Assignee</th><th>Deadline</th><th>Meeting</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>'
             : '<div class="tasks-empty">No tasks match the current filters.</div>') +
         '</div>' +
-        '<p class="tasks-source-note">Canonical list: <code>tasks/tasks.json</code>. New tasks save locally first; copy the JSON snippet to git so the team sees them.</p>';
+        '<p class="tasks-source-note">Click a task or <strong>Update</strong> to change status and add comments. Edits save on this device; copy JSON to git to share. Login sync planned.</p>';
 
       bindCreateForm(data, options);
 
@@ -634,6 +959,7 @@
       status: params.get('status') || '',
       assignee: params.get('assignee') || '',
       tag: params.get('tag') || '',
+      task: params.get('task') || '',
       newTask: params.get('new') === '1',
       createMeeting: params.get('createMeeting') || ''
     };
@@ -647,6 +973,7 @@
     invalidateCache: invalidateCache,
     normalizeTags: normalizeTags,
     taskTags: taskTags,
-    collectAllTags: collectAllTags
+    collectAllTags: collectAllTags,
+    postTaskUpdate: postTaskUpdate
   };
 })(typeof window !== 'undefined' ? window : this);
