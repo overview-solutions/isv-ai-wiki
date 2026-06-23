@@ -68,13 +68,16 @@ isv-ai-wiki/
 
 Registered sections (`SECTIONS` in `index.html`):
 
-| `home` · `mission` · `funded` · `tech` · `notes` · `tasks` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
+| `home` · `mission` · `funded` · `notes` · `tasks` · `committees` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
+
+`home` is the IEEE Smart Village Knowledge Base **and** the Tech Committee working hub (intro blocks + initiatives). Legacy `#tech` hash redirects to `home`. Other ISV committees (RWGs, subcommittees) live on `committees`.
 
 ### Hash URLs (stable deep links)
 
 | Hash | Lands on |
 |------|----------|
-| `#home` | Landing page (default) |
+| `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
+| `#committees` | Other ISV committees — RWGs and subcommittees |
 | `#tasks` | All meeting follow-ups (filterable) |
 | `#tasks?meeting=metering-2026-05-28` | Tasks for one meeting |
 | `#meter-study` | Meter benchmark iframe |
@@ -83,7 +86,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
-| `#mission`, `#funded`, `#tech`, … | Top-level sections |
+| `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → redirects to `#home`) |
 
 **For agents:** Prefer hash links when citing wiki pages. Prefer **standalone HTML** (`meter-vendor-study.html`) when scraping full content — iframes omit chrome but duplicate body.
 

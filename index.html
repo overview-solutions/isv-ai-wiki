@@ -245,6 +245,10 @@ body {
 
 .notes-embed-toolbar-links a:hover { text-decoration: underline; }
 
+.nav-label-knowledge {
+  margin-top: 0.35rem;
+}
+
 .home-lead {
   font-size: 17px;
   line-height: 1.6;
@@ -257,7 +261,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.85rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
 
 .home-block {
@@ -287,52 +291,76 @@ body {
   margin: 0;
 }
 
-.home-quick-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-3);
-  margin-bottom: 0.65rem;
+.home-tech-section {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
 }
 
-.home-quick-grid {
+.home-tech-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.home-tech-header h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--green);
+}
+
+.home-tech-header p {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0;
+  padding-left: calc(0.85rem + 3px);
+}
+
+.committees-intro {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  max-width: 52rem;
+}
+
+.committees-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.65rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.home-quick-card {
-  display: block;
-  padding: 0.8rem 0.9rem;
+.committees-panel {
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
   background: var(--bg);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.1s, background 0.1s;
 }
 
-.home-quick-card:hover {
-  border-color: var(--green);
-  background: var(--green-50);
-}
-
-.home-quick-card strong {
-  display: block;
+.committees-panel h3 {
   font-size: 14px;
   font-weight: 500;
-  margin-bottom: 0.2rem;
+  margin: 0 0 0.65rem;
+  color: var(--green);
 }
 
-.home-quick-card span {
-  font-size: 12px;
+.committees-panel ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--text-2);
-  line-height: 1.45;
 }
 
-.nav-label-knowledge {
-  margin-top: 0.35rem;
+.committees-panel li { margin-bottom: 0.35rem; }
+
+@media (max-width: 768px) {
+  .home-blocks,
+  .committees-grid { grid-template-columns: 1fr; }
 }
 
 .tech-notes-layout {
@@ -1081,8 +1109,10 @@ code {
     width: 100%;
   }
 
-  .home-blocks,
-  .home-quick-grid { grid-template-columns: 1fr; }
+  .tech-hero {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
 </head>
@@ -1121,13 +1151,13 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
       Mission
     </div>
+    <div class="nav-item" data-section="committees" onclick="showSection('committees')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Other ISV committees
+    </div>
     <div class="nav-item" data-section="funded" onclick="showSection('funded')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Funded projects
-    </div>
-    <div class="nav-item" data-section="tech" onclick="showSection('tech')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Tech committee
     </div>
     <div class="nav-item" data-section="notes" onclick="showSection('notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -1194,11 +1224,11 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title">IEEE Smart Village Knowledge Base</div>
-        <div class="section-sub">What this wiki is, who it serves, and how to get involved</div>
+        <div class="section-sub">Working hub for the ISV Technology Committee — funded deployments, open standards, meeting notes, and conference workshops</div>
       </div>
     </div>
     <div id="content-home">
-      <p class="home-lead">A working hub for ISV volunteers, field partners, and engineers — funded deployments, open standards, meeting notes, and conference workshops in one place. This is not the public program site; it is where the working group documents and shares operational knowledge.</p>
+      <p class="home-lead">This knowledge base is built primarily for <strong>Technology Committee volunteers</strong> at the moment — meeting notes, engineering references, and initiative tracking. It is not the public program site (<a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org</a>). Others may browse, but active work here centers on Tech Comm for now. To join another ISV group, sign up as a volunteer on the <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">main site</a>.</p>
 
       <div class="home-blocks">
         <div class="home-block">
@@ -1214,59 +1244,165 @@ code {
         <div class="home-block">
           <div class="home-block-title">Who it's for</div>
           <ul>
-            <li>ISV Tech Comm volunteers and advisors</li>
-            <li>In-country NGO partners and micro-utility operators</li>
-            <li>Engineers on metering, microgrids, and rural comms</li>
-            <li>Conference attendees and collaborators (EnAccess, SteamaCo, etc.)</li>
-            <li>Anyone contributing open tools that support funded field work</li>
+            <li><strong>Tech Comm volunteers and advisors</strong> — primary audience today</li>
+            <li>Field partners and engineers collaborating on Tech Comm work</li>
+            <li>Conference attendees and open-tool contributors (read-only welcome)</li>
           </ul>
         </div>
         <div class="home-block">
           <div class="home-block-title">How to engage</div>
           <ul>
-            <li>Browse the <strong>funded projects map</strong> and field programs</li>
-            <li>Read or add <strong>meeting notes</strong> and <strong>technical reports</strong></li>
-            <li>Join Tech Comm via the <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Linktree</a></li>
-            <li>Contribute on GitHub — push HTML to update this wiki</li>
-            <li>Program news and grants: <a href="https://ieeesmartvillage.org" target="_blank" rel="noopener">ieeesmartvillage.org</a></li>
+            <li>Join <strong>Tech Comm</strong> via the <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Linktree</a></li>
+            <li>Other ISV groups (RWGs, subcommittees): <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">sign up as a volunteer</a> on the main site</li>
+            <li>See <a href="#" onclick="showSection('committees');return false">Other ISV committees</a> for how the program is organized</li>
+            <li>Browse the <strong>funded projects map</strong>, <strong>meeting notes</strong>, and <strong>technical reports</strong></li>
           </ul>
         </div>
       </div>
+    </div>
 
-      <div class="home-quick-label">Start here</div>
-      <div class="home-quick-grid">
-        <a class="home-quick-card" href="#" onclick="showSection('mission');return false">
-          <strong>Mission</strong>
-          <span>Energy, education, and enterprise pillars — what ISV is building toward</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showSection('funded');return false">
-          <strong>Funded projects</strong>
-          <span>Active NGO deployments on the map — the core field mission</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showSection('tech');return false">
-          <strong>Tech committee</strong>
-          <span>OpenAMI, project map, EMS hardware, drone ops — volunteer engineering</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showSection('tasks');return false">
-          <strong>Tasks &amp; follow-ups</strong>
-          <span>Action items from meetings — status, assignee, completion</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showNote('metering-2026-05-28');return false">
-          <strong>Meeting notes</strong>
-          <span>Tech Comm call notes — metering, comms, action items</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">
-          <strong>Power Africa Workshop</strong>
-          <span>2026 conference hands-on track — schedule, guests, logistics</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showSection('meter-study');return false">
-          <strong>Meter benchmark</strong>
-          <span>Village metering vendor study — pipeline tracker and protocol comparison</span>
-        </a>
-        <a class="home-quick-card" href="#" onclick="showSection('tech-notes');return false">
-          <strong>Technical reports</strong>
-          <span>Dev Labs and ISV research — summaries with links to full documents</span>
-        </a>
+    <div class="home-tech-section" id="tech-comm">
+      <div class="home-tech-header">
+        <div>
+          <h2>Technology Committee initiatives</h2>
+          <p>Volunteer engineering efforts — not PSA-funded field deployments</p>
+        </div>
+        <button class="edit-btn" onclick="toggleAI('tech')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          Edit with AI
+        </button>
+      </div>
+      <div id="content-tech">
+        <div class="tech-hero">
+          <div class="wiki-body">
+            <p>Side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
+          </div>
+          <figure class="tech-committee-logo">
+            <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
+          </figure>
+        </div>
+        <div class="project-grid">
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Smart Village Project Map</span>
+          </div>
+          <div class="project-desc">Maintains the <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated funded deployments on OpenStreetMap power layers, synced from ISV grant records. Powers the map on the Funded projects page.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
+          </div>
+          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible — targets open alternatives to proprietary utility GIS schemas.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Drone Ops — Crop Health &amp; Environmental Monitoring</span>
+          </div>
+          <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement — supporting agricultural productivity at funded village sites.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Street Pole EMS Box</span>
+          </div>
+          <div class="project-desc">Open pole-mount gateway (ISV + NESL + <a href="https://github.com/energy-iot/ems-dev/" target="_blank">Energy IOT</a>): three meters per box, remote disconnect, SunSpec JSON over MQTT — aimed at ~$58/household metering vs ~$1k legacy AMI. Prototype from the 2025 Open Energy Hackathon; problem framing in <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a>.</div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-pilot">Hackathon</span>
+            <span class="project-name">Open Energy Hackathon — SF Climate Week 2025</span>
+          </div>
+          <div class="project-desc">Earth Day hack at Port Labs (Oakland) on affordable village metering, DER protocol gaps, and IEEE 2030.5 / SunSpec integration. Writeup: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-pilot">Notes</span>
+            <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
+          </div>
+          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a> · <a href="#" onclick="showSection('tasks');return false">Follow-ups</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Tracker</span>
+            <span class="project-name">Follow-ups &amp; tasks</span>
+          </div>
+          <div class="project-desc">14 open action items from Tech Comm and Power Africa planning — status, assignee, completion %. <a href="#" onclick="showSection('tasks');return false">Open task board →</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-active">Active</span>
+            <span class="project-name">Village metering vendor study</span>
+          </div>
+          <div class="project-desc">Pipeline tracker and layered benchmark for village-level meters, AMI stacks, and microgrid platforms — DLMS, STS, SunSpec, IEEE 2030.5 by stack layer. <a href="#" onclick="showSection('meter-study');return false">Open study →</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-planning">Planning</span>
+            <span class="project-name">Power Africa Conference — Workshop</span>
+          </div>
+          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="ai-panel" id="ai-tech">
+      <div class="ai-panel-label">AI editor — tech committee</div>
+      <textarea class="ai-input" id="input-tech" placeholder="e.g. 'Add a mesh networking initiative for remote meter telemetry'"></textarea>
+      <div class="ai-actions">
+        <button class="btn-generate" id="run-tech" onclick="runAI('tech')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Generate
+        </button>
+        <button class="btn-cancel" onclick="toggleAI('tech')">Cancel</button>
+        <div class="spinner" id="spin-tech"></div>
+        <button class="btn-apply" id="apply-tech" onclick="applyContent('tech')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Apply
+        </button>
+      </div>
+      <div class="ai-result" id="result-tech"></div>
+    </div>
+  </div>
+
+  <!-- OTHER ISV COMMITTEES -->
+  <div class="section" id="sec-committees">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Other ISV committees</div>
+        <div class="section-sub">Regional working groups and functional subcommittees</div>
+      </div>
+    </div>
+    <div class="wiki-body" id="content-committees">
+      <p class="committees-intro">IEEE Smart Village brings together volunteers across regions and disciplines to fund and support village-scale energy programs worldwide. Beyond the <a href="#" onclick="showSection('home');return false">Technology Committee</a>, the program is organized into <strong>regional working groups</strong> (RWGs) and <strong>functional subcommittees</strong> listed below.</p>
+      <p class="committees-intro">This wiki is maintained by Tech Comm volunteers for now — reference material, not a working hub for every group. RWGs are typically the first contact for applicants in their region; subcommittees handle project evaluation (PDC), finance, membership, marketing, and related program work. To engage with any of these groups, sign up as a volunteer on <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org</a>.</p>
+
+      <div class="committees-grid">
+        <div class="committees-panel">
+          <h3>Regional Working Groups</h3>
+          <ul>
+            <li>North America — Joan Kerr</li>
+            <li>Latin America — Mario De La Ossa</li>
+            <li>Africa — Abiodun Okunola</li>
+            <li>China</li>
+            <li>South Asia — Sasi Kottayil</li>
+          </ul>
+        </div>
+        <div class="committees-panel">
+          <h3>Subcommittees</h3>
+          <ul>
+            <li>Education</li>
+            <li>Finance</li>
+            <li>Fund Development</li>
+            <li>Marketing</li>
+            <li>Membership</li>
+            <li>Operations</li>
+            <li>Project Development (PDC)</li>
+            <li>Safety, Quality, Reliability &amp; Standards (SafetyQRS)</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -1344,112 +1480,6 @@ code {
         <div class="toolkit-note-title">Deployment toolkit</div>
         <p>Many funded sites use ISV-designed hardware — the <strong>SunBlazer</strong> community charging station and <strong>Portable Battery Kit (PBK)</strong> — rather than custom one-off systems. Specs live on the <a href="https://linktr.ee/isv_tech" target="_blank">Tech Committee Linktree</a>.</p>
       </div>
-    </div>
-  </div>
-
-  <!-- TECH COMMITTEE -->
-  <div class="section" id="sec-tech">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Technology Committee initiatives</div>
-        <div class="section-sub">Volunteer engineering efforts aligned to support funded field projects</div>
-      </div>
-      <button class="edit-btn" onclick="toggleAI('tech')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        Edit with AI
-      </button>
-    </div>
-    <div id="content-tech">
-      <div class="tech-hero">
-        <div class="wiki-body">
-          <p>These are not PSA-funded field deployments. They are side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
-        </div>
-        <figure class="tech-committee-logo">
-          <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
-        </figure>
-      </div>
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Smart Village Project Map</span>
-          </div>
-          <div class="project-desc">Maintains the <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated funded deployments on OpenStreetMap power layers, synced from ISV grant records. Powers the map on the Funded projects page.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
-          </div>
-          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible — targets open alternatives to proprietary utility GIS schemas.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Drone Ops — Crop Health &amp; Environmental Monitoring</span>
-          </div>
-          <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement — supporting agricultural productivity at funded village sites.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Street Pole EMS Box</span>
-          </div>
-          <div class="project-desc">Open pole-mount gateway (ISV + NESL + <a href="https://github.com/energy-iot/ems-dev/" target="_blank">Energy IOT</a>): three meters per box, remote disconnect, SunSpec JSON over MQTT — aimed at ~$58/household metering vs ~$1k legacy AMI. Prototype from the 2025 Open Energy Hackathon; problem framing in <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a>.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-pilot">Hackathon</span>
-            <span class="project-name">Open Energy Hackathon — SF Climate Week 2025</span>
-          </div>
-          <div class="project-desc">Earth Day hack at Port Labs (Oakland) on affordable village metering, DER protocol gaps, and IEEE 2030.5 / SunSpec integration. Writeup: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-pilot">Notes</span>
-            <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
-          </div>
-          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a> · <a href="#" onclick="showSection('tasks');return false">Follow-ups</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Tracker</span>
-            <span class="project-name">Follow-ups &amp; tasks</span>
-          </div>
-          <div class="project-desc">14 open action items from Tech Comm and Power Africa planning — status, assignee, completion %. <a href="#" onclick="showSection('tasks');return false">Open task board →</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Village metering vendor study</span>
-          </div>
-          <div class="project-desc">Pipeline tracker and layered benchmark for village-level meters, AMI stacks, and microgrid platforms — DLMS, STS, SunSpec, IEEE 2030.5 by stack layer. <a href="#" onclick="showSection('meter-study');return false">Open study →</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">Power Africa Conference — Workshop</span>
-          </div>
-          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a></div>
-        </div>
-      </div>
-    </div>
-    <div class="ai-panel" id="ai-tech">
-      <div class="ai-panel-label">AI editor — tech committee</div>
-      <textarea class="ai-input" id="input-tech" placeholder="e.g. 'Add a mesh networking initiative for remote meter telemetry'"></textarea>
-      <div class="ai-actions">
-        <button class="btn-generate" id="run-tech" onclick="runAI('tech')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Generate
-        </button>
-        <button class="btn-cancel" onclick="toggleAI('tech')">Cancel</button>
-        <div class="spinner" id="spin-tech"></div>
-        <button class="btn-apply" id="apply-tech" onclick="applyContent('tech')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Apply
-        </button>
-      </div>
-      <div class="ai-result" id="result-tech"></div>
     </div>
   </div>
 
@@ -1917,7 +1947,7 @@ code {
 </div>
 
 <script>
-const SECTIONS = ['home','mission','funded','tech','notes','tasks','power-africa','meter-study','tech-notes','standards','data','resources'];
+const SECTIONS = ['home','mission','funded','notes','tasks','committees','power-africa','meter-study','tech-notes','standards','data','resources'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
   'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }
@@ -2043,6 +2073,10 @@ function showNote(noteId, updateHash = true) {
 function initFromHash() {
   const raw = location.hash.replace(/^#/, '');
   if (!raw || raw === 'home') {
+    showSection('home', { skipHash: true });
+    return;
+  }
+  if (raw === 'tech') {
     showSection('home', { skipHash: true });
     return;
   }
