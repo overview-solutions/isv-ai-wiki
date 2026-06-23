@@ -108,6 +108,10 @@
     var inProg = config.statusLabels.in_progress || ['in-progress'];
     if (names.some(function (n) { return blocked.indexOf(n) >= 0; })) return 'blocked';
     if (names.some(function (n) { return inProg.indexOf(n) >= 0; })) return 'in_progress';
+    var rules = config.statusRules || {};
+    if (rules.inProgressWhenComments !== false && (issue.comments || 0) > 0) {
+      return 'in_progress';
+    }
     return 'not_started';
   }
 

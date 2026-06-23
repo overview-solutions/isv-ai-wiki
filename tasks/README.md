@@ -50,12 +50,19 @@ gh label create priority-low --color 656d76 --repo overview-solutions/isv-ai-wik
 
 ## Status rules (wiki display)
 
-| GitHub state | Labels | Shown as |
-|--------------|--------|----------|
-| Open | `blocked` | Blocked |
-| Open | `in-progress` | In progress |
-| Open | (neither) | Not started |
-| Closed | — | Done |
+GitHub Issues only have **open** and **closed** natively. The wiki infers richer status like this:
+
+| GitHub | Labels | Comments | Wiki shows |
+|--------|--------|----------|------------|
+| Closed | — | — | Done |
+| Open | `blocked` | — | Blocked |
+| Open | `in-progress` | — | In progress |
+| Open | — | ≥ 1 | In progress *(activity on the issue)* |
+| Open | — | 0 | Not started |
+
+Optional labels `in-progress` and `blocked` override the comment heuristic when present. Toggle comment-based detection in [`config.json`](config.json) → `statusRules.inProgressWhenComments`.
+
+**On GitHub:** close the issue when done; add a comment (or `in-progress` label) when work starts; add `blocked` if stuck.
 
 ## Config
 

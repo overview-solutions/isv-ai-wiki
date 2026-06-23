@@ -136,12 +136,17 @@ Label setup (one-time, for maintainers): see [`tasks/README.md`](tasks/README.md
 
 #### Status on the wiki
 
+GitHub only has **open** vs **closed**. The wiki maps that plus labels and comments:
+
 | On GitHub | Wiki shows |
 |-----------|------------|
-| Issue **open** | Not started |
-| Open + `in-progress` label | In progress |
-| Open + `blocked` label | Blocked |
 | Issue **closed** | Done |
+| Open + `blocked` label | Blocked |
+| Open + `in-progress` label | In progress |
+| Open + **at least one comment** | In progress |
+| Open, no comments, no status labels | Not started |
+
+Comment on an issue when work starts — no extra label required. Add `blocked` or `in-progress` labels if you want to override that logic.
 
 Meeting metadata and label names live in [`tasks/config.json`](tasks/config.json). Legacy pre-Issues catalog: [`tasks/tasks-archive.json`](tasks/tasks-archive.json).
 
