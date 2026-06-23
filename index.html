@@ -249,12 +249,40 @@ body {
   margin-top: 0.35rem;
 }
 
+.home-about-text {
+  flex: 1;
+  min-width: 0;
+}
+
 .home-lead {
   font-size: 17px;
   line-height: 1.6;
   color: var(--text);
+  margin: 0 0 0.85rem;
+}
+
+.home-about-text .home-lead:last-child {
+  margin-bottom: 0;
+}
+
+.home-about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
   margin-bottom: 1.5rem;
-  max-width: 52rem;
+}
+
+@media (min-width: 640px) {
+  .home-about {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.home-about .tech-committee-logo {
+  width: min(200px, 72vw);
+  flex-shrink: 0;
 }
 
 .home-blocks {
@@ -612,25 +640,14 @@ body {
 .wiki-body { font-size: 15px; line-height: 1.8; color: var(--text); }
 .wiki-body p { margin-bottom: 0.85rem; }
 
-.tech-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .tech-hero {
-    flex-direction: row;
-    align-items: flex-start;
-  }
+.tech-intro {
+  margin-bottom: 1.25rem;
+  max-width: 52rem;
 }
 
 .tech-committee-logo {
   margin: 0;
   flex-shrink: 0;
-  width: min(220px, 72vw);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -1108,11 +1125,6 @@ code {
   #main.notes-wide {
     width: 100%;
   }
-
-  .tech-hero {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 </style>
 </head>
@@ -1223,12 +1235,19 @@ code {
   <div class="section active" id="sec-home">
     <div class="section-header">
       <div>
-        <div class="section-title">IEEE Smart Village Knowledge Base</div>
+        <div class="section-title">IEEE Smart Village (ISV) Knowledge Base</div>
         <div class="section-sub">Working hub for the ISV Technology Committee — funded deployments, open standards, meeting notes, and conference workshops</div>
       </div>
     </div>
     <div id="content-home">
-      <p class="home-lead">This knowledge base is built primarily for <strong>Technology Committee volunteers</strong> at the moment — meeting notes, engineering references, and initiative tracking. It is not the public program site (<a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org</a>). Others may browse, but active work here centers on Tech Comm for now. To join another ISV group, sign up as a volunteer on the <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">main site</a>.</p>
+      <div class="home-about">
+        <figure class="tech-committee-logo">
+          <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
+        </figure>
+        <div class="home-about-text">
+          <p class="home-lead">This knowledge base is built primarily for <strong>Technology Committee volunteers</strong> at the moment — meeting notes, engineering references, and initiative tracking. ISV is made up of other committees as well — regional working groups, subcommittees, and more — which can be explored <a href="#" onclick="showSection('committees');return false">here</a>. The work of those groups is not reflected here; this site focuses on Tech Comm for now.</p>
+        </div>
+      </div>
 
       <div class="home-blocks">
         <div class="home-block">
@@ -1252,10 +1271,10 @@ code {
         <div class="home-block">
           <div class="home-block-title">How to engage</div>
           <ul>
-            <li>Join <strong>Tech Comm</strong> via the <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Linktree</a></li>
-            <li>Other ISV groups (RWGs, subcommittees): <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">sign up as a volunteer</a> on the main site</li>
-            <li>See <a href="#" onclick="showSection('committees');return false">Other ISV committees</a> for how the program is organized</li>
-            <li>Browse the <strong>funded projects map</strong>, <strong>meeting notes</strong>, and <strong>technical reports</strong></li>
+            <li><a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">Volunteer signup form</a></li>
+            <li>Browse the <a href="#" onclick="showSection('funded');return false">funded projects map</a>, <a href="#" onclick="showSection('notes');return false">meeting notes</a>, and <a href="#" onclick="showSection('tech-notes');return false">technical reports</a></li>
+            <li><a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">Join the Tech Comm WhatsApp group</a></li>
+            <li>More context and links: <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Tech Comm Linktree</a> — project map, SunBlazer docs, proposal forms, and related resources</li>
           </ul>
         </div>
       </div>
@@ -1273,13 +1292,8 @@ code {
         </button>
       </div>
       <div id="content-tech">
-        <div class="tech-hero">
-          <div class="wiki-body">
-            <p>Side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
-          </div>
-          <figure class="tech-committee-logo">
-            <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
-          </figure>
+        <div class="wiki-body tech-intro">
+          <p>Side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
         </div>
         <div class="project-grid">
         <div class="project-card">
@@ -1377,7 +1391,7 @@ code {
     </div>
     <div class="wiki-body" id="content-committees">
       <p class="committees-intro">IEEE Smart Village brings together volunteers across regions and disciplines to fund and support village-scale energy programs worldwide. Beyond the <a href="#" onclick="showSection('home');return false">Technology Committee</a>, the program is organized into <strong>regional working groups</strong> (RWGs) and <strong>functional subcommittees</strong> listed below.</p>
-      <p class="committees-intro">This wiki is maintained by Tech Comm volunteers for now — reference material, not a working hub for every group. RWGs are typically the first contact for applicants in their region; subcommittees handle project evaluation (PDC), finance, membership, marketing, and related program work. To engage with any of these groups, sign up as a volunteer on <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org</a>.</p>
+      <p class="committees-intro">This wiki is maintained by Tech Comm volunteers for now — reference material, not a working hub for every group. RWGs are typically the first contact for applicants in their region; subcommittees handle project evaluation (PDC), finance, membership, marketing, and related program work. To engage with any of these groups, sign up on the <a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">ISV volunteer page</a>.</p>
 
       <div class="committees-grid">
         <div class="committees-panel">
