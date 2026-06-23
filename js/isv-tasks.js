@@ -152,6 +152,19 @@
     };
   }
 
+  function isFileProtocol() {
+    return location.protocol === 'file:';
+  }
+
+  function renderFileProtocolHelp() {
+    return '<div class="tasks-api-error">' +
+      '<strong>Tasks need a web server — not <code>file://</code></strong>' +
+      '<p style="margin:0.5rem 0 0;font-size:13px;line-height:1.55">Opening <code>index.html</code> directly in the browser blocks <code>fetch</code> (CORS). The Tasks page cannot load <code>tasks/config.json</code> or the GitHub API that way.</p>' +
+      '<p style="margin:0.75rem 0 0;font-size:13px;line-height:1.55"><strong>Local:</strong> run <code>./preview.sh</code> in this repo, then open <a href="http://localhost:8765/index.html#tasks">http://localhost:8765/index.html#tasks</a>.</p>' +
+      '<p style="margin:0.5rem 0 0;font-size:13px;line-height:1.55"><strong>Deployed:</strong> <a href="https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks" target="_blank" rel="noopener">overview-solutions.github.io/isv-ai-wiki</a> · or manage issues on <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub ↗</a>.</p>' +
+    '</div>';
+  }
+
   function loadConfig() {
     return fetch(resolveUrl(CONFIG_URL))
       .then(function (r) {
@@ -284,7 +297,7 @@
     return '<div class="tasks-github-bar">' +
       '<a class="task-github-btn" href="' + escapeHtml(config.github.issuesUrl) + '" target="_blank" rel="noopener">All issues on GitHub ↗</a>' +
       '<a class="task-github-btn task-github-btn-primary" href="' + escapeHtml(newUrl) + '" target="_blank" rel="noopener">New follow-up ↗</a>' +
-      '<span class="tasks-github-hint">Create, comment, assign, and close on GitHub — this page is a live view.</span>' +
+      '<span class="tasks-github-hint">Click a task to open it on GitHub — create, comment, assign, and close there.</span>' +
     '</div>';
   }
 
@@ -299,75 +312,8 @@
     '</div>';
   }
 
-  function findTaskByNumber(data, num) {
-    return (data.tasks || []).find(function (t) { return t.number === num; }) || null;
-  }
-
-  function fetchIssueComments(config, number) {
-    var api = 'https://api.github.com/repos/' +
-      config.github.owner + '/' + config.github.repo + '/issues/' + number + '/comments';
-    return fetch(api, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .catch(function () { return []; });
-  }
-
-  function renderIssueDetail(data, task, options) {
-    var config = data.config;
-    var m = config.meetings && config.meetings[task.meeting];
-    var meetLabel = m ? m.title + ' · ' + m.date : (task.meeting || '—');
-    var meetHref = task.meeting ? meetingLink(task.meeting, config) : '';
-    var tags = taskTags(task);
-    var backHref = wikiTasksHref(buildListQuery(options));
-
-    return '<div class="task-detail">' +
-      '<p class="task-detail-back"><a href="' + escapeHtml(backHref) + '">← All tasks</a></p>' +
-      renderGithubToolbar(config, { meeting: task.meeting }) +
-      '<div class="task-detail-head">' +
-        '<div class="task-detail-id"><a href="' + escapeHtml(task.url) + '" target="_blank" rel="noopener">' + escapeHtml(task.id) + ' ↗</a></div>' +
-        '<h2 class="task-detail-title">' + escapeHtml(task.title) + '</h2>' +
-        '<div class="task-detail-meta">' +
-          '<span class="' + pillClass(task.status) + '">' + escapeHtml(statusLabel(config, task.status)) + '</span>' +
-          '<span>Assignee: <strong>' + escapeHtml(task.assignee) + '</strong></span>' +
-          (task.priority ? '<span>Priority: <strong>' + escapeHtml(task.priority) + '</strong></span>' : '') +
-          (meetHref ? '<span>Meeting: <a href="' + meetHref + '">' + escapeHtml(meetLabel) + '</a></span>' : '') +
-          '<span>Updated: <strong>' + escapeHtml(formatWhen(task.updatedAt)) + '</strong></span>' +
-        '</div>' +
-        (tags.length ? '<div class="task-detail-tags">' + renderTagsHtml(tags, { filterable: true }) + '</div>' : '') +
-        (task.notes ? '<div class="task-detail-notes wiki-body">' + escapeHtml(task.notes) + '</div>' : '') +
-      '</div>' +
-      '<div class="task-github-cta">' +
-        '<p>Updates and comments live on GitHub — comment there to append to this issue’s history.</p>' +
-        '<a class="task-github-btn task-github-btn-primary" href="' + escapeHtml(task.url) + '" target="_blank" rel="noopener">Open issue on GitHub ↗</a>' +
-      '</div>' +
-      '<div class="task-history-panel" id="task-comments-panel">' +
-        '<h3 class="task-panel-title">Comments</h3>' +
-        '<p class="task-panel-lead" style="color:var(--text-3)">Loading…</p>' +
-      '</div>' +
-    '</div>';
-  }
-
-  function renderCommentsPanel(comments) {
-    if (!comments.length) {
-      return '<h3 class="task-panel-title">Comments</h3><p class="task-history-empty">No comments yet.</p>';
-    }
-    var items = comments.map(function (c) {
-      return '<li class="task-history-item task-history-comment">' +
-        '<div class="task-history-meta">' +
-          '<span class="task-history-label">Comment</span>' +
-          '<time datetime="' + escapeHtml(c.created_at) + '">' + escapeHtml(formatWhen(c.created_at)) + '</time>' +
-        '</div>' +
-        '<div class="task-history-by">' + escapeHtml(c.user && c.user.login ? c.user.login : 'GitHub user') + '</div>' +
-        '<div class="task-history-comment">' + escapeHtml(c.body) + '</div>' +
-      '</li>';
-    }).join('');
-    return '<h3 class="task-panel-title">Comments</h3><ol class="task-history">' + items + '</ol>';
-  }
-
-  function bindIssueDetail(data, task) {
-    fetchIssueComments(data.config, task.number).then(function (comments) {
-      var panel = document.getElementById('task-comments-panel');
-      if (panel) panel.innerHTML = renderCommentsPanel(comments);
-    });
+  function redirectToGithubIssue(config, issueNum) {
+    window.location.href = githubIssueUrl(config, issueNum);
   }
 
   function buildListQuery(options) {
@@ -384,6 +330,13 @@
   function renderMeetingPanel(meetingId, containerId) {
     var el = document.getElementById(containerId || 'follow-ups-panel');
     if (!el) return;
+    if (isFileProtocol()) {
+      el.innerHTML =
+        '<div class="follow-ups-panel">' +
+          '<div class="follow-ups-foot">Follow-ups load from GitHub when served over HTTP. Run <code>./preview.sh</code> or use the <a href="https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks" target="_blank" rel="noopener">deployed wiki</a>.</div>' +
+        '</div>';
+      return;
+    }
     loadTasks().then(function (data) {
       var config = data.config;
       var tasks = tasksForMeeting(data, meetingId);
@@ -411,16 +364,14 @@
       });
       var list = sorted.map(function (t) {
         var tags = taskTags(t);
-        var issueHref = t.url;
-        var wikiHref = wikiTasksHref('issue=' + t.number);
         return '<li>' +
           '<span class="' + pillClass(t.status) + '">' + escapeHtml(statusLabel(config, t.status)) + '</span>' +
-          '<span class="task-title"><a class="task-open-link" href="' + escapeHtml(wikiHref) + '">' + escapeHtml(t.title) + '</a>' +
+          '<span class="task-title"><a class="task-open-link" href="' + escapeHtml(t.url) + '" target="_blank" rel="noopener">' + escapeHtml(t.title) + '</a>' +
             (tags.length ? '<span class="task-tags-inline">' + renderTagsHtml(tags) + '</span>' : '') +
           '</span>' +
           '<span class="task-meta">Assigned: <strong>' + escapeHtml(t.assignee) + '</strong>' +
           (t.comments ? ' · ' + t.comments + ' comment' + (t.comments === 1 ? '' : 's') : '') +
-          ' · <a href="' + escapeHtml(issueHref) + '" target="_blank" rel="noopener">GitHub ↗</a></span>' +
+          '</span>' +
           '</li>';
       }).join('');
 
@@ -454,6 +405,11 @@
     var root = document.getElementById('tasks-root');
     if (!root) return;
 
+    if (isFileProtocol()) {
+      root.innerHTML = renderFileProtocolHelp();
+      return;
+    }
+
     root.innerHTML = '<p style="color:var(--text-3);font-size:14px">Loading issues from GitHub…</p>';
 
     loadTasks().then(function (data) {
@@ -481,16 +437,7 @@
       var issueNum = parseInt(options.issue || hashOpts.issue || params.get('issue') || params.get('task') || '', 10);
 
       if (issueNum) {
-        var detailTask = findTaskByNumber(data, issueNum);
-        if (!detailTask) {
-          root.innerHTML = '<div class="tasks-empty">Issue <code>#' + escapeHtml(String(issueNum)) + '</code> not found in the loaded list. ' +
-            '<a href="' + escapeHtml(config.github.issuesUrl + '/' + issueNum) + '" target="_blank" rel="noopener">Open on GitHub ↗</a> · ' +
-            '<a href="' + escapeHtml(wikiTasksHref('')) + '">Back to list</a></div>';
-          return;
-        }
-        root.innerHTML = renderIssueDetail(data, detailTask, options);
-        bindIssueDetail(data, detailTask);
-        history.replaceState(null, '', '#tasks?issue=' + issueNum);
+        redirectToGithubIssue(config, issueNum);
         return;
       }
 
@@ -544,10 +491,9 @@
           ? '<a href="' + meetHref + '">' + escapeHtml(meetLabel) + '</a>'
           : escapeHtml(meetLabel);
         var tags = taskTags(t);
-        var wikiHref = wikiTasksHref('issue=' + t.number);
         return '<tr>' +
           '<td class="task-id"><a href="' + escapeHtml(t.url) + '" target="_blank" rel="noopener">' + escapeHtml(t.id) + '</a></td>' +
-          '<td><a class="task-open-link" href="' + escapeHtml(wikiHref) + '">' + escapeHtml(t.title) + '</a>' +
+          '<td><a class="task-open-link" href="' + escapeHtml(t.url) + '" target="_blank" rel="noopener">' + escapeHtml(t.title) + '</a>' +
             (t.notes ? '<div style="font-size:11px;color:var(--text-3);margin-top:2px">' + escapeHtml(truncate(t.notes, 120)) + '</div>' : '') +
           '</td>' +
           '<td class="task-tags-col">' + renderTagsHtml(tags, { filterable: true }) + '</td>' +
@@ -555,7 +501,6 @@
           '<td>' + escapeHtml(t.assignee) + '</td>' +
           '<td class="task-updated-col">' + escapeHtml(formatWhen(t.updatedAt)) + '</td>' +
           '<td>' + meetCell + '</td>' +
-          '<td class="task-actions-col"><a class="task-update-link" href="' + escapeHtml(t.url) + '" target="_blank" rel="noopener">On GitHub ↗</a></td>' +
           '</tr>';
       }).join('');
 
@@ -595,10 +540,10 @@
         '</div>' +
         '<div class="tasks-table-wrap">' +
           (filtered.length
-            ? '<table class="tasks-table"><thead><tr><th>Issue</th><th>Task</th><th>Tags</th><th>Status</th><th>Assignee</th><th>Updated</th><th>Meeting</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>'
+            ? '<table class="tasks-table"><thead><tr><th>Issue</th><th>Task</th><th>Tags</th><th>Status</th><th>Assignee</th><th>Updated</th><th>Meeting</th></tr></thead><tbody>' + rows + '</tbody></table>'
             : '<div class="tasks-empty">No issues match the current filters. <a href="' + escapeHtml(githubNewIssueUrl(config)) + '" target="_blank" rel="noopener">Create one on GitHub ↗</a></div>') +
         '</div>' +
-        '<p class="tasks-source-note">Tasks are <a href="' + escapeHtml(config.github.issuesUrl) + '" target="_blank" rel="noopener">GitHub Issues</a> on <code>overview-solutions/isv-ai-wiki</code>. Comment, assign, label, and close there — this page refreshes on load.</p>';
+        '<p class="tasks-source-note">Tasks are <a href="' + escapeHtml(config.github.issuesUrl) + '" target="_blank" rel="noopener">GitHub Issues</a> on <code>overview-solutions/isv-ai-wiki</code>. Click any row to open the issue on GitHub.</p>';
 
       function applyFilters() {
         var m = document.getElementById('tasks-filter-meeting');

@@ -80,7 +80,6 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#committees` | Other ISV committees — RWGs and subcommittees |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
-| `#tasks?issue=42` | Issue detail (comments from GitHub API) |
 | `#meter-study` | Meter benchmark iframe |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#power-africa/{note-id}` | Workshop planning (default: `power-africa-2026-workshop-planning`) |

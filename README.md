@@ -18,6 +18,8 @@ cd isv-ai-wiki
 
 Open [http://localhost:8765/index.html](http://localhost:8765/index.html) — use the sidebar to browse.
 
+**Do not** double-click `index.html` in Finder — `file://` breaks the Tasks page (and other `fetch` calls). Always use `./preview.sh` or the [deployed site](https://overview-solutions.github.io/isv-ai-wiki/).
+
 | Section | What it is |
 |---------|------------|
 | **Tasks** | Meeting follow-ups as [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) — live board in the wiki |
