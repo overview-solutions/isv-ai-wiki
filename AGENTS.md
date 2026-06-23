@@ -78,8 +78,9 @@ Registered sections (`SECTIONS` in `index.html`):
 |------|----------|
 | `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
 | `#committees` | Other ISV committees — RWGs and subcommittees |
-| `#tasks` | All meeting follow-ups (filterable) |
-| `#tasks?meeting=metering-2026-05-28` | Tasks for one meeting |
+| `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
+| `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
+| `#tasks?issue=42` | Issue detail (comments from GitHub API) |
 | `#meter-study` | Meter benchmark iframe |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#power-africa/{note-id}` | Workshop planning (default: `power-africa-2026-workshop-planning`) |
@@ -227,7 +228,9 @@ When editing this repo:
 
 | Task | File(s) |
 |------|---------|
-| Update follow-up status / assignee | `tasks/tasks.json` |
+| Create / update follow-up | [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) — use **Follow-up task** template; add meeting label |
+| Meeting metadata for tasks UI | `tasks/config.json` |
+| Legacy task catalog (archive) | `tasks/tasks-archive.json` |
 | Add vendor row / contact | `meter-vendor-study.html` |
 | New Tech Comm note | `tech-comm-YYYY-MM-DD-topic.html`, `index.html` → `MEETING_NOTES` |
 | Workshop / event plan | `power-africa-*.html`, `NOTE_GROUPS` / `MEETING_NOTES` |

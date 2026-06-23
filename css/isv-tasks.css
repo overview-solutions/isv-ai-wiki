@@ -697,4 +697,94 @@ a.task-tag:hover {
   .task-update-form {
     grid-template-columns: 1fr;
   }
+
+  .tasks-github-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.tasks-github-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-2);
+}
+
+.tasks-github-hint {
+  flex: 1 1 200px;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.45;
+}
+
+.task-github-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  text-decoration: none;
+  background: var(--bg);
+}
+
+.task-github-btn:hover {
+  background: var(--bg-3);
+  color: var(--text);
+}
+
+.task-github-btn-primary {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.task-github-btn-primary:hover {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+.tasks-api-error {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--red);
+  background: var(--red-50);
+  font-size: 13px;
+  color: var(--text);
+}
+
+.task-github-cta {
+  margin: 1.25rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-2);
+}
+
+.task-github-cta p {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0 0 0.75rem;
+}
+
+.task-detail-notes {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+}
+
+.task-updated-col {
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
 }

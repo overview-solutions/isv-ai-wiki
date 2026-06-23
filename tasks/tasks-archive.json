@@ -1,0 +1,141 @@
+{
+  "statusLegend": {
+    "not_started": { "label": "Not started", "short": "Open", "order": 1 },
+    "in_progress": { "label": "In progress", "short": "Active", "order": 2 },
+    "blocked": { "label": "Blocked", "short": "Blocked", "order": 3 },
+    "done": { "label": "Done", "short": "Done", "order": 4 }
+  },
+  "meetings": {
+    "metering-2026-05-28": {
+      "title": "Metering & comms topology",
+      "date": "28 May 2026",
+      "group": "tech-comm",
+      "hash": "notes/metering-2026-05-28",
+      "standalone": "tech-comm-2026-05-28-metering-topology.html"
+    },
+    "power-africa-2026-workshop-planning": {
+      "title": "Power Africa Workshop planning",
+      "date": "Sep 2026",
+      "group": "power-africa",
+      "hash": "power-africa/power-africa-2026-workshop-planning",
+      "standalone": "power-africa-2026-workshop-planning.html"
+    }
+  },
+  "tasks": [
+    {
+      "id": "tc-001",
+      "title": "Build per-village network coverage / LOS topology map",
+      "status": "not_started",
+      "assignee": "Tech Comm",
+      "meeting": "metering-2026-05-28",
+      "priority": "high"
+    },
+    {
+      "id": "tc-002",
+      "title": "Define CIU relay/proxy architecture (phone or repeater)",
+      "status": "not_started",
+      "assignee": "Tech Comm",
+      "meeting": "metering-2026-05-28",
+      "priority": "high"
+    },
+    {
+      "id": "tc-003",
+      "title": "Certify mobile app cannot alter meter readings",
+      "status": "not_started",
+      "assignee": "Unassigned",
+      "meeting": "metering-2026-05-28",
+      "priority": "medium"
+    },
+    {
+      "id": "tc-004",
+      "title": "Harmonize STS + OEM + DLMS keys across 64% legacy hardware",
+      "status": "not_started",
+      "assignee": "Tech Comm",
+      "meeting": "metering-2026-05-28",
+      "priority": "high"
+    },
+    {
+      "id": "tc-005",
+      "title": "MacFi layer spec — DLMS through proprietary driver",
+      "status": "not_started",
+      "assignee": "Unassigned",
+      "meeting": "metering-2026-05-28",
+      "priority": "medium"
+    },
+    {
+      "id": "tc-006",
+      "title": "Investigate when two meters differ by > 5% (field discrepancy protocol)",
+      "status": "not_started",
+      "assignee": "Rahul Bhargava",
+      "meeting": "metering-2026-05-28",
+      "priority": "medium",
+      "notes": "Raised on call — India IPP context"
+    },
+    {
+      "id": "pa-001",
+      "title": "Finalize workshop budget (kits, duties, shipping)",
+      "status": "in_progress",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "high",
+      "notes": "Target under $1,000 total"
+    },
+    {
+      "id": "pa-002",
+      "title": "Decide room layout and table/power requirements",
+      "status": "not_started",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "high"
+    },
+    {
+      "id": "pa-003",
+      "title": "Prep workshop materials and kit contents list",
+      "status": "not_started",
+      "assignee": "Workshop team",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "high"
+    },
+    {
+      "id": "pa-004",
+      "title": "Draft one-paragraph workshop session description",
+      "status": "not_started",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "medium"
+    },
+    {
+      "id": "pa-005",
+      "title": "Contact Albert (Nairobi) for shipping address",
+      "status": "not_started",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "high"
+    },
+    {
+      "id": "pa-006",
+      "title": "Place Sandra / 10 Power video (5–10 min) in agenda",
+      "status": "not_started",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "medium",
+      "notes": "Tuesday evening slot candidate"
+    },
+    {
+      "id": "pa-007",
+      "title": "Confirm non-ISV workshop participants have 1-day conference registration",
+      "status": "not_started",
+      "assignee": "Workshop team",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "medium"
+    },
+    {
+      "id": "pa-008",
+      "title": "Coordinate Warren Scott (SteamaCo) 30 min pre-session — Monday AM",
+      "status": "in_progress",
+      "assignee": "Glenn Algie & Mike Wilson",
+      "meeting": "power-africa-2026-workshop-planning",
+      "priority": "high"
+    }
+  ]
+}

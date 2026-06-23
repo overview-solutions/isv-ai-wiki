@@ -1,0 +1,41 @@
+{
+  "github": {
+    "owner": "overview-solutions",
+    "repo": "isv-ai-wiki",
+    "issuesUrl": "https://github.com/overview-solutions/isv-ai-wiki/issues",
+    "newIssueUrl": "https://github.com/overview-solutions/isv-ai-wiki/issues/new?template=follow-up",
+    "chooseTemplateUrl": "https://github.com/overview-solutions/isv-ai-wiki/issues/new/choose"
+  },
+  "labelPrefix": {
+    "meeting": "meeting-",
+    "priority": "priority-"
+  },
+  "statusLabels": {
+    "in_progress": ["in-progress"],
+    "blocked": ["blocked"]
+  },
+  "statusLegend": {
+    "not_started": { "label": "Not started", "short": "Open", "order": 1 },
+    "in_progress": { "label": "In progress", "short": "Active", "order": 2 },
+    "blocked": { "label": "Blocked", "short": "Blocked", "order": 3 },
+    "done": { "label": "Done", "short": "Done", "order": 4 }
+  },
+  "meetings": {
+    "metering-2026-05-28": {
+      "title": "Metering & comms topology",
+      "date": "28 May 2026",
+      "group": "tech-comm",
+      "hash": "notes/metering-2026-05-28",
+      "standalone": "tech-comm-2026-05-28-metering-topology.html",
+      "label": "meeting-metering-2026-05-28"
+    },
+    "power-africa-2026-workshop-planning": {
+      "title": "Power Africa Workshop planning",
+      "date": "Sep 2026",
+      "group": "power-africa",
+      "hash": "power-africa/power-africa-2026-workshop-planning",
+      "standalone": "power-africa-2026-workshop-planning.html",
+      "label": "meeting-power-africa-2026-workshop-planning"
+    }
+  }
+}

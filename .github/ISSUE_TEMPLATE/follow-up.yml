@@ -1,0 +1,45 @@
+name: Follow-up task
+description: Action item from a Tech Comm call or workshop planning session
+title: ""
+labels:
+  - task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Meeting follow-up** for the [ISV Knowledge Base](https://overview-solutions.github.io/isv-ai-wiki/). Add a **meeting** label (`meeting-metering-2026-05-28` or `meeting-power-africa-2026-workshop-planning`) on the right sidebar after creating the issue.
+  - type: textarea
+    id: description
+    attributes:
+      label: What needs to be done?
+      description: One clear outcome — this becomes the issue title if you leave the title field blank above.
+      placeholder: e.g. Build per-village network coverage / LOS topology map
+    validations:
+      required: true
+  - type: input
+    id: assignee
+    attributes:
+      label: Assignee
+      description: GitHub @username if they are on the repo, or name/team in this field
+      placeholder: Tech Comm
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - high
+        - medium
+        - low
+  - type: textarea
+    id: context
+    attributes:
+      label: Context from the meeting
+      description: Links, blockers, deadlines (optional)
+      placeholder: Raised on 28 May Tech Comm call — India IPP context
+  - type: checkboxes
+    id: status
+    attributes:
+      label: Initial status
+      options:
+        - label: Mark as in progress (add `in-progress` label after creating)
+        - label: Mark as blocked (add `blocked` label after creating)

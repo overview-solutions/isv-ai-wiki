@@ -20,12 +20,15 @@ Open [http://localhost:8765/index.html](http://localhost:8765/index.html) — us
 
 | Section | What it is |
 |---------|------------|
+| **Tasks** | Meeting follow-ups as [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) — live board in the wiki |
 | **Meeting notes** | Internal Tech Comm call notes (tables, action items, embedded diagrams) |
 | **Technical reports** | Dev Labs + ISV reports (`catalog.json`) — summaries here, full docs linked |
-| **Everything else** | Mission, funded projects map, standards, team, resources |
+| **Everything else** | Mission, funded projects map, standards, resources, committees |
 
 Direct links (live site):
 
+- [Tasks board (wiki)](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) — filter by meeting, status, assignee
+- [GitHub Issues (source of truth)](https://github.com/overview-solutions/isv-ai-wiki/issues) — create, comment, assign, close
 - [Metering topology meeting note](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)
 - [Circles of Power · ISV-HCK-001](https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-reports/isv-hck-2025-circles-of-power)
 - [Technical reports](https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-reports)
@@ -105,6 +108,41 @@ On the meeting note page, above the diagram:
 
 Text-only tweaks: edit the `.svg` in Cursor (see `technical-notes/diagrams/EDITING.md`).
 
+### Follow-ups & tasks (GitHub Issues)
+
+Action items from meetings are **not** stored in `tasks.json` anymore. They are **[GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues)** on this repo (`overview-solutions/isv-ai-wiki`).
+
+#### Where to see progress
+
+| View | URL | Best for |
+|------|-----|----------|
+| **Wiki task board** | [index.html#tasks](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) | Summary stats, filters by meeting/status/assignee, links into each issue |
+| **Meeting note panel** | Top of each meeting note page (e.g. [#notes/metering-2026-05-28](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)) | Follow-ups for that session only |
+| **GitHub Issues** | [github.com/…/isv-ai-wiki/issues](https://github.com/overview-solutions/isv-ai-wiki/issues) | Full history — comments, assignees, labels, close/reopen |
+| **GitHub Projects** *(optional)* | Repo → **Projects** tab | Kanban across issues if you add a project board |
+
+The wiki reads issues from the public GitHub API on page load. **Create and update on GitHub** — comment for updates, close when done. The wiki reflects changes the next time you open or refresh the Tasks page.
+
+#### Create a follow-up
+
+1. [New issue → Follow-up task template](https://github.com/overview-solutions/isv-ai-wiki/issues/new?template=follow-up)
+2. Describe the work, assignee, and context
+3. Add a **meeting** label on the issue sidebar, e.g. `meeting-metering-2026-05-28` or `meeting-power-africa-2026-workshop-planning`
+4. Optional: `in-progress`, `blocked`, `priority-high`, etc.
+
+Label setup (one-time, for maintainers): see [`tasks/README.md`](tasks/README.md).
+
+#### Status on the wiki
+
+| On GitHub | Wiki shows |
+|-----------|------------|
+| Issue **open** | Not started |
+| Open + `in-progress` label | In progress |
+| Open + `blocked` label | Blocked |
+| Issue **closed** | Done |
+
+Meeting metadata and label names live in [`tasks/config.json`](tasks/config.json). Legacy pre-Issues catalog: [`tasks/tasks-archive.json`](tasks/tasks-archive.json).
+
 ---
 
 ## Repo layout
@@ -112,10 +150,12 @@ Text-only tweaks: edit the `.svg` in Cursor (see `technical-notes/diagrams/EDITI
 ```
 isv-ai-wiki/
 ├── tasks/
-│   └── tasks.json                    # Follow-ups: status, assignee, meeting link
-├── tasks.html                        # Full task board (standalone)
+│   ├── config.json                   # GitHub repo + meeting labels for Issues UI
+│   ├── tasks-archive.json            # Legacy catalog (pre-Issues migration)
+│   └── README.md                     # Labels setup + workflow
+├── tasks.html                        # Redirects to index.html#tasks
 ├── css/isv-tasks.css                 # Follow-up panels + task table styles
-├── js/isv-tasks.js                   # Loads tasks.json, renders panels
+├── js/isv-tasks.js                   # Loads GitHub Issues API + config
 ├── js/isv-theme.js                   # Theme toggle (default light, localStorage)
 ├── index.html                          # Wiki shell + navigation
 ├── preview.sh                          # Local server (port 8765)
@@ -154,6 +194,14 @@ First-time setup: repo **Settings → Pages → Source: GitHub Actions**.
 
 ## Contributing
 
-Pull requests welcome. For a new meeting note or catalog entry, a small focused PR is enough — no issue required.
+Pull requests welcome for wiki content (meeting notes, catalog entries, etc.).
+
+**Meeting follow-ups** go through **GitHub Issues**, not PRs to a task file:
+
+- [Open a new follow-up](https://github.com/overview-solutions/isv-ai-wiki/issues/new?template=follow-up)
+- [View all issues](https://github.com/overview-solutions/isv-ai-wiki/issues)
+- [Wiki task board](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) for a filtered summary
+
+You need a GitHub account and (for creating issues on a private repo) collaborator access. Sign up as an ISV volunteer at [smartvillage.ieee.org/volunteer](https://smartvillage.ieee.org/volunteer/) if you are not on the team yet.
 
 MIT · IEEE Smart Village · Overview Solutions LLC
