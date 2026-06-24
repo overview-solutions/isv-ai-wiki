@@ -58,12 +58,16 @@ Reports are **indexed** in the wiki, **hosted** on Cottonspace, and **maintained
 - Live library: [sattal.cottonspace.com/reports](https://sattal.cottonspace.com/reports)
 - Source repo: [github.com/rahulbhargavain/openami-smart-village](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports)
 
-Reports use IDs like **EMG-TRD-005** = *Emerging markets · Technical reference · #005*. See the collapsible key on the Technical reports page. Cottonspace entries sync via:
+Reports use IDs like **EMG-TRD-005** = *Emerging markets · Technical reference · #005*. See the collapsible key on the Technical reports page.
+
+The wiki does **not** query Cottonspace at runtime — it loads `technical-notes/catalog.json` (no row limit). After new reports appear on [Cottonspace](https://sattal.cottonspace.com/reports), refresh the snapshot:
 
 ```bash
 cd isv-ai-wiki
 python3 technical-notes/sync-catalog.py
 ```
+
+The sync script parses `openami-smart-village/reports/index.html`. If Cottonspace changes its card HTML and sync finds zero reports, update `technical-notes/sync-catalog.py` and re-run.
 
 Wiki-only entries (e.g. **ISV-HCK-001**) have `"syncProtected": true` and are preserved by the sync script.
 

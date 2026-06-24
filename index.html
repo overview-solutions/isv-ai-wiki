@@ -1910,7 +1910,8 @@ code {
         </ul>
       </div>
       <div class="wiki-body">
-        <p>Indexed summaries here; full documents on Cottonspace or in this wiki. Dev Labs reports sync from <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a>. Refresh Cottonspace entries with <code>python3 technical-notes/sync-catalog.py</code>.</p>
+        <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a> or in this wiki. The list below comes from <code>technical-notes/catalog.json</code> — a snapshot synced from the <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a> reports index (not fetched live from Cottonspace). Re-run <code>python3 technical-notes/sync-catalog.py</code> after new reports are published, then deploy. There is no query limit; if a tab looks incomplete, the catalog is probably out of date.</p>
+        <p id="tech-notes-catalog-meta" class="wiki-body" style="margin-top:0.5rem;font-size:13px;color:var(--text-2)"></p>
       </div>
       <details class="tech-code-legend" id="tech-code-legend">
         <summary>Report ID key — what EMG-REG-008 means</summary>
@@ -2125,6 +2126,7 @@ async function loadTechnicalNotes() {
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
+    renderTechNotesCatalogMeta();
     if (activeTechNoteId) renderTechnicalNoteDetail(activeTechNoteId);
     else renderTechnicalNotesEmptyDetail();
     return;
@@ -2142,6 +2144,7 @@ async function loadTechnicalNotes() {
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
+    renderTechNotesCatalogMeta();
     if (!activeTechNoteId && techNotesCatalog.length) {
       showTechNote(techNotesCatalog[0].id, false);
     } else if (activeTechNoteId) {
@@ -2223,6 +2226,17 @@ function setTechFilter(cat) {
   activeTechFilter = cat;
   renderTechnicalNotesFilters();
   renderTechnicalNotesList();
+  renderTechNotesCatalogMeta();
+}
+
+function renderTechNotesCatalogMeta() {
+  const el = document.getElementById('tech-notes-catalog-meta');
+  if (!el || !techNotesCatalog.length) return;
+  const visible = filteredTechNotes().length;
+  const total = techNotesCatalog.length;
+  const fromCottonspace = techNotesCatalog.filter(i => i.sourceCatalog === 'cottonspace-dev-labs').length;
+  const filterNote = activeTechFilter === 'all' ? '' : ` (${activeTechFilter})`;
+  el.textContent = `${visible} of ${total} indexed reports${filterNote} · ${fromCottonspace} synced from Cottonspace · refresh with technical-notes/sync-catalog.py`;
 }
 
 function filteredTechNotes() {

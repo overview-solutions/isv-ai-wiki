@@ -1,25 +1,4 @@
 {
-  "reportCodeGuide": {
-    "summary": "Report IDs follow {Series}-{Type}-{Number}. The series names the program area; the type names the document kind; the number is a serial within that series-type.",
-    "series": {
-      "EMG": "Emerging markets & mini-grids",
-      "TXE": "Transport & e-mobility",
-      "ISV": "ISV Technology Committee (this wiki)"
-    },
-    "types": {
-      "REG": "Regulatory",
-      "TRD": "Technical reference",
-      "PITCH": "Funding or investment pitch",
-      "NEX": "Strategic synthesis",
-      "CR": "Engineering critique",
-      "HCK": "Hackathon / field writeup",
-      "LTR": "Industry letter"
-    },
-    "special": {
-      "EMG-SSA-V001": "Emerging markets · SSA vehicle assessment · #001",
-      "SSA-STS-LEGACY-2026-001": "SSA advocacy · STS legacy metering · 2026-001"
-    }
-  },
   "catalogs": [
     {
       "id": "cottonspace-dev-labs",
@@ -39,6 +18,23 @@
   ],
   "items": [
     {
+      "id": "emg-trd-011",
+      "reportCode": "EMG-TRD-011",
+      "title": "Open-Source DCU Edge Architecture & Wi-SUN Mesh Stack for Africa",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/open-source-dcu-mesh-hes.html",
+      "sourceFile": "reports/open-source-dcu-mesh-hes.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/open-source-dcu-mesh-hes.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "An industrial audit of ARM hardware platforms (Allwinner, BeagleBone, CM4), smart meter radio transceivers, Linux driver strategies (G3-PLC, wsbrd), and open HES architectures (EMQX, Gurux DLMS, ThingsBoard, MicroPowerManager) replacing proprietary EAC/DINA middleware.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
       "id": "emg-reg-008-openami-nigeria",
       "reportCode": "EMG-REG-008",
       "title": "OpenAMI Nigeria Strategic Expansion: Technical Reference Design & NERC 2023 Rules",
@@ -57,7 +53,7 @@
       "sourceFile": "reports/openami-strategic-report.html",
       "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/openami-strategic-report.html",
       "sourceCatalog": "cottonspace-dev-labs",
-      "summary": "Authoritative regulatory strategy and technical reference design blueprint aligning the OpenAMI smart metering stack with the newly-active 2023 NERC Nigeria Mini-Grid regulations. Details isolated/interconnected permit systems, direct community agreements, and MYTO loss cap compliance mapping.",
+      "summary": "An authoritative regulatory strategy and technical reference design blueprint aligning the OpenAMI smart metering stack with the newly-active 2023 NERC Nigeria Mini-Grid regulations. Details isolated/interconnected permit systems, direct community agreements, and MYTO loss cap compliance mapping.",
       "isvRelevance": "Direct ISV/OpenAMI expansion playbook for Nigeria and SSA regulatory contexts tied to IEEE Smart Village mini-grid programs.",
       "relatedMeetingNotes": [
         "metering-2026-05-28"
@@ -82,7 +78,7 @@
       "sourceFile": "reports/openami-funding-pitch.html",
       "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/openami-funding-pitch.html",
       "sourceCatalog": "cottonspace-dev-labs",
-      "summary": "Comprehensive fundraising prospectus applying H.R. Moody's 22 Laws of Fund-Raising to the OpenAMI smart-metering and ISV off-grid mini-grid expansion. Details target donor mapping, a 4-stage execution roadmap, value propositions, and emotional narrative positioning.",
+      "summary": "A comprehensive fundraising prospectus applying H.R. Moody's 22 Laws of Fund-Raising to the OpenAMI smart-metering and ISV off-grid mini-grid expansion. Details target donor mapping, a 4-stage execution roadmap, value propositions, and emotional narrative positioning.",
       "isvRelevance": "Capital-raising framework for ISV portfolio growth and OpenAMI scale-out across Africa.",
       "relatedMeetingNotes": []
     },
@@ -92,8 +88,8 @@
       "title": "UN ECE Interoperability Guidelines: Open-Source & Hybrid Models in Mini-Grid Context",
       "publisher": "Cottonspace Dev Labs",
       "published": "May 2026",
-      "type": "policy-framework",
-      "category": "Policy Framework",
+      "type": "regulatory-strategy",
+      "category": "Regulatory Strategy",
       "tags": [
         "UNECE",
         "interoperability",
@@ -105,7 +101,7 @@
       "sourceFile": "reports/unece-interoperability-guidelines.html",
       "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/unece-interoperability-guidelines.html",
       "sourceCatalog": "cottonspace-dev-labs",
-      "summary": "Comprehensive synthesis of the 2025 UNECE guidelines on energy system digitalization. Analyzes GridWise interoperability dimensions, SGAM layers, open-source PAYG tokens, hybrid software models, and edge registries.",
+      "summary": "A comprehensive policy synthesis of the 2025 UNECE guidelines on energy system digitalization. Analyzes GridWise interoperability dimensions, SGAM layers, open-source PAYG tokens, hybrid software models, and edge registries.",
       "isvRelevance": "Policy anchor for ISV interoperability work across metering, PAYG, and hybrid control systems.",
       "relatedMeetingNotes": []
     },
@@ -128,7 +124,7 @@
       "sourceFile": "reports/openami-smart-metering-spec.html",
       "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/openami-smart-metering-spec.html",
       "sourceCatalog": "cottonspace-dev-labs",
-      "summary": "Detailed technical reference design for OpenAMI, synthesizing the IHM-4000 hardware architecture, Wi-SUN mesh topology, 7 core use cases, 7-layer OSI & 5-layer SGAM mappings, and Earth Leakage life-safety limits.",
+      "summary": "A detailed technical reference design for OpenAMI, synthesizing the IHM-4000 hardware architecture, Wi-SUN mesh topology, 7 core use cases, 7-layer OSI & 5-layer SGAM mappings, and Earth Leakage life-safety limits.",
       "isvRelevance": "Core OpenAMI engineering spec for Tech Comm metering topology, NAN redundancy, and field deployment standards.",
       "relatedMeetingNotes": [
         "metering-2026-05-28"
@@ -153,7 +149,7 @@
       "sourceFile": "reports/cse-minigrid-biofuels-synthesis.html",
       "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/cse-minigrid-biofuels-synthesis.html",
       "sourceCatalog": "cottonspace-dev-labs",
-      "summary": "Comprehensive policy synthesis of the CSE 2026 Bioenergy Report and Mini-Grid Monetisation Framework. Explores the CapEx-OpEx imbalance, JREDA beneficiary data, and the circular solar-biomass-eATV nexus.",
+      "summary": "A comprehensive policy synthesis of the CSE 2026 Bioenergy Report and Mini-Grid Monetisation Framework. Explores the CapEx-OpEx imbalance, JREDA beneficiary data, and the circular solar-biomass-eATV nexus.",
       "isvRelevance": "Connects ISV energy access programs to broader mini-grid finance and productive-use mobility.",
       "relatedMeetingNotes": []
     },
@@ -163,8 +159,8 @@
       "title": "Prepaid Metering & NERC Regulations: Auditing Equity & Grid Arrival in SSA",
       "publisher": "Cottonspace Dev Labs",
       "published": "May 2026",
-      "type": "regulatory-analysis",
-      "category": "Regulatory Analysis",
+      "type": "regulatory-strategy",
+      "category": "Regulatory Strategy",
       "tags": [
         "NERC",
         "AFUR",
@@ -182,6 +178,125 @@
       "relatedMeetingNotes": [
         "metering-2026-05-28"
       ]
+    },
+    {
+      "id": "emg-tech-015",
+      "reportCode": "EMG-TECH-015",
+      "title": "EPRI Smart Grid Open-Source Stacks: Maturity Audit & Hardening Specification",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "engineering-critique",
+      "category": "Engineering Critique",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/epri-dev-software-audit.html",
+      "sourceFile": "reports/epri-dev-software-audit.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/epri-dev-software-audit.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "An extensive code and protocol audit of epri-dev/DLMS-COSEM, dlms-access-point, and OpenDER libraries. Focuses on missing interface classes (Profiles, Disconnects), high-level security suites, optical eye optical handshakes for Calin/Hexing meters, and physical DCU access point requirements including local WAL cache, Wi-SUN FAN RF drivers, watchdogs, and A/B partition OTA updates.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-tech-018",
+      "reportCode": "EMG-TECH-018",
+      "title": "Filtered AI Architecture & OPAI Use-Case Matrix",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/minigrid-opai-software-audit.html",
+      "sourceFile": "reports/minigrid-opai-software-audit.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/minigrid-opai-software-audit.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "An extensive code and protocol audit of the EPRI / LF Energy Open Power AI Consortium (OPAI) research repository. Isolates critical assets and synthesizes target multi-model architectures (SolarNet, Quartz, PowerNet) for rural grid deployment.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-tech-017",
+      "reportCode": "EMG-TECH-017",
+      "title": "Power Quality (PQ) Management in Decentralized Mini-Grids",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/minigrid-power-quality.html",
+      "sourceFile": "reports/minigrid-power-quality.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/minigrid-power-quality.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "A deep technical specification for managing phase unbalance and harmonic distortion. Integrates software-driven Python-OpenDSS phase balancing routines, edge-level active asymmetric inverter control loops (3P4W) driven by Fledge/OpenFMB, Delta-Wye transformer triplen traps, and EPRI Grid-IQ OS-HEM resonance spectrogram auditing.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-tech-016",
+      "reportCode": "EMG-TECH-016",
+      "title": "Mini-Grid Dynamic Capacity & AI-Driven Optimization Specification",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/minigrid-dynamic-capacity-ai.html",
+      "sourceFile": "reports/minigrid-dynamic-capacity-ai.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/minigrid-dynamic-capacity-ai.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "An engineering specification for rural solar-plus-storage mini-grids. Evaluates conductor oversizing and software-driven AAR forecasts for Dynamic Thermal Line capacities. Details Volt/VAR feeder optimization along with advanced AI operations: AIWP lead-acid battery protection and co-located edge AI inference compute nodes acting as productive solar-absorption loads.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-tech-014",
+      "reportCode": "EMG-TECH-014",
+      "title": "Combined Cooling & Heating Heat Pump (CCHHP) for Rural Post-Harvest Agro-Processing",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/cchhp-milk-chilling-drying.html",
+      "sourceFile": "reports/cchhp-milk-chilling-drying.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/cchhp-milk-chilling-drying.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "An engineering specification of CCHHP systems utilizing Copeland Scroll technology and water-ice PCM thermal batteries for decentralized 1kL (2x500L) dairy cold chains and crop dehydration. Evaluates Promethean, Inficold, Tessol, and InspiraFarms, with a full 10-year TCO model and rural grid compatibility analysis.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-tech-013",
+      "reportCode": "EMG-TECH-013",
+      "title": "SSA Mini-Grid Downtime: Cloud Lock-In & Edge Topology",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "engineering-critique",
+      "category": "Engineering Critique",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/ssa-minigrid-downtime.html",
+      "sourceFile": "reports/ssa-minigrid-downtime.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/ssa-minigrid-downtime.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "Root cause anatomy of 4-day+ mini-grid outages across Sub-Saharan Africa — SMS infrastructure vulnerabilities, iron-roof RF attenuation, cloud-synchronous AMI brittleness, STS key access mechanisms, and how EPRI's open-source wisund + OpenDER + OpenDSS stack eliminates every single point of failure.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "emg-crit-012",
+      "reportCode": "EMG-CRIT-012",
+      "title": "MicroPowerManager: Architectural & Regulatory Critique",
+      "publisher": "Cottonspace Dev Labs",
+      "published": "May 2026",
+      "type": "engineering-critique",
+      "category": "Engineering Critique",
+      "tags": [],
+      "url": "https://sattal.cottonspace.com/reports/micropowermanager-critique.html",
+      "sourceFile": "reports/micropowermanager-critique.html",
+      "githubUrl": "https://github.com/rahulbhargavain/openami-smart-village/blob/main/reports/micropowermanager-critique.html",
+      "sourceCatalog": "cottonspace-dev-labs",
+      "summary": "A rigorous technical audit of MPM's systemic deficiencies: perimeter-only security vs. cryptographic audit chains, NERC compliance exposure, split-brain STS token generation risks, mobile money payment chain failures, and missing power quality telemetry — with 8 specific open-source integration recommendations.",
+      "isvRelevance": "",
+      "relatedMeetingNotes": []
     },
     {
       "id": "txe-cr-001-trikexplor",
@@ -302,5 +417,28 @@
         "metering-2026-05-28"
       ]
     }
-  ]
+  ],
+  "reportCodeGuide": {
+    "summary": "Report IDs follow {Series}-{Type}-{Number}. The series names the program area; the type names the document kind; the number is a serial within that series-type.",
+    "series": {
+      "EMG": "Emerging markets & mini-grids",
+      "TXE": "Transport & e-mobility",
+      "ISV": "ISV Technology Committee (this wiki)"
+    },
+    "types": {
+      "REG": "Regulatory",
+      "TRD": "Technical reference",
+      "PITCH": "Funding or investment pitch",
+      "NEX": "Strategic synthesis",
+      "CR": "Engineering critique",
+      "HCK": "Hackathon / field writeup",
+      "LTR": "Industry letter",
+      "TECH": "Technical reference / critique",
+      "CRIT": "Engineering critique"
+    },
+    "special": {
+      "EMG-SSA-V001": "Emerging markets · SSA vehicle assessment · #001",
+      "SSA-STS-LEGACY-2026-001": "SSA advocacy · STS legacy metering · 2026-001"
+    }
+  }
 }

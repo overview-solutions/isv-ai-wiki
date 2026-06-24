@@ -39,6 +39,23 @@ CATEGORY_TYPE = {
     "Industry Letter": "industry-letter",
 }
 
+REPORT_SEGMENT_CATEGORY = {
+    "REG": "Regulatory Strategy",
+    "TRD": "Technical Reference",
+    "PITCH": "Funding Pitch",
+    "NEX": "Strategic Synthesis",
+    "CR": "Engineering Critique",
+    "CRIT": "Engineering Critique",
+    "TECH": "Technical Reference",
+    "SSA": "Vehicle Assessment",
+    "STS": "Industry Letter",
+}
+
+SPECIAL_CATEGORY = {
+    "EMG-PITCH-002": "Investment Pitch",
+    "SSA-STS-LEGACY-2026-001": "Industry Letter",
+}
+
 
 def fetch_index(url: str = SYNC_URL) -> str:
     with urllib.request.urlopen(url, timeout=30) as resp:
@@ -51,36 +68,58 @@ def strip_html(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def infer_category(report_code: str, data_category: str) -> str:
+    if data_category == "critique":
+        return "Engineering Critique"
+    if report_code in SPECIAL_CATEGORY:
+        return SPECIAL_CATEGORY[report_code]
+    parts = report_code.split("-")
+    if len(parts) >= 2:
+        seg = parts[1]
+        if seg in REPORT_SEGMENT_CATEGORY:
+            return REPORT_SEGMENT_CATEGORY[seg]
+    return {
+        "technical": "Technical Reference",
+        "policy": "Regulatory Strategy",
+        "funding": "Funding Pitch",
+        "critique": "Engineering Critique",
+    }.get(data_category, "Report")
+
+
 def parse_cards(raw: str) -> list[dict]:
+    """Parse report cards from Cottonspace index (div.card layout since 2026)."""
     cards = []
-    for m in re.finditer(r'<a href="([^"]+\.html)" class="card">(.*?)</a>', raw, re.S):
-        href = m.group(1).lstrip("/")
+    for part in raw.split('<div class="card"')[1:]:
+        data_cat_m = re.search(r'data-category="([^"]+)"', part)
+        data_category = data_cat_m.group(1) if data_cat_m else ""
+
+        href_m = re.search(r'href="([^"]+\.html)"', part)
+        if not href_m:
+            continue
+        href = href_m.group(1).lstrip("/")
         if href.startswith("reports/"):
             filename = href.split("/", 1)[1]
         else:
             filename = href.split("/")[-1]
 
-        block = m.group(2)
-        tag_m = re.search(r'class="card-tag[^"]*">([^<]+)', block)
-        title_m = re.search(r'class="card-title">(.*?)</div>', block, re.S)
-        desc_m = re.search(r'class="card-desc">([^<]+)', block)
+        status_m = re.search(r'class="card-status[^"]*">([^<]+)', part)
+        title_m = re.search(r'class="card-title">(.*?)</h2>', part, re.S)
+        desc_m = re.search(r'class="card-desc">([^<]+)', part)
 
-        tag_line = strip_html(tag_m.group(1)) if tag_m else ""
-        category = ""
+        status_line = strip_html(status_m.group(1)) if status_m else ""
         report_code = ""
-        if " · " in tag_line:
-            left, report_code = tag_line.rsplit(" · ", 1)
-            category = re.sub(r"^[\U0001F300-\U0001FAFF\u2600-\u27BF⚙️✉️⚡🌍🌱☀️🔄📐🔧🏗️📊💰🔑📶🏭🇳🇬]+\s*", "", left).strip()
-        else:
-            category = tag_line
+        if " · " in status_line:
+            _, report_code = status_line.rsplit(" · ", 1)
+            report_code = report_code.strip()
 
         title = strip_html(title_m.group(1)) if title_m else filename
         summary = strip_html(desc_m.group(1)) if desc_m else ""
+        category = infer_category(report_code, data_category)
 
         cards.append(
             {
                 "filename": filename,
-                "reportCode": report_code.strip(),
+                "reportCode": report_code,
                 "category": category,
                 "title": title,
                 "summary": summary,
@@ -161,8 +200,12 @@ def merge_catalog(existing: dict, cards: list[dict]) -> dict:
         catalogs = [cottonspace, *catalogs]
 
     result = {"catalogs": catalogs, "items": merged_items}
-    if existing.get("reportCodeGuide"):
-        result["reportCodeGuide"] = existing["reportCodeGuide"]
+    guide = dict(existing.get("reportCodeGuide") or {})
+    types = dict(guide.get("types") or {})
+    types.setdefault("TECH", "Technical reference / critique")
+    types.setdefault("CRIT", "Engineering critique")
+    guide["types"] = types
+    result["reportCodeGuide"] = guide
     return result
 
 
@@ -182,7 +225,7 @@ def main() -> int:
         return 0
 
     CATALOG_PATH.write_text(json.dumps(updated, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Synced {len(updated['items'])} reports → {CATALOG_PATH}")
+    print(f"Synced {len(updated['items'])} reports ({len(cards)} from Cottonspace) → {CATALOG_PATH}")
     return 0
 
 
