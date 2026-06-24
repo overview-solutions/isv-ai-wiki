@@ -10,13 +10,11 @@ git branch -M main
 
 echo "→ Adding all files..."
 git add .
-git commit -m "feat: initial ISV wiki with PostGIS + TimescaleDB schema
+git commit -m "feat: initial ISV wiki
 
 - Standalone AI-editable wiki (index.html, no build step)
-- PostgreSQL schema: PostGIS spatial, TimescaleDB time-series, pgvector optional
 - GitHub Actions workflow for Pages deployment (auto SSL)
-- OpenAMI GeoJSON-compatible microgrid asset tables
-- ADCP tidal, energy metrics, drone telemetry hypertables with compression policies"
+- OpenAMI GeoJSON microgrid data references and Dev Labs catalog"
 
 echo "→ Adding remote..."
 git remote add origin https://github.com/Overview-Solutions/isv-wiki.git

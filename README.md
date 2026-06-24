@@ -8,6 +8,8 @@ Static wiki for the IEEE Smart Village working group. **No install, no build ste
 
 **Live:** [overview-solutions.github.io/isv-ai-wiki](https://overview-solutions.github.io/isv-ai-wiki)
 
+**Source (open source):** [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) — MIT license, public repo. Clone, edit, pull request.
+
 **Local:**
 
 ```bash
@@ -173,27 +175,46 @@ isv-ai-wiki/
 │   ├── sync-catalog.py                 # Sync from openami-smart-village GitHub
 │   └── diagrams/                       # SVG diagrams for meeting notes
 ├── js/                                 # Funded projects map embed
-├── schema/                             # Optional Postgres schema (future)
 └── .github/workflows/deploy.yml        # Deploy to GitHub Pages on push
 ```
 
 ---
 
+## Open source & hosting
+
+This wiki is **fully open source** and hosted for free on **GitHub Pages**.
+
+| | |
+|--|--|
+| **Repository** | [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) |
+| **Live site** | [overview-solutions.github.io/isv-ai-wiki](https://overview-solutions.github.io/isv-ai-wiki) |
+| **License** | MIT ([LICENSE](LICENSE)) |
+| **Tasks / follow-ups** | [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) on the same repo |
+| **Deploy** | Push to `main` → GitHub Actions (`.github/workflows/deploy.yml`) publishes static files |
+
+There is **no server to maintain** for the wiki itself: content is HTML, CSS, and JSON in git. GitHub builds and serves the site with HTTPS. Mapbox token (optional) is the only deploy secret — for the funded-projects map embed.
+
+**Contribute content:** fork or branch → edit files → open a pull request. Meeting notes, catalog entries, and task labels/issues all live in this repository.
+
+**Write access (collaborator):** Anyone can fork and open PRs without being added to the repo. To be added as a **GitHub collaborator** (push directly, manage issues with full repo access), email **Adam Sauer**, Tech Comm Committee Chair, at [adam.r.sauer@ieee.org](mailto:adam.r.sauer@ieee.org).
+
+**Contribute code:** same flow. Local preview: `./preview.sh` (do not open `index.html` via `file://` — Tasks and other pages need HTTP).
+
+First-time Pages setup (maintainers): repo **Settings → Pages → Source: GitHub Actions**.
+
+---
+
 ## Deploy
 
-Push to `main`. The workflow publishes to GitHub Pages automatically.
+Push to `main`. The workflow publishes to GitHub Pages automatically (~1 minute).
 
 Site URL: `https://overview-solutions.github.io/isv-ai-wiki`
-
-First-time setup: repo **Settings → Pages → Source: GitHub Actions**.
 
 ---
 
 ## Optional
 
 **AI editing** — sidebar status dot → paste an [Anthropic API key](https://console.anthropic.com) → **Edit with AI** on any section. Key stays in your browser only.
-
-**Database** — `schema/*.sql` is for a future Postgres/Supabase backend. The wiki runs fine without it today.
 
 **Mapbox** — embedded funded-projects map needs `MAPBOX_PUBLIC_TOKEN` as a GitHub Actions secret (see `deploy.yml`). Without it, the map shows a setup message.
 
@@ -209,6 +230,6 @@ Pull requests welcome for wiki content (meeting notes, catalog entries, etc.).
 - [View all issues](https://github.com/overview-solutions/isv-ai-wiki/issues)
 - [Wiki task board](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) for a filtered summary
 
-You need a GitHub account and (for creating issues on a private repo) collaborator access. Sign up as an ISV volunteer at [smartvillage.ieee.org/volunteer](https://smartvillage.ieee.org/volunteer/) if you are not on the team yet.
+You need a GitHub account. Anyone can comment on public issues; to push to the repo or be assigned as a collaborator, email Tech Comm Chair **Adam Sauer** at [adam.r.sauer@ieee.org](mailto:adam.r.sauer@ieee.org). Sign up as an ISV volunteer at [smartvillage.ieee.org/volunteer](https://smartvillage.ieee.org/volunteer/) if you are not on the team yet.
 
 MIT · IEEE Smart Village · Overview Solutions LLC

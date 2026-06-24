@@ -51,7 +51,7 @@ isv-ai-wiki/
 │   ├── sync-catalog.py           # Pull Dev Labs reports from GitHub
 │   └── diagrams/                 # SVG for meeting notes (e.g. metering-topology.svg)
 ├── js/                           # Funded projects map (Mapbox)
-└── schema/                       # Future Postgres/PostGIS (not required to run wiki)
+└── .github/workflows/deploy.yml  # GitHub Pages
 ```
 
 **Live base URL:** `https://overview-solutions.github.io/isv-ai-wiki/`

@@ -1029,21 +1029,6 @@ body {
   cursor: pointer;
 }
 
-/* DB callout */
-.db-note {
-  margin-top: 1.5rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--purple);
-  border-radius: 8px;
-  background: var(--purple-50);
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-.db-note-title { font-weight: 500; color: var(--purple); margin-bottom: 4px; font-size: 13px; }
-.db-note p { color: var(--text-2); margin: 0; }
-
 code {
   font-family: var(--mono);
   font-size: 12px;
@@ -1217,10 +1202,10 @@ code {
   </div>
 
   <div class="nav-group">
-    <div class="nav-label">Schema</div>
-    <a class="nav-item" href="schema/" target="_blank">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      SQL files
+    <div class="nav-label">Developers</div>
+    <a class="nav-item" href="https://github.com/overview-solutions/isv-ai-wiki" target="_blank" rel="noopener" title="Open-source repo — MIT license">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      Source on GitHub
     </a>
   </div>
 
@@ -1261,6 +1246,7 @@ code {
             <li><strong>Meeting notes</strong> and <strong>technical reports</strong> from working sessions</li>
             <li>Event planning — e.g. <strong>Power Africa Workshop</strong></li>
             <li>Standards, schemas, and open data references</li>
+            <li>Open source on <a href="https://github.com/overview-solutions/isv-ai-wiki" target="_blank" rel="noopener">GitHub</a> — static site via GitHub Pages</li>
           </ul>
         </div>
         <div class="home-block">
@@ -1278,6 +1264,7 @@ code {
             <li>Browse the <a href="#" onclick="showSection('funded');return false">funded projects map</a>, <a href="#" onclick="showSection('notes');return false">meeting notes</a>, and <a href="#" onclick="showSection('tech-notes');return false">technical reports</a></li>
             <li><a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">Join the Tech Comm WhatsApp group</a></li>
             <li>More context and links: <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Tech Comm Linktree</a> — project map, SunBlazer docs, proposal forms, and related resources</li>
+            <li>Want to edit on GitHub? Email Chair <a href="mailto:adam.r.sauer@ieee.org">Adam Sauer</a> to be added as a repo collaborator (or fork and open a pull request anytime)</li>
           </ul>
         </div>
       </div>
@@ -1566,14 +1553,14 @@ code {
         <div class="standard-icon">🗺️</div>
         <div>
           <div class="standard-name">GeoJSON — OpenAMI Spatial Schema</div>
-          <div class="standard-desc">ISV-developed GeoJSON schema for microgrid asset mapping, topology, and grid interconnection data. PostGIS compatible.</div>
+          <div class="standard-desc">ISV-developed GeoJSON schema for microgrid asset mapping, topology, and grid interconnection data.</div>
         </div>
       </div>
       <div class="standard-row">
         <div class="standard-icon">🔗</div>
         <div>
           <div class="standard-name">Esri Utility Network — Electric Distribution &amp; Transmission</div>
-          <div class="standard-desc">Industry reference model for utility GIS topology — devices, junctions, lines, terminals, subnetworks, and connectivity rules for unbalanced distribution and transmission networks. ISV is developing an open-source equivalent aligned to OpenAMI GeoJSON and PostGIS, so microgrid operators get the same asset and connectivity semantics without ArcGIS lock-in.</div>
+          <div class="standard-desc">Industry reference model for utility GIS topology — devices, junctions, lines, terminals, subnetworks, and connectivity rules for unbalanced distribution and transmission networks. ISV is developing an open-source equivalent aligned to OpenAMI GeoJSON, so microgrid operators get the same asset and connectivity semantics without ArcGIS lock-in.</div>
         </div>
       </div>
     </div>
@@ -1617,16 +1604,10 @@ code {
         <span class="tag-chip">ADCP</span>
         <span class="tag-chip">Tidal</span>
         <span class="tag-chip">NDVI</span>
-        <span class="tag-chip">TimescaleDB</span>
-        <span class="tag-chip">PostGIS</span>
       </div>
       <div class="wiki-body">
-        <p>ISV maintains open datasets and schema definitions under permissive licenses. All microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
-        <p>Funded deployment locations live on the <a href="#" onclick="showSection('funded');return false">Funded projects map</a> (sourced from <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a>). Microgrid topology follows the OpenAMI GeoJSON schema; sensor time-series use the PostGIS/TimescaleDB definitions in <code>schema/</code>.</p>
-      </div>
-      <div class="db-note">
-        <div class="db-note-title">Database architecture</div>
-        <p>This wiki is designed to connect to a PostgreSQL backend with <code>PostGIS</code> for spatial assets, <code>TimescaleDB</code> for sensor time-series, and optionally <code>pgvector</code> for semantic search. See the <code>schema/</code> directory for full SQL definitions.</p>
+        <p>ISV maintains open datasets and schema definitions under permissive licenses. Microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
+        <p>Funded deployment locations live on the <a href="#" onclick="showSection('funded');return false">Funded projects map</a> (sourced from <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a>). Technical reports and Dev Labs research are indexed in this wiki and hosted on <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a>.</p>
       </div>
     </div>
     <div class="ai-panel" id="ai-data">
@@ -1784,12 +1765,12 @@ code {
         <div class="standard-icon">🗂️</div>
         <div>
           <div class="resource-name">OpenAMI Schema Repository</div>
-          <div class="resource-desc">GeoJSON microgrid data model — open source, MIT license. See <code>schema/</code> in this repo.</div>
+          <div class="resource-desc">GeoJSON microgrid data model and Dev Labs reports — <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> on GitHub.</div>
         </div>
       </div>
       <div class="callout">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <div><strong>Hosting:</strong> Deploy this site via GitHub Pages (Settings → Pages → Deploy from branch: <code>main</code>, folder: <code>/</code>). Free SSL, auto-renews — no cert expiry ever again.</div>
+        <div><strong>Open source &amp; hosting:</strong> This wiki is the public repo <a href="https://github.com/overview-solutions/isv-ai-wiki" target="_blank" rel="noopener">overview-solutions/isv-ai-wiki</a> (MIT). The live site is <a href="https://overview-solutions.github.io/isv-ai-wiki/" target="_blank" rel="noopener">GitHub Pages</a> — push to <code>main</code> and GitHub Actions deploys static HTML in about a minute. No wiki server to run; follow-ups use <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues</a> on the same repo. See <a href="https://github.com/overview-solutions/isv-ai-wiki/blob/main/README.md" target="_blank" rel="noopener">README</a> for clone, preview, and PR workflow. To request <strong>collaborator access</strong> on GitHub, email Tech Comm Chair Adam Sauer at <a href="mailto:adam.r.sauer@ieee.org">adam.r.sauer@ieee.org</a>.</div>
       </div>
     </div>
     <div class="ai-panel" id="ai-resources">
