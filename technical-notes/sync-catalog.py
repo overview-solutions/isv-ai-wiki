@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Sync technical-notes/catalog.json from Cottonspace Dev Labs reports index.
+"""Optional: refresh technical-notes/catalog.json enrichment stubs from Dev Labs index.
+
+The wiki loads the live report list in the browser (js/tech-notes-catalog.js) —
+this script is only needed to update catalog.json metadata (tags, isvRelevance, etc.).
 
 Source of truth: openami-smart-village/reports/index.html
   https://github.com/rahulbhargavain/openami-smart-village

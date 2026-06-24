@@ -47,8 +47,8 @@ isv-ai-wiki/
 ├── power-africa-*-*.html         # Workshop / event planning notes
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
-│   ├── catalog.json              # Technical reports index (metadata + links out)
-│   ├── sync-catalog.py           # Pull Dev Labs reports from GitHub
+│   ├── catalog.json              # Report enrichments + wiki-only entries (ISV context)
+│   ├── sync-catalog.py           # Optional: refresh catalog.json stubs from Dev Labs index
 │   └── diagrams/                 # SVG for meeting notes (e.g. metering-topology.svg)
 ├── js/                           # Funded projects map (Mapbox)
 └── .github/workflows/deploy.yml  # GitHub Pages
@@ -116,7 +116,7 @@ Read sources in this order when answering technical questions:
 
 1. **Cited benchmark tables** — [`meter-vendor-study.html`](meter-vendor-study.html) (numbered `[s1]`… bibliography).
 2. **Tech Comm meeting notes** — problem framing, topology, action items (e.g. [`tech-comm-2026-05-28-metering-topology.html`](tech-comm-2026-05-28-metering-topology.html)).
-3. **Technical reports** — summaries in wiki; full PDFs/HTML on [Cottonspace](https://sattal.cottonspace.com/reports) / [openami-smart-village](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports). Use `isvRelevance` and `relatedMeetingNotes` in `catalog.json`.
+3. **Technical reports** — list built live from openami-smart-village `reports/index.html`; enrichments in `catalog.json` (`isvRelevance`, `relatedMeetingNotes`). Full docs on [Cottonspace](https://sattal.cottonspace.com/reports).
 4. **Standards section** in `index.html` — quick reference (DLMS, STS, SunSpec, IEEE 2030.5).
 5. **ISV-internal** — DokuWiki PDFs, prior outreach contacts. Tag as **ISV**, not independent verification.
 6. **Legacy DokuWiki** — `http://34.125.138.210/...` (migration source; may be stale).
@@ -218,7 +218,7 @@ When editing this repo:
 2. **Add citations** — new `[s#]` row in bibliography; tag `V` / `I` / `ISV`.
 3. **Register** new meeting notes in `MEETING_NOTES` + sidebar sub-nav if needed.
 4. **Use embed pattern** — `?embed=1` + `html.embed` CSS on standalone pages.
-5. **Sync reports** — `python3 technical-notes/sync-catalog.py` (respect `syncProtected` entries).
+5. **Report enrichments** — edit `technical-notes/catalog.json` for `isvRelevance` / `relatedMeetingNotes`; optional `python3 technical-notes/sync-catalog.py` to refresh stubs (`syncProtected` entries preserved).
 6. **Don't** edit `index.html` mission/standards prose unless the user asked — scope to the task.
 7. **Don't** commit secrets (Mapbox tokens, API keys). Map token is a GitHub Actions secret.
 8. **Prefer** updating existing study tables over spawning duplicate markdown vendor lists.

@@ -1910,7 +1910,7 @@ code {
         </ul>
       </div>
       <div class="wiki-body">
-        <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a> or in this wiki. The list below comes from <code>technical-notes/catalog.json</code> — a snapshot synced from the <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a> reports index (not fetched live from Cottonspace). Re-run <code>python3 technical-notes/sync-catalog.py</code> after new reports are published, then deploy. There is no query limit; if a tab looks incomplete, the catalog is probably out of date.</p>
+        <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a> or in this wiki. The report list is built <strong>live</strong> from the <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a> reports index each time you open this page (same source Cottonspace publishes). Wiki-only notes and ISV context come from <code>technical-notes/catalog.json</code>. No manual sync needed for new Cottonspace reports.</p>
         <p id="tech-notes-catalog-meta" class="wiki-body" style="margin-top:0.5rem;font-size:13px;color:var(--text-2)"></p>
       </div>
       <details class="tech-code-legend" id="tech-code-legend">
@@ -1945,6 +1945,7 @@ code {
   </div>
 </div>
 
+<script src="js/tech-notes-catalog.js"></script>
 <script>
 const SECTIONS = ['home','mission','funded','notes','tasks','committees','power-africa','meter-study','tech-notes','standards','data','resources'];
 const NOTE_GROUPS = {
@@ -1983,7 +1984,9 @@ let activeNoteId = 'metering-2026-05-28';
 let techNotesCatalog = [];
 let techNotesCatalogs = [];
 let techNotesCodeGuide = null;
-let techNotesLoaded = false;
+let techNotesMetaLoaded = false;
+let techNotesCatalogSource = '';
+let techNotesEnrichments = [];
 let activeTechNoteId = null;
 let activeTechFilter = 'all';
 
@@ -2121,30 +2124,41 @@ document.addEventListener('keydown', e => {
 document.addEventListener('DOMContentLoaded', initFromHash);
 
 async function loadTechnicalNotes() {
-  if (techNotesLoaded) {
-    renderReportCodeLegend();
-    renderTechnicalNotesNav();
-    renderTechnicalNotesFilters();
-    renderTechnicalNotesList();
-    renderTechNotesCatalogMeta();
-    if (activeTechNoteId) renderTechnicalNoteDetail(activeTechNoteId);
-    else renderTechnicalNotesEmptyDetail();
-    return;
-  }
   const listEl = document.getElementById('tech-notes-list');
+  if (!techNotesMetaLoaded && listEl) {
+    listEl.innerHTML = '<div class="tech-notes-detail-empty">Loading reports…</div>';
+  }
+
   try {
-    const resp = await fetch(TECH_NOTES_CATALOG_URL);
-    if (!resp.ok) throw new Error('Catalog unavailable');
-    const data = await resp.json();
-    techNotesCatalogs = Array.isArray(data.catalogs) ? data.catalogs : [];
-    techNotesCatalog = Array.isArray(data.items) ? data.items : [];
-    techNotesCodeGuide = data.reportCodeGuide || null;
-    techNotesLoaded = true;
+    if (!techNotesMetaLoaded) {
+      const resp = await fetch(TECH_NOTES_CATALOG_URL);
+      if (!resp.ok) throw new Error('Catalog unavailable');
+      const data = await resp.json();
+      techNotesCatalogs = Array.isArray(data.catalogs) ? data.catalogs : [];
+      techNotesCodeGuide = data.reportCodeGuide || null;
+      techNotesEnrichments = Array.isArray(data.items) ? data.items : [];
+      techNotesMetaLoaded = true;
+    }
+
+    const cotton = techNotesCatalogs.find(c => c.id === 'cottonspace-dev-labs');
+    const indexUrl = cotton?.syncSource || window.TechNotesCatalog.REPORTS_INDEX_URL;
+
+    try {
+      const live = await window.TechNotesCatalog.fetchLiveReports(techNotesEnrichments, indexUrl);
+      techNotesCatalog = live.items;
+      techNotesCatalogSource = 'live';
+    } catch (liveErr) {
+      console.warn('Live Dev Labs index unavailable; using catalog.json', liveErr);
+      techNotesCatalog = [...techNotesEnrichments];
+      techNotesCatalogSource = 'cached';
+    }
+
     renderReportCodeLegend();
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
     renderTechnicalNotesList();
     renderTechNotesCatalogMeta();
+
     if (!activeTechNoteId && techNotesCatalog.length) {
       showTechNote(techNotesCatalog[0].id, false);
     } else if (activeTechNoteId) {
@@ -2234,9 +2248,11 @@ function renderTechNotesCatalogMeta() {
   if (!el || !techNotesCatalog.length) return;
   const visible = filteredTechNotes().length;
   const total = techNotesCatalog.length;
-  const fromCottonspace = techNotesCatalog.filter(i => i.sourceCatalog === 'cottonspace-dev-labs').length;
   const filterNote = activeTechFilter === 'all' ? '' : ` (${activeTechFilter})`;
-  el.textContent = `${visible} of ${total} indexed reports${filterNote} · ${fromCottonspace} synced from Cottonspace · refresh with technical-notes/sync-catalog.py`;
+  const sourceNote = techNotesCatalogSource === 'live'
+    ? 'live from Dev Labs index'
+    : 'cached catalog.json (index unavailable)';
+  el.textContent = `${visible} of ${total} reports${filterNote} · ${sourceNote}`;
 }
 
 function filteredTechNotes() {
@@ -2323,7 +2339,7 @@ function renderTechnicalNoteDetail(id) {
 }
 
 function showTechNote(id, updateHash = true) {
-  if (!techNotesLoaded) {
+  if (!techNotesMetaLoaded) {
     loadTechnicalNotes().then(() => showTechNote(id, updateHash));
     return;
   }

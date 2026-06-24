@@ -60,16 +60,18 @@ Reports are **indexed** in the wiki, **hosted** on Cottonspace, and **maintained
 
 Reports use IDs like **EMG-TRD-005** = *Emerging markets · Technical reference · #005*. See the collapsible key on the Technical reports page.
 
-The wiki does **not** query Cottonspace at runtime — it loads `technical-notes/catalog.json` (no row limit). After new reports appear on [Cottonspace](https://sattal.cottonspace.com/reports), refresh the snapshot:
+**Listing (automatic):** Opening Technical reports in the wiki fetches the live [openami-smart-village reports index](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports) from GitHub (same source [Cottonspace](https://sattal.cottonspace.com/reports) publishes). New reports appear without running a sync script or redeploying.
+
+**Enrichments (manual):** `technical-notes/catalog.json` holds wiki-only entries (e.g. **ISV-HCK-001**) and optional ISV context (`isvRelevance`, `relatedMeetingNotes`, tags) merged by report ID. Edit that file when you want richer summaries on specific reports.
+
+Optional — refresh enrichment stubs after bulk Cottonspace changes:
 
 ```bash
 cd isv-ai-wiki
 python3 technical-notes/sync-catalog.py
 ```
 
-The sync script parses `openami-smart-village/reports/index.html`. If Cottonspace changes its card HTML and sync finds zero reports, update `technical-notes/sync-catalog.py` and re-run.
-
-Wiki-only entries (e.g. **ISV-HCK-001**) have `"syncProtected": true` and are preserved by the sync script.
+Wiki-only entries have `"syncProtected": true` and are always preserved.
 
 To add ISV-specific context manually, edit fields in `technical-notes/catalog.json`:
 
