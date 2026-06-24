@@ -737,6 +737,135 @@ body {
 .map-embed-toolbar a { color: var(--green); text-decoration: none; }
 .map-embed-toolbar a:hover { text-decoration: underline; }
 
+.mission-feature-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0 0 0.5rem;
+}
+
+.mission-feature {
+  margin: 2rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.funded-videos-section {
+  margin: 1.25rem 0 1.5rem;
+}
+
+.funded-videos-intro {
+  margin: 0 0 1rem;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+
+.funded-videos-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .funded-videos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.funded-video-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.funded-video-card-head {
+  padding: 0.85rem 1rem 0;
+}
+
+.funded-video-project {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green);
+  margin-bottom: 0.25rem;
+}
+
+.funded-video-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 0.2rem;
+  line-height: 1.35;
+}
+
+.funded-video-label {
+  font-size: 12px;
+  color: var(--text-2);
+  margin: 0 0 0.65rem;
+}
+
+.funded-row-video {
+  margin-top: 0.45rem;
+  font-size: 12px;
+}
+
+.funded-row-video a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.funded-row-video a:hover { text-decoration: underline; }
+
+.mission-feature-title {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+  line-height: 1.35;
+}
+
+.mission-feature-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0 0 0.85rem;
+}
+
+.video-embed {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.video-embed-frame {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-embed-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-embed-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.85rem;
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+}
+
+.video-embed-toolbar a { color: var(--green); text-decoration: none; }
+.video-embed-toolbar a:hover { text-decoration: underline; }
+
 .funded-stats {
   display: flex;
   flex-wrap: wrap;
@@ -1429,6 +1558,26 @@ code {
       <p>The Technology Committee maintains open engineering initiatives — standards, monitoring tools, and interoperability layers — that support funded field projects without replacing them.</p>
       <p>Across funded mini-grids, the recurring engineering problems are: <strong>metering costs</strong> that can double project budgets, <strong>inability to bill and detect theft</strong> without per-customer meters, <strong>protocol fragmentation</strong> (STS, DLMS, OEM, MODBUS) below the feeder, and <strong>unreliable rural backhaul</strong> when DCUs fail. See <a href="#" onclick="showSection('tech-notes');return false">Technical reports</a> and <a href="#" onclick="showNote('metering-2026-05-28');return false">May 2026 Tech Comm notes</a>.</p>
     </div>
+    <div class="mission-feature">
+      <p class="mission-feature-eyebrow">Latest field project · what drives ISV</p>
+      <h3 class="mission-feature-title">IEEE Smart Village — A Journey of Impact: Equinoct (Kerala, India)</h3>
+      <p class="mission-feature-desc">ISV’s newest Kerala deployment with EQUINOCT — a Community Resource Efficiency Hub supporting coastal enterprises through energy, education, and enterprise in one place.</p>
+      <div class="video-embed">
+        <div class="video-embed-frame">
+          <iframe
+            title="IEEE Smart Village — A Journey of Impact: Equinoct (Kerala, India)"
+            src="https://player.vimeo.com/video/1192404953?h=98c35b51ae"
+            allow="fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-embed-toolbar">
+          <span>7 min · full story · North Paravur, Kochi</span>
+          <a href="https://vimeo.com/1192404953/98c35b51ae" target="_blank" rel="noopener">Watch on Vimeo ↗</a>
+        </div>
+      </div>
+    </div>
     <div class="ai-panel" id="ai-mission">
       <div class="ai-panel-label">AI editor — mission</div>
       <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Add a paragraph about rural microgrid deployments' or 'Make this more concise'"></textarea>
@@ -1477,6 +1626,11 @@ code {
             <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">Source</a>
           </span>
         </div>
+      </div>
+      <div class="funded-videos-section" id="funded-videos-section" hidden>
+        <div class="project-section-label">Project field stories</div>
+        <p class="funded-videos-intro">Videos from the <a href="https://vimeo.com/user117415241" target="_blank" rel="noopener">ISV Vimeo channel</a> tied to individual deployments — not generic program overviews.</p>
+        <div class="funded-videos-grid" id="funded-videos-grid"></div>
       </div>
       <div class="project-section-label">Active programs</div>
       <div class="funded-list" id="funded-list"></div>
@@ -1978,8 +2132,10 @@ const DEV_LABS_GITHUB_REPO = 'https://github.com/rahulbhargavain/openami-smart-v
 const DEV_LABS_GITHUB_REPORTS = `${DEV_LABS_GITHUB_REPO}/tree/main/reports`;
 const WIKI_PAGES_ORIGIN = 'https://overview-solutions.github.io/isv-ai-wiki';
 const GEOJSON_URL = 'https://overview-solutions.github.io/RemoteMonitorMap/projects.geojson';
+const FUNDED_VIDEOS_URL = 'js/funded-project-videos.json';
 const aiResults = {};
 let fundedDataLoaded = false;
+let fundedProjectVideos = null;
 let activeNoteId = 'metering-2026-05-28';
 let techNotesCatalog = [];
 let techNotesCatalogs = [];
@@ -2370,6 +2526,82 @@ function statusTag(code) {
   return ['Pending', 'tag-pending'];
 }
 
+function vimeoEmbedSrc(vimeoId, vimeoHash) {
+  return vimeoHash
+    ? `https://player.vimeo.com/video/${vimeoId}?h=${vimeoHash}`
+    : `https://player.vimeo.com/video/${vimeoId}`;
+}
+
+function vimeoPageUrl(vimeoId, vimeoHash) {
+  return vimeoHash ? `https://vimeo.com/${vimeoId}/${vimeoHash}` : `https://vimeo.com/${vimeoId}`;
+}
+
+function projectMatchesVideo(project, rule) {
+  const name = (project.name || '').toLowerCase();
+  const includes = rule.match?.nameIncludes || [];
+  return includes.some(token => name.includes(token));
+}
+
+function findVideoForProject(project, videos) {
+  return (videos || []).find(rule => projectMatchesVideo(project, rule)) || null;
+}
+
+async function loadFundedProjectVideos() {
+  if (fundedProjectVideos) return fundedProjectVideos;
+  try {
+    const resp = await fetch(FUNDED_VIDEOS_URL);
+    if (!resp.ok) throw new Error('Video catalog unavailable');
+    const data = await resp.json();
+    fundedProjectVideos = Array.isArray(data.videos) ? data.videos : [];
+    return fundedProjectVideos;
+  } catch (err) {
+    fundedProjectVideos = [];
+    return fundedProjectVideos;
+  }
+}
+
+function renderFundedProjectVideos(projects, videos) {
+  const section = document.getElementById('funded-videos-section');
+  const grid = document.getElementById('funded-videos-grid');
+  if (!section || !grid || !videos.length) return;
+
+  const cards = [];
+  videos.forEach(rule => {
+    const matched = projects.filter(p => projectMatchesVideo(p, rule));
+    if (!matched.length) return;
+    const projectLine = matched
+      .map(p => p.acronym ? `${p.name} (${p.acronym})` : p.name)
+      .join(' · ');
+    const embed = vimeoEmbedSrc(rule.vimeoId, rule.vimeoHash);
+    const page = vimeoPageUrl(rule.vimeoId, rule.vimeoHash);
+    cards.push(`
+      <article class="funded-video-card">
+        <div class="funded-video-card-head">
+          <div class="funded-video-project">${escapeHtml(projectLine)}</div>
+          <h3 class="funded-video-title">${escapeHtml(rule.title)}</h3>
+          <p class="funded-video-label">${escapeHtml(rule.label || '')}</p>
+        </div>
+        <div class="video-embed" style="border:0;border-radius:0">
+          <div class="video-embed-frame">
+            <iframe title="${escapeHtml(rule.title)}" src="${embed}" allow="fullscreen; picture-in-picture" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+          <div class="video-embed-toolbar">
+            <span>${escapeHtml(matched.map(p => p.country).filter(Boolean).join(' · ') || 'Field deployment')}</span>
+            <a href="${page}" target="_blank" rel="noopener">Vimeo ↗</a>
+          </div>
+        </div>
+      </article>
+    `);
+  });
+
+  if (!cards.length) {
+    section.hidden = true;
+    return;
+  }
+  grid.innerHTML = cards.join('');
+  section.hidden = false;
+}
+
 async function loadFundedProjects() {
   if (fundedDataLoaded) return;
   const statsEl = document.getElementById('funded-stats');
@@ -2404,6 +2636,9 @@ async function loadFundedProjects() {
     });
 
     const projects = Array.from(byProject.values());
+    const videos = await loadFundedProjectVideos();
+    renderFundedProjectVideos(projects, videos);
+
     const active = projects.filter(p => p.status === 'A');
     const countries = new Set(active.map(p => p.country).filter(Boolean));
     const sites = (geo.features || []).filter(f => f.properties?.['Retired / Active / Pending (Future)'] === 'A').length;
@@ -2421,10 +2656,15 @@ async function loadFundedProjects() {
       const meta = [p.country, p.org, p.years].filter(Boolean).join(' · ');
       const linkStart = p.link ? `<a href="${p.link}" target="_blank" rel="noopener">` : '';
       const linkEnd = p.link ? '</a>' : '';
+      const video = findVideoForProject(p, videos);
+      const videoLine = video
+        ? `<div class="funded-row-video"><a href="${vimeoPageUrl(video.vimeoId, video.vimeoHash)}" target="_blank" rel="noopener">▶ Field story on Vimeo</a></div>`
+        : '';
       return `<div class="funded-row">
         <div>
           <div class="funded-row-name">${linkStart}${title}${linkEnd}</div>
           <div class="funded-row-meta">${meta}</div>
+          ${videoLine}
         </div>
         <span class="tag ${cls}">${label}</span>
       </div>`;

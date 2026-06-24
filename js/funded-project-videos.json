@@ -1,0 +1,22 @@
+{
+  "channel": "https://vimeo.com/user117415241",
+  "note": "Project-specific field stories only — generic ISV program intros are excluded.",
+  "videos": [
+    {
+      "id": "equinoct-kerala",
+      "match": { "nameIncludes": ["equinoct"] },
+      "title": "A Journey of Impact: Equinoct (Kerala, India)",
+      "label": "7 min · Community Resource Efficiency Hub",
+      "vimeoId": "1192404953",
+      "vimeoHash": "98c35b51ae"
+    },
+    {
+      "id": "ghe-himalayas",
+      "match": { "nameIncludes": ["lingshed", "phugtal"] },
+      "title": "ISV & Global Himalayan Expedition — The Story of a Partnership",
+      "label": "5 min · Ladakh monastery microgrids",
+      "vimeoId": "592856868",
+      "vimeoHash": "e5ccf778e4"
+    }
+  ]
+}
