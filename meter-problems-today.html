@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Problems Today · Meter benchmark · ISV</title>
+<title>Problems in depth · Metering focus · ISV</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css">
 <script src="js/isv-theme.js"></script>
@@ -22,10 +22,14 @@ h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 
 h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
 p, li { font-size: 14px; margin-bottom: 0.5rem; }
 ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
-.hub { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 13px; }
-.hub a { padding: 0.35rem 0.65rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: var(--text-2); background: var(--bg-2); }
-.hub a:hover { border-color: var(--green); color: var(--green); }
-.hub a.active { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
+.callout-warn strong { color: var(--amber); }
+.dual-track { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+.track-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; background: var(--bg-2); font-size: 13px; }
+.track-card h3 { margin: 0 0 0.5rem; font-size: 13px; color: var(--teal); }
+.track-card p { margin: 0 0 0.5rem; color: var(--text-2); font-size: 13px; line-height: 1.5; }
+.track-card ul { margin: 0; padding-left: 1.1rem; font-size: 12px; color: var(--text-2); }
+.track-card li { margin-bottom: 0.35rem; }
+@media (max-width: 720px) { .dual-track { grid-template-columns: 1fr; } }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 13px; }
 .callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
 .callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
@@ -56,7 +60,7 @@ ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
 .relation dt { font-weight: 500; font-size: 12px; margin-top: 0.65rem; color: var(--teal); }
 .relation dt:first-child { margin-top: 0; }
 .relation dd { margin: 0.15rem 0 0; color: var(--text-2); line-height: 1.45; }
-html.embed .back, html.embed #notes-back-btn, html.embed .hub { display: none; }
+html.embed .back { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 @media (max-width: 820px) { .landscape-wrap { margin-left: -0.5rem; margin-right: -0.5rem; border-radius: 0; border-left: 0; border-right: 0; } }
 </style>
@@ -71,25 +75,17 @@ html.embed .wrap { padding-top: 1rem; }
 </div>
 <script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
 <div class="wrap">
-  <div class="back"><a href="index.html#meter-study">← Meter benchmark</a></div>
-  <nav class="hub" aria-label="Meter benchmark pages">
-    <a href="meter-problems-today.html" class="active">The problems today</a>
-    <a href="meter-vmrs.html">OBIS · VMRS</a>
-    <a href="meter-vendor-study.html">Vendor study</a>
-  </nav>
-  <h1>The problems today</h1>
-  <p class="sub">Why utility AMI stacks overwhelm village mini-grids · Jun 2026 · Tech Comm framing</p>
+  <div class="back"><a href="index.html#meter-study/problems-today">← Metering focus</a> · <a href="meter-overview.html">Overview</a></div>
 
-  <p id="notes-back-btn" style="margin-bottom:1rem">
-    <a href="index.html#meter-study/problems-today" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
-  </p>
+  <h1>Problems in depth</h1>
+  <p class="sub">Landscape &amp; layers · utility AMI vs village minimum · Jun 2026</p>
 
-  <p class="lead">Utility AMI and village mini-grids share the same <strong>ecosystem layers</strong> — payment schemes, semantic registers, exchange formats, protocols, and physical access — but utilities must implement every layer deeply while villages can narrow the contract at the gateway. The diagram below is OSI-<em>inspired</em> (not a literal OSI map): it separates <strong>what the data means</strong> from <strong>how it is paid for</strong> from <strong>how it is moved</strong>. Terms: <a href="meter-vmrs.html#acronyms">acronym list</a> · register tiers: <a href="meter-vmrs.html#what-tiers-mean">what VMRS tiers mean</a>.</p>
-
-  <div class="callout">
-    <strong>ISV wedge</strong>
-    Normalize at <strong>L4–L5</strong>: <a href="meter-vmrs.html">VMRS</a> (OBIS semantics, draft) and <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound JSON/MQTT v0.1</a>. Keep STS vending and vendor NAN at <strong>L1–L2</strong> southbound. Reserve Glenn Algie’s <strong>SIP</strong> at <strong>L3</strong> for DER market sessions.
+  <div class="callout" style="border-left-color:var(--green);background:var(--green-50)">
+    <strong style="color:var(--green)">Summary on overview page</strong>
+    Two goals, problem bullets, and nested page index live on <a href="meter-overview.html">Metering focus · Overview</a>. This page is the detailed landscape — diagrams and layer tables.
   </div>
+
+  <p class="lead">Utility AMI and village mini-grids share the same <strong>ecosystem layers</strong> — payment schemes, semantic registers, exchange formats, protocols, and physical access — but utilities must implement every layer deeply while villages can narrow the contract at the gateway. The diagram below is OSI-<em>inspired</em> (not a literal OSI map). Terms: <a href="meter-vmrs.html#acronyms">acronym list</a> · <a href="meter-vmrs.html#what-tiers-mean">VMRS tiers</a>.</p>
 
   <h2>Metering landscape — layered ecosystem (utility vs village)</h2>
   <p>Read across: each row is a layer type. Amber = utility-heavy scope. Green = village minimum. Teal = both need it, different depth. <strong>Do not confuse layers</strong> — STS is a payment/key scheme (L6/L3), OBIS is register semantics (L5), DLMS is a meter protocol (L2), MQTT is northbound messaging (L2/L4).</p>
@@ -238,11 +234,11 @@ html.embed .wrap { padding-top: 1rem; }
     <li><strong>DER vs revenue meter confusion</strong> — SunSpec on inverters solves generation monitoring; it does not replace STS vending or OBIS billing registers.</li>
   </ul>
 
-  <h2>Next artifacts in this benchmark</h2>
+  <h2>Related pages</h2>
   <ul>
+    <li><a href="meter-overview.html">Metering focus · Overview</a></li>
     <li><a href="meter-vmrs.html">OBIS · VMRS</a> — tiers, <a href="meter-vmrs.html#acronyms">acronym list</a>, ICD, northbound profile</li>
-    <li><a href="meter-benchmark/vmrs-registers.json"><code>meter-benchmark/vmrs-registers.json</code></a> — machine-readable register set</li>
-    <li><a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a> — MQTT topics, envelope, SIP hooks</li>
+    <li><a href="meter-benchmark/vmrs-registers.json"><code>meter-benchmark/vmrs-registers.json</code></a> · <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a></li>
     <li><a href="meter-vendor-study.html">Vendor study</a> — cited comparison with VMRS column</li>
   </ul>
 </div>

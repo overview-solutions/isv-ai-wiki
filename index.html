@@ -288,6 +288,30 @@ body {
   flex-shrink: 0;
 }
 
+.home-primary-focus {
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--green-50);
+}
+.home-primary-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.35rem;
+}
+.home-primary-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+}
+.home-primary-title a { color: var(--text); text-decoration: none; }
+.home-primary-title a:hover { color: var(--green); }
+.home-primary-desc { font-size: 14px; color: var(--text-2); margin: 0; line-height: 1.55; }
+
 .home-blocks {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -670,6 +694,11 @@ body {
   border-radius: 10px;
   padding: 1rem 1.1rem;
   background: var(--bg);
+}
+
+.project-card-primary {
+  border-color: var(--green);
+  background: var(--green-50);
 }
 
 .project-card-head {
@@ -1292,28 +1321,29 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Meeting notes
     </div>
+    <div class="nav-sub" id="nav-sub-notes">
+      <div class="nav-sub-item active" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
+    </div>
     <div class="nav-item" data-section="tasks" onclick="showSection('tasks')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       Tasks
     </div>
-    <div class="nav-sub" id="nav-sub-notes">
-      <div class="nav-sub-item active" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
-    </div>
-    <div class="nav-item" data-section="power-africa" onclick="showSection('power-africa')">
+    <div class="nav-item" data-section="events" onclick="showSection('events')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      Power Africa Workshop
+      In-person events
     </div>
-    <div class="nav-sub" id="nav-sub-power-africa">
-      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="power-africa" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · Workshop planning</div>
+    <div class="nav-sub" id="nav-sub-events">
+      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · Power Africa workshop</div>
     </div>
     <div class="nav-item" data-section="meter-study" onclick="showSection('meter-study')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Meter benchmark
+      Metering focus
     </div>
     <div class="nav-sub" id="nav-sub-meter-study">
-      <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">The problems today</div>
+      <div class="nav-sub-item active" data-meter-page="overview" onclick="showMeterPage('overview')">Overview</div>
+      <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">Problems</div>
       <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
-      <div class="nav-sub-item active" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor study</div>
+      <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor study</div>
     </div>
     <div class="nav-label nav-label-knowledge">Knowledge base</div>
     <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
@@ -1371,14 +1401,21 @@ code {
         </div>
       </div>
 
+      <div class="home-primary-focus">
+        <p class="home-primary-eyebrow">Primary endeavor · Tech Comm 2026</p>
+        <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('overview');return false">Metering focus</a></h2>
+        <p class="home-primary-desc">Affordable, interoperable village metering — multi-vendor normalization at the gateway (northbound JSON/MQTT) and lightweight standards that avoid utility AMI cost. <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study</a></p>
+      </div>
+
       <div class="home-blocks">
         <div class="home-block">
           <div class="home-block-title">What this is</div>
           <ul>
             <li>Map and list of <strong>ISV-funded solar microgrid programs</strong></li>
-            <li><strong>Technology Committee</strong> initiatives — OpenAMI, metering, monitoring</li>
+            <li><strong>Metering focus</strong> — <a href="#" onclick="showMeterPage('overview');return false">primary Tech Comm endeavor</a> (2026)</li>
+            <li><strong>Technology Committee</strong> initiatives — <strong>OpenAMI</strong> (ISV stakeholder alongside <a href="https://enaccess.org" target="_blank" rel="noopener">EnAccess</a>, NESL, and <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT</a>), monitoring, pole EMS</li>
             <li><strong>Meeting notes</strong> and <strong>technical reports</strong> from working sessions</li>
-            <li>Event planning — e.g. <strong>Power Africa Workshop</strong></li>
+            <li>In-person events — <a href="#" onclick="showSection('events');return false">workshops and hackathons</a></li>
             <li>Standards, schemas, and open data references</li>
             <li>Open source on <a href="https://github.com/overview-solutions/isv-ai-wiki" target="_blank" rel="noopener">GitHub</a> — static site via GitHub Pages</li>
           </ul>
@@ -1420,6 +1457,13 @@ code {
           <p>Side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
         </div>
         <div class="project-grid">
+        <div class="project-card project-card-primary">
+          <div class="project-card-head">
+            <span class="tag tag-active">Primary</span>
+            <span class="project-name">Metering focus</span>
+          </div>
+          <div class="project-desc">IEEE Tech Comm’s current coordination thread: northbound interoperability, VMRS register tiers, vendor benchmark, anchor POCs (SteamaCo, Darway). <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study</a></div>
+        </div>
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-active">Active</span>
@@ -1432,7 +1476,7 @@ code {
             <span class="tag tag-active">Active</span>
             <span class="project-name">OpenAMI — Open Microgrid Interface</span>
           </div>
-          <div class="project-desc">GeoJSON-based data model for interoperable microgrid asset management. SunSpec and IEEE 2030.5 compatible — targets open alternatives to proprietary utility GIS schemas.</div>
+          <div class="project-desc">IEEE Smart Village is a stakeholder in the OpenAMI effort alongside <a href="https://enaccess.org" target="_blank" rel="noopener">EnAccess</a>, NESL, and <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT</a>. GeoJSON-based data model for interoperable microgrid asset management — SunSpec and IEEE 2030.5 compatible, targeting open alternatives to proprietary utility GIS schemas. Code and prototypes: <a href="https://github.com/energy-iot" target="_blank" rel="noopener">github.com/energy-iot</a>.</div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
@@ -1460,7 +1504,7 @@ code {
             <span class="tag tag-pilot">Notes</span>
             <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
           </div>
-          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. Builds on hackathon EMS work. <a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes →</a> · <a href="#" onclick="showSection('tasks');return false">Follow-ups</a></div>
+          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. <a href="#" onclick="showNote('metering-2026-05-28');return false">Meeting notes →</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems in depth</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
@@ -1471,17 +1515,10 @@ code {
         </div>
         <div class="project-card">
           <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Village metering vendor study</span>
-          </div>
-          <div class="project-desc">Pipeline tracker and layered benchmark for village-level meters, AMI stacks, and microgrid platforms — DLMS, STS, VMRS, SunSpec by stack layer. <a href="#" onclick="showMeterPage('problems-today');return false">Problems today</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study →</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
             <span class="tag tag-planning">Planning</span>
             <span class="project-name">Power Africa Conference — Workshop</span>
           </div>
-          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a></div>
+          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a> · <a href="#" onclick="showSection('events');return false">All in-person events</a></div>
         </div>
       </div>
     </div>
@@ -1970,19 +2007,10 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title" id="notes-section-title">Meeting notes</div>
-        <div class="section-sub" id="notes-section-sub">Technology Committee call notes — preview below</div>
+        <div class="section-sub" id="notes-section-sub">28 May 2026 · STS · SMS · DLMS · redundant NAN · CIU/phone relay</div>
       </div>
     </div>
     <div id="content-notes">
-      <div class="wiki-body">
-        <p>Structured notes from ISV Tech Comm calls. Select a note in the sidebar or below. Background reports and problem framing: <a href="#" onclick="showSection('tech-notes');return false">Technical reports</a>.</p>
-      </div>
-      <div class="notes-index" id="notes-index">
-        <a class="notes-index-item active" href="#" data-note="metering-2026-05-28" onclick="showNote('metering-2026-05-28');return false">
-          <div class="notes-index-title">Metering &amp; comms topology</div>
-          <div class="notes-index-meta">28 May 2026 · STS · SMS · DLMS · redundant NAN · CIU/phone relay</div>
-        </a>
-      </div>
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
           <span id="notes-embed-label">28 May 2026 · Metering &amp; comms topology</span>
@@ -1995,71 +2023,45 @@ code {
     </div>
   </div>
 
-  <!-- POWER AFRICA WORKSHOP -->
-  <div class="section" id="sec-power-africa">
+  <!-- IN-PERSON EVENTS -->
+  <div class="section" id="sec-events">
     <div class="section-header">
       <div>
-        <div class="section-title" id="power-africa-section-title">Power Africa Workshop</div>
-        <div class="section-sub" id="power-africa-section-sub">Conference hands-on track · planning notes</div>
+        <div class="section-title" id="events-section-title">In-person events</div>
+        <div class="section-sub" id="events-section-sub">Workshops and hackathons · planning notes</div>
       </div>
     </div>
-    <div id="content-power-africa">
-      <div class="wiki-body">
-        <p>Planning notes for the IEEE Smart Village workshop at the annual PES/IAS Power Africa conference. ISV has run workshops at Power Africa since 2012 — electricity, education, and enterprise for off-grid communities. Official program: <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ieee-powerafrica.org/isvx</a>. Select a session below.</p>
-      </div>
-      <div class="notes-index" id="power-africa-index">
-        <a class="notes-index-item active" href="#" data-note="power-africa-2026-workshop-planning" onclick="showNote('power-africa-2026-workshop-planning');return false">
-          <div class="notes-index-title">Workshop planning</div>
-          <div class="notes-index-meta">Sep 2026 · Nairobi · Glenn &amp; Mike · kits · budget · schedule</div>
-        </a>
-      </div>
+    <div id="content-events">
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
-          <span id="power-africa-embed-label">Sep 2026 · Workshop planning</span>
+          <span id="events-embed-label">Sep 2026 · Workshop planning</span>
           <div class="notes-embed-toolbar-links">
-            <a id="power-africa-toolbar-standalone" href="power-africa-2026-workshop-planning.html" target="_blank" rel="noopener">Full page</a>
+            <a id="events-toolbar-standalone" href="power-africa-2026-workshop-planning.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="power-africa-frame" title="Power Africa Workshop notes preview" src="power-africa-2026-workshop-planning.html?embed=1"></iframe>
+        <iframe id="events-frame" title="In-person event notes preview" src="power-africa-2026-workshop-planning.html?embed=1"></iframe>
       </div>
     </div>
   </div>
 
-  <!-- METER BENCHMARK -->
+  <!-- METERING FOCUS -->
   <div class="section" id="sec-meter-study">
     <div class="section-header">
       <div>
-        <div class="section-title">Meter benchmark</div>
-        <div class="section-sub" id="meter-study-section-sub">Village metering — problems, VMRS alignment, vendor comparison</div>
+        <div class="section-title">Metering focus</div>
+        <div class="section-sub" id="meter-study-section-sub">Primary Tech Comm endeavor · overview, VMRS, vendor study, landscape</div>
       </div>
     </div>
     <div id="content-meter-study">
-      <div class="wiki-body">
-        <p>Compare smart meters, AMI vendors, and microgrid platforms for ISV-funded village deployments. Utility AMI stacks are mapped in <strong>The problems today</strong>; northbound JSON/MQTT and register tiers in <strong><a href="#" onclick="showMeterPage('vmrs');return false">OBIS · VMRS</a></strong> (<a href="meter-vmrs.html#acronyms">acronym list</a>). Specs in <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/</code></a>.</p>
-      </div>
-      <div class="notes-index" id="meter-study-index">
-        <a class="notes-index-item" href="#" data-meter-page="problems-today" onclick="showMeterPage('problems-today');return false">
-          <div class="notes-index-title">The problems today</div>
-          <div class="notes-index-meta">Utility AMI vs village minimum · COSEM · HES · MDMS · SIP</div>
-        </a>
-        <a class="notes-index-item" href="#" data-meter-page="vmrs" onclick="showMeterPage('vmrs');return false">
-          <div class="notes-index-title">OBIS · VMRS</div>
-          <div class="notes-index-meta">Register set · MQTT profile · manufacturer POC playbook</div>
-        </a>
-        <a class="notes-index-item active" href="#" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study');return false">
-          <div class="notes-index-title">Vendor study</div>
-          <div class="notes-index-meta">Pipeline + cited DLMS · STS · VMRS benchmark</div>
-        </a>
-      </div>
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
-          <span id="meter-study-embed-label">Vendor study</span>
+          <span id="meter-study-embed-label">Overview</span>
           <div class="notes-embed-toolbar-links">
-            <a id="meter-study-toolbar-standalone" href="meter-vendor-study.html" target="_blank" rel="noopener">Full page</a>
+            <a id="meter-study-toolbar-standalone" href="meter-overview.html" target="_blank" rel="noopener">Full page</a>
             <a href="meter-benchmark/northbound-mqtt-v0.1.json" target="_blank" rel="noopener">Northbound JSON</a>
           </div>
         </div>
-        <iframe id="meter-study-frame" title="Meter benchmark preview" src="meter-vendor-study.html?embed=1"></iframe>
+        <iframe id="meter-study-frame" title="Metering focus preview" src="meter-overview.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2121,21 +2123,27 @@ code {
 
 <script src="js/tech-notes-catalog.js"></script>
 <script>
-const SECTIONS = ['home','mission','funded','notes','tasks','committees','power-africa','meter-study','tech-notes','standards','data','resources'];
+const SECTIONS = ['home','mission','funded','notes','tasks','committees','events','meter-study','tech-notes','standards','data','resources'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
-  'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }
+  'events': { section: 'events', defaultNote: 'power-africa-2026-workshop-planning' }
 };
 const METER_BENCHMARK_PAGES = {
+  'overview': {
+    title: 'Overview',
+    sub: 'Primary endeavor · two goals · problems summary',
+    src: 'meter-overview.html?embed=1',
+    standalone: 'meter-overview.html'
+  },
   'problems-today': {
-    title: 'The problems today',
-    sub: 'Utility AMI vs village minimum · COSEM · HES · MDMS · SIP',
+    title: 'Problems',
+    sub: 'Landscape diagram · L1–L7 layers · utility vs village comparison',
     src: 'meter-problems-today.html?embed=1',
     standalone: 'meter-problems-today.html'
   },
   'vmrs': {
     title: 'OBIS · VMRS',
-    sub: 'Register set · MQTT profile · manufacturer POC playbook',
+    sub: 'Register tiers · acronyms · ICD · northbound MQTT · POC playbook',
     src: 'meter-vmrs.html?embed=1',
     standalone: 'meter-vmrs.html'
   },
@@ -2146,7 +2154,7 @@ const METER_BENCHMARK_PAGES = {
     standalone: 'meter-vendor-study.html'
   }
 };
-let activeMeterPageId = 'vendor-study';
+let activeMeterPageId = 'overview';
 const MEETING_NOTES = {
   'metering-2026-05-28': {
     group: 'tech-comm',
@@ -2159,8 +2167,8 @@ const MEETING_NOTES = {
     diagramGuide: 'technical-notes/diagrams/editing-guide.html'
   },
   'power-africa-2026-workshop-planning': {
-    group: 'power-africa',
-    title: 'Workshop planning',
+    group: 'events',
+    title: 'Power Africa workshop planning',
     date: 'Sep 2026',
     sub: 'Nairobi · Glenn & Mike · kits · budget · schedule · Nairobi shipping',
     src: 'power-africa-2026-workshop-planning.html?embed=1',
@@ -2214,9 +2222,16 @@ function showSection(id, options = {}) {
   });
   const main = document.getElementById('main');
   main.classList.toggle('wide', id === 'funded');
-  main.classList.toggle('notes-wide', id === 'notes' || id === 'power-africa' || id === 'meter-study' || id === 'tech-notes' || id === 'tasks');
+  main.classList.toggle('notes-wide', id === 'notes' || id === 'events' || id === 'meter-study' || id === 'tech-notes' || id === 'tasks');
   if (id === 'funded') loadFundedProjects();
-  if ((id === 'notes' || id === 'power-africa') && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
+  if ((id === 'notes' || id === 'events') && !options.skipNoteRefresh) {
+    const noteSection = getNoteSection(activeNoteId);
+    if (noteSection !== id) {
+      const groupKey = id === 'events' ? 'events' : 'tech-comm';
+      activeNoteId = NOTE_GROUPS[groupKey]?.defaultNote || activeNoteId;
+    }
+    refreshNotePreview(activeNoteId);
+  }
   if (id === 'meter-study' && !options.skipMeterRefresh) refreshMeterPreview(activeMeterPageId);
   if (id === 'tasks' && window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
   if (id === 'tech-notes') loadTechnicalNotes();
@@ -2241,15 +2256,10 @@ function refreshNotePreview(noteId) {
   document.querySelectorAll('.nav-sub-item[data-note]').forEach(el => {
     el.classList.toggle('active', el.dataset.note === noteId);
   });
-  document.querySelectorAll('.notes-index-item[data-note]').forEach(el => {
-    el.classList.toggle('active', el.dataset.note === noteId);
-    if (el.closest('#notes-index')) el.style.display = getNoteGroup(el.dataset.note) === 'tech-comm' ? '' : 'none';
-    if (el.closest('#power-africa-index')) el.style.display = getNoteGroup(el.dataset.note) === 'power-africa' ? '' : 'none';
-  });
-  const frameId = group === 'power-africa' ? 'power-africa-frame' : 'notes-frame';
-  const labelId = group === 'power-africa' ? 'power-africa-embed-label' : 'notes-embed-label';
-  const subId = group === 'power-africa' ? 'power-africa-section-sub' : 'notes-section-sub';
-  const toolbarId = group === 'power-africa' ? 'power-africa-toolbar-standalone' : 'notes-toolbar-standalone';
+  const frameId = group === 'events' ? 'events-frame' : 'notes-frame';
+  const labelId = group === 'events' ? 'events-embed-label' : 'notes-embed-label';
+  const subId = group === 'events' ? 'events-section-sub' : 'notes-section-sub';
+  const toolbarId = group === 'events' ? 'events-toolbar-standalone' : 'notes-toolbar-standalone';
   const frame = document.getElementById(frameId);
   const nextSrc = note.src;
   if (frame && frame.getAttribute('src') !== nextSrc) frame.setAttribute('src', nextSrc);
@@ -2274,9 +2284,6 @@ function refreshMeterPreview(pageId) {
   const page = METER_BENCHMARK_PAGES[pageId];
   if (!page) return;
   document.querySelectorAll('.nav-sub-item[data-meter-page]').forEach(el => {
-    el.classList.toggle('active', el.dataset.meterPage === pageId);
-  });
-  document.querySelectorAll('.notes-index-item[data-meter-page]').forEach(el => {
     el.classList.toggle('active', el.dataset.meterPage === pageId);
   });
   const frame = document.getElementById('meter-study-frame');
@@ -2311,9 +2318,9 @@ function initFromHash() {
     return;
   }
   if (raw === 'meter-study' || raw.startsWith('meter-study/')) {
-    const pageId = raw.split('/')[1] || 'vendor-study';
+    const pageId = raw.split('/')[1] || 'overview';
     if (METER_BENCHMARK_PAGES[pageId]) showMeterPage(pageId, false);
-    else showMeterPage('vendor-study', false);
+    else showMeterPage('overview', false);
     return;
   }
   if (raw === 'tasks' || raw.startsWith('tasks?')) {
@@ -2321,9 +2328,11 @@ function initFromHash() {
     if (window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
     return;
   }
-  if (raw.startsWith('notes') || raw.startsWith('power-africa')) {
-    const section = raw.split('/')[0];
-    const defaultNote = NOTE_GROUPS[section === 'power-africa' ? 'power-africa' : 'tech-comm']?.defaultNote;
+  if (raw.startsWith('notes') || raw.startsWith('events') || raw.startsWith('power-africa')) {
+    let section = raw.split('/')[0];
+    if (section === 'power-africa') section = 'events';
+    const groupKey = section === 'events' ? 'events' : 'tech-comm';
+    const defaultNote = NOTE_GROUPS[groupKey]?.defaultNote;
     const noteId = raw.split('/')[1] || defaultNote;
     if (MEETING_NOTES[noteId]) showNote(noteId, false);
     return;
@@ -2868,7 +2877,7 @@ document.getElementById('api-modal').addEventListener('click', function(e) {
 });
 
 updateApiStatus();
-['notes-frame', 'power-africa-frame', 'meter-study-frame'].forEach(function (id) {
+['notes-frame', 'events-frame', 'meter-study-frame'].forEach(function (id) {
   var f = document.getElementById(id);
   if (f && window.ISVTheme) ISVTheme.syncFrame(f);
 });

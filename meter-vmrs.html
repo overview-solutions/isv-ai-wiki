@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OBIS · VMRS · Meter benchmark · ISV</title>
+<title>OBIS · VMRS · Metering focus · ISV</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css">
 <script src="js/isv-theme.js"></script>
@@ -21,11 +21,7 @@ h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 
 h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
 p, li { font-size: 14px; margin-bottom: 0.5rem; }
 ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
-.hub { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 13px; }
-.hub a { padding: 0.35rem 0.65rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: var(--text-2); background: var(--bg-2); }
-.hub a:hover { border-color: var(--green); color: var(--green); }
-.hub a.active { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
-.tbl-wrap { overflow-x: auto; margin-bottom: 1.25rem; border: 1px solid var(--border); border-radius: 10px; }
+.tag-draft { overflow-x: auto; margin-bottom: 1.25rem; border: 1px solid var(--border); border-radius: 10px; }
 table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
 th, td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
 th { background: var(--bg-2); font-weight: 500; font-size: 11px; }
@@ -58,7 +54,7 @@ pre { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8
 .steps { counter-reset: step; list-style: none; padding-left: 0; }
 .steps li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; }
 .steps li::before { content: counter(step); position: absolute; left: 0; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--green-50); color: var(--green); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-html.embed .back, html.embed #notes-back-btn, html.embed .hub { display: none; }
+html.embed .back { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 </style>
 </head>
@@ -72,18 +68,10 @@ html.embed .wrap { padding-top: 1rem; }
 </div>
 <script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
 <div class="wrap">
-  <div class="back"><a href="index.html#meter-study">← Meter benchmark</a></div>
-  <nav class="hub" aria-label="Meter benchmark pages">
-    <a href="meter-problems-today.html">The problems today</a>
-    <a href="meter-vmrs.html" class="active">OBIS · VMRS</a>
-    <a href="meter-vendor-study.html">Vendor study</a>
-  </nav>
+  <div class="back"><a href="index.html#meter-study/vmrs">← Metering focus</a> · <a href="meter-overview.html">Overview</a></div>
+
   <h1>OBIS · Village Minimum Register Set (VMRS)</h1>
   <p class="sub">Draft alignment wedge · v0.1-draft · Jun 2026 · <span class="tag-draft">NOT a published standard</span></p>
-
-  <p id="notes-back-btn" style="margin-bottom:1rem">
-    <a href="index.html#meter-study/vmrs" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
-  </p>
 
   <div class="callout callout-warn">
     <strong>Read this before citing VMRS in an RFP</strong>
@@ -318,7 +306,8 @@ Can you connect us with your DLMS/AMI protocol engineer for a 30-minute technica
 
   <h2>Related pages</h2>
   <ul>
-    <li><a href="meter-problems-today.html">The problems today</a> — layered ecosystem diagram (payment vs semantics vs protocol)</li>
+    <li><a href="meter-overview.html">Metering focus · Overview</a></li>
+    <li><a href="meter-problems-today.html">Problems in depth</a> — layered ecosystem diagram</li>
     <li><a href="meter-vendor-study.html">Vendor study</a> — VMRS column in benchmark tables</li>
     <li><a href="tech-comm-2026-05-28-metering-topology.html">May 2026 metering topology</a> — STS/SMS and redundant NAN</li>
   </ul>

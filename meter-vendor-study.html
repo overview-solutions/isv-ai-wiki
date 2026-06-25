@@ -74,8 +74,7 @@ td code { font-family: var(--mono); font-size: 10px; }
 .sources { font-size: 12px; line-height: 1.5; }
 .sources li { margin-bottom: 0.35rem; }
 .sources .tag { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--bg-3); color: var(--text-2); margin-right: 4px; }
-html.embed .back, html.embed #notes-back-btn { display: none; }
-html.embed .meter-hub { display: none; }
+html.embed .back { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
 @media (max-width: 720px) { .layers { grid-template-columns: 1fr; } }
@@ -95,22 +94,11 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 }
 </script>
 <div class="wrap">
-  <div class="back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <div class="back"><a href="index.html">← ISV Knowledge Base · Home</a> · <a href="index.html#meter-study/vendor-study">Metering focus</a></div>
   <h1>Village metering vendor study</h1>
   <p class="sub">Researched pass · Jun 2026 · pipeline + layered protocol benchmark · citations required for every score</p>
 
-  <p id="notes-back-btn" style="margin-bottom:1rem">
-    <a href="index.html#meter-study/vendor-study" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
-    · <a href="index.html" style="font-size:14px">Home</a>
-  </p>
-
-  <nav class="hub meter-hub" aria-label="Meter benchmark pages" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;font-size:13px">
-    <a href="meter-problems-today.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--text-2);background:var(--bg-2)">The problems today</a>
-    <a href="meter-vmrs.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--text-2);background:var(--bg-2)">OBIS · VMRS</a>
-    <a href="meter-vendor-study.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--green);text-decoration:none;color:var(--green);background:var(--green-50);font-weight:500">Vendor study</a>
-  </nav>
-
-  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Alignment target: <a href="meter-vmrs.html">VMRS</a> (OBIS subset) northbound via <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a>. See <a href="meter-problems-today.html">The problems today</a> for why full utility AMI stacks do not fit village budgets.</p>
+  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Part of <a href="meter-overview.html">Metering focus</a>. Alignment target: <a href="meter-vmrs.html">VMRS</a> northbound via <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. Landscape: <a href="meter-problems-today.html">Problems in depth</a>.</p>
 
   <div class="method-box">
     <strong>Research method (this pass)</strong>

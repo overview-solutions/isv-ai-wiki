@@ -42,9 +42,10 @@ isv-ai-wiki/
 ├── index.html                    # Shell: sidebar, sections, hash routing, registries
 ├── AGENTS.md                     # ← You are here (AI navigation)
 ├── README.md                     # Human quickstart
+├── meter-overview.html           # Metering focus — high-level overview (default embed)
+├── meter-vmrs.html               # OBIS VMRS + acronyms + tiers + POC playbook
+├── meter-problems-today.html     # Problems in depth — landscape diagrams & layers
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
-├── meter-problems-today.html     # Utility AMI vs village stack diagrams
-├── meter-vmrs.html               # OBIS VMRS + manufacturer POC playbook
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + SIP hooks
@@ -73,7 +74,7 @@ isv-ai-wiki/
 
 Registered sections (`SECTIONS` in `index.html`):
 
-| `home` · `mission` · `funded` · `notes` · `tasks` · `committees` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
+| `home` · `mission` · `funded` · `notes` · `tasks` · `committees` · `events` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
 
 `home` is the IEEE Smart Village Knowledge Base **and** the Tech Committee working hub (intro blocks + initiatives). Legacy `#tech` hash redirects to `home`. Other ISV committees (RWGs, subcommittees) live on `committees`.
 
@@ -85,12 +86,13 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#committees` | Other ISV committees — RWGs and subcommittees |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
-| `#meter-study` | Meter benchmark — default: vendor study |
-| `#meter-study/problems-today` | Utility AMI vs village minimum stack |
-| `#meter-study/vmrs` | OBIS VMRS + northbound profile |
+| `#meter-study` | Metering focus — default: overview |
+| `#meter-study/overview` | High-level overview (primary endeavor) |
+| `#meter-study/problems-today` | Problems — landscape diagrams & layers |
+| `#meter-study/vmrs` | OBIS VMRS + acronyms + tiers |
 | `#meter-study/vendor-study` | Vendor pipeline + technical tables |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
-| `#power-africa/{note-id}` | Workshop planning (default: `power-africa-2026-workshop-planning`) |
+| `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
@@ -102,8 +104,8 @@ Registered sections (`SECTIONS` in `index.html`):
 
 Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` class). The shell loads:
 
-- `meter-vendor-study.html?embed=1`
-- `meter-problems-today.html?embed=1` · `meter-vmrs.html?embed=1`
+- `meter-overview.html?embed=1` (default)
+- `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1` · `meter-problems-today.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
@@ -115,7 +117,7 @@ When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the
 | `SECTIONS` | Top-level nav ids |
 | `MEETING_NOTES` | Note id → `{ group, title, date, src, standalone }` |
 | `METER_BENCHMARK_PAGES` | Page id → `{ title, sub, src, standalone }` for meter-study sub-nav |
-| `NOTE_GROUPS` | `tech-comm` → `notes` section; `power-africa` → `power-africa` section |
+| `NOTE_GROUPS` | `tech-comm` → `notes` section; `events` → `events` section (in-person workshops & hackathons) |
 | `TECH_NOTES_CATALOG_URL` | Points to `technical-notes/catalog.json` |
 
 ---
@@ -135,7 +137,7 @@ Read sources in this order when answering technical questions:
 
 ---
 
-## Meter benchmark — what matters most
+## Metering focus — what matters most
 
 The study uses a **three-layer stack** (field / edge / cloud). The most **versatile** columns across use cases:
 
