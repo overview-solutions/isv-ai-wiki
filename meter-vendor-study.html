@@ -10,7 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
 <script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
@@ -71,6 +73,18 @@ td code { font-family: var(--mono); font-size: 10px; }
 .enum-grid div { padding: 0.5rem 0.65rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-2); }
 .enum-grid dt { font-weight: 500; font-size: 11px; margin-bottom: 0.15rem; }
 .enum-grid dd { color: var(--text-2); margin: 0; line-height: 1.4; }
+.study-map {
+  display: grid; gap: 0.45rem; margin-bottom: 1.25rem; font-size: 12px; line-height: 1.45;
+}
+.study-map div {
+  padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-2); color: var(--text-2);
+}
+.study-map strong { color: var(--text); font-weight: 500; }
+tr.section-row td {
+  background: var(--bg-2); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--teal); padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--border);
+}
+.bench-role { font-size: 11px; color: var(--text-2); white-space: nowrap; }
 .sources { font-size: 12px; line-height: 1.5; }
 .sources li { margin-bottom: 0.35rem; }
 .sources .tag { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--bg-3); color: var(--text-2); margin-right: 4px; }
@@ -88,28 +102,27 @@ html.embed h1 { font-size: 20px; }
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   </button>
 </div>
-<script>
-if (new URLSearchParams(location.search).get('embed') === '1') {
-  document.documentElement.classList.add('embed');
-}
-</script>
 <div class="wrap">
-  <div class="back"><a href="index.html">← ISV Knowledge Base · Home</a> · <a href="index.html#meter-study/vendor-study">Metering focus</a></div>
-  <h1>Village metering vendor study</h1>
-  <p class="sub">Researched pass · Jun 2026 · pipeline + layered protocol benchmark · citations required for every score</p>
+  <div class="back"><a href="index.html#meter-study/vendor-study">← Meter Interoperability</a></div>
+  <h1>Vendor Study</h1>
+  <p class="sub">Jun 2026 · pipeline + protocol benchmark · citations required</p>
 
-  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Part of <a href="meter-overview.html">Metering focus</a>. Alignment target: <a href="meter-vmrs.html">VMRS</a> northbound via <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. Landscape: <a href="meter-problems-today.html">Problems in depth</a>.</p>
+  <p class="lead">Living comparison for village-meter procurement: cited protocol scores, outreach status, and contacts. Target northbound contract: <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound MQTT v0.1</a> + <a href="index.html#meter-study/vmrs">VMRS</a>. Web/datasheet pass only — nothing marked <code>tested</code>.</p>
 
-  <div class="method-box">
-    <strong>Research method (this pass)</strong>
-    <p style="margin:0.5rem 0 0">Web review of vendor product pages, technical PDFs, and third-party industry reports. ISV internal notes (DokuWiki, Tech Comm) used only where marked <span class="tag">ISV</span>. No hands-on interop testing in this pass — nothing marked <code>tested</code>.</p>
-    <div class="method-stats">
-      <div class="method-stat"><strong>8</strong>independent / industry sources</div>
-      <div class="method-stat"><strong>20</strong>vendor-primary sources</div>
-      <div class="method-stat"><strong>3</strong>ISV-internal sources</div>
-      <div class="method-stat"><strong>51</strong>total citations</div>
-    </div>
+  <div class="study-map">
+    <div><strong>1 · Protocol benchmark</strong> — DLMS, STS, VMRS, and northbound APIs from datasheets and public docs (<code>doc</code> / <code>claim</code> / <code>no</code> / <code>—</code>). Grouped by vendor role; do not compare SunSpec inverter rows to STS meter rows.</div>
+    <div><strong>2 · Outreach pipeline</strong> — brochures, pricing, field references, and ISV follow-up history. Operational, not proof of interoperability.</div>
+    <div><strong>3 · Directory &amp; context</strong> — full contact directory, generation-side DER notes, industry cost bands, and bibliography (expand below).</div>
   </div>
+
+  <details>
+    <summary>Method · scoring legend · known gaps</summary>
+    <p style="font-size:12px;color:var(--text-2);margin:0.5rem 0">8 industry + 20 vendor-primary + 3 ISV sources (51 citations). Cells: <code>doc</code> / <code>claim</code> / <code>no</code> / <code>—</code>. VMRS = documented OBIS export, not full ICD. Confidence T0–T3.</p>
+    <div class="callout callout-warn" style="margin:0.5rem 0 0">
+      <strong>Gaps this pass</strong>
+      No public API for SteamaCo Nimbus or SparkMeter ThunderCloud. Inhemeter DLMS docs partner-gated. Rare published $/meter pricing.
+    </div>
+  </details>
 
   <div class="layers">
     <div class="layer"><strong>Field — meter / CIU</strong><span>DLMS/COSEM · STS · Modbus · proprietary RF/OEM</span></div>
@@ -117,21 +130,268 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <div class="layer"><strong>Cloud — platform</strong><span>IEEE 2030.5 · REST/MQTT · proprietary HES/MDMS</span></div>
   </div>
 
-  <div class="callout callout-warn">
-    <strong>Dead ends this pass (honest gaps)</strong>
-    Public API specs not found for SteamaCo Nimbus or SparkMeter ThunderCloud. Inhemeter DLMS interoperability manuals appear partner-gated (ISV reports NDA). Hexing, Kelin, Schneider, Jinco, GroWatts, Studer, Dohon — no verified product/protocol docs retrieved. Published $/meter pricing is rare; industry reports give ranges only, not vendor list prices.
+  <h2>Protocol benchmark</h2>
+  <p style="font-size:12px;color:var(--text-2);margin:-0.35rem 0 0.75rem;max-width:48rem">One table, three vendor classes. VMRS = documented OBIS export toward <code>northbound-mqtt-v0.1</code>, not a full COSEM ICD. Confidence T0–T3.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Vendor</th><th>Role</th><th>Product</th><th>DLMS</th><th>STS</th><th>VMRS</th><th>SunSpec</th><th>2030.5</th><th>Transport</th><th>Northbound</th><th>Lock-in</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
+      </thead>
+      <tbody>
+        <tr class="section-row"><td colspan="14">Meter OEM &amp; DCU hardware</td></tr>
+        <tr>
+          <td><strong>Donsun</strong></td>
+          <td class="bench-role">meter + DCU</td>
+          <td>DS1000/1600/3000, DSC100 DCU</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>RF, PLC, GPRS/3G/4G on DCU; RS-485 DLMS HDLC <span class="src"><a href="#s28">[28]</a><a href="#s29">[29]</a></span></td>
+          <td>DLMS → HES (HES not bundled)</td>
+          <td class="val-unknown">—</td>
+          <td><code>—</code> <span class="src">ISV quote only</span></td>
+          <td>T1</td>
+          <td class="note-cell">IEC 62056 + STS on DS1000 brochure <span class="src"><a href="#s4">[4]</a></span>; DSC100 DLMS+DL/T698 <span class="src"><a href="#s28">[28]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Inhemeter</strong></td>
+          <td class="bench-role">meter</td>
+          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC, RF, GPRS, 3G/4G, NB-IoT modules <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
+          <td>DLMS COSEM server; CIU via PLC/RF</td>
+          <td class="val-unknown">—</td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">OBIS/IEC62056-21 optical on brochure <span class="src"><a href="#s15">[15]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Calin</strong></td>
+          <td class="bench-role">meter</td>
+          <td>CAM168-G, CAM368-G</td>
+          <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC / RF / GPRS / LoRa options <span class="src"><a href="#s18">[18]</a></span></td>
+          <td>DLMS to AMI head-end</td>
+          <td class="val-unknown">—</td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">IEC62055 + IEC62056 on product page</td>
+        </tr>
+        <tr>
+          <td><strong>Mojec</strong></td>
+          <td class="bench-role">meter + AMI</td>
+          <td>STS prepay + PLC AMI</td>
+          <td class="val-claim">claim</td>
+          <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>PLC NAN; GPRS WAN via concentrator <span class="src"><a href="#s16">[16]</a></span></td>
+          <td>Proprietary AMI + STS vending</td>
+          <td class="val-unknown">—</td>
+          <td><code>—</code></td>
+          <td>T1–T2</td>
+          <td class="note-cell">DLMS/COSM in AMI slide deck <span class="src"><a href="#s17">[17]</a></span>; STS on R&amp;D page</td>
+        </tr>
+        <tr class="section-row"><td colspan="14">Full-stack AMI &amp; mesh platforms</td></tr>
+        <tr>
+          <td><strong>SteamaCo</strong></td>
+          <td class="bench-role">full-stack</td>
+          <td>Nimbus AMI + Savi</td>
+          <td class="val-doc">interop</td>
+          <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>Savi: GPRS/PLC/RF mesh <span class="src"><a href="#s2">[2]</a></span></td>
+          <td>REST API (customer login); MPM plugin sync <span class="src"><a href="#s1">[1]</a><a href="#s30">[30]</a></span></td>
+          <td><span class="pill pill-amber">partner</span></td>
+          <td><code>platform</code> + SaaS <span class="src"><a href="#s23">[23]</a></span></td>
+          <td>T1–T2</td>
+          <td class="note-cell">Claims DLMS/COSEM interoperable HES/MDMS <span class="src"><a href="#s3">[3]</a></span>; Savi STS + mobile money <span class="src"><a href="#s2">[2]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>SparkMeter</strong></td>
+          <td class="bench-role">full-stack</td>
+          <td>ThunderCloud + mesh meters</td>
+          <td class="val-no">no public</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td>Proprietary RF mesh; low-bandwidth IP uplink <span class="src"><a href="#s9">[9]</a><a href="#s13">[13]</a></span></td>
+          <td>ThunderCloud (proprietary)</td>
+          <td><span class="pill pill-amber">closed</span></td>
+          <td><code>$40–110</code> band <span class="src"><a href="#s22">[22]</a></span></td>
+          <td>T2</td>
+          <td class="note-cell">EFC lists ~$80 MSR — single data point, not verified quote <span class="src"><a href="#s9">[9]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Okra</strong></td>
+          <td class="bench-role">mesh nanogrid</td>
+          <td>Harvest + Pod</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>DC mesh; Harvest cloud <span class="src"><a href="#s19">[19]</a></span></td>
+          <td>Harvest cloud; mobile money + cash</td>
+          <td><span class="pill pill-amber">closed</span></td>
+          <td><code>—</code></td>
+          <td>T1</td>
+          <td class="note-cell">Prepaid kWh or daily rate in Harvest <span class="src"><a href="#s19">[19]</a></span>; no public API spec</td>
+        </tr>
+        <tr class="section-row"><td colspan="14">Edge platform (not a revenue meter)</td></tr>
+        <tr>
+          <td><strong>New Sun Road</strong></td>
+          <td class="bench-role">platform</td>
+          <td>Stellar Edge + OS</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
+          <td class="val-unknown">—</td>
+          <td class="val-unknown">—</td>
+          <td>Modbus RTU, CAN, REST cloud UI <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
+          <td>Modbus RTU, CAN, REST cloud UI</td>
+          <td><span class="pill pill-teal">agnostic</span></td>
+          <td><code>platform</code></td>
+          <td>T1</td>
+          <td class="note-cell">Modbus RTU documented; SunSpec not claimed on vendor pages</td>
+        </tr>
+        <tr class="section-row"><td colspan="14">Named in pipeline — no protocol sheet retrieved this pass</td></tr>
+        <tr>
+          <td>Hexing · Kelin</td>
+          <td class="bench-role">meter</td>
+          <td>Utility AMI</td>
+          <td colspan="11" class="val-unknown">Hexing HXP100DII cited in industry minigrid examples <span class="src"><a href="#s22">[22]</a></span> — no vendor protocol sheets retrieved</td>
+        </tr>
+        <tr>
+          <td>Schneider · Jinco · Growatt · Studer · Dohon</td>
+          <td class="bench-role">mixed</td>
+          <td>—</td>
+          <td colspan="11" class="val-unknown">Original watch list — no verified protocol documentation retrieved this pass</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <h2>Scoring legend</h2>
-  <div class="enum-grid">
-    <div><dt>Protocol cell</dt><dd><code>doc</code> manual/datasheet · <code>claim</code> marketing only · <code>no</code> contrary evidence · <code>—</code> not researched · <code>N/A</code> wrong layer</dd></div>
-    <div><dt>VMRS</dt><dd>Documented export of <a href="meter-vmrs.html">Village Minimum Register Set</a> OBIS codes — not full DLMS ICD</dd></div>
-    <div><dt>Confidence</dt><dd>T0 marketing · T1 datasheet/brochure · T2 third-party or integration guide · T3 field/ISV hands-on</dd></div>
-    <div><dt>$/connection</dt><dd>Industry band from independent reports unless ISV quote noted</dd></div>
+  <h2>Outreach pipeline</h2>
+  <p style="font-size:12px;color:var(--text-2);margin:-0.35rem 0 0.75rem;max-width:48rem">Procurement follow-up only — see protocol columns above for STS/DLMS/VMRS scores.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Brand</th><th>System</th><th>Role</th><th>Outreach</th><th>Brochure</th><th>Pricing</th><th>Field refs</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Donsun</strong></td>
+          <td>DS series meters + DSC100 DCU</td>
+          <td class="role">meter + DCU</td>
+          <td><span class="pill pill-green">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s28">[28]</a></span></td>
+          <td><span class="pill pill-amber">ISV quote</span> <span class="src">ISV</span></td>
+          <td class="note-cell">Deployed in multiple African utilities per vendor trade listings <span class="src"><a href="#s5">[5]</a></span></td>
+          <td class="note-cell">SteamaCo lists Savi meters as Donsun-supplied <span class="src"><a href="#s6">[6]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>SteamaCo</strong></td>
+          <td>Nimbus AMI + Savi meters + DCU</td>
+          <td class="role">full-stack</td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Kenya mini-grid deployments cited (e.g. Kudura) <span class="src"><a href="#s7">[7]</a></span></td>
+          <td class="note-cell">API exists; public developer portal not found <span class="src"><a href="#s1">[1]</a><a href="#s8">[8]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>New Sun Road</strong></td>
+          <td>Stellar Edge + Microgrid OS</td>
+          <td class="role">platform</td>
+          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Vendor claims 1,000+ microgrids / 21 countries <span class="src"><a href="#s10">[10]</a></span></td>
+          <td class="note-cell">Not a revenue meter — edge controller + cloud OS</td>
+        </tr>
+        <tr>
+          <td><strong>SparkMeter</strong></td>
+          <td>ThunderCloud + RF mesh meters</td>
+          <td class="role">full-stack</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s9">[9]</a></span></td>
+          <td><span class="pill pill-red">quote only</span> <span class="src"><a href="#s13">[13]</a></span></td>
+          <td class="note-cell">22 countries per EFC profile; Haiti, Kenya, Tanzania listed <span class="src"><a href="#s9">[9]</a></span></td>
+          <td class="note-cell">Proprietary mesh + cloud; no public DLMS spec found <span class="src"><a href="#s9">[9]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Inhemeter</strong></td>
+          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
+          <td class="role">meter</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">Partner DLMS docs gated per ISV field notes <span class="src">ISV</span></td>
+        </tr>
+        <tr>
+          <td><strong>Mojec</strong></td>
+          <td>STS prepay + AMI (Nigeria)</td>
+          <td class="role">meter + AMI</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s16">[16]</a><a href="#s17">[17]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">IBEDC vending; Port Harcourt &amp; Ikeja AMR cited <span class="src"><a href="#s16">[16]</a></span></td>
+          <td class="note-cell">DLMS mentioned in Mojec AMI deck <span class="src"><a href="#s17">[17]</a></span></td>
+        </tr>
+        <tr>
+          <td><strong>Calin</strong></td>
+          <td>CAM168-G / CAM368-G etc.</td>
+          <td class="role">meter</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s18">[18]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="val-unknown">—</td>
+          <td class="note-cell">DLMS/COSEM + STS on same product lines</td>
+        </tr>
+        <tr>
+          <td><strong>Okra</strong></td>
+          <td>Pod + Harvest platform</td>
+          <td class="role">mesh nanogrid</td>
+          <td><span class="pill pill-red">—</span></td>
+          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s19">[19]</a><a href="#s20">[20]</a></span></td>
+          <td><span class="pill pill-red">—</span></td>
+          <td class="note-cell">Haiti, Cambodia, Philippines case studies <span class="src"><a href="#s20">[20]</a><a href="#s21">[21]</a></span></td>
+          <td class="note-cell">DC mesh + prepaid billing — not utility DLMS AMI</td>
+        </tr>
+        <tr>
+          <td>Hexing · Kelin</td>
+          <td>Utility AMI</td>
+          <td class="role">meter</td>
+          <td colspan="5" class="val-unknown">Named in industry minigrid meter examples (Hexing HXP100DII) <span class="src"><a href="#s22">[22]</a></span> — no vendor protocol sheets retrieved this pass</td>
+        </tr>
+        <tr>
+          <td>Schneider · Jinco · GroWatts · Studer · Dohon</td>
+          <td>—</td>
+          <td class="role">mixed</td>
+          <td colspan="5" class="val-unknown">On original watch list — no verified protocol documentation retrieved this pass</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <h2>Vendor contacts (for follow-up)</h2>
-  <p style="font-size:13px;color:var(--text-2);margin-bottom:0.75rem">Official channels only — each row cites a source. <span class="contact-isv">ISV prior contact</span> = earlier ISV outreach, not independently verified. Use contact forms where no email is published.</p>
+  <details>
+    <summary>Vendor contacts (full directory)</summary>
   <div class="tbl-wrap">
     <table>
       <thead>
@@ -331,253 +591,11 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       </tbody>
     </table>
   </div>
+  </details>
 
-  <h2>Pipeline tracker</h2>
-  <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr><th>Brand</th><th>System</th><th>Role</th><th>Outreach</th><th>Brochure</th><th>Pricing</th><th>Field refs</th><th>STS</th><th>Notes</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Donsun</strong></td>
-          <td>DS series meters + DSC100 DCU</td>
-          <td class="role">meter + DCU</td>
-          <td><span class="pill pill-green">Yes</span> <span class="src">ISV</span></td>
-          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s28">[28]</a></span></td>
-          <td><span class="pill pill-amber">ISV quote</span> <span class="src">ISV</span></td>
-          <td class="note-cell">Deployed in multiple African utilities per vendor trade listings <span class="src"><a href="#s5">[5]</a></span></td>
-          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s4">[4]</a><a href="#s28">[28]</a></span></td>
-          <td class="note-cell">SteamaCo lists Savi meters as Donsun-supplied <span class="src"><a href="#s6">[6]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>SteamaCo</strong></td>
-          <td>Nimbus AMI + Savi meters + DCU</td>
-          <td class="role">full-stack</td>
-          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
-          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="note-cell">Kenya mini-grid deployments cited (e.g. Kudura) <span class="src"><a href="#s7">[7]</a></span></td>
-          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s2">[2]</a></span></td>
-          <td class="note-cell">API exists; public developer portal not found <span class="src"><a href="#s1">[1]</a><a href="#s8">[8]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>New Sun Road</strong></td>
-          <td>Stellar Edge + Microgrid OS</td>
-          <td class="role">platform</td>
-          <td><span class="pill pill-amber">Yes</span> <span class="src">ISV</span></td>
-          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="note-cell">Vendor claims 1,000+ microgrids / 21 countries <span class="src"><a href="#s10">[10]</a></span></td>
-          <td class="val-na">N/A</td>
-          <td class="note-cell">Not a revenue meter — edge controller + cloud OS</td>
-        </tr>
-        <tr>
-          <td><strong>SparkMeter</strong></td>
-          <td>ThunderCloud + RF mesh meters</td>
-          <td class="role">full-stack</td>
-          <td><span class="pill pill-red">—</span></td>
-          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s9">[9]</a></span></td>
-          <td><span class="pill pill-red">quote only</span> <span class="src"><a href="#s13">[13]</a></span></td>
-          <td class="note-cell">22 countries per EFC profile; Haiti, Kenya, Tanzania listed <span class="src"><a href="#s9">[9]</a></span></td>
-          <td class="val-unknown">—</td>
-          <td class="note-cell">Proprietary mesh + cloud; no public DLMS spec found <span class="src"><a href="#s9">[9]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>Inhemeter</strong></td>
-          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
-          <td class="role">meter</td>
-          <td><span class="pill pill-red">—</span></td>
-          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="val-unknown">—</td>
-          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s14">[14]</a></span></td>
-          <td class="note-cell">Partner DLMS docs gated per ISV field notes <span class="src">ISV</span></td>
-        </tr>
-        <tr>
-          <td><strong>Mojec</strong></td>
-          <td>STS prepay + AMI (Nigeria)</td>
-          <td class="role">meter + AMI</td>
-          <td><span class="pill pill-red">—</span></td>
-          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s16">[16]</a><a href="#s17">[17]</a></span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="note-cell">IBEDC vending; Port Harcourt &amp; Ikeja AMR cited <span class="src"><a href="#s16">[16]</a></span></td>
-          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s16">[16]</a></span></td>
-          <td class="note-cell">DLMS mentioned in Mojec AMI deck <span class="src"><a href="#s17">[17]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>Calin</strong></td>
-          <td>CAM168-G / CAM368-G etc.</td>
-          <td class="role">meter</td>
-          <td><span class="pill pill-red">—</span></td>
-          <td><span class="pill pill-green">Yes</span> <span class="src"><a href="#s18">[18]</a></span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="val-unknown">—</td>
-          <td><span class="pill pill-green">doc</span> <span class="src"><a href="#s18">[18]</a></span></td>
-          <td class="note-cell">DLMS/COSEM + STS on same product lines</td>
-        </tr>
-        <tr>
-          <td><strong>Okra</strong></td>
-          <td>Pod + Harvest platform</td>
-          <td class="role">mesh nanogrid</td>
-          <td><span class="pill pill-red">—</span></td>
-          <td><span class="pill pill-amber">partial</span> <span class="src"><a href="#s19">[19]</a><a href="#s20">[20]</a></span></td>
-          <td><span class="pill pill-red">—</span></td>
-          <td class="note-cell">Haiti, Cambodia, Philippines case studies <span class="src"><a href="#s20">[20]</a><a href="#s21">[21]</a></span></td>
-          <td class="val-na">N/A</td>
-          <td class="note-cell">DC mesh + prepaid billing — not utility DLMS AMI</td>
-        </tr>
-        <tr>
-          <td>Hexing · Kelin</td>
-          <td>Utility AMI</td>
-          <td class="role">meter</td>
-          <td colspan="7" class="val-unknown">Named in industry minigrid meter examples (Hexing HXP100DII) <span class="src"><a href="#s22">[22]</a></span> — no vendor protocol sheets retrieved this pass</td>
-        </tr>
-        <tr>
-          <td>Schneider · Jinco · GroWatts · Studer · Dohon</td>
-          <td>—</td>
-          <td class="role">mixed</td>
-          <td colspan="7" class="val-unknown">On original watch list — no verified protocol documentation retrieved this pass</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Technical benchmark — meters &amp; AMI</h2>
-  <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>VMRS</th><th>SunSpec</th><th>2030.5</th><th>NAN / WAN</th><th>Northbound</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Donsun</strong></td>
-          <td>DS1000/1600/3000, DSC100 DCU</td>
-          <td class="val-doc">doc</td>
-          <td class="val-doc">doc</td>
-          <td class="val-doc">doc</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td>RF, PLC, GPRS/3G/4G on DCU; RS-485 DLMS HDLC <span class="src"><a href="#s28">[28]</a><a href="#s29">[29]</a></span></td>
-          <td>DLMS → HES (HES not bundled)</td>
-          <td><code>—</code> <span class="src">ISV quote only</span></td>
-          <td>T1</td>
-          <td class="note-cell">IEC 62056 + STS on DS1000 brochure <span class="src"><a href="#s4">[4]</a></span>; DSC100 DLMS+DL/T698 <span class="src"><a href="#s28">[28]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>Inhemeter</strong></td>
-          <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
-          <td class="val-doc">doc</td>
-          <td class="val-doc">doc</td>
-          <td class="val-doc">doc</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td>PLC, RF, GPRS, 3G/4G, NB-IoT modules <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
-          <td>DLMS COSEM server; CIU via PLC/RF</td>
-          <td><code>—</code></td>
-          <td>T1</td>
-          <td class="note-cell">OBIS/IEC62056-21 optical on brochure <span class="src"><a href="#s15">[15]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>Calin</strong></td>
-          <td>CAM168-G, CAM368-G</td>
-          <td class="val-doc">doc</td>
-          <td class="val-doc">doc</td>
-          <td class="val-claim">claim</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td>PLC / RF / GPRS / LoRa options <span class="src"><a href="#s18">[18]</a></span></td>
-          <td>DLMS to AMI head-end</td>
-          <td><code>—</code></td>
-          <td>T1</td>
-          <td class="note-cell">IEC62055 + IEC62056 on product page</td>
-        </tr>
-        <tr>
-          <td><strong>Mojec</strong></td>
-          <td>STS prepay + PLC AMI</td>
-          <td class="val-claim">claim</td>
-          <td class="val-doc">doc</td>
-          <td class="val-claim">claim</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td>PLC NAN; GPRS WAN via concentrator <span class="src"><a href="#s16">[16]</a></span></td>
-          <td>Proprietary AMI + STS vending</td>
-          <td><code>—</code></td>
-          <td>T1–T2</td>
-          <td class="note-cell">DLMS/COSM in AMI slide deck <span class="src"><a href="#s17">[17]</a></span>; STS on R&amp;D page</td>
-        </tr>
-        <tr>
-          <td><strong>SparkMeter</strong></td>
-          <td>ThunderCloud + mesh meters</td>
-          <td class="val-no">no public</td>
-          <td class="val-unknown">—</td>
-          <td class="val-unknown">—</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td>Proprietary RF mesh; low-bandwidth IP uplink <span class="src"><a href="#s9">[9]</a><a href="#s13">[13]</a></span></td>
-          <td>ThunderCloud (proprietary)</td>
-          <td><code>$40–110</code> band <span class="src"><a href="#s22">[22]</a></span></td>
-          <td>T2</td>
-          <td class="note-cell">EFC lists ~$80 MSR — single data point, not verified quote <span class="src"><a href="#s9">[9]</a></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Technical benchmark — platforms &amp; full stacks</h2>
-  <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>VMRS</th><th>SunSpec</th><th>2030.5</th><th>Northbound</th><th>Lock-in</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>SteamaCo</strong></td>
-          <td>Nimbus AMI + Savi</td>
-          <td class="val-doc">interop</td>
-          <td class="val-doc">doc</td>
-          <td class="val-claim">claim</td>
-          <td class="val-unknown">—</td>
-          <td class="val-unknown">—</td>
-          <td>REST API (customer login); MPM plugin sync <span class="src"><a href="#s1">[1]</a><a href="#s30">[30]</a></span></td>
-          <td><span class="pill pill-amber">partner</span></td>
-          <td><code>platform</code> + SaaS <span class="src"><a href="#s23">[23]</a></span></td>
-          <td>T1–T2</td>
-          <td class="note-cell">Claims DLMS/COSEM interoperable HES/MDMS <span class="src"><a href="#s3">[3]</a></span>; Savi STS + mobile money <span class="src"><a href="#s2">[2]</a></span></td>
-        </tr>
-        <tr>
-          <td><strong>New Sun Road</strong></td>
-          <td>Stellar Edge + OS</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td class="val-unknown">—</td>
-          <td class="val-unknown">—</td>
-          <td>Modbus RTU, CAN, REST cloud UI <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
-          <td><span class="pill pill-teal">agnostic</span></td>
-          <td><code>platform</code></td>
-          <td>T1</td>
-          <td class="note-cell">Modbus RTU documented; SunSpec not claimed on vendor pages</td>
-        </tr>
-        <tr>
-          <td><strong>Okra</strong></td>
-          <td>Harvest + Pod</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td class="val-na">N/A</td>
-          <td class="val-unknown">—</td>
-          <td class="val-unknown">—</td>
-          <td>Harvest cloud; mobile money + cash <span class="src"><a href="#s19">[19]</a></span></td>
-          <td><span class="pill pill-amber">closed</span></td>
-          <td><code>—</code></td>
-          <td>T1</td>
-          <td class="note-cell">Prepaid kWh or daily rate in Harvest <span class="src"><a href="#s19">[19]</a></span>; no public API spec</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Generation-side monitoring (not revenue meters)</h2>
+  <details>
+    <summary>Generation-side monitoring (not revenue meters)</summary>
+    <p style="font-size:12px;color:var(--text-2);margin:0.5rem 0 0.75rem">Parallel DER / inverter track — listed for contact-directory completeness. Do not score SunSpec or 2030.5 on STS revenue-meter rows in the protocol benchmark.</p>
   <div class="tbl-wrap">
     <table>
       <thead>
@@ -614,8 +632,11 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       </tbody>
     </table>
   </div>
+  </details>
 
-  <h2>Industry cost bands (independent — for comparison only)</h2>
+  <details>
+    <summary>Industry cost bands · key findings · bibliography</summary>
+  <h3 style="font-size:14px;margin:0.75rem 0 0.5rem">Industry cost bands (independent — comparison only)</h3>
   <div class="tbl-wrap">
     <table style="min-width:0">
       <thead><tr><th>Metric</th><th>Range</th><th>Context</th><th>Source</th></tr></thead>
@@ -629,7 +650,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </table>
   </div>
 
-  <h2>Key findings</h2>
+  <h3 style="font-size:14px;margin:1rem 0 0.5rem">Key findings</h3>
   <ul>
     <li><strong>Donsun + SteamaCo link verified:</strong> SteamaCo’s product page states Savi meters are “provided by Donsun Shenzhen” <span class="src"><a href="#s6">[6]</a></span> — same hardware family ISV is evaluating.</li>
     <li><strong>DLMS + STS often co-exist</strong> on West Africa / China utility meters (Donsun, Inhemeter, Calin, Mojec) per datasheets — but <em>key hierarchies differ</em> from OEM stacks (see Tech Comm topology notes).</li>
@@ -638,8 +659,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li><strong>SunSpec</strong> is documented for Enphase SunSpec-700 Modbus and Victron’s integration with SunSpec inverters — not for Donsun/Inhemeter revenue meters.</li>
   </ul>
 
-  <h2>Sources bibliography</h2>
-  <p style="font-size:13px;color:var(--text-2)"><span class="tag">V</span> vendor · <span class="tag">I</span> independent/industry · <span class="tag">ISV</span> internal</p>
+  <h3 style="font-size:14px;margin:1rem 0 0.5rem">Sources bibliography</h3>
+  <p style="font-size:12px;color:var(--text-2)"><span class="tag">V</span> vendor · <span class="tag">I</span> independent · <span class="tag">ISV</span> internal</p>
   <ol class="sources" id="sources">
     <li id="s1"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/off-grid-smart-metering-platform" target="_blank" rel="noopener">Off-grid IoT smart metering platform</a> (API, DCU, Savi)</li>
     <li id="s2"><span class="tag">V</span> SteamaCo — <a href="https://steama.co/savi-meters" target="_blank" rel="noopener">Savi smart meters</a> (STS, GPRS/PLC/RF mesh, AES-128)</li>
@@ -693,13 +714,11 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li id="s50"><span class="tag">I</span> LinkedIn — <a href="https://www.linkedin.com/company/shijiazhuang-kelin-electric-co." target="_blank" rel="noopener">Shijiazhuang Kelin Electric</a> (ke1911@kldcop.com — not on vendor homepage this pass)</li>
     <li id="s51"><span class="tag">V</span> Deye — <a href="https://www.deyeinverter.com/contact/" target="_blank" rel="noopener">Contact page</a> (market@deye.com.cn)</li>
   </ol>
+  </details>
 
-  <h2>Related</h2>
-  <ul>
-    <li><a href="index.html#notes/metering-2026-05-28">Tech Comm — Metering &amp; comms topology</a></li>
-    <li><a href="index.html#standards">Standards</a></li>
-    <li><a href="http://34.125.138.210/home:technologies:monitor:study" target="_blank" rel="noopener">Original DokuWiki study</a></li>
-  </ul>
+  <p class="meter-footer">
+    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a>
+  </p>
 </div>
 </body>
 </html>

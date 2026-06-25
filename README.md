@@ -27,7 +27,7 @@ Open [http://localhost:8765/index.html](http://localhost:8765/index.html) — us
 | **Tasks** | Meeting follow-ups as [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) — live board in the wiki |
 | **Meeting notes** | Internal Tech Comm call notes (tables, action items, embedded diagrams) |
 | **Technical reports** | Dev Labs + ISV reports (`catalog.json`) — summaries here, full docs linked |
-| **Everything else** | Mission, funded projects map, standards, resources, committees |
+| **Everything else** | About ISV, supported projects map, standards, resources |
 
 Direct links (live site):
 

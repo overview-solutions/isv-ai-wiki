@@ -314,36 +314,43 @@ body {
 
 .home-blocks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.85rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+  max-width: 52rem;
 }
 
 .home-block {
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem 1.05rem;
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
   background: var(--bg-2);
 }
 
 .home-block-title {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.25rem;
   color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-.home-block p,
-.home-block li {
-  font-size: 13px;
-  line-height: 1.55;
+.home-block p {
+  font-size: 12px;
+  line-height: 1.45;
   color: var(--text-2);
-  margin-bottom: 0.35rem;
+  margin: 0;
 }
 
-.home-block ul {
-  padding-left: 1.1rem;
-  margin: 0;
+.home-block p a { font-size: 12px; }
+
+.meeting-cadence {
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.45;
+  margin: -0.25rem 0 0.85rem;
+  max-width: 52rem;
 }
 
 .home-tech-section {
@@ -374,6 +381,18 @@ body {
   margin: 0;
   padding-left: calc(0.85rem + 3px);
 }
+
+.about-callout {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  background: var(--bg-2);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 1.25rem 0 1.5rem;
+  max-width: 52rem;
+}
+.about-anchor { scroll-margin-top: 1rem; }
 
 .committees-intro {
   font-size: 15px;
@@ -701,6 +720,11 @@ body {
   background: var(--green-50);
 }
 
+.project-card-stable {
+  border-style: dashed;
+  background: var(--bg-2);
+}
+
 .project-card-head {
   display: flex;
   align-items: center;
@@ -719,6 +743,7 @@ body {
 }
 
 .tag-active   { background: var(--green-50);  color: var(--green); }
+.tag-stable   { background: var(--bg-3); color: var(--text-2); }
 .tag-pilot    { background: var(--amber-50);  color: var(--amber); }
 .tag-planning { background: var(--teal-50);   color: var(--teal); }
 .tag-retired  { background: var(--bg-3);     color: var(--text-3); }
@@ -1295,7 +1320,7 @@ code {
     <button type="button" class="theme-toggle" data-isv-theme-toggle aria-label="Switch to dark mode">
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <span class="theme-toggle-label">Dark mode</span>
+      <span class="theme-toggle-label">Dark Mode</span>
     </button>
   </div>
 
@@ -1305,24 +1330,30 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5z"/></svg>
       Home
     </div>
-    <div class="nav-item" data-section="mission" onclick="showSection('mission')">
+    <div class="nav-item" data-section="about" onclick="showSection('about')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
-      Mission
+      About ISV
     </div>
-    <div class="nav-item" data-section="committees" onclick="showSection('committees')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Other ISV committees
-    </div>
-    <div class="nav-item" data-section="funded" onclick="showSection('funded')">
+    <div class="nav-item" data-section="supported" onclick="showSection('supported')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Funded projects
+      Supported Projects
+    </div>
+    <div class="nav-item" data-section="meter-study" onclick="showSection('meter-study')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Meter Interoperability
+    </div>
+    <div class="nav-sub" id="nav-sub-meter-study">
+      <div class="nav-sub-item" data-meter-page="overview" onclick="showMeterPage('overview')">Overview</div>
+      <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">Problems</div>
+      <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
+      <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor Study</div>
     </div>
     <div class="nav-item" data-section="notes" onclick="showSection('notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      Meeting notes
+      Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
-      <div class="nav-sub-item active" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering topology</div>
+      <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
     </div>
     <div class="nav-item" data-section="tasks" onclick="showSection('tasks')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -1330,34 +1361,23 @@ code {
     </div>
     <div class="nav-item" data-section="events" onclick="showSection('events')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      In-person events
+      In-Person Events
     </div>
     <div class="nav-sub" id="nav-sub-events">
-      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · Power Africa workshop</div>
+      <div class="nav-sub-item" data-note="open-energy-hackathon-2025" data-note-group="events" onclick="showNote('open-energy-hackathon-2025')">Apr 2025 · Open Energy Hackathon</div>
+      <div class="nav-sub-item" data-note="power-africa-openami-2025" data-note-group="events" onclick="showNote('power-africa-openami-2025')">Sep 2025 · OpenAMI @ Power Africa</div>
+      <div class="nav-sub-item" data-note="open-energy-hackathon-2026" data-note-group="events" onclick="showNote('open-energy-hackathon-2026')">Apr 2026 · Open Energy Hackathon</div>
+      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · Power Africa Workshop</div>
     </div>
-    <div class="nav-item" data-section="meter-study" onclick="showSection('meter-study')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Metering focus
-    </div>
-    <div class="nav-sub" id="nav-sub-meter-study">
-      <div class="nav-sub-item active" data-meter-page="overview" onclick="showMeterPage('overview')">Overview</div>
-      <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">Problems</div>
-      <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
-      <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor study</div>
-    </div>
-    <div class="nav-label nav-label-knowledge">Knowledge base</div>
+    <div class="nav-label nav-label-knowledge">Knowledge Base</div>
     <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-      Technical reports
+      Technical Reports
     </div>
     <div class="nav-sub" id="nav-sub-tech-notes"></div>
     <div class="nav-item" data-section="standards" onclick="showSection('standards')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
       Standards
-    </div>
-    <div class="nav-item" data-section="data" onclick="showSection('data')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-      Open data
     </div>
     <div class="nav-item" data-section="resources" onclick="showSection('resources')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -1387,8 +1407,8 @@ code {
   <div class="section active" id="sec-home">
     <div class="section-header">
       <div>
-        <div class="section-title">IEEE Smart Village (ISV) Knowledge Base</div>
-        <div class="section-sub">Working hub for the ISV Technology Committee — funded deployments, open standards, meeting notes, and conference workshops</div>
+        <div class="section-title">IEEE Smart Village · Technology Committee</div>
+        <div class="section-sub">Knowledge base for ISV’s engineering subcommittee — open standards, meeting notes, and conference workshops</div>
       </div>
     </div>
     <div id="content-home">
@@ -1397,46 +1417,24 @@ code {
           <img src="assets/tech-committee-logo.png" alt="IEEE Smart Village Tech Committee">
         </figure>
         <div class="home-about-text">
-          <p class="home-lead">This knowledge base is built primarily for <strong>Technology Committee volunteers</strong> at the moment — meeting notes, engineering references, and initiative tracking. ISV is made up of other committees as well — regional working groups, subcommittees, and more — which can be explored <a href="#" onclick="showSection('committees');return false">here</a>. The work of those groups is not reflected here; this site focuses on Tech Comm for now.</p>
+          <p class="home-lead"><strong>IEEE Smart Village</strong> is a humanitarian program within IEEE that funds village-scale energy, education, and enterprise worldwide. The <strong>Technology Committee</strong> is one of its functional subcommittees — the place where volunteers coordinate open engineering work in support of <a href="#" onclick="showSection('supported');return false">Supported Projects</a>. This knowledge base is for documentation and support work from the Technology Committee: meeting notes, standards references, and initiative tracking. See <a href="#" onclick="showSection('about');return false">About ISV</a> for more context of the rest of the team. For the full ISV program — news, applications, and general material — visit <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org ↗</a>.</p>
         </div>
       </div>
 
       <div class="home-primary-focus">
         <p class="home-primary-eyebrow">Primary endeavor · Tech Comm 2026</p>
-        <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('overview');return false">Metering focus</a></h2>
-        <p class="home-primary-desc">Affordable, interoperable village metering — multi-vendor normalization at the gateway (northbound JSON/MQTT) and lightweight standards that avoid utility AMI cost. <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study</a></p>
+        <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('overview');return false">Meter Interoperability</a></h2>
+        <p class="home-primary-desc">Affordable, interoperable village metering — northbound JSON/MQTT at the gateway, VMRS register tiers, and vendor benchmark. Includes <strong>OpenAMI</strong> and <strong>Street Pole EMS</strong> hardware threads. Use the sidebar for Overview, Problems, VMRS, and Vendor Study.</p>
       </div>
 
       <div class="home-blocks">
         <div class="home-block">
-          <div class="home-block-title">What this is</div>
-          <ul>
-            <li>Map and list of <strong>ISV-funded solar microgrid programs</strong></li>
-            <li><strong>Metering focus</strong> — <a href="#" onclick="showMeterPage('overview');return false">primary Tech Comm endeavor</a> (2026)</li>
-            <li><strong>Technology Committee</strong> initiatives — <strong>OpenAMI</strong> (ISV stakeholder alongside <a href="https://enaccess.org" target="_blank" rel="noopener">EnAccess</a>, NESL, and <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT</a>), monitoring, pole EMS</li>
-            <li><strong>Meeting notes</strong> and <strong>technical reports</strong> from working sessions</li>
-            <li>In-person events — <a href="#" onclick="showSection('events');return false">workshops and hackathons</a></li>
-            <li>Standards, schemas, and open data references</li>
-            <li>Open source on <a href="https://github.com/overview-solutions/isv-ai-wiki" target="_blank" rel="noopener">GitHub</a> — static site via GitHub Pages</li>
-          </ul>
+          <div class="home-block-title">Who this site is for</div>
+          <p>Tech Comm volunteers and advisors; field partners and open-tool contributors. New volunteers: complete the <a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">ISV volunteer form ↗</a>, note your interest in the <strong>Technology Committee</strong>, and a chair will follow up with onboarding.</p>
         </div>
         <div class="home-block">
-          <div class="home-block-title">Who it's for</div>
-          <ul>
-            <li><strong>Tech Comm volunteers and advisors</strong> — primary audience today</li>
-            <li>Field partners and engineers collaborating on Tech Comm work</li>
-            <li>Conference attendees and open-tool contributors (read-only welcome)</li>
-          </ul>
-        </div>
-        <div class="home-block">
-          <div class="home-block-title">How to engage</div>
-          <ul>
-            <li><a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">Volunteer signup form</a></li>
-            <li>Browse the <a href="#" onclick="showSection('funded');return false">funded projects map</a>, <a href="#" onclick="showSection('notes');return false">meeting notes</a>, and <a href="#" onclick="showSection('tech-notes');return false">technical reports</a></li>
-            <li><a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">Join the Tech Comm WhatsApp group</a></li>
-            <li>More context and links: <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Tech Comm Linktree</a> — project map, SunBlazer docs, proposal forms, and related resources</li>
-            <li>Want to edit on GitHub? Email Chair <a href="mailto:adam.r.sauer@ieee.org">Adam Sauer</a> to be added as a repo collaborator (or fork and open a pull request anytime)</li>
-          </ul>
+          <div class="home-block-title">How to Engage</div>
+          <p>Join virtual committee meetings twice monthly — <strong>7:30&nbsp;am Pacific</strong> (<strong>8:00&nbsp;pm India</strong>; see <a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">WhatsApp ↗</a> for invites), pick up work on <a href="#" onclick="showSection('tasks');return false">Tasks</a>, attend <a href="#" onclick="showSection('events');return false">hackathons and conferences</a>, and review <a href="#" onclick="showSection('supported');return false">Supported Projects</a> to spot new engineering needs.</p>
         </div>
       </div>
     </div>
@@ -1445,7 +1443,7 @@ code {
       <div class="home-tech-header">
         <div>
           <h2>Technology Committee initiatives</h2>
-          <p>Volunteer engineering efforts — not PSA-funded field deployments</p>
+          <p>Open engineering by the Technology Committee — a subcommittee of IEEE Smart Village — not seed-funded field deployments</p>
         </div>
         <button class="edit-btn" onclick="toggleAI('tech')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
@@ -1454,29 +1452,16 @@ code {
       </div>
       <div id="content-tech">
         <div class="wiki-body tech-intro">
-          <p>Side projects by the ISV Technology Committee — open standards, monitoring infrastructure, and tools that make funded microgrids easier to deploy, measure, and integrate.</p>
+          <p>Volunteer engineering threads — open standards, gateways, and event builds. Stable map infrastructure is listed separately below.</p>
         </div>
         <div class="project-grid">
+        <div class="project-section-label">Active initiatives</div>
         <div class="project-card project-card-primary">
           <div class="project-card-head">
             <span class="tag tag-active">Primary</span>
-            <span class="project-name">Metering focus</span>
+            <span class="project-name">Meter Interoperability</span>
           </div>
-          <div class="project-desc">IEEE Tech Comm’s current coordination thread: northbound interoperability, VMRS register tiers, vendor benchmark, anchor POCs (SteamaCo, Darway). <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Smart Village Project Map</span>
-          </div>
-          <div class="project-desc">Maintains the <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated funded deployments on OpenStreetMap power layers, synced from ISV grant records. Powers the map on the Funded projects page.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">OpenAMI — Open Microgrid Interface</span>
-          </div>
-          <div class="project-desc">IEEE Smart Village is a stakeholder in the OpenAMI effort alongside <a href="https://enaccess.org" target="_blank" rel="noopener">EnAccess</a>, NESL, and <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT</a>. GeoJSON-based data model for interoperable microgrid asset management — SunSpec and IEEE 2030.5 compatible, targeting open alternatives to proprietary utility GIS schemas. Code and prototypes: <a href="https://github.com/energy-iot" target="_blank" rel="noopener">github.com/energy-iot</a>.</div>
+          <div class="project-desc">Northbound MQTT + VMRS, vendor benchmark, anchor POCs (SteamaCo, Darway). <strong>OpenAMI</strong> and <strong>Street Pole EMS</strong> are hardware threads here — not separate initiatives. <a href="#" onclick="showMeterPage('overview');return false">Open Meter Interoperability →</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
@@ -1487,38 +1472,32 @@ code {
         </div>
         <div class="project-card">
           <div class="project-card-head">
-            <span class="tag tag-active">Active</span>
-            <span class="project-name">Street Pole EMS Box</span>
-          </div>
-          <div class="project-desc">Open pole-mount gateway (ISV + NESL + <a href="https://github.com/energy-iot/ems-dev/" target="_blank">Energy IOT</a>): three meters per box, remote disconnect, SunSpec JSON over MQTT — aimed at ~$58/household metering vs ~$1k legacy AMI. Prototype from the 2025 Open Energy Hackathon; problem framing in <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a>.</div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
             <span class="tag tag-pilot">Hackathon</span>
             <span class="project-name">Open Energy Hackathon — SF Climate Week 2025</span>
           </div>
-          <div class="project-desc">Earth Day hack at Port Labs (Oakland) on affordable village metering, DER protocol gaps, and IEEE 2030.5 / SunSpec integration. Writeup: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
+          <div class="project-desc">Earth Day build-a-thon at Port Labs: SunSpec gateways on real DER hardware (inverters, EVSE, storage), US grid-market tracks, and open-source LF/enAccess stacks. <a href="#" onclick="showNote('open-energy-hackathon-2025');return false">2025 summary →</a> · <a href="https://luma.com/h9khaweo" target="_blank" rel="noopener">Luma ↗</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
-            <span class="tag tag-pilot">Notes</span>
-            <span class="project-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</span>
+            <span class="tag tag-planning">Planning</span>
+            <span class="project-name">Open Energy Hackathon 2.0 — SF Climate Week 2026</span>
           </div>
-          <div class="project-desc">Call notes on STS token delivery via SMS, DLMS/OEM key bottlenecks, redundant field channels (RF mesh, PLC, CIU, phone relay), and DCU failure modes. <a href="#" onclick="showNote('metering-2026-05-28');return false">Meeting notes →</a> · <a href="#" onclick="showMeterPage('problems-today');return false">Problems in depth</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-active">Tracker</span>
-            <span class="project-name">Follow-ups &amp; tasks</span>
-          </div>
-          <div class="project-desc">Open action items from Tech Comm and Power Africa planning — tracked as GitHub Issues. <a href="#" onclick="showSection('tasks');return false">Open task board →</a> · <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">Issues on GitHub ↗</a></div>
+          <div class="project-desc">Second annual build-a-thon: AI/mesh/hardware challenges on live inverters, EVSE, and meters — microgrids, stranded chargers, Flux PCB kits. <a href="#" onclick="showNote('open-energy-hackathon-2026');return false">Event page →</a> · <a href="https://luma.com/6jvum8on" target="_blank" rel="noopener">Luma ↗</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-planning">Planning</span>
             <span class="project-name">Power Africa Conference — Workshop</span>
           </div>
-          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a> · <a href="#" onclick="showSection('events');return false">All in-person events</a></div>
+          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a> · <a href="#" onclick="showSection('events');return false">All In-Person Events</a></div>
+        </div>
+        <div class="project-section-label">Stable infrastructure</div>
+        <div class="project-card project-card-stable">
+          <div class="project-card-head">
+            <span class="tag tag-stable">Stable</span>
+            <span class="project-name">Smart Village Project Map</span>
+          </div>
+          <div class="project-desc">Long-running <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated ISV field programs on OpenStreetMap power layers. Passive upkeep only: map pins refresh when partners report new or closed sites, not a standing sprint. Powers the <a href="#" onclick="showSection('supported');return false">Supported Projects</a> view · <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank" rel="noopener">full map ↗</a></div>
         </div>
       </div>
     </div>
@@ -1542,21 +1521,36 @@ code {
     </div>
   </div>
 
-  <!-- OTHER ISV COMMITTEES -->
-  <div class="section" id="sec-committees">
+  <!-- ABOUT ISV (mission · structure) -->
+  <div class="section" id="sec-about">
     <div class="section-header">
       <div>
-        <div class="section-title">Other ISV committees</div>
-        <div class="section-sub">Regional working groups and functional subcommittees</div>
+        <div class="section-title">About IEEE Smart Village</div>
+        <div class="section-sub">Program mission · volunteer structure · <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org ↗</a></div>
+      </div>
+      <button class="edit-btn" onclick="toggleAI('mission')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        Edit mission
+      </button>
+    </div>
+
+    <div class="wiki-body about-anchor" id="about-mission">
+      <div id="content-mission">
+        <p>IEEE Smart Village integrates sustainable electricity, education, and entrepreneurial solutions to empower off-grid communities worldwide — bringing advanced technology for energy, communications, water, and sanitation to the village.</p>
+        <p>Every ISV field program addresses at least two of three pillars: <strong>Energy</strong> (solar-based electricity and micro-utilities), <strong>Education</strong> (digital classrooms, vocational training, SECI-based adult learning), and <strong>Entrepreneurship</strong> (community-owned energy businesses). These align with UN SDGs 7, 4, and 8.</p>
+      </div>
+      <div class="about-callout">
+        <strong>This wiki vs. the wider program</strong>
+        You are in the <strong>Technology Committee</strong> knowledge base — one engineering subcommittee within IEEE Smart Village. For general ISV browsing — applications, news, and program material — use the official site: <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org ↗</a>. Active field deployments are on <a href="#" onclick="showSection('supported');return false">Supported Projects</a>; Tech Comm may offer <strong>technical support upon request</strong>, separate from volunteer initiatives on the <a href="#" onclick="showSection('home');return false">home page</a> (meter interoperability, drone ops, hackathons, etc.).
       </div>
     </div>
-    <div class="wiki-body" id="content-committees">
-      <p class="committees-intro">IEEE Smart Village brings together volunteers across regions and disciplines to fund and support village-scale energy programs worldwide. Beyond the <a href="#" onclick="showSection('home');return false">Technology Committee</a>, the program is organized into <strong>regional working groups</strong> (RWGs) and <strong>functional subcommittees</strong> listed below.</p>
-      <p class="committees-intro">This wiki is maintained by Tech Comm volunteers for now — reference material, not a working hub for every group. RWGs are typically the first contact for applicants in their region; subcommittees handle project evaluation (PDC), finance, membership, marketing, and related program work. To engage with any of these groups, sign up on the <a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">ISV volunteer page</a>.</p>
 
+    <div class="about-anchor" id="about-structure">
+      <div class="project-section-label">Volunteer structure</div>
+      <p class="committees-intro">The <strong>Technology Committee</strong> maintains this wiki. The rest of IEEE Smart Village is organized into <strong>regional working groups</strong> (first contact for applicants) and other <strong>functional subcommittees</strong> (project evaluation, finance, membership, and more). <a href="https://smartvillage.ieee.org/volunteer/" target="_blank" rel="noopener">Volunteer signup ↗</a></p>
       <div class="committees-grid">
         <div class="committees-panel">
-          <h3>Regional Working Groups</h3>
+          <h3>Regional working groups</h3>
           <ul>
             <li>North America — Joan Kerr</li>
             <li>Latin America — Mario De La Ossa</li>
@@ -1568,61 +1562,19 @@ code {
         <div class="committees-panel">
           <h3>Subcommittees</h3>
           <ul>
-            <li>Education</li>
-            <li>Finance</li>
-            <li>Fund Development</li>
-            <li>Marketing</li>
-            <li>Membership</li>
-            <li>Operations</li>
+            <li><strong>Technology</strong> (this wiki)</li>
+            <li>Education · Finance · Fund Development</li>
+            <li>Marketing · Membership · Operations</li>
             <li>Project Development (PDC)</li>
             <li>Safety, Quality, Reliability &amp; Standards (SafetyQRS)</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- MISSION -->
-  <div class="section" id="sec-mission">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Mission</div>
-        <div class="section-sub">What IEEE Smart Village is building toward</div>
-      </div>
-      <button class="edit-btn" onclick="toggleAI('mission')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        Edit with AI
-      </button>
-    </div>
-    <div class="wiki-body" id="content-mission">
-      <p>IEEE Smart Village integrates sustainable electricity, education, and entrepreneurial solutions to empower off-grid communities worldwide — bringing the world to the village through advanced technology for energy, communications, water, and sanitation.</p>
-      <p>Every project addresses at least two of ISV's three pillars: <strong>Energy</strong> (solar-based electricity and micro-utilities), <strong>Education</strong> (digital classrooms, vocational training, SECI-based adult learning), and <strong>Entrepreneurship</strong> (community-owned energy businesses). These align with UN SDGs 7, 4, and 8.</p>
-      <p>The Technology Committee maintains open engineering initiatives — standards, monitoring tools, and interoperability layers — that support funded field projects without replacing them.</p>
-      <p>Across funded mini-grids, the recurring engineering problems are: <strong>metering costs</strong> that can double project budgets, <strong>inability to bill and detect theft</strong> without per-customer meters, <strong>protocol fragmentation</strong> (STS, DLMS, OEM, MODBUS) below the feeder, and <strong>unreliable rural backhaul</strong> when DCUs fail. See <a href="#" onclick="showSection('tech-notes');return false">Technical reports</a> and <a href="#" onclick="showNote('metering-2026-05-28');return false">May 2026 Tech Comm notes</a>.</p>
-    </div>
-    <div class="mission-feature">
-      <p class="mission-feature-eyebrow">Latest field project · what drives ISV</p>
-      <h3 class="mission-feature-title">IEEE Smart Village — A Journey of Impact: Equinoct (Kerala, India)</h3>
-      <p class="mission-feature-desc">ISV’s newest Kerala deployment with EQUINOCT — a Community Resource Efficiency Hub supporting coastal enterprises through energy, education, and enterprise in one place.</p>
-      <div class="video-embed">
-        <div class="video-embed-frame">
-          <iframe
-            title="IEEE Smart Village — A Journey of Impact: Equinoct (Kerala, India)"
-            src="https://player.vimeo.com/video/1192404953?h=98c35b51ae"
-            allow="fullscreen; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"></iframe>
-        </div>
-        <div class="video-embed-toolbar">
-          <span>7 min · full story · North Paravur, Kochi</span>
-          <a href="https://vimeo.com/1192404953/98c35b51ae" target="_blank" rel="noopener">Watch on Vimeo ↗</a>
-        </div>
-      </div>
-    </div>
     <div class="ai-panel" id="ai-mission">
       <div class="ai-panel-label">AI editor — mission</div>
-      <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Add a paragraph about rural microgrid deployments' or 'Make this more concise'"></textarea>
+      <textarea class="ai-input" id="input-mission" placeholder="Describe the change… e.g. 'Shorten the three-pillars paragraph'"></textarea>
       <div class="ai-actions">
         <button class="btn-generate" id="run-mission" onclick="runAI('mission')">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1639,17 +1591,17 @@ code {
     </div>
   </div>
 
-  <!-- FUNDED PROJECTS -->
-  <div class="section" id="sec-funded">
+  <!-- SUPPORTED PROJECTS -->
+  <div class="section" id="sec-supported">
     <div class="section-header">
       <div>
-        <div class="section-title">Funded Solar PV projects</div>
-        <div class="section-sub">ISV seed-funded NGO deployments — energy, education, and enterprise in the field</div>
+        <div class="section-title">Supported Projects</div>
+        <div class="section-sub">ISV seed-funded field programs · Tech Comm technical support on request</div>
       </div>
     </div>
-    <div id="content-funded">
+    <div id="content-supported">
       <div class="wiki-body">
-        <p>These are the core ISV mission: in-country NGO and entrepreneur partners running solar micro-utilities under tranche-based project agreements. Each addresses at least two of the three pillars and is tracked on the map below.</p>
+        <p>These are <strong>IEEE Smart Village</strong> deployments — in-country NGO and entrepreneur partners running solar micro-utilities under ISV tranche-based agreements. They are <em>not</em> Technology Committee initiatives; Tech Comm volunteers may provide engineering help when a program asks. For general ISV material — applications, news, and the rest of the program — visit <a href="https://smartvillage.ieee.org/" target="_blank" rel="noopener">smartvillage.ieee.org ↗</a>.</p>
       </div>
       <div class="funded-stats" id="funded-stats">
         <span class="stat-chip">Loading map data…</span>
@@ -1670,15 +1622,15 @@ code {
         </div>
       </div>
       <div class="funded-videos-section" id="funded-videos-section" hidden>
-        <div class="project-section-label">Project field stories</div>
-        <p class="funded-videos-intro">Videos from the <a href="https://vimeo.com/user117415241" target="_blank" rel="noopener">ISV Vimeo channel</a> tied to individual deployments — not generic program overviews.</p>
+        <div class="project-section-label">Field stories</div>
+        <p class="funded-videos-intro">Project videos from the <a href="https://vimeo.com/user117415241" target="_blank" rel="noopener">ISV Vimeo channel</a>.</p>
         <div class="funded-videos-grid" id="funded-videos-grid"></div>
       </div>
       <div class="project-section-label">Active programs</div>
       <div class="funded-list" id="funded-list"></div>
       <div class="toolkit-note">
         <div class="toolkit-note-title">Deployment toolkit</div>
-        <p>Many funded sites use ISV-designed hardware — the <strong>SunBlazer</strong> community charging station and <strong>Portable Battery Kit (PBK)</strong> — rather than custom one-off systems. Specs live on the <a href="https://linktr.ee/isv_tech" target="_blank">Tech Committee Linktree</a>.</p>
+        <p>Many field sites use ISV-designed hardware — the <strong>SunBlazer</strong> community charging station and <strong>Portable Battery Kit (PBK)</strong>. Specs on the <a href="https://linktr.ee/isv_tech" target="_blank">Tech Committee Linktree</a>.</p>
       </div>
     </div>
   </div>
@@ -1779,52 +1731,6 @@ code {
     </div>
   </div>
 
-  <!-- DATA -->
-  <div class="section" id="sec-data">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Open data</div>
-        <div class="section-sub">Datasets, schemas, and open repositories</div>
-      </div>
-      <button class="edit-btn" onclick="toggleAI('data')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        Edit with AI
-      </button>
-    </div>
-    <div id="content-data">
-      <div class="tags-row">
-        <span class="tag-chip">GeoJSON</span>
-        <span class="tag-chip">OpenAMI</span>
-        <span class="tag-chip">LiDAR</span>
-        <span class="tag-chip">Hyperspectral</span>
-        <span class="tag-chip">ADCP</span>
-        <span class="tag-chip">Tidal</span>
-        <span class="tag-chip">NDVI</span>
-      </div>
-      <div class="wiki-body">
-        <p>ISV maintains open datasets and schema definitions under permissive licenses. Microgrid topology data follows the OpenAMI GeoJSON schema, enabling third-party tools to parse and visualize community energy systems.</p>
-        <p>Funded deployment locations live on the <a href="#" onclick="showSection('funded');return false">Funded projects map</a> (sourced from <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a>). Technical reports and Dev Labs research are indexed in this wiki and hosted on <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a>.</p>
-      </div>
-    </div>
-    <div class="ai-panel" id="ai-data">
-      <div class="ai-panel-label">AI editor — open data</div>
-      <textarea class="ai-input" id="input-data" placeholder="e.g. 'Add a section about our GitHub repository structure and licensing'"></textarea>
-      <div class="ai-actions">
-        <button class="btn-generate" id="run-data" onclick="runAI('data')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Generate
-        </button>
-        <button class="btn-cancel" onclick="toggleAI('data')">Cancel</button>
-        <div class="spinner" id="spin-data"></div>
-        <button class="btn-apply" id="apply-data" onclick="applyContent('data')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          Apply
-        </button>
-      </div>
-      <div class="ai-result" id="result-data"></div>
-    </div>
-  </div>
-
   <!-- RESOURCES -->
   <div class="section" id="sec-resources">
     <div class="section-header">
@@ -1841,15 +1747,22 @@ code {
       <div class="resource-row">
         <div class="standard-icon">🏛️</div>
         <div>
-          <div class="resource-name">Circles of Power — Open Energy Hackathon 2025</div>
-          <div class="resource-desc"><a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium essay</a> · <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">Technical report ISV-HCK-001</a> — village metering economics, EMS hardware, SunSpec/MQTT stack.</div>
+          <div class="resource-name">Open Energy Hackathon 2025</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('open-energy-hackathon-2025');return false">Event summary</a> · <a href="https://luma.com/h9khaweo" target="_blank" rel="noopener">Luma ↗</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — SunSpec gateways, US DER/grid tracks, LF &amp; enAccess OSS. Village metering angle: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium essay</a>.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📊</div>
+        <div>
+          <div class="resource-name">OpenAMI @ Power Africa 2025</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('power-africa-openami-2025');return false">Event summary</a> · <a href="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/edit" target="_blank" rel="noopener">Slide deck</a> — REIc, ISV, Energy IoT, EnAccess; closed vs open AMI; three-phase roadmap.</div>
         </div>
       </div>
       <div class="resource-row">
         <div class="standard-icon">📦</div>
         <div>
-          <div class="resource-name">Street Pole EMS Box — ems-dev</div>
-          <div class="resource-desc"><a href="https://github.com/energy-iot/ems-dev/" target="_blank">github.com/energy-iot/ems-dev</a> — open hardware/firmware from the hackathon; SunSpec gateway, three meters per pole box.</div>
+          <div class="resource-name">Street Pole EMS — ems-dev</div>
+          <div class="resource-desc"><a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — Street Pole EMS hardware/firmware; part of the <a href="#" onclick="showMeterPage('overview');return false">Meter Interoperability</a> thread.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1912,14 +1825,14 @@ code {
         <div class="standard-icon">📡</div>
         <div>
           <div class="resource-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting notes</a> — STS/SMS token path, redundant NAN channels, CIU/phone relay proposal, and call action items.</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting Notes</a> — STS/SMS token path, redundant NAN channels, CIU/phone relay proposal, and call action items.</div>
         </div>
       </div>
       <div class="resource-row">
         <div class="standard-icon">🗺️</div>
         <div>
           <div class="resource-name">Smart Village Project Map</div>
-          <div class="resource-desc"><a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">RemoteMonitorMap</a> — global map of ISV-funded deployments on OpenStreetMap power layers. Source: <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">GitHub</a>.</div>
+          <div class="resource-desc">Stable <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">RemoteMonitorMap</a> deployment — passive pin updates when field partners report site changes. Embedded on <a href="#" onclick="showSection('supported');return false">Supported Projects</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1992,7 +1905,7 @@ code {
   <div class="section" id="sec-tasks">
     <div class="section-header">
       <div>
-        <div class="section-title">Follow-ups &amp; tasks</div>
+        <div class="section-title">Follow-ups &amp; Tasks</div>
         <div class="section-sub">Action items tracked as GitHub Issues — comment and close on GitHub</div>
       </div>
     </div>
@@ -2006,10 +1919,11 @@ code {
   <div class="section" id="sec-notes">
     <div class="section-header">
       <div>
-        <div class="section-title" id="notes-section-title">Meeting notes</div>
+        <div class="section-title" id="notes-section-title">Meeting Notes</div>
         <div class="section-sub" id="notes-section-sub">28 May 2026 · STS · SMS · DLMS · redundant NAN · CIU/phone relay</div>
       </div>
     </div>
+    <p class="meeting-cadence">Tech Comm meets virtually <strong>twice monthly</strong> at <strong>7:30&nbsp;am Pacific</strong> (<strong>8:00&nbsp;pm India</strong>). Join the <a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">WhatsApp group ↗</a> for meeting links.</p>
     <div id="content-notes">
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
@@ -2018,7 +1932,7 @@ code {
             <a id="notes-toolbar-standalone" href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="notes-frame" title="Meeting notes preview" src="tech-comm-2026-05-28-metering-topology.html?embed=1"></iframe>
+        <iframe id="notes-frame" title="Meeting Notes preview" src="tech-comm-2026-05-28-metering-topology.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2027,19 +1941,19 @@ code {
   <div class="section" id="sec-events">
     <div class="section-header">
       <div>
-        <div class="section-title" id="events-section-title">In-person events</div>
+        <div class="section-title" id="events-section-title">In-Person Events</div>
         <div class="section-sub" id="events-section-sub">Workshops and hackathons · planning notes</div>
       </div>
     </div>
     <div id="content-events">
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
-          <span id="events-embed-label">Sep 2026 · Workshop planning</span>
+          <span id="events-embed-label">Apr 2025 · Open Energy hackathon</span>
           <div class="notes-embed-toolbar-links">
-            <a id="events-toolbar-standalone" href="power-africa-2026-workshop-planning.html" target="_blank" rel="noopener">Full page</a>
+            <a id="events-toolbar-standalone" href="open-energy-hackathon-2025.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="events-frame" title="In-person event notes preview" src="power-africa-2026-workshop-planning.html?embed=1"></iframe>
+        <iframe id="events-frame" title="In-Person Events preview" src="open-energy-hackathon-2025.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2048,8 +1962,8 @@ code {
   <div class="section" id="sec-meter-study">
     <div class="section-header">
       <div>
-        <div class="section-title">Metering focus</div>
-        <div class="section-sub" id="meter-study-section-sub">Primary Tech Comm endeavor · overview, VMRS, vendor study, landscape</div>
+        <div class="section-title">Meter Interoperability</div>
+        <div class="section-sub" id="meter-study-section-sub">Overview · Problems · VMRS · Vendor Study</div>
       </div>
     </div>
     <div id="content-meter-study">
@@ -2061,7 +1975,7 @@ code {
             <a href="meter-benchmark/northbound-mqtt-v0.1.json" target="_blank" rel="noopener">Northbound JSON</a>
           </div>
         </div>
-        <iframe id="meter-study-frame" title="Metering focus preview" src="meter-overview.html?embed=1"></iframe>
+        <iframe id="meter-study-frame" title="Meter Interoperability preview" src="meter-overview.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2070,7 +1984,7 @@ code {
   <div class="section" id="sec-tech-notes">
     <div class="section-header">
       <div>
-        <div class="section-title">Technical reports</div>
+        <div class="section-title">Technical Reports</div>
         <div class="section-sub" id="tech-notes-section-sub">Dev Labs research reports · Cottonspace · GitHub</div>
       </div>
     </div>
@@ -2123,33 +2037,38 @@ code {
 
 <script src="js/tech-notes-catalog.js"></script>
 <script>
-const SECTIONS = ['home','mission','funded','notes','tasks','committees','events','meter-study','tech-notes','standards','data','resources'];
+const SECTIONS = ['home','about','supported','notes','tasks','events','meter-study','tech-notes','standards','resources'];
+const ABOUT_SCROLL_ALIASES = {
+  mission: 'about-mission',
+  committees: 'about-structure'
+};
+const SUPPORTED_SECTION_ALIASES = ['supported', 'funded', 'field-programs'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
-  'events': { section: 'events', defaultNote: 'power-africa-2026-workshop-planning' }
+  'events': { section: 'events', defaultNote: 'open-energy-hackathon-2025' }
 };
 const METER_BENCHMARK_PAGES = {
   'overview': {
     title: 'Overview',
-    sub: 'Primary endeavor · two goals · problems summary',
+    sub: 'Gateway normalization · northbound MQTT + VMRS',
     src: 'meter-overview.html?embed=1',
     standalone: 'meter-overview.html'
   },
   'problems-today': {
     title: 'Problems',
-    sub: 'Landscape diagram · L1–L7 layers · utility vs village comparison',
+    sub: 'Layer diagram · utility vs village',
     src: 'meter-problems-today.html?embed=1',
     standalone: 'meter-problems-today.html'
   },
   'vmrs': {
     title: 'OBIS · VMRS',
-    sub: 'Register tiers · acronyms · ICD · northbound MQTT · POC playbook',
+    sub: 'Register tiers · northbound JSON appendix',
     src: 'meter-vmrs.html?embed=1',
     standalone: 'meter-vmrs.html'
   },
   'vendor-study': {
-    title: 'Vendor study',
-    sub: 'Pipeline + cited DLMS · STS · VMRS benchmark',
+    title: 'Vendor Study',
+    sub: 'Protocol benchmark · outreach pipeline · contacts',
     src: 'meter-vendor-study.html?embed=1',
     standalone: 'meter-vendor-study.html'
   }
@@ -2165,6 +2084,30 @@ const MEETING_NOTES = {
     standalone: 'tech-comm-2026-05-28-metering-topology.html',
     diagramSvg: 'technical-notes/diagrams/metering-topology.svg',
     diagramGuide: 'technical-notes/diagrams/editing-guide.html'
+  },
+  'open-energy-hackathon-2025': {
+    group: 'events',
+    title: 'Open Energy hackathon',
+    date: 'Apr 2025',
+    sub: 'SunSpec · DER markets · Port Labs · Luma',
+    src: 'open-energy-hackathon-2025.html?embed=1',
+    standalone: 'open-energy-hackathon-2025.html'
+  },
+  'power-africa-openami-2025': {
+    group: 'events',
+    title: 'OpenAMI @ Power Africa',
+    date: 'Sep 2025',
+    sub: 'REIc · ISV · Energy IoT · EnAccess · open AMI roadmap',
+    src: 'power-africa-openami-presentation-2025.html?embed=1',
+    standalone: 'power-africa-openami-presentation-2025.html'
+  },
+  'open-energy-hackathon-2026': {
+    group: 'events',
+    title: 'Open Energy hackathon',
+    date: 'Apr 2026',
+    sub: 'AI · mesh · hardware · Luma · Informal Spaces',
+    src: 'open-energy-hackathon-2026.html?embed=1',
+    standalone: 'open-energy-hackathon-2026.html'
   },
   'power-africa-2026-workshop-planning': {
     group: 'events',
@@ -2220,10 +2163,11 @@ function showSection(id, options = {}) {
     document.getElementById('sec-' + s).classList.toggle('active', s === id);
     document.querySelector(`[data-section="${s}"]`)?.classList.toggle('active', s === id);
   });
+  document.querySelectorAll('.nav-sub-item').forEach(el => el.classList.remove('active'));
   const main = document.getElementById('main');
-  main.classList.toggle('wide', id === 'funded');
+  main.classList.toggle('wide', id === 'supported');
   main.classList.toggle('notes-wide', id === 'notes' || id === 'events' || id === 'meter-study' || id === 'tech-notes' || id === 'tasks');
-  if (id === 'funded') loadFundedProjects();
+  if (id === 'supported') loadFundedProjects();
   if ((id === 'notes' || id === 'events') && !options.skipNoteRefresh) {
     const noteSection = getNoteSection(activeNoteId);
     if (noteSection !== id) {
@@ -2233,11 +2177,17 @@ function showSection(id, options = {}) {
     refreshNotePreview(activeNoteId);
   }
   if (id === 'meter-study' && !options.skipMeterRefresh) refreshMeterPreview(activeMeterPageId);
+  if (id === 'tech-notes' && techNotesMetaLoaded) renderTechnicalNotesNav();
   if (id === 'tasks' && window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
   if (id === 'tech-notes') loadTechnicalNotes();
   if (!options.skipHash) {
     const base = location.pathname + location.search;
     history.replaceState(null, '', id === 'home' ? base : `${base}#${id}`);
+  }
+  if (options.scrollTo) {
+    requestAnimationFrame(() => {
+      document.getElementById(options.scrollTo)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 }
 
@@ -2290,13 +2240,33 @@ function refreshMeterPreview(pageId) {
   const label = document.getElementById('meter-study-embed-label');
   const sub = document.getElementById('meter-study-section-sub');
   const toolbar = document.getElementById('meter-study-toolbar-standalone');
-  if (frame) frame.src = page.src;
+  if (frame) {
+    bindMeterStudyFrameGuard(frame);
+    frame.src = page.src;
+  }
   if (label) label.textContent = page.title;
   if (sub) sub.textContent = page.sub;
   if (toolbar) {
     toolbar.href = page.standalone;
     toolbar.textContent = 'Full page';
   }
+}
+
+function bindMeterStudyFrameGuard(frame) {
+  if (!frame || frame.dataset.meterGuardBound) return;
+  frame.dataset.meterGuardBound = '1';
+  frame.addEventListener('load', function () {
+    try {
+      const doc = frame.contentDocument;
+      if (!doc) return;
+      const path = doc.location.pathname || '';
+      const isWikiShell = /index\.html$/.test(path) || path.endsWith('/');
+      if (isWikiShell && METER_BENCHMARK_PAGES[activeMeterPageId]) {
+        frame.src = METER_BENCHMARK_PAGES[activeMeterPageId].src;
+      }
+      if (window.ISVTheme) ISVTheme.syncFrame(frame);
+    } catch (e) { /* cross-origin */ }
+  });
 }
 
 function showMeterPage(pageId, updateHash = true) {
@@ -2350,8 +2320,21 @@ function initFromHash() {
     });
     return;
   }
+  if (raw === 'data') {
+    showSection('resources', { skipHash: true });
+    return;
+  }
   if (SECTIONS.includes(raw)) {
     showSection(raw, { skipHash: true });
+    return;
+  }
+  if (ABOUT_SCROLL_ALIASES[raw]) {
+    showSection('about', { skipHash: true, scrollTo: ABOUT_SCROLL_ALIASES[raw] });
+    return;
+  }
+  if (SUPPORTED_SECTION_ALIASES.includes(raw)) {
+    showSection('supported', { skipHash: true });
+    return;
   }
 }
 
@@ -2763,7 +2746,7 @@ async function loadFundedProjects() {
 function toggleAI(sec) {
   const panel = document.getElementById('ai-' + sec);
   const isOpen = panel.classList.contains('open');
-  SECTIONS.forEach(s => document.getElementById('ai-' + s).classList.remove('open'));
+  SECTIONS.forEach(s => document.getElementById('ai-' + s)?.classList.remove('open'));
   if (!isOpen) panel.classList.add('open');
 }
 
@@ -2859,7 +2842,18 @@ function updateApiStatus() {
   }
 }
 
-// Restore saved content
+// Restore saved mission content (editable block on About ISV)
+(function () {
+  const savedMission = localStorage.getItem('isv_content_mission');
+  if (!savedMission) return;
+  const el = document.getElementById('content-mission');
+  if (el) {
+    const paras = savedMission.split('\n\n').filter(Boolean);
+    el.innerHTML = paras.map(p => `<p>${p}</p>`).join('');
+  }
+})();
+
+// Restore saved content for AI-editable sections
 SECTIONS.forEach(sec => {
   const saved = localStorage.getItem('isv_content_' + sec);
   if (saved) {
@@ -2879,7 +2873,9 @@ document.getElementById('api-modal').addEventListener('click', function(e) {
 updateApiStatus();
 ['notes-frame', 'events-frame', 'meter-study-frame'].forEach(function (id) {
   var f = document.getElementById(id);
-  if (f && window.ISVTheme) ISVTheme.syncFrame(f);
+  if (!f) return;
+  if (id === 'meter-study-frame') bindMeterStudyFrameGuard(f);
+  if (window.ISVTheme) ISVTheme.syncFrame(f);
 });
 </script>
 </body>

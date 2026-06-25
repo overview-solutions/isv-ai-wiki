@@ -50,6 +50,9 @@ isv-ai-wiki/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + SIP hooks
 ├── tech-comm-*-*.html            # Meeting note pages (?embed=1 in iframe)
+├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
+├── open-energy-hackathon-2025.html  # 2025 Open Energy Hackathon summary (Circles of Power)
+├── open-energy-hackathon-2026.html  # 2026 hackathon planning (Earth Day · SF Climate Week · Port Labs)
 ├── power-africa-*-*.html         # Workshop / event planning notes
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
@@ -74,16 +77,19 @@ isv-ai-wiki/
 
 Registered sections (`SECTIONS` in `index.html`):
 
-| `home` · `mission` · `funded` · `notes` · `tasks` · `committees` · `events` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
+| `home` · `about` · `supported` · `notes` · `tasks` · `events` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
 
-`home` is the IEEE Smart Village Knowledge Base **and** the Tech Committee working hub (intro blocks + initiatives). Legacy `#tech` hash redirects to `home`. Other ISV committees (RWGs, subcommittees) live on `committees`.
+`home` is the Tech Committee working hub. `about` — mission and volunteer structure. `supported` — field-program map (legacy `#funded` → `supported`). Official ISV site: https://smartvillage.ieee.org/
 
 ### Hash URLs (stable deep links)
 
 | Hash | Lands on |
 |------|----------|
 | `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
-| `#committees` | Other ISV committees — RWGs and subcommittees |
+| `#about` | Mission, volunteer structure |
+| `#supported` | Field-program map (Tech Comm support on request) |
+| `#mission`, `#committees` | Legacy — scroll to anchors on `#about` |
+| `#funded`, `#field-programs` | Legacy — opens `#supported` |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
 | `#meter-study` | Metering focus — default: overview |
@@ -96,7 +102,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
-| `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → redirects to `#home`) |
+| `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → `#home`; `#funded` → `#supported`) |
 
 **For agents:** Prefer hash links when citing wiki pages. Prefer **standalone HTML** (`meter-vendor-study.html`) when scraping full content — iframes omit chrome but duplicate body.
 

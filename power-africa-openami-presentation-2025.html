@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power Africa OpenAMI Presentation · Sep 2025 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.hero-layout { margin-bottom: 1.5rem; }
+.overview-cards { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1rem; }
+.overview-card {
+  border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.95rem; background: var(--bg-2);
+  display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; align-items: baseline;
+}
+.overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
+.overview-title { font-size: 13px; font-weight: 500; }
+.overview-detail { font-size: 12px; color: var(--text-2); }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 14px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout--amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout--amber strong { color: var(--amber); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; }
+p, li { font-size: 14px; margin-bottom: 0.5rem; }
+ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.phase { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.65rem; background: var(--bg-2); font-size: 13px; }
+.phase strong { color: var(--teal); }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 12px; padding: 5px 10px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+.slides-embed {
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 1rem 0 1.5rem; background: var(--bg-2);
+  aspect-ratio: 16 / 10; min-height: 360px;
+}
+.slides-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+html.embed .slides-embed { display: none; }
+@media (min-width: 768px) { .overview-cards { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Power Africa · OpenAMI presentation</h1>
+  <p class="sub">IEEE PES/IAS PowerAfrica · 30 Sep 2025 · <a href="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/edit" target="_blank" rel="noopener">Slide deck ↗</a></p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/power-africa-openami-2025" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div class="hero-layout">
+    <div class="overview-cards">
+      <div class="overview-card">
+        <div class="overview-val">4</div>
+        <div class="overview-title">Stakeholder orgs</div>
+        <div class="overview-detail">REIc · ISV · Energy IoT · EnAccess</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-val">600M</div>
+        <div class="overview-title">Without electricity</div>
+        <div class="overview-detail">Sub-Saharan Africa · rural mini-grids as path</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-val">3</div>
+        <div class="overview-title">Roadmap phases</div>
+        <div class="overview-detail">OEM integration → local AMI → MQTT modernization</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Open Advanced Metering Infrastructure</strong>
+      OpenAMI is an open-source metering stack for African mini-grids — software, hardware, and payments — designed to be community-owned, vendor-agnostic, and transparent on cost. Production (solar + batteries) is tractable; <em>distribution</em> (metering, load management, vending) is the hard part this effort targets.
+    </div>
+  </div>
+
+  <h2>Slide deck</h2>
+  <div class="slides-embed">
+    <iframe title="OpenAMI Power Africa 2025 presentation" src="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/embed?start=false&amp;loop=false&amp;delayms=3000" allowfullscreen></iframe>
+  </div>
+  <p style="font-size:13px;color:var(--text-2)">If the embed does not load, open the <a href="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/edit" target="_blank" rel="noopener">Google Slides deck</a> directly. Same deck was also presented at the Linux Foundation Energy Summit Europe 2025 (OpenAMI schema appendix).</p>
+
+  <h2>Presenters</h2>
+  <table>
+    <thead><tr><th>Organization</th><th>People</th><th>Role in OpenAMI</th></tr></thead>
+    <tbody>
+      <tr><td>REIc (Yaoundé, Cameroon)</td><td>Jude Numfor, Michel Fripiat</td><td>Field operations &amp; testing · anchor operator (power provider since 2006)</td></tr>
+      <tr><td>IEEE Smart Village</td><td>Akash Borde, Adam Sauer</td><td>Coordination, technical support, fundraising</td></tr>
+      <tr><td>Energy IoT Open Source</td><td>Arila Barnes</td><td>Open-source gateway (Street Pole EMS, MeshEMS)</td></tr>
+      <tr><td>EnAccess</td><td>Daniel Mohns, Vivien Barnier</td><td>Open-source payments platform (MicroPowerManager)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Why distribution fails today</h2>
+  <div class="callout callout--amber">
+    <strong>Production is easy; distribution is hard</strong>
+    Solar, power conversion, and storage are increasingly commodity. Load management, metering, and vending remain fragmented, expensive, and poorly supported in Africa.
+  </div>
+  <ul>
+    <li>Few meter vendors serve the village market — supply-chain shocks when vendors exit (e.g. SparkMeter).</li>
+    <li>No reliable service agreements when meters fail in the field.</li>
+    <li>Solutions not designed for African connectivity (frequent uplink loss).</li>
+    <li>SaaS fees out of proportion to mini-grid revenue models.</li>
+  </ul>
+  <p><strong>Consequences:</strong> operators cannot deliver power reliably; paying customers and investors lose trust.</p>
+
+  <h2>Closed AMI vs OpenAMI</h2>
+  <p>The deck contrasts three closed stacks — SparkMeter, SteamaCo/Nimbus-style AMI, utility OEM AMI — with a fourth path: <strong>OpenAMI</strong> combining EnAccess MPM, Street Pole / MeshEMS gateways, and OEM-agnostic DCU integration.</p>
+  <table>
+    <thead><tr><th>Track</th><th>Examples</th><th>Risk</th></tr></thead>
+    <tbody>
+      <tr><td>(1) SparkMeter-class</td><td>Proprietary edge + cloud</td><td>Vendor exit strands &gt;10k meters (deck, Sep 2025)</td></tr>
+      <tr><td>(2) SteamaCo / Nimbus</td><td>Closed AMI integrations</td><td>OEM lock-in, limited second-source DCUs</td></tr>
+      <tr><td>(3) Utility AMI</td><td>DLMS end-to-end, full MDMS</td><td>Cost &amp; complexity mismatch for villages</td></tr>
+      <tr><td>(4) OpenAMI</td><td>MPM + MQTT/OpenAMI + ESP32 gateway</td><td>Community-maintained; integration work in progress</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Reference architecture (from slides)</h2>
+  <ol>
+    <li><strong>Edge meter</strong> — measures power to each tenant/home.</li>
+    <li><strong>Meter–DCU comms</strong> — G3 (RF or PLC) or proprietary NAN.</li>
+    <li><strong>Data concentrator (DCU)</strong> — aggregates reads locally.</li>
+    <li><strong>Local server / command station</strong> — issues disconnect, vending, diagnostics.</li>
+    <li><strong>Main server</strong> — syncs with payments platform (MPM, mobile money).</li>
+  </ol>
+  <p>Evolution shown in the deck: proprietary DLMS → <strong>MQTT/OpenAMI replacement</strong> northbound; SparkMeter cloud → open stack; optional <strong>Street Pole EMS</strong> and <strong>MeshEMS</strong> as ESP32 gateways when OEM DCUs cannot be opened directly.</p>
+
+  <h2>Hardware highlighted</h2>
+  <ul>
+    <li><strong>Street Pole EMS</strong> — built at the 2025 SF Climate Week hackathon; live metering, SunSpec telemetry, leakage/temperature sensing, MQTT + JSON on ESP32-S3 (<a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>).</li>
+    <li><strong>MeshEMS</strong> — mesh-capable variant for NAN redundancy (work in progress).</li>
+    <li><strong>EnAccess MicroPowerManager (MPM)</strong> — open payments / utility management layer.</li>
+  </ul>
+  <p>SunSpec models in the appendix: meter telemetry (Hz, per-phase V/I/P/Q, import/export Wh), harmonics, subpanel models, plus proposed bandwidth, RCM leak detection, and GPIO/door sensors — groundwork for an LF Energy OpenAMI working group.</p>
+
+  <h2>Milestones at presentation time</h2>
+  <ul>
+    <li>Technical roadmap drafted.</li>
+    <li>Test lab set up in Cameroon (REIc).</li>
+    <li>Sample kits from three OEMs acquired.</li>
+    <li><strong>Next:</strong> integration and testing.</li>
+  </ul>
+
+  <h2>Roadmap phases (deck)</h2>
+  <div class="phase"><strong>Phase 1 — Q3/Q4 2025</strong> OEM-agnostic integration (software-first). Meter backend development. Optional custom gateway hardware.</div>
+  <div class="phase"><strong>Phase 2 — Early 2026</strong> Internet-independent operation. Local AMI server per site; periodic cloud sync for remote oversight.</div>
+  <div class="phase"><strong>Phase 3 — Late 2026</strong> Modernize stack; replace G3/DLMS southbound where feasible with MQTT; multi-OEM meter bands through Street Pole / MeshEMS gateways.</div>
+
+  <h2>SparkMeter situation (Sep 2025)</h2>
+  <p>SparkMeter had been a popular AMDA minigrid metering vendor and suddenly exited the market. The deck warned that &gt;10,000 proprietary meters risked becoming e-waste, leaving operators unable to vend or service loans. OpenAMI was positioned as a path to <em>continue operating hardware</em> with new open software — initially for REIc Cameroon, then additional operators.</p>
+
+  <h2>Related in this wiki</h2>
+  <div class="links">
+    <a href="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/edit" target="_blank" rel="noopener">Google Slides ↗</a>
+    <a href="index.html#meter-study/problems-today">Problems · layer diagram</a>
+    <a href="index.html#meter-study/vmrs">OBIS · VMRS</a>
+    <a href="open-energy-hackathon-2025.html">2025 Open Energy hackathon</a>
+    <a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a>
+    <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT GitHub ↗</a>
+    <a href="https://enaccess.org" target="_blank" rel="noopener">EnAccess ↗</a>
+  </div>
+</div>
+</body>
+</html>

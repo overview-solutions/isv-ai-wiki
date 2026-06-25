@@ -3,40 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metering focus · Overview · ISV Tech Comm</title>
+<title>Meter Interoperability · Overview · ISV Tech Comm</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
 <script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
 a { color: var(--green); }
-.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
 .back a { text-decoration: none; }
-.back a:hover { text-decoration: underline; }
-h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
-.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
-.lead { font-size: 15px; line-height: 1.65; margin-bottom: 1.25rem; max-width: 52rem; }
-h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
-p, li { font-size: 14px; margin-bottom: 0.5rem; }
-ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
-.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 13px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
-.callout-primary { border-left-color: var(--green); background: var(--green-50); }
-.callout-primary strong { color: var(--green); }
-.dual-track { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
-.track-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; background: var(--bg-2); font-size: 13px; }
-.track-card h3 { margin: 0 0 0.5rem; font-size: 13px; color: var(--teal); }
-.track-card p { margin: 0 0 0.5rem; color: var(--text-2); font-size: 13px; line-height: 1.5; }
-.track-card ul { margin: 0; padding-left: 1.1rem; font-size: 12px; color: var(--text-2); }
-.track-card li { margin-bottom: 0.35rem; }
-.problem-list { font-size: 14px; margin-bottom: 1.25rem; }
-.problem-list li { margin-bottom: 0.4rem; }
-.related { font-size: 13px; color: var(--text-2); }
+h2 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
+.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 12px; line-height: 1.45; }
+.callout strong { color: var(--amber); }
+.flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.5rem; font-size: 12px; margin-bottom: 0.85rem; padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); line-height: 1.4; }
+.flow-box { padding: 0.35rem 0.55rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--text); }
+.flow-box-north { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
+.flow-arrow { color: var(--text-3); font-size: 11px; }
+.subnav-list { font-size: 13px; margin: 0 0 0.85rem; padding-left: 1.2rem; color: var(--text-2); line-height: 1.5; }
+.subnav-list li { margin-bottom: 0.35rem; }
+.problem-grid div p { margin: 0; font-size: 12px; color: var(--text-2); line-height: 1.45; }
 html.embed .back { display: none; }
-html.embed .wrap { padding-top: 1rem; }
-@media (max-width: 720px) { .dual-track { grid-template-columns: 1fr; } }
+html.embed h2 { font-size: 13px; margin-top: 0.9rem; }
+html.embed .body-text { font-size: 12px; }
+html.embed .flow-row { font-size: 11px; }
+html.embed .subnav-list { font-size: 12px; }
 </style>
 </head>
 <body>
@@ -47,63 +43,133 @@ html.embed .wrap { padding-top: 1rem; }
     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   </button>
 </div>
-<script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
 <div class="wrap">
-  <div class="back"><a href="index.html#meter-study">← Metering focus</a> · <a href="index.html">Home</a></div>
+  <div class="back"><a href="index.html#meter-study">← Meter Interoperability</a></div>
 
-  <h1>Metering focus</h1>
-  <p class="sub">IEEE ISV Tech Comm · primary endeavor · Jun 2026</p>
+  <h1>Meter Interoperability</h1>
+  <p class="sub">ISV Tech Comm primary endeavor · 2026</p>
+  <p class="lead">Mini-grid and village-energy operators need per-customer energy reads, prepaid billing, and theft visibility — without buying a full utility AMI stack. This section documents how ISV scopes affordable metering: normalize vendor-specific meter data at the <strong>gateway</strong>, publish a small northbound contract, and procure only what a feeder actually needs. <strong>IEEE Smart Village</strong> does not sell meters or head-end software — it uses IEEE’s agnostic place in the ecosystem to help those practices take hold.</p>
 
-  <div class="callout callout-primary">
-    <strong>Current primary endeavor</strong>
-    Tech Comm is concentrating volunteer effort on <strong>affordable, interoperable village metering</strong> — multi-vendor normalization at the gateway and lightweight standards that avoid utility AMI cost. Pole EMS, OpenAMI, and other initiatives continue, but metering is the active coordination thread for standards, vendor outreach, and anchor developer POCs.
-  </div>
+  <h2>Why IEEE · why ISV</h2>
+  <p class="body-text">Rural metering stalls when every vendor ships a closed AMI bundle, every tender copies utility MDMS boilerplate, and operators cannot swap gear without rewriting billing. Meter OEMs, integrators, open-platform builders (EnAccess, Energy IoT), and field operators all have legitimate interests — but no single commercial player can credibly write the <em>common</em> contract everyone else must adopt. <strong>IEEE</strong> sits outside those product lines: a neutral forum where ISV’s Technology Committee can convene stakeholders, compare field evidence, and publish reference artifacts without picking a winner.</p>
+  <p class="body-text">That is the picture this section is building toward: a rural energy metering ecosystem that can <strong>flourish</strong> — more integrators bidding on the same scope, operators mixing OEM fleets on one feeder, migration paths when vendors exit, and open gateways that compete on implementation rather than proprietary lock-in. ISV turns alignment into draft specs (northbound MQTT, VMRS tiers, vendor benchmarks, POC gap matrices), validated on real deployments — not certified standards, but shared practice operators and vendors can point to. <strong>OpenAMI</strong> (geo asset model) and <strong>Street Pole EMS</strong> (pole-gateway reference kits) are hardware threads inside this same focus.</p>
 
-  <p class="lead">Funded mini-grids repeatedly hit the same wall: metering capex rivals generation hardware, operators cannot bill or catch theft without per-customer reads, and protocol fragmentation (STS, DLMS, OEM mesh) blocks swap and scale.</p>
-
-  <h2>Two goals, one program</h2>
-  <div class="dual-track">
-    <div class="track-card">
-      <h3>Multi-vendor normalization</h3>
-      <p>Anchor developers and operators should not be locked to one OEM NAN or proprietary cloud API forever.</p>
-      <ul>
-        <li>Northbound JSON/MQTT export at the gateway — <a href="meter-benchmark/northbound-mqtt-v0.1.json">v0.1 draft</a></li>
-        <li>VMRS register checklist + vendor <a href="meter-vmrs.html#acronyms">ICD</a> mapping — <a href="meter-vmrs.html">OBIS · VMRS</a></li>
-        <li>Anchor-led feeder POCs with published gap matrices</li>
-      </ul>
+  <h2>What ISV is normalizing</h2>
+  <div class="problem-grid">
+    <div>
+      <strong>Procurement scope</strong>
+      <p>Village tenders that paste “Cadillac” utility AMI requirements strand budgets. ISV documents a <strong>minimum viable</strong> northbound contract — what a 50–500 connection feeder actually needs for prepaid billing and theft visibility.</p>
     </div>
-    <div class="track-card">
-      <h3>Lightweight, less expensive systems</h3>
-      <p>Villages should not pay for MDMS, full Profile Generic, or certification surfaces they will never use.</p>
-      <ul>
-        <li>Scope-limited procurement language (village vs utility layers)</li>
-        <li>Cited $/connection bands — <a href="meter-vendor-study.html">vendor study</a></li>
-        <li>STS/SMS and redundant field paths when DCU fails</li>
-      </ul>
+    <div>
+      <strong>Gateway contract</strong>
+      <p>Southbound stays OEM-specific (DLMS, RF mesh, Modbus). Northbound converges on one MQTT/JSON envelope so HES and MPM integrations are written once, regardless of meter brand under the pole.</p>
+    </div>
+    <div>
+      <strong>Register semantics</strong>
+      <p>OBIS keys are standardized; ICD exposure is not. VMRS tiers separate universal reads from model-specific gaps so procurement and integration arguments happen on a shared checklist, not vendor slide decks.</p>
+    </div>
+    <div>
+      <strong>Field evidence</strong>
+      <p>Anchor POCs (SteamaCo, Darway) publish which registers each model actually exposes — gap matrices operators can cite, integrators can bid against, and vendors can close without a proprietary certification gate.</p>
     </div>
   </div>
 
-  <h2>Why this matters (problems summary)</h2>
-  <ul class="problem-list">
-    <li><strong>Cadillac procurement on village budgets</strong> — RFPs copy utility DLMS/MDMS language; vendors quote full AMI when operators only need prepaid + feeder visibility.</li>
-    <li><strong>Layer confusion</strong> — STS (payment), OBIS (semantics), DLMS (protocol), and SunSpec (DER) get conflated in one compliance column.</li>
-    <li><strong>OEM lock-in</strong> — proprietary RF and gated ICDs block second-source DCUs and multi-vendor feeders.</li>
-    <li><strong>Comms fragility</strong> — when the DCU or WAN fails, billing must still work via STS/SMS and CIU paths.</li>
-  </ul>
-  <p style="font-size:13px;color:var(--text-2)">Landscape diagrams and layer tables: <a href="meter-problems-today.html">Problems in depth</a>.</p>
+  <p class="body-text">Primary audience: operators, integrators, and vendors deploying <strong>STS prepaid</strong>, pole-mounted DCUs, and mixed OEM fleets in emerging markets.</p>
 
-  <h2>Machine-readable specs</h2>
-  <ul>
-    <li><a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a> — northbound MQTT topics and JSON envelope (primary)</li>
-    <li><a href="meter-benchmark/vmrs-registers.json"><code>meter-benchmark/vmrs-registers.json</code></a> — register checklist with certainty tiers (appendix)</li>
+  <div class="callout">
+    <strong>Draft artifacts — not IEC/DLMS UA published standards.</strong>
+    Primary machine-readable spec: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>.
+    Register appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>.
+    Human-readable tiers and OBIS keys: <a href="index.html#meter-study/vmrs">OBIS · VMRS</a>.
+  </div>
+
+  <h2>Two deliverables</h2>
+  <div class="dash-grid">
+    <div class="dash-card dash-card-primary">
+      <h3>Northbound MQTT profile (v0.1)</h3>
+      <ul>
+        <li>JSON envelope from pole EMS / DCU to operator HES or MPM</li>
+        <li>Topic layout, register array, optional SIP session hooks</li>
+        <li>Gateway may speak DLMS, OEM RF, Modbus, or PLC southbound — MQTT/JSON northbound only</li>
+      </ul>
+    </div>
+    <div class="dash-card">
+      <h3>VMRS register checklist</h3>
+      <ul>
+        <li>~10 OBIS keys every village billing case needs (import kWh, credit, tamper, disconnect, clock…)</li>
+        <li>Tier&nbsp;A (universal IEC) · Tier&nbsp;B (ICD varies) · Tier&nbsp;C (optional audit)</li>
+        <li>Explicit exclusions: full Profile Generic buffers, utility MDMS semantics, STSA key mgmt</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Gateway normalization</h2>
+  <p class="body-text">Southbound protocols differ by meter OEM and NAN (RF mesh, PLC, GPRS). Requiring one wire protocol across a mixed fleet locks you to a single vendor. Instead, the <strong>edge gateway</strong> reads whatever the meter exposes locally, maps registers to OBIS semantics, and publishes one northbound shape.</p>
+  <div class="flow-row" aria-label="Data path from meter to operator">
+    <span class="flow-box">Meter (DLMS / OEM / Modbus)</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">NAN (RF · PLC · cellular)</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">Pole EMS / DCU</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box flow-box-north">MQTT / JSON northbound</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">Operator HES · MPM · billing</span>
+  </div>
+  <p class="body-text">STS token vending (SMS, USSD, CIU keypad) stays on its own path — it is a <strong>payment layer</strong>, not the meter read protocol. See <a href="index.html#meter-study/problems-today">Problems</a> for the full utility-vs-village layer diagram.</p>
+
+  <h2>Why procurement goes wrong</h2>
+  <div class="problem-grid">
+    <div>
+      <strong>“Cadillac” RFPs</strong>
+      <p>Consultants and utility AMI playbooks get pasted into village tenders: full MDMS, Profile Generic load profiles, DLMS conformance matrices, and per-meter HLS on rural WAN. That is appropriate for a 500k-meter utility — not for a 200-connection feeder on a $40–110/connection budget. ISV scopes a <strong>minimum viable</strong> northbound contract instead.</p>
+    </div>
+    <div>
+      <strong>Layer soup</strong>
+      <p>STS, OBIS, DLMS, MQTT, and SunSpec sit at different layers. A single RFP line like “DLMS + STS + SunSpec” mixes prepaid vending (L6), register semantics (L5), wire protocol (L2), northbound format (L4), and inverter DER (parallel track). <a href="index.html#meter-study/problems-today">Problems</a> maps each layer.</p>
+    </div>
+    <div>
+      <strong>OEM lock-in</strong>
+      <p>Closed AMI platforms (mesh + cloud + MDMS bundle) ship fast but block second-source DCUs and migration. Northbound normalization lets operators swap meter OEMs while keeping one HES integration — if the gateway exposes VMRS-shaped JSON.</p>
+    </div>
+    <div>
+      <strong>Comms fragility</strong>
+      <p>When the DCU or WAN link fails, customers still need STS tokens. CIU keypads, SMS vending, and redundant NAN paths must work independently of scheduled DLMS reads. May 2026 call notes cover SMS token delivery and phone-relay fallbacks.</p>
+    </div>
+  </div>
+
+  <h2>Sub-pages in this section</h2>
+  <ul class="subnav-list">
+    <li><a href="index.html#meter-study/problems-today"><strong>Problems</strong></a> — utility AMI vs village minimum; layer diagram and common mistakes</li>
+    <li><a href="index.html#meter-study/vmrs"><strong>OBIS · VMRS</strong></a> — register tiers, northbound JSON example, acronym list</li>
+    <li><a href="index.html#meter-study/vendor-study"><strong>Vendor Study</strong></a> — outreach pipeline, protocol scores, cited $/connection bands (web pass only)</li>
   </ul>
 
-  <h2>Related work</h2>
-  <p class="related">
-    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 · Metering &amp; comms topology</a> (meeting notes) ·
-    <a href="index.html#tech-notes">Technical reports</a> (affordable metering, OpenAMI) ·
-    <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a> (pole EMS reference) ·
-    <a href="index.html#tasks">Tasks</a> / GitHub Issues for follow-ups
+  <h2>Field validation</h2>
+  <p class="body-text">Anchor POCs compare vendor ICD maps against <code>northbound-mqtt-v0.1</code> on real feeders and publish gap matrices (which OBIS keys each model actually exposes).</p>
+  <div class="dash-grid">
+    <div class="dash-card">
+      <h3>SteamaCo</h3>
+      <ul>
+        <li>Nimbus / Savi stack — closed AMI with DLMS claims; benchmark for migration path to open northbound</li>
+        <li>Power Africa workshop pre-session (Warren Scott) · Kenya deployment context</li>
+      </ul>
+    </div>
+    <div class="dash-card">
+      <h3>Darway</h3>
+      <ul>
+        <li>Feeder-scale pilot target for pole EMS + MQTT envelope on schedule</li>
+        <li>ICD extraction and tier&nbsp;B register gaps documented per model</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="meter-footer">
+    Specs: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a> ·
+    <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a> ·
+    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a> ·
+    <a href="power-africa-openami-presentation-2025.html">OpenAMI deck (Sep 2025)</a> ·
+    <a href="index.html#tasks">Tasks</a>
   </p>
 </div>
 </body>
