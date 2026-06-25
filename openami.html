@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenAMI · ISV Tech Comm</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.85rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 48rem; line-height: 1.5; }
+h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
+.callout strong { color: var(--teal); }
+.stack-table td:first-child { font-weight: 500; }
+.stack-table .out-of-scope { color: var(--text-3); font-style: italic; }
+.link-list { font-size: 13px; line-height: 1.6; margin-bottom: 1rem; }
+.link-list li { margin-bottom: 0.35rem; }
+html.embed .back { display: none; }
+html.embed .wrap { padding-top: 0.75rem; }
+html.embed h1 { font-size: 18px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study/openami">← Meter Interoperability</a></div>
+
+  <h1>OpenAMI</h1>
+  <p class="sub">Hardware thread within ISV Meter Interoperability · EnAccess · Energy IoT · NESL</p>
+  <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends.</p>
+
+  <div class="callout">
+    <strong>Community · Discord</strong>
+    OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.
+  </div>
+
+  <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a></p>
+
+  <h2>Stack layers (working definitions)</h2>
+  <table class="stack-table">
+    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OpenEMS</strong> (Energy IoT)</td><td>EMS / edge orchestration</td><td>More urban — grid present; stack can stop at the DCU.</td></tr>
+      <tr><td><strong>MeshEMS</strong> (NESL)</td><td>NAN mesh</td><td>DCU mesh backhaul · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> schematic</td></tr>
+      <tr><td><strong>Street Pole EMS</strong></td><td>Pole gateway</td><td><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a> firmware</td></tr>
+      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry</td><td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; <strong>leakage visible at every layer</strong> of the distribution path</td></tr>
+      <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>Instead of OpenEMS backend in village deployments</td></tr>
+      <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology</td><td>Maps feeder → branch → meter so loss can be compared at each point in the system</td></tr>
+      <tr><td class="out-of-scope"><strong>OpenADR</strong></td><td class="out-of-scope">Price signals</td><td class="out-of-scope">Utility pricing server — not village prepaid priority</td></tr>
+    </tbody>
+  </table>
+
+  <h2>ISV wiki threads</h2>
+  <ul class="link-list">
+    <li><a href="index.html#meter-study/overview">Meter Interoperability · Overview</a></li>
+    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 notes · MeshEMS power rails</a></li>
+    <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a></li>
+    <li><a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a></li>
+  </ul>
+
+  <h2>External links</h2>
+  <ul class="link-list">
+    <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a></li>
+    <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a></li>
+    <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a></li>
+    <li><a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> (Dev Labs reports)</li>
+  </ul>
+</div>
+</body>
+</html>

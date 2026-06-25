@@ -24,6 +24,14 @@
     "done": { "label": "Done", "short": "Done", "order": 4 }
   },
   "meetings": {
+    "tech-comm-2026-06-25": {
+      "title": "AI Wiki orientation",
+      "date": "25 Jun 2026",
+      "group": "tech-comm",
+      "hash": "notes/tech-comm-2026-06-25",
+      "standalone": "tech-comm-2026-06-25-ai-wiki-orientation.html",
+      "label": "meeting-tech-comm-2026-06-25"
+    },
     "metering-2026-05-28": {
       "title": "Metering & comms topology",
       "date": "28 May 2026",

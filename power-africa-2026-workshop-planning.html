@@ -155,12 +155,16 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
         <div class="overview-card">
           <div class="overview-val">8h</div>
           <div class="overview-title">Workshop time</div>
-          <div class="overview-detail">3 sessions — Mon AM, Tue PM, Sat AM</div>
+          <div class="overview-detail">MAKE · CODE · INTEGRATE — Mon AM (4h), Tue eve (2h), Sat AM (2h)</div>
         </div>
       </div>
       <div class="callout">
         <strong>Main goal</strong>
         Formalize workshop sessions — define structure, budget, room layout, and materials so the conference hands-on track is ready to run. Kits are for workshop use only; not trying to sell them.
+      </div>
+      <div class="callout" style="border-left-color:var(--teal);background:var(--teal-50)">
+        <strong style="color:var(--teal)">How to participate</strong>
+        Groups that want to join a workshop session should register for the conference <strong>day rate</strong> for the day they plan to attend — no separate workshop fee. Register via <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a> / conference registration.
       </div>
     </div>
 
@@ -171,13 +175,14 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </div>
 
   <h2>Session schedule</h2>
+  <p>Three hands-on blocks follow a <strong>MAKE → CODE → INTEGRATE</strong> arc across the conference week.</p>
   <table>
-    <thead><tr><th>When</th><th>Duration</th><th>Notes</th></tr></thead>
+    <thead><tr><th>When</th><th>Duration</th><th>Theme</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td>Monday morning (pre-session)</td><td>30 min</td><td>Warren Scott, SteamaCo — before workshop starts</td></tr>
-      <tr><td>Monday morning</td><td>4 hr</td><td>Workshop session</td></tr>
-      <tr><td>Tuesday evening</td><td>2 hr</td><td><span class="todo">Slot for Sandra / 10 Power video (5–10 min) — TBD</span></td></tr>
-      <tr><td>Saturday morning</td><td>2 hr</td><td></td></tr>
+      <tr><td>Monday morning (pre-session)</td><td>30 min</td><td>—</td><td>Warren Scott, SteamaCo — before workshop starts</td></tr>
+      <tr><td><strong>Monday morning</strong></td><td><strong>4 hr</strong></td><td><strong>MAKE</strong></td><td>First workshop block — build / assemble kits and hardware</td></tr>
+      <tr><td><strong>Tuesday evening</strong></td><td><strong>2 hr</strong></td><td><strong>CODE</strong></td><td>Firmware, MQTT/northbound lab — <span class="todo">Sandra / 10 Power video (5–10 min) slot TBD</span></td></tr>
+      <tr><td><strong>Saturday morning</strong></td><td><strong>2 hr</strong></td><td><strong>INTEGRATE</strong></td><td>Final block — wire stack together, northbound path, end-to-end lab</td></tr>
     </tbody>
   </table>
 
@@ -186,14 +191,15 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <thead><tr><th>Who</th><th>When</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td>Warren Scott, SteamaCo</td><td>Monday morning · 30 min pre-session</td><td>Before workshop starts</td></tr>
-      <tr><td>Sandra, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a> (Haiti)</td><td>TBD · 5–10 min video</td><td>Native projects in the Americas; women-owned; creative business cases — place somewhere in agenda</td></tr>
-      <tr><td>EnAccess</td><td>Workshop sessions</td><td>Attending workshop</td></tr>
+      <tr><td>Sandra, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a> (Haiti)</td><td>Tuesday evening · CODE</td><td>5–10 min video — native projects in the Americas; women-owned; creative business cases</td></tr>
+      <tr><td>EnAccess</td><td>MAKE · CODE · INTEGRATE</td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> on site; attending workshop</td></tr>
       <tr><td>Aaron, <a href="https://nearlyfreeenergy.com/" target="_blank" rel="noopener">NearlyFree Energy</a></td><td>Workshop sessions</td><td>Interested in attending</td></tr>
+      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach pending</span></td><td><a href="assets/documents/amda-pitch-one-page.pdf" target="_blank" rel="noopener">pitch PDF</a> · <a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">our-team</a> · <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
     </tbody>
   </table>
 
   <h2>Workshop session summary</h2>
-  <p class="todo">One paragraph describing the workshop session — to be drafted.</p>
+  <p>The PowerAfrica hands-on track is structured in three sessions: <strong>MAKE</strong> (Monday morning, 4&nbsp;hours) — assemble pole-gateway kits and bench hardware; <strong>CODE</strong> (Tuesday evening, 2&nbsp;hours) — firmware, MQTT/northbound profiles, and lab exercises on the built gear; <strong>INTEGRATE</strong> (Saturday morning, 2&nbsp;hours) — connect meters, gateway, and operator-facing stack into an end-to-end village metering path.</p>
 
   <h2>Planning checklist</h2>
   <ul>
@@ -201,13 +207,20 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li><strong>Cabinets</strong> — 3 cabinets to ship / set up in the room</li>
     <li><strong>Budget</strong> — determine total cost including duties, shipping, and kit procurement (under $1,000 target)</li>
     <li><strong>Room arrangement</strong> — how should the workshop space be laid out for hands-on work?</li>
-    <li><strong>Materials</strong> — what needs to be prepped before the conference?</li>
+    <li><strong>Materials</strong> — what needs to be prepped before the conference? Power: 5&nbsp;V for MeshEMS temp reference + SSRs (buck/boost from 18650); CircuitSetup on 3.3&nbsp;V; see <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun notes · pole power rails</a></li>
     <li><strong>Shipping address</strong> — get delivery address from Albert in Nairobi</li>
-    <li><strong>Non-ISV participants</strong> — some workshop attendees are not ISV members; confirm each is registered for the conference (1-day registration to cover costs)</li>
+    <li><strong>Registration</strong> — groups joining a workshop session register for the conference <strong>day rate</strong> on the day they attend (MAKE Mon, CODE Tue eve, INTEGRATE Sat)</li>
+    <li><strong>Non-ISV participants</strong> — same day-rate registration; confirm each attendee is registered for the session date they plan to join</li>
   </ul>
 
   <h2>Action items (tracked)</h2>
-  <p style="font-size:13px;color:var(--text-2);margin-bottom:0.75rem">See follow-up summary at the top of this page. Full list in <a href="index.html#tasks">Knowledge Base · Tasks</a> or <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>.</p>
+  <table>
+    <thead><tr><th>Task</th><th>Issue</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Reach out to AMDA</td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td><td><a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">our-team</a> · workshop day-rate registration · OBIS codes · open stack</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--text-2);margin:0.75rem 0">See follow-up summary at the top of this page. Full board in <a href="index.html#tasks">Knowledge Base · Tasks</a> or <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>.</p>
 
   <h2>Related events</h2>
   <ul>
@@ -222,7 +235,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <ul>
     <li><a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025 · event summary</a></li>
     <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI presentation · Sep 2025</a></li>
-    <li><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">Street Pole EMS (ems-dev)</a></li>
+    <li><a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL MeshEMS (schematic)</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">Street Pole EMS (ems-dev)</a></li>
     <li><a href="index.html#notes/metering-2026-05-28">Tech Comm — Metering &amp; comms topology</a></li>
   </ul>
 </div>
