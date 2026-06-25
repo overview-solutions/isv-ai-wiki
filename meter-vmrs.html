@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBIS · VMRS · Meter benchmark · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.lead { font-size: 15px; line-height: 1.65; margin-bottom: 1.25rem; max-width: 52rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
+p, li { font-size: 14px; margin-bottom: 0.5rem; }
+ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+.hub { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 13px; }
+.hub a { padding: 0.35rem 0.65rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: var(--text-2); background: var(--bg-2); }
+.hub a:hover { border-color: var(--green); color: var(--green); }
+.hub a.active { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 1.25rem; border: 1px solid var(--border); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
+th, td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 11px; }
+tr:last-child td { border-bottom: 0; }
+td code { font-family: var(--mono); font-size: 11px; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 13px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn strong { color: var(--amber); }
+.cert-a { color: var(--green); font-weight: 600; font-size: 11px; }
+.cert-b { color: var(--amber); font-weight: 600; font-size: 11px; }
+.cert-c { color: var(--text-3); font-weight: 600; font-size: 11px; font-style: italic; }
+.acronym-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.45rem 1rem; margin-bottom: 1.25rem; font-size: 12px; }
+.acronym-grid dt { font-weight: 600; font-family: var(--mono); font-size: 11px; color: var(--teal); display: inline; }
+.acronym-grid dt::after { content: " — "; font-family: var(--font); font-weight: 400; color: var(--text-3); }
+.acronym-grid dd { display: inline; margin: 0; color: var(--text-2); line-height: 1.45; }
+.acronym-grid div { padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+.tier-box { border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; background: var(--bg-2); font-size: 13px; }
+.tier-box h3 { margin: 0 0 0.5rem; font-size: 13px; }
+.tier-box p { margin: 0 0 0.5rem; color: var(--text-2); font-size: 13px; }
+.tier-box p:last-child { margin-bottom: 0; }
+.src-list { font-size: 12px; margin-bottom: 1rem; }
+.src-list li { margin-bottom: 0.35rem; }
+.tag-draft { font-size: 10px; padding: 2px 8px; border-radius: 12px; background: var(--amber-50); color: var(--amber); font-weight: 500; }
+pre { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; overflow-x: auto; font-family: var(--mono); font-size: 11px; line-height: 1.5; margin-bottom: 1rem; }
+.poc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.65rem; margin-bottom: 1.25rem; }
+.poc-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem; background: var(--bg-2); font-size: 12px; }
+.poc-card strong { display: block; font-size: 12px; margin-bottom: 0.35rem; color: var(--teal); }
+.poc-card span { color: var(--text-2); line-height: 1.45; }
+.steps { counter-reset: step; list-style: none; padding-left: 0; }
+.steps li { counter-increment: step; padding-left: 2rem; position: relative; margin-bottom: 0.75rem; }
+.steps li::before { content: counter(step); position: absolute; left: 0; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--green-50); color: var(--green); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+html.embed .back, html.embed #notes-back-btn, html.embed .hub { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study">← Meter benchmark</a></div>
+  <nav class="hub" aria-label="Meter benchmark pages">
+    <a href="meter-problems-today.html">The problems today</a>
+    <a href="meter-vmrs.html" class="active">OBIS · VMRS</a>
+    <a href="meter-vendor-study.html">Vendor study</a>
+  </nav>
+  <h1>OBIS · Village Minimum Register Set (VMRS)</h1>
+  <p class="sub">Draft alignment wedge · v0.1-draft · Jun 2026 · <span class="tag-draft">NOT a published standard</span></p>
+
+  <p id="notes-back-btn" style="margin-bottom:1rem">
+    <a href="index.html#meter-study/vmrs" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
+  </p>
+
+  <div class="callout callout-warn">
+    <strong>Read this before citing VMRS in an RFP</strong>
+    VMRS is an <strong>ISV Tech Comm working proposal</strong> — a shortlist of registers we think village operators need. It is <em>not</em> an IEC, DLMS UA, or STS published profile. See <a href="#what-tiers-mean">tier definitions</a> and <a href="#acronyms">acronyms</a> (including <strong>ICD</strong>). Every tier&nbsp;B mapping must be validated against the vendor ICD before procurement.
+  </div>
+
+  <p class="lead">The primary artifact is the <strong>northbound JSON/MQTT profile</strong> — a gateway export contract. <strong>VMRS</strong> is the appendix: a checklist of likely <a href="#acronyms">OBIS</a> keys in that payload. Most tier&nbsp;A codes already exist on every DLMS meter; the village gap is procurement scope and northbound shape, not new register inventions. See <a href="meter-problems-today.html">layered landscape</a> and <a href="#what-tiers-mean">what the tiers mean</a>.</p>
+
+  <div class="callout">
+    <strong>Machine-readable specs</strong>
+    Northbound envelope (primary): <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a><br>
+    Register checklist (appendix): <a href="meter-benchmark/vmrs-registers.json"><code>meter-benchmark/vmrs-registers.json</code></a>
+  </div>
+
+  <h2 id="acronyms">Acronym list</h2>
+  <p style="font-size:13px;color:var(--text-2);margin-bottom:0.75rem">Meter-benchmark terms used across this wiki. <a href="meter-problems-today.html">Problems today</a> uses L1–L7 layer labels.</p>
+  <dl class="acronym-grid">
+    <div><dt>AMI</dt><dd>Advanced Metering Infrastructure — meters + NAN + head-end + often MDMS</dd></div>
+    <div><dt>CIU</dt><dd>Customer Interface Unit — keypad/display for STS token entry at the home</dd></div>
+    <div><dt>COSEM</dt><dd>Companion Specification for Energy Metering — application layer inside DLMS meters (objects + attributes)</dd></div>
+    <div><dt>DCU</dt><dd>Data Concentrator Unit — field gateway that polls meters and uplinks to a head-end</dd></div>
+    <div><dt>DER</dt><dd>Distributed Energy Resource — rooftop solar, batteries, etc. (SunSpec track, parallel to revenue VMRS)</dd></div>
+    <div><dt>DLMS</dt><dd>Device Language Message Specification — protocol family for speaking to smart meters (often with COSEM)</dd></div>
+    <div><dt>HES</dt><dd>Head End System — schedules reads, firmware, alarms between WAN and MDMS/operator tools</dd></div>
+    <div><dt>ICD</dt><dd>Interface Class Description — vendor document listing every COSEM object on a meter model (logical names, OBIS, data types). <strong>The map you need for tier&nbsp;B.</strong></dd></div>
+    <div><dt>KMC</dt><dd>Key Management Centre — utility/STS key infrastructure (separate from register reads)</dd></div>
+    <div><dt>MDMS</dt><dd>Meter Data Management System — VEE, billing integration, work orders, regulatory export (utility L7)</dd></div>
+    <div><dt>NAN</dt><dd>Neighborhood Area Network — RF mesh, PLC, etc. between meters and DCU</dd></div>
+    <div><dt>OBIS</dt><dd>OBject Identification System — IEC code naming what a register means (e.g. <code>1.8.0</code> = active import kWh)</dd></div>
+    <div><dt>OEM</dt><dd>Original Equipment Manufacturer — meter hardware vendor (Donsun, Inhemeter, Mojec, …)</dd></div>
+    <div><dt>POC</dt><dd>Proof of Concept — one feeder, documented gaps, not certification</dd></div>
+    <div><dt>SIP</dt><dd>Session Information Protocol — ISV/Glenn Algie draft for authenticated DER market sessions (not VoIP SIP)</dd></div>
+    <div><dt>SSA</dt><dd>Sub-Saharan Africa</dd></div>
+    <div><dt>STS</dt><dd>Standard Transfer Specification — prepaid token encryption and transfer (IEC 62055); payment scheme, not a wire protocol</dd></div>
+    <div><dt>STSA</dt><dd>STS Association — body governing STS key management and token standards</dd></div>
+    <div><dt>VEE</dt><dd>Validation, Estimation, Editing — utility MDMS treatment of interval meter data</dd></div>
+    <div><dt>VMRS</dt><dd>Village Minimum Register Set — ISV draft checklist of registers for northbound telemetry (not a published IEC profile)</dd></div>
+    <div><dt>WAN</dt><dd>Wide Area Network — cellular/fiber backhaul from DCU to cloud</dd></div>
+  </dl>
+
+  <h2>What is an ICD?</h2>
+  <p>When we say “validate against the vendor <strong>ICD</strong>,” we mean their <strong>Interface Class Description</strong>: the machine-readable description of which <a href="#acronyms">COSEM</a> objects exist on a specific meter type, each with an <a href="#acronyms">OBIS</a> logical name, class, and attributes.</p>
+  <p>Two meters can both be “DLMS/STS prepay” but expose <strong>different logical names</strong> for credit balance or disconnect state. Tier&nbsp;A OBIS codes like <code>1.8.0</code> are universal; tier&nbsp;B items (credit, tamper bits, relay) are where you open the ICD and ask: <em>which object, which attribute, which read method?</em></p>
+  <p>Utility AMI teams already demand ICDs for certification. Village POCs need a <strong>short ICD excerpt</strong> — only the rows that map to VMRS targets — not the full hundred-page object list.</p>
+
+  <h2 id="what-tiers-mean">What the tiers mean — and what VMRS is for</h2>
+  <p style="font-size:13px;color:var(--text-2);margin-bottom:1rem">VMRS is not a new OBIS standard. The tiers say how much each line item is “already industry fact” vs “ask the vendor ICD.”</p>
+
+  <div class="tier-box">
+    <h3><span class="cert-a">Tier A · Standard OBIS</span> (IEC 62056-6-1)</h3>
+    <p>Examples: <code>1.8.0</code>, <code>1.7.0</code>, <code>32.7.0</code>, <code>0.0.0</code>. Universal metrology and clock codes — every DLMS vendor already implements these. <strong>ISV does not introduce alignment here;</strong> we cite them as payload keys in the northbound profile.</p>
+    <p><strong>Value:</strong> Procurement checklist and JSON schema labels — “we need these reads,” not “we invented these codes.”</p>
+  </div>
+  <div class="tier-box">
+    <h3><span class="cert-b">Tier B · Common COSEM practice</span></h3>
+    <p>Examples: remaining credit, disconnect control, device serial, tamper status. Appear on most STS/DLMS prepay meters, but <strong>logical names and bit meanings vary by ICD</strong>. VMRS names the semantic target; only a vendor ICD sheet harmonizes the path to it.</p>
+    <p><strong>Value:</strong> Anchor-led OEM ask — “document ICD mapping for meters you already ship to us.” The <strong>gap matrix</strong> per vendor is the real deliverable.</p>
+  </div>
+  <div class="tier-box">
+    <h3><span class="cert-c">Tier C · ISV working proposal</span></h3>
+    <p>Example: last token / transfer audit register. Operator need may be real; OBIS assignment is <strong>not</strong> standardized. Optional — drop from POC unless an anchor operator requires STS audit northbound.</p>
+    <p><strong>Value:</strong> Low. Do not build a strategy around tier&nbsp;C alone.</p>
+  </div>
+
+  <div class="callout">
+    <strong>So is VMRS a useful exercise?</strong>
+    Yes, if reframed: align on <strong>northbound JSON/MQTT</strong> + <strong>scope-limited procurement</strong> (“not full MDMS/Profile Generic”). The OBIS table is mostly tier&nbsp;A bibliography plus tier&nbsp;B ICD homework. POC success = gateway publishes <code>northbound-mqtt-v0.1</code> on a real feeder; tier&nbsp;A confirmed; tier&nbsp;B gaps published — not “VMRS compliance.”
+  </div>
+
+  <h2>How the register list was chosen</h2>
+  <ol>
+    <li><strong>IEC 62056-6-1 (OBIS)</strong> — Universal metrology and clock codes (tier&nbsp;A): e.g. <code>1.8.0</code> active import energy is the de-facto worldwide billing register; not an ISV invention.</li>
+    <li><strong>DLMS UA COSEM / prepay meter practice</strong> — Tier&nbsp;B codes (credit balance, disconnect control, tamper status) appear on STS-capable DLMS meters but <strong>logical names vary by manufacturer ICD</strong> — we document common patterns, not one true mapping.</li>
+    <li><strong>IEC 62055 (STS)</strong> — Defines token transfer and encryption. STS is <em>not</em> OBIS-native; mapping “remaining credit” to an OBIS code is vendor-specific (tier&nbsp;B).</li>
+    <li><strong>ISV Tech Comm field requirements</strong> — Theft visibility, prepaid parity, relay state, asset identity from <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a> and operator interviews — tier&nbsp;C where no single OBIS is standardized.</li>
+    <li><strong>Vendor study citations</strong> — Inhemeter brochure cites OBIS/IEC62056-21 optical read <span style="font-size:11px;color:var(--text-2)">(meter-vendor-study [s15])</span> — supports that DLMS meters expose standard OBIS, not that VMRS as a bundle is vendor-certified.</li>
+  </ol>
+  <p><strong>What we did not do:</strong> hands-on <a href="#acronyms">ICD</a> extraction on target meters, DLMS UA conformance testing, or STSA register harmonization. Those are the next validation steps.</p>
+
+  <h2>Certainty tiers (summary)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>Meaning</th><th>ISV adds alignment?</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cert-a">A</span></td><td>IEC 62056-6-1 OBIS</td><td>No — cite in northbound JSON</td><td><code>1.8.0</code>, <code>32.7.0</code></td></tr>
+        <tr><td><span class="cert-b">B</span></td><td>Common; ICD varies</td><td>Only via ICD mapping ask</td><td>Credit, disconnect, serial</td></tr>
+        <tr><td><span class="cert-c">C</span></td><td>Operator need; OBIS open</td><td>Weak — optional</td><td>Last token audit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>VMRS register table (with provenance)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>OBIS</th><th>Name</th><th>Tier</th><th>Req.</th><th>Why it is on the list</th><th>Caveats</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>1.8.0</code></td><td>Active energy import (total)</td><td><span class="cert-a">A</span></td><td>Yes</td><td>IEC 62056-6-1 standard billing register</td><td>—</td></tr>
+        <tr><td><code>2.8.0</code></td><td>Active energy export (total)</td><td><span class="cert-a">A</span></td><td>If net-metered</td><td>IEC 62056-6-1 export register</td><td>Omit on import-only feeders</td></tr>
+        <tr><td><code>1.7.0</code></td><td>Instantaneous active power import</td><td><span class="cert-a">A</span></td><td>Yes</td><td>IEC metrology; theft/load anomaly detection</td><td>Read interval is policy, not OBIS</td></tr>
+        <tr><td><code>32.7.0</code></td><td>Instantaneous voltage (L1)</td><td><span class="cert-a">A</span></td><td>Yes</td><td>IEC metrology</td><td>Use L2/L3 codes if wired</td></tr>
+        <tr><td><code>14.7.0</code></td><td>Supply frequency</td><td><span class="cert-a">A</span></td><td>Optional</td><td>IEC metrology</td><td>Often skipped on rural single-phase</td></tr>
+        <tr><td><code>0.0.0</code></td><td>Clock / device time</td><td><span class="cert-a">A</span></td><td>Yes</td><td>IEC clock object</td><td>Document UTC vs local offset</td></tr>
+        <tr><td><code>0.0.96.1.1.255</code></td><td>Device ID / serial (typical COSEM)</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Common ICD identification object</td><td>Logical name varies — northbound <code>meterSerial</code> OK</td></tr>
+        <tr><td><code>96.1.0</code></td><td>Billing period counter</td><td><span class="cert-a">A</span></td><td>Optional</td><td>IEC abstract object — <strong>not serial number</strong></td><td>Earlier draft mislabeled this; do not use for asset ID</td></tr>
+        <tr><td><code>96.5.0</code></td><td>Operating / alarm status</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Tamper/cover flags on prepay meters</td><td>Bit definitions are manufacturer-specific</td></tr>
+        <tr><td><code>96.8.0</code></td><td>Remaining credit / balance</td><td><span class="cert-b">B</span></td><td>If prepaid</td><td>Common on STS/DLMS prepay ICDs</td><td>STS path may not expose northbound; CIU may be only source</td></tr>
+        <tr><td><code>0.0.96.3.10.255</code></td><td>Disconnect control state</td><td><span class="cert-b">B</span></td><td>Yes</td><td>DLMS UA disconnect control default pattern</td><td>Replaces imprecise <code>96.11.1</code> from v0.1 draft</td></tr>
+        <tr><td><code>96.11.5</code></td><td>Last token / transfer event</td><td><span class="cert-c">C</span></td><td>Optional</td><td>STS audit trail — operator request</td><td>OBIS not harmonized — confirm per vendor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>References (not exhaustive)</h2>
+  <ul class="src-list">
+    <li>IEC 62056-6-1 — OBIS identification system (tier A codes)</li>
+    <li>IEC 62055 (STS) — token transfer; does not define VMRS bundle</li>
+    <li>DLMS UA COSEM Blue Book — disconnect control, prepayment/account objects (tier B mappings)</li>
+    <li>ISV <a href="meter-vendor-study.html">vendor study</a> — vendor claims OBIS/DLMS on brochures only</li>
+    <li>ISV <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 Tech Comm</a> — STS/SMS, redundant reads, operator pain points</li>
+  </ul>
+
+  <h2>Explicitly excluded from VMRS</h2>
+  <ul>
+    <li>Full Profile Generic (class 7) interval buffers — utility L4; add only if theft analytics need it</li>
+    <li>Full COSEM ICD — utility certification scope</li>
+    <li>STS key management (STSA/KMC) — separate L3 trust domain</li>
+    <li>SunSpec inverter registers — parallel DER track on pole EMS</li>
+  </ul>
+
+  <h2>Open validation questions</h2>
+  <ul>
+    <li>Which VMRS targets are readable via optical/DLMS on Donsun DS1000, Inhemeter i310, Calin CAM168-G in ISV target geographies?</li>
+    <li>Per-vendor tamper bit map for <code>96.5.0</code> (or equivalent)?</li>
+    <li>Does northbound JSON use OBIS keys when logical name differs, or always normalize to VMRS semantic IDs?</li>
+  </ul>
+
+  <h2>Examples — same semantics, different southbound</h2>
+
+  <h3>DLMS meter (Inhemeter i310) → gateway → MQTT</h3>
+  <p>Gateway opens DLMS association locally, reads COSEM attributes mapped to OBIS, publishes northbound envelope:</p>
+  <pre>{
+  "schemaVersion": "0.1",
+  "ts": "2026-06-22T14:30:00Z",
+  "feederId": "feeder-north-paravur-01",
+  "gatewayId": "pole-ems-0042",
+  "meterSerial": "DDZ1513-88421",
+  "sessionId": "sip-7f3a9c2e",
+  "registers": [
+    { "obis": "1.8.0", "value": 1842.5, "unit": "kWh", "quality": "good" },
+    { "obis": "96.8.0", "value": 12.4, "unit": "kWh", "quality": "good" },
+    { "obis": "0.0.96.3.10.255", "value": "connected", "unit": "enum", "quality": "good" }
+  ]
+}</pre>
+
+  <h3>STS-only path (token at CIU, audit at gateway)</h3>
+  <p>Customer buys token via SMS/USSD; meter accepts token locally. Gateway still publishes <code>96.8.0</code> and <code>96.11.5</code> when DLMS or vendor API exposes them — or operator accepts CIU display as source of truth until VMRS read path exists.</p>
+
+  <h3>Proprietary mesh (SparkMeter-style)</h3>
+  <p>Platform vendor maps internal registers to VMRS at their cloud API. ISV asks for explicit OBIS mapping doc or MQTT bridge conforming to <code>northbound-mqtt-v0.1.json</code> — avoids permanent semantic lock-in.</p>
+
+  <h2>Northbound profile v0.1 — where it lives</h2>
+  <p>The JSON/MQTT profile lives in the repo under <strong><code>meter-benchmark/</code></strong> alongside VMRS registers — not in a database schema or buried in vendor PDFs. Rationale:</p>
+  <ul>
+    <li>Versioned with the wiki (Git history, PR review, GitHub Pages deploy).</li>
+    <li>Edge firmware and platform teams can fetch stable URLs from Pages.</li>
+    <li>Human docs (<a href="meter-problems-today.html">Problems today</a>, this page) link to the same files agents and CI can consume.</li>
+  </ul>
+  <p>MQTT topic root: <code>openami/v1/{feederId}/{gatewayId}/meter/{meterSerial}/telemetry</code> — see full topic tree in the JSON file.</p>
+
+  <h2>SIP — Session Information Protocol (Glenn Algie)</h2>
+  <div class="callout callout-warn">
+    <strong>Not SunSpec SIP · not VoIP SIP</strong>
+    Glenn’s <strong>Session Information Protocol</strong> is an ISV Tech Comm proposal for establishing authenticated sessions between meters, gateways, and market participants in <strong>decentralized DER energy markets</strong> — so disconnect commands and settlements are bound to a session, reducing spoofing and theft in peer-to-peer trading.
+  </div>
+  <p>Northbound profile v0.1 reserves:</p>
+  <ul>
+    <li>Optional <code>sessionId</code> on telemetry payloads (traceability).</li>
+    <li>Mandatory session handshake on command topics before relay/disconnect or settlement actions.</li>
+    <li>Topic: <code>{topicRoot}/session/{sessionId}</code> with participants, feeder scope, validity window, signature.</li>
+  </ul>
+  <p>Normative SIP specification is evolving; this wiki tracks hooks in JSON until Glenn publishes SIP v0.1 text.</p>
+
+  <h2>Unifying manufacturers — logical approach</h2>
+  <ol class="steps">
+    <li><strong>Lead with northbound MQTT/JSON, not “adopt VMRS.”</strong> Ask: “Can you emit <code>northbound-mqtt-v0.1</code> from your DCU or document an ICD excerpt for these reads?”</li>
+    <li><strong>Separate revenue meter track from DER track.</strong> VMRS + MQTT for billing; SunSpec/MQTT on pole EMS for generation (see ISV-HCK-001 / Stonehenge topology).</li>
+    <li><strong>Edge normalization contract.</strong> Vendor keeps proprietary NAN; gateway publishes northbound envelope with tier&nbsp;A keys and documented tier&nbsp;B mappings.</li>
+    <li><strong>90-day POC.</strong> One feeder, 10–30 meters, northbound export on schedule, STS vending unchanged, <strong>gap matrix</strong> published.</li>
+    <li><strong>Publish gaps in vendor study.</strong> Upgrade VMRS column from <code>—</code> to <code>doc</code> only with ICD citation.</li>
+  </ol>
+
+  <h2>Technical POCs to find in each company</h2>
+  <p>Skip generic sales@ — ask for these roles by title or department:</p>
+  <div class="poc-grid">
+    <div class="poc-card">
+      <strong>Firmware / metrology lead</strong>
+      <span>Owns OBIS register implementation, tamper flags, relay control. Can confirm 96.5.0 bit meanings and read latency.</span>
+    </div>
+    <div class="poc-card">
+      <strong>DLMS / AMI protocol engineer</strong>
+      <span>Association objects, Profile Generic, which COSEM classes expose VMRS. Often in “smart meter R&amp;D” or “communication module” team.</span>
+    </div>
+    <div class="poc-card">
+      <strong>STS / prepay product manager</strong>
+      <span>Token gateway, 96.8.0 mapping, CIU integration, STSA key process — critical for SSA village deployments.</span>
+    </div>
+    <div class="poc-card">
+      <strong>DCU / gateway software lead</strong>
+      <span>Store-and-forward, MQTT/REST northbound, multi-vendor meter drivers. SteamaCo/Nimbus, Donsun DSC100, pole EMS teams.</span>
+    </div>
+    <div class="poc-card">
+      <strong>Regional integrator / utility AMI PM</strong>
+      <span>Africa or South Asia field references, installed-base OBIS tables, partner portal access (Inhemeter-style gated docs).</span>
+    </div>
+    <div class="poc-card">
+      <strong>DER / EMS partner engineer</strong>
+      <span>For Glenn’s SIP and DER markets — often separate from revenue meter team; may sit with inverter or microgrid platform group.</span>
+    </div>
+  </div>
+
+  <h3>Opening email (template)</h3>
+  <pre>Subject: Village metering POC — northbound MQTT + ICD excerpt
+
+We are IEEE Smart Village Tech Comm. We are not asking for full utility MDMS certification.
+
+We need MQTT/JSON telemetry conforming to northbound-mqtt-v0.1.json from your DCU or our gateway,
+with ICD-documented reads for the register checklist in vmrs-registers.json (mostly standard OBIS).
+
+Can you connect us with your DLMS/AMI protocol engineer for a 30-minute technical call?</pre>
+
+  <h2>Related pages</h2>
+  <ul>
+    <li><a href="meter-problems-today.html">The problems today</a> — layered ecosystem diagram (payment vs semantics vs protocol)</li>
+    <li><a href="meter-vendor-study.html">Vendor study</a> — VMRS column in benchmark tables</li>
+    <li><a href="tech-comm-2026-05-28-metering-topology.html">May 2026 metering topology</a> — STS/SMS and redundant NAN</li>
+  </ul>
+</div>
+</body>
+</html>

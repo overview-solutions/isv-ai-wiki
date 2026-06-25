@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Problems Today · Meter benchmark · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.lead { font-size: 15px; line-height: 1.65; margin-bottom: 1.25rem; max-width: 52rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; }
+p, li { font-size: 14px; margin-bottom: 0.5rem; }
+ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+.hub { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; font-size: 13px; }
+.hub a { padding: 0.35rem 0.65rem; border-radius: 8px; border: 1px solid var(--border); text-decoration: none; color: var(--text-2); background: var(--bg-2); }
+.hub a:hover { border-color: var(--green); color: var(--green); }
+.hub a.active { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 13px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn strong { color: var(--amber); }
+.landscape-wrap { border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem; background: var(--bg-2); margin: 1rem 0 1.5rem; overflow-x: auto; }
+.landscape-wrap svg { min-width: 860px; width: 100%; height: auto; display: block; }
+.landscape-caption { font-size: 12px; color: var(--text-2); margin-top: 0.65rem; line-height: 1.5; }
+.layer-key { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.5rem; margin-bottom: 1.25rem; font-size: 12px; }
+.layer-key div { padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); }
+.layer-key dt { font-weight: 500; font-size: 11px; color: var(--teal); margin-bottom: 0.15rem; }
+.layer-key dd { margin: 0; color: var(--text-2); line-height: 1.4; }
+.eco-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; font-size: 11px; margin: 1rem 0; padding: 0.75rem; border: 1px dashed var(--border); border-radius: 10px; background: var(--bg); }
+.eco-flow span { padding: 0.3rem 0.55rem; border-radius: 6px; background: var(--bg-2); border: 1px solid var(--border); white-space: nowrap; }
+.eco-flow .arr { color: var(--text-3); border: 0; background: transparent; padding: 0 0.15rem; }
+.compare-tbl { font-size: 12px; }
+.compare-tbl th { font-size: 10px; }
+.compare-tbl td { vertical-align: top; line-height: 1.45; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 1.25rem; border: 1px solid var(--border); border-radius: 10px; }
+.tbl-wrap table { width: 100%; border-collapse: collapse; }
+.tbl-wrap th, .tbl-wrap td { border-bottom: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; }
+.tbl-wrap th { background: var(--bg-2); font-weight: 500; }
+.tbl-wrap tr:last-child td { border-bottom: 0; }
+.pill-u { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--amber-50); color: var(--amber); }
+.pill-v { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--green-50); color: var(--green); }
+.pill-both { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--teal-50); color: var(--teal); }
+.diagram-grid { display: block; }
+.relation { border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 1.25rem; font-size: 13px; background: var(--bg); }
+.relation dt { font-weight: 500; font-size: 12px; margin-top: 0.65rem; color: var(--teal); }
+.relation dt:first-child { margin-top: 0; }
+.relation dd { margin: 0.15rem 0 0; color: var(--text-2); line-height: 1.45; }
+html.embed .back, html.embed #notes-back-btn, html.embed .hub { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+@media (max-width: 820px) { .landscape-wrap { margin-left: -0.5rem; margin-right: -0.5rem; border-radius: 0; border-left: 0; border-right: 0; } }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study">← Meter benchmark</a></div>
+  <nav class="hub" aria-label="Meter benchmark pages">
+    <a href="meter-problems-today.html" class="active">The problems today</a>
+    <a href="meter-vmrs.html">OBIS · VMRS</a>
+    <a href="meter-vendor-study.html">Vendor study</a>
+  </nav>
+  <h1>The problems today</h1>
+  <p class="sub">Why utility AMI stacks overwhelm village mini-grids · Jun 2026 · Tech Comm framing</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1rem">
+    <a href="index.html#meter-study/problems-today" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
+  </p>
+
+  <p class="lead">Utility AMI and village mini-grids share the same <strong>ecosystem layers</strong> — payment schemes, semantic registers, exchange formats, protocols, and physical access — but utilities must implement every layer deeply while villages can narrow the contract at the gateway. The diagram below is OSI-<em>inspired</em> (not a literal OSI map): it separates <strong>what the data means</strong> from <strong>how it is paid for</strong> from <strong>how it is moved</strong>. Terms: <a href="meter-vmrs.html#acronyms">acronym list</a> · register tiers: <a href="meter-vmrs.html#what-tiers-mean">what VMRS tiers mean</a>.</p>
+
+  <div class="callout">
+    <strong>ISV wedge</strong>
+    Normalize at <strong>L4–L5</strong>: <a href="meter-vmrs.html">VMRS</a> (OBIS semantics, draft) and <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound JSON/MQTT v0.1</a>. Keep STS vending and vendor NAN at <strong>L1–L2</strong> southbound. Reserve Glenn Algie’s <strong>SIP</strong> at <strong>L3</strong> for DER market sessions.
+  </div>
+
+  <h2>Metering landscape — layered ecosystem (utility vs village)</h2>
+  <p>Read across: each row is a layer type. Amber = utility-heavy scope. Green = village minimum. Teal = both need it, different depth. <strong>Do not confuse layers</strong> — STS is a payment/key scheme (L6/L3), OBIS is register semantics (L5), DLMS is a meter protocol (L2), MQTT is northbound messaging (L2/L4).</p>
+
+  <dl class="layer-key">
+    <div><dt>L7 · Business &amp; operations</dt><dd>Who runs billing, VEE, work orders, regulatory reporting, DER markets</dd></div>
+    <div><dt>L6 · Revenue &amp; payment schemes</dt><dd>STS prepaid tokens, postpaid, flat tariff, mobile money, net metering — not wire formats</dd></div>
+    <div><dt>L5 · Application semantics</dt><dd>What a register <em>means</em>: OBIS codes, COSEM objects, SunSpec models, STS token records</dd></div>
+    <div><dt>L4 · Data profiles &amp; exchange formats</dt><dd>Profile Generic buffers, load profiles, JSON/MQTT envelopes, MDMS CSV/XML exports</dd></div>
+    <div><dt>L3 · Session, identity &amp; trust</dt><dd>DLMS associations/HLS, TLS, STS KMC/STSA, SIP sessions, certificates</dd></div>
+    <div><dt>L2 · Messaging protocols</dt><dd>DLMS/COSEM, MQTT, Modbus, proprietary mesh APIs, SMS/USSD gateways</dd></div>
+    <div><dt>L1 · Physical &amp; link access</dt><dd>Optical port, PLC/RF NAN, GPRS/LTE, CIU keypad, RS-485</dd></div>
+  </dl>
+
+  <div class="landscape-wrap">
+    <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering ecosystem layers comparing utility AMI and village minimum">
+      <text x="248" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text)">Utility AMI — typical scope</text>
+      <text x="620" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text)">Village mini-grid — minimum scope</text>
+      <line x1="434" y1="8" x2="434" y2="540" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <!-- L7 -->
+      <text x="8" y="58" font-size="9" font-weight="600" fill="var(--teal)">L7</text>
+      <text x="8" y="70" font-size="8" fill="var(--text-2)">Business</text>
+      <rect x="88" y="38" width="320" height="44" rx="5" fill="var(--amber-50)" stroke="var(--amber)" stroke-width="1.2"/>
+      <text x="248" y="54" text-anchor="middle" font-size="9" fill="var(--text)">MDMS · CIS · VEE · workforce · regulatory</text>
+      <text x="248" y="68" text-anchor="middle" font-size="8" fill="var(--text-2)">full utility back-office integration</text>
+      <rect x="460" y="38" width="320" height="44" rx="5" fill="var(--green-50)" stroke="var(--green)" stroke-width="1.2"/>
+      <text x="620" y="54" text-anchor="middle" font-size="9" fill="var(--text)">Operator app · CRM · mobile money</text>
+      <text x="620" y="68" text-anchor="middle" font-size="8" fill="var(--text-2)">lightweight; optional SIP for DER markets</text>
+      <!-- L6 -->
+      <text x="8" y="108" font-size="9" font-weight="600" fill="var(--teal)">L6</text>
+      <text x="8" y="120" font-size="8" fill="var(--text-2)">Payment</text>
+      <rect x="88" y="88" width="320" height="44" rx="5" fill="var(--amber-50)" stroke="var(--amber)" stroke-width="1"/>
+      <text x="248" y="104" text-anchor="middle" font-size="9" fill="var(--text)">Complex tariffs · TOU · demand charges</text>
+      <text x="248" y="118" text-anchor="middle" font-size="8" fill="var(--text-2)">STS + postpaid + net metering programs</text>
+      <rect x="460" y="88" width="320" height="44" rx="5" fill="var(--green-50)" stroke="var(--green)" stroke-width="1.2"/>
+      <text x="620" y="104" text-anchor="middle" font-size="9" fill="var(--text)">STS prepaid dominant · flat tariff common</text>
+      <text x="620" y="118" text-anchor="middle" font-size="8" fill="var(--text-2)">SMS/USSD vending unchanged · postpaid rare</text>
+      <!-- L5 -->
+      <text x="8" y="168" font-size="9" font-weight="600" fill="var(--teal)">L5</text>
+      <text x="8" y="180" font-size="8" fill="var(--text-2)">Semantics</text>
+      <rect x="88" y="138" width="320" height="52" rx="5" fill="var(--red-50)" stroke="var(--red)" stroke-width="1.2"/>
+      <text x="248" y="156" text-anchor="middle" font-size="9" font-weight="600" fill="var(--text)">Full COSEM ICD · all OBIS groups</text>
+      <text x="248" y="170" text-anchor="middle" font-size="8" fill="var(--text-2)">100s of objects · certification matrices</text>
+      <text x="248" y="182" text-anchor="middle" font-size="8" fill="var(--text-2)">+ SunSpec on grid DER programs</text>
+      <rect x="460" y="138" width="320" height="52" rx="5" fill="var(--green-50)" stroke="var(--green)" stroke-width="1.5"/>
+      <text x="620" y="156" text-anchor="middle" font-size="9" font-weight="600" fill="var(--text)">VMRS — OBIS subset (draft)</text>
+      <text x="620" y="170" text-anchor="middle" font-size="8" fill="var(--text-2)">~10–12 registers · vendor ICD maps vary</text>
+      <text x="620" y="182" text-anchor="middle" font-size="8" fill="var(--text-2)">SunSpec parallel track for inverters</text>
+      <!-- L4 -->
+      <text x="8" y="228" font-size="9" font-weight="600" fill="var(--teal)">L4</text>
+      <text x="8" y="240" font-size="8" fill="var(--text-2)">Formats</text>
+      <rect x="88" y="198" width="320" height="52" rx="5" fill="var(--red-50)" stroke="var(--red)" stroke-width="1.2"/>
+      <text x="248" y="216" text-anchor="middle" font-size="9" font-weight="600" fill="var(--text)">Profile Generic (class 7) · load profiles</text>
+      <text x="248" y="230" text-anchor="middle" font-size="8" fill="var(--text-2)">buffered intervals · billing period alignment</text>
+      <text x="248" y="242" text-anchor="middle" font-size="8" fill="var(--text-2)">MDMS export schemas · CIM optional</text>
+      <rect x="460" y="198" width="320" height="52" rx="5" fill="var(--green-50)" stroke="var(--green)" stroke-width="1.5"/>
+      <text x="620" y="216" text-anchor="middle" font-size="9" font-weight="600" fill="var(--text)">JSON/MQTT northbound v0.1</text>
+      <text x="620" y="230" text-anchor="middle" font-size="8" fill="var(--text-2)">on-demand totals OK · 15-min if theft analytics</text>
+      <text x="620" y="242" text-anchor="middle" font-size="8" fill="var(--text-2)">no Profile Generic required on WAN</text>
+      <!-- L3 -->
+      <text x="8" y="288" font-size="9" font-weight="600" fill="var(--teal)">L3</text>
+      <text x="8" y="300" font-size="8" fill="var(--text-2)">Trust</text>
+      <rect x="88" y="258" width="320" height="44" rx="5" fill="var(--amber-50)" stroke="var(--amber)" stroke-width="1"/>
+      <text x="248" y="274" text-anchor="middle" font-size="9" fill="var(--text)">Per-meter HLS · utility KMC · cert rotation</text>
+      <text x="248" y="288" text-anchor="middle" font-size="8" fill="var(--text-2)">STSA for STS key domains</text>
+      <rect x="460" y="258" width="320" height="44" rx="5" fill="var(--teal-50)" stroke="var(--teal)" stroke-width="1"/>
+      <text x="620" y="274" text-anchor="middle" font-size="9" fill="var(--text)">Gateway-terminated DLMS · TLS MQTT</text>
+      <text x="620" y="288" text-anchor="middle" font-size="8" fill="var(--text-2)">STS keys stay with STSA · SIP (draft) for DER</text>
+      <!-- L2 -->
+      <text x="8" y="348" font-size="9" font-weight="600" fill="var(--teal)">L2</text>
+      <text x="8" y="360" font-size="8" fill="var(--text-2)">Protocol</text>
+      <rect x="88" y="308" width="320" height="52" rx="5" fill="var(--bg)" stroke="var(--border)" stroke-width="1"/>
+      <text x="248" y="326" text-anchor="middle" font-size="9" fill="var(--text)">DLMS/COSEM end-to-end · HES scheduling</text>
+      <text x="248" y="340" text-anchor="middle" font-size="8" fill="var(--text-2)">WAN: GPRS/LTE/fiber · DCU as client</text>
+      <text x="248" y="352" text-anchor="middle" font-size="8" fill="var(--text-2)">often same protocol field→cloud</text>
+      <rect x="460" y="308" width="320" height="52" rx="5" fill="var(--bg-3)" stroke="var(--border)" stroke-width="1"/>
+      <text x="620" y="326" text-anchor="middle" font-size="9" fill="var(--text)">Southbound: any (DLMS · OEM RF · Modbus)</text>
+      <text x="620" y="340" text-anchor="middle" font-size="8" fill="var(--text-2)">Northbound: MQTT/REST only at gateway</text>
+      <text x="620" y="352" text-anchor="middle" font-size="8" fill="var(--text-2)">SMS/USSD for tokens (parallel path)</text>
+      <!-- L1 -->
+      <text x="8" y="408" font-size="9" font-weight="600" fill="var(--teal)">L1</text>
+      <text x="8" y="420" font-size="8" fill="var(--text-2)">Physical</text>
+      <rect x="88" y="368" width="692" height="44" rx="5" fill="var(--bg-3)" stroke="var(--border)" stroke-width="1"/>
+      <text x="434" y="386" text-anchor="middle" font-size="9" fill="var(--text)">Shared field layer — optical · PLC/RF mesh · GPRS/LTE · CIU keypad · RS-485</text>
+      <text x="434" y="402" text-anchor="middle" font-size="8" fill="var(--text-2)">Village does not simplify physics; it simplifies what must be normalized above the gateway</text>
+      <!-- cross-layer note -->
+      <rect x="88" y="430" width="692" height="56" rx="5" fill="none" stroke="var(--teal)" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="434" y="450" text-anchor="middle" font-size="9" font-weight="600" fill="var(--teal)">Common confusion — same pole, different layers</text>
+      <text x="434" y="466" text-anchor="middle" font-size="8" fill="var(--text-2)">STS token = L6 payment + L3 keys · OBIS 1.8.0 = L5 meaning · DLMS read = L2 · SunSpec inverter = L5 DER track</text>
+      <text x="434" y="478" text-anchor="middle" font-size="8" fill="var(--text-2)">Profile Generic = L4 utility · MQTT JSON = L4 village northbound</text>
+      <!-- ISV boundary -->
+      <line x1="448" y1="130" x2="448" y2="365" stroke="var(--green)" stroke-width="2"/>
+      <text x="452" y="248" font-size="8" fill="var(--green)" font-weight="600" transform="rotate(90 452 248)">ISV normalize here</text>
+    </svg>
+    <p class="landscape-caption">OSI-inspired layering for landscape context — not a protocol stack specification. Vertical green line: recommended village normalization boundary (edge gateway / pole EMS).</p>
+  </div>
+
+  <h2>Ecosystem actors (who owns which layer)</h2>
+  <div class="eco-flow" aria-label="Metering ecosystem actor flow">
+    <span>Customer</span><span class="arr">→</span>
+    <span>CIU / SMS</span><span class="arr">→</span>
+    <span>Meter (L1–L5)</span><span class="arr">→</span>
+    <span>DCU / gateway (L2–L4)</span><span class="arr">→</span>
+    <span>HES / platform (L4–L7)</span><span class="arr">→</span>
+    <span>Operator / MDMS (L7)</span>
+  </div>
+  <p style="font-size:13px;color:var(--text-2)">Parallel paths: <strong>STSA/KMC</strong> (L3) issues STS keys to meters; <strong>mobile money API</strong> (L7) connects to vending without replacing meter reads; <strong>pole EMS</strong> (L2–L5) handles SunSpec DER separately from revenue VMRS.</p>
+
+  <h2>Layer comparison table</h2>
+  <div class="tbl-wrap">
+    <table class="compare-tbl">
+      <thead>
+        <tr><th>Layer</th><th>Utility AMI</th><th>Village minimum</th><th>Typical mistake</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>L7 Business</td><td><span class="pill-u">Full MDMS</span> VEE, regulatory, WFM</td><td><span class="pill-v">Operator billing</span> spreadsheet or SaaS</td><td>Buying MDMS for 200 connections</td></tr>
+        <tr><td>L6 Payment</td><td><span class="pill-both">STS + postpaid</span> complex tariffs</td><td><span class="pill-v">STS prepaid</span> + flat rate</td><td>Confusing token SMS with meter protocol</td></tr>
+        <tr><td>L5 Semantics</td><td><span class="pill-u">Full OBIS/ICD</span></td><td><span class="pill-v">VMRS draft subset</span></td><td>Demanding full COSEM for village RFP</td></tr>
+        <tr><td>L4 Formats</td><td><span class="pill-u">Profile Generic</span> interval buffers</td><td><span class="pill-v">JSON/MQTT</span> on-demand reads</td><td>Requiring load profiles without analytics plan</td></tr>
+        <tr><td>L3 Trust</td><td><span class="pill-u">Per-meter HLS</span> utility PKI</td><td><span class="pill-v">Gateway TLS</span> + STSA for STS</td><td>Exposing DLMS keys on rural WAN</td></tr>
+        <tr><td>L2 Protocol</td><td><span class="pill-both">DLMS end-to-end</span></td><td><span class="pill-v">Any southbound</span> · MQTT north</td><td>Mandating one NAN vendor globally</td></tr>
+        <tr><td>L1 Physical</td><td colspan="2"><span class="pill-both">Same hardware reality</span> — optical, PLC, RF, cellular</td><td>Ignoring CIU/SMS when DCU is down</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How layers interact (not a flat list)</h2>
+  <dl class="relation">
+    <dt>L6 vs L5 — payment scheme ≠ register format</dt>
+    <dd><a href="meter-vmrs.html#acronyms">STS</a> (IEC 62055) defines <strong>token transfer and encryption</strong>; <a href="meter-vmrs.html#acronyms">OBIS</a> (IEC 62056-6-1) defines <strong>what “1.8.0 kWh” means</strong>. A meter can accept STS tokens while exposing credit on vendor-specific <a href="meter-vmrs.html#acronyms">COSEM</a> objects — see vendor <a href="meter-vmrs.html#acronyms">ICD</a> for tier&nbsp;B mapping.</dd>
+    <dt>L4 vs L5 — Profile Generic vs simple totals</dt>
+    <dd>Utilities use Profile Generic (COSEM class 7) to buffer 15-minute intervals for VEE. Villages can read totalizer registers (L5) on schedule without maintaining class-7 buffers — unless theft detection needs interval data.</dd>
+    <dt>L3 — association suites vs village gateway</dt>
+    <dd>Utility deployments use DLMS association + HLS per meter. A village DCU can hold one local DLMS association and publish only TLS MQTT northbound — shrinking the trust surface on expensive WAN links.</dd>
+    <dt>L3 — SIP (Session Information Protocol)</dt>
+    <dd>Glenn Algie’s draft layer for authenticated <strong>market sessions</strong> (DER trading, disconnect authorization) — sits above MQTT at L3, not to be confused with VoIP SIP or SunSpec.</dd>
+    <dt>Parallel DER track</dt>
+    <dd>Revenue meter VMRS (L5) and inverter SunSpec models (L5 DER) converge at the pole EMS (L2–L4) but should not be merged into one procurement column — see <a href="meter-vmrs.html">VMRS page</a> exclusions.</dd>
+  </dl>
+
+  <h2>What breaks in the field today</h2>
+  <ul>
+    <li><strong>Cadillac procurement on Tata budgets</strong> — RFPs copy utility DLMS/MDMS language; vendors quote full AMI when the operator only needs prepaid + aggregate feeder visibility.</li>
+    <li><strong>OEM key bottlenecks</strong> — proprietary RF stacks block second-source DCUs (see <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 Tech Comm notes</a>).</li>
+    <li><strong>Protocol translation tax</strong> — STS, DLMS, Modbus, and SunSpec coexist on one pole; no shared northbound schema until VMRS + MQTT profile.</li>
+    <li><strong>DER vs revenue meter confusion</strong> — SunSpec on inverters solves generation monitoring; it does not replace STS vending or OBIS billing registers.</li>
+  </ul>
+
+  <h2>Next artifacts in this benchmark</h2>
+  <ul>
+    <li><a href="meter-vmrs.html">OBIS · VMRS</a> — tiers, <a href="meter-vmrs.html#acronyms">acronym list</a>, ICD, northbound profile</li>
+    <li><a href="meter-benchmark/vmrs-registers.json"><code>meter-benchmark/vmrs-registers.json</code></a> — machine-readable register set</li>
+    <li><a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a> — MQTT topics, envelope, SIP hooks</li>
+    <li><a href="meter-vendor-study.html">Vendor study</a> — cited comparison with VMRS column</li>
+  </ul>
+</div>
+</body>
+</html>

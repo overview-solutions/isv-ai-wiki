@@ -1,0 +1,153 @@
+{
+  "id": "vmrs",
+  "title": "Village Minimum Register Set (VMRS)",
+  "version": "0.1-draft",
+  "status": "draft-proposal",
+  "disclaimer": "ISV Tech Comm working subset — NOT an IEC or DLMS UA published profile. Validate OBIS-to-COSEM mappings with each vendor before procurement.",
+  "standard": "OBIS identification per IEC 62056-6-1 where noted; COSEM mappings per DLMS UA Blue Book where noted",
+  "methodology": "Registers chosen from (1) universal billing/t metrology codes in IEC 62056-6-1, (2) objects commonly exposed on STS/DLMS prepay meters in vendor literature and utility AMI practice, (3) ISV field requirements from Tech Comm notes. Tier C entries need vendor confirmation.",
+  "primaryArtifact": "meter-benchmark/northbound-mqtt-v0.1.json",
+  "summary": "Appendix register checklist for northbound MQTT payloads. Transport (DLMS, OEM RF, STS) stays vendor-specific below the edge gateway; tier A OBIS keys are IEC-standard; tier B requires vendor ICD mapping.",
+  "certaintyLegend": {
+    "A": "Standard OBIS code — defined in IEC 62056-6-1 (energy, metrology, clock)",
+    "B": "Common COSEM/AMI practice — widely implemented on prepay/DLMS meters; exact attribute mapping varies by ICD",
+    "C": "ISV working proposal — logical need confirmed by operators; OBIS assignment or mandatory flag not standardized"
+  },
+  "registers": [
+    {
+      "obis": "1.8.0",
+      "name": "Active energy import (total)",
+      "unit": "kWh",
+      "interval": "billing",
+      "required": true,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — OBIS code 1.8.0 (active import, cumulative)"],
+      "notes": "Universal revenue billing register on DLMS meters worldwide"
+    },
+    {
+      "obis": "2.8.0",
+      "name": "Active energy export (total)",
+      "unit": "kWh",
+      "interval": "billing",
+      "required": false,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — OBIS code 2.8.0 (active export, cumulative)"],
+      "notes": "Include only when net-metering or DER export settlement is in scope"
+    },
+    {
+      "obis": "1.7.0",
+      "name": "Instantaneous active power import",
+      "unit": "W",
+      "interval": "event or 15min",
+      "required": true,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — OBIS code 1.7.0 (instantaneous active import power)"],
+      "notes": "Theft detection, load profiling; interval is operator policy not OBIS-defined"
+    },
+    {
+      "obis": "32.7.0",
+      "name": "Instantaneous voltage (L1)",
+      "unit": "V",
+      "interval": "event or 15min",
+      "required": true,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — OBIS code 32.7.0 (instantaneous voltage, L1)"],
+      "notes": "Single-phase village feeders; use 52.7.0/72.7.0 if L2/L3 exist"
+    },
+    {
+      "obis": "14.7.0",
+      "name": "Supply frequency",
+      "unit": "Hz",
+      "interval": "event or 15min",
+      "required": false,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — OBIS code 14.7.0"],
+      "notes": "Optional on stable single-phase rural feeders"
+    },
+    {
+      "obis": "0.0.0",
+      "name": "Clock / device time",
+      "unit": "datetime",
+      "interval": "sync",
+      "required": true,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — clock object OBIS 0.0.0"],
+      "notes": "Gateway should document timezone/UTC offset"
+    },
+    {
+      "obis": "96.1.0",
+      "name": "Billing period counter",
+      "unit": "count",
+      "interval": "billing",
+      "required": false,
+      "certainty": "A",
+      "sources": ["IEC 62056-6-1 — abstract object 96.1.0"],
+      "notes": "NOT meter serial — see 0.0.96.1.1.255 / device ID alternatives in tier B",
+      "alternatives": ["0.0.96.1.1.255 — device ID / serial on many COSEM ICDs"]
+    },
+    {
+      "obis": "0.0.96.1.1.255",
+      "name": "Device ID / serial number (typical COSEM)",
+      "unit": "text",
+      "interval": "static",
+      "required": true,
+      "certainty": "B",
+      "sources": ["DLMS UA COSEM identification objects — common ICD pattern", "Inhemeter i310 brochure cites OBIS/IEC62056-21 optical read — ISV vendor study [s15]"],
+      "notes": "Exact logical name varies by manufacturer; northbound may use meterSerial field instead of OBIS when ICD differs",
+      "alternatives": ["96.1.0 if vendor maps serial incorrectly — verify in ICD"]
+    },
+    {
+      "obis": "96.5.0",
+      "name": "Internal operating / alarm status",
+      "unit": "bitfield",
+      "interval": "event",
+      "required": true,
+      "certainty": "B",
+      "sources": ["IEC 62056-6-1 abstract group 96.5 — status/alarm objects", "Common on tamper-capable prepay meters"],
+      "notes": "Bit meanings are manufacturer-specific — require ICD tamper table, do not assume cross-vendor bits"
+    },
+    {
+      "obis": "96.8.0",
+      "name": "Remaining credit / prepayment balance",
+      "unit": "currency or kWh",
+      "interval": "event",
+      "required": "if-prepaid",
+      "certainty": "B",
+      "sources": ["Common COSEM prepayment/account objects on STS-capable meters", "IEC 62055 STS defines token transfer — not OBIS-native; credit display mapping is vendor ICD"],
+      "notes": "STS vending path may not expose this northbound until DLMS read exists; CIU display may be only source",
+      "alternatives": ["Account/credit objects in Blue Book prepayment interface — ask vendor for logical name"]
+    },
+    {
+      "obis": "0.0.96.3.10.255",
+      "name": "Disconnect control (typical COSEM logical name)",
+      "unit": "enum",
+      "interval": "event",
+      "required": true,
+      "certainty": "B",
+      "sources": ["DLMS UA COSEM — disconnect control class default logical name pattern"],
+      "notes": "Previous VMRS draft used 96.11.1 — that was imprecise; use vendor ICD. Northbound enum: connected | disconnected",
+      "alternatives": ["96.11.x variants appear in some vendor docs — always verify"]
+    },
+    {
+      "obis": "96.11.5",
+      "name": "Last token / transfer event register",
+      "unit": "event",
+      "interval": "event",
+      "required": false,
+      "certainty": "C",
+      "sources": ["Observed in prepay meter OBIS tables (vendor-specific)", "ISV STS audit requirement from Tech Comm notes"],
+      "notes": "Logical name not standardized across vendors — include if ICD exposes token audit"
+    }
+  ],
+  "excludedByDesign": [
+    "Full Profile Generic (class 7) load profile buffers — utility VEE, not village minimum unless theft analytics require intervals",
+    "Full COSEM ICD (100s of objects) — utility certification scope",
+    "STS key management (STSA/KMC) — separate trust domain from register reads",
+    "SunSpec inverter models — parallel DER track, not revenue VMRS"
+  ],
+  "openQuestions": [
+    "Field validation: which VMRS OBIS codes are readable on Donsun DS1000, Inhemeter i310, Calin CAM168-G via optical/DLMS in ISV target deployments",
+    "Harmonize disconnect and credit logical names into northbound JSON when vendor OBIS differs",
+    "Community review against DLMS UA prepayment profile when available to team"
+  ]
+}

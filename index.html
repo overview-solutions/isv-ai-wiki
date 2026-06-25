@@ -1310,6 +1310,11 @@ code {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Meter benchmark
     </div>
+    <div class="nav-sub" id="nav-sub-meter-study">
+      <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">The problems today</div>
+      <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
+      <div class="nav-sub-item active" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor study</div>
+    </div>
     <div class="nav-label nav-label-knowledge">Knowledge base</div>
     <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
@@ -1469,7 +1474,7 @@ code {
             <span class="tag tag-active">Active</span>
             <span class="project-name">Village metering vendor study</span>
           </div>
-          <div class="project-desc">Pipeline tracker and layered benchmark for village-level meters, AMI stacks, and microgrid platforms — DLMS, STS, SunSpec, IEEE 2030.5 by stack layer. <a href="#" onclick="showSection('meter-study');return false">Open study →</a></div>
+          <div class="project-desc">Pipeline tracker and layered benchmark for village-level meters, AMI stacks, and microgrid platforms — DLMS, STS, VMRS, SunSpec by stack layer. <a href="#" onclick="showMeterPage('problems-today');return false">Problems today</a> · <a href="#" onclick="showMeterPage('vmrs');return false">VMRS</a> · <a href="#" onclick="showMeterPage('vendor-study');return false">Vendor study →</a></div>
         </div>
         <div class="project-card">
           <div class="project-card-head">
@@ -2025,21 +2030,36 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title">Meter benchmark</div>
-        <div class="section-sub">Village metering vendor study — pipeline + technical comparison</div>
+        <div class="section-sub" id="meter-study-section-sub">Village metering — problems, VMRS alignment, vendor comparison</div>
       </div>
     </div>
     <div id="content-meter-study">
       <div class="wiki-body">
-        <p>Compare smart meters, AMI vendors, and microgrid platforms for ISV-funded village deployments. Standards are scored by stack layer (field / edge / cloud), not in a single compliance column. Migrated from the DokuWiki <a href="http://34.125.138.210/home:technologies:monitor:study" target="_blank" rel="noopener">monitor study</a>.</p>
+        <p>Compare smart meters, AMI vendors, and microgrid platforms for ISV-funded village deployments. Utility AMI stacks are mapped in <strong>The problems today</strong>; northbound JSON/MQTT and register tiers in <strong><a href="#" onclick="showMeterPage('vmrs');return false">OBIS · VMRS</a></strong> (<a href="meter-vmrs.html#acronyms">acronym list</a>). Specs in <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/</code></a>.</p>
+      </div>
+      <div class="notes-index" id="meter-study-index">
+        <a class="notes-index-item" href="#" data-meter-page="problems-today" onclick="showMeterPage('problems-today');return false">
+          <div class="notes-index-title">The problems today</div>
+          <div class="notes-index-meta">Utility AMI vs village minimum · COSEM · HES · MDMS · SIP</div>
+        </a>
+        <a class="notes-index-item" href="#" data-meter-page="vmrs" onclick="showMeterPage('vmrs');return false">
+          <div class="notes-index-title">OBIS · VMRS</div>
+          <div class="notes-index-meta">Register set · MQTT profile · manufacturer POC playbook</div>
+        </a>
+        <a class="notes-index-item active" href="#" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study');return false">
+          <div class="notes-index-title">Vendor study</div>
+          <div class="notes-index-meta">Pipeline + cited DLMS · STS · VMRS benchmark</div>
+        </a>
       </div>
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
-          <span>Village metering vendor study</span>
+          <span id="meter-study-embed-label">Vendor study</span>
           <div class="notes-embed-toolbar-links">
-            <a href="meter-vendor-study.html" target="_blank" rel="noopener">Full page</a>
+            <a id="meter-study-toolbar-standalone" href="meter-vendor-study.html" target="_blank" rel="noopener">Full page</a>
+            <a href="meter-benchmark/northbound-mqtt-v0.1.json" target="_blank" rel="noopener">Northbound JSON</a>
           </div>
         </div>
-        <iframe id="meter-study-frame" title="Meter vendor study preview" src="meter-vendor-study.html?embed=1"></iframe>
+        <iframe id="meter-study-frame" title="Meter benchmark preview" src="meter-vendor-study.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2106,6 +2126,27 @@ const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
   'power-africa': { section: 'power-africa', defaultNote: 'power-africa-2026-workshop-planning' }
 };
+const METER_BENCHMARK_PAGES = {
+  'problems-today': {
+    title: 'The problems today',
+    sub: 'Utility AMI vs village minimum · COSEM · HES · MDMS · SIP',
+    src: 'meter-problems-today.html?embed=1',
+    standalone: 'meter-problems-today.html'
+  },
+  'vmrs': {
+    title: 'OBIS · VMRS',
+    sub: 'Register set · MQTT profile · manufacturer POC playbook',
+    src: 'meter-vmrs.html?embed=1',
+    standalone: 'meter-vmrs.html'
+  },
+  'vendor-study': {
+    title: 'Vendor study',
+    sub: 'Pipeline + cited DLMS · STS · VMRS benchmark',
+    src: 'meter-vendor-study.html?embed=1',
+    standalone: 'meter-vendor-study.html'
+  }
+};
+let activeMeterPageId = 'vendor-study';
 const MEETING_NOTES = {
   'metering-2026-05-28': {
     group: 'tech-comm',
@@ -2176,6 +2217,7 @@ function showSection(id, options = {}) {
   main.classList.toggle('notes-wide', id === 'notes' || id === 'power-africa' || id === 'meter-study' || id === 'tech-notes' || id === 'tasks');
   if (id === 'funded') loadFundedProjects();
   if ((id === 'notes' || id === 'power-africa') && !options.skipNoteRefresh) refreshNotePreview(activeNoteId);
+  if (id === 'meter-study' && !options.skipMeterRefresh) refreshMeterPreview(activeMeterPageId);
   if (id === 'tasks' && window.ISVTasks) ISVTasks.renderTaskPage(ISVTasks.parseTasksHash());
   if (id === 'tech-notes') loadTechnicalNotes();
   if (!options.skipHash) {
@@ -2228,6 +2270,36 @@ function showNote(noteId, updateHash = true) {
   if (updateHash) history.replaceState(null, '', `#${sectionId}/${noteId}`);
 }
 
+function refreshMeterPreview(pageId) {
+  const page = METER_BENCHMARK_PAGES[pageId];
+  if (!page) return;
+  document.querySelectorAll('.nav-sub-item[data-meter-page]').forEach(el => {
+    el.classList.toggle('active', el.dataset.meterPage === pageId);
+  });
+  document.querySelectorAll('.notes-index-item[data-meter-page]').forEach(el => {
+    el.classList.toggle('active', el.dataset.meterPage === pageId);
+  });
+  const frame = document.getElementById('meter-study-frame');
+  const label = document.getElementById('meter-study-embed-label');
+  const sub = document.getElementById('meter-study-section-sub');
+  const toolbar = document.getElementById('meter-study-toolbar-standalone');
+  if (frame) frame.src = page.src;
+  if (label) label.textContent = page.title;
+  if (sub) sub.textContent = page.sub;
+  if (toolbar) {
+    toolbar.href = page.standalone;
+    toolbar.textContent = 'Full page';
+  }
+}
+
+function showMeterPage(pageId, updateHash = true) {
+  if (!METER_BENCHMARK_PAGES[pageId]) return;
+  activeMeterPageId = pageId;
+  showSection('meter-study', { skipMeterRefresh: true, skipHash: true });
+  refreshMeterPreview(pageId);
+  if (updateHash) history.replaceState(null, '', `#meter-study/${pageId}`);
+}
+
 function initFromHash() {
   const raw = location.hash.replace(/^#/, '');
   if (!raw || raw === 'home') {
@@ -2238,8 +2310,10 @@ function initFromHash() {
     showSection('home', { skipHash: true });
     return;
   }
-  if (raw === 'meter-study') {
-    showSection('meter-study', { skipHash: true });
+  if (raw === 'meter-study' || raw.startsWith('meter-study/')) {
+    const pageId = raw.split('/')[1] || 'vendor-study';
+    if (METER_BENCHMARK_PAGES[pageId]) showMeterPage(pageId, false);
+    else showMeterPage('vendor-study', false);
     return;
   }
   if (raw === 'tasks' || raw.startsWith('tasks?')) {

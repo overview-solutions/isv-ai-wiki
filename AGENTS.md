@@ -43,6 +43,11 @@ isv-ai-wiki/
 ├── AGENTS.md                     # ← You are here (AI navigation)
 ├── README.md                     # Human quickstart
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
+├── meter-problems-today.html     # Utility AMI vs village stack diagrams
+├── meter-vmrs.html               # OBIS VMRS + manufacturer POC playbook
+├── meter-benchmark/
+│   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
+│   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + SIP hooks
 ├── tech-comm-*-*.html            # Meeting note pages (?embed=1 in iframe)
 ├── power-africa-*-*.html         # Workshop / event planning notes
 ├── stonehenge-microgrid-topology.html
@@ -80,7 +85,10 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#committees` | Other ISV committees — RWGs and subcommittees |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
-| `#meter-study` | Meter benchmark iframe |
+| `#meter-study` | Meter benchmark — default: vendor study |
+| `#meter-study/problems-today` | Utility AMI vs village minimum stack |
+| `#meter-study/vmrs` | OBIS VMRS + northbound profile |
+| `#meter-study/vendor-study` | Vendor pipeline + technical tables |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#power-africa/{note-id}` | Workshop planning (default: `power-africa-2026-workshop-planning`) |
 | `#tech-reports` | Technical reports list |
@@ -95,6 +103,7 @@ Registered sections (`SECTIONS` in `index.html`):
 Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` class). The shell loads:
 
 - `meter-vendor-study.html?embed=1`
+- `meter-problems-today.html?embed=1` · `meter-vmrs.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
@@ -105,6 +114,7 @@ When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the
 |----------|---------|
 | `SECTIONS` | Top-level nav ids |
 | `MEETING_NOTES` | Note id → `{ group, title, date, src, standalone }` |
+| `METER_BENCHMARK_PAGES` | Page id → `{ title, sub, src, standalone }` for meter-study sub-nav |
 | `NOTE_GROUPS` | `tech-comm` → `notes` section; `power-africa` → `power-africa` section |
 | `TECH_NOTES_CATALOG_URL` | Points to `technical-notes/catalog.json` |
 
@@ -134,6 +144,7 @@ The study uses a **three-layer stack** (field / edge / cloud). The most **versat
 | Benchmark | Why it matters |
 |-----------|----------------|
 | **STS support** (`doc` / `claim` / `—`) | Prepaid token vending is the dominant rural billing model in SSA. Drives CIU, vending integration, key management. |
+| **VMRS / OBIS export** (`doc` / `claim` / `—`) | **Draft** ISV shortlist in `meter-benchmark/vmrs-registers.json` — tier A/B/C certainty; not a published standard. Validate per vendor ICD. |
 | **DLMS/COSEM** at meter + DCU | Utility-grade interoperability, future HES/MDMS, avoids permanent OEM lock-in if documented. |
 | **Northbound API / platform** | How billing, CRM, and mobile money connect. “REST (partner login)” ≠ public OpenAPI. |
 | **$/connection band** | Capex gate; compare industry ranges ($40–110 installed cited in study) — not list prices unless sourced. |
@@ -155,6 +166,11 @@ The study uses a **three-layer stack** (field / edge / cloud). The most **versat
 | **SunSpec** | Inverter / DER monitoring (Victron, Enphase), not cheap STS keypad meters. |
 | **IEEE 2030.5** | Grid-facing DER gateways and utility programs — rarely the village prepaid meter. |
 | **Modbus RTU/TCP** | EMS, hybrid inverters, Stellar Edge — generation and control, not STS token paths. |
+| **SIP (Session Information Protocol)** | Glenn Algie / Tech Comm — authenticated sessions for theft-resistant DER markets; hooks in northbound MQTT v0.1, not SunSpec/VoIP SIP. |
+
+### Northbound profile location
+
+**Canonical home:** `meter-benchmark/northbound-mqtt-v0.1.json` (with companion `vmrs-registers.json`). Version with the wiki via Git; human docs on `meter-vmrs.html` and `meter-problems-today.html`.
 
 ### Scoring legend (do not reinterpret)
 

@@ -75,6 +75,7 @@ td code { font-family: var(--mono); font-size: 10px; }
 .sources li { margin-bottom: 0.35rem; }
 .sources .tag { font-size: 10px; padding: 1px 6px; border-radius: 10px; background: var(--bg-3); color: var(--text-2); margin-right: 4px; }
 html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .meter-hub { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
 @media (max-width: 720px) { .layers { grid-template-columns: 1fr; } }
@@ -99,11 +100,17 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p class="sub">Researched pass · Jun 2026 · pipeline + layered protocol benchmark · citations required for every score</p>
 
   <p id="notes-back-btn" style="margin-bottom:1rem">
-    <a href="index.html#meter-study" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
+    <a href="index.html#meter-study/vendor-study" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meter benchmark</a>
     · <a href="index.html" style="font-size:14px">Home</a>
   </p>
 
-  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Cells are filled only where a cited source supports the claim. Unknown stays <code>—</code>.</p>
+  <nav class="hub meter-hub" aria-label="Meter benchmark pages" style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;font-size:13px">
+    <a href="meter-problems-today.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--text-2);background:var(--bg-2)">The problems today</a>
+    <a href="meter-vmrs.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--border);text-decoration:none;color:var(--text-2);background:var(--bg-2)">OBIS · VMRS</a>
+    <a href="meter-vendor-study.html" style="padding:0.35rem 0.65rem;border-radius:8px;border:1px solid var(--green);text-decoration:none;color:var(--green);background:var(--green-50);font-weight:500">Vendor study</a>
+  </nav>
+
+  <p class="lead">Compare village-level metering and microgrid vendors in two layers: a <strong>pipeline tracker</strong> (outreach, docs, pricing) and a <strong>technical benchmark</strong> (protocols by stack layer). Alignment target: <a href="meter-vmrs.html">VMRS</a> (OBIS subset) northbound via <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>meter-benchmark/northbound-mqtt-v0.1.json</code></a>. See <a href="meter-problems-today.html">The problems today</a> for why full utility AMI stacks do not fit village budgets.</p>
 
   <div class="method-box">
     <strong>Research method (this pass)</strong>
@@ -130,6 +137,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2>Scoring legend</h2>
   <div class="enum-grid">
     <div><dt>Protocol cell</dt><dd><code>doc</code> manual/datasheet · <code>claim</code> marketing only · <code>no</code> contrary evidence · <code>—</code> not researched · <code>N/A</code> wrong layer</dd></div>
+    <div><dt>VMRS</dt><dd>Documented export of <a href="meter-vmrs.html">Village Minimum Register Set</a> OBIS codes — not full DLMS ICD</dd></div>
     <div><dt>Confidence</dt><dd>T0 marketing · T1 datasheet/brochure · T2 third-party or integration guide · T3 field/ISV hands-on</dd></div>
     <div><dt>$/connection</dt><dd>Industry band from independent reports unless ISV quote noted</dd></div>
   </div>
@@ -451,12 +459,13 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="tbl-wrap">
     <table>
       <thead>
-        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>SunSpec</th><th>2030.5</th><th>NAN / WAN</th><th>Northbound</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
+        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>VMRS</th><th>SunSpec</th><th>2030.5</th><th>NAN / WAN</th><th>Northbound</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Donsun</strong></td>
           <td>DS1000/1600/3000, DSC100 DCU</td>
+          <td class="val-doc">doc</td>
           <td class="val-doc">doc</td>
           <td class="val-doc">doc</td>
           <td class="val-na">N/A</td>
@@ -472,6 +481,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td>i210 / i310 (DDZ1513 / DTZ1513)</td>
           <td class="val-doc">doc</td>
           <td class="val-doc">doc</td>
+          <td class="val-doc">doc</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
           <td>PLC, RF, GPRS, 3G/4G, NB-IoT modules <span class="src"><a href="#s14">[14]</a><a href="#s15">[15]</a></span></td>
@@ -485,6 +495,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td>CAM168-G, CAM368-G</td>
           <td class="val-doc">doc</td>
           <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
           <td>PLC / RF / GPRS / LoRa options <span class="src"><a href="#s18">[18]</a></span></td>
@@ -498,6 +509,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td>STS prepay + PLC AMI</td>
           <td class="val-claim">claim</td>
           <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
           <td>PLC NAN; GPRS WAN via concentrator <span class="src"><a href="#s16">[16]</a></span></td>
@@ -510,6 +522,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td><strong>SparkMeter</strong></td>
           <td>ThunderCloud + mesh meters</td>
           <td class="val-no">no public</td>
+          <td class="val-unknown">—</td>
           <td class="val-unknown">—</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
@@ -527,7 +540,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="tbl-wrap">
     <table>
       <thead>
-        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>SunSpec</th><th>2030.5</th><th>Northbound</th><th>Lock-in</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
+        <tr><th>Vendor</th><th>Product</th><th>DLMS</th><th>STS</th><th>VMRS</th><th>SunSpec</th><th>2030.5</th><th>Northbound</th><th>Lock-in</th><th>$/conn</th><th>Conf.</th><th>Evidence</th></tr>
       </thead>
       <tbody>
         <tr>
@@ -535,6 +548,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td>Nimbus AMI + Savi</td>
           <td class="val-doc">interop</td>
           <td class="val-doc">doc</td>
+          <td class="val-claim">claim</td>
           <td class="val-unknown">—</td>
           <td class="val-unknown">—</td>
           <td>REST API (customer login); MPM plugin sync <span class="src"><a href="#s1">[1]</a><a href="#s30">[30]</a></span></td>
@@ -548,6 +562,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
           <td>Stellar Edge + OS</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
+          <td class="val-na">N/A</td>
           <td class="val-unknown">—</td>
           <td class="val-unknown">—</td>
           <td>Modbus RTU, CAN, REST cloud UI <span class="src"><a href="#s11">[11]</a><a href="#s12">[12]</a></span></td>
@@ -559,6 +574,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
         <tr>
           <td><strong>Okra</strong></td>
           <td>Harvest + Pod</td>
+          <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
           <td class="val-na">N/A</td>
           <td class="val-unknown">—</td>
