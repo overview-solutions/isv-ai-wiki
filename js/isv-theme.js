@@ -46,7 +46,7 @@
     document.querySelectorAll('[data-isv-theme-toggle]').forEach(function (btn) {
       var label = btn.querySelector('.theme-toggle-label');
       if (label) {
-        label.textContent = isDark ? 'Light mode' : 'Dark mode';
+        label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
       }
       btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     });

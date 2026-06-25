@@ -33,10 +33,10 @@
       "label": "meeting-metering-2026-05-28"
     },
     "power-africa-2026-workshop-planning": {
-      "title": "Power Africa Workshop planning",
+      "title": "Power Africa workshop planning",
       "date": "Sep 2026",
-      "group": "power-africa",
-      "hash": "power-africa/power-africa-2026-workshop-planning",
+      "group": "events",
+      "hash": "events/power-africa-2026-workshop-planning",
       "standalone": "power-africa-2026-workshop-planning.html",
       "label": "meeting-power-africa-2026-workshop-planning"
     }

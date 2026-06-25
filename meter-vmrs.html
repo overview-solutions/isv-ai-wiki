@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBIS · VMRS · Meter Interoperability · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+h2 { font-size: 14px; font-weight: 500; margin: 1rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.lead { font-size: 14px; margin-bottom: 0.75rem; line-height: 1.5; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.75rem; font-size: 12px; }
+.callout strong { color: var(--teal); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn strong { color: var(--amber); }
+.tier-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; margin-bottom: 0.75rem; font-size: 11px; }
+.tier-cell { border: 1px solid var(--border); border-radius: 8px; padding: 0.55rem 0.65rem; background: var(--bg-2); line-height: 1.4; }
+.tier-cell strong { display: block; font-size: 10px; margin-bottom: 0.2rem; }
+.cert-a { color: var(--green); }
+.cert-b { color: var(--amber); }
+.cert-c { color: var(--text-3); font-style: italic; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 560px; }
+th, td { border-bottom: 1px solid var(--border); padding: 0.4rem 0.5rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-size: 10px; }
+tr:last-child td { border-bottom: 0; }
+td code { font-family: var(--mono); font-size: 10px; }
+pre { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem; overflow-x: auto; font-family: var(--mono); font-size: 10px; line-height: 1.45; margin: 0.5rem 0; }
+.acronym-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.35rem; font-size: 11px; margin-top: 0.5rem; }
+.acronym-grid div { padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
+.acronym-grid dt { font-weight: 600; font-family: var(--mono); font-size: 10px; color: var(--teal); display: inline; }
+.acronym-grid dt::after { content: " — "; font-family: var(--font); font-weight: 400; color: var(--text-3); }
+.acronym-grid dd { display: inline; margin: 0; color: var(--text-2); }
+html.embed .back { display: none; }
+@media (max-width: 720px) { .tier-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study/vmrs">← Meter Interoperability</a></div>
+
+  <h1>OBIS · VMRS</h1>
+  <p class="sub">v0.1-draft · Jun 2026 · <span class="tag-draft">NOT a published standard</span></p>
+
+  <div class="callout callout-warn">
+    <strong>Before citing in an RFP</strong>
+    VMRS is an ISV working checklist — not IEC/DLMS UA/STS. Primary artifact: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. VMRS appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>. Validate tier&nbsp;B against vendor <strong>ICD</strong> (Interface Class Description).
+  </div>
+
+  <p class="lead">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has.</p>
+
+  <div class="tier-row">
+    <div class="tier-cell"><strong class="cert-a">Tier A · IEC OBIS</strong><code>1.8.0</code>, <code>32.7.0</code>, etc. Universal — cite in JSON, don’t reinvent.</div>
+    <div class="tier-cell"><strong class="cert-b">Tier B · ICD varies</strong>Credit, disconnect, serial, tamper — need vendor ICD excerpt per model.</div>
+    <div class="tier-cell"><strong class="cert-c">Tier C · optional</strong>Last-token audit — operator need, weak OBIS standardization.</div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>OBIS</th><th>Name</th><th>T</th><th>Req</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>1.8.0</code></td><td>Active import kWh</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Standard billing register</td></tr>
+        <tr><td><code>2.8.0</code></td><td>Active export kWh</td><td><span class="cert-a">A</span></td><td>If net-metered</td><td>Omit on import-only</td></tr>
+        <tr><td><code>1.7.0</code></td><td>Instantaneous power</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Theft/load anomaly</td></tr>
+        <tr><td><code>32.7.0</code></td><td>Voltage L1</td><td><span class="cert-a">A</span></td><td>Yes</td><td>L2/L3 if wired</td></tr>
+        <tr><td><code>0.0.0</code></td><td>Clock</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Document UTC offset</td></tr>
+        <tr><td><code>0.0.96.1.1.255</code></td><td>Serial (typical)</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Logical name varies — use <code>meterSerial</code> northbound</td></tr>
+        <tr><td><code>96.1.0</code></td><td>Billing period counter</td><td><span class="cert-a">A</span></td><td>Opt</td><td><strong>Not</strong> serial number</td></tr>
+        <tr><td><code>96.5.0</code></td><td>Alarm / tamper</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Bit map per ICD</td></tr>
+        <tr><td><code>96.8.0</code></td><td>Remaining credit</td><td><span class="cert-b">B</span></td><td>Prepaid</td><td>CIU may be only source</td></tr>
+        <tr><td><code>0.0.96.3.10.255</code></td><td>Disconnect state</td><td><span class="cert-b">B</span></td><td>Yes</td><td>DLMS disconnect control pattern</td></tr>
+        <tr><td><code>96.11.5</code></td><td>Last token event</td><td><span class="cert-c">C</span></td><td>Opt</td><td>STS audit — confirm per vendor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details id="acronyms">
+    <summary>Acronym list</summary>
+    <dl class="acronym-grid">
+      <div><dt>AMI</dt><dd>Advanced metering infrastructure (meter + NAN + head-end + often MDMS)</dd></div>
+      <div><dt>CIU</dt><dd>Customer interface unit — STS keypad at home</dd></div>
+      <div><dt>COSEM</dt><dd>Application layer inside DLMS meters</dd></div>
+      <div><dt>DCU</dt><dd>Data concentrator / field gateway</dd></div>
+      <div><dt>DLMS</dt><dd>Protocol for smart meter communication</dd></div>
+      <div><dt>ICD</dt><dd>Vendor COSEM object map — required for tier B</dd></div>
+      <div><dt>MDMS</dt><dd>Utility meter data management (L7)</dd></div>
+      <div><dt>OBIS</dt><dd>Register semantics (e.g. <code>1.8.0</code> = import kWh)</dd></div>
+      <div><dt>STS</dt><dd>Prepaid token scheme (L6/L3) — not a wire protocol</dd></div>
+      <div><dt>VMRS</dt><dd>ISV draft register checklist for northbound JSON</dd></div>
+    </dl>
+  </details>
+
+  <h2>Northbound JSON example</h2>
+  <p style="font-size:12px;color:var(--text-2);margin:0 0 0.5rem">Gateway reads COSEM/OBIS locally, publishes MQTT envelope (<a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>):</p>
+  <pre>{
+  "schemaVersion": "0.1",
+  "ts": "2026-06-22T14:30:00Z",
+  "feederId": "feeder-north-paravur-01",
+  "gatewayId": "pole-ems-0042",
+  "meterSerial": "DDZ1513-88421",
+  "registers": [
+    { "obis": "1.8.0", "value": 1842.5, "unit": "kWh", "quality": "good" },
+    { "obis": "96.8.0", "value": 12.4, "unit": "kWh", "quality": "good" }
+  ]
+}</pre>
+
+  <details>
+    <summary>POC playbook · SIP</summary>
+    <p style="font-size:12px;color:var(--text-2);margin:0.5rem 0"><strong>POC ask:</strong> one feeder, 10–30 meters, <code>northbound-mqtt-v0.1</code> on schedule, STS vending unchanged, ICD gap matrix published. Ask vendor for DLMS/AMI engineer — not sales@.</p>
+    <p style="font-size:12px;color:var(--text-2)"><strong>SIP</strong> (Glenn Algie): Session Information Protocol for authenticated disconnect/market sessions above MQTT — not VoIP SIP, not SunSpec.</p>
+  </details>
+
+  <details>
+    <summary>Excluded from VMRS · sources · validation gaps</summary>
+    <ul style="font-size:12px;color:var(--text-2);margin:0.5rem 0 0;padding-left:1.2rem">
+      <li>Profile Generic buffers, full COSEM ICD, STSA/KMC key mgmt, SunSpec inverter registers</li>
+      <li>Sources: IEC 62056-6-1, IEC 62055, DLMS UA Blue Book, vendor study tables, <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a></li>
+      <li>Not yet done: hands-on ICD extraction, DLMS conformance, STSA harmonization</li>
+    </ul>
+  </details>
+
+  <p class="meter-footer">
+    <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound JSON</a> ·
+    <a href="meter-benchmark/vmrs-registers.json">vmrs-registers.json</a>
+  </p>
+</div>
+</body>
+</html>

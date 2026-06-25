@@ -16,8 +16,8 @@
     "power-africa-2026-workshop-planning": {
       "title": "Power Africa Workshop planning",
       "date": "Sep 2026",
-      "group": "power-africa",
-      "hash": "power-africa/power-africa-2026-workshop-planning",
+      "group": "events",
+      "hash": "events/power-africa-2026-workshop-planning",
       "standalone": "power-africa-2026-workshop-planning.html"
     }
   },

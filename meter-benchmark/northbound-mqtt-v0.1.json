@@ -1,0 +1,76 @@
+{
+  "id": "openami-village-northbound",
+  "title": "OpenAMI Village Meter — Northbound MQTT Profile",
+  "version": "0.1",
+  "status": "draft",
+  "location": "meter-benchmark/northbound-mqtt-v0.1.json",
+  "companion": {
+    "vmrs": "meter-benchmark/vmrs-registers.json",
+    "humanDocs": [
+      "meter-vmrs.html",
+      "meter-problems-today.html"
+    ],
+    "referenceImplementation": "https://github.com/energy-iot/ems-dev/"
+  },
+  "scope": {
+    "includes": [
+      "Normalized VMRS register payloads from edge gateway to operator HES",
+      "MQTT topic layout and JSON envelope",
+      "Session Information Protocol (SIP) hooks for Glenn Algie DER-market sessions"
+    ],
+    "excludes": [
+      "Full DLMS/COSEM object model on the wire",
+      "Utility MDMS business semantics",
+      "STS key management (separate STSA/KMC track)"
+    ]
+  },
+  "mqtt": {
+    "broker": "Operator-managed; TLS required in production",
+    "qos": {
+      "telemetry": 1,
+      "events": 1,
+      "commands": 1
+    },
+    "topicRoot": "openami/v1/{feederId}/{gatewayId}",
+    "topics": {
+      "telemetry": "{topicRoot}/meter/{meterSerial}/telemetry",
+      "event": "{topicRoot}/meter/{meterSerial}/event",
+      "session": "{topicRoot}/session/{sessionId}",
+      "command": "{topicRoot}/meter/{meterSerial}/command"
+    }
+  },
+  "payloadEnvelope": {
+    "schemaVersion": "0.1",
+    "required": ["ts", "feederId", "gatewayId", "meterSerial", "registers"],
+    "registersItem": {
+      "obis": "string — IEC 62056-6-1 code e.g. 1.8.0",
+      "value": "number | string | boolean",
+      "unit": "string",
+      "quality": "good | suspect | comms_lost"
+    },
+    "example": {
+      "schemaVersion": "0.1",
+      "ts": "2026-06-22T14:30:00Z",
+      "feederId": "feeder-north-paravur-01",
+      "gatewayId": "pole-ems-0042",
+      "meterSerial": "DS1000-88421",
+      "sessionId": "sip-7f3a9c2e",
+      "registers": [
+        { "obis": "1.8.0", "value": 1842.5, "unit": "kWh", "quality": "good" },
+        { "obis": "96.8.0", "value": 12.4, "unit": "kWh", "quality": "good" },
+        { "obis": "96.11.1", "value": "connected", "unit": "enum", "quality": "good" }
+      ]
+    }
+  },
+  "sip": {
+    "name": "Session Information Protocol",
+    "owner": "Glenn Algie / ISV Tech Comm",
+    "purpose": "Establish authenticated sessions between meters, gateways, and market participants so energy trades and disconnect commands are theft-resistant in decentralized DER markets.",
+    "northboundRole": "Optional sessionId on telemetry and mandatory session handshake on command topics before relay/disconnect or settlement actions.",
+    "sessionHandshake": {
+      "topic": "{topicRoot}/session/{sessionId}",
+      "fields": ["sessionId", "participants", "feederScope", "validFrom", "validTo", "signature"]
+    },
+    "note": "SIP spec text is evolving — this JSON profile reserves session hooks; update when Glenn publishes SIP v0.1 normative doc."
+  }
+}

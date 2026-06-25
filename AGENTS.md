@@ -42,8 +42,17 @@ isv-ai-wiki/
 ├── index.html                    # Shell: sidebar, sections, hash routing, registries
 ├── AGENTS.md                     # ← You are here (AI navigation)
 ├── README.md                     # Human quickstart
+├── meter-overview.html           # Metering focus — high-level overview (default embed)
+├── meter-vmrs.html               # OBIS VMRS + acronyms + tiers + POC playbook
+├── meter-problems-today.html     # Problems in depth — landscape diagrams & layers
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
+├── meter-benchmark/
+│   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
+│   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + SIP hooks
 ├── tech-comm-*-*.html            # Meeting note pages (?embed=1 in iframe)
+├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
+├── open-energy-hackathon-2025.html  # 2025 Open Energy Hackathon summary (Circles of Power)
+├── open-energy-hackathon-2026.html  # 2026 hackathon planning (Earth Day · SF Climate Week · Port Labs)
 ├── power-africa-*-*.html         # Workshop / event planning notes
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
@@ -68,25 +77,32 @@ isv-ai-wiki/
 
 Registered sections (`SECTIONS` in `index.html`):
 
-| `home` · `mission` · `funded` · `notes` · `tasks` · `committees` · `power-africa` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
+| `home` · `about` · `supported` · `notes` · `tasks` · `events` · `meter-study` · `tech-notes` · `standards` · `data` · `resources`
 
-`home` is the IEEE Smart Village Knowledge Base **and** the Tech Committee working hub (intro blocks + initiatives). Legacy `#tech` hash redirects to `home`. Other ISV committees (RWGs, subcommittees) live on `committees`.
+`home` is the Tech Committee working hub. `about` — mission and volunteer structure. `supported` — field-program map (legacy `#funded` → `supported`). Official ISV site: https://smartvillage.ieee.org/
 
 ### Hash URLs (stable deep links)
 
 | Hash | Lands on |
 |------|----------|
 | `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
-| `#committees` | Other ISV committees — RWGs and subcommittees |
+| `#about` | Mission, volunteer structure |
+| `#supported` | Field-program map (Tech Comm support on request) |
+| `#mission`, `#committees` | Legacy — scroll to anchors on `#about` |
+| `#funded`, `#field-programs` | Legacy — opens `#supported` |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
-| `#meter-study` | Meter benchmark iframe |
+| `#meter-study` | Metering focus — default: overview |
+| `#meter-study/overview` | High-level overview (primary endeavor) |
+| `#meter-study/problems-today` | Problems — landscape diagrams & layers |
+| `#meter-study/vmrs` | OBIS VMRS + acronyms + tiers |
+| `#meter-study/vendor-study` | Vendor pipeline + technical tables |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
-| `#power-africa/{note-id}` | Workshop planning (default: `power-africa-2026-workshop-planning`) |
+| `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
-| `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → redirects to `#home`) |
+| `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → `#home`; `#funded` → `#supported`) |
 
 **For agents:** Prefer hash links when citing wiki pages. Prefer **standalone HTML** (`meter-vendor-study.html`) when scraping full content — iframes omit chrome but duplicate body.
 
@@ -94,7 +110,8 @@ Registered sections (`SECTIONS` in `index.html`):
 
 Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` class). The shell loads:
 
-- `meter-vendor-study.html?embed=1`
+- `meter-overview.html?embed=1` (default)
+- `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1` · `meter-problems-today.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
@@ -105,7 +122,8 @@ When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the
 |----------|---------|
 | `SECTIONS` | Top-level nav ids |
 | `MEETING_NOTES` | Note id → `{ group, title, date, src, standalone }` |
-| `NOTE_GROUPS` | `tech-comm` → `notes` section; `power-africa` → `power-africa` section |
+| `METER_BENCHMARK_PAGES` | Page id → `{ title, sub, src, standalone }` for meter-study sub-nav |
+| `NOTE_GROUPS` | `tech-comm` → `notes` section; `events` → `events` section (in-person workshops & hackathons) |
 | `TECH_NOTES_CATALOG_URL` | Points to `technical-notes/catalog.json` |
 
 ---
@@ -125,7 +143,7 @@ Read sources in this order when answering technical questions:
 
 ---
 
-## Meter benchmark — what matters most
+## Metering focus — what matters most
 
 The study uses a **three-layer stack** (field / edge / cloud). The most **versatile** columns across use cases:
 
@@ -134,6 +152,7 @@ The study uses a **three-layer stack** (field / edge / cloud). The most **versat
 | Benchmark | Why it matters |
 |-----------|----------------|
 | **STS support** (`doc` / `claim` / `—`) | Prepaid token vending is the dominant rural billing model in SSA. Drives CIU, vending integration, key management. |
+| **VMRS / OBIS export** (`doc` / `claim` / `—`) | **Draft** ISV shortlist in `meter-benchmark/vmrs-registers.json` — tier A/B/C certainty; not a published standard. Validate per vendor ICD. |
 | **DLMS/COSEM** at meter + DCU | Utility-grade interoperability, future HES/MDMS, avoids permanent OEM lock-in if documented. |
 | **Northbound API / platform** | How billing, CRM, and mobile money connect. “REST (partner login)” ≠ public OpenAPI. |
 | **$/connection band** | Capex gate; compare industry ranges ($40–110 installed cited in study) — not list prices unless sourced. |
@@ -155,6 +174,11 @@ The study uses a **three-layer stack** (field / edge / cloud). The most **versat
 | **SunSpec** | Inverter / DER monitoring (Victron, Enphase), not cheap STS keypad meters. |
 | **IEEE 2030.5** | Grid-facing DER gateways and utility programs — rarely the village prepaid meter. |
 | **Modbus RTU/TCP** | EMS, hybrid inverters, Stellar Edge — generation and control, not STS token paths. |
+| **SIP (Session Information Protocol)** | Glenn Algie / Tech Comm — authenticated sessions for theft-resistant DER markets; hooks in northbound MQTT v0.1, not SunSpec/VoIP SIP. |
+
+### Northbound profile location
+
+**Canonical home:** `meter-benchmark/northbound-mqtt-v0.1.json` (with companion `vmrs-registers.json`). Version with the wiki via Git; human docs on `meter-vmrs.html` and `meter-problems-today.html`.
 
 ### Scoring legend (do not reinterpret)
 

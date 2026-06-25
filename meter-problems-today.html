@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problems · Meter Interoperability · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+.lead { font-size: 14px; margin-bottom: 0.75rem; max-width: 48rem; line-height: 1.5; }
+.landscape-wrap { border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem; background: var(--bg-2); margin-bottom: 0.75rem; overflow-x: auto; }
+.landscape-wrap svg { min-width: 720px; width: 100%; height: auto; display: block; }
+.landscape-caption { font-size: 11px; color: var(--text-2); margin-top: 0.45rem; line-height: 1.4; }
+.compare-tbl { font-size: 11px; }
+.compare-tbl th { font-size: 10px; }
+.compare-tbl td { vertical-align: top; line-height: 1.35; padding: 0.4rem 0.5rem; }
+.pill-u, .pill-v, .pill-both { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 8px; }
+.pill-u { background: var(--amber-50); color: var(--amber); }
+.pill-v { background: var(--green-50); color: var(--green); }
+.pill-both { background: var(--teal-50); color: var(--teal); }
+html.embed .back { display: none; }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study/problems-today">← Meter Interoperability</a></div>
+
+  <h1>Problems</h1>
+  <p class="sub">Utility AMI vs village minimum · OSI-inspired layers (not a protocol stack)</p>
+
+  <p class="lead">Same ecosystem layers — payment, semantics, formats, protocols, physical — but villages narrow the contract at the <strong>gateway</strong>. Green line = normalize southbound (DLMS/OEM/Modbus) to northbound MQTT/JSON. Acronym definitions are on OBIS · VMRS.</p>
+
+  <div class="landscape-wrap">
+    <svg viewBox="0 0 720 468" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering layers utility vs village">
+      <text x="198" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Utility AMI</text>
+      <text x="522" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Village minimum</text>
+      <line x1="360" y1="4" x2="360" y2="430" stroke="var(--border)" stroke-dasharray="4 3"/>
+      <line x1="372" y1="72" x2="372" y2="318" stroke="var(--green)" stroke-width="2"/>
+      <text x="376" y="198" font-size="7" fill="var(--green)" font-weight="600" transform="rotate(90 376 198)">gateway</text>
+      <!-- L7-L1 compact rows -->
+      <text x="6" y="44" font-size="8" font-weight="600" fill="var(--teal)">L7</text>
+      <rect x="56" y="28" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+      <text x="196" y="46" text-anchor="middle" font-size="8" fill="var(--text)">MDMS · CIS · VEE · regulatory</text>
+      <rect x="368" y="28" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+      <text x="516" y="46" text-anchor="middle" font-size="8" fill="var(--text)">Operator CRM · MPM · mobile money</text>
+      <text x="6" y="84" font-size="8" font-weight="600" fill="var(--teal)">L6</text>
+      <rect x="56" y="68" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+      <text x="196" y="86" text-anchor="middle" font-size="8" fill="var(--text)">Complex tariffs · STS + postpaid</text>
+      <rect x="368" y="68" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+      <text x="516" y="86" text-anchor="middle" font-size="8" fill="var(--text)">STS prepaid · SMS/USSD vending</text>
+      <text x="6" y="124" font-size="8" font-weight="600" fill="var(--teal)">L5</text>
+      <rect x="56" y="108" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
+      <text x="196" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">Full COSEM ICD · all OBIS</text>
+      <text x="196" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">certification matrices</text>
+      <rect x="368" y="108" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+      <text x="516" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">VMRS · ~10 OBIS keys</text>
+      <text x="516" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">SunSpec = parallel DER track</text>
+      <text x="6" y="164" font-size="8" font-weight="600" fill="var(--teal)">L4</text>
+      <rect x="56" y="148" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
+      <text x="196" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">Profile Generic · load profiles</text>
+      <text x="196" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">15-min buffers for VEE</text>
+      <rect x="368" y="148" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+      <text x="516" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">JSON/MQTT northbound v0.1</text>
+      <text x="516" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">on-demand reads OK</text>
+      <text x="6" y="204" font-size="8" font-weight="600" fill="var(--teal)">L3</text>
+      <rect x="56" y="188" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+      <text x="196" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Per-meter HLS · utility PKI</text>
+      <rect x="368" y="188" width="296" height="28" rx="4" fill="var(--teal-50)" stroke="var(--teal)"/>
+      <text x="516" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Gateway TLS · STSA for STS keys</text>
+      <text x="6" y="244" font-size="8" font-weight="600" fill="var(--teal)">L2</text>
+      <rect x="56" y="228" width="280" height="32" rx="4" fill="var(--bg)" stroke="var(--border)"/>
+      <text x="196" y="244" text-anchor="middle" font-size="8" fill="var(--text)">DLMS end-to-end · HES schedules</text>
+      <text x="196" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">GPRS/LTE WAN</text>
+      <rect x="368" y="228" width="296" height="32" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
+      <text x="516" y="244" text-anchor="middle" font-size="8" fill="var(--text)">Any southbound · MQTT north only</text>
+      <text x="516" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">DLMS · OEM RF · Modbus · G3</text>
+      <text x="6" y="284" font-size="8" font-weight="600" fill="var(--teal)">L1</text>
+      <rect x="56" y="268" width="608" height="28" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
+      <text x="360" y="286" text-anchor="middle" font-size="8" fill="var(--text)">Optical · PLC/RF · cellular · CIU · RS-485 — shared physics</text>
+      <!-- cost -->
+      <rect x="56" y="306" width="280" height="24" rx="4" fill="var(--amber-50)" stroke="var(--amber)" stroke-dasharray="3 2"/>
+      <text x="196" y="322" text-anchor="middle" font-size="7" fill="var(--amber)">~$1k+/connection utility AMI</text>
+      <rect x="368" y="306" width="296" height="24" rx="4" fill="var(--green-50)" stroke="var(--green)" stroke-dasharray="3 2"/>
+      <text x="516" y="322" text-anchor="middle" font-size="7" fill="var(--green)">~$58/hh pole EMS target vs $600–1.5k legacy meter</text>
+      <!-- confusion -->
+      <rect x="56" y="338" width="608" height="36" rx="4" fill="none" stroke="var(--teal)" stroke-dasharray="3 2"/>
+      <text x="360" y="354" text-anchor="middle" font-size="8" font-weight="600" fill="var(--teal)">Do not conflate on one RFP line</text>
+      <text x="360" y="366" text-anchor="middle" font-size="7" fill="var(--text-2)">STS=L6+L3 · OBIS 1.8.0=L5 · DLMS read=L2 · MQTT JSON=L4 · SunSpec inverter=L5 DER</text>
+      <!-- path -->
+      <text x="56" y="392" font-size="8" font-weight="600" fill="var(--text)">Village path:</text>
+      <text x="130" y="392" font-size="8" fill="var(--text-2)">Customer/CIU → meter → pole EMS/DCU → local AMI → cloud/MPM</text>
+      <text x="130" y="404" font-size="7" fill="var(--text-3)">OpenAMI stack: <tspan fill="var(--green)">Street Pole EMS</tspan> · MeshEMS · MPM · REIc lab — <tspan fill="var(--green)">Power Africa 2025 deck</tspan></text>
+    </svg>
+    <p class="landscape-caption">Normalize at gateway (green line). OpenAMI mapping: <a href="power-africa-openami-presentation-2025.html">Power Africa Sep 2025</a>.</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="compare-tbl">
+      <thead><tr><th>Layer</th><th>Utility</th><th>Village</th><th>Common mistake</th></tr></thead>
+      <tbody>
+        <tr><td>L7</td><td><span class="pill-u">MDMS</span></td><td><span class="pill-v">Operator billing</span></td><td>Buying MDMS for 200 meters</td></tr>
+        <tr><td>L6</td><td><span class="pill-both">STS+postpaid</span></td><td><span class="pill-v">STS prepaid</span></td><td>Token SMS ≠ meter protocol</td></tr>
+        <tr><td>L5</td><td><span class="pill-u">Full ICD</span></td><td><span class="pill-v">VMRS subset</span></td><td>Full COSEM in village RFP</td></tr>
+        <tr><td>L4</td><td><span class="pill-u">Profile Generic</span></td><td><span class="pill-v">MQTT JSON</span></td><td>Intervals without analytics plan</td></tr>
+        <tr><td>L3</td><td><span class="pill-u">Per-meter HLS</span></td><td><span class="pill-v">Gateway TLS</span></td><td>DLMS keys on rural WAN</td></tr>
+        <tr><td>L2</td><td><span class="pill-both">DLMS e2e</span></td><td><span class="pill-v">Any south · MQTT north</span></td><td>One NAN vendor globally</td></tr>
+        <tr><td>L1</td><td colspan="2"><span class="pill-both">Same hardware</span></td><td>Ignoring CIU when DCU down</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>Layer interactions &amp; field failures</summary>
+    <ul style="margin:0.5rem 0 0;padding-left:1.2rem;font-size:12px;color:var(--text-2)">
+      <li><strong>L6≠L5:</strong> STS is payment/keys; OBIS is register meaning — map via vendor ICD (tier B).</li>
+      <li><strong>L4:</strong> Villages skip Profile Generic unless theft analytics need intervals.</li>
+      <li><strong>L3:</strong> One DLMS association at gateway + TLS MQTT shrinks rural trust surface.</li>
+      <li><strong>DER vs revenue:</strong> SunSpec on inverters ≠ STS billing registers — separate procurement columns.</li>
+      <li><strong>Vendor exit:</strong> Closed stacks (SparkMeter) strand installed base — <a href="power-africa-openami-presentation-2025.html">OpenAMI deck</a>.</li>
+      <li><strong>OEM keys:</strong> Proprietary RF blocks second-source DCUs — <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a>.</li>
+    </ul>
+  </details>
+
+  <p class="meter-footer">
+    <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound JSON</a> ·
+    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a>
+  </p>
+</div>
+</body>
+</html>

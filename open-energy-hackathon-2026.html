@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Energy Hackathon 2026 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.hero-layout { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 1.5rem; }
+.overview-cards { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+.overview-card {
+  border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.95rem; background: var(--bg-2);
+  display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; align-items: baseline;
+}
+.overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
+.overview-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.overview-detail { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--amber); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.challenge-list li { margin-bottom: 0.4rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 12px; padding: 5px 10px; border-radius: 7px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+@media (min-width: 768px) { .overview-cards { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Open Energy Hackathon 2.0</h1>
+  <p class="sub">AI, Mesh, and Hardware · SF Climate Week · Earth Day · Informal Spaces (formerly Port Labs), Oakland · 22 Apr 2026 · <a href="https://luma.com/6jvum8on" target="_blank" rel="noopener">Official Luma listing ↗</a></p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/open-energy-hackathon-2026" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div class="hero-layout">
+    <div class="overview-cards">
+      <div class="overview-card">
+        <div class="overview-val">2.0</div>
+        <div class="overview-title">Second annual</div>
+        <div class="overview-detail">~90 registered in 2025 · more hardware &amp; challenges</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-val">Build</div>
+        <div class="overview-title">Not a pitch comp</div>
+        <div class="overview-detail">Code that controls physical inverters, EVSE, storage, meters</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-val">EIOT</div>
+        <div class="overview-title">Host org</div>
+        <div class="overview-detail">Energy IoT Open Source · 501(c)(3) · LF Energy associate member</div>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Per organizers (Luma)</strong>
+      Engineers, developers, and hardware builders work with <strong>real renewable equipment</strong> — solar inverters, EV chargers, battery storage, energy meters — on integrations communities need now, with open hardware/software and AI-assisted design workflows. Teams form on the day; challenge details live on the community <strong>Zulip</strong> channel linked from Luma.
+    </div>
+  </div>
+
+  <h2>Challenge themes</h2>
+  <ul class="challenge-list">
+    <li><strong>Programmable Microgrid</strong> — plug, play, and own your power</li>
+    <li><strong>Revive stranded EV chargers</strong> — open source + SunSpec standards</li>
+    <li><strong>Flexible interconnection modeling</strong> — microgrid design for constrained grids using EASI</li>
+    <li><strong>Cooperative cloud</strong> — remote microgrid management at scale</li>
+    <li><strong>Flux AI dev kit</strong> — from prototype to production hardware (meshEMS / mInverter PCB workflows)</li>
+    <li><strong>Bring your own</strong> open energy challenge</li>
+  </ul>
+  <p>ISV Tech Comm may run a <strong>village metering / northbound MQTT</strong> thread inside these challenges — see <a href="index.html#meter-study/overview">Meter Interoperability</a> — but the published themes span domestic DER, EVSE, mesh EMS, and grid interconnection, not only energy access.</p>
+
+  <h2>Schedule (from Luma)</h2>
+  <table>
+    <thead><tr><th>When</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Day 1 · 22 Apr</strong></td><td>9:00 doors · 10–11 challenge intros &amp; team formation · 11–1 team time · 1–2 sponsored lunch · 2–10 pm hacking · 10 pm close</td></tr>
+      <tr><td><strong>Day 2</strong></td><td>9:00–2:00 continue hacking · 3:00 submissions due · 5:00 showcase · 6:00 awards</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Logistics</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Where</td><td><strong>Informal Spaces</strong> (formerly Port Labs), Oakland — same Franklin St address as 2025</td></tr>
+      <tr><td>Registration</td><td><a href="https://luma.com/6jvum8on" target="_blank" rel="noopener">Luma · RSVP ↗</a> (free general admission)</td></tr>
+      <tr><td>Hosted by</td><td>Kyle Valiton · Arila Barnes (Energy IoT) · SF Climate Week · informal spaces – OAK</td></tr>
+      <tr><td>Channel partners</td><td>SunSpec Alliance · Linux Foundation Energy</td></tr>
+      <tr><td>Perks noted on Luma</td><td>NESL.energy meshEMS PCB discount · Flux.AI open PCB collaboration · donate link for open-source lab</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Not Power Africa</h2>
+  <p>ISV's <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a> (Nairobi, Sep 2026) is a separate in-person program — different venue, travel, and kit logistics.</p>
+
+  <h2>Related</h2>
+  <div class="links">
+    <a href="https://luma.com/6jvum8on" target="_blank" rel="noopener">Luma · official listing ↗</a>
+    <a href="open-energy-hackathon-2025.html">2025 hackathon summary</a>
+    <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev ↗</a>
+    <a href="index.html#meter-study/overview">Meter Interoperability (ISV thread)</a>
+    <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a>
+  </div>
+</div>
+</body>
+</html>
