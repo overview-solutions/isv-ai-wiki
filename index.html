@@ -2042,7 +2042,8 @@ const ABOUT_SCROLL_ALIASES = {
   mission: 'about-mission',
   committees: 'about-structure'
 };
-const SUPPORTED_SECTION_ALIASES = ['supported', 'funded', 'field-programs'];
+const SUPPORTED_SECTION_HASH = 'projects';
+const SUPPORTED_SECTION_ALIASES = ['projects', 'supported', 'funded', 'field-programs'];
 const NOTE_GROUPS = {
   'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
   'events': { section: 'events', defaultNote: 'open-energy-hackathon-2025' }
@@ -2182,7 +2183,8 @@ function showSection(id, options = {}) {
   if (id === 'tech-notes') loadTechnicalNotes();
   if (!options.skipHash) {
     const base = location.pathname + location.search;
-    history.replaceState(null, '', id === 'home' ? base : `${base}#${id}`);
+    const hashId = id === 'supported' ? SUPPORTED_SECTION_HASH : id;
+    history.replaceState(null, '', id === 'home' ? base : `${base}#${hashId}`);
   }
   if (options.scrollTo) {
     requestAnimationFrame(() => {
@@ -2324,16 +2326,16 @@ function initFromHash() {
     showSection('resources', { skipHash: true });
     return;
   }
+  if (SUPPORTED_SECTION_ALIASES.includes(raw)) {
+    showSection('supported', { skipHash: raw === SUPPORTED_SECTION_HASH });
+    return;
+  }
   if (SECTIONS.includes(raw)) {
     showSection(raw, { skipHash: true });
     return;
   }
   if (ABOUT_SCROLL_ALIASES[raw]) {
     showSection('about', { skipHash: true, scrollTo: ABOUT_SCROLL_ALIASES[raw] });
-    return;
-  }
-  if (SUPPORTED_SECTION_ALIASES.includes(raw)) {
-    showSection('supported', { skipHash: true });
     return;
   }
 }
