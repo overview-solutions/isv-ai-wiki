@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Meeting follow-up** for the [ISV Knowledge Base](https://overview-solutions.github.io/isv-ai-wiki/). Add a **meeting** label (`meeting-metering-2026-05-28` or `meeting-power-africa-2026-workshop-planning`) on the right sidebar after creating the issue.
+        **Meeting follow-up** for the [ISV Knowledge Base](https://overview-solutions.github.io/isv-ai-wiki/). Add a **meeting** label (`meeting-tech-comm-2026-06-25`, `meeting-metering-2026-05-28`, or `meeting-power-africa-2026-workshop-planning`) on the right sidebar after creating the issue.
   - type: textarea
     id: description
     attributes:

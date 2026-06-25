@@ -448,8 +448,50 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0 1rem;
 }
+
+.tech-notes-toolbar {
+  margin: 1rem 0 0;
+}
+
+.tech-notes-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  max-width: 28rem;
+}
+
+.tech-notes-search-wrap:focus-within {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 2px var(--teal-50);
+}
+
+.tech-notes-search-wrap svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.tech-notes-search-wrap input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  min-width: 0;
+}
+
+.tech-notes-search-wrap input::placeholder { color: var(--text-3); }
+
+.tech-notes-search-wrap input::-webkit-search-cancel-button { cursor: pointer; }
 
 .filter-chip {
   font-family: var(--font);
@@ -1347,12 +1389,14 @@ code {
       <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">Problems</div>
       <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
       <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor Study</div>
+      <div class="nav-sub-item" data-meter-page="openami" onclick="showMeterPage('openami')">OpenAMI</div>
     </div>
     <div class="nav-item" data-section="notes" onclick="showSection('notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
+      <div class="nav-sub-item" data-note="tech-comm-2026-06-25" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-06-25')">25 Jun 2026 · AI Wiki Orientation</div>
       <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
     </div>
     <div class="nav-item" data-section="tasks" onclick="showSection('tasks')">
@@ -1489,7 +1533,7 @@ code {
             <span class="tag tag-planning">Planning</span>
             <span class="project-name">Power Africa Conference — Workshop</span>
           </div>
-          <div class="project-desc">Hands-on workshop track at the annual PES/IAS Power Africa conference. Planning sessions, kit budget, room layout, and materials prep. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a> · <a href="#" onclick="showSection('events');return false">All In-Person Events</a></div>
+          <div class="project-desc">Hands-on workshop at Power Africa — <strong>MAKE</strong> (Mon 4h), <strong>CODE</strong> (Tue eve), <strong>INTEGRATE</strong> (Sat). Kits, room layout, materials. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open planning notes →</a> · <a href="#" onclick="showSection('events');return false">All In-Person Events</a></div>
         </div>
         <div class="project-section-label">Stable infrastructure</div>
         <div class="project-card project-card-stable">
@@ -1752,10 +1796,24 @@ code {
         </div>
       </div>
       <div class="resource-row">
+        <div class="standard-icon">🔗</div>
+        <div>
+          <div class="resource-name">OpenAMI — ISV hub</div>
+          <div class="resource-desc"><a href="#" onclick="showMeterPage('openami');return false">Open in Meter Interoperability</a> · actionable energy telemetry, stack layers, <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>.</div>
+        </div>
+      </div>
+      <div class="resource-row">
         <div class="standard-icon">📊</div>
         <div>
           <div class="resource-name">OpenAMI @ Power Africa 2025</div>
           <div class="resource-desc"><a href="#" onclick="showNote('power-africa-openami-2025');return false">Event summary</a> · <a href="https://docs.google.com/presentation/d/1b1Bl63I-evfd20MW6XxDe0IIse-0Nm85/edit" target="_blank" rel="noopener">Slide deck</a> — REIc, ISV, Energy IoT, EnAccess; closed vs open AMI; three-phase roadmap.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📡</div>
+        <div>
+          <div class="resource-name">MeshEMS board — NESL</div>
+          <div class="resource-desc"><a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> — ESP32-based EMS PCB; schematic on README. Pairs with <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> (Street Pole firmware). Power rails: <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun meeting notes</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1776,7 +1834,7 @@ code {
         <div class="standard-icon">🔋</div>
         <div>
           <div class="resource-name">EnAccess Foundation</div>
-          <div class="resource-desc"><a href="https://enaccess.org" target="_blank">enaccess.org</a> · <a href="https://github.com/enaccess" target="_blank">github.com/enaccess</a> — Netherlands-based nonprofit (est. 2018) publishing open-source, hardware-agnostic tools for energy access. ~56 public repos covering PAYGO, prepaid metering, IoT comms, and decentralized utility management — directly applicable to ISV's metering/comms topology work.</div>
+          <div class="resource-desc"><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a> · <a href="https://enaccess.org" target="_blank">enaccess.org</a> · <a href="https://github.com/enaccess" target="_blank">github.com/enaccess</a> — OpenAMI program page and open-source tools for energy access (MPM, PAYGO, metering, IoT comms).</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1798,6 +1856,13 @@ code {
         <div>
           <div class="resource-name">OpenSmartMeter &amp; Cicada-FW — EnAccess</div>
           <div class="resource-desc"><a href="https://github.com/enaccess/OpenSmartMeter" target="_blank">OpenSmartMeter</a> — low-cost, OEM-agnostic GSM prepaid smart meter with a customizable API. <a href="https://github.com/enaccess/Cicada-FW" target="_blank">Cicada-FW</a> — bi-directional IoT comms module for embedded energy-access devices.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">🔬</div>
+        <div>
+          <div class="resource-name">EPRI Open Source</div>
+          <div class="resource-desc"><a href="https://github.com/epri-dev" target="_blank" rel="noopener">github.com/epri-dev</a> — EPRI’s public grid and DER research code (IEEE 1547 originated from EPRI work; open stacks include OpenDSS, OpenDER, and LF Energy OPAI-related projects). Discussed on <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun 2026 meeting notes</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1874,7 +1939,7 @@ code {
         <div class="standard-icon">🗂️</div>
         <div>
           <div class="resource-name">OpenAMI Schema Repository</div>
-          <div class="resource-desc">GeoJSON microgrid data model and Dev Labs reports — <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> on GitHub.</div>
+          <div class="resource-desc"><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> · GeoJSON microgrid data model and Dev Labs reports — <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> on GitHub.</div>
         </div>
       </div>
       <div class="callout">
@@ -1920,19 +1985,19 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title" id="notes-section-title">Meeting Notes</div>
-        <div class="section-sub" id="notes-section-sub">28 May 2026 · STS · SMS · DLMS · redundant NAN · CIU/phone relay</div>
+        <div class="section-sub" id="notes-section-sub">25 Jun 2026 · OpenAMI stack · MeshEMS power · EPRI · AMDA</div>
       </div>
     </div>
     <p class="meeting-cadence">Tech Comm meets virtually <strong>twice monthly</strong> at <strong>7:30&nbsp;am Pacific</strong> (<strong>8:00&nbsp;pm India</strong>). Join the <a href="https://chat.whatsapp.com/C40a2t7W1f7EMJPWRxeDTZ?mode=gi_t" target="_blank" rel="noopener">WhatsApp group ↗</a> for meeting links.</p>
     <div id="content-notes">
       <div class="notes-embed">
         <div class="notes-embed-toolbar">
-          <span id="notes-embed-label">28 May 2026 · Metering &amp; comms topology</span>
+          <span id="notes-embed-label">25 Jun 2026 · AI Wiki orientation</span>
           <div class="notes-embed-toolbar-links">
-            <a id="notes-toolbar-standalone" href="tech-comm-2026-05-28-metering-topology.html" target="_blank" rel="noopener">Full page</a>
+            <a id="notes-toolbar-standalone" href="tech-comm-2026-06-25-ai-wiki-orientation.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="notes-frame" title="Meeting Notes preview" src="tech-comm-2026-05-28-metering-topology.html?embed=1"></iframe>
+        <iframe id="notes-frame" title="Meeting Notes preview" src="tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1"></iframe>
       </div>
     </div>
   </div>
@@ -2008,6 +2073,12 @@ code {
         <p id="tech-code-legend-intro" style="margin-top:0.5rem"></p>
         <div class="tech-code-legend-grid" id="tech-code-legend-grid"></div>
       </details>
+      <div class="tech-notes-toolbar">
+        <label class="tech-notes-search-wrap" for="tech-notes-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+          <input type="search" id="tech-notes-search" placeholder="Search title, code, tags, summary…" autocomplete="off" enterkeyhint="search" oninput="setTechSearch(this.value)">
+        </label>
+      </div>
       <div class="tech-notes-filters" id="tech-notes-filters"></div>
       <div class="tech-notes-layout">
         <div class="tech-notes-list" id="tech-notes-list">
@@ -2045,7 +2116,7 @@ const ABOUT_SCROLL_ALIASES = {
 const SUPPORTED_SECTION_HASH = 'projects';
 const SUPPORTED_SECTION_ALIASES = ['projects', 'supported', 'funded', 'field-programs'];
 const NOTE_GROUPS = {
-  'tech-comm': { section: 'notes', defaultNote: 'metering-2026-05-28' },
+  'tech-comm': { section: 'notes', defaultNote: 'tech-comm-2026-06-25' },
   'events': { section: 'events', defaultNote: 'open-energy-hackathon-2025' }
 };
 const METER_BENCHMARK_PAGES = {
@@ -2072,10 +2143,24 @@ const METER_BENCHMARK_PAGES = {
     sub: 'Protocol benchmark · outreach pipeline · contacts',
     src: 'meter-vendor-study.html?embed=1',
     standalone: 'meter-vendor-study.html'
+  },
+  'openami': {
+    title: 'OpenAMI',
+    sub: 'Actionable telemetry · leakage visibility · stack · Discord',
+    src: 'openami.html?embed=1',
+    standalone: 'openami.html'
   }
 };
 let activeMeterPageId = 'overview';
 const MEETING_NOTES = {
+  'tech-comm-2026-06-25': {
+    group: 'tech-comm',
+    title: 'AI Wiki orientation',
+    date: '25 Jun 2026',
+    sub: 'OpenAMI stack · MeshEMS power · EPRI · STS · AMDA',
+    src: 'tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1',
+    standalone: 'tech-comm-2026-06-25-ai-wiki-orientation.html'
+  },
   'metering-2026-05-28': {
     group: 'tech-comm',
     title: 'Metering & comms topology',
@@ -2114,7 +2199,7 @@ const MEETING_NOTES = {
     group: 'events',
     title: 'Power Africa workshop planning',
     date: 'Sep 2026',
-    sub: 'Nairobi · Glenn & Mike · kits · budget · schedule · Nairobi shipping',
+    sub: 'Nairobi · MAKE · CODE · INTEGRATE · kits · budget · shipping',
     src: 'power-africa-2026-workshop-planning.html?embed=1',
     standalone: 'power-africa-2026-workshop-planning.html'
   }
@@ -2129,7 +2214,7 @@ const FUNDED_VIDEOS_URL = 'js/funded-project-videos.json';
 const aiResults = {};
 let fundedDataLoaded = false;
 let fundedProjectVideos = null;
-let activeNoteId = 'metering-2026-05-28';
+let activeNoteId = 'tech-comm-2026-06-25';
 let techNotesCatalog = [];
 let techNotesCatalogs = [];
 let techNotesCodeGuide = null;
@@ -2138,6 +2223,7 @@ let techNotesCatalogSource = '';
 let techNotesEnrichments = [];
 let activeTechNoteId = null;
 let activeTechFilter = 'all';
+let activeTechSearch = '';
 
 function toggleMobileMenu() {
   const open = !document.body.classList.contains('menu-open');
@@ -2467,21 +2553,46 @@ function setTechFilter(cat) {
   renderTechNotesCatalogMeta();
 }
 
+function setTechSearch(query) {
+  activeTechSearch = String(query || '').trim();
+  renderTechnicalNotesList();
+  renderTechNotesCatalogMeta();
+}
+
+function techNoteSearchHaystack(item) {
+  return [
+    item.title,
+    item.summary,
+    item.reportCode,
+    item.category,
+    item.type,
+    item.publisher,
+    item.isvRelevance,
+    explainReportCode(item.reportCode),
+    ...(item.tags || [])
+  ].filter(Boolean).join(' ').toLowerCase();
+}
+
 function renderTechNotesCatalogMeta() {
   const el = document.getElementById('tech-notes-catalog-meta');
   if (!el || !techNotesCatalog.length) return;
   const visible = filteredTechNotes().length;
   const total = techNotesCatalog.length;
-  const filterNote = activeTechFilter === 'all' ? '' : ` (${activeTechFilter})`;
+  const filterNote = activeTechFilter === 'all' ? '' : ` · ${activeTechFilter}`;
+  const searchNote = activeTechSearch ? ` · search: “${activeTechSearch}”` : '';
   const sourceNote = techNotesCatalogSource === 'live'
     ? 'live from Dev Labs index'
     : 'cached catalog.json (index unavailable)';
-  el.textContent = `${visible} of ${total} reports${filterNote} · ${sourceNote}`;
+  el.textContent = `${visible} of ${total} reports${filterNote}${searchNote} · ${sourceNote}`;
 }
 
 function filteredTechNotes() {
-  if (activeTechFilter === 'all') return techNotesCatalog;
-  return techNotesCatalog.filter(item => item.category === activeTechFilter);
+  let items = activeTechFilter === 'all'
+    ? techNotesCatalog
+    : techNotesCatalog.filter(item => item.category === activeTechFilter);
+  if (!activeTechSearch) return items;
+  const q = activeTechSearch.toLowerCase();
+  return items.filter(item => techNoteSearchHaystack(item).includes(q));
 }
 
 function renderTechnicalNotesList() {
@@ -2493,7 +2604,10 @@ function renderTechnicalNotesList() {
     return;
   }
   if (!items.length) {
-    listEl.innerHTML = '<div class="tech-notes-detail-empty">No reports match this filter.</div>';
+    const emptyMsg = activeTechSearch
+      ? `No reports match “${escapeHtml(activeTechSearch)}”.`
+      : 'No reports match this filter.';
+    listEl.innerHTML = `<div class="tech-notes-detail-empty">${emptyMsg}</div>`;
     return;
   }
   listEl.innerHTML = items.map(item => `

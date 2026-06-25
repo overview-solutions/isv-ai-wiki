@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Comm — AI Wiki Orientation · 25 Jun 2026 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/isv-tasks.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.75rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
+.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.agenda-list li { margin-bottom: 0.35rem; color: var(--text-2); }
+.agenda-list strong { color: var(--text); font-weight: 500; }
+.stack-table td:first-child { font-weight: 500; white-space: nowrap; }
+.stack-table .out-of-scope { color: var(--text-3); font-style: italic; }
+.power-table td { font-size: 13px; line-height: 1.45; }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn strong { color: var(--amber); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>AI Wiki orientation</h1>
+  <p class="sub">ISV Technology Committee · 25 June 2026 · wiki walkthrough · metering layers · emerging focus</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#notes/tech-comm-2026-06-25" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meeting Notes</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div id="follow-ups-panel"></div>
+
+  <div class="callout">
+    <strong>Call purpose</strong>
+    Orient volunteers on the Tech Comm knowledge base — main sections, how Tasks tie to GitHub Issues, and where Meter Interoperability work is heading (OBIS normalization, Street Pole EMS).
+  </div>
+
+  <h2>Agenda</h2>
+  <ul class="agenda-list">
+    <li><strong>Wiki layout</strong> — Home, About ISV, Supported Projects, Meter Interoperability, Meeting Notes, Tasks, Events, Knowledge Base</li>
+    <li><strong>Tasks</strong> — issues on <code>overview-solutions/isv-ai-wiki</code>, meeting labels, status from labels + comments</li>
+    <li><strong>OBIS · VMRS</strong> — register tiers and northbound normalization</li>
+    <li><strong>Street Pole EMS</strong> — pole-gateway hardware thread (<a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>)</li>
+    <li><strong>Open floor</strong> — other items from attendees</li>
+  </ul>
+
+  <h2>Discussion notes</h2>
+  <ul>
+    <li><strong>EPRI &amp; IEEE 1547</strong> — <strong>EPRI wrote it; IEEE implemented it.</strong> <a href="index.html#standards">IEEE 1547</a> covers DER interconnection (ride-through, export limits, grid tie-in). EPRI’s ongoing open-source grid work: <a href="https://github.com/epri-dev" target="_blank" rel="noopener">github.com/epri-dev</a>. Relevant when village feeders connect behind-the-meter solar/storage or evolve toward utility interconnection — parallel track to village prepaid metering, not a replacement for it.</li>
+    <li><strong>STS key management</strong> — <strong>STS provides key mgmt</strong> for prepaid token vending (STSA key hierarchy). Separate from DLMS and OEM key stacks discussed in the <a href="tech-comm-2026-05-28-metering-topology.html">May topology note</a>. Northbound VMRS / MQTT profiles intentionally exclude STSA key operations — token path stays on SMS/USSD/CIU; meter reads stay on gateway normalization.</li>
+    <li><strong>EnAccess · OpenAMI on site</strong> — <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a> · running <strong>OpenAMI</strong> on live deployments — field validation of the open stack (MPM + geo asset model + gateway path) beyond conference decks. See <a href="index.html#meter-study/overview">Meter Interoperability</a> and <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI (Sep 2025)</a>.</li>
+    <li><strong>OSEAS · Global Off-Grid Solar Forum</strong> — EnAccess <a href="https://www.oseas.org/" target="_blank" rel="noopener">OSEAS</a> (Open Source Energy Access Symposium) runs <strong>in parallel</strong> to the <a href="https://www.offgridsolarforum.org/" target="_blank" rel="noopener">Global Off-Grid Solar Forum</a> — same week / venue ecosystem (Kigali, Oct 2026 per <a href="power-africa-2026-workshop-planning.html">workshop planning note</a>). Worth coordinating ISV / Tech Comm attendance across both.</li>
+    <li><strong>AMDA outreach</strong> — Africa Minigrid Developers Association: <a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">africamda.org/our-team</a> for contacts. Follow-up <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a> — invite to Power Africa workshop (day-rate registration), OBIS codes, open stack. One-page pitch: <a href="assets/documents/amda-pitch-one-page.pdf" target="_blank" rel="noopener">AMDA pitch (PDF)</a>.</li>
+    <li><strong>OpenAMI community (Discord)</strong> — project chat is on the <strong>OSEA</strong> server: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a>. Tech Comm needs to <strong>get more active</strong> there — see <a href="index.html#meter-study/openami">wiki OpenAMI page</a>.</li>
+    <li><strong>OpenAMI definition (working)</strong> — <strong>OpenAMI is driving actionable energy telemetry</strong> (reads and events operators can act on) and <strong>leakage visibility at every part of the system</strong> (feeder, branch, customer). See <a href="index.html#meter-study/openami">OpenAMI page</a> and table below.</li>
+    <li><strong>OpenADR</strong> — pushes <em>prices</em> to devices (pricing server / demand-response path). Useful in grid-connected DER markets; <strong>not</strong> a village-metering focus for ISV right now.</li>
+    <li><strong>MeshEMS / pole power rails</strong> — voltage budget and PCB notes from Glenn; see section below. Workshop kits need explicit 5&nbsp;V paths for temp reference and SSRs.</li>
+    <li><strong>Jude · EMS board scale-up</strong> — hoping to deploy <strong>10× EMS boards</strong> in the field. Design constraint for now: <strong>do not include PII in meters</strong> (no customer-identifying data on the meter read path today). Follow up with Jude on deployment plan and what telemetry stays anonymous vs operator-backend only.</li>
+  </ul>
+
+  <h2>OpenAMI stack — working definitions</h2>
+  <p>How the pieces fit together in field conversations (Sep 2025 deck + today’s call). Hub: <a href="index.html#meter-study/openami">OpenAMI page</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a>.</p>
+  <table class="stack-table">
+    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>OpenEMS</strong> (Energy IoT)</td><td>EMS / edge orchestration</td><td>More <strong>urban</strong> — grid present (e.g. Aaron’s grid in Uganda). Stack can <strong>stop at the DCU</strong> when that is enough.</td></tr>
+      <tr><td><strong>MeshEMS</strong></td><td>NAN mesh</td><td>Lets DCUs form a mesh when pole-to-pole RF backhaul is needed.</td></tr>
+      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry · interop</td><td>Northbound contract — normalize southbound OEM/DLMS at gateway to registers operators can bill, vend, and disconnect on; ISV <a href="index.html#meter-study/overview">Meter Interoperability</a> thread.</td></tr>
+      <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>MicroPowerManager as HES/billing layer — <strong>instead of</strong> OpenEMS backend in village deployments.</td></tr>
+      <tr><td><strong>OpenAMI</strong> (geo + asset model)</td><td>Networking / topology semantics</td><td>Asset and connectivity layer above gateways — complements MQTT register payloads.</td></tr>
+      <tr><td class="out-of-scope"><strong>OpenADR</strong></td><td class="out-of-scope">Price signals to devices</td><td class="out-of-scope">Pricing server for utility DR/tariffs — parallel track, not village prepaid priority.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="meshems-power">MeshEMS / pole power architecture</h2>
+  <p>Working notes for <strong>MeshEMS</strong> and Street Pole EMS workshop hardware — multiple rails must be planned explicitly; 18650 cell voltage alone is not enough for every peripheral. <strong>EMS board schematic</strong> (NESL): <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">github.com/nesl-admin/nesl-meshems</a> — see repo README. Street Pole firmware: <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>.</p>
+  <table class="power-table">
+    <thead><tr><th>Load</th><th>Rail</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MeshEMS board</strong></td><td><strong>5&nbsp;V</strong></td><td>Temperature reference needs a 5&nbsp;V supply. PCB schematic on <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL nesl-meshems</a> README.</td></tr>
+      <tr><td><strong>18650 battery holders</strong></td><td>3.3&nbsp;V or 6.6&nbsp;V → <strong>5&nbsp;V</strong></td><td>Need a <strong>buck or boost</strong> converter depending on pack wiring (single cell ~3.3&nbsp;V nominal vs two-series ~6.6&nbsp;V).</td></tr>
+      <tr><td><strong>SSRs</strong></td><td><strong>5&nbsp;V</strong></td><td>Solid-state relays on the pole stack also require 5&nbsp;V drive.</td></tr>
+      <tr><td><strong>ESP32 dev kit</strong> (MeshEMS / Street Pole)</td><td>5&nbsp;V → <strong>3.3&nbsp;V</strong></td><td>Typical dev boards accept <strong>5&nbsp;V</strong> on USB/VIN and step down to <strong>3.3&nbsp;V</strong> onboard for the MCU — no separate 3.3&nbsp;V feed needed for the kit if a 5&nbsp;V rail is available (check board spec).</td></tr>
+      <tr><td><strong>CircuitSetup meter board</strong></td><td><strong>3.3&nbsp;V</strong></td><td>Logic / stack interface runs at 3.3&nbsp;V.</td></tr>
+      <tr><td><strong>CircuitSetup base board</strong></td><td>3φ AC → 9&nbsp;VDC → 3.3&nbsp;V</td><td>Base draws from <strong>3-phase AC</strong>, supplies ~9&nbsp;VDC for measurement ICs, can regulate down to <strong>3.3&nbsp;V</strong> on the stack pin.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-warn">
+    <strong>Glenn’s AC-derived PCB (schematic on file)</strong>
+    Manages pole power from <strong>240&nbsp;VAC (3-phase)</strong>: mini transformers, rectifier, surge diodes — produces a <strong>5&nbsp;V reference</strong> and <strong>three 9&nbsp;V references</strong>. <em>Would not recommend field use without an <strong>ETL or UL</strong>-certified board</em> (safety, isolation, and utility voltage context).
+  </div>
+  <p>Action for workshop BOM: specify buck/boost modules for 5&nbsp;V where cell or stack voltage does not natively match; ESP32 dev kits can derive 3.3&nbsp;V from 5&nbsp;V onboard — keep CircuitSetup 3.3&nbsp;V stack power separate from SSR / temp-reference 5&nbsp;V budget.</p>
+
+  <h2>Field notes · Addis Ababa grid</h2>
+  <p class="body-text">Reported from the call — context for urban / grid-connected OpenEMS work and why local distribution telemetry matters more than export marketing alone.</p>
+  <table class="power-table">
+    <thead><tr><th>Observation</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Outages</strong></td><td><strong>2–4&nbsp;hours</strong> every few days, observed ~<strong>2&nbsp;miles from the airport</strong> — not only rural feeders.</td></tr>
+      <tr><td><strong>T→D capacity</strong></td><td>Not enough <strong>transmission-to-distribution cross-connect</strong>; distribution layer is overloaded.</td></tr>
+      <tr><td><strong>Transformer life</strong></td><td>Among the <strong>shortest transformer lifetimes</strong> reported — ~<strong>15% failure rate</strong> vs ~<strong>2%</strong> typical elsewhere.</td></tr>
+      <tr><td><strong>Utility priorities</strong></td><td>More emphasis on <strong>international electricity sales</strong> to neighboring countries than on <strong>local distribution servicing</strong>.</td></tr>
+      <tr><td><strong>EV fast charging</strong></td><td><strong>160&nbsp;kW DC fast chargers</strong> — up to <strong>8 cars on the same block</strong>; charging equipment fails when <strong>power surges</strong> hit the overloaded local network.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-text">Implication for ISV: leakage and load visibility at the distribution edge (OpenAMI / OpenEMS) is not abstract — overloaded T→D handoff and cluster EV load are breaking real assets. Compare <a href="index.html#standards">IEEE 1547</a> / <a href="https://github.com/epri-dev" target="_blank" rel="noopener">EPRI</a> grid tooling vs village prepaid track.</p>
+
+  <h2>Layer reminder</h2>
+  <table>
+    <thead><tr><th>Layer</th><th>Example</th><th>ISV wiki thread</th></tr></thead>
+    <tbody>
+      <tr><td>Grid interconnection</td><td>IEEE 1547 (<a href="https://github.com/epri-dev" target="_blank" rel="noopener">EPRI</a> wrote · IEEE std)</td><td><a href="index.html#standards">Standards</a> · DER / microgrid tie-in</td></tr>
+      <tr><td>Prepaid / payment</td><td>STS token + key mgmt</td><td><a href="index.html#meter-study/problems-today">Problems</a> · L6 payment layer</td></tr>
+      <tr><td>Register semantics</td><td>OBIS · VMRS tiers</td><td><a href="index.html#meter-study/vmrs">OBIS · VMRS</a></td></tr>
+      <tr><td>Northbound</td><td>MQTT / JSON at gateway</td><td><a href="index.html#meter-study/overview">Meter Interoperability</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Attendees &amp; open items</h2>
+  <p style="color:var(--text-2);font-size:13px">Add names, claims, and new follow-ups during or after the call.</p>
+
+  <h2>Action items (tracked)</h2>
+  <ul>
+    <li><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">Reach out to AMDA</a> — contacts at <a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">africamda.org/our-team</a>; Nairobi workshop, OBIS codes, open stack (<a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a>)</li>
+    <li><strong>OpenAMI Discord</strong> — increase Tech Comm presence on <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a>; point people to <a href="index.html#meter-study/openami">OpenAMI page</a> for stack summary</li>
+    <li id="followup-jude-ems"><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/15" target="_blank" rel="noopener">Follow up with Jude</a> — 10× EMS board deployment; confirm meters stay <strong>without PII</strong> on northbound reads (<a href="https://github.com/overview-solutions/isv-ai-wiki/issues/15" target="_blank" rel="noopener">#15</a>)</li>
+  </ul>
+  <p style="font-size:13px;color:var(--text-2);margin-bottom:0.75rem">Full board at the top of this page and in <a href="index.html#tasks">Knowledge Base · Tasks</a>. Comment and update status on <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>.</p>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="index.html#meter-study/overview">Meter Interoperability · Overview</a></li>
+    <li><a href="tech-comm-2026-05-28-metering-topology.html">28 May 2026 · Metering topology</a></li>
+    <li><a href="index.html#meter-study/openami">OpenAMI hub</a> · <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL MeshEMS</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a></li>
+  </ul>
+</div>
+<script src="js/isv-tasks.js"></script>
+<script>ISVTasks.renderMeetingPanel('tech-comm-2026-06-25');</script>
+</body>
+</html>
