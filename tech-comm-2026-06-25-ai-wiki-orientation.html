@@ -34,6 +34,7 @@ th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
 .callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
 .callout-warn strong { color: var(--amber); }
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.todo { color: var(--text-2); font-style: italic; }
 html.embed .back,
 html.embed #notes-back-btn { display: none; }
 html.embed .wrap { padding-top: 1rem; }
@@ -87,6 +88,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li><strong>OpenAMI definition (working)</strong> — <strong>OpenAMI is driving actionable energy telemetry</strong> (reads and events operators can act on) and <strong>leakage visibility at every part of the system</strong> (feeder, branch, customer). See <a href="index.html#meter-study/openami">OpenAMI page</a> and table below.</li>
     <li><strong>OpenADR</strong> — pushes <em>prices</em> to devices (pricing server / demand-response path). Useful in grid-connected DER markets; <strong>not</strong> a village-metering focus for ISV right now.</li>
     <li><strong>MeshEMS / pole power rails</strong> — voltage budget and PCB notes from Glenn; see section below. Workshop kits need explicit 5&nbsp;V paths for temp reference and SSRs.</li>
+    <li><strong>MeshEMS board distribution</strong> — recipient list started: <strong>Redwan Hussain</strong> (<a href="tel:+16463616130">+1&nbsp;646-361-6130</a>); <strong>Sean White</strong> — OpenEMS meters with Arila Barnes; NABCEP installer training. See <a href="#meshems-distribution">distribution table</a> · <a href="index.html#meter-study/meshems">MeshEMS hub</a> (upstream/downstream · technological autonomy).</li>
     <li><strong>Jude · EMS board scale-up</strong> — hoping to deploy <strong>10× EMS boards</strong> in the field. Design constraint for now: <strong>do not include PII in meters</strong> (no customer-identifying data on the meter read path today). Follow up with Jude on deployment plan and what telemetry stays anonymous vs operator-backend only.</li>
   </ul>
 
@@ -105,7 +107,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </table>
 
   <h2 id="meshems-power">MeshEMS / pole power architecture</h2>
-  <p>Working notes for <strong>MeshEMS</strong> and Street Pole EMS workshop hardware — multiple rails must be planned explicitly; 18650 cell voltage alone is not enough for every peripheral. <strong>EMS board schematic</strong> (NESL): <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">github.com/nesl-admin/nesl-meshems</a> — see repo README. Street Pole firmware: <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>.</p>
+  <p>Working notes for <strong>MeshEMS</strong> and Street Pole EMS workshop hardware — multiple rails must be planned explicitly; 18650 cell voltage alone is not enough for every peripheral. Hub: <a href="index.html#meter-study/meshems">MeshEMS board page</a>. <strong>EMS board schematic</strong> (NESL): <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">github.com/nesl-admin/nesl-meshems</a> — see repo README. Street Pole firmware: <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>.</p>
   <table class="power-table">
     <thead><tr><th>Load</th><th>Rail</th><th>Notes</th></tr></thead>
     <tbody>
@@ -122,6 +124,27 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     Manages pole power from <strong>240&nbsp;VAC (3-phase)</strong>: mini transformers, rectifier, surge diodes — produces a <strong>5&nbsp;V reference</strong> and <strong>three 9&nbsp;V references</strong>. <em>Would not recommend field use without an <strong>ETL or UL</strong>-certified board</em> (safety, isolation, and utility voltage context).
   </div>
   <p>Action for workshop BOM: specify buck/boost modules for 5&nbsp;V where cell or stack voltage does not natively match; ESP32 dev kits can derive 3.3&nbsp;V from 5&nbsp;V onboard — keep CircuitSetup 3.3&nbsp;V stack power separate from SSR / temp-reference 5&nbsp;V budget.</p>
+
+  <h2 id="meshems-distribution">MeshEMS board distribution</h2>
+  <p class="body-text">Recipients and field partners for MeshEMS / Street Pole EMS boards — shipping, deployment, and installer training. Schematic: <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL nesl-meshems</a>.</p>
+  <table class="power-table">
+    <thead><tr><th>Name</th><th>Contact</th><th>Role / notes</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Redwan Hussain</strong></td>
+        <td><a href="tel:+16463616130">+1&nbsp;646-361-6130</a></td>
+        <td>—</td>
+        <td><span class="todo">On list</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sean White</strong></td>
+        <td>—</td>
+        <td>Working with <strong>Arila Barnes</strong> (Energy IoT) on <strong>OpenEMS meters</strong>. Teaches <a href="https://www.nabcep.org/" target="_blank" rel="noopener">NABCEP</a> certified installer coursework — technician training for power / solar systems.</td>
+        <td><span class="todo">On list</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="body-text">Related: Jude · 10× EMS board field deployment (<a href="https://github.com/overview-solutions/isv-ai-wiki/issues/15" target="_blank" rel="noopener">#15</a>) — no PII on meter read path.</p>
 
   <h2>Field notes · Addis Ababa grid</h2>
   <p class="body-text">Reported from the call — context for urban / grid-connected OpenEMS work and why local distribution telemetry matters more than export marketing alone.</p>
@@ -163,7 +186,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <ul>
     <li><a href="index.html#meter-study/overview">Meter Interoperability · Overview</a></li>
     <li><a href="tech-comm-2026-05-28-metering-topology.html">28 May 2026 · Metering topology</a></li>
-    <li><a href="index.html#meter-study/openami">OpenAMI hub</a> · <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL MeshEMS</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a></li>
+    <li><a href="index.html#meter-study/openami">OpenAMI hub</a> · <a href="index.html#meter-study/meshems">MeshEMS board</a> · <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL MeshEMS</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a></li>
   </ul>
 </div>
 <script src="js/isv-tasks.js"></script>

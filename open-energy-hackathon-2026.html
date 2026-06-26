@@ -46,6 +46,15 @@ th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
 html.embed .back, html.embed #notes-back-btn { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
+.event-figure {
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  background: var(--bg-2); margin: 1rem 0 1.5rem;
+}
+.event-figure img { display: block; width: 100%; height: auto; }
+.event-figure figcaption {
+  padding: 0.75rem 1rem; font-size: 13px; color: var(--text-2);
+  line-height: 1.45; border-top: 1px solid var(--border);
+}
 @media (min-width: 768px) { .overview-cards { grid-template-columns: repeat(3, 1fr); } }
 </style>
 </head>
@@ -121,6 +130,15 @@ html.embed h1 { font-size: 20px; }
     </tbody>
   </table>
 
+  <h2>MeshEMS v2.0 hardware</h2>
+  <p>2026 builds target the <strong>NESL 865B</strong> MeshEMS board (v2.0) — successor to the <a href="open-energy-hackathon-2025.html">2025 EMS Dev Kit v1</a>. OpenAMI metering firmware, multi-tenant edge metering, and workshop field notes live on the wiki hub:</p>
+  <figure class="event-figure">
+    <a href="index.html#meter-study/meshems"><img src="assets/meshems-nesl-ems-controller-865b-diagram.png" width="1200" height="675" loading="lazy" alt="NESL EMS Controller PCB 865B — MeshEMS v2.0 board diagram"></a>
+    <figcaption>
+      <strong>MeshEMS v2.0 · NESL EMS Controller PCB 865B</strong> — <a href="index.html#meter-study/meshems">MeshEMS board hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a>
+    </figcaption>
+  </figure>
+
   <h2>Not Power Africa</h2>
   <p>ISV's <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a> (Nairobi, Sep 2026) is a separate in-person program — different venue, travel, and kit logistics.</p>
 
@@ -130,6 +148,7 @@ html.embed h1 { font-size: 20px; }
     <a href="open-energy-hackathon-2025.html">2025 hackathon summary</a>
     <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev ↗</a>
     <a href="index.html#meter-study/overview">Meter Interoperability (ISV thread)</a>
+    <a href="index.html#meter-study/meshems">MeshEMS board v2.0</a>
     <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a>
   </div>
 </div>

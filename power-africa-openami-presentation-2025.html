@@ -58,6 +58,15 @@ html.embed #notes-back-btn { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
 html.embed .slides-embed { display: none; }
+.event-figure {
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  background: var(--bg-2); margin: 1rem 0 1.5rem;
+}
+.event-figure img { display: block; width: 100%; height: auto; }
+.event-figure figcaption {
+  padding: 0.75rem 1rem; font-size: 13px; color: var(--text-2);
+  line-height: 1.45; border-top: 1px solid var(--border);
+}
 @media (min-width: 768px) { .overview-cards { grid-template-columns: repeat(3, 1fr); } }
 </style>
 </head>
@@ -160,9 +169,15 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2>Hardware highlighted</h2>
   <ul>
     <li><strong>Street Pole EMS</strong> — built at the 2025 SF Climate Week hackathon; live metering, SunSpec telemetry, leakage/temperature sensing, MQTT + JSON on ESP32-S3 (<a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>).</li>
-    <li><strong>MeshEMS</strong> — mesh-capable variant for NAN redundancy; PCB schematic on <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL nesl-meshems</a> README (work in progress).</li>
+    <li><strong>MeshEMS (v1)</strong> — first-generation EMS Dev Kit Rev 001 PCB; mesh-capable pole gateway prototype shown in Nairobi alongside OpenAMI stack narrative.</li>
     <li><strong>EnAccess MicroPowerManager (MPM)</strong> — open payments / utility management layer.</li>
   </ul>
+  <figure class="event-figure">
+    <img src="assets/meshems-ems-dev-kit-v001-2025.png" width="1200" height="675" loading="lazy" alt="EIOT.Energy EMS Dev Kit Rev 001 — board used at Power Africa OpenAMI 2025 and the 2025 Open Energy hackathon">
+    <figcaption>
+      <strong>EIOT.Energy EMS Dev Kit Rev 001 (v1)</strong> — same NESL / Energy IoT board supplied at <a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025</a> and referenced in this presentation. Current hardware is <strong>MeshEMS v2.0</strong> (NESL 865B): <a href="index.html#meter-study/meshems">MeshEMS board hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a>.
+    </figcaption>
+  </figure>
   <p>SunSpec models in the appendix: meter telemetry (Hz, per-phase V/I/P/Q, import/export Wh), harmonics, subpanel models, plus proposed bandwidth, RCM leak detection, and GPIO/door sensors — groundwork for an LF Energy OpenAMI working group.</p>
 
   <h2>Milestones at presentation time</h2>
@@ -190,6 +205,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a>
     <a href="https://github.com/energy-iot" target="_blank" rel="noopener">Energy IoT GitHub ↗</a>
     <a href="index.html#meter-study/openami">ISV OpenAMI hub</a>
+    <a href="index.html#meter-study/meshems">MeshEMS board v2.0</a>
     <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord ↗</a>
     <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI ↗</a>
   </div>
