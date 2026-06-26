@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeshEMS board · ISV Tech Comm</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.85rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 48rem; line-height: 1.5; }
+.boundary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin: 0.75rem 0 1rem;
+  max-width: 48rem;
+}
+.boundary-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.85rem;
+  background: var(--bg-2);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.boundary-card h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 0.4rem;
+  color: var(--teal);
+}
+.boundary-card ul { margin: 0; padding-left: 1.1rem; color: var(--text-2); }
+.boundary-card li { margin-bottom: 0.25rem; }
+.boundary-meter {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 0.35rem 0;
+  max-width: 48rem;
+}
+@media (max-width: 640px) {
+  .boundary-grid { grid-template-columns: 1fr; }
+}
+h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
+.callout strong { color: var(--teal); }
+.stack-table td:first-child { font-weight: 500; }
+.link-list { font-size: 13px; line-height: 1.6; margin-bottom: 1rem; }
+.link-list li { margin-bottom: 0.35rem; }
+.board-figure {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+  margin: 0 0 1.25rem;
+  max-width: 100%;
+}
+.board-figure-hero { margin-top: 0.25rem; }
+html.embed .board-figure { margin-bottom: 1rem; }
+.board-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.board-figure figcaption {
+  padding: 0.75rem 1rem;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.45;
+  border-top: 1px solid var(--border);
+}
+html.embed .back { display: none; }
+html.embed .wrap { padding-top: 0.75rem; }
+html.embed h1 { font-size: 18px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study/meshems">← Meter Interoperability</a> · <a href="index.html#meter-study/openami">OpenAMI</a></div>
+
+  <h1>MeshEMS board</h1>
+  <p class="sub">NESL · OpenAMI-aligned · multi-tenant edge metering · workshops &amp; field deployments</p>
+
+  <h2>Board diagram</h2>
+  <figure class="board-figure board-figure-hero">
+    <img src="assets/meshems-nesl-ems-controller-865b-diagram.png" width="1200" height="675" loading="eager" alt="NESL EMS Controller PCB 865B — annotated diagram with ESP32-S3, Ethernet, RS485 Modbus, TFT display, SD card, and SSR headers">
+    <figcaption>
+      <strong>NESL EMS Controller PCB 865B</strong> — basic board diagram (Rev 001). ESP32-S3; HanRun Ethernet; HW-519 RS485 (master Modbus/RTU); 128×128 TFT (SPI); SD card; onboard SSR headers; ext 5&nbsp;V / 3.3&nbsp;V inputs; GPS and door-switch I/O. From <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">energy-iot/meshems-openami-metering</a> · <a href="https://www.newenergysolutionslab.com/" target="_blank" rel="noopener">NewEnergySolutionsLab.com</a>.
+    </figcaption>
+  </figure>
+
+  <p class="lead">The <strong>MeshEMS board</strong> is an ESP32-based EMS PCB <strong>designed by NESL</strong> in alignment with <strong><a href="index.html#meter-study/openami">OpenAMI</a></strong> — mesh-capable neighborhood-area networking for DCU backhaul when pole-to-pole RF redundancy is needed. Current OpenAMI metering firmware targets the <strong>NESL 865B</strong> board: <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a>.</p>
+
+  <div class="callout">
+    <strong>OpenAMI alignment</strong>
+    Board layout and I/O support OpenAMI field deployments: Modbus RTU meters (DDS238, CHD130, DDSU666) or CircuitSetup ATM90E32 6-channel SPI metering, MQTT northbound telemetry, and SSR load control. Schematic: <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> · application firmware: <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a>.
+  </div>
+
+  <h2 id="why-this-board">Why this board exists</h2>
+  <p class="lead">The MeshEMS dev kit is a <strong>multi-tenant edge metering system</strong> — one pole gateway that can serve several customer circuits (~6 homes or loads) while staying honest about what belongs on each side of the meter. It is used across <strong>workshops, hackathons, and field deployments</strong> (including the <a href="power-africa-2026-workshop-planning.html">Power Africa 2026 workshop</a>, Open Energy hackathons, and operator pilots such as Jude’s 10× EMS scale-up). The board is not only hardware; it is a <strong>learning exercise</strong> in working with real off-the-shelf power electronics and energy metering gear, documented in the open so communities can reuse the lessons.</p>
+  <p class="body-text">Goal: help small communities develop <strong>technological autonomy early</strong> — especially during periods of rapid load growth — by curating clear understanding of the metering ecosystem, sharing how systems connect, and building cohesion across vendors and open stacks instead of locking operators into one proprietary AMI bundle.</p>
+
+  <h2 id="upstream-downstream">Upstream · meter · downstream</h2>
+  <p class="body-text">A practical first step is to <strong>clarify and isolate</strong> knowledge on each side of the revenue meter. MeshEMS sits at that boundary and makes interoperability visible — what the DCU must speak upstream versus what each customer circuit needs downstream.</p>
+  <div class="boundary-grid">
+    <div class="boundary-card">
+      <h3>Upstream of the meter</h3>
+      <ul>
+        <li>DCUs and pole gateways</li>
+        <li>Utility / feeder systems</li>
+        <li>Head-end, vending, operator backends</li>
+        <li>Northbound MQTT · geo asset model</li>
+      </ul>
+    </div>
+    <div class="boundary-card">
+      <h3>Downstream of the meter</h3>
+      <ul>
+        <li>Multiple homes and customer circuits (~6 per board)</li>
+        <li>Per-tenant reads, credit, disconnect</li>
+        <li>Branch loads, anchor tenants, theft visibility</li>
+        <li>Off-the-shelf meters and SSR control</li>
+      </ul>
+    </div>
+  </div>
+  <p class="boundary-meter">← revenue meter / gateway normalization →</p>
+  <p class="body-text">Workshop and field kits exercise both sides: southbound OEM and Modbus paths into the board, northbound registers operators can bill on. Documenting that split — in hardware, firmware, and wiki — is how ISV helps operators and integrators find where systems actually meet.</p>
+
+  <h2 id="ecosystem-cohesion">OpenAMI · OBIS · building in the open</h2>
+  <p class="body-text"><strong><a href="index.html#meter-study/openami">OpenAMI</a></strong> is the collaborative stack MeshEMS aligns with — actionable telemetry, leakage at feeder → branch → customer, vendor-agnostic gateways. <strong><a href="index.html#meter-study/vmrs">OBIS · VMRS</a></strong> gives shared register semantics on the northbound path so the same JSON contract works across meter brands. MeshEMS is one concrete place those abstractions meet physical wiring.</p>
+  <p class="body-text">ISV’s role: continue to <strong>curate understanding</strong> of this ecosystem — workshop notes, gap matrices, board diagrams, distribution lists — and work in alignment with EnAccess, Energy IoT, NESL, and field operators so cohesion grows from shared practice, not from a single vendor’s closed stack.</p>
+
+  <h2>Role in the stack</h2>
+  <table class="stack-table">
+    <thead><tr><th>Layer</th><th>MeshEMS</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Southbound</strong></td><td>DLMS / OEM meter interfaces via gateway firmware; pairs with CircuitSetup and other bench/field meter boards.</td></tr>
+      <tr><td><strong>Edge</strong></td><td>ESP32 EMS — mesh NAN between DCUs; optional when a single Street Pole gateway is not enough for feeder coverage.</td></tr>
+      <tr><td><strong>Northbound</strong></td><td>MQTT / JSON registers aligned to <a href="index.html#meter-study/vmrs">OBIS · VMRS</a> — same OpenAMI contract as EnAccess MPM and operator backends.</td></tr>
+      <tr><td><strong>Firmware</strong></td><td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> (865B · OpenAMI) · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a> (Street Pole EMS)</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="events-deployments">Events &amp; deployments</h2>
+  <p class="body-text">MeshEMS is a shared platform — not built for a single conference. Scheduled and in-flight uses include:</p>
+  <ul class="link-list">
+    <li><a href="power-africa-2026-workshop-planning.html">Power Africa 2026 workshop</a> · <a href="open-energy-hackathon-2026.html">Open Energy Hackathon 2026</a> — <strong>v2.0</strong> (NESL 865B) kits</li>
+    <li><a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025</a> · <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI 2025</a> — <strong>v1</strong> EMS Dev Kit Rev 001 (board photos on those event pages)</li>
+    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">Board distribution</a> — field partners (Redwan Hussain, Sean White / NABCEP, OpenEMS with Arila Barnes)</li>
+    <li><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/15" target="_blank" rel="noopener">Jude · 10× EMS deployment</a> — REIc / operator pilot track</li>
+    <li><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> — Nearly Free Energy Uganda site-layout lab (dashboard + GeoJSON)</li>
+  </ul>
+
+  <h2>MeshEMS vs Street Pole EMS</h2>
+  <p class="body-text"><strong>Street Pole EMS</strong> — single-pole ESP32 gateway prototyped at the 2025 Open Energy Hackathon; live metering, SunSpec telemetry, MQTT northbound.</p>
+  <p class="body-text"><strong>MeshEMS</strong> — NESL PCB variant with <strong>mesh backhaul</strong> so multiple DCUs can form a neighborhood-area network when line-of-sight or single-hop RF is insufficient. Use when the OpenAMI deployment needs redundant pole-to-pole links, not when a standalone pole gateway is enough.</p>
+
+  <h2>Power rails (workshop)</h2>
+  <p class="body-text">Multiple supplies must be planned on the bench and in the field — 5&nbsp;V for temperature reference and SSRs; 3.3&nbsp;V for CircuitSetup stack logic; buck/boost from 18650 packs as needed. Full rail table: <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 notes · MeshEMS power architecture</a>.</p>
+
+  <h2>Board distribution</h2>
+  <p class="body-text">Recipient list for field units and installer partners: <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">MeshEMS board distribution</a> (Redwan Hussain, Sean White / NABCEP · OpenEMS with Arila Barnes, and related Jude deployment track).</p>
+
+  <h2>ISV wiki threads</h2>
+  <ul class="link-list">
+    <li><a href="index.html#meter-study/openami">OpenAMI hub</a></li>
+    <li><a href="index.html#meter-study/overview">Meter Interoperability · Overview</a></li>
+    <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a></li>
+    <li><a href="power-africa-2026-workshop-planning.html">Power Africa 2026 workshop planning</a></li>
+    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 · power rails</a> · <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">distribution</a></li>
+  </ul>
+
+  <h2>External links</h2>
+  <ul class="link-list">
+    <li><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">Energy IoT · meshems-openami-metering</a> — OpenAMI metering app for NESL 865B</li>
+    <li><a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL · nesl-meshems</a> — schematic on README</li>
+    <li><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">Energy IoT · ems-dev</a> — Street Pole EMS firmware</li>
+    <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a></li>
+    <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a></li>
+  </ul>
+</div>
+</body>
+</html>

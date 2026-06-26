@@ -15,7 +15,8 @@
     'problems-today': 'meter-problems-today.html',
     vmrs: 'meter-vmrs.html',
     'vendor-study': 'meter-vendor-study.html',
-    openami: 'openami.html'
+    openami: 'openami.html',
+    meshems: 'meshems.html'
   };
 
   var ID_BY_FILE = Object.keys(PAGE_BY_ID).reduce(function (acc, id) {
@@ -61,7 +62,7 @@
       return;
     }
 
-    var fileMatch = href.match(/^([^?#]*(?:meter-[\w-]+|openami)\.html)(?:[?#].*)?$/);
+    var fileMatch = href.match(/^([^?#]*(?:meter-[\w-]+|openami|meshems)\.html)(?:[?#].*)?$/);
     if (fileMatch) {
       var file = fileMatch[1].replace(/^\.\//, '');
       var base = file.split('/').pop();

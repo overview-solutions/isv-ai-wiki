@@ -1390,6 +1390,7 @@ code {
       <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">OBIS · VMRS</div>
       <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor Study</div>
       <div class="nav-sub-item" data-meter-page="openami" onclick="showMeterPage('openami')">OpenAMI</div>
+      <div class="nav-sub-item" data-meter-page="meshems" onclick="showMeterPage('meshems')">MeshEMS board</div>
     </div>
     <div class="nav-item" data-section="notes" onclick="showSection('notes')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -1813,7 +1814,7 @@ code {
         <div class="standard-icon">📡</div>
         <div>
           <div class="resource-name">MeshEMS board — NESL</div>
-          <div class="resource-desc"><a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> — ESP32-based EMS PCB; schematic on README. Pairs with <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> (Street Pole firmware). Power rails: <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun meeting notes</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showMeterPage('meshems');return false">Open in Meter Interoperability</a> · NESL PCB aligned with OpenAMI · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> · pairs with <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a>. Power rails: <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun meeting notes</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2134,7 +2135,7 @@ const METER_BENCHMARK_PAGES = {
   },
   'vmrs': {
     title: 'OBIS · VMRS',
-    sub: 'Register tiers · northbound JSON appendix',
+    sub: 'Village Minimum Register Set · OBIS tiers · northbound JSON',
     src: 'meter-vmrs.html?embed=1',
     standalone: 'meter-vmrs.html'
   },
@@ -2149,6 +2150,12 @@ const METER_BENCHMARK_PAGES = {
     sub: 'Actionable telemetry · leakage visibility · stack · Discord',
     src: 'openami.html?embed=1',
     standalone: 'openami.html'
+  },
+  'meshems': {
+    title: 'MeshEMS board',
+    sub: 'Multi-tenant edge metering · workshops & deployments · OpenAMI',
+    src: 'meshems.html?embed=1',
+    standalone: 'meshems.html'
   }
 };
 let activeMeterPageId = 'overview';

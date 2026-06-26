@@ -19,7 +19,8 @@ a { color: var(--green); }
 h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 .sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
 h2 { font-size: 14px; font-weight: 500; margin: 1rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
-.lead { font-size: 14px; margin-bottom: 0.75rem; line-height: 1.5; }
+.lead { font-size: 14px; margin-bottom: 0.75rem; line-height: 1.5; max-width: 48rem; }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.75rem; font-size: 12px; }
 .callout strong { color: var(--teal); }
 .callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
@@ -57,14 +58,18 @@ html.embed .back { display: none; }
   <div class="back"><a href="index.html#meter-study/vmrs">← Meter Interoperability</a></div>
 
   <h1>OBIS · VMRS</h1>
-  <p class="sub">v0.1-draft · Jun 2026 · <span class="tag-draft">NOT a published standard</span></p>
+  <p class="sub">Village Minimum Register Set · v0.1-draft · Jun 2026 · <span class="tag-draft">NOT a published standard</span></p>
+
+  <p class="lead"><strong>OBIS</strong> (Object Identification System) is how the metering industry names registers — e.g. <code>1.8.0</code> always means cumulative active import energy (kWh). DLMS meters implement OBIS codes internally; vendors disagree on <em>which</em> codes they expose and how, not on what the codes mean.</p>
+  <p class="lead"><strong>VMRS</strong> — the <strong>Village Minimum Register Set</strong> — is ISV’s draft shortlist of the OBIS keys a village feeder actually needs: import kWh, remaining credit, tamper, disconnect state, clock, and a handful of metrology reads. It is the register appendix for northbound JSON/MQTT at the gateway — roughly ten keys instead of a utility-scale COSEM ICD or MDMS profile. Operators cite VMRS in procurement; integrators map vendor ICDs to the same checklist; gateways publish a VMRS-shaped payload so one HES or MPM integration survives meter OEM changes.</p>
+  <p class="body-text">Machine-readable source: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a> · transport contract: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>.</p>
 
   <div class="callout callout-warn">
     <strong>Before citing in an RFP</strong>
-    VMRS is an ISV working checklist — not IEC/DLMS UA/STS. Primary artifact: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. VMRS appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>. Validate tier&nbsp;B against vendor <strong>ICD</strong> (Interface Class Description).
+    VMRS is an ISV working checklist — not IEC, DLMS UA, or STS. Validate tier&nbsp;B registers against each vendor’s <strong>ICD</strong> (Interface Class Description); tier&nbsp;A OBIS codes are IEC-standard but still need a confirmed read path on the model you buy.
   </div>
 
-  <p class="lead">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has.</p>
+  <p class="body-text">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has, plus tier&nbsp;B prepaid and control registers that vary by vendor.</p>
 
   <div class="tier-row">
     <div class="tier-cell"><strong class="cert-a">Tier A · IEC OBIS</strong><code>1.8.0</code>, <code>32.7.0</code>, etc. Universal — cite in JSON, don’t reinvent.</div>
@@ -103,7 +108,7 @@ html.embed .back { display: none; }
       <div><dt>MDMS</dt><dd>Utility meter data management (L7)</dd></div>
       <div><dt>OBIS</dt><dd>Register semantics (e.g. <code>1.8.0</code> = import kWh)</dd></div>
       <div><dt>STS</dt><dd>Prepaid token scheme (L6/L3) — not a wire protocol</dd></div>
-      <div><dt>VMRS</dt><dd>ISV draft register checklist for northbound JSON</dd></div>
+      <div><dt>VMRS</dt><dd>Village Minimum Register Set — ISV draft ~10 OBIS keys for village northbound JSON (billing, prepaid, tamper, disconnect)</dd></div>
     </dl>
   </details>
 
