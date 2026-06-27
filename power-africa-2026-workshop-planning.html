@@ -70,6 +70,13 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .hero-overview .callout { margin-bottom: 0; }
 .callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
 .callout strong { display: block; margin-bottom: 0.25rem; color: var(--amber); }
+.callout-teal { border-left-color: var(--teal); background: var(--teal-50); }
+.callout-teal strong { color: var(--teal); }
+.callout-pitch { border-left-color: var(--green); background: var(--green-50); }
+.callout-pitch strong { color: var(--green); }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 0.65rem; }
+.phase { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.65rem; background: var(--bg-2); font-size: 13px; }
+.phase strong { color: var(--teal); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; color: var(--text); }
 p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
@@ -132,8 +139,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 </div>
 <div class="wrap">
   <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
-  <h1>Workshop planning</h1>
-  <p class="sub">2026 IEEE PES &amp; IAS PowerAfrica Conference · Nairobi, Kenya · 21–25 Sep 2026 · Glenn Algie &amp; Mike Wilson · <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a></p>
+  <h1>Street-EMS workshop · Power Africa 2026</h1>
+  <p class="sub">IEEE ISV hands-on track · Nairobi, Kenya · 21–25 Sep 2026 · Primary organizer: Glenn Algie · Mike Wilson · <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a></p>
 
   <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/power-africa-2026-workshop-planning" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
 
@@ -143,28 +150,32 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <div class="hero-overview">
       <div class="overview-cards">
         <div class="overview-card">
-          <div class="overview-val">20</div>
-          <div class="overview-title">Hands-on kits</div>
-          <div class="overview-detail">On hand for workshop use — not for sale</div>
+          <div class="overview-val">15–20</div>
+          <div class="overview-title">EMS PCBs take-home</div>
+          <div class="overview-detail">Working Street-EMS controller for first workshop attendees</div>
         </div>
         <div class="overview-card">
-          <div class="overview-val">3</div>
-          <div class="overview-title">Cabinets</div>
-          <div class="overview-detail">To ship and set up in the workshop room</div>
+          <div class="overview-val">3–5</div>
+          <div class="overview-title">Reference cabinets</div>
+          <div class="overview-detail">Multi-tenant single &amp; 3φ cabinets (&lt;25&nbsp;lb) — built, donated for take-home</div>
         </div>
         <div class="overview-card">
           <div class="overview-val">8h</div>
-          <div class="overview-title">Workshop time</div>
-          <div class="overview-detail">MAKE · CODE · INTEGRATE — Mon AM (4h), Tue eve (2h), Sat AM (2h)</div>
+          <div class="overview-title">Make · Code · Integrate</div>
+          <div class="overview-detail">Mon AM (4h) · Tue eve (2h) · Sat AM (2h) — mentoring-based</div>
         </div>
       </div>
-      <div class="callout">
-        <strong>Main goal</strong>
-        Formalize workshop sessions — define structure, budget, room layout, and materials so the conference hands-on track is ready to run. Kits are for workshop use only; not trying to sell them.
+      <div class="callout callout-pitch">
+        <strong>What workshop attendees get</strong>
+        Hands-on build of a <strong>Street-EMS</strong> controller on the <a href="index.html#meter-study/meshems">MeshEMS v2.0</a> platform; integration into a three-phase Street-EMS reference cabinet (DIN-rail breakers, contactor, multi-tenant metering); coding labs against open and commercial backends; and a practical <strong>decision matrix</strong> for aggregation trade-offs. First <strong>15–20</strong> participants take home a working EMS PCB; <strong>3–5</strong> lightweight reference cabinets (&lt;25&nbsp;lb) are built and donated for take-home as well. Register for the conference <strong>day rate</strong> on the session day you attend — <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a>.
       </div>
-      <div class="callout" style="border-left-color:var(--teal);background:var(--teal-50)">
-        <strong style="color:var(--teal)">How to participate</strong>
-        Groups that want to join a workshop session should register for the conference <strong>day rate</strong> for the day they plan to attend — no separate workshop fee. Register via <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a> / conference registration.
+      <div class="callout callout-teal">
+        <strong>How to participate</strong>
+        Groups joining a workshop session register for the conference <strong>day rate</strong> for the day they plan to attend — no separate workshop fee.
+      </div>
+      <div class="callout">
+        <strong>Organizer planning note</strong>
+        Internal checklist below — budget, room layout, shipping, materials — so the hands-on track is ready to run.
       </div>
     </div>
 
@@ -174,17 +185,67 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </figure>
   </div>
 
+  <h2 id="workshop-vision">Workshop vision</h2>
+  <p>To bring a fresh perspective beyond previous cloud-centric hackathons — and in the spirit of <strong>IEEE Smart Village</strong> technology workshops — this IEEE ISV track anchors on the open-source <strong>Street-EMS</strong> platform (<a href="index.html#meter-study/meshems">MeshEMS v2.0</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a>).</p>
+  <p>Unlike past hackathons, the workshop introduces <strong>business-case sensitivity alongside engineering</strong>. Participants explore both open and commercial aggregation and backend architectures supported by Street-EMS, including:</p>
+  <ul>
+    <li><strong>DLMS / COSEM</strong> — utility-grade meter semantics southbound</li>
+    <li><strong><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess</a></strong> — multi-tenant REST API / OpenAMI operator stack</li>
+    <li><strong><a href="https://github.com/OpenEMS/openems" target="_blank" rel="noopener">OpenEMS</a></strong> — rapidly maturing open-source aggregation and energy management framework</li>
+  </ul>
+  <p class="body-text">Audience: <strong>in-country engineers</strong> developing village electrification and community minigrid solutions. Format: mentoring-based <strong>Make · Code · Integrate</strong> — three sessions across the conference week.</p>
+  <p class="body-text">In keeping with the IEEE ISV mission, <strong>solution architecture cost sensitivity</strong> is a first-class design criterion — scoped to what operators can actually deploy, operate, and sustain in-country.</p>
+
+  <h2>Make · Code · Integrate</h2>
+  <div class="phase"><strong>MAKE — Monday morning (4&nbsp;hr)</strong> Build a Street-EMS controller; integrate it into a <strong>three-phase Street-EMS reference cabinet</strong> with DIN-rail breakers, contactor, and multi-tenant metering options (single-phase and three-phase cabinet variants).</div>
+  <div class="phase"><strong>CODE — Tuesday evening (2&nbsp;hr)</strong> Code-challenge portions: network Street-EMS with alternative <strong>cloud and cloudless</strong> backend architectures — EnAccess MPM, OpenEMS paths, DLMS/COSEM integration labs.</div>
+  <div class="phase"><strong>INTEGRATE — Saturday morning (2&nbsp;hr)</strong> Evaluate, discuss, and build out a <strong>decision matrix</strong> — technical and commercial trade-offs of each aggregation approach (deployment cost, scalability, sovereignty, communications requirements, lifecycle sustainability).</div>
+
+  <h2>Cloudless · sovereign architecture option</h2>
+  <p>The workshop introduces a truly <strong>cloudless, sovereign village electrification</strong> path as an evolution of Street-EMS — embedded <strong>LV feeder distributed intelligence</strong>:</p>
+  <ul>
+    <li><strong>Measure everywhere</strong> — actionable telemetry at feeder, branch, and customer</li>
+    <li><strong>Policy-based, telecom-like session admission</strong> — asset transfer and peer-to-peer control-plane options</li>
+    <li><strong>Transmit only actionable telemetry</strong> — not utility-scale archive dumps</li>
+    <li>Street-EMS intelligence at the <strong>LV feeder</strong> — shifting the LV feeder from the traditional “last kilometre” to the <strong>first kilometre</strong> of community-owned, villager-empowered, resilient electrification</li>
+  </ul>
+  <p class="body-text">Connects to ISV <a href="index.html#meter-study/openami">OpenAMI</a> and <a href="index.html#meter-study/vmrs">OBIS · VMRS</a> northbound normalization threads.</p>
+
+  <h2>Trade · logistics · in-country manufacturing</h2>
+  <p class="body-text">The workshop also covers value-added impact of recent <strong>cross-Africa multi-country free trade agreement</strong> (AfCFTA) opportunities for in-country startups — awareness and proper use of <strong>Harmonized System (HS) codes</strong> for module and PCB import, local assembly, test, programming, repair, and export.</p>
+
   <h2>Session schedule</h2>
-  <p>Three hands-on blocks follow a <strong>MAKE → CODE → INTEGRATE</strong> arc across the conference week.</p>
+  <p>Three hands-on blocks — mentoring format, in-country engineers, village electrification and community minigrid focus.</p>
   <table>
     <thead><tr><th>When</th><th>Duration</th><th>Theme</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td>Monday morning (pre-session)</td><td>30 min</td><td>—</td><td>Warren Scott, SteamaCo — before workshop starts</td></tr>
-      <tr><td><strong>Monday morning</strong></td><td><strong>4 hr</strong></td><td><strong>MAKE</strong></td><td>First workshop block — build / assemble kits and hardware</td></tr>
-      <tr><td><strong>Tuesday evening</strong></td><td><strong>2 hr</strong></td><td><strong>CODE</strong></td><td>Firmware, MQTT/northbound lab — <span class="todo">Sandra / 10 Power video (5–10 min) slot TBD</span></td></tr>
-      <tr><td><strong>Saturday morning</strong></td><td><strong>2 hr</strong></td><td><strong>INTEGRATE</strong></td><td>Final block — wire stack together, northbound path, end-to-end lab</td></tr>
+      <tr><td>Monday morning (pre-session)</td><td>30 min</td><td>—</td><td>Warren Scott, SteamaCo — commercial aggregation context before MAKE</td></tr>
+      <tr><td><strong>Monday morning</strong></td><td><strong>4 hr</strong></td><td><strong>MAKE</strong></td><td>Street-EMS controller build · 3φ reference cabinet · DIN rail · contactor · multi-tenant metering variants</td></tr>
+      <tr><td><strong>Tuesday evening</strong></td><td><strong>2 hr</strong></td><td><strong>CODE</strong></td><td>Network Street-EMS to cloud / cloudless backends · EnAccess · OpenEMS · DLMS paths · <span class="todo">Sandra / 10 Power video (5–10 min) TBD</span></td></tr>
+      <tr><td><strong>Saturday morning</strong></td><td><strong>2 hr</strong></td><td><strong>INTEGRATE</strong></td><td>Decision matrix — cost, scalability, sovereignty, comms, lifecycle · end-to-end lab wrap</td></tr>
     </tbody>
   </table>
+
+  <h2>Aggregation paths (working)</h2>
+  <table>
+    <thead><tr><th>Path</th><th>Role</th><th>Workshop use</th></tr></thead>
+    <tbody>
+      <tr><td><strong>DLMS / COSEM</strong></td><td>Southbound meter protocol</td><td>Vendor meter integration at the cabinet edge</td></tr>
+      <tr><td><strong>EnAccess · OpenAMI</strong></td><td>Multi-tenant REST / operator backend</td><td>Cloud aggregation · MPM · field-validated open stack</td></tr>
+      <tr><td><strong>OpenEMS</strong></td><td>Open aggregation &amp; EMS</td><td>Rapidly maturing framework for edge orchestration and backend options</td></tr>
+      <tr><td><strong>Cloudless / sovereign</strong></td><td>LV feeder intelligence</td><td>Session admission · P2P control plane · actionable telemetry only · no mandatory cloud</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Decision matrix criteria</h2>
+  <p>INTEGRATE session drafts a practical matrix comparing aggregation approaches on:</p>
+  <ul>
+    <li><strong>Deployment cost</strong> — capex and in-country assembly</li>
+    <li><strong>Scalability</strong> — feeder growth and multi-tenant expansion</li>
+    <li><strong>Sovereignty</strong> — data residency and operator control</li>
+    <li><strong>Communications requirements</strong> — always-on cloud vs periodic sync vs offline-first</li>
+    <li><strong>Lifecycle sustainability</strong> — repair, HS import/export, local programming and test</li>
+  </ul>
 
   <h2>Guests &amp; featured content</h2>
   <table>
@@ -198,8 +259,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </tbody>
   </table>
 
-  <h2>Workshop session summary</h2>
-  <p>The PowerAfrica hands-on track is structured in three sessions: <strong>MAKE</strong> (Monday morning, 4&nbsp;hours) — assemble pole-gateway kits and bench hardware; <strong>CODE</strong> (Tuesday evening, 2&nbsp;hours) — firmware, MQTT/northbound profiles, and lab exercises on the built gear; <strong>INTEGRATE</strong> (Saturday morning, 2&nbsp;hours) — connect meters, gateway, and operator-facing stack into an end-to-end village metering path. Workshop kits use <strong>MeshEMS v2.0</strong> (NESL 865B) — see <a href="index.html#meter-study/meshems">MeshEMS board hub</a>. Prior generation (v1) was used at <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI 2025</a> and <a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025</a>.</p>
+  <h2>Street-EMS hardware · MeshEMS v2.0</h2>
+  <p class="body-text">Workshop kits use the <strong>NESL 865B</strong> Street-EMS / MeshEMS v2.0 controller. Prior generation (v1) was used at <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI 2025</a> and <a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025</a>. Hub: <a href="index.html#meter-study/meshems">MeshEMS board</a>.</p>
 
   <figure class="conference-poster">
     <a href="index.html#meter-study/meshems"><img src="assets/meshems-nesl-ems-controller-865b-diagram.png" alt="NESL EMS Controller PCB 865B — MeshEMS v2.0 workshop kit"></a>
@@ -210,13 +271,15 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h2>Planning checklist</h2>
   <ul>
-    <li><strong>Kits</strong> — have enough for 20; workshop use only, not for sale</li>
-    <li><strong>Cabinets</strong> — 3 cabinets to ship / set up in the room</li>
-    <li><strong>Budget</strong> — determine total cost including duties, shipping, and kit procurement (under $1,000 target)</li>
-    <li><strong>Room arrangement</strong> — how should the workshop space be laid out for hands-on work?</li>
-    <li><strong>Materials</strong> — what needs to be prepped before the conference? Power: 5&nbsp;V for MeshEMS temp reference + SSRs (buck/boost from 18650); CircuitSetup on 3.3&nbsp;V; see <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun notes · pole power rails</a></li>
+    <li><strong>EMS PCBs</strong> — 15–20 take-home units for first workshop attendees; enough bench stock for room builds</li>
+    <li><strong>Reference cabinets</strong> — 3–5 multi-tenant single &amp; 3φ Street-EMS cabinets (&lt;25&nbsp;lb each) to build, ship, and donate for take-home</li>
+    <li><strong>Budget</strong> — total cost including duties, shipping, HS-coded import, and kit procurement (under $1,000 target for consumables TBD)</li>
+    <li><strong>Room arrangement</strong> — bench layout for cabinet assembly, metering variants, and mentoring stations</li>
+    <li><strong>Materials</strong> — DIN rail, breakers, contactors, metering options per cabinet variant; power: 5&nbsp;V for MeshEMS temp reference + SSRs (buck/boost from 18650); CircuitSetup on 3.3&nbsp;V; see <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun notes · pole power rails</a></li>
+    <li><strong>HS codes &amp; AfCFTA</strong> — briefing materials for module/PCB import, local assembly, test, programming, repair, export</li>
+    <li><strong>Decision matrix template</strong> — draft worksheet for INTEGRATE session (cost · scale · sovereignty · comms · lifecycle)</li>
     <li><strong>Shipping address</strong> — get delivery address from Albert in Nairobi</li>
-    <li><strong>Registration</strong> — groups joining a workshop session register for the conference <strong>day rate</strong> on the day they attend (MAKE Mon, CODE Tue eve, INTEGRATE Sat)</li>
+    <li><strong>Registration</strong> — day rate on session day (MAKE Mon, CODE Tue eve, INTEGRATE Sat)</li>
     <li><strong>Non-ISV participants</strong> — same day-rate registration; confirm each attendee is registered for the session date they plan to join</li>
   </ul>
 
