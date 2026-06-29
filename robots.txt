@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+# Content Signals (https://contentsignals.org/, IETF draft-romm-aipref-contentsignals)
+# Open volunteer IEEE Smart Village knowledge base, MIT-licensed.
+# search   = yes : index us so people and agents can find the wiki
+# ai-input = yes : agents may read pages to answer live questions / RAG
+# ai-train = yes : model makers may train on this content
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 Sitemap: https://isv.wiki/sitemap.xml

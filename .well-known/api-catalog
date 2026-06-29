@@ -1,0 +1,36 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://isv.wiki/",
+      "service-doc": [
+        {
+          "href": "https://isv.wiki/AGENTS.md",
+          "type": "text/markdown",
+          "title": "AGENTS.md — AI navigation guide: trust hierarchy, file map, contributor rules"
+        },
+        {
+          "href": "https://isv.wiki/llms.txt",
+          "type": "text/markdown",
+          "title": "llms.txt — concise agent index of the knowledge base"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://isv.wiki/technical-notes/catalog.json",
+          "type": "application/json",
+          "title": "Technical reports catalog — report index with provenance"
+        },
+        {
+          "href": "https://isv.wiki/meter-benchmark/vmrs-registers.json",
+          "type": "application/json",
+          "title": "Village Minimum Register Set (VMRS) v0.1 — OBIS register shortlist"
+        },
+        {
+          "href": "https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json",
+          "type": "application/json",
+          "title": "OpenAMI village meter northbound JSON/MQTT interface profile v0.1"
+        }
+      ]
+    }
+  ]
+}
