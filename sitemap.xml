@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://isv.wiki/</loc></url>
+  <url><loc>https://isv.wiki/AGENTS.md</loc></url>
+  <url><loc>https://isv.wiki/llms.txt</loc></url>
+  <url><loc>https://isv.wiki/meter-vendor-study.html</loc></url>
+  <url><loc>https://isv.wiki/meter-overview.html</loc></url>
+  <url><loc>https://isv.wiki/meshems.html</loc></url>
+  <url><loc>https://isv.wiki/technical-notes/catalog.json</loc></url>
+  <url><loc>https://isv.wiki/meter-benchmark/vmrs-registers.json</loc></url>
+  <url><loc>https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json</loc></url>
+  <url><loc>https://isv.wiki/tech-comm-2026-06-25-ai-wiki-orientation.html</loc></url>
+  <url><loc>https://isv.wiki/tech-comm-2026-05-28-metering-topology.html</loc></url>
+</urlset>

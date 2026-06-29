@@ -51,6 +51,20 @@
     return tasksBasePath() + m.standalone;
   }
 
+  function wikiSiteRoot() {
+    if (/isv\.wiki$/i.test(location.hostname)) return 'https://isv.wiki';
+    if (location.pathname.indexOf('/isv-ai-wiki') === 0) {
+      return location.origin + '/isv-ai-wiki';
+    }
+    return location.origin;
+  }
+
+  function deployedWikiHref(hashPath) {
+    hashPath = hashPath || 'index.html';
+    if (location.protocol === 'file:') return wikiSiteRoot() + '/' + hashPath.replace(/^\//, '');
+    return wikiSiteRoot() + '/' + hashPath.replace(/^\//, '');
+  }
+
   function wikiTasksHref(queryString) {
     var qs = queryString || '';
     if (qs && qs.charAt(0) !== '?') qs = '?' + qs;
@@ -165,7 +179,7 @@
       '<strong>Tasks need a web server — not <code>file://</code></strong>' +
       '<p style="margin:0.5rem 0 0;font-size:13px;line-height:1.55">Opening <code>index.html</code> directly in the browser blocks <code>fetch</code> (CORS). The Tasks page cannot load <code>tasks/config.json</code> or the GitHub API that way.</p>' +
       '<p style="margin:0.75rem 0 0;font-size:13px;line-height:1.55"><strong>Local:</strong> run <code>./preview.sh</code> in this repo, then open <a href="http://localhost:8765/index.html#tasks">http://localhost:8765/index.html#tasks</a>.</p>' +
-      '<p style="margin:0.5rem 0 0;font-size:13px;line-height:1.55"><strong>Deployed:</strong> <a href="https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks" target="_blank" rel="noopener">overview-solutions.github.io/isv-ai-wiki</a> · or manage issues on <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub ↗</a>.</p>' +
+      '<p style="margin:0.5rem 0 0;font-size:13px;line-height:1.55"><strong>Deployed:</strong> <a href="' + escapeHtml(deployedWikiHref('index.html#tasks')) + '" target="_blank" rel="noopener">' + escapeHtml(wikiSiteRoot()) + '</a> · or manage issues on <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub ↗</a>.</p>' +
     '</div>';
   }
 
@@ -337,12 +351,19 @@
     if (isFileProtocol()) {
       el.innerHTML =
         '<div class="follow-ups-panel">' +
-          '<div class="follow-ups-foot">Follow-ups load from GitHub when served over HTTP. Run <code>./preview.sh</code> or use the <a href="https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks" target="_blank" rel="noopener">deployed wiki</a>.</div>' +
+          '<div class="follow-ups-foot">Follow-ups load from GitHub when served over HTTP. Run <code>./preview.sh</code> or use the <a href="' + escapeHtml(deployedWikiHref('index.html#tasks')) + '" target="_blank" rel="noopener">deployed wiki</a>.</div>' +
         '</div>';
       return;
     }
     loadTasks().then(function (data) {
       var config = data.config;
+      if (data.error) {
+        el.innerHTML =
+          '<div class="follow-ups-panel">' +
+            renderErrorBanner(data) +
+          '</div>';
+        return;
+      }
       var tasks = tasksForMeeting(data, meetingId);
       if (!tasks.length && !data.error) {
         var label = meetingLabelForId(config, meetingId);
@@ -356,10 +377,7 @@
           '</div>';
         return;
       }
-      if (!tasks.length) {
-        el.innerHTML = '';
-        return;
-      }
+      if (!tasks.length) return;
       var stats = completionStats(tasks);
       var meeting = config.meetings && config.meetings[meetingId];
       var sorted = tasks.slice().sort(function (a, b) {

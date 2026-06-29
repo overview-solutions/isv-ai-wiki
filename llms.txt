@@ -1,0 +1,16 @@
+# ISV Knowledge Base
+
+> Volunteer IEEE Smart Village Technology Committee knowledge base — metering interoperability, meeting notes, technical reports, and open AMI/MQTT profiles. Not an official IEEE website; program site: https://smartvillage.ieee.org/
+
+## Docs
+
+- [AGENTS.md](https://isv.wiki/AGENTS.md): Navigation guide for AI assistants — trust hierarchy, file map, contributor rules
+- [Meter vendor study](https://isv.wiki/meter-vendor-study.html): Cited vendor benchmark for village mini-grid metering
+- [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
+- [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
+- [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
+- [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents
+
+## Optional
+
+- [GitHub source](https://github.com/overview-solutions/isv-ai-wiki): MIT-licensed repo; push to `main` deploys the site

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://isv.wiki/sitemap.xml

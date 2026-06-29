@@ -1,6 +1,6 @@
 # AGENTS.md — Navigation guide for AI assistants
 
-This file is the **machine-oriented map** for the [ISV Knowledge Base](https://overview-solutions.github.io/isv-ai-wiki). Humans can read it too; [`README.md`](README.md) covers clone, preview, and deploy.
+This file is the **machine-oriented map** for the [ISV Knowledge Base](https://isv.wiki/). Humans can read it too; [`README.md`](README.md) covers clone, preview, and deploy.
 
 ---
 
@@ -63,7 +63,7 @@ isv-ai-wiki/
 └── .github/workflows/deploy.yml  # GitHub Pages
 ```
 
-**Live base URL:** `https://overview-solutions.github.io/isv-ai-wiki/`
+**Live base URL:** `https://isv.wiki/` (GitHub Pages mirror: `https://overview-solutions.github.io/isv-ai-wiki/`)
 
 **Local preview:** `./preview.sh` → `http://localhost:8765/index.html`
 
