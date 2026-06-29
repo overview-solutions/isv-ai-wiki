@@ -9,7 +9,12 @@
 - [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
 - [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
 - [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
+- [Agent index (DNS-AID HTTP)](https://isv.wiki/.well-known/agents/index.json): Empty agent list + links to specs (no live MCP/A2A on this host)
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents
+
+## DNS-AID
+
+Discovery (Cloudflare DNS, not in repo): `_index._agents.isv.wiki` HTTPS → `isv.wiki` with DNSSEC. Setup: `technical-notes/AGENT-READINESS-CLOUDFLARE.md`.
 
 ## Optional
 

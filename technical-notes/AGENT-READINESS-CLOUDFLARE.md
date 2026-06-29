@@ -62,20 +62,85 @@ This is a Cloudflare product feature, not something the repo can do.
   return markdown, while a normal browser request still gets HTML.
 
 ### 3. DNS for AI Discovery (DNS-AID) — draft + RFC 9460 (works in grey OR orange)
-This lives in DNS, so it works regardless of proxy mode. Cloudflare DNS dashboard:
-- **Enable DNSSEC:** DNS → Settings → DNSSEC → Enable, then add the DS record it gives you at your
-  registrar (where `.wiki` is registered). Required so validating resolvers trust the records.
-- **Add an SVCB/HTTPS record.** Caveat: this only makes sense if there is a real agent endpoint to
-  point at. Today isv.wiki has **no A2A/MCP agent endpoint**, so the honest options are:
-  - (a) Skip DNS-AID until such an endpoint exists, **or**
-  - (b) Publish a minimal index pointing back at the HTTPS site so agents land on the well-known files:
-    ```
-    _index._agents.isv.wiki.  3600  IN  HTTPS  1 isv.wiki. alpn="h2,http/1.1"
-    ```
-    (Cloudflare DNS UI: Type = HTTPS, Name = `_index._agents`, Priority/Target/params per the UI.)
 
-  Recommendation: do (b) only if you want the scanner to pass; it adds little real capability while
-  there is no agent service behind it. Your call.
+DNS-AID is **not in the git repo** — it lives in **Cloudflare DNS** plus **DNSSEC**. The site is a static wiki with **no MCP/A2A server**, so we publish only the organizational **`_index._agents`** entrypoint (not `_mcp._agents` or `_a2a._agents`).
+
+#### Step A — Enable DNSSEC (required for scanner pass)
+
+1. Cloudflare → **isv.wiki** → **DNS** → **Settings**
+2. **DNSSEC** → **Enable**
+3. Domain is on **Cloudflare Registrar**, so the **DS record** at `.wiki` is usually published automatically. If the registrar were external, you would paste Cloudflare’s DS values there.
+
+Verify:
+
+```bash
+dig @1.1.1.1 isv.wiki DS +short
+# expect at least one DS line
+
+dig @1.1.1.1 _index._agents.isv.wiki HTTPS +dnssec +short
+# expect HTTPS RDATA plus an RRSIG line
+```
+
+#### Step B — Add `_index._agents` HTTPS record
+
+**Dashboard (manual):**
+
+| Field | Value |
+|-------|--------|
+| Type | **HTTPS** |
+| Name | `_index._agents` |
+| TTL | Auto (or 3600) |
+| Priority | `1` (ServiceMode — not 0) |
+| Target | `isv.wiki` |
+| Value / SvcParams | `alpn="h3,h2" port="443" mandatory="alpn,port"` |
+
+**API (script):**
+
+```bash
+export CLOUDFLARE_API_TOKEN='…'   # Zone:DNS:Edit on isv.wiki
+chmod +x scripts/publish-dns-aid-cloudflare.sh scripts/verify-dns-aid.sh
+./scripts/publish-dns-aid-cloudflare.sh
+./scripts/verify-dns-aid.sh
+```
+
+Expected `dig` output:
+
+```bash
+dig @1.1.1.1 _index._agents.isv.wiki HTTPS +short
+# 1 isv.wiki. alpn="h3,h2" port="443" mandatory="alpn,port"
+```
+
+#### Step C — HTTP index (in repo, already on `ai-readiness`)
+
+Agents that follow the SVCB target can load:
+
+- `https://isv.wiki/.well-known/agents/index.json` — states there are **no live agents**; links to `AGENTS.md`, `llms.txt`, `api-catalog`, JSON specs.
+
+#### What we deliberately skip
+
+| Record | Why |
+|--------|-----|
+| `_mcp._agents` | No MCP server on isv.wiki |
+| `_a2a._agents` | No A2A endpoint |
+| Fake `cap=` URLs | Would mislead agents (AGENTS.md honest-unknowns rule) |
+
+#### Re-test
+
+```bash
+./scripts/verify-dns-aid.sh
+
+curl -s -X POST https://isitagentready.com/api/scan \
+  -H 'Content-Type: application/json' \
+  -d '{"url":"https://isv.wiki"}' | python3 -c "
+import json,sys
+d=json.load(sys.stdin)
+c=d['checks']['discoverability']['dnsAid']
+print(c['status'], '-', c['message'])
+print('dnssecValidated:', c.get('details',{}).get('dnssecValidated'))
+"
+```
+
+Pass needs: **HTTPS/SVCB answer at `_index._agents`** and **`dnssecValidated: true`** (DoH `AD=1`).
 
 ---
 
