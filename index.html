@@ -677,6 +677,51 @@ body {
   margin-top: 0.25rem;
 }
 
+.tech-provenance-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.tech-provenance-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 20px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.tech-provenance-badge--source { background: var(--bg-3); color: var(--text-2); }
+.tech-provenance-badge--human { background: var(--green-50); color: var(--green); }
+.tech-provenance-badge--ai { background: var(--purple-50); color: var(--purple); }
+.tech-provenance-badge--mixed { background: var(--blue-50); color: var(--blue); }
+.tech-provenance-badge--reviewed { background: var(--teal-50); color: var(--teal); }
+.tech-provenance-badge--draft { background: var(--amber-50); color: var(--amber); }
+.tech-provenance-badge--index { background: var(--bg-2); color: var(--text-3); border: 1px solid var(--border); }
+
+.tech-notes-source-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 0.65rem;
+}
+
+.tech-detail-provenance {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-2);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.tech-detail-provenance strong { color: var(--text); font-weight: 500; }
+
 @media (max-width: 800px) {
   .tech-notes-layout { grid-template-columns: 1fr; }
   .tech-notes-list { max-height: none; }
@@ -1534,7 +1579,7 @@ code {
             <span class="tag tag-planning">Planning</span>
             <span class="project-name">Power Africa Conference — Workshop</span>
           </div>
-          <div class="project-desc">IEEE ISV <strong>Street-EMS</strong> workshop — Make · Code · Integrate for in-country minigrid engineers; business-case + cloudless paths; take-home EMS PCB &amp; cabinets. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open workshop page →</a> · <a href="#" onclick="showSection('events');return false">All In-Person Events</a></div>
+          <div class="project-desc">IEEE ISV <strong>Street-EMS</strong> workshop for in-country minigrid engineers — hands-on MeshEMS kits and aggregation trade-offs. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open workshop page →</a></div>
         </div>
         <div class="project-section-label">Stable infrastructure</div>
         <div class="project-card project-card-stable">
@@ -1904,6 +1949,20 @@ code {
       <div class="resource-row">
         <div class="standard-icon">📋</div>
         <div>
+          <div class="resource-name">EEP Africa · Mini-grid sector study (2018)</div>
+          <div class="resource-desc"><a href="#" onclick="showTechNote('eep-minigrids-study-2018');return false">Indexed in Technical Reports</a> · <a href="https://eepafrica.org/documents/EEP_MiniGrids_Study_DigitalVersion.pdf" target="_blank" rel="noopener">PDF ↗</a> — 43 funded mini-grid projects across East &amp; Southern Africa; policy, finance, and developer lessons.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📋</div>
+        <div>
+          <div class="resource-name">Alaska Rural Energy Tour Report (2024)</div>
+          <div class="resource-desc"><a href="#" onclick="showTechNote('isv-alaska-trip-report-2024');return false">ISV-FLD-001 · Technical Reports</a> · <a href="assets/documents/isv-alaska-trip-report-2024-09-09.pdf" target="_blank" rel="noopener">PDF ↗</a> · <a href="https://github.com/overview-solutions/AlaskaEnergy" target="_blank" rel="noopener">AlaskaEnergy repo ↗</a> — May 2024 Tech Comm field trip (Anchorage conference, Kotzebue / Kivalina / Noatak).</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📋</div>
+        <div>
           <div class="resource-name">ISV 2022 Portfolio of Project Briefs</div>
           <div class="resource-desc"><a href="https://drive.google.com/file/d/1PHWLemf_nbjp2tA_pk5Jbweo-noGu5Ub/view" target="_blank">PDF</a> — two-page briefs on funded NGO projects, three-pillar approach, and ISV operating model (May 2022).</div>
         </div>
@@ -1919,7 +1978,7 @@ code {
         <div class="standard-icon">📄</div>
         <div>
           <div class="resource-name">Project Intake Details</div>
-          <div class="resource-desc"><a href="https://drive.google.com/file/d/1nhD3694tdBX3OLRAFy0-DlB3lTeralAr/view" target="_blank">PDF</a> — 2024 Alaska trip report and project intake documentation from the Technology Committee.</div>
+          <div class="resource-desc"><a href="https://drive.google.com/file/d/1nhD3694tdBX3OLRAFy0-DlB3lTeralAr/view" target="_blank">Google Drive PDF</a> — broader 2024 project intake bundle. Alaska trip report: <a href="#" onclick="showTechNote('isv-alaska-trip-report-2024');return false">ISV-FLD-001</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1998,7 +2057,7 @@ code {
             <a id="notes-toolbar-standalone" href="tech-comm-2026-06-25-ai-wiki-orientation.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="notes-frame" title="Meeting Notes preview" src="tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1"></iframe>
+        <iframe id="notes-frame" title="Meeting Notes preview" src="tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1&v=20260627"></iframe>
       </div>
     </div>
   </div>
@@ -2019,7 +2078,7 @@ code {
             <a id="events-toolbar-standalone" href="open-energy-hackathon-2025.html" target="_blank" rel="noopener">Full page</a>
           </div>
         </div>
-        <iframe id="events-frame" title="In-Person Events preview" src="open-energy-hackathon-2025.html?embed=1"></iframe>
+        <iframe id="events-frame" title="In-Person Events preview" src="open-energy-hackathon-2025.html?embed=1&v=20260627"></iframe>
       </div>
     </div>
   </div>
@@ -2041,7 +2100,7 @@ code {
             <a href="meter-benchmark/northbound-mqtt-v0.1.json" target="_blank" rel="noopener">Northbound JSON</a>
           </div>
         </div>
-        <iframe id="meter-study-frame" title="Meter Interoperability preview" src="meter-overview.html?embed=1"></iframe>
+        <iframe id="meter-study-frame" title="Meter Interoperability preview" src="meter-overview.html?embed=1&v=20260627"></iframe>
       </div>
     </div>
   </div>
@@ -2066,9 +2125,14 @@ code {
         </ul>
       </div>
       <div class="wiki-body">
-        <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a> or in this wiki. The report list is built <strong>live</strong> from the <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a> reports index each time you open this page (same source Cottonspace publishes). Wiki-only notes and ISV context come from <code>technical-notes/catalog.json</code>. No manual sync needed for new Cottonspace reports.</p>
+        <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a>, external publishers, or in this wiki. Dev Labs reports sync <strong>live</strong> from <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a>; ISV and external entries come from <code>technical-notes/catalog.json</code>. Each report shows <strong>source · authorship · review</strong> badges — see key below.</p>
         <p id="tech-notes-catalog-meta" class="wiki-body" style="margin-top:0.5rem;font-size:13px;color:var(--text-2)"></p>
       </div>
+      <details class="tech-code-legend" id="tech-provenance-legend">
+        <summary>Provenance key — source, authorship, review</summary>
+        <p id="tech-provenance-legend-intro" style="margin-top:0.5rem"></p>
+        <div class="tech-code-legend-grid" id="tech-provenance-legend-grid"></div>
+      </details>
       <details class="tech-code-legend" id="tech-code-legend">
         <summary>Report ID key — what EMG-REG-008 means</summary>
         <p id="tech-code-legend-intro" style="margin-top:0.5rem"></p>
@@ -2081,6 +2145,7 @@ code {
         </label>
       </div>
       <div class="tech-notes-filters" id="tech-notes-filters"></div>
+      <div class="tech-notes-source-filters" id="tech-notes-source-filters"></div>
       <div class="tech-notes-layout">
         <div class="tech-notes-list" id="tech-notes-list">
           <div class="tech-notes-detail-empty">Loading catalog…</div>
@@ -2124,37 +2189,37 @@ const METER_BENCHMARK_PAGES = {
   'overview': {
     title: 'Overview',
     sub: 'Gateway normalization · northbound MQTT + VMRS',
-    src: 'meter-overview.html?embed=1',
+    src: 'meter-overview.html?embed=1&v=20260627',
     standalone: 'meter-overview.html'
   },
   'problems-today': {
     title: 'Problems',
     sub: 'Layer diagram · utility vs village',
-    src: 'meter-problems-today.html?embed=1',
+    src: 'meter-problems-today.html?embed=1&v=20260627',
     standalone: 'meter-problems-today.html'
   },
   'vmrs': {
     title: 'OBIS · VMRS',
     sub: 'Village Minimum Register Set · OBIS tiers · northbound JSON',
-    src: 'meter-vmrs.html?embed=1',
+    src: 'meter-vmrs.html?embed=1&v=20260627',
     standalone: 'meter-vmrs.html'
   },
   'vendor-study': {
     title: 'Vendor Study',
     sub: 'Protocol benchmark · outreach pipeline · contacts',
-    src: 'meter-vendor-study.html?embed=1',
+    src: 'meter-vendor-study.html?embed=1&v=20260627',
     standalone: 'meter-vendor-study.html'
   },
   'openami': {
     title: 'OpenAMI',
     sub: 'Actionable telemetry · leakage visibility · stack · Discord',
-    src: 'openami.html?embed=1',
+    src: 'openami.html?embed=1&v=20260627',
     standalone: 'openami.html'
   },
   'meshems': {
     title: 'MeshEMS board',
     sub: 'Multi-tenant edge metering · workshops & deployments · OpenAMI',
-    src: 'meshems.html?embed=1',
+    src: 'meshems.html?embed=1&v=20260627',
     standalone: 'meshems.html'
   }
 };
@@ -2165,7 +2230,7 @@ const MEETING_NOTES = {
     title: 'AI Wiki orientation',
     date: '25 Jun 2026',
     sub: 'OpenAMI stack · MeshEMS power · EPRI · STS · AMDA',
-    src: 'tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1',
+    src: 'tech-comm-2026-06-25-ai-wiki-orientation.html?embed=1&v=20260627',
     standalone: 'tech-comm-2026-06-25-ai-wiki-orientation.html'
   },
   'metering-2026-05-28': {
@@ -2173,7 +2238,7 @@ const MEETING_NOTES = {
     title: 'Metering & comms topology',
     date: '28 May 2026',
     sub: 'STS · SMS · DLMS · redundant NAN · CIU/phone relay',
-    src: 'tech-comm-2026-05-28-metering-topology.html?embed=1',
+    src: 'tech-comm-2026-05-28-metering-topology.html?embed=1&v=20260627',
     standalone: 'tech-comm-2026-05-28-metering-topology.html',
     diagramSvg: 'technical-notes/diagrams/metering-topology.svg',
     diagramGuide: 'technical-notes/diagrams/editing-guide.html'
@@ -2183,7 +2248,7 @@ const MEETING_NOTES = {
     title: 'Open Energy hackathon',
     date: 'Apr 2025',
     sub: 'SunSpec · DER markets · Port Labs · Luma',
-    src: 'open-energy-hackathon-2025.html?embed=1',
+    src: 'open-energy-hackathon-2025.html?embed=1&v=20260627',
     standalone: 'open-energy-hackathon-2025.html'
   },
   'power-africa-openami-2025': {
@@ -2191,7 +2256,7 @@ const MEETING_NOTES = {
     title: 'OpenAMI @ Power Africa',
     date: 'Sep 2025',
     sub: 'REIc · ISV · Energy IoT · EnAccess · open AMI roadmap',
-    src: 'power-africa-openami-presentation-2025.html?embed=1',
+    src: 'power-africa-openami-presentation-2025.html?embed=1&v=20260627',
     standalone: 'power-africa-openami-presentation-2025.html'
   },
   'open-energy-hackathon-2026': {
@@ -2199,15 +2264,15 @@ const MEETING_NOTES = {
     title: 'Open Energy hackathon',
     date: 'Apr 2026',
     sub: 'AI · mesh · hardware · Luma · Informal Spaces',
-    src: 'open-energy-hackathon-2026.html?embed=1',
+    src: 'open-energy-hackathon-2026.html?embed=1&v=20260627',
     standalone: 'open-energy-hackathon-2026.html'
   },
   'power-africa-2026-workshop-planning': {
     group: 'events',
     title: 'Street-EMS workshop · Power Africa',
     date: 'Sep 2026',
-    sub: 'Nairobi · Make · Code · Integrate · business-case · cloudless · take-home kits',
-    src: 'power-africa-2026-workshop-planning.html?embed=1',
+    sub: 'Nairobi · Make · Code · Integrate · take-home kits',
+    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260627',
     standalone: 'power-africa-2026-workshop-planning.html'
   }
 };
@@ -2225,11 +2290,13 @@ let activeNoteId = 'tech-comm-2026-06-25';
 let techNotesCatalog = [];
 let techNotesCatalogs = [];
 let techNotesCodeGuide = null;
+let techNotesProvenanceGuide = null;
 let techNotesMetaLoaded = false;
 let techNotesCatalogSource = '';
 let techNotesEnrichments = [];
 let activeTechNoteId = null;
 let activeTechFilter = 'all';
+let activeTechSourceFilter = 'all';
 let activeTechSearch = '';
 
 function toggleMobileMenu() {
@@ -2453,6 +2520,7 @@ async function loadTechnicalNotes() {
       const data = await resp.json();
       techNotesCatalogs = Array.isArray(data.catalogs) ? data.catalogs : [];
       techNotesCodeGuide = data.reportCodeGuide || null;
+      techNotesProvenanceGuide = data.reportProvenanceGuide || null;
       techNotesEnrichments = Array.isArray(data.items) ? data.items : [];
       techNotesMetaLoaded = true;
     }
@@ -2466,13 +2534,15 @@ async function loadTechnicalNotes() {
       techNotesCatalogSource = 'live';
     } catch (liveErr) {
       console.warn('Live Dev Labs index unavailable; using catalog.json', liveErr);
-      techNotesCatalog = [...techNotesEnrichments];
+      techNotesCatalog = techNotesEnrichments.map(item => window.TechNotesCatalog.withProvenance(item));
       techNotesCatalogSource = 'cached';
     }
 
     renderReportCodeLegend();
+    renderProvenanceLegend();
     renderTechnicalNotesNav();
     renderTechnicalNotesFilters();
+    renderTechnicalNotesSourceFilters();
     renderTechnicalNotesList();
     renderTechNotesCatalogMeta();
 
@@ -2519,6 +2589,55 @@ function renderReportCodeLegend() {
   grid.innerHTML = entries.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join('');
 }
 
+function itemProvenance(item) {
+  return window.TechNotesCatalog?.resolveProvenance(item) || {
+    sourceKind: item.sourceKind || 'dev-labs',
+    authorship: item.authorship || 'ai-assisted',
+    reviewStatus: item.reviewStatus || 'draft',
+  };
+}
+
+function provenanceLabel(group, key) {
+  return window.TechNotesCatalog?.PROVENANCE_LABELS?.[group]?.[key] || key;
+}
+
+function authorshipBadgeClass(authorship) {
+  if (authorship === 'human-primary') return 'tech-provenance-badge--human';
+  if (authorship === 'mixed') return 'tech-provenance-badge--mixed';
+  return 'tech-provenance-badge--ai';
+}
+
+function reviewBadgeClass(reviewStatus) {
+  if (reviewStatus === 'committee-reviewed') return 'tech-provenance-badge--reviewed';
+  if (reviewStatus === 'index-only') return 'tech-provenance-badge--index';
+  return 'tech-provenance-badge--draft';
+}
+
+function renderProvenanceBadgesHtml(item, compact) {
+  const p = itemProvenance(item);
+  const badges = [
+    `<span class="tech-provenance-badge tech-provenance-badge--source" title="Source">${escapeHtml(provenanceLabel('sourceKind', p.sourceKind))}</span>`,
+    `<span class="tech-provenance-badge ${authorshipBadgeClass(p.authorship)}" title="Authorship">${escapeHtml(provenanceLabel('authorship', p.authorship))}</span>`,
+  ];
+  if (!compact) {
+    badges.push(`<span class="tech-provenance-badge ${reviewBadgeClass(p.reviewStatus)}" title="Review status">${escapeHtml(provenanceLabel('reviewStatus', p.reviewStatus))}</span>`);
+  }
+  return `<div class="tech-provenance-badges">${badges.join('')}</div>`;
+}
+
+function renderProvenanceLegend() {
+  const intro = document.getElementById('tech-provenance-legend-intro');
+  const grid = document.getElementById('tech-provenance-legend-grid');
+  const g = techNotesProvenanceGuide;
+  if (!intro || !grid || !g) return;
+  intro.textContent = g.summary || '';
+  const entries = [];
+  Object.entries(g.sourceKind || {}).forEach(([k, v]) => entries.push([`source:${k}`, v]));
+  Object.entries(g.authorship || {}).forEach(([k, v]) => entries.push([`auth:${k}`, v]));
+  Object.entries(g.reviewStatus || {}).forEach(([k, v]) => entries.push([`review:${k}`, v]));
+  grid.innerHTML = entries.map(([k, v]) => `<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join('');
+}
+
 function getTechNoteCategories() {
   const cats = new Set();
   techNotesCatalog.forEach(item => { if (item.category) cats.add(item.category); });
@@ -2553,6 +2672,27 @@ function renderTechnicalNotesFilters() {
   )).join('');
 }
 
+function renderTechnicalNotesSourceFilters() {
+  const el = document.getElementById('tech-notes-source-filters');
+  if (!el) return;
+  const sources = [
+    ['all', 'All sources'],
+    ['dev-labs', 'Dev Labs'],
+    ['isv-wiki', 'ISV wiki'],
+    ['external', 'External'],
+  ];
+  el.innerHTML = sources.map(([id, label]) => (
+    `<button type="button" class="filter-chip${id === activeTechSourceFilter ? ' active' : ''}" onclick="setTechSourceFilter('${id}')">${escapeHtml(label)}</button>`
+  )).join('');
+}
+
+function setTechSourceFilter(source) {
+  activeTechSourceFilter = source;
+  renderTechnicalNotesSourceFilters();
+  renderTechnicalNotesList();
+  renderTechNotesCatalogMeta();
+}
+
 function setTechFilter(cat) {
   activeTechFilter = cat;
   renderTechnicalNotesFilters();
@@ -2567,6 +2707,7 @@ function setTechSearch(query) {
 }
 
 function techNoteSearchHaystack(item) {
+  const p = itemProvenance(item);
   return [
     item.title,
     item.summary,
@@ -2576,6 +2717,9 @@ function techNoteSearchHaystack(item) {
     item.publisher,
     item.isvRelevance,
     explainReportCode(item.reportCode),
+    provenanceLabel('sourceKind', p.sourceKind),
+    provenanceLabel('authorship', p.authorship),
+    provenanceLabel('reviewStatus', p.reviewStatus),
     ...(item.tags || [])
   ].filter(Boolean).join(' ').toLowerCase();
 }
@@ -2586,17 +2730,21 @@ function renderTechNotesCatalogMeta() {
   const visible = filteredTechNotes().length;
   const total = techNotesCatalog.length;
   const filterNote = activeTechFilter === 'all' ? '' : ` · ${activeTechFilter}`;
+  const sourceFilterNote = activeTechSourceFilter === 'all' ? '' : ` · ${provenanceLabel('sourceKind', activeTechSourceFilter)}`;
   const searchNote = activeTechSearch ? ` · search: “${activeTechSearch}”` : '';
-  const sourceNote = techNotesCatalogSource === 'live'
+  const catalogSourceNote = techNotesCatalogSource === 'live'
     ? 'live from Dev Labs index'
     : 'cached catalog.json (index unavailable)';
-  el.textContent = `${visible} of ${total} reports${filterNote}${searchNote} · ${sourceNote}`;
+  el.textContent = `${visible} of ${total} reports${filterNote}${sourceFilterNote}${searchNote} · ${catalogSourceNote}`;
 }
 
 function filteredTechNotes() {
   let items = activeTechFilter === 'all'
     ? techNotesCatalog
     : techNotesCatalog.filter(item => item.category === activeTechFilter);
+  if (activeTechSourceFilter !== 'all') {
+    items = items.filter(item => itemProvenance(item).sourceKind === activeTechSourceFilter);
+  }
   if (!activeTechSearch) return items;
   const q = activeTechSearch.toLowerCase();
   return items.filter(item => techNoteSearchHaystack(item).includes(q));
@@ -2622,6 +2770,7 @@ function renderTechnicalNotesList() {
       <div class="tech-pub-title">${escapeHtml(item.title)}</div>
       <div class="tech-pub-meta">${escapeHtml(item.category || item.type || 'report')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
       ${item.reportCode ? `<div class="tech-pub-code" title="${escapeHtml(explainReportCode(item.reportCode))}">${escapeHtml(item.reportCode)} — ${escapeHtml(explainReportCode(item.reportCode))}</div>` : ''}
+      ${renderProvenanceBadgesHtml(item, true)}
       <div class="tech-pub-tags">${(item.tags || []).slice(0, 4).map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('')}</div>
     </button>
   `).join('');
@@ -2653,6 +2802,10 @@ function renderTechnicalNoteDetail(id) {
   const codeLine = item.reportCode
     ? `<div class="tech-detail-publisher" style="margin-top:-0.5rem;margin-bottom:1rem"><span style="font-family:var(--mono);font-size:12px">${escapeHtml(item.reportCode)}</span> — ${escapeHtml(explainReportCode(item.reportCode))}</div>`
     : '';
+  const p = itemProvenance(item);
+  const provExplain = techNotesProvenanceGuide
+    ? `<div class="tech-detail-provenance">${renderProvenanceBadgesHtml(item, false)}<div style="margin-top:0.45rem"><strong>Source:</strong> ${escapeHtml((techNotesProvenanceGuide.sourceKind || {})[p.sourceKind] || p.sourceKind)} · <strong>Authorship:</strong> ${escapeHtml((techNotesProvenanceGuide.authorship || {})[p.authorship] || p.authorship)} · <strong>Review:</strong> ${escapeHtml((techNotesProvenanceGuide.reviewStatus || {})[p.reviewStatus] || p.reviewStatus)}</div></div>`
+    : renderProvenanceBadgesHtml(item, false);
   const related = (item.relatedMeetingNotes || [])
     .filter(nid => MEETING_NOTES[nid])
     .map(nid => `<button type="button" class="btn-secondary-link" onclick="showNote('${nid}')">Meeting note: ${escapeHtml(MEETING_NOTES[nid].title)}</button>`)
@@ -2663,6 +2816,7 @@ function renderTechnicalNoteDetail(id) {
     <div class="tech-detail-title">${escapeHtml(item.title)}</div>
     <div class="tech-detail-publisher">${escapeHtml(item.publisher || '')}${item.published ? ` · ${escapeHtml(item.published)}` : ''}</div>
     ${codeLine}
+    ${provExplain}
     <div class="tech-detail-block">
       <div class="tech-detail-label">Summary</div>
       <div class="tech-detail-body">${escapeHtml(item.summary || '')}</div>

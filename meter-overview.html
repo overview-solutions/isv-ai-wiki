@@ -20,7 +20,7 @@ h2 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; padding-bottom:
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .body-text strong { color: var(--text); font-weight: 500; }
 .callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 12px; line-height: 1.45; }
-.callout strong { color: var(--amber); }
+.callout > strong:first-child { color: var(--amber); }
 .flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.5rem; font-size: 12px; margin-bottom: 0.85rem; padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); line-height: 1.4; }
 .flow-box { padding: 0.35rem 0.55rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--text); }
 .flow-box-north { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
@@ -78,9 +78,7 @@ html.embed .subnav-list { font-size: 12px; }
 
   <div class="callout">
     <strong>Draft artifacts — not IEC/DLMS UA published standards.</strong>
-    Primary machine-readable spec: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>.
-    Register appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>.
-    Human-readable tiers and OBIS keys: <a href="index.html#meter-study/vmrs">OBIS · VMRS</a>.
+    <p>Primary machine-readable spec: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. Register appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>. Human-readable tiers and OBIS keys: <a href="index.html#meter-study/vmrs">OBIS · VMRS</a>.</p>
   </div>
 
   <h2>Two deliverables</h2>

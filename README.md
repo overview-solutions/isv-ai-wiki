@@ -62,7 +62,9 @@ Reports use IDs like **EMG-TRD-005** = *Emerging markets · Technical reference 
 
 **Listing (automatic):** Opening Technical reports in the wiki fetches the live [openami-smart-village reports index](https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports) from GitHub (same source [Cottonspace](https://sattal.cottonspace.com/reports) publishes). New reports appear without running a sync script or redeploying.
 
-**Enrichments (manual):** `technical-notes/catalog.json` holds wiki-only entries (e.g. **ISV-HCK-001**) and optional ISV context (`isvRelevance`, `relatedMeetingNotes`, tags) merged by report ID. Edit that file when you want richer summaries on specific reports.
+**Enrichments (manual):** `technical-notes/catalog.json` holds wiki-only entries (e.g. **ISV-HCK-001**, external industry PDFs) and optional ISV context (`isvRelevance`, `relatedMeetingNotes`, provenance tags, tags) merged by report ID. Edit that file when you want richer summaries on specific reports.
+
+**Provenance (optional per item):** `sourceKind` (`dev-labs` | `isv-wiki` | `external`), `authorship` (`human-primary` | `ai-assisted` | `mixed`), `reviewStatus` (`committee-reviewed` | `draft` | `index-only`). Omitted fields use defaults documented in `reportProvenanceGuide`.
 
 Optional — refresh enrichment stubs after bulk Cottonspace changes:
 

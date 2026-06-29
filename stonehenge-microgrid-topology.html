@@ -24,8 +24,8 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .stat { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; background: var(--bg-2); }
 .stat-val { font-size: 22px; font-weight: 500; color: var(--teal); }
 .stat-label { font-size: 12px; color: var(--text-2); margin-top: 2px; }
-.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { color: var(--teal); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 p, li { font-size: 14px; margin-bottom: 0.5rem; }
 ul { padding-left: 1.25rem; margin-bottom: 1rem; }
@@ -61,7 +61,7 @@ th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
 
   <div class="callout">
     <strong>Problems we are trying to solve</strong>
-    Rural mini-grid operators often cannot afford per-customer AMI. Without metering they cannot bill reliably, detect theft, or maintain systems. Below the feeder, devices speak STS, DLMS, OEM, MODBUS, and proprietary RF — while utilities and aggregators need IEEE 2030.5 and SunSpec-shaped data. The 2025 hack tested open pole-mount EMS hardware and protocol gateways against these constraints.
+    <p>Rural mini-grid operators often cannot afford per-customer AMI. Without metering they cannot bill reliably, detect theft, or maintain systems. Below the feeder, devices speak STS, DLMS, OEM, MODBUS, and proprietary RF — while utilities and aggregators need IEEE 2030.5 and SunSpec-shaped data. The 2025 hack tested open pole-mount EMS hardware and protocol gateways against these constraints.</p>
   </div>
 
   <h2>What came out of the hackathon</h2>

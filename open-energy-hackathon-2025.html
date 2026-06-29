@@ -30,10 +30,10 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
 .overview-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
 .overview-detail { font-size: 12px; color: var(--text-2); line-height: 1.4; }
-.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { color: var(--teal); }
 .callout--muted { border-left-color: var(--border); background: var(--bg-2); }
-.callout--muted strong { color: var(--text); }
+.callout--muted > strong:first-child { color: var(--text); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; }
 p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
@@ -100,7 +100,7 @@ html.embed h1 { font-size: 20px; }
     </div>
     <div class="callout">
       <strong>What the event was (per organizers)</strong>
-      A hands-on open-source energy hack during SF Climate Week: implement a <strong>SunSpec-compliant gateway</strong> against real renewable hardware, experiment with standards that let DERs participate in <strong>US utility markets</strong> (demand response, ancillary services, CA Rule 21 / UL 1741-SB), and connect open platforms across equipment vendors — with a parallel thread on how the same stack can support <strong>rural electrification</strong> (IEEE Smart Village / open AMI).
+      <p>A hands-on open-source energy hack during SF Climate Week: implement a <strong>SunSpec-compliant gateway</strong> against real renewable hardware, experiment with standards that let DERs participate in <strong>US utility markets</strong> (demand response, ancillary services, CA Rule 21 / UL 1741-SB), and connect open platforms across equipment vendors — with a parallel thread on how the same stack can support <strong>rural electrification</strong> (IEEE Smart Village / open AMI).</p>
     </div>
   </div>
 
@@ -169,7 +169,7 @@ html.embed h1 { font-size: 20px; }
   <h2>One participant perspective (not the full event)</h2>
   <div class="callout callout--muted">
     <strong>Adam Sauer · Circles of Power (Medium)</strong>
-    Adam's post-hack essay centers ISV's village metering economics and a Stonehenge topology metaphor — useful for <a href="index.html#tech-reports/isv-hck-2025-circles-of-power">ISV-HCK-001</a>, but it does <em>not</em> cover the domestic DER / utility-market tracks that most teams pursued. Treat the essay as one lens, not the event recap.
+    <p>Adam's post-hack essay centers ISV's village metering economics and a Stonehenge topology metaphor — useful for <a href="index.html#tech-reports/isv-hck-2025-circles-of-power">ISV-HCK-001</a>, but it does <em>not</em> cover the domestic DER / utility-market tracks that most teams pursued. Treat the essay as one lens, not the event recap.</p>
     <div class="links" style="margin-top:0.5rem;margin-bottom:0">
       <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank" rel="noopener">Medium essay ↗</a>
       <a href="stonehenge-microgrid-topology.html">Stonehenge appendix</a>

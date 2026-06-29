@@ -30,10 +30,10 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
 .overview-title { font-size: 13px; font-weight: 500; }
 .overview-detail { font-size: 12px; color: var(--text-2); }
-.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 14px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--teal); }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { color: var(--teal); }
 .callout--amber { border-left-color: var(--amber); background: var(--amber-50); }
-.callout--amber strong { color: var(--amber); }
+.callout--amber > strong:first-child { color: var(--amber); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; }
 p, li { font-size: 14px; margin-bottom: 0.5rem; }
@@ -110,7 +110,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
     <div class="callout">
       <strong>Open Advanced Metering Infrastructure</strong>
-      OpenAMI is an open-source metering stack for African mini-grids — software, hardware, and payments — designed to be community-owned, vendor-agnostic, and transparent on cost. Production (solar + batteries) is tractable; <em>distribution</em> (metering, load management, vending) is the hard part this effort targets.
+      <p>OpenAMI is an open-source metering stack for African mini-grids — software, hardware, and payments — designed to be community-owned, vendor-agnostic, and transparent on cost. Production (solar + batteries) is tractable; <em>distribution</em> (metering, load management, vending) is the hard part this effort targets.</p>
     </div>
   </div>
 
@@ -134,7 +134,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2>Why distribution fails today</h2>
   <div class="callout callout--amber">
     <strong>Production is easy; distribution is hard</strong>
-    Solar, power conversion, and storage are increasingly commodity. Load management, metering, and vending remain fragmented, expensive, and poorly supported in Africa.
+    <p>Solar, power conversion, and storage are increasingly commodity. Load management, metering, and vending remain fragmented, expensive, and poorly supported in Africa.</p>
   </div>
   <ul>
     <li>Few meter vendors serve the village market — supply-chain shocks when vendors exit (e.g. SparkMeter).</li>

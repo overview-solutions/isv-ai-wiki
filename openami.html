@@ -22,7 +22,7 @@ h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
-.callout strong { color: var(--teal); }
+.callout > strong:first-child { color: var(--teal); }
 .stack-table td:first-child { font-weight: 500; }
 .stack-table .out-of-scope { color: var(--text-3); font-style: italic; }
 .link-list { font-size: 13px; line-height: 1.6; margin-bottom: 1rem; }
@@ -54,7 +54,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="callout">
     <strong>Community · Discord</strong>
-    OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.
+    <p>OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.</p>
   </div>
 
   <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>. The <a href="index.html#meter-study/meshems">MeshEMS board</a> is aligned hardware for learning that stack in the field — multi-tenant edge metering at the upstream/downstream boundary, documented openly for community operators.</p>

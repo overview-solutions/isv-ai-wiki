@@ -293,3 +293,22 @@ html.embed .isv-topbar { display: none; }
     border-radius: 10px;
   }
 }
+
+/* Callout boxes — only the title line (first direct strong) breaks to its own row */
+.callout > strong:first-child {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+.callout p strong,
+.callout em strong {
+  display: inline;
+  font-weight: 600;
+}
+.callout p {
+  margin: 0 0 0.5rem;
+  line-height: 1.55;
+}
+.callout p:last-child {
+  margin-bottom: 0;
+}

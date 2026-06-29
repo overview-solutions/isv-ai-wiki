@@ -175,12 +175,16 @@ def merge_catalog(existing: dict, cards: list[dict]) -> dict:
             "summary": card["summary"],
             "isvRelevance": (old or {}).get("isvRelevance", ""),
             "relatedMeetingNotes": (old or {}).get("relatedMeetingNotes", []),
+            "sourceKind": (old or {}).get("sourceKind"),
+            "authorship": (old or {}).get("authorship"),
+            "reviewStatus": (old or {}).get("reviewStatus"),
         }
         merged_items.append(merged)
 
     # Keep wiki-only entries (not on Cottonspace index)
     for item in items_in:
-        if item.get("syncProtected") or item.get("sourceCatalog") not in (None, "cottonspace-dev-labs"):
+        sc = item.get("sourceCatalog")
+        if item.get("syncProtected") or sc not in (None, "cottonspace-dev-labs"):
             if not any(m["id"] == item["id"] for m in merged_items):
                 merged_items.append(item)
 
@@ -204,11 +208,14 @@ def merge_catalog(existing: dict, cards: list[dict]) -> dict:
 
     result = {"catalogs": catalogs, "items": merged_items}
     guide = dict(existing.get("reportCodeGuide") or {})
+    prov = existing.get("reportProvenanceGuide")
     types = dict(guide.get("types") or {})
     types.setdefault("TECH", "Technical reference / critique")
     types.setdefault("CRIT", "Engineering critique")
     guide["types"] = types
     result["reportCodeGuide"] = guide
+    if prov:
+        result["reportProvenanceGuide"] = prov
     return result
 
 

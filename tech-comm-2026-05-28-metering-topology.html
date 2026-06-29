@@ -40,8 +40,8 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-line { width: 28px; height: 0; border-top: 2px solid; }
 .legend-line.dashed { border-top-style: dashed; }
-.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--amber); }
+.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { color: var(--amber); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; color: var(--text); }
 p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
@@ -121,7 +121,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="callout">
     <strong>Primary bottleneck</strong>
-    Handshakes and keys — DLMS, OEM, and STS each use different key hierarchies. DCU/NAN uplink fails often due to telecom topology (trees, walls, Cameroon rainy season), not meter hardware alone.
+    <p>Handshakes and keys — DLMS, OEM, and STS each use different key hierarchies. DCU/NAN uplink fails often due to telecom topology (trees, walls, Cameroon rainy season), not meter hardware alone.</p>
   </div>
 
   <div class="panel">

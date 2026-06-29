@@ -134,7 +134,7 @@ Read sources in this order when answering technical questions:
 
 1. **Cited benchmark tables** — [`meter-vendor-study.html`](meter-vendor-study.html) (numbered `[s1]`… bibliography).
 2. **Tech Comm meeting notes** — problem framing, topology, action items (e.g. [`tech-comm-2026-05-28-metering-topology.html`](tech-comm-2026-05-28-metering-topology.html)).
-3. **Technical reports** — list built live from openami-smart-village `reports/index.html`; enrichments in `catalog.json` (`isvRelevance`, `relatedMeetingNotes`). Full docs on [Cottonspace](https://sattal.cottonspace.com/reports).
+3. **Technical reports** — list built live from openami-smart-village `reports/index.html`; enrichments in `catalog.json` (`isvRelevance`, `relatedMeetingNotes`, **provenance**: `sourceKind`, `authorship`, `reviewStatus`). Full docs on [Cottonspace](https://sattal.cottonspace.com/reports) or external PDFs. Defaults: Dev Labs → AI-assisted draft; ISV wiki → human reviewed; external → index-only.
 4. **Standards section** in `index.html` — quick reference (DLMS, STS, SunSpec, IEEE 2030.5).
 5. **ISV-internal** — DokuWiki PDFs, prior outreach contacts. Tag as **ISV**, not independent verification.
 6. **Legacy DokuWiki** — `http://34.125.138.210/...` (migration source; may be stale).

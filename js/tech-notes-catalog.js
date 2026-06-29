@@ -38,6 +38,51 @@
     'SSA-STS-LEGACY-2026-001': 'Industry Letter',
   };
 
+  const PROVENANCE_LABELS = {
+    sourceKind: {
+      'dev-labs': 'Dev Labs',
+      'isv-wiki': 'ISV wiki',
+      external: 'External',
+    },
+    authorship: {
+      'human-primary': 'Human-authored',
+      'ai-assisted': 'AI-assisted synthesis',
+      mixed: 'Human + AI',
+    },
+    reviewStatus: {
+      'committee-reviewed': 'Committee reviewed',
+      draft: 'Draft — verify citations',
+      'index-only': 'Index only — third party',
+    },
+  };
+
+  function inferSourceKind(item) {
+    if (item.sourceKind) return item.sourceKind;
+    if (item.sourceCatalog === 'isv-wiki') return 'isv-wiki';
+    if (item.sourceCatalog === 'external-references') return 'external';
+    return 'dev-labs';
+  }
+
+  function resolveProvenance(item) {
+    const sourceKind = inferSourceKind(item);
+    let authorship = item.authorship;
+    if (!authorship) {
+      if (sourceKind === 'external' || sourceKind === 'isv-wiki') authorship = 'human-primary';
+      else authorship = 'ai-assisted';
+    }
+    let reviewStatus = item.reviewStatus;
+    if (!reviewStatus) {
+      if (sourceKind === 'isv-wiki') reviewStatus = 'committee-reviewed';
+      else if (sourceKind === 'external') reviewStatus = 'index-only';
+      else reviewStatus = 'draft';
+    }
+    return { sourceKind, authorship, reviewStatus };
+  }
+
+  function withProvenance(item) {
+    return { ...item, ...resolveProvenance(item) };
+  }
+
   function stripHtml(text) {
     const el = document.createElement('div');
     el.innerHTML = text;
@@ -126,7 +171,7 @@
 
     for (const card of cards) {
       const old = matchEnrichment(enrichmentList, card);
-      items.push({
+      items.push(withProvenance({
         id: old?.id || slugFromCode(card.reportCode || card.filename.replace('.html', '')),
         reportCode: card.reportCode,
         title: card.title,
@@ -138,17 +183,20 @@
         url: card.url,
         sourceFile: card.sourceFile,
         githubUrl: card.githubUrl,
-        sourceCatalog: 'cottonspace-dev-labs',
+        sourceCatalog: old?.sourceCatalog || 'cottonspace-dev-labs',
         summary: card.summary,
         isvRelevance: old?.isvRelevance || '',
         relatedMeetingNotes: old?.relatedMeetingNotes || [],
         mediumUrl: old?.mediumUrl,
-      });
+        sourceKind: old?.sourceKind,
+        authorship: old?.authorship,
+        reviewStatus: old?.reviewStatus,
+      }));
     }
 
     for (const item of enrichmentList) {
       if (item.syncProtected || (item.sourceCatalog && item.sourceCatalog !== 'cottonspace-dev-labs')) {
-        if (!items.some((m) => m.id === item.id)) items.push(item);
+        if (!items.some((m) => m.id === item.id)) items.push(withProvenance(item));
       }
     }
 
@@ -170,5 +218,8 @@
     parseIndexHtml,
     mergeReportCatalog,
     fetchLiveReports,
+    resolveProvenance,
+    withProvenance,
+    PROVENANCE_LABELS,
   };
 })();

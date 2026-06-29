@@ -29,8 +29,8 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
 .overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
 .overview-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
 .overview-detail { font-size: 12px; color: var(--text-2); line-height: 1.4; }
-.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; }
-.callout strong { display: block; margin-bottom: 0.25rem; color: var(--amber); }
+.callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { color: var(--amber); }
 h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
 p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
 ul { padding-left: 1.25rem; margin-bottom: 1rem; }
@@ -94,7 +94,7 @@ html.embed h1 { font-size: 20px; }
     </div>
     <div class="callout">
       <strong>Per organizers (Luma)</strong>
-      Engineers, developers, and hardware builders work with <strong>real renewable equipment</strong> — solar inverters, EV chargers, battery storage, energy meters — on integrations communities need now, with open hardware/software and AI-assisted design workflows. Teams form on the day; challenge details live on the community <strong>Zulip</strong> channel linked from Luma.
+      <p>Engineers, developers, and hardware builders work with <strong>real renewable equipment</strong> — solar inverters, EV chargers, battery storage, energy meters — on integrations communities need now, with open hardware/software and AI-assisted design workflows. Teams form on the day; challenge details live on the community <strong>Zulip</strong> channel linked from Luma.</p>
     </div>
   </div>
 
@@ -131,16 +131,7 @@ html.embed h1 { font-size: 20px; }
   </table>
 
   <h2>MeshEMS v2.0 hardware</h2>
-  <p>2026 builds target the <strong>NESL 865B</strong> MeshEMS board (v2.0) — successor to the <a href="open-energy-hackathon-2025.html">2025 EMS Dev Kit v1</a>. OpenAMI metering firmware, multi-tenant edge metering, and workshop field notes live on the wiki hub:</p>
-  <figure class="event-figure">
-    <a href="index.html#meter-study/meshems"><img src="assets/meshems-nesl-ems-controller-865b-diagram.png" width="1200" height="675" loading="lazy" alt="NESL EMS Controller PCB 865B — MeshEMS v2.0 board diagram"></a>
-    <figcaption>
-      <strong>MeshEMS v2.0 · NESL EMS Controller PCB 865B</strong> — <a href="index.html#meter-study/meshems">MeshEMS board hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a>
-    </figcaption>
-  </figure>
-
-  <h2>Not Power Africa</h2>
-  <p>ISV's <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a> (Nairobi, Sep 2026) is a separate in-person program — different venue, travel, and kit logistics.</p>
+  <p>2026 builds use the <strong>NESL 865B</strong> board — successor to the <a href="open-energy-hackathon-2025.html">2025 EMS Dev Kit v1</a>. Details, BOM, and firmware: <a href="index.html#meter-study/meshems">MeshEMS board hub</a>. (ISV’s <a href="power-africa-2026-workshop-planning.html">Power Africa workshop</a> in Nairobi is a separate Sep 2026 program.)</p>
 
   <h2>Related</h2>
   <div class="links">

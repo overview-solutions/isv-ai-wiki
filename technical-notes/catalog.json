@@ -14,6 +14,12 @@
       "title": "ISV Knowledge Base reports",
       "url": "https://overview-solutions.github.io/isv-ai-wiki/index.html#tech-reports",
       "publisher": "ISV Technology Committee"
+    },
+    {
+      "id": "external-references",
+      "title": "External industry studies",
+      "url": "https://eepafrica.org/publications",
+      "publisher": "Third-party publishers"
     }
   ],
   "items": [
@@ -413,13 +419,87 @@
       "mediumUrl": "https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb",
       "sourceCatalog": "isv-wiki",
       "syncProtected": true,
+      "sourceKind": "isv-wiki",
+      "authorship": "human-primary",
+      "reviewStatus": "committee-reviewed",
       "summary": "Field problem framing from the 2025 Open Energy Hackathon: prepaid meters at $600–$1,500 can nearly double mini-grid CAPEX; villages need per-customer metering, theft detection, billing, and protocol translation (SunSpec/MQTT) below the distribution feeder. Documents pole-mount EMS prototypes and includes a Stonehenge topology metaphor as one modeling aid.",
       "isvRelevance": "Sets the economic and interoperability case behind Tech Comm metering work, Street Pole EMS, and OpenAMI — the metaphor is optional; the problems are not.",
       "relatedMeetingNotes": [
         "metering-2026-05-28"
       ]
+    },
+    {
+      "id": "isv-alaska-trip-report-2024",
+      "reportCode": "ISV-FLD-001",
+      "title": "2024 Alaska Rural Energy Tour Report",
+      "publisher": "IEEE Smart Village · Tech Comm",
+      "published": "Sep 2024",
+      "type": "field-report",
+      "category": "Field report",
+      "tags": [
+        "Alaska",
+        "Arctic",
+        "rural energy",
+        "PCE",
+        "Kotzebue",
+        "Kivalina"
+      ],
+      "url": "assets/documents/isv-alaska-trip-report-2024-09-09.pdf",
+      "githubUrl": "https://github.com/overview-solutions/AlaskaEnergy",
+      "sourceCatalog": "isv-wiki",
+      "syncProtected": true,
+      "sourceKind": "isv-wiki",
+      "authorship": "human-primary",
+      "reviewStatus": "committee-reviewed",
+      "summary": "May 2024 field report from the IEEE Smart Village Alaska tour (Adam Sauer, Niru Kumar, Steve McClure, Gerro Prinsloo): Sustainable Energy Conference in Anchorage, visits to Kotzebue, Kivalina, and Noatak; Power Cost Equalization (PCE); native-corporation energy relationships; and emerging trends (nuclear, AI, hydrogen, climate, food production) with six alignment recommendations.",
+      "isvRelevance": "Documents ISV Tech Comm field engagement, rural Arctic energy context, and project-intake threads that inform supported-project scouting — complements the 2024 project intake Google Drive bundle.",
+      "relatedMeetingNotes": []
+    },
+    {
+      "id": "eep-minigrids-study-2018",
+      "title": "Opportunities and Challenges in the Mini-Grid Sector in Africa",
+      "publisher": "EEP Africa",
+      "published": "Sep 2018",
+      "type": "industry-study",
+      "category": "Industry study",
+      "tags": [
+        "mini-grid",
+        "EEP Africa",
+        "policy",
+        "finance",
+        "SSA"
+      ],
+      "url": "https://eepafrica.org/documents/EEP_MiniGrids_Study_DigitalVersion.pdf",
+      "sourceCatalog": "external-references",
+      "syncProtected": true,
+      "sourceKind": "external",
+      "authorship": "human-primary",
+      "reviewStatus": "index-only",
+      "summary": "Portfolio review of 43 EEP-funded renewable mini-grid projects across 10 countries in East and Southern Africa — technologies, business models, financing, policy barriers, and recommendations for developers and support programs.",
+      "isvRelevance": "Sector baseline for mini-grid economics, productive use, and regulatory/finance context behind ISV metering and operator business-case work — wiki indexes only; verify claims against primary sources.",
+      "relatedMeetingNotes": [
+        "metering-2026-05-28"
+      ]
     }
   ],
+  "reportProvenanceGuide": {
+    "summary": "Each report is tagged by source, authorship, and review status. Defaults apply when fields are omitted: Dev Labs → AI-assisted draft; ISV wiki → human committee-reviewed; external PDFs → human index-only.",
+    "sourceKind": {
+      "dev-labs": "Dev Labs / Cottonspace — synthesized research hosted on openami-smart-village",
+      "isv-wiki": "ISV Technology Committee — meeting notes, hackathon writeups, wiki-native pages",
+      "external": "Third-party publisher — linked PDF or site; ISV does not host the full document"
+    },
+    "authorship": {
+      "human-primary": "Primarily human-written or field-authored",
+      "ai-assisted": "AI-assisted synthesis — verify citations before RFP or field use",
+      "mixed": "Human outline or review with AI drafting or research assist"
+    },
+    "reviewStatus": {
+      "committee-reviewed": "Tech Comm has reviewed for wiki use",
+      "draft": "Published for discussion — not field-validated by ISV",
+      "index-only": "Bibliography entry — summary and link only"
+    }
+  },
   "reportCodeGuide": {
     "summary": "Report IDs follow {Series}-{Type}-{Number}. The series names the program area; the type names the document kind; the number is a serial within that series-type.",
     "series": {
@@ -434,6 +514,7 @@
       "NEX": "Strategic synthesis",
       "CR": "Engineering critique",
       "HCK": "Hackathon / field writeup",
+      "FLD": "Field report / trip documentation",
       "LTR": "Industry letter",
       "TECH": "Technical reference / critique",
       "CRIT": "Engineering critique"
