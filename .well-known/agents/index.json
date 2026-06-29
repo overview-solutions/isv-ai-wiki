@@ -1,0 +1,14 @@
+{
+  "version": "1",
+  "domain": "isv.wiki",
+  "description": "IEEE Smart Village Technology Committee knowledge base — static HTML and JSON specs. No live MCP or A2A agent runs on this host.",
+  "agents": [],
+  "discovery": {
+    "serviceDoc": "https://isv.wiki/AGENTS.md",
+    "llmsTxt": "https://isv.wiki/llms.txt",
+    "apiCatalog": "https://isv.wiki/.well-known/api-catalog",
+    "technicalReports": "https://isv.wiki/technical-notes/catalog.json",
+    "vmrs": "https://isv.wiki/meter-benchmark/vmrs-registers.json",
+    "northboundMqtt": "https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json"
+  }
+}

@@ -16,6 +16,11 @@
       ],
       "describedby": [
         {
+          "href": "https://isv.wiki/.well-known/agents/index.json",
+          "type": "application/json",
+          "title": "DNS-AID HTTP agent index — static resources only (no live MCP/A2A)"
+        },
+        {
           "href": "https://isv.wiki/technical-notes/catalog.json",
           "type": "application/json",
           "title": "Technical reports catalog — report index with provenance"
