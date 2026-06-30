@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEEE PES &amp; IAS Power Africa Conference 2026 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 0.75rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 13px; padding: 0.45rem 0.85rem; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+.links a:hover { border-color: var(--green); color: var(--green); }
+.event-figure {
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  background: var(--bg-2); margin: 1rem 0 1.5rem;
+}
+.event-figure img { display: block; width: 100%; height: auto; }
+.event-figure figcaption {
+  padding: 0.75rem 1rem; font-size: 13px; color: var(--text-2);
+  line-height: 1.45; border-top: 1px solid var(--border);
+}
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>IEEE PES &amp; IAS Power Africa Conference 2026</h1>
+  <p class="sub">Nairobi, Kenya · 21–25 September 2026 · IEEE Smart Village track</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/power-africa-2026-conference" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <p class="body-text">The official conference program and full agenda are not published yet. This page will stay minimal until the organizers post schedules on the main conference site.</p>
+
+  <figure class="event-figure">
+    <img src="assets/power-africa-2026-poster.png" alt="ISV Activities at the 2026 IEEE PES and IAS PowerAfrica Conference — Nairobi, Kenya, 21–25 September 2026">
+    <figcaption>ISV @ PowerAfrica 2026 — keynotes, panels, workshops, hackathons, and networking.</figcaption>
+  </figure>
+
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org ↗</a>
+    <a href="https://ieee-powerafrica.org/isvx/" target="_blank" rel="noopener">ISV @ PowerAfrica ↗</a>
+    <a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop (ISV)</a>
+    <a href="power-africa-openami-presentation-2025.html">OpenAMI @ Power Africa 2025</a>
+  </div>
+
+  <h2>Related on this wiki</h2>
+  <ul style="padding-left:1.25rem;font-size:14px">
+    <li><a href="power-africa-2026-workshop-planning.html">OpenAMI Multitenant Metering EMS Workshop</a> — MAKE · CODE · INTEGRATE hands-on track</li>
+    <li><a href="index.html#meter-study/meshems">MeshEMS / Street-EMS hardware</a></li>
+    <li><a href="index.html#meter-study/openami">OpenAMI program context</a></li>
+  </ul>
+</div>
+</body>
+</html>
