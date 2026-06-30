@@ -1458,7 +1458,8 @@ code {
       <div class="nav-sub-item" data-note="open-energy-hackathon-2025" data-note-group="events" onclick="showNote('open-energy-hackathon-2025')">Apr 2025 · Open Energy Hackathon</div>
       <div class="nav-sub-item" data-note="power-africa-openami-2025" data-note-group="events" onclick="showNote('power-africa-openami-2025')">Sep 2025 · OpenAMI @ Power Africa</div>
       <div class="nav-sub-item" data-note="open-energy-hackathon-2026" data-note-group="events" onclick="showNote('open-energy-hackathon-2026')">Apr 2026 · Open Energy Hackathon</div>
-      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · Street-EMS Workshop</div>
+      <div class="nav-sub-item" data-note="power-africa-2026-conference" data-note-group="events" onclick="showNote('power-africa-2026-conference')">Sep 2026 · Power Africa Conference</div>
+      <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · OpenAMI EMS Workshop</div>
     </div>
     <div class="nav-label nav-label-knowledge">Knowledge Base</div>
     <div class="nav-item" data-section="tech-notes" onclick="showSection('tech-notes')">
@@ -1578,9 +1579,16 @@ code {
         <div class="project-card">
           <div class="project-card-head">
             <span class="tag tag-planning">Planning</span>
-            <span class="project-name">Power Africa Conference — Workshop</span>
+            <span class="project-name">Power Africa Conference 2026</span>
           </div>
-          <div class="project-desc">IEEE ISV <strong>Street-EMS</strong> workshop for in-country minigrid engineers — hands-on MeshEMS kits and aggregation trade-offs. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Open workshop page →</a></div>
+          <div class="project-desc">IEEE PES &amp; IAS Power Africa · Nairobi · 21–25 Sep 2026. Official agenda TBD — <a href="#" onclick="showNote('power-africa-2026-conference');return false">wiki hub →</a> · <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org ↗</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-planning">Planning</span>
+            <span class="project-name">OpenAMI EMS Workshop</span>
+          </div>
+          <div class="project-desc">MAKE · CODE · INTEGRATE hands-on <strong>Street-EMS</strong> track for in-country minigrid engineers — take-home MeshEMS kits and aggregation trade-offs. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Workshop page →</a></div>
         </div>
         <div class="project-section-label">Stable infrastructure</div>
         <div class="project-card project-card-stable">
@@ -2268,12 +2276,20 @@ const MEETING_NOTES = {
     src: 'open-energy-hackathon-2026.html?embed=1&v=20260629',
     standalone: 'open-energy-hackathon-2026.html'
   },
+  'power-africa-2026-conference': {
+    group: 'events',
+    title: 'Power Africa Conference 2026',
+    date: 'Sep 2026',
+    sub: 'Nairobi · IEEE PES & IAS · official site links',
+    src: 'power-africa-2026-conference.html?embed=1&v=20260630',
+    standalone: 'power-africa-2026-conference.html'
+  },
   'power-africa-2026-workshop-planning': {
     group: 'events',
-    title: 'Street-EMS workshop · Power Africa',
+    title: 'OpenAMI EMS Workshop',
     date: 'Sep 2026',
-    sub: 'Nairobi · Make · Code · Integrate · take-home kits',
-    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260629',
+    sub: 'Nairobi · MAKE · CODE · INTEGRATE · take-home kits',
+    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260630',
     standalone: 'power-africa-2026-workshop-planning.html'
   }
 };
