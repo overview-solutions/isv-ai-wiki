@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "isv-ai-wiki (PUBLIC)",
+      "path": "."
+    },
+    {
+      "name": "isv-ai-wiki-private (PRIVATE — do not publish)",
+      "path": "../isv-ai-wiki-private"
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/.git": true
+    },
+    "files.associations": {
+      "AGENTS.md": "markdown",
+      "SHARING-POLICY.md": "markdown"
+    }
+  },
+  "extensions": {
+    "recommendations": []
+  }
+}

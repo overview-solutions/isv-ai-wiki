@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSEAS 2026 · ISV Hackathon Challenge · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 0.75rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+.overview-cards { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 1.25rem; }
+.overview-card {
+  border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem 0.95rem; background: var(--bg-2);
+  display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; align-items: baseline;
+}
+.overview-val { font-size: 22px; font-weight: 500; line-height: 1; grid-row: span 2; align-self: center; color: var(--green); }
+.overview-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.overview-detail { font-size: 12px; color: var(--text-2); line-height: 1.4; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
+  font-size: 14px; line-height: 1.55;
+}
+.callout > strong:first-child { display: block; margin-bottom: 0.4rem; font-weight: 500; color: var(--green); }
+.callout p:last-child { margin-bottom: 0; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+.todo { color: var(--text-2); font-style: italic; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 13px; padding: 0.45rem 0.85rem; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+.links a:hover { border-color: var(--green); color: var(--green); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+@media (min-width: 768px) { .overview-cards { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>OSEAS 2026</h1>
+  <p class="sub">Open Source in Energy Access Symposium · Kigali, Rwanda · 26–27 Oct 2026 · <a href="https://www.oseas.org/" target="_blank" rel="noopener">oseas.org ↗</a></p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/oseas-2026" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div class="overview-cards">
+    <div class="overview-card">
+      <div class="overview-val">3.0</div>
+      <div class="overview-title">Third annual OSEAS</div>
+      <div class="overview-detail">Abuja 2024 · Nairobi 2025 · Kigali 2026</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-val">26–27</div>
+      <div class="overview-title">Symposium dates</div>
+      <div class="overview-detail">Oct 2026 · working groups · poster fair · hackathon</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-val">+2d</div>
+      <div class="overview-title">Forum overlap</div>
+      <div class="overview-detail">Global Off-Grid Solar Forum runs 27–29 Oct at Kigali Convention Centre</div>
+    </div>
+  </div>
+
+  <p class="body-text">OSEAS is the global symposium for open-source innovation in energy access — co-organized by <a href="https://enaccess.org/" target="_blank" rel="noopener">EnAccess</a> and the <a href="https://www.wri.org/initiatives/polsky-center-global-energy-transition" target="_blank" rel="noopener">WRI Polsky Center</a>, with <a href="https://www.africa.engineering.cmu.edu/" target="_blank" rel="noopener">Carnegie Mellon University Africa</a> as the 2026 hosting partner. The 2026 program adds expanded working groups, a product fair, donor roundtable, site visit, and an improved hackathon.</p>
+
+  <h2>Same week in Kigali</h2>
+  <table>
+    <thead><tr><th>Event</th><th>Dates</th><th>Venue / notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong><a href="https://www.oseas.org/" target="_blank" rel="noopener">OSEAS 2026</a></strong></td>
+        <td>26–27 Oct 2026</td>
+        <td>Open Source in Energy Access Symposium — hackathon, demos, working groups</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.offgridsolarforum.org/" target="_blank" rel="noopener">Global Off-Grid Solar Forum &amp; Expo</a></strong></td>
+        <td>27–29 Oct 2026</td>
+        <td>Kigali Convention Centre — industry expo &amp; policy forum</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="body-text">The two events run <strong>in parallel</strong> in the same week and venue ecosystem. ISV Tech Comm attendance can span both — open-stack builders at OSEAS and minigrid / DRE operators at the Forum.</p>
+
+  <div class="callout">
+    <strong>ISV @ OSEAS hackathon</strong>
+    <p>IEEE Smart Village will contribute a <strong>code challenge</strong> to the OSEAS 2026 hackathon. Challenge brief, judging criteria, and starter repos are <span class="todo">in planning</span> — aligned with ISV’s <a href="index.html#meter-study/openami">OpenAMI</a> and <a href="index.html#meter-study/meshems">MeshEMS / Street-EMS</a> stacks (multi-tenant metering, northbound interoperability, village-scale EMS).</p>
+    <p>Expect themes around open tools that help in-country teams deploy, operate, and sustain community electrification — not slide decks. Details will be posted here and coordinated with EnAccess as the symposium program firms up.</p>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>Registration</strong>
+    <p>OSEAS 2026 registration is open on the official site. Forum registration is separate on <a href="https://www.offgridsolarforum.org/" target="_blank" rel="noopener">offgridsolarforum.org</a>.</p>
+  </div>
+
+  <h2>Who should join (from organizers)</h2>
+  <ul>
+    <li>Clean energy entrepreneurs and DRE companies</li>
+    <li>Researchers, academia, and open-source community members</li>
+    <li>NGOs, civil society, donors, and policymakers</li>
+    <li>Technology innovators building interoperable energy access tools</li>
+  </ul>
+
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://www.oseas.org/" target="_blank" rel="noopener">oseas.org ↗</a>
+    <a href="https://www.offgridsolarforum.org/" target="_blank" rel="noopener">offgridsolarforum.org ↗</a>
+    <a href="https://hub.wri.org/events/2026/10/open-source-energy-access-symposium-2026" target="_blank" rel="noopener">WRI Hub listing ↗</a>
+    <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI ↗</a>
+  </div>
+
+  <h2>Related on this wiki</h2>
+  <ul>
+    <li><a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop</a> · Nairobi · Sep 2026 — hands-on Street-EMS track ahead of OSEAS</li>
+    <li><a href="open-energy-hackathon-2026.html">Open Energy Hackathon 2026</a> · Oakland · Apr 2026 — prior ISV hackathon thread</li>
+    <li><a href="power-africa-openami-presentation-2025.html">OpenAMI @ Power Africa 2025</a> · Nairobi · prior East Africa open-stack gathering</li>
+    <li><a href="index.html#meter-study/overview">Meter Interoperability</a> · northbound MQTT · VMRS · vendor study</li>
+  </ul>
+</div>
+</body>
+</html>
