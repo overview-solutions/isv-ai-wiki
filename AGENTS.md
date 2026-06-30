@@ -69,6 +69,48 @@ isv-ai-wiki/
 
 ---
 
+## Public / private split (read before committing)
+
+This repo (`isv-ai-wiki`) is **public**. A second repo, **`overview-solutions/isv-ai-wiki-private`**, holds material that must not be on the open web. The governance rules are in [`SHARING-POLICY.md`](SHARING-POLICY.md) (human-facing, also public). This section is the machine-oriented version.
+
+### The boundary is one-directional
+
+Private context may *inform* public writing in the abstract, but **no private fact, name, direct contact, price, or NDA-quoted text is ever written into a file in this public repo.** When both repos are open in the same editor (see Cursor workflow below), treat `isv-ai-wiki-private/` as **read-only context, never a copy source** for public files.
+
+### What is private (never commit to `isv-ai-wiki`)
+
+| Category | Examples |
+|----------|----------|
+| **Outreach contacts & status** | Named individuals, personal/direct emails, WeChat/WhatsApp, "who replied / who intro'd / negotiation state". *Exception:* a vendor's own **published generic** address (`info@`, `sales@`) is public. |
+| **Unpublished pricing / terms** | Real quoted `$/connection`, discounts, NDA pricing. Public study uses **industry bands** only ($40–110 cited). |
+| **NDA-gated technical docs** | DLMS interop guides, ICDs, restricted datasheets. Public wiki may *name* the doc and cite it as ISV-internal; never host or quote restricted contents. |
+| **Internal people / partner details** | Personal contact info, partner internal notes, unconsented individuals. Self-published staff contact (e.g. chair's IEEE email) is exempt. |
+
+### When a note mixes public and private
+
+Split it. Public reasoning stays here; private specifics go to `isv-ai-wiki-private`; the public file links across as **"ISV-internal — access on request."** Never inline the private part "just for now."
+
+### Cursor / AI shared-context workflow
+
+The intended editing setup loads **both** repos as siblings so an assistant has full context while respecting the boundary:
+
+```
+ISV/                       ← parent folder (open this in Cursor, or use the workspace file)
+├── isv-ai-wiki/           ← PUBLIC — this repo
+└── isv-ai-wiki-private/      ← PRIVATE — clone beside it, never published
+```
+
+- Open [`isv-wiki.code-workspace`](isv-wiki.code-workspace) in Cursor/VS Code for a ready multi-root view of both repos. (Harmless if the private folder isn't cloned yet — it shows empty.)
+- The private repo carries its **own** `AGENTS.md` describing its contents; read both.
+- **Commit discipline:** every change destined for `isv-ai-wiki` must pass the categories table above. Before you stage a public commit, scan the diff for emails of named individuals, real prices, and NDA text. When unsure, it is private.
+- The reverse is fine: pulling a *public* citation or band *into* a private working doc is allowed.
+
+### Trust hierarchy note
+
+In the trust hierarchy below, **ISV-internal** sources (item 5) now live in `isv-ai-wiki-private`, not inline in public files. Cite them as ISV-internal; do not paste their restricted contents here.
+
+---
+
 ## How navigation works
 
 ### Single-page app shell
@@ -245,7 +287,8 @@ When editing this repo:
 5. **Report enrichments** — edit `technical-notes/catalog.json` for `isvRelevance` / `relatedMeetingNotes`; optional `python3 technical-notes/sync-catalog.py` to refresh stubs (`syncProtected` entries preserved).
 6. **Don't** edit `index.html` mission/standards prose unless the user asked — scope to the task.
 7. **Don't** commit secrets (Mapbox tokens, API keys). Map token is a GitHub Actions secret.
-8. **Prefer** updating existing study tables over spawning duplicate markdown vendor lists.
+8. **Don't** commit private material — named contacts, real pricing, NDA docs, unconsented personal details. See *Public / private split* above and [`SHARING-POLICY.md`](SHARING-POLICY.md). Those belong in `isv-ai-wiki-private`.
+9. **Prefer** updating existing study tables over spawning duplicate markdown vendor lists.
 
 ### Common tasks → files
 
@@ -267,7 +310,8 @@ When editing this repo:
 
 | Resource | URL |
 |----------|-----|
-| This wiki (GitHub) | `https://github.com/overview-solutions/isv-ai-wiki` |
+| This wiki (GitHub, **public**) | `https://github.com/overview-solutions/isv-ai-wiki` |
+| Private companion repo (**access-controlled**) | `https://github.com/overview-solutions/isv-ai-wiki-private` — contacts, pricing, NDA docs; see [`SHARING-POLICY.md`](SHARING-POLICY.md) |
 | Dev Labs reports source | `https://github.com/rahulbhargavain/openami-smart-village` |
 | Funded projects map data | `https://github.com/overview-solutions/RemoteMonitorMap` |
 | Legacy DokuWiki | `http://34.125.138.210/` |

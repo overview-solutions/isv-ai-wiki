@@ -4,6 +4,14 @@ Static wiki for the IEEE Smart Village working group. **No install, no build ste
 
 **AI assistants:** read [`AGENTS.md`](AGENTS.md) first — navigation, trust hierarchy, meter benchmark framework, and contributor rules.
 
+## Public by default, private by necessity
+
+This wiki is **open** — anyone can read it. A small amount of material (vendor contacts and outreach status, real pricing, NDA-gated docs, unconsented personal details) is kept in a **separate access-controlled repo**, [`isv-ai-wiki-private`](https://github.com/overview-solutions/isv-ai-wiki-private). We publish the rules so you can see exactly what we protect and why:
+
+- **[`SHARING-POLICY.md`](SHARING-POLICY.md)** — what's public, what's private, and how to request access (this doc is itself public, on purpose).
+- Contributors & AI assistants: the boundary is one-directional — private may inform public in the abstract, but no private fact, name, price, or NDA quote is ever copied into a public file. See [`AGENTS.md`](AGENTS.md) → *Public / private split*.
+- Editing both at once? Open [`isv-wiki.code-workspace`](isv-wiki.code-workspace) in Cursor/VS Code for a multi-root view of both repos as shared context.
+
 ## Try it (30 seconds)
 
 **Live:** [overview-solutions.github.io/isv-ai-wiki](https://overview-solutions.github.io/isv-ai-wiki)
