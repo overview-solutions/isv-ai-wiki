@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Problems · Meter Interoperability · ISV</title>
+<title>Problems · Village Metering · ISV</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="css/meter-focus.css">
@@ -25,11 +25,8 @@ h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 .compare-tbl { font-size: 11px; }
 .compare-tbl th { font-size: 10px; }
 .compare-tbl td { vertical-align: top; line-height: 1.35; padding: 0.4rem 0.5rem; }
-.pill-u, .pill-v, .pill-both { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 8px; }
-.pill-u { background: var(--amber-50); color: var(--amber); }
-.pill-v { background: var(--green-50); color: var(--green); }
-.pill-both { background: var(--teal-50); color: var(--teal); }
-html.embed .back { display: none; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 12px; line-height: 1.45; }
+.callout > strong:first-child { color: var(--teal); }
 </style>
 </head>
 <body>
@@ -41,107 +38,317 @@ html.embed .back { display: none; }
   </button>
 </div>
 <div class="wrap">
-  <div class="back"><a href="index.html#meter-study/problems-today">← Meter Interoperability</a></div>
+  <div class="back"><a href="index.html#meter-study">← Village Metering</a></div>
 
-  <h1>Problems</h1>
-  <p class="sub">Utility AMI vs village minimum · OSI-inspired layers (not a protocol stack)</p>
+  <h1>Problems to solve</h1>
+  <p class="sub">What village and mini-grid operators need from metering — and how ISV is helping</p>
 
-  <p class="lead">Same ecosystem layers — payment, semantics, formats, protocols, physical — but villages narrow the contract at the <strong>gateway</strong>. Green line = normalize southbound (DLMS/OEM/Modbus) to northbound MQTT/JSON. Acronym definitions are on OBIS · VMRS.</p>
+  <p class="lead">A rural utility with 200 customers cannot run like a city grid with 500,000 meters. Operators still need to <strong>bill fairly</strong>, <strong>cut off non-payers</strong>, and <strong>find stolen power</strong> — without spending more on meters than on solar panels. <a href="index.html#meter-study/scope">Who we mean by “village”</a> · cited population and access context. Below: field problems and practical approaches.</p>
 
-  <div class="landscape-wrap">
-    <svg viewBox="0 0 720 468" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering layers utility vs village">
-      <text x="198" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Utility AMI</text>
-      <text x="522" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Village minimum</text>
-      <line x1="360" y1="4" x2="360" y2="430" stroke="var(--border)" stroke-dasharray="4 3"/>
-      <line x1="372" y1="72" x2="372" y2="318" stroke="var(--green)" stroke-width="2"/>
-      <text x="376" y="198" font-size="7" fill="var(--green)" font-weight="600" transform="rotate(90 376 198)">gateway</text>
-      <!-- L7-L1 compact rows -->
-      <text x="6" y="44" font-size="8" font-weight="600" fill="var(--teal)">L7</text>
-      <rect x="56" y="28" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
-      <text x="196" y="46" text-anchor="middle" font-size="8" fill="var(--text)">MDMS · CIS · VEE · regulatory</text>
-      <rect x="368" y="28" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
-      <text x="516" y="46" text-anchor="middle" font-size="8" fill="var(--text)">Operator CRM · MPM · mobile money</text>
-      <text x="6" y="84" font-size="8" font-weight="600" fill="var(--teal)">L6</text>
-      <rect x="56" y="68" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
-      <text x="196" y="86" text-anchor="middle" font-size="8" fill="var(--text)">Complex tariffs · STS + postpaid</text>
-      <rect x="368" y="68" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
-      <text x="516" y="86" text-anchor="middle" font-size="8" fill="var(--text)">STS prepaid · SMS/USSD vending</text>
-      <text x="6" y="124" font-size="8" font-weight="600" fill="var(--teal)">L5</text>
-      <rect x="56" y="108" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
-      <text x="196" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">Full COSEM ICD · all OBIS</text>
-      <text x="196" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">certification matrices</text>
-      <rect x="368" y="108" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
-      <text x="516" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">VMRS · ~10 OBIS keys</text>
-      <text x="516" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">SunSpec = parallel DER track</text>
-      <text x="6" y="164" font-size="8" font-weight="600" fill="var(--teal)">L4</text>
-      <rect x="56" y="148" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
-      <text x="196" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">Profile Generic · load profiles</text>
-      <text x="196" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">15-min buffers for VEE</text>
-      <rect x="368" y="148" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
-      <text x="516" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">JSON/MQTT northbound v0.1</text>
-      <text x="516" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">on-demand reads OK</text>
-      <text x="6" y="204" font-size="8" font-weight="600" fill="var(--teal)">L3</text>
-      <rect x="56" y="188" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
-      <text x="196" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Per-meter HLS · utility PKI</text>
-      <rect x="368" y="188" width="296" height="28" rx="4" fill="var(--teal-50)" stroke="var(--teal)"/>
-      <text x="516" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Gateway TLS · STSA for STS keys</text>
-      <text x="6" y="244" font-size="8" font-weight="600" fill="var(--teal)">L2</text>
-      <rect x="56" y="228" width="280" height="32" rx="4" fill="var(--bg)" stroke="var(--border)"/>
-      <text x="196" y="244" text-anchor="middle" font-size="8" fill="var(--text)">DLMS end-to-end · HES schedules</text>
-      <text x="196" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">GPRS/LTE WAN</text>
-      <rect x="368" y="228" width="296" height="32" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
-      <text x="516" y="244" text-anchor="middle" font-size="8" fill="var(--text)">Any southbound · MQTT north only</text>
-      <text x="516" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">DLMS · OEM RF · Modbus · G3</text>
-      <text x="6" y="284" font-size="8" font-weight="600" fill="var(--teal)">L1</text>
-      <rect x="56" y="268" width="608" height="28" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
-      <text x="360" y="286" text-anchor="middle" font-size="8" fill="var(--text)">Optical · PLC/RF · cellular · CIU · RS-485 — shared physics</text>
-      <!-- cost -->
-      <rect x="56" y="306" width="280" height="24" rx="4" fill="var(--amber-50)" stroke="var(--amber)" stroke-dasharray="3 2"/>
-      <text x="196" y="322" text-anchor="middle" font-size="7" fill="var(--amber)">~$1k+/connection utility AMI</text>
-      <rect x="368" y="306" width="296" height="24" rx="4" fill="var(--green-50)" stroke="var(--green)" stroke-dasharray="3 2"/>
-      <text x="516" y="322" text-anchor="middle" font-size="7" fill="var(--green)">~$58/hh pole EMS target vs $600–1.5k legacy meter</text>
-      <!-- confusion -->
-      <rect x="56" y="338" width="608" height="36" rx="4" fill="none" stroke="var(--teal)" stroke-dasharray="3 2"/>
-      <text x="360" y="354" text-anchor="middle" font-size="8" font-weight="600" fill="var(--teal)">Do not conflate on one RFP line</text>
-      <text x="360" y="366" text-anchor="middle" font-size="7" fill="var(--text-2)">STS=L6+L3 · OBIS 1.8.0=L5 · DLMS read=L2 · MQTT JSON=L4 · SunSpec inverter=L5 DER</text>
-      <!-- path -->
-      <text x="56" y="392" font-size="8" font-weight="600" fill="var(--text)">Village path:</text>
-      <text x="130" y="392" font-size="8" fill="var(--text-2)">Customer/CIU → meter → pole EMS/DCU → local AMI → cloud/MPM</text>
-      <text x="130" y="404" font-size="7" fill="var(--text-3)">OpenAMI stack: <tspan fill="var(--green)">Street Pole EMS</tspan> · MeshEMS · MPM · REIc lab — <tspan fill="var(--green)">Power Africa 2025 deck</tspan></text>
-    </svg>
-    <p class="landscape-caption">Normalize at gateway (green line). OpenAMI mapping: <a href="power-africa-openami-presentation-2025.html">Power Africa Sep 2025</a>.</p>
+  <div class="ps-path">
+    <strong>Simple data path:</strong> Customer pays → credit reaches the meter → meter tracks use → pole box reads the meter → cloud gets one standard JSON report → billing software updates. Payment codes (prepaid tokens) travel on a <em>separate</em> path from meter reads — usually SMS or a keypad — and that is normal.
   </div>
 
-  <div class="tbl-wrap">
-    <table class="compare-tbl">
-      <thead><tr><th>Layer</th><th>Utility</th><th>Village</th><th>Common mistake</th></tr></thead>
-      <tbody>
-        <tr><td>L7</td><td><span class="pill-u">MDMS</span></td><td><span class="pill-v">Operator billing</span></td><td>Buying MDMS for 200 meters</td></tr>
-        <tr><td>L6</td><td><span class="pill-both">STS+postpaid</span></td><td><span class="pill-v">STS prepaid</span></td><td>Token SMS ≠ meter protocol</td></tr>
-        <tr><td>L5</td><td><span class="pill-u">Full ICD</span></td><td><span class="pill-v">VMRS subset</span></td><td>Full COSEM in village RFP</td></tr>
-        <tr><td>L4</td><td><span class="pill-u">Profile Generic</span></td><td><span class="pill-v">MQTT JSON</span></td><td>Intervals without analytics plan</td></tr>
-        <tr><td>L3</td><td><span class="pill-u">Per-meter HLS</span></td><td><span class="pill-v">Gateway TLS</span></td><td>DLMS keys on rural WAN</td></tr>
-        <tr><td>L2</td><td><span class="pill-both">DLMS e2e</span></td><td><span class="pill-v">Any south · MQTT north</span></td><td>One NAN vendor globally</td></tr>
-        <tr><td>L1</td><td colspan="2"><span class="pill-both">Same hardware</span></td><td>Ignoring CIU when DCU down</td></tr>
-      </tbody>
-    </table>
+  <div class="ps-section">
+    <h2>Billing &amp; payment</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Know how much each customer used</td>
+            <td>Flat village tariffs hide freeloaders; you cannot bill fairly without a per-home kWh read.</td>
+            <td>Revenue meter at each connection; <a href="index.html#meter-study/vmrs">minimum register checklist</a> starts with cumulative import kWh.</td>
+          </tr>
+          <tr>
+            <td>Collect payment before or as energy is used</td>
+            <td>Post-paid rural accounts go unpaid; operators need cash flow to fix lines and fuel gensets.</td>
+            <td>Prepaid meters; <a href="index.html#meter-study/vendor-study">vendor study</a> scores token-capable models; <a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a> for accounts and mobile money.</td>
+          </tr>
+          <tr>
+            <td>Deliver prepaid credit to the meter</td>
+            <td>Customer paid at a shop or on a phone — energy must still reach their meter.</td>
+            <td>20-digit token entry at meter or <strong>customer interface unit</strong> (wall keypad); SMS/USSD vending; industry-standard token format (<abbr title="Standard Transfer Specification">STS</abbr>) or open <a href="https://github.com/enaccess/OpenPAYGO-Token" target="_blank" rel="noopener">OpenPAYGO</a>.</td>
+          </tr>
+          <tr>
+            <td>Show remaining balance</td>
+            <td>Households need to know when to buy more; support calls drop when balance is visible locally.</td>
+            <td>CIU display or vendor app; northbound read of credit register where meter exposes it — see <a href="meter-benchmark/vmrs-registers.json">register checklist</a>.</td>
+          </tr>
+          <tr>
+            <td>Audit who received which token</td>
+            <td>Disputes and fraud investigations need a last-token trail.</td>
+            <td>Vendor-dependent audit register; optional tier in VMRS; vending system logs from operator CRM.</td>
+          </tr>
+          <tr>
+            <td>Keep the grid funded (O&amp;M revenue)</td>
+            <td>Without steady collections, lines stay broken and diesel runs out.</td>
+            <td>Reliable prepaid + at least one <strong>anchor business</strong> on the feeder paying year-round; see <a href="stonehenge-microgrid-topology.html">Circles of Power</a> notes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>Cutoffs &amp; control</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Disconnect non-paying customers</td>
+            <td>Physical pole climbs are expensive and dangerous; credit exhausted should mean power off.</td>
+            <td>Internal relay in smart meter; remote disconnect command over meter protocol; register checklist includes disconnect state.</td>
+          </tr>
+          <tr>
+            <td>Reconnect after payment</td>
+            <td>Truck rolls for reconnect kill revenue; should be automatic once credit is restored.</td>
+            <td>Same relay + token or remote reconnect from billing platform; test in <a href="index.html#meter-study/vendor-study">vendor POC</a> before fleet buy.</td>
+          </tr>
+          <tr>
+            <td>Control several homes from one pole</td>
+            <td>Pole-mounted distribution is common; one box can host multiple meters and relays.</td>
+            <td><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">Street Pole EMS</a> prototype — multiple meters + relays per pole; <a href="index.html#meter-study/meshems">MeshEMS board</a> for lab and pilot builds.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>Theft, leakage &amp; losses</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Illegal taps and bypasses</td>
+            <td>Energy leaves the feeder without passing a meter; honest customers subsidize thieves.</td>
+            <td>Tamper and cover-open alarms on revenue meters; per-customer reads vs feeder total; field patrol triggered by alarms.</td>
+          </tr>
+          <tr>
+            <td>Unmetered load on the feeder</td>
+            <td>Aggregate feeder meter minus sum of customers reveals hidden use — if you have both reads.</td>
+            <td>Feeder-level CT + customer meters; <a href="index.html#meter-study/openami">OpenAMI</a> telemetry at the edge; pole EMS aggregation.</td>
+          </tr>
+          <tr>
+            <td>Continuous leakage on low-voltage lines</td>
+            <td>Faulty insulation or equipment draws power 24/7; hard to spot with monthly reads only.</td>
+            <td>Residual-current monitoring at feeder edge; <a href="oseas-2026.html">OSEAS 2026 challenge</a> theme (leakage detection on pole EMS); on-demand power reads for anomaly flags.</td>
+          </tr>
+          <tr>
+            <td>Neutral imbalance on three-phase feeders</td>
+            <td>Voltage sag, overheated neutrals, unhappy customers — common on village LV networks.</td>
+            <td>Feeder-edge monitoring + alerts; alternate <a href="oseas-2026.html">OSEAS challenge</a> theme (neutral balancing).</td>
+          </tr>
+          <tr>
+            <td>Two meters disagree</td>
+            <td>Which read do you bill? Drift &gt;5% needs investigation before trusting revenue data.</td>
+            <td>Calibration and install QA; compare against feeder total; field note from India IPP partners.</td>
+          </tr>
+          <tr>
+            <td>Spot theft without expensive utility analytics</td>
+            <td>Full utility load-profile databases cost too much for 200 meters.</td>
+            <td>Instantaneous power read when suspicion arises; optional interval reads only if you have an analytics plan; lighter <strong>NILM</strong> (signature disaggregation) explored at <a href="stonehenge-microgrid-topology.html">2025 hackathon</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>Visibility &amp; operations</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Voltage problems at the home</td>
+            <td>Brownouts damage appliances and hint at overloaded feeders.</td>
+            <td>Voltage register on revenue meter; alarm thresholds in billing or EMS software.</td>
+          </tr>
+          <tr>
+            <td>See power use right now</td>
+            <td>Theft and overload show up in watts before they show up in monthly kWh.</td>
+            <td>Instantaneous power in register checklist; northbound JSON on change or poll.</td>
+          </tr>
+          <tr>
+            <td>Trust meter time and identity</td>
+            <td>Wrong clock corrupts billing periods; wrong serial bills the wrong house.</td>
+            <td>Clock sync at gateway; serial number in every northbound message — <a href="meter-benchmark/northbound-mqtt-v0.1.json">JSON profile v0.1</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>Affordability</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Meters cost as much as generation</td>
+            <td>Legacy prepaid installs at $600–1,500 per home can exceed solar hardware spend.</td>
+            <td>Target ~$58/household pole EMS path vs legacy meter; industry bands $40–110 cited in <a href="index.html#meter-study/vendor-study">vendor study</a>; buy only registers you need.</td>
+          </tr>
+          <tr>
+            <td>Utility-grade software priced for utilities</td>
+            <td>Full billing and MDMS suites assume millions of meters, not hundreds.</td>
+            <td>Open operator tools (<a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MPM</a>); minimum cloud data contract instead of full AMI stack — see <a href="index.html#meter-study/overview">overview</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>When communications fail</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Cloud cannot reach meters today</td>
+            <td>Rural GPRS, mesh, and pole uplinks fail often; operator still blind to field state.</td>
+            <td>Redundant radio paths (RF mesh + PLC); <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 topology notes</a>; proposed phone-as-relay uplink when pole gateway is down.</td>
+          </tr>
+          <tr>
+            <td>Prepaid still works but office does not know</td>
+            <td>Meters keep consuming local credit when link is down; CIU may hold stats cloud wants.</td>
+            <td>STS tokens via SMS without live meter feedback; sync CIU or meter when link returns; do not assume always-on cloud reads.</td>
+          </tr>
+          <tr>
+            <td>Customer cannot buy credit because network is down</td>
+            <td>Token vending should not require the same broken path as scheduled meter reads.</td>
+            <td>Separate SMS/USSD vending channel; local token entry at CIU; <a href="tech-comm-2026-05-28-metering-topology.html">redundant channel table</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <h2>Integration &amp; long-term freedom</h2>
+    <div class="tbl-wrap">
+      <table class="ps-table">
+        <thead><tr><th>Problem</th><th>Why it hurts</th><th>Approaches we're tracking</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Hook billing to mobile money and CRM</td>
+            <td>Operators run on M-Pesa and spreadsheets; meter data must land in one place.</td>
+            <td>Northbound REST/MQTT to operator platform; EnAccess MPM; vendor cloud where acceptable — score APIs in <a href="index.html#meter-study/vendor-study">vendor study</a>.</td>
+          </tr>
+          <tr>
+            <td>Every meter brand speaks a different language</td>
+            <td>Swapping vendor means rewriting integrations.</td>
+            <td>Pole <strong>gateway</strong> reads vendor protocol locally, publishes one <a href="meter-benchmark/northbound-mqtt-v0.1.json">JSON/MQTT shape</a> northbound — mixed fleets on one feeder.</td>
+          </tr>
+          <tr>
+            <td>Vendor exit strands installed meters</td>
+            <td>Closed mesh + cloud bundles block migration.</td>
+            <td>Open northbound contract; document gaps in POC matrices; <a href="power-africa-openami-presentation-2025.html">OpenAMI roadmap</a>.</td>
+          </tr>
+          <tr>
+            <td>Confuse customer meters with solar inverter monitoring</td>
+            <td>DER monitoring (generation) is a different job from revenue metering (billing).</td>
+            <td>Separate procurement columns; inverter data via <a href="https://sunspec.org" target="_blank" rel="noopener">SunSpec</a> track — not mixed into prepaid token path.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Where ISV fits</strong>
+    <p>IEEE Smart Village does not sell meters. The Tech Committee publishes <strong>draft</strong> checklists and test results so operators, integrators, and vendors argue from the same field problems — then cite evidence in <a href="index.html#meter-study/vendor-study">vendor study</a> and anchor pilots (SteamaCo, Darway). See <a href="index.html#meter-study/overview">overview</a> for how ISV fits.</p>
   </div>
 
   <details>
-    <summary>Layer interactions &amp; field failures</summary>
-    <ul style="margin:0.5rem 0 0;padding-left:1.2rem;font-size:12px;color:var(--text-2)">
-      <li><strong>L6≠L5:</strong> STS is payment/keys; OBIS is register meaning — map via vendor ICD (tier B).</li>
-      <li><strong>L4:</strong> Villages skip Profile Generic unless theft analytics need intervals.</li>
-      <li><strong>L3:</strong> One DLMS association at gateway + TLS MQTT shrinks rural trust surface.</li>
-      <li><strong>DER vs revenue:</strong> SunSpec on inverters ≠ STS billing registers — separate procurement columns.</li>
-      <li><strong>Vendor exit:</strong> Closed stacks (SparkMeter) strand installed base — <a href="power-africa-openami-presentation-2025.html">OpenAMI deck</a>.</li>
-      <li><strong>OEM keys:</strong> Proprietary RF blocks second-source DCUs — <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a>.</li>
-    </ul>
+    <summary>For integrators: utility stack vs village minimum (layer diagram)</summary>
+    <p class="lead" style="margin-top:0.5rem;font-size:12px">Utilities buy enormous certification and MDMS scope. Villages need the same <em>outcomes</em> (bill, disconnect, tamper) with a thinner contract at the pole gateway. Green line = normalize whatever the meter speaks locally into one northbound JSON report.</p>
+    <div class="landscape-wrap">
+      <svg viewBox="0 0 720 468" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Metering layers utility vs village">
+        <text x="198" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">City utility stack</text>
+        <text x="522" y="16" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Village minimum</text>
+        <line x1="360" y1="4" x2="360" y2="430" stroke="var(--border)" stroke-dasharray="4 3"/>
+        <line x1="372" y1="72" x2="372" y2="318" stroke="var(--green)" stroke-width="2"/>
+        <text x="376" y="198" font-size="7" fill="var(--green)" font-weight="600" transform="rotate(90 376 198)">gateway</text>
+        <text x="6" y="44" font-size="8" font-weight="600" fill="var(--teal)">L7</text>
+        <rect x="56" y="28" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+        <text x="196" y="46" text-anchor="middle" font-size="8" fill="var(--text)">Full billing suite · regulatory</text>
+        <rect x="368" y="28" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+        <text x="516" y="46" text-anchor="middle" font-size="8" fill="var(--text)">Operator CRM · mobile money</text>
+        <text x="6" y="84" font-size="8" font-weight="600" fill="var(--teal)">L6</text>
+        <rect x="56" y="68" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+        <text x="196" y="86" text-anchor="middle" font-size="8" fill="var(--text)">Complex tariffs · prepaid + postpaid</text>
+        <rect x="368" y="68" width="296" height="28" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+        <text x="516" y="86" text-anchor="middle" font-size="8" fill="var(--text)">Prepaid tokens · SMS vending</text>
+        <text x="6" y="124" font-size="8" font-weight="600" fill="var(--teal)">L5</text>
+        <rect x="56" y="108" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
+        <text x="196" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">Every register defined</text>
+        <text x="196" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">certification matrices</text>
+        <rect x="368" y="108" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+        <text x="516" y="124" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">~10 billing registers</text>
+        <text x="516" y="136" text-anchor="middle" font-size="7" fill="var(--text-2)">inverter data = separate track</text>
+        <text x="6" y="164" font-size="8" font-weight="600" fill="var(--teal)">L4</text>
+        <rect x="56" y="148" width="280" height="32" rx="4" fill="var(--red-50)" stroke="var(--red)"/>
+        <text x="196" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">15-min load profiles</text>
+        <text x="196" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">for utility analytics</text>
+        <rect x="368" y="148" width="296" height="32" rx="4" fill="var(--green-50)" stroke="var(--green)"/>
+        <text x="516" y="164" text-anchor="middle" font-size="8" font-weight="600" fill="var(--text)">JSON/MQTT northbound v0.1</text>
+        <text x="516" y="176" text-anchor="middle" font-size="7" fill="var(--text-2)">read on demand OK</text>
+        <text x="6" y="204" font-size="8" font-weight="600" fill="var(--teal)">L3</text>
+        <rect x="56" y="188" width="280" height="28" rx="4" fill="var(--amber-50)" stroke="var(--amber)"/>
+        <text x="196" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Per-meter encryption keys</text>
+        <rect x="368" y="188" width="296" height="28" rx="4" fill="var(--teal-50)" stroke="var(--teal)"/>
+        <text x="516" y="206" text-anchor="middle" font-size="8" fill="var(--text)">Gateway TLS · token key mgmt</text>
+        <text x="6" y="244" font-size="8" font-weight="600" fill="var(--teal)">L2</text>
+        <rect x="56" y="228" width="280" height="32" rx="4" fill="var(--bg)" stroke="var(--border)"/>
+        <text x="196" y="244" text-anchor="middle" font-size="8" fill="var(--text)">One wire protocol end-to-end</text>
+        <text x="196" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">cellular to every meter</text>
+        <rect x="368" y="228" width="296" height="32" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
+        <text x="516" y="244" text-anchor="middle" font-size="8" fill="var(--text)">Any meter protocol in · MQTT out</text>
+        <text x="516" y="256" text-anchor="middle" font-size="7" fill="var(--text-2)">RF mesh · PLC · Modbus</text>
+        <text x="6" y="284" font-size="8" font-weight="600" fill="var(--teal)">L1</text>
+        <rect x="56" y="268" width="608" height="28" rx="4" fill="var(--bg-3)" stroke="var(--border)"/>
+        <text x="360" y="286" text-anchor="middle" font-size="8" fill="var(--text)">Wires · radio · keypad · cellular — same physical world</text>
+        <rect x="56" y="306" width="280" height="24" rx="4" fill="var(--amber-50)" stroke="var(--amber)" stroke-dasharray="3 2"/>
+        <text x="196" y="322" text-anchor="middle" font-size="7" fill="var(--amber)">~$1k+/connection utility AMI</text>
+        <rect x="368" y="306" width="296" height="24" rx="4" fill="var(--green-50)" stroke="var(--green)" stroke-dasharray="3 2"/>
+        <text x="516" y="322" text-anchor="middle" font-size="7" fill="var(--green)">~$58/hh pole EMS target vs $600–1.5k legacy meter</text>
+        <rect x="56" y="338" width="608" height="36" rx="4" fill="none" stroke="var(--teal)" stroke-dasharray="3 2"/>
+        <text x="360" y="354" text-anchor="middle" font-size="8" font-weight="600" fill="var(--teal)">Do not paste utility RFP lines into village tenders</text>
+        <text x="360" y="366" text-anchor="middle" font-size="7" fill="var(--text-2)">Tokens ≠ meter reads · inverter data ≠ customer billing · one JSON contract at gateway</text>
+        <text x="56" y="392" font-size="8" font-weight="600" fill="var(--text)">Village path:</text>
+        <text x="130" y="392" font-size="8" fill="var(--text-2)">Customer keypad → meter → pole box → operator cloud</text>
+        <text x="130" y="404" font-size="7" fill="var(--text-3)">Hardware: Street Pole EMS · MeshEMS · OpenAMI deck (Sep 2025)</text>
+      </svg>
+      <p class="landscape-caption">Acronym definitions and register codes: <a href="index.html#meter-study/vmrs">Register checklist (VMRS)</a>. OpenAMI mapping: <a href="power-africa-openami-presentation-2025.html">Power Africa Sep 2025</a>.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="compare-tbl">
+        <thead><tr><th>Layer</th><th>Utility habit</th><th>Village need</th><th>Common mistake</th></tr></thead>
+        <tbody>
+          <tr><td>L7</td><td>Full MDMS</td><td>Operator billing app</td><td>Buying MDMS for 200 meters</td></tr>
+          <tr><td>L6</td><td>Prepaid + postpaid</td><td>Prepaid tokens</td><td>Treating SMS token as meter protocol</td></tr>
+          <tr><td>L5</td><td>All registers</td><td>~10 billing registers</td><td>Full meter dictionary in village RFP</td></tr>
+          <tr><td>L4</td><td>15-min profiles</td><td>JSON on demand</td><td>Interval reads without analytics plan</td></tr>
+          <tr><td>L3</td><td>Per-meter keys</td><td>Gateway encryption</td><td>Exposing meter keys on rural WAN</td></tr>
+          <tr><td>L2</td><td>One protocol everywhere</td><td>Any in · MQTT out</td><td>One radio vendor for all countries</td></tr>
+          <tr><td>L1</td><td colspan="2">Same wires and radios</td><td>Forgetting keypad works when pole link is down</td></tr>
+        </tbody>
+      </table>
+    </div>
   </details>
 
   <p class="meter-footer">
+    <a href="index.html#meter-study/overview">Overview</a> ·
+    <a href="index.html#meter-study/vmrs">Register checklist</a> ·
     <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound JSON</a> ·
-    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a>
+    <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 comms notes</a>
   </p>
 </div>
 </body>

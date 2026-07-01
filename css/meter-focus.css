@@ -1,4 +1,4 @@
-/* Shared compact layout for Meter Interoperability pages (especially embed) */
+/* Shared compact layout for Village Metering pages (especially embed) */
 html.embed body { font-size: 14px; }
 html.embed .wrap { padding: 0.75rem 1.15rem 1.25rem; max-width: none; }
 html.embed h1 { font-size: 18px; margin-bottom: 0.2rem; }
@@ -35,6 +35,19 @@ html.embed details[open] summary { margin-bottom: 0.5rem; }
 }
 
 .tbl-wrap { overflow-x: auto; margin-bottom: 0.85rem; border: 1px solid var(--border); border-radius: 10px; }
+
+.ps-section { margin-bottom: 1.1rem; }
+.ps-section h2 { font-size: 14px; font-weight: 500; margin: 0 0 0.45rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); color: var(--text); }
+.ps-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ps-table th, .ps-table td { border-bottom: 1px solid var(--border); padding: 0.45rem 0.55rem; text-align: left; vertical-align: top; line-height: 1.4; }
+.ps-table th { background: var(--bg-2); font-size: 10px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.02em; }
+.ps-table tr:last-child td { border-bottom: 0; }
+.ps-table td:first-child { font-weight: 500; color: var(--text); width: 28%; }
+.ps-table td:nth-child(2) { color: var(--text-2); width: 36%; }
+.ps-table td:nth-child(3) { color: var(--text-2); font-size: 11px; }
+.ps-table a { font-size: 11px; }
+.ps-path { font-size: 12px; padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); margin-bottom: 0.85rem; line-height: 1.5; color: var(--text-2); }
+.ps-path strong { color: var(--text); }
 
 @media (max-width: 640px) {
   .dash-grid, .problem-grid { grid-template-columns: 1fr; }

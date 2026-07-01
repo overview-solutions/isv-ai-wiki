@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meter Interoperability · Overview · ISV Tech Comm</title>
+<title>Village Metering · Overview · ISV Tech Comm</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="css/meter-focus.css">
@@ -24,7 +24,6 @@ h2 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; padding-bottom:
 .flow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.5rem; font-size: 12px; margin-bottom: 0.85rem; padding: 0.65rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); line-height: 1.4; }
 .flow-box { padding: 0.35rem 0.55rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--text); }
 .flow-box-north { border-color: var(--green); background: var(--green-50); color: var(--green); font-weight: 500; }
-.flow-arrow { color: var(--text-3); font-size: 11px; }
 .subnav-list { font-size: 13px; margin: 0 0 0.85rem; padding-left: 1.2rem; color: var(--text-2); line-height: 1.5; }
 .subnav-list li { margin-bottom: 0.35rem; }
 .problem-grid div p { margin: 0; font-size: 12px; color: var(--text-2); line-height: 1.45; }
@@ -44,122 +43,133 @@ html.embed .subnav-list { font-size: 12px; }
   </button>
 </div>
 <div class="wrap">
-  <div class="back"><a href="index.html#meter-study">← Meter Interoperability</a></div>
+  <div class="back"><a href="index.html#meter-study">← Village Metering</a></div>
 
-  <h1>Meter Interoperability</h1>
+  <h1>Village Metering</h1>
   <p class="sub">ISV Tech Comm primary endeavor · 2026</p>
-  <p class="lead">Mini-grid and village-energy operators need per-customer energy reads, prepaid billing, and theft visibility — without buying a full utility AMI stack. This section documents how ISV scopes affordable metering: normalize vendor-specific meter data at the <strong>gateway</strong>, publish a small northbound contract, and procure only what a feeder actually needs. <strong>IEEE Smart Village</strong> does not sell meters or head-end software — it uses IEEE’s agnostic place in the ecosystem to help those practices take hold.</p>
-
-  <h2>Why IEEE · why ISV</h2>
-  <p class="body-text">Rural metering stalls when every vendor ships a closed AMI bundle, every tender copies utility MDMS boilerplate, and operators cannot swap gear without rewriting billing. Meter OEMs, integrators, open-platform builders (EnAccess, Energy IoT), and field operators all have legitimate interests — but no single commercial player can credibly write the <em>common</em> contract everyone else must adopt. <strong>IEEE</strong> sits outside those product lines: a neutral forum where ISV’s Technology Committee can convene stakeholders, compare field evidence, and publish reference artifacts without picking a winner.</p>
-  <p class="body-text">That is the picture this section is building toward: a rural energy metering ecosystem that can <strong>flourish</strong> — more integrators bidding on the same scope, operators mixing OEM fleets on one feeder, migration paths when vendors exit, and open gateways that compete on implementation rather than proprietary lock-in. ISV turns alignment into draft specs (northbound MQTT, VMRS tiers, vendor benchmarks, POC gap matrices), validated on real deployments — not certified standards, but shared practice operators and vendors can point to. <strong>OpenAMI</strong> drives <strong>actionable energy telemetry</strong> on the same thread (geo asset model, gateways) — not a separate initiative from <strong>Street Pole EMS</strong>.</p>
-
-  <h2>What ISV is normalizing</h2>
-  <div class="problem-grid">
-    <div>
-      <strong>Procurement scope</strong>
-      <p>Village tenders that paste “Cadillac” utility AMI requirements strand budgets. ISV documents a <strong>minimum viable</strong> northbound contract — what a 50–500 connection feeder actually needs for prepaid billing and theft visibility.</p>
-    </div>
-    <div>
-      <strong>Gateway contract</strong>
-      <p>Southbound stays OEM-specific (DLMS, RF mesh, Modbus). Northbound converges on one MQTT/JSON envelope so HES and MPM integrations are written once, regardless of meter brand under the pole.</p>
-    </div>
-    <div>
-      <strong>Register semantics</strong>
-      <p>OBIS keys are standardized; ICD exposure is not. VMRS tiers separate universal reads from model-specific gaps so procurement and integration arguments happen on a shared checklist, not vendor slide decks.</p>
-    </div>
-    <div>
-      <strong>Field evidence</strong>
-      <p>Anchor POCs (SteamaCo, Darway) publish which registers each model actually exposes — gap matrices operators can cite, integrators can bid against, and vendors can close without a proprietary certification gate.</p>
-    </div>
-  </div>
-
-  <p class="body-text">Primary audience: operators, integrators, and vendors deploying <strong>STS prepaid</strong>, pole-mounted DCUs, and mixed OEM fleets in emerging markets.</p>
+  <p class="lead">Mini-grid operators need to <strong>bill each home</strong>, <strong>shut off non-payers</strong>, and <strong>catch stolen power</strong> — without buying a city-scale metering system. This section documents affordable ways to do that. Start with <a href="index.html#meter-study/scope">who we mean by “village”</a> (population, access, HDI context), then <a href="index.html#meter-study/problems-today"><strong>Problems to solve</strong></a>.</p>
 
   <div class="callout">
-    <strong>Draft artifacts — not IEC/DLMS UA published standards.</strong>
-    <p>Primary machine-readable spec: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. Register appendix: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a>. Human-readable tiers and OBIS keys: <a href="index.html#meter-study/vmrs">OBIS · VMRS</a>.</p>
+    <strong>Start here if you're new</strong>
+    <p><a href="index.html#meter-study/problems-today"><strong>Problems to solve</strong></a> — plain-language list of field needs (prepaid credit, remote disconnect, theft, comms failures) and approaches ISV is tracking. Technical jargon is optional reading below.</p>
   </div>
 
-  <h2>Two deliverables</h2>
+  <h2>Why IEEE · why ISV</h2>
+  <p class="body-text">Rural metering stalls when every vendor ships a closed bundle, every tender copies utility software requirements, and operators cannot swap gear without rewriting billing. Meter makers, integrators, open-platform builders, and field NGOs all have legitimate interests — but no single company can credibly write the <em>common</em> data contract everyone else should adopt. <strong>IEEE Smart Village</strong> sits outside those product lines: a neutral place to compare field evidence and publish draft specs without picking a winner.</p>
+  <p class="body-text">Goal: more integrators bidding on the same scope, mixed meter brands on one feeder, and migration paths when a vendor exits — gateways compete on implementation, not proprietary lock-in.</p>
+
+  <h2>What ISV publishes (draft — not official standards)</h2>
+  <div class="problem-grid">
+    <div>
+      <strong>Problem → solution map</strong>
+      <p><a href="index.html#meter-study/problems-today">Problems page</a> — billing, cutoffs, theft, affordability, comms — each tied to hardware and software approaches.</p>
+    </div>
+    <div>
+      <strong>Minimum meter reads</strong>
+      <p><a href="index.html#meter-study/vmrs">Register checklist</a> — ~10 values every village billing case needs (kWh, credit, tamper, disconnect, clock…).</p>
+    </div>
+    <div>
+      <strong>One cloud data format</strong>
+      <p>Pole gateway reads any meter locally, sends <a href="meter-benchmark/northbound-mqtt-v0.1.json">JSON over MQTT</a> northbound so billing software is written once.</p>
+    </div>
+    <div>
+      <strong>Vendor evidence</strong>
+      <p><a href="index.html#meter-study/vendor-study">Vendor study</a> — cited benchmark tables, contacts, and dead ends from public sources.</p>
+    </div>
+  </div>
+
+  <h2>How data moves (simple view)</h2>
+  <p class="body-text">Each meter brand uses its own wire protocol under the pole. The <strong>edge gateway</strong> (pole box or data concentrator) translates to one northbound report. Prepaid <strong>tokens</strong> are a payment path — SMS, mobile money, keypad — separate from scheduled meter reads.</p>
+  <div class="flow-row" aria-label="Data path from meter to operator">
+    <span class="flow-box">Home meter</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">Radio / wire to pole</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">Pole gateway</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box flow-box-north">Standard JSON report</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box">Billing · mobile money</span>
+  </div>
+
+  <h2>Hardware threads on the same problem set</h2>
   <div class="dash-grid">
     <div class="dash-card dash-card-primary">
-      <h3>Northbound MQTT profile (v0.1)</h3>
+      <h3>Street Pole EMS</h3>
       <ul>
-        <li>JSON envelope from pole EMS / DCU to operator HES or MPM</li>
-        <li>Topic layout, register array, optional SIP session hooks</li>
-        <li>Gateway may speak DLMS, OEM RF, Modbus, or PLC southbound — MQTT/JSON northbound only</li>
+        <li>ESP32 pole box — multiple meters + relays per pole</li>
+        <li>Open firmware: <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a></li>
+        <li>Target ~$58/household vs $600–1.5k legacy meters</li>
       </ul>
     </div>
     <div class="dash-card">
-      <h3>VMRS register checklist</h3>
+      <h3>MeshEMS board</h3>
       <ul>
-        <li>~10 OBIS keys every village billing case needs (import kWh, credit, tamper, disconnect, clock…)</li>
-        <li>Tier&nbsp;A (universal IEC) · Tier&nbsp;B (ICD varies) · Tier&nbsp;C (optional audit)</li>
-        <li>Explicit exclusions: full Profile Generic buffers, utility MDMS semantics, STSA key mgmt</li>
+        <li>Lab and pilot PCB for multi-tenant edge metering</li>
+        <li><a href="index.html#meter-study/meshems">Board page</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL schematic</a></li>
+      </ul>
+    </div>
+    <div class="dash-card">
+      <h3>OpenAMI program</h3>
+      <ul>
+        <li>Actionable feeder telemetry — leakage, aggregation</li>
+        <li><a href="index.html#meter-study/openami">OpenAMI hub</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess</a></li>
+      </ul>
+    </div>
+    <div class="dash-card">
+      <h3>Operator software</h3>
+      <ul>
+        <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a> — accounts, prepaid, reporting</li>
+        <li>Open token alternative: <a href="https://github.com/enaccess/OpenPAYGO-Token" target="_blank" rel="noopener">OpenPAYGO</a></li>
       </ul>
     </div>
   </div>
 
-  <h2>Gateway normalization</h2>
-  <p class="body-text">Southbound protocols differ by meter OEM and NAN (RF mesh, PLC, GPRS). Requiring one wire protocol across a mixed fleet locks you to a single vendor. Instead, the <strong>edge gateway</strong> reads whatever the meter exposes locally, maps registers to OBIS semantics, and publishes one northbound shape.</p>
-  <div class="flow-row" aria-label="Data path from meter to operator">
-    <span class="flow-box">Meter (DLMS / OEM / Modbus)</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-box">NAN (RF · PLC · cellular)</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-box">Pole EMS / DCU</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-box flow-box-north">MQTT / JSON northbound</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-box">Operator HES · MPM · billing</span>
-  </div>
-  <p class="body-text">STS token vending (SMS, USSD, CIU keypad) stays on its own path — it is a <strong>payment layer</strong>, not the meter read protocol. See <a href="index.html#meter-study/problems-today">Problems</a> for the full utility-vs-village layer diagram.</p>
-
-  <h2>Why procurement goes wrong</h2>
+  <h2>Why village tenders go wrong</h2>
   <div class="problem-grid">
     <div>
-      <strong>“Cadillac” RFPs</strong>
-      <p>Consultants and utility AMI playbooks get pasted into village tenders: full MDMS, Profile Generic load profiles, DLMS conformance matrices, and per-meter HLS on rural WAN. That is appropriate for a 500k-meter utility — not for a 200-connection feeder on a $40–110/connection budget. ISV scopes a <strong>minimum viable</strong> northbound contract instead.</p>
+      <strong>Utility scope on a village budget</strong>
+      <p>Consultants paste full billing-suite and 15-minute load-profile requirements into a 200-meter tender. Appropriate for a city — not for a $40–110/connection feeder.</p>
     </div>
     <div>
-      <strong>Layer soup</strong>
-      <p>STS, OBIS, DLMS, MQTT, and SunSpec sit at different layers. A single RFP line like “DLMS + STS + SunSpec” mixes prepaid vending (L6), register semantics (L5), wire protocol (L2), northbound format (L4), and inverter DER (parallel track). <a href="index.html#meter-study/problems-today">Problems</a> maps each layer.</p>
+      <strong>Mixing unlike things</strong>
+      <p>Prepaid tokens, meter reads, inverter monitoring, and cloud format are different layers. One RFP line that says “all protocols” creates impossible bids. See <a href="index.html#meter-study/problems-today">Problems</a> diagram.</p>
     </div>
     <div>
-      <strong>OEM lock-in</strong>
-      <p>Closed AMI platforms (mesh + cloud + MDMS bundle) ship fast but block second-source DCUs and migration. Northbound normalization lets operators swap meter OEMs while keeping one HES integration — if the gateway exposes VMRS-shaped JSON.</p>
+      <strong>Closed vendor bundles</strong>
+      <p>Mesh + cloud + billing from one vendor ships fast but blocks second-source hardware and migration.</p>
     </div>
     <div>
       <strong>Comms fragility</strong>
-      <p>When the DCU or WAN link fails, customers still need STS tokens. CIU keypads, SMS vending, and redundant NAN paths must work independently of scheduled DLMS reads. May 2026 call notes cover SMS token delivery and phone-relay fallbacks.</p>
+      <p>When the pole uplink fails, customers still need tokens and keypads must still work. <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a> on redundant paths.</p>
     </div>
   </div>
 
-  <h2>Sub-pages in this section</h2>
+  <h2>Pages in this section</h2>
   <ul class="subnav-list">
-    <li><a href="index.html#meter-study/problems-today"><strong>Problems</strong></a> — utility AMI vs village minimum; layer diagram and common mistakes</li>
-    <li><a href="index.html#meter-study/vmrs"><strong>OBIS · VMRS</strong></a> — Village Minimum Register Set; register tiers, northbound JSON example, acronym list</li>
-    <li><a href="index.html#meter-study/vendor-study"><strong>Vendor Study</strong></a> — outreach pipeline, protocol scores, cited $/connection bands (web pass only)</li>
-    <li><a href="index.html#meter-study/openami"><strong>OpenAMI</strong></a> — actionable telemetry, stack layers, hardware threads, OSEA Discord</li>
-    <li><a href="index.html#meter-study/meshems"><strong>MeshEMS board</strong></a> — NESL multi-tenant edge metering dev kit; workshops &amp; field deployments; upstream/downstream boundary; technological autonomy</li>
+    <li><a href="index.html#meter-study/scope"><strong>Village scope</strong></a> — who we mean by village; population &amp; access stats; HDI; healthy vs unhealthy modernization</li>
+    <li><a href="index.html#meter-study/problems-today"><strong>Problems to solve</strong></a> — start here; field needs and approaches</li>
+    <li><a href="index.html#meter-study/vendor-study"><strong>Vendor study</strong></a> — who supports prepaid, disconnect, protocols (cited)</li>
+    <li><a href="index.html#meter-study/vmrs"><strong>Register checklist</strong></a> — minimum meter reads for billing and control (OBIS · VMRS)</li>
+    <li><a href="index.html#meter-study/openami"><strong>OpenAMI</strong></a> — feeder telemetry and open stack layers</li>
+    <li><a href="index.html#meter-study/meshems"><strong>MeshEMS board</strong></a> — edge metering dev kit</li>
   </ul>
 
   <h2>Field validation</h2>
-  <p class="body-text">Anchor POCs compare vendor ICD maps against <code>northbound-mqtt-v0.1</code> on real feeders and publish gap matrices (which OBIS keys each model actually exposes).</p>
+  <p class="body-text">Anchor pilots compare real meters against the register checklist and JSON profile on live feeders — gap matrices operators can cite.</p>
   <div class="dash-grid">
     <div class="dash-card">
       <h3>SteamaCo</h3>
       <ul>
-        <li>Nimbus / Savi stack — closed AMI with DLMS claims; benchmark for migration path to open northbound</li>
-        <li>Power Africa workshop pre-session (Warren Scott) · Kenya deployment context</li>
+        <li>Closed AMI with migration path to open northbound</li>
+        <li>Kenya deployment context · Power Africa pre-session</li>
       </ul>
     </div>
     <div class="dash-card">
       <h3>Darway</h3>
       <ul>
-        <li>Feeder-scale pilot target for pole EMS + MQTT envelope on schedule</li>
-        <li>ICD extraction and tier&nbsp;B register gaps documented per model</li>
+        <li>Feeder pilot for pole EMS + JSON envelope</li>
+        <li>Per-model register gaps documented</li>
       </ul>
     </div>
   </div>
@@ -168,10 +178,6 @@ html.embed .subnav-list { font-size: 12px; }
     Specs: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a> ·
     <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a> ·
     <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a> ·
-    <a href="index.html#meter-study/openami">OpenAMI hub</a> ·
-    <a href="index.html#meter-study/meshems">MeshEMS board</a> ·
-    <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> ·
-    <a href="power-africa-openami-presentation-2025.html">OpenAMI deck (Sep 2025)</a> ·
     <a href="index.html#tasks">Tasks</a>
   </p>
 </div>

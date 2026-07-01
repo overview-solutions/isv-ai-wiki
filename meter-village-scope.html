@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Village scope · Village Metering · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+.lead { font-size: 14px; margin-bottom: 0.75rem; max-width: 48rem; line-height: 1.5; }
+h2 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.stat-box { border: 1px solid var(--border); border-radius: 10px; padding: 0.65rem 0.75rem; background: var(--bg-2); text-align: center; }
+.stat-val { font-size: 18px; font-weight: 600; color: var(--teal); line-height: 1.2; }
+.stat-lbl { font-size: 10px; color: var(--text-2); margin-top: 0.25rem; line-height: 1.35; }
+.stat-src { font-size: 9px; color: var(--text-3); margin-top: 0.2rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 12px; line-height: 1.45; }
+.callout > strong:first-child { color: var(--teal); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn > strong:first-child { color: var(--amber); }
+.scope-list { font-size: 13px; color: var(--text-2); margin: 0 0 0.75rem; padding-left: 1.2rem; line-height: 1.5; }
+.scope-list li { margin-bottom: 0.4rem; }
+.bib { font-size: 11px; color: var(--text-2); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); line-height: 1.45; }
+.bib li { margin-bottom: 0.35rem; }
+.bib .tag { font-size: 9px; padding: 1px 5px; border-radius: 8px; background: var(--bg-3); color: var(--text-3); margin-right: 0.25rem; }
+.src a { font-size: 10px; }
+html.embed .back { display: none; }
+@media (max-width: 640px) { .stat-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#meter-study">← Village Metering</a></div>
+
+  <h1>Who we mean by “village”</h1>
+  <p class="sub">Scale · geography · human development · why metering choices matter now</p>
+
+  <p class="lead">IEEE Smart Village works on <strong>village-scale energy</strong> — communities too small for utility-style advanced metering, too large for a single solar home system, and often growing faster than the grid can reach them. This page defines that scope in plain language and cites independent sources for population and access numbers. For operational problems and solutions, see <a href="index.html#meter-study/problems-today">Problems to solve</a>.</p>
+
+  <h2>How ISV defines a village (working scope)</h2>
+  <p class="body-text">There is no single UN legal definition of “village.” National statistics use different cutoffs for rural vs urban. For engineering and procurement on this wiki, ISV uses an <strong>operational definition</strong>:</p>
+  <ul class="scope-list">
+    <li><strong>Settlement scale</strong> — a localized community or cluster, often tens to a few thousand people, served by one or a few low-voltage feeders rather than a metropolitan grid.</li>
+    <li><strong>Utility model</strong> — a mini-grid, micro-utility, or community distributor that sells electricity per connection (often prepaid), not a national transmission utility.</li>
+    <li><strong>Connection band</strong> — roughly <strong>50–500 customer connections per feeder</strong> is the sweet spot for Village Metering work: large enough to need per-home billing and theft control, small enough that city-scale MDMS and certification are overkill. <span class="src">[ISV working band — validate per deployment]</span></li>
+    <li><strong>Geography</strong> — primarily <strong>rural and peri-urban</strong> areas in Africa and Asia where ISV field partners deploy; includes remote indigenous communities (e.g. Alaska field notes) where the same metering economics apply.</li>
+    <li><strong>Not in scope</strong> — metropolitan AMI rollouts, national utility head-ends, or single-home pico-solar unless they feed a broader feeder study.</li>
+  </ul>
+  <p class="body-text">Industry language overlaps: <em>mini-grid</em>, <em>micro-grid</em>, <em>decentralized utility</em>, and <em>energy access enterprise</em> often describe the same operator class. World Bank and AMDA sector work treats mini-grids as localized distribution serving rural and peri-urban customers where the main grid is absent or unreliable <span class="src">[<a href="#s5">s5</a>] [<a href="#s6">s6</a>]</span>.</p>
+
+  <h2>How many people — and what share of the world?</h2>
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-val">~3.5B</div>
+      <div class="stat-lbl">People living in rural areas globally (2024)</div>
+      <div class="stat-src"><a href="#s3">s3</a></div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">~42%</div>
+      <div class="stat-lbl">World population that is rural (2024)</div>
+      <div class="stat-src"><a href="#s3">s3</a></div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">655M</div>
+      <div class="stat-lbl">People without electricity access (2024 data)</div>
+      <div class="stat-src"><a href="#s1">s1</a></div>
+    </div>
+  </div>
+  <p class="body-text">Rural population is still <strong>growing in absolute terms</strong> in many regions even as the world urbanizes — so “wait for the grid” is not a passive default. UN World Urbanization Prospects tracks rural/urban splits by national definitions <span class="src">[<a href="#s3">s3</a>]</span>.</p>
+  <p class="body-text">Electricity access is a separate measure: a household may be rural but electrified (grid, mini-grid, or solar home system), or urban but without reliable supply. Tracking SDG 7 reports global access stagnating around <strong>92%</strong> in 2024, with progress too slow to meet the 2030 universal-access goal without a sharp acceleration <span class="src">[<a href="#s1">s1</a>]</span>.</p>
+
+  <h2>Where the gap concentrates</h2>
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-val">560M+</div>
+      <div class="stat-lbl">Without electricity in sub-Saharan Africa</div>
+      <div class="stat-src"><a href="#s1">s1</a></div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">447M</div>
+      <div class="stat-lbl">Rural SSA without electricity (2024, up from 376M in 2010)</div>
+      <div class="stat-src"><a href="#s1">s1</a></div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">~80%</div>
+      <div class="stat-lbl">Of Africa’s unelectrified live in rural areas</div>
+      <div class="stat-src"><a href="#s4">s4</a></div>
+    </div>
+  </div>
+  <p class="body-text">Sub-Saharan Africa accounts for the majority of people still in the dark; IEA analysis notes roughly <strong>eight in ten</strong> people globally without electricity live there <span class="src">[<a href="#s2">s2</a>]</span>. Electrification has often <strong>not kept pace with population growth</strong> — the rural deficit in SSA grew over the last decade even as some countries expanded connections <span class="src">[<a href="#s1">s1</a>]</span>.</p>
+  <p class="body-text">South Asia and other regions also host large unelectrified populations, but SSA combines low access rates with high rural share (~60% rural population in many analyses) and young demographics — so demand per connected customer rises as villages mechanize <span class="src">[<a href="#s7">s7</a>]</span>.</p>
+
+  <h2>Mini-grids and village utilities — scale of the opportunity</h2>
+  <p class="body-text">For communities the main grid will not serve soon, <strong>decentralized mini-grids</strong> are a primary connection path alongside grid extension and solar home systems. Estimates vary by scenario:</p>
+  <ul class="scope-list">
+    <li>World Bank / ESMAP analysis: mini-grids could connect on the order of <strong>490 million people by 2030</strong>, requiring hundreds of thousands of sites and major investment — but with improving uptime vs earlier diesel-era systems <span class="src">[<a href="#s5">s5</a>]</span>.</li>
+    <li>Sector surveys: thousands of mini-grids already operate in SSA; private developers report hundreds of thousands of rural customers on decentralized utilities <span class="src">[<a href="#s6">s6</a>]</span>.</li>
+    <li>Literature reviews cite ~11 million mini-grid-related connections in SSA in recent years and project large household impact by 2030 if policy and finance align <span class="src">[<a href="#s7">s7</a>]</span>.</li>
+  </ul>
+  <p class="body-text">ISV does not endorse one global headcount — we cite ranges and focus on <strong>operators ISV can help</strong>: village-scale utilities with prepaid billing, mixed meter fleets, and limited O&amp;M staff.</p>
+
+  <h2>Human development — why energy is not a side issue</h2>
+  <p class="body-text">The UN <strong>Human Development Index (HDI)</strong> summarizes health, education, and income. Electricity is not a direct HDI input, but it underpins all three: clinics, schools, productive enterprise, and safe cooking/lighting <span class="src">[<a href="#s8">s8</a>]</span>.</p>
+  <p class="body-text">The <strong>Multidimensional Poverty Index (MPI)</strong> — published with the Human Development Report — explicitly counts <strong>lack of electricity</strong> as a deprivation indicator (aligned with SDG 7). Recent MPI updates report about <strong>1.1 billion people</strong> in acute multidimensional poverty; missing electricity is among the most common living-standard deprivations alongside cooking fuel, sanitation, and housing <span class="src">[<a href="#s9">s9</a>]</span>.</p>
+  <p class="body-text">UNDP satellite-based work argues official “electrified” counts can <strong>overstate reliable access</strong> — settlements with weak or intermittent supply may still fail productive use. That gap matters for metering: a connection on paper is not the same as trustworthy kWh accounting <span class="src">[<a href="#s10">s10</a>]</span>.</p>
+
+  <h2>Rapid growth — modernization fork</h2>
+  <p class="body-text">Villages in low-access regions are not static. Population growth, diaspora remittances, motor loads, cold chains, and phone-first payments change feeders faster than utility procurement cycles. There is a real choice between:</p>
+
+  <div class="callout">
+    <strong>Healthier modernization (what Village Metering supports)</strong>
+    <ul class="scope-list" style="margin-top:0.45rem;margin-bottom:0">
+      <li><strong>Open, documented interfaces</strong> — operators can swap meter brands, integrate mobile money, and migrate vendors without rewriting billing.</li>
+      <li><strong>Edge-first resilience</strong> — prepaid tokens, keypads, and pole gateways keep working when backhaul fails; cloud is sync, not single point of failure.</li>
+      <li><strong>Right-sized investment</strong> — per-connection costs in cited industry bands (~$40–110 installed smart meter range in mini-grid literature) instead of utility AMI budgets <span class="src">[<a href="#s11">s11</a>]</span>.</li>
+      <li><strong>Productive anchors</strong> — schools, clinics, mills, or businesses that stabilize revenue (ISV field pattern; see <a href="stonehenge-microgrid-topology.html">Circles of Power</a> notes).</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>Unhealthy modernization (patterns we document to avoid)</strong>
+    <ul class="scope-list" style="margin-top:0.45rem;margin-bottom:0">
+      <li><strong>City AMI pasted onto villages</strong> — full MDMS, 15-minute load profiles, and per-meter WAN crypto where a pole gateway would suffice.</li>
+      <li><strong>Closed cloud bundles</strong> — one vendor owns mesh, meters, and billing; migration strands installed base (documented in ISV Dev Labs downtime analysis) <span class="src">[<a href="#s12">s12</a>]</span>.</li>
+      <li><strong>Cloud-synchronous control</strong> — disconnect, vending, or theft response that fails when rural GPRS drops; multi-day outages without local fallbacks.</li>
+      <li><strong>Billing without visibility</strong> — flat tariffs or aggregate feeders that hide theft until the operator is insolvent.</li>
+    </ul>
+  </div>
+
+  <p class="body-text">Metering sits at the center of that fork: it is how a growing village utility stays <strong>solvency-positive</strong> while adopting solar, storage, and income-generating loads. That is why IEEE Smart Village Tech Comm treats Village Metering as a primary endeavor — not meter worship, but <strong>governance infrastructure</strong> for humane electrification.</p>
+
+  <h2>References</h2>
+  <ol class="bib">
+    <li id="s1"><span class="tag">I</span> <strong>Tracking SDG 7: The Energy Progress Report</strong> (2024 data) — 655 million without electricity; 92% global access rate; SSA rural deficit 447 million (2024). Joint report: IEA, IRENA, UNSD, World Bank, WHO. Summary: <a href="https://www.worldbank.org/en/news/press-release/2026/06/16/accelerating-universal-energy-access" target="_blank" rel="noopener">World Bank press release ↗</a> · <a href="https://trackingsdg7.esmap.org/" target="_blank" rel="noopener">trackingsdg7.esmap.org ↗</a></li>
+    <li id="s2"><span class="tag">I</span> IEA, <strong>Access to electricity stagnates, leaving globally 730 million in the dark</strong> (commentary on 2024 access trends; SSA share of unelectrified). <a href="https://www.iea.org/commentaries/access-to-electricity-stagnates-leaving-globally-730-million-in-the-dark" target="_blank" rel="noopener">iea.org ↗</a></li>
+    <li id="s3"><span class="tag">I</span> UN DESA Population Division, <strong>World Urbanization Prospects 2025</strong> / World Bank <code>SP.RUR.TOTL</code> — rural population ~3.46 billion (~42% of world) in 2024. <a href="https://population.un.org/wup/" target="_blank" rel="noopener">population.un.org/wup ↗</a> · <a href="https://data.worldbank.org/indicator/SP.RUR.TOTL" target="_blank" rel="noopener">World Bank rural population ↗</a></li>
+    <li id="s4"><span class="tag">I</span> IEA, <strong>Financing Electricity Access in Africa</strong> — ~600 million without access in Africa; ~80% of unelectrified in rural areas; financing skew to urban. <a href="https://www.iea.org/reports/financing-electricity-access-in-africa" target="_blank" rel="noopener">iea.org ↗</a></li>
+    <li id="s5"><span class="tag">I</span> World Bank / ESMAP, <strong>Mini Grids for Half a Billion People</strong> — scenario: mini-grids could serve ~490 million people by 2030. <a href="https://documents1.worldbank.org/curated/en/099122223180539643/pdf/P17515118ea44a020192941b81f7e8498e1.pdf" target="_blank" rel="noopener">World Bank PDF ↗</a></li>
+    <li id="s6"><span class="tag">I</span> AMDA (Africa Minigrid Developers Association), sector statistics on decentralized utilities and connections in SSA. <a href="https://www.africamda.org/" target="_blank" rel="noopener">africamda.org ↗</a></li>
+    <li id="s7"><span class="tag">I</span> Domegni &amp; Azouma, <strong>A review of renewable off-grid mini-grids in Sub-Saharan Africa</strong>, <em>Frontiers in Energy Research</em> (2022) — SSA rural share, electrification rates, mini-grid connection orders of magnitude. <a href="https://www.frontiersin.org/journals/energy-research/articles/10.3389/fenrg.2022.1089025/full" target="_blank" rel="noopener">Frontiers ↗</a></li>
+    <li id="s8"><span class="tag">I</span> UNDP, <strong>Human Development Report 2023/24 technical notes</strong> — HDI dimensions (health, education, standard of living). <a href="https://hdr.undp.org/human-development-report-2023-24" target="_blank" rel="noopener">hdr.undp.org ↗</a></li>
+    <li id="s9"><span class="tag">I</span> UNDP / OPHI, <strong>Global Multidimensional Poverty Index</strong> — electricity as deprivation indicator; ~1.1 billion in acute MPI poverty (2025 update). <a href="https://hdr.undp.org/content/2025-global-multidimensional-poverty-index-mpi" target="_blank" rel="noopener">hdr.undp.org ↗</a></li>
+    <li id="s10"><span class="tag">I</span> UNDP, <strong>Electricity Access from Space</strong> — satellite evidence on reliability vs nominal access; unelectrified concentrated in rural SSA. <a href="https://data.undp.org/insights/achieving-universal-electricity-access/electricity-access-from-space" target="_blank" rel="noopener">data.undp.org ↗</a></li>
+    <li id="s11"><span class="tag">I</span> Energy 4 Impact, <strong>Billing models for mini-grids</strong> (cited in <a href="index.html#meter-study/vendor-study">vendor study</a>) — installed smart meter cost bands in SSA mini-grid context. <a href="https://www.energy4impact.org/sites/default/files/2024-09/billing_models_for_minigrids_april_2019.pdf" target="_blank" rel="noopener">PDF ↗</a></li>
+    <li id="s12"><span class="tag">I</span> Dev Labs report <strong>SSA Mini-Grid Downtime: Cloud Lock-In &amp; Edge Topology</strong> — indexed as <a href="index.html#tech-reports/ssa-minigrid-downtime">Technical Reports</a> on this wiki.</li>
+  </ol>
+
+  <p class="meter-footer">
+    <a href="index.html#meter-study/problems-today">Problems to solve</a> ·
+    <a href="index.html#meter-study/overview">Overview</a> ·
+    <a href="index.html#supported">Supported Projects</a> ·
+    <a href="index.html#tech-reports">Technical Reports</a>
+  </p>
+</div>
+</body>
+</html>

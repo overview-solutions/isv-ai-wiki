@@ -68,12 +68,12 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="callout">
     <strong>Call purpose</strong>
-    <p>Orient volunteers on the Tech Comm knowledge base — main sections, how Tasks tie to GitHub Issues, and where Meter Interoperability work is heading (OBIS normalization, Street Pole EMS).</p>
+    <p>Orient volunteers on the Tech Comm knowledge base — main sections, how Tasks tie to GitHub Issues, and where Village Metering work is heading (field problems, register checklist, Street Pole EMS).</p>
   </div>
 
   <h2>Agenda</h2>
   <ul class="agenda-list">
-    <li><strong>Wiki layout</strong> — Home, About ISV, Supported Projects, Meter Interoperability, Meeting Notes, Tasks, Events, Knowledge Base</li>
+    <li><strong>Wiki layout</strong> — Home, About ISV, Supported Projects, Village Metering, Meeting Notes, Tasks, Events, Knowledge Base</li>
     <li><strong>Tasks</strong> — issues on <code>overview-solutions/isv-ai-wiki</code>, meeting labels, status from labels + comments</li>
     <li><strong>OBIS · VMRS</strong> — register tiers and northbound normalization</li>
     <li><strong>Street Pole EMS</strong> — pole-gateway hardware thread (<a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a>)</li>
@@ -84,7 +84,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <ul>
     <li><strong>EPRI &amp; IEEE 1547</strong> — <strong>EPRI wrote it; IEEE implemented it.</strong> <a href="index.html#standards">IEEE 1547</a> covers DER interconnection (ride-through, export limits, grid tie-in). EPRI’s ongoing open-source grid work: <a href="https://github.com/epri-dev" target="_blank" rel="noopener">github.com/epri-dev</a>. Relevant when village feeders connect behind-the-meter solar/storage or evolve toward utility interconnection — parallel track to village prepaid metering, not a replacement for it.</li>
     <li><strong>STS key management</strong> — <strong>STS provides key mgmt</strong> for prepaid token vending (STSA key hierarchy). Separate from DLMS and OEM key stacks discussed in the <a href="tech-comm-2026-05-28-metering-topology.html">May topology note</a>. Northbound VMRS / MQTT profiles intentionally exclude STSA key operations — token path stays on SMS/USSD/CIU; meter reads stay on gateway normalization.</li>
-    <li><strong>EnAccess · OpenAMI on site</strong> — <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a> · running <strong>OpenAMI</strong> on live deployments — field validation of the open stack (MPM + geo asset model + gateway path) beyond conference decks. See <a href="index.html#meter-study/overview">Meter Interoperability</a> and <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI (Sep 2025)</a>.</li>
+    <li><strong>EnAccess · OpenAMI on site</strong> — <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a> · running <strong>OpenAMI</strong> on live deployments — field validation of the open stack (MPM + geo asset model + gateway path) beyond conference decks. See <a href="index.html#meter-study/problems-today">Village Metering</a> and <a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI (Sep 2025)</a>.</li>
     <li><strong>OSEAS · Global Off-Grid Solar Forum</strong> — EnAccess <a href="https://www.oseas.org/" target="_blank" rel="noopener">OSEAS</a> (Open Source Energy Access Symposium) runs <strong>in parallel</strong> to the <a href="https://www.offgridsolarforum.org/" target="_blank" rel="noopener">Global Off-Grid Solar Forum</a> — same week / venue ecosystem (Kigali, Oct 2026; see <a href="oseas-2026.html">OSEAS wiki page</a>). Worth coordinating ISV / Tech Comm attendance across both. ISV will contribute a hackathon code challenge at OSEAS.</li>
     <li><strong>AMDA outreach — decided not to pursue</strong> — Africa Minigrid Developers Association (<a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">africamda.org/our-team</a>) was on the table for Power Africa workshop invites, OBIS codes, and open-stack alignment (<a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a> · <a href="assets/documents/amda-pitch-one-page.pdf" target="_blank" rel="noopener">pitch PDF</a>). <strong>Decision:</strong> do not engage AMDA on additional items — a separate group is already busy developing a solution for <strong>SteamaCo</strong> and <strong>SparkMeter</strong> interoperability; avoid duplicating that effort.</li>
     <li><strong>OpenAMI community (Discord)</strong> — project chat is on the <strong>OSEA</strong> server: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a>. Tech Comm needs to <strong>get more active</strong> there — see <a href="index.html#meter-study/openami">wiki OpenAMI page</a>.</li>
@@ -102,7 +102,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <tbody>
       <tr><td><strong>OpenEMS</strong> (Energy IoT)</td><td>EMS / edge orchestration</td><td>More <strong>urban</strong> — grid present (e.g. Aaron’s grid in Uganda). Stack can <strong>stop at the DCU</strong> when that is enough.</td></tr>
       <tr><td><strong>MeshEMS</strong></td><td>NAN mesh</td><td>Lets DCUs form a mesh when pole-to-pole RF backhaul is needed.</td></tr>
-      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry · interop</td><td>Northbound contract — normalize southbound OEM/DLMS at gateway to registers operators can bill, vend, and disconnect on; ISV <a href="index.html#meter-study/overview">Meter Interoperability</a> thread.</td></tr>
+      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry · interop</td><td>Northbound contract — normalize southbound OEM/DLMS at gateway to registers operators can bill, vend, and disconnect on; ISV <a href="index.html#meter-study/problems-today">Village Metering</a> thread.</td></tr>
       <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>MicroPowerManager as HES/billing layer — <strong>instead of</strong> OpenEMS backend in village deployments.</td></tr>
       <tr><td><strong>OpenAMI</strong> (geo + asset model)</td><td>Networking / topology semantics</td><td>Asset and connectivity layer above gateways — complements MQTT register payloads.</td></tr>
       <tr><td class="out-of-scope"><strong>OpenADR</strong></td><td class="out-of-scope">Price signals to devices</td><td class="out-of-scope">Pricing server for utility DR/tariffs — parallel track, not village prepaid priority.</td></tr>
@@ -169,8 +169,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <tbody>
       <tr><td>Grid interconnection</td><td>IEEE 1547 (<a href="https://github.com/epri-dev" target="_blank" rel="noopener">EPRI</a> wrote · IEEE std)</td><td><a href="index.html#standards">Standards</a> · DER / microgrid tie-in</td></tr>
       <tr><td>Prepaid / payment</td><td>STS token + key mgmt</td><td><a href="index.html#meter-study/problems-today">Problems</a> · L6 payment layer</td></tr>
-      <tr><td>Register semantics</td><td>OBIS · VMRS tiers</td><td><a href="index.html#meter-study/vmrs">OBIS · VMRS</a></td></tr>
-      <tr><td>Northbound</td><td>MQTT / JSON at gateway</td><td><a href="index.html#meter-study/overview">Meter Interoperability</a></td></tr>
+      <tr><td>Register semantics</td><td>OBIS · VMRS tiers</td><td><a href="index.html#meter-study/vmrs">Register checklist</a></td></tr>
+      <tr><td>Northbound</td><td>MQTT / JSON at gateway</td><td><a href="index.html#meter-study/problems-today">Village Metering</a></td></tr>
     </tbody>
   </table>
 
@@ -187,7 +187,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h2>Related</h2>
   <ul>
-    <li><a href="index.html#meter-study/overview">Meter Interoperability · Overview</a></li>
+    <li><a href="index.html#meter-study/problems-today">Village Metering · Problems</a> · <a href="index.html#meter-study/overview">Overview</a></li>
     <li><a href="tech-comm-2026-05-28-metering-topology.html">28 May 2026 · Metering topology</a></li>
     <li><a href="index.html#meter-study/openami">OpenAMI hub</a> · <a href="index.html#meter-study/meshems">MeshEMS board</a> · <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess OpenAMI</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL MeshEMS</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a></li>
   </ul>
