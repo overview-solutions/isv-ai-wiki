@@ -1428,10 +1428,11 @@ code {
     </div>
     <div class="nav-item" data-section="meter-study" onclick="showSection('meter-study')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      Village metering
+      Village Metering
     </div>
     <div class="nav-sub" id="nav-sub-meter-study">
       <div class="nav-sub-item" data-meter-page="problems-today" onclick="showMeterPage('problems-today')">Problems</div>
+      <div class="nav-sub-item" data-meter-page="scope" onclick="showMeterPage('scope')">Village scope</div>
       <div class="nav-sub-item" data-meter-page="overview" onclick="showMeterPage('overview')">Overview</div>
       <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">Register checklist</div>
       <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor Study</div>
@@ -1516,8 +1517,8 @@ code {
 
       <div class="home-primary-focus">
         <p class="home-primary-eyebrow">Primary endeavor · Tech Comm 2026</p>
-        <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('problems-today');return false">Village metering</a></h2>
-        <p class="home-primary-desc">Bill each home, cut off non-payers, catch stolen power — without city-scale AMI cost. Start with <a href="#" onclick="showMeterPage('problems-today');return false">Problems to solve</a>, then vendor study and register checklist. Pole EMS and OpenAMI hardware threads live here too.</p>
+        <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('problems-today');return false">Village Metering</a></h2>
+        <p class="home-primary-desc">Bill each home, cut off non-payers, catch stolen power — without city-scale AMI cost. <a href="#" onclick="showMeterPage('scope');return false">Village scope</a> (who &amp; how many) · <a href="#" onclick="showMeterPage('problems-today');return false">Problems</a> · vendor study.</p>
       </div>
 
       <div class="home-blocks">
@@ -1545,14 +1546,14 @@ code {
       </div>
       <div id="content-tech">
         <div class="wiki-body tech-intro">
-          <p>Volunteer engineering threads — open standards, gateways, and event builds. Stable map infrastructure is listed separately below.</p>
+          <p>Volunteer engineering threads — open standards, gateways, and field tooling. Stable map infrastructure is listed separately below.</p>
         </div>
         <div class="project-grid">
         <div class="project-section-label">Active initiatives</div>
         <div class="project-card project-card-primary">
           <div class="project-card-head">
             <span class="tag tag-active">Primary</span>
-            <span class="project-name">Village metering</span>
+            <span class="project-name">Village Metering</span>
           </div>
           <div class="project-desc">Prepaid billing, remote disconnect, theft visibility — documented as field problems first, then vendor evidence and open gateway specs. Anchor POCs: SteamaCo, Darway. <a href="#" onclick="showMeterPage('problems-today');return false">Open problems →</a> · <a href="#" onclick="showMeterPage('overview');return false">overview</a></div>
         </div>
@@ -1563,41 +1564,6 @@ code {
           </div>
           <div class="project-desc">BVLOS LiDAR and hyperspectral flights for crop health assessment, NDVI and vegetation analysis, and environmental measurement — supporting agricultural productivity at funded village sites.</div>
         </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-pilot">Hackathon</span>
-            <span class="project-name">Open Energy Hackathon — SF Climate Week 2025</span>
-          </div>
-          <div class="project-desc">Earth Day build-a-thon at Port Labs: SunSpec gateways on real DER hardware (inverters, EVSE, storage), US grid-market tracks, and open-source LF/enAccess stacks. <a href="#" onclick="showNote('open-energy-hackathon-2025');return false">2025 summary →</a> · <a href="https://luma.com/h9khaweo" target="_blank" rel="noopener">Luma ↗</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">Open Energy Hackathon 2.0 — SF Climate Week 2026</span>
-          </div>
-          <div class="project-desc">Second annual build-a-thon: AI/mesh/hardware challenges on live inverters, EVSE, and meters — microgrids, stranded chargers, Flux PCB kits. <a href="#" onclick="showNote('open-energy-hackathon-2026');return false">Event page →</a> · <a href="https://luma.com/6jvum8on" target="_blank" rel="noopener">Luma ↗</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">Power Africa Conference 2026</span>
-          </div>
-          <div class="project-desc">IEEE PES &amp; IAS Power Africa · Nairobi · 21–25 Sep 2026. Official agenda TBD — <a href="#" onclick="showNote('power-africa-2026-conference');return false">wiki hub →</a> · <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org ↗</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">OpenAMI EMS Workshop</span>
-          </div>
-          <div class="project-desc">MAKE · CODE · INTEGRATE hands-on <strong>Street-EMS</strong> track for in-country minigrid engineers — take-home MeshEMS kits and aggregation trade-offs. <a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Workshop page →</a></div>
-        </div>
-        <div class="project-card">
-          <div class="project-card-head">
-            <span class="tag tag-planning">Planning</span>
-            <span class="project-name">OSEAS 2026 · Kigali</span>
-          </div>
-          <div class="project-desc">Open Source in Energy Access Symposium — parallel to the Global Off-Grid Solar Forum. ISV <strong>EMS code challenge</strong> (leakage detection or neutral balancing on LV feeder). <a href="#" onclick="showNote('oseas-2026');return false">Event page →</a> · <a href="https://www.oseas.org/" target="_blank" rel="noopener">oseas.org ↗</a></div>
-        </div>
         <div class="project-section-label">Stable infrastructure</div>
         <div class="project-card project-card-stable">
           <div class="project-card-head">
@@ -1605,6 +1571,21 @@ code {
             <span class="project-name">Smart Village Project Map</span>
           </div>
           <div class="project-desc">Long-running <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">RemoteMonitorMap</a> — geolocated ISV field programs on OpenStreetMap power layers. Passive upkeep only: map pins refresh when partners report new or closed sites, not a standing sprint. Powers the <a href="#" onclick="showSection('supported');return false">Supported Projects</a> view · <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank" rel="noopener">full map ↗</a></div>
+        </div>
+        <div class="project-section-label">Past initiatives</div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-retired">Past</span>
+            <span class="project-name">SunBlazer</span>
+          </div>
+          <div class="project-desc">Modular community solar charging station — portable PV hub for hot-swapped village batteries. Flagship ISV hardware from early Haiti deployments (2011+) through SunBlazer III/Lite/IV; many field sites still run deployed units. <a href="https://drive.google.com/drive/folders/1CRyJIIwomfakESt-I66JKZF5sY9vf2wX" target="_blank" rel="noopener">SunBlazer IV docs ↗</a> · <a href="http://wiki.smartvillage.ieee.org/home/technologies/solarpv/sunblazeriii" target="_blank" rel="noopener">legacy wiki ↗</a></div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-head">
+            <span class="tag tag-retired">Past</span>
+            <span class="project-name">Portable Battery Kit (PBK)</span>
+          </div>
+          <div class="project-desc">Take-home battery pack leased from a SunBlazer hub — household lighting and phone charging without per-home solar. Pickup-truck deployable; built from widely available local materials. Still in use at micro-entrepreneur sites. <a href="http://wiki.smartvillage.ieee.org/home/technologies/solarpv/pbk" target="_blank" rel="noopener">PBK specs ↗</a> · <a href="https://linktr.ee/isv_tech" target="_blank" rel="noopener">Tech Linktree ↗</a></div>
         </div>
       </div>
     </div>
@@ -1855,14 +1836,14 @@ code {
         <div class="standard-icon">🏛️</div>
         <div>
           <div class="resource-name">Open Energy Hackathon 2025</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('open-energy-hackathon-2025');return false">Event summary</a> · <a href="https://luma.com/h9khaweo" target="_blank" rel="noopener">Luma ↗</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — SunSpec gateways, US DER/grid tracks, LF &amp; enAccess OSS. Village metering angle: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium essay</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('open-energy-hackathon-2025');return false">Event summary</a> · <a href="https://luma.com/h9khaweo" target="_blank" rel="noopener">Luma ↗</a> · <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — SunSpec gateways, US DER/grid tracks, LF &amp; enAccess OSS. Village Metering angle: <a href="#" onclick="showTechNote('isv-hck-2025-circles-of-power');return false">ISV-HCK-001</a> · <a href="https://medium.com/@UpAndAdam/circles-of-power-43f5a98227fb" target="_blank">Medium essay</a>.</div>
         </div>
       </div>
       <div class="resource-row">
         <div class="standard-icon">🔗</div>
         <div>
           <div class="resource-name">OpenAMI — ISV hub</div>
-          <div class="resource-desc"><a href="#" onclick="showMeterPage('openami');return false">Open in Meter Interoperability</a> · actionable energy telemetry, stack layers, <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showMeterPage('openami');return false">Open in Village Metering</a> · actionable energy telemetry, stack layers, <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a> · <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1876,14 +1857,14 @@ code {
         <div class="standard-icon">📡</div>
         <div>
           <div class="resource-name">MeshEMS board — NESL</div>
-          <div class="resource-desc"><a href="#" onclick="showMeterPage('meshems');return false">Open in Meter Interoperability</a> · NESL PCB aligned with OpenAMI · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> · pairs with <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a>. Power rails: <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun meeting notes</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showMeterPage('meshems');return false">Open in Village Metering</a> · NESL PCB aligned with OpenAMI · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">nesl-meshems</a> · pairs with <a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a>. Power rails: <a href="#" onclick="showNote('tech-comm-2026-06-25');return false">25 Jun meeting notes</a>.</div>
         </div>
       </div>
       <div class="resource-row">
         <div class="standard-icon">📦</div>
         <div>
           <div class="resource-name">Street Pole EMS — ems-dev</div>
-          <div class="resource-desc"><a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — Street Pole EMS hardware/firmware; part of the <a href="#" onclick="showMeterPage('overview');return false">Meter Interoperability</a> thread.</div>
+          <div class="resource-desc"><a href="https://github.com/energy-iot/ems-dev/" target="_blank">ems-dev</a> — Street Pole EMS hardware/firmware; part of the <a href="#" onclick="showMeterPage('problems-today');return false">Village Metering</a> thread.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2104,8 +2085,8 @@ code {
   <div class="section" id="sec-meter-study">
     <div class="section-header">
       <div>
-        <div class="section-title">Village metering</div>
-        <div class="section-sub" id="meter-study-section-sub">Problems · Overview · Vendor study · Register checklist</div>
+        <div class="section-title">Village Metering</div>
+        <div class="section-sub" id="meter-study-section-sub">Problems · Village scope · Overview · Vendor study</div>
       </div>
     </div>
     <div id="content-meter-study">
@@ -2117,7 +2098,7 @@ code {
             <a href="meter-benchmark/northbound-mqtt-v0.1.json" target="_blank" rel="noopener">Northbound JSON</a>
           </div>
         </div>
-        <iframe id="meter-study-frame" title="Village metering preview" src="meter-problems-today.html?embed=1&v=20260701"></iframe>
+        <iframe id="meter-study-frame" title="Village Metering preview" src="meter-problems-today.html?embed=1&v=20260701"></iframe>
       </div>
     </div>
   </div>
@@ -2140,7 +2121,7 @@ code {
           <li><strong>Affordable hardware</strong> — legacy meters at $600–$1,500 can exceed generation cost</li>
           <li><strong>Comms that survive rural links</strong> — tokens and keypads when the pole uplink is down</li>
         </ul>
-        <p style="margin-top:0.5rem;font-size:13px;color:var(--text-2)">Full problem → solution map: <a href="#" onclick="showMeterPage('problems-today');return false">Village metering · Problems</a>.</p>
+        <p style="margin-top:0.5rem;font-size:13px;color:var(--text-2)">Full problem → solution map: <a href="#" onclick="showMeterPage('problems-today');return false">Village Metering · Problems</a>.</p>
       </div>
       <div class="wiki-body">
         <p>Indexed summaries here; full documents on <a href="https://sattal.cottonspace.com/reports" target="_blank" rel="noopener">Cottonspace</a>, external publishers, or in this wiki. Dev Labs reports sync <strong>live</strong> from <a href="https://github.com/rahulbhargavain/openami-smart-village/tree/main/reports" target="_blank" rel="noopener">openami-smart-village</a>; ISV and external entries come from <code>technical-notes/catalog.json</code>. Each report shows <strong>source · authorship · review</strong> badges — see key below.</p>
@@ -2215,6 +2196,12 @@ const METER_BENCHMARK_PAGES = {
     sub: 'Field needs · prepaid · disconnect · theft · comms',
     src: 'meter-problems-today.html?embed=1&v=20260701',
     standalone: 'meter-problems-today.html'
+  },
+  'scope': {
+    title: 'Village scope',
+    sub: 'Who we mean · population · HDI · modernization fork',
+    src: 'meter-village-scope.html?embed=1&v=20260701',
+    standalone: 'meter-village-scope.html'
   },
   'vmrs': {
     title: 'Register checklist',

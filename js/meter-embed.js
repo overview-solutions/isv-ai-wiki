@@ -1,5 +1,5 @@
 /**
- * Meter Interoperability standalone pages — embed mode (?embed=1)
+ * Village Metering standalone pages — embed mode (?embed=1)
  * Keeps in-iframe navigation on meter-*.html and delegates wiki hash links to parent.
  */
 (function () {

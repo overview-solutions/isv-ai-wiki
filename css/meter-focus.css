@@ -1,4 +1,4 @@
-/* Shared compact layout for Meter Interoperability pages (especially embed) */
+/* Shared compact layout for Village Metering pages (especially embed) */
 html.embed body { font-size: 14px; }
 html.embed .wrap { padding: 0.75rem 1.15rem 1.25rem; max-width: none; }
 html.embed h1 { font-size: 18px; margin-bottom: 0.2rem; }

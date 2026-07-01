@@ -42,9 +42,10 @@ isv-ai-wiki/
 ├── index.html                    # Shell: sidebar, sections, hash routing, registries
 ├── AGENTS.md                     # ← You are here (AI navigation)
 ├── README.md                     # Human quickstart
-├── meter-overview.html           # Metering focus — high-level overview (default embed)
-├── meter-vmrs.html               # OBIS VMRS + acronyms + tiers + POC playbook
-├── meter-problems-today.html     # Problems in depth — landscape diagrams & layers
+├── meter-overview.html           # Village Metering — context, hardware threads, why ISV
+├── meter-vmrs.html               # Register checklist (OBIS · VMRS) + acronym reference
+├── meter-problems-today.html     # Field problems → solutions (default embed)
+├── meter-village-scope.html      # Village definition · population · HDI (cited)
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
@@ -134,10 +135,11 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#funded`, `#field-programs` | Legacy — opens `#supported` |
 | `#tasks` | GitHub Issues — live list from `overview-solutions/isv-ai-wiki` |
 | `#tasks?meeting=metering-2026-05-28` | Filter by meeting label |
-| `#meter-study` | Metering focus — default: overview |
-| `#meter-study/overview` | High-level overview (primary endeavor) |
-| `#meter-study/problems-today` | Problems — landscape diagrams & layers |
-| `#meter-study/vmrs` | OBIS VMRS + acronyms + tiers |
+| `#meter-study` | Village Metering — default: problems |
+| `#meter-study/problems-today` | Field problems → solutions (primary entry) |
+| `#meter-study/scope` | Village definition · population · HDI · modernization fork (cited) |
+| `#meter-study/overview` | Why ISV · gateway path · hardware threads |
+| `#meter-study/vmrs` | Register checklist (OBIS · VMRS) |
 | `#meter-study/vendor-study` | Vendor pipeline + technical tables |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
@@ -152,8 +154,8 @@ Registered sections (`SECTIONS` in `index.html`):
 
 Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` class). The shell loads:
 
-- `meter-overview.html?embed=1` (default)
-- `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1` · `meter-problems-today.html?embed=1`
+- `meter-problems-today.html?embed=1` (default)
+- `meter-village-scope.html?embed=1` · `meter-overview.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
