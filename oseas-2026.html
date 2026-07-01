@@ -113,9 +113,32 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p class="body-text">The two events run <strong>in parallel</strong> in the same week and venue ecosystem. ISV Tech Comm attendance can span both — open-stack builders at OSEAS and minigrid / DRE operators at the Forum.</p>
 
   <div class="callout">
-    <strong>ISV @ OSEAS hackathon</strong>
-    <p>IEEE Smart Village will contribute a <strong>code challenge</strong> to the OSEAS 2026 hackathon. Challenge brief, judging criteria, and starter repos are <span class="todo">in planning</span> — aligned with ISV’s <a href="index.html#meter-study/openami">OpenAMI</a> and <a href="index.html#meter-study/meshems">MeshEMS / Street-EMS</a> stacks (multi-tenant metering, northbound interoperability, village-scale EMS).</p>
-    <p>Expect themes around open tools that help in-country teams deploy, operate, and sustain community electrification — not slide decks. Details will be posted here and coordinated with EnAccess as the symposium program firms up.</p>
+    <strong>ISV EMS code challenge · invited by OSEAS</strong>
+    <p>After a planning call with <strong>Josha</strong> (OSEAS), IEEE Smart Village was invited to add an <strong>EMS code challenge</strong> to the OSEAS Rwanda workshop / hackathon track. Glenn Algie is drafting the brief — <span class="todo">final theme TBD within ~24h</span>.</p>
+    <p>Both candidates run on the <strong>edge at the LV feeder</strong> using Street-EMS / MeshEMS — continuous monitoring, isolation, alerts, and automations rather than cloud-only dashboards. Target hardware includes off-the-shelf <strong>IVY metering RCM</strong> and <strong>abSMART</strong> Modbus read/write multi-register CT inputs.</p>
+  </div>
+
+  <h2>Candidate challenge themes (pick one)</h2>
+  <table>
+    <thead><tr><th>#</th><th>Theme</th><th>Edge EMS scope</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td><strong>Continuous leakage detection</strong></td>
+        <td>Detection, isolation, reports, and automations on the LV feeder — RCM + Modbus CT telemetry at the edge; actionable alerts without mandatory cloud round-trips.</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td><strong>Continuous neutral balancing</strong></td>
+        <td>Insights, alerts, automations, and recovery for village <strong>3-phase LV feeders</strong> — neutral imbalance monitoring and corrective workflows at the feeder controller.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="body-text">Either path extends ISV’s <a href="index.html#meter-study/meshems">MeshEMS / Street-EMS</a> “LV feeder as first kilometre” thread and pairs with <a href="index.html#meter-study/openami">OpenAMI</a> northbound semantics where operators need aggregation upstream.</p>
+
+  <div class="callout callout-amber">
+    <strong>EnAccess · Power Africa 2026</strong>
+    <p>EnAccess has <strong>limited travel budget</strong> and is <strong>unlikely to attend PAC 2026</strong> (Nairobi, Sep). OpenAMI coordination continues remotely and shifts emphasis to <strong>OSEAS Kigali</strong> (Oct) — see <a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop</a> guest list update.</p>
   </div>
 
   <div class="callout callout-amber">
@@ -144,7 +167,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li><a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop</a> · Nairobi · Sep 2026 — hands-on Street-EMS track ahead of OSEAS</li>
     <li><a href="open-energy-hackathon-2026.html">Open Energy Hackathon 2026</a> · Oakland · Apr 2026 — prior ISV hackathon thread</li>
     <li><a href="power-africa-openami-presentation-2025.html">OpenAMI @ Power Africa 2025</a> · Nairobi · prior East Africa open-stack gathering</li>
-    <li><a href="index.html#meter-study/overview">Meter Interoperability</a> · northbound MQTT · VMRS · vendor study</li>
+    <li><a href="index.html#meter-study/problems-today">Village metering · Problems</a> · vendor study · register checklist</li>
   </ul>
 </div>
 </body>
