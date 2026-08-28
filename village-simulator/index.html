@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="../css/meter-focus.css">
+<link rel="stylesheet" href="css/village-perspectives.css">
 <script src="../js/isv-theme.js"></script>
 <script src="../js/meter-embed.js"></script>
 <style>
@@ -328,6 +329,11 @@ html.embed .wl-stage-col { height: 62vh; min-height: 420px; }
     <span>power lines</span>
   </div>
   <div id="wl-theater">
+  <div class="view-mode-controls">
+    <button type="button" id="view-mode-3d" class="view-mode-btn active">3D Village</button>
+    <button type="button" id="view-mode-cabinet" class="view-mode-btn">Cabinet Builder</button>
+    <button type="button" id="view-mode-customer" class="view-mode-btn">Customer Meter</button>
+  </div>
   <div class="controls">
     <span id="wl-clock">00:00</span>
     <button type="button" class="wl-skip" id="wl-play" title="Play" aria-label="Play">▶</button>
@@ -407,6 +413,9 @@ html.embed .wl-stage-col { height: 62vh; min-height: 420px; }
         <ul id="wl-log"></ul>
       </div>
     </div>
+  </div>
+  <div id="wl-perspective-container" class="stage" style="display: none;">
+    <!-- Cabinet and Customer views inserted here dynamically -->
   </div>
   <div id="wl-fs-load">
     <header class="fs-load-head">
