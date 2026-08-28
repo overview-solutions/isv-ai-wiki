@@ -316,6 +316,22 @@ const houseIndex = Object.fromEntries(HOUSES.map((h, i) => [h.id, i]));
 const boardById = Object.fromEntries(BOARDS.map((b) => [b.id, b]));
 const HOUSE_N = HOUSES.length;
 
+// Export simulation data for perspective views
+const SIM = {
+  houses: HOUSES,
+  boards: BOARDS,
+  feeders: FEEDERS,
+  events: day.events,
+  readings: day.readings,
+  summary: day.summary,
+  houseById,
+  boardById,
+  readingAt: (houseId, min) => {
+    const slot = Math.min(SLOTS - 1, Math.max(0, Math.floor(min / SLOT_MIN)));
+    return day.readings[slot * HOUSE_N + houseIndex[houseId]];
+  }
+};
+
 const ANOM_EVENT = new Set(["disconnect", "sms", "reconnect", "cap_warn", "pf_warn", "overload"]);
 const anomalyIds = new Set();
 for (const e of day.events) {
@@ -2434,6 +2450,11 @@ function setNow(min) {
   if (scrub && document.activeElement !== scrub) scrub.value = String(imin);
   fillLog();
   fillHouses();
+  
+  // Notify perspective views of time change
+  if (window.currentPerspectiveView && window.currentPerspectiveView.update) {
+    window.currentPerspectiveView.update(imin);
+  }
 }
 
 function applyVisibility() {
@@ -2590,6 +2611,63 @@ function togglePlay(dir) {
 }
 
 function bindUi() {
+  // View mode switching for Cabinet Builder and Customer views
+  let cabinetView = null;
+  let customerView = null;
+  let currentViewMode = "3d";
+  
+  const btn3d = document.getElementById("view-mode-3d");
+  const btnCabinet = document.getElementById("view-mode-cabinet");
+  const btnCustomer = document.getElementById("view-mode-customer");
+  const stage3d = document.querySelector(".stage");
+  const perspectiveContainer = document.getElementById("wl-perspective-container");
+  
+  async function switchViewMode(mode) {
+    currentViewMode = mode;
+    
+    // Update button states
+    btn3d?.classList.toggle("active", mode === "3d");
+    btnCabinet?.classList.toggle("active", mode === "cabinet");
+    btnCustomer?.classList.toggle("active", mode === "customer");
+    
+    // Show/hide containers
+    if (stage3d) stage3d.style.display = mode === "3d" ? "grid" : "none";
+    if (perspectiveContainer) perspectiveContainer.style.display = mode === "3d" ? "none" : "grid";
+    
+    // Clear current view reference
+    window.currentPerspectiveView = null;
+    
+    // Lazy load and initialize views
+    if (mode === "cabinet") {
+      const { createCabinetView } = await import("./village-cabinet-view.js");
+      perspectiveContainer.innerHTML = "";
+      cabinetView = createCabinetView(perspectiveContainer, SIM);
+      window.currentPerspectiveView = cabinetView;
+    } else if (mode === "customer") {
+      const { createCustomerView } = await import("./village-customer-view.js");
+      perspectiveContainer.innerHTML = "";
+      customerView = createCustomerView(perspectiveContainer, SIM, state.nowMin);
+      window.currentPerspectiveView = customerView;
+    }
+  }
+  
+  btn3d?.addEventListener("click", () => switchViewMode("3d"));
+  btnCabinet?.addEventListener("click", () => switchViewMode("cabinet"));
+  btnCustomer?.addEventListener("click", () => switchViewMode("customer"));
+  
+  // Listen for meter selection events from views
+  document.addEventListener("cabinet-meter-select", (e) => {
+    const houseId = e.detail.houseId;
+    console.log("Cabinet selected meter:", houseId);
+    // Could switch back to 3D and focus if desired
+  });
+  
+  document.addEventListener("customer-meter-select", (e) => {
+    const houseId = e.detail.houseId;
+    console.log("Customer selected meter:", houseId);
+    // Could switch back to 3D and focus if desired
+  });
+  
   document.getElementById("wl-play")?.addEventListener("click", () => togglePlay(1));
   document.getElementById("wl-rev")?.addEventListener("click", () => togglePlay(-1));
   document.getElementById("wl-scrub")?.addEventListener("input", (e) => {

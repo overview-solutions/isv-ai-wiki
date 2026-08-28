@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perspective Views Test</title>
+<link rel="stylesheet" href="../css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/village-perspectives.css">
+<style>
+  body { padding: 1rem; }
+  .test-container { max-width: 1200px; margin: 0 auto; }
+  .test-section { margin-bottom: 2rem; padding: 1rem; border: 2px solid #3b6d11; border-radius: 8px; }
+  h2 { margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<div class="test-container">
+  <h1>Perspective Views Test Page</h1>
+  <p>Testing Cabinet Builder and Customer Meter views with mock data.</p>
+  
+  <div class="test-section">
+    <h2>Test Status</h2>
+    <div id="test-status">Initializing...</div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Cabinet Builder View</h2>
+    <div id="cabinet-test"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Customer Meter View</h2>
+    <div id="customer-test"></div>
+  </div>
+</div>
+
+<script type="module">
+  // Mock simulation data
+  const mockSim = {
+    houses: [
+      {
+        id: 'h0',
+        name: 'Amina',
+        serial: 'SM-0000A',
+        cluster: 'market',
+        feederId: 'f-market',
+        boardId: 'ems-1',
+        phase: 'A',
+        loadLimitW: 250,
+        startCredit: 80,
+        wallet: 450
+      },
+      {
+        id: 'h1',
+        name: 'Joseph',
+        serial: 'SM-0001J',
+        cluster: 'market',
+        feederId: 'f-market',
+        boardId: 'ems-1',
+        phase: 'B',
+        loadLimitW: 400,
+        startCredit: 0,
+        wallet: 1200
+      },
+      {
+        id: 'h2',
+        name: 'Grace',
+        serial: 'SM-0002G',
+        cluster: 'west',
+        feederId: 'f-west',
+        boardId: 'ems-2',
+        phase: 'C',
+        loadLimitW: 150,
+        startCredit: 80,
+        wallet: 800
+      }
+    ],
+    boards: [
+      { id: 'ems-1', cluster: 'market', feederId: 'f-market' },
+      { id: 'ems-2', cluster: 'west', feederId: 'f-west' }
+    ],
+    feeders: [
+      { id: 'f-market', cluster: 'market', label: 'Market feeder' },
+      { id: 'f-west', cluster: 'west', label: 'West farms feeder' }
+    ],
+    events: [
+      {
+        min: 360,
+        kind: 'pay',
+        houseId: 'h0',
+        amount: 500,
+        wallet: 950,
+        note: 'Payment via kiosk'
+      },
+      {
+        min: 361,
+        kind: 'reconnect',
+        houseId: 'h0',
+        wallet: 950,
+        note: 'Meter reconnected'
+      }
+    ],
+    readings: [
+      {
+        min: 360,
+        houseId: 'h0',
+        energyWh: 150,
+        powerW: 200,
+        on: true,
+        wallet: 450,
+        cost: 30,
+        loadType: 'cooking',
+        loadLimitW: 250,
+        capacity: 0.8,
+        pf: 0.92,
+        varQ: 15,
+        phase: 'A',
+        feederOut: false,
+        mix: { cooking: 150, lighting: 50 }
+      }
+    ],
+    summary: {
+      customers: 3,
+      tariff: 200,
+      kWh: 150
+    }
+  };
+  
+  async function testViews() {
+    const status = document.getElementById('test-status');
+    
+    try {
+      status.innerHTML = '✓ Mock data created<br>';
+      
+      // Test Cabinet View
+      status.innerHTML += 'Loading Cabinet View...<br>';
+      const { createCabinetView } = await import('./js/village-cabinet-view.js');
+      const cabinetContainer = document.getElementById('cabinet-test');
+      const cabinetView = createCabinetView(cabinetContainer, mockSim);
+      status.innerHTML += '✓ Cabinet View loaded successfully<br>';
+      
+      // Test Customer View
+      status.innerHTML += 'Loading Customer View...<br>';
+      const { createCustomerView } = await import('./js/village-customer-view.js');
+      const customerContainer = document.getElementById('customer-test');
+      const customerView = createCustomerView(customerContainer, mockSim, 360);
+      status.innerHTML += '✓ Customer View loaded successfully<br>';
+      
+      status.innerHTML += '<br><strong style="color: #3b6d11;">✓ All tests passed!</strong>';
+    } catch (error) {
+      status.innerHTML += `<br><strong style="color: #b42318;">✗ Error: ${error.message}</strong><br><pre>${error.stack}</pre>`;
+      console.error('Test error:', error);
+    }
+  }
+  
+  testViews();
+</script>
+</body>
+</html>

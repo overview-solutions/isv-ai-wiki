@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="../css/meter-focus.css">
+<link rel="stylesheet" href="css/village-perspectives.css">
 <script src="../js/isv-theme.js"></script>
 <script src="../js/meter-embed.js"></script>
 <style>
@@ -20,6 +21,52 @@ a { color: var(--green); }
 .back a { text-decoration: none; }
 h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 .sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+
+/* Collapsible info sections */
+.info-details, .legend-details {
+  margin-bottom: 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-2);
+}
+
+.info-details summary, .legend-details summary {
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-2);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.info-details summary:hover, .legend-details summary:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.info-details summary::before, .legend-details summary::before {
+  content: "▶";
+  font-size: 9px;
+  transition: transform 0.15s;
+}
+
+.info-details[open] summary::before, .legend-details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.info-content, .legend-content {
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.info-content p {
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 0;
+}
+
 .callout { border-left: 3px solid var(--amber); background: var(--amber-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 12px; line-height: 1.45; }
 .callout > strong:first-child { color: var(--amber); display: block; margin-bottom: 0.2rem; }
 .legend { display: flex; flex-wrap: wrap; gap: 0.65rem 1rem; font-size: 11px; color: var(--text-2); margin-bottom: 0.75rem; }
@@ -234,19 +281,16 @@ html.embed .wl-stage-col { height: 62vh; min-height: 420px; }
 <div class="wrap">
   <p class="back"><a href="../index.html#village-metering/village-simulator">Village Metering</a> · Village Simulator</p>
   <h1>Village Simulator</h1>
-  <p class="sub">Three.js spacetime stack. v2 (default): ground = now, worldlines rise, last 2 h stretched. v1: day stack stays put, now-plane climbs midnight→24:00. Green pad, brown yards, sun-cast shadows. Red knobs = still dark from a feeder/xfmr outage, every 5 min. Dark LV traces at trip (top) and restore (bottom). Hot red = FAULT / last breath. Default: anomaly events, worldlines off, readings off, payments off, mesh hops off, RF net off. PV is fixed-tilt (south). WASD trucks look-at. Hypothetical day, not live telemetry.</p>
-  <div class="callout">
-    <strong>Not live telemetry</strong>
-    Schematic mini-grid day using GroundBolt rules: 15 min heartbeat, tariff 200 / kWh (abstract units),
-    <code>POST /transaction/</code> then <code>set_balance</code>, then watts. <code>meter_config.state = AUTO</code>
-    → relay off when <code>credit_wallet &le; 0</code>. Four local outages (west spur, east pole xfmr, south lateral, market feeder overload) — rest of village stays live.
-    One DitroniX DTM (IPEM-class) per feeder: 3φ compare on the pole bars; imbalance can command a schematic phase-transfer.
-    Topology: ~10 homes / MeshEMS board, ~10 boards / feeder (~100 customers).
-    Leakage detection: MeshEMS ΔP localizes unmetered load to the feeder span between two boards.
-    Anomalies include PF &lt; 0.80 and capacity ≥ 80%. Allotment trip: 30 min ≥ 100% or 15 min ≥ 150% → <code>STATE_OFF</code>.
-    SM meters do not decode STS / OpenPAYGO tokens.
-    <span id="wl-fault-note"></span>
-  </div>
+  <p class="sub">Hypothetical prepaid mini-grid day · 3D spacetime visualization · GroundBolt simulation rules</p>
+  <details class="info-details">
+    <summary>About this simulation (click to expand)</summary>
+    <div class="info-content">
+      <p><strong>Not live telemetry</strong> — Schematic mini-grid day using GroundBolt rules: 15 min heartbeat, tariff 200/kWh (abstract units). Four local outages (west spur, east pole xfmr, south lateral, market feeder overload). Topology: ~10 homes/MeshEMS board, ~10 boards/feeder (~100 customers). Leakage detection via MeshEMS ΔP. Anomalies include PF &lt; 0.80 and capacity ≥ 80%.</p>
+    </div>
+  </details>
+  <details class="legend-details">
+    <summary>Color legend (click to expand)</summary>
+    <div class="legend-content">
   <div class="legend" data-legend="messages">
     <span><i style="background:#c9a227"></i>pay / set_balance (kiosk · agent · phone · CIU)</span>
     <span><i style="background:#2aa8b8"></i>reading (on)</span>
@@ -327,7 +371,14 @@ html.embed .wl-stage-col { height: 62vh; min-height: 420px; }
     <span id="wl-line-hi">100% at cap</span>
     <span>power lines</span>
   </div>
+    </div>
+  </details>
   <div id="wl-theater">
+  <div class="view-mode-controls">
+    <button type="button" id="view-mode-3d" class="view-mode-btn active">3D Village</button>
+    <button type="button" id="view-mode-cabinet" class="view-mode-btn">Cabinet Builder</button>
+    <button type="button" id="view-mode-customer" class="view-mode-btn">Customer Meter</button>
+  </div>
   <div class="controls">
     <span id="wl-clock">00:00</span>
     <button type="button" class="wl-skip" id="wl-play" title="Play" aria-label="Play">▶</button>
@@ -407,6 +458,9 @@ html.embed .wl-stage-col { height: 62vh; min-height: 420px; }
         <ul id="wl-log"></ul>
       </div>
     </div>
+  </div>
+  <div id="wl-perspective-container" class="stage" style="display: none;">
+    <!-- Cabinet and Customer views inserted here dynamically -->
   </div>
   <div id="wl-fs-load">
     <header class="fs-load-head">
