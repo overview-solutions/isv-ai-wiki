@@ -2639,12 +2639,12 @@ function bindUi() {
     
     // Lazy load and initialize views
     if (mode === "cabinet") {
-      const { createCabinetView } = await import("./js/village-cabinet-view.js");
+      const { createCabinetView } = await import("./village-cabinet-view.js");
       perspectiveContainer.innerHTML = "";
       cabinetView = createCabinetView(perspectiveContainer, SIM);
       window.currentPerspectiveView = cabinetView;
     } else if (mode === "customer") {
-      const { createCustomerView } = await import("./js/village-customer-view.js");
+      const { createCustomerView } = await import("./village-customer-view.js");
       perspectiveContainer.innerHTML = "";
       customerView = createCustomerView(perspectiveContainer, SIM, state.nowMin);
       window.currentPerspectiveView = customerView;
