@@ -405,6 +405,8 @@ let polePick = [];
 let breakerPick = [];
 let camFly = null;
 let camFeederId = null;
+const PICK_DRAG_PX = 6;
+let pickPtr = null;
 let dtmBars = [];
 let dtmParts = [];
 let emsMesh;
@@ -756,7 +758,7 @@ function boot() {
   if (state.role !== "customer" && state.scope?.kind === "feeder") flyToFeeder(state.scope.id);
   window.addEventListener("resize", resize);
   new ResizeObserver(resize).observe(stage);
-  renderer.domElement.addEventListener("pointerdown", onPick);
+  bindStagePick();
   renderer.setAnimationLoop(tick);
 }
 
@@ -3052,6 +3054,54 @@ function scopeFromHit(hit) {
   return { kind: "village" };
 }
 
+function abortCamFly() {
+  if (!camFly) return;
+  camFly = null;
+  if (controls) {
+    controls.enabled = true;
+    controls.enableDamping = true;
+  }
+}
+
+function bindStagePick() {
+  const el = renderer.domElement;
+  el.addEventListener("pointerdown", onStagePointerDown, true);
+  window.addEventListener("pointermove", onStagePointerMove);
+  window.addEventListener("pointerup", onStagePointerUp);
+  window.addEventListener("pointercancel", onStagePointerCancel);
+}
+
+function onStagePointerDown(ev) {
+  abortCamFly();
+  if (pickPtr && ev.pointerId !== pickPtr.id) {
+    pickPtr.dragged = true;
+    return;
+  }
+  if (ev.pointerType === "mouse" && ev.button !== 0) return;
+  pickPtr = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, dragged: false };
+}
+
+function onStagePointerMove(ev) {
+  if (!pickPtr || ev.pointerId !== pickPtr.id) return;
+  const dx = ev.clientX - pickPtr.x;
+  const dy = ev.clientY - pickPtr.y;
+  if (dx * dx + dy * dy >= PICK_DRAG_PX * PICK_DRAG_PX) pickPtr.dragged = true;
+}
+
+function onStagePointerUp(ev) {
+  if (!pickPtr || ev.pointerId !== pickPtr.id) return;
+  const dragged = pickPtr.dragged;
+  pickPtr = null;
+  if (dragged) return;
+  if (ev.pointerType === "mouse" && ev.button !== 0) return;
+  onPick(ev);
+}
+
+function onStagePointerCancel(ev) {
+  if (!pickPtr || ev.pointerId !== pickPtr.id) return;
+  pickPtr = null;
+}
+
 function onPick(ev) {
   const rect = renderer.domElement.getBoundingClientRect();
   const mouse = new THREE.Vector2(
@@ -3111,11 +3161,7 @@ function scaleCompassCards() {
 
 function panLook(dt) {
   if (!panKeys.size || !camera || !controls) return;
-  if (camFly) camFly = null;
-  if (controls) {
-    controls.enabled = true;
-    controls.enableDamping = true;
-  }
+  abortCamFly();
   camera.getWorldDirection(panFwd);
   panFwd.y = 0;
   if (panFwd.lengthSq() < 1e-6) panFwd.set(0, 0, NORTH.z || -1);
