@@ -186,14 +186,33 @@ body {
 }
 
 #main.sim-stage-first {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+#sec-village-metering.sim-stage-first {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 #sec-village-metering.sim-stage-first .section-header { display: none; }
+#sec-village-metering.sim-stage-first #content-village-metering,
+#sec-village-metering.sim-stage-first .notes-embed {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 #sec-village-metering.sim-stage-first .notes-embed { margin-top: 0; }
 #sec-village-metering.sim-stage-first .notes-embed iframe {
-  height: calc(100vh - 5.25rem);
-  min-height: 560px;
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  width: 100%;
 }
 #sec-village-metering.sim-stage-first #meter-study-toolbar-json { display: none; }
 
@@ -1396,6 +1415,11 @@ code {
   #main.notes-wide {
     width: 100%;
   }
+
+  #main.sim-stage-first {
+    padding-top: 3.25rem;
+    padding-bottom: 0.5rem;
+  }
 }
 </style>
 </head>
@@ -2314,7 +2338,7 @@ const METER_BENCHMARK_PAGES = {
   'village-simulator': {
     title: 'Village Simulator',
     sub: '',
-    src: 'village-simulator/index.html?embed=1&v=20260831feeder3',
+    src: 'village-simulator/index.html?embed=1&v=20260831fit',
     standalone: 'village-simulator/index.html'
   }
 };

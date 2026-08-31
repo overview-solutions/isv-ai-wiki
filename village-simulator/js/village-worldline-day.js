@@ -753,6 +753,10 @@ function boot() {
   applyVizMode();
   applyRole();
   resize();
+  requestAnimationFrame(() => {
+    resize();
+    requestAnimationFrame(resize);
+  });
   if (state.role !== "customer" && state.scope?.kind === "feeder") flyToFeeder(state.scope.id);
   window.addEventListener("resize", resize);
   new ResizeObserver(resize).observe(stage);
