@@ -280,7 +280,7 @@ td { color: var(--text-2); font-size: 13px; }
     <strong>How this maps to real devices</strong>
     <p>Inverters typically expose these settings via:</p>
     <ul style="margin: 0.5rem 0 0;">
-      <li><strong>SunSpec Modbus</strong> — Models 122 (volt-VAR), 123 (freq-watt), 126 (volt-watt), 132 (grid support)</li>
+      <li><strong>SunSpec Modbus / JSON</strong> — <a href="standard-sunspec.html">Models 701–712</a> (volt-VAR 705, volt-watt 706, freq-droop 711). Legacy 100-series: Models 122, 123, 126, 132.</li>
       <li><strong>IEEE 2030.5</strong> — DER control resources (DERProgram, DERCurve, DERStatus)</li>
       <li><strong>Proprietary apps</strong> — vendor-specific monitoring portals or local WiFi config interfaces</li>
     </ul>
@@ -363,8 +363,8 @@ td { color: var(--text-2); font-size: 13px; }
         <td>Harmonic limits referenced by 1547 — IEEE 1547 delegates power quality details to IEEE 519.</td>
       </tr>
       <tr>
-        <td><strong>SunSpec Modbus</strong></td>
-        <td>Device-level data model for inverter monitoring/control. Many inverters expose 1547 settings via SunSpec registers (Model 122, 123, 126 for volt-VAR/freq-watt curves).</td>
+        <td><a href="standard-sunspec.html"><strong>SunSpec</strong></a></td>
+        <td>Device-level data model. IEEE 1547-2018 Annex E names SunSpec Modbus as an interoperable interface. New implementations use Models 701–712 (not legacy 122/123/126) for the same volt-var / freq-watt / ride-through functions.</td>
       </tr>
     </tbody>
   </table>
@@ -407,12 +407,14 @@ td { color: var(--text-2); font-size: 13px; }
     <li><a href="https://standards.ieee.org/ieee/1547/6953/" target="_blank" rel="noopener">IEEE 1547-2018 standard (purchase) ↗</a></li>
     <li><a href="https://standards.ieee.org/ieee/1547.1/7531/" target="_blank" rel="noopener">IEEE 1547.1-2020 test procedures ↗</a></li>
     <li><a href="https://www.energy.gov/eere/solar/sunspec-alliance-ieee-1547-2018-resources" target="_blank" rel="noopener">DOE IEEE 1547-2018 resources ↗</a></li>
+    <li><a href="standard-sunspec.html">SunSpec 701–712 schema</a> — IEEE 1547-2018 device models (Modbus / JSON)</li>
     <li><a href="https://sunspec.org/ieee-1547-2018-resources/" target="_blank" rel="noopener">SunSpec Alliance 1547 implementation guide ↗</a></li>
     <li><a href="https://www.cpuc.ca.gov/industries-and-topics/electrical-energy/infrastructure/smart-grid/rule-21" target="_blank" rel="noopener">California Rule 21 (state adoption) ↗</a></li>
   </ul>
 
   <div class="footer-nav">
     <a href="index.html#standards">← All standards</a>
+    <a href="standard-sunspec.html">SunSpec</a>
     <a href="standard-ieee-2030-5.html">IEEE 2030.5 →</a>
   </div>
 </div>

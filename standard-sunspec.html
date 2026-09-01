@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunSpec — Device Information Models · Standards · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 24px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.85rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 54rem; line-height: 1.5; }
+h2 { font-size: 16px; font-weight: 500; margin: 1.5rem 0 0.65rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; color: var(--text); }
+p { font-size: 14px; color: var(--text-2); margin-bottom: 0.75rem; line-height: 1.55; max-width: 54rem; }
+ul, ol { margin: 0 0 0.85rem 1.5rem; color: var(--text-2); line-height: 1.6; }
+li { margin-bottom: 0.35rem; font-size: 14px; }
+code { font-family: var(--mono); font-size: 13px; background: var(--bg-2); padding: 0.15rem 0.4rem; border-radius: 4px; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.75rem 0.95rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 13px; line-height: 1.5; }
+.callout > strong:first-child { color: var(--teal); display: block; margin-bottom: 0.4rem; }
+.callout-key { border-left-color: var(--green); background: var(--green-50); }
+.callout-key > strong:first-child { color: var(--green); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn > strong:first-child { color: var(--amber); }
+.spec-grid { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin-bottom: 1rem; }
+@media (min-width: 720px) { .spec-grid { grid-template-columns: repeat(2, 1fr); } }
+.spec-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 0.85rem; background: var(--bg-2); font-size: 13px; line-height: 1.5; }
+.spec-card h4 { margin: 0 0 0.35rem; font-size: 13px; color: var(--green); font-weight: 500; }
+.spec-card p { font-size: 12px; margin-bottom: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; line-height: 1.45; }
+th { background: var(--bg-2); font-size: 11px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.02em; }
+td { color: var(--text-2); font-size: 13px; }
+td code { font-size: 11px; }
+.timeline { margin: 1rem 0; }
+.timeline-item { display: flex; gap: 0.75rem; margin-bottom: 0.85rem; }
+.timeline-year { font-weight: 600; color: var(--green); min-width: 4rem; font-size: 13px; }
+.timeline-text { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.footer-nav { font-size: 13px; color: var(--text-2); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.footer-nav a { margin-right: 1rem; }
+.schema-toolbar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+.schema-toolbar label { font-size: 12px; color: var(--text-2); }
+.schema-toolbar select { font-family: var(--font); font-size: 13px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); max-width: 100%; }
+.schema-pre {
+  max-height: 32rem; overflow: auto; font-size: 11px; background: var(--bg-2);
+  border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem;
+  font-family: var(--mono); line-height: 1.4; white-space: pre; margin-bottom: 0.75rem;
+  color: var(--text);
+}
+.schema-meta { font-size: 12px; color: var(--text-3); margin-bottom: 0.75rem; }
+.tree { background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); border: 2px solid var(--green); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; }
+.tree-title { font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 1rem; }
+.tree-block { border-radius: 8px; padding: 0.75rem 0.85rem; margin-bottom: 0.55rem; font-size: 12px; line-height: 1.45; }
+.tree-block strong { display: block; font-size: 13px; margin-bottom: 0.3rem; }
+.tree-id { font-family: var(--mono); font-size: 11px; }
+details.model-json { border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 0.75rem; margin-bottom: 0.5rem; background: var(--bg); }
+details.model-json summary { cursor: pointer; font-size: 13px; font-weight: 500; color: var(--teal); }
+.tbl-wrap { overflow-x: auto; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#standards">← Standards</a></div>
+
+  <h1>SunSpec Alliance</h1>
+  <p class="sub">Device Information Models — SunSpec Modbus · SunSpec JSON · IEEE 1547-2018 / IEEE 2030.5 interoperability</p>
+
+  <p class="lead">SunSpec defines <strong>vendor-neutral information models</strong> for inverters, storage, meters, and other DER. The same model can be encoded as Modbus registers (field / installer) or as JSON (MQTT, REST, OpenAMI). IEEE 1547-2018 names SunSpec Modbus and IEEE 2030.5 as the two interoperable communications methods for the same DER functions. The <strong>701–712 series</strong> is that shared schema.</p>
+
+  <div class="callout callout-key">
+    <strong>Core purpose</strong>
+    <p>Give every DER a <strong>single named point map</strong> (Model ID, point names, types, scale factors, curve groups) so a gateway can talk to any certified inverter without an OEM register spreadsheet. IEEE 2030.5 does not invent a second data model for grid-support functions — its DER function set is the WAN/XML encoding of this same SunSpec inverter-control model (IEEE 2030.5-2018 §10.10).</p>
+  </div>
+
+  <h2>What it is at its core</h2>
+
+  <p>SunSpec is a <strong>device information model</strong>, not a WAN protocol. Three layers:</p>
+
+  <ul>
+    <li><strong>Models</strong> — numbered blocks (1 Common, 101–103 legacy inverters, <strong>701–712 DER</strong>, 802+ storage, 200-series meters). Each model is a group of points and nested groups.</li>
+    <li><strong>Encodings</strong> — Modbus RTU/TCP (register map after the <code>SunS</code> marker) or JSON (canonical definition encoding; JSON instances for MQTT/REST).</li>
+    <li><strong>Profiles</strong> — which models a device must implement. The IEEE 1547-2018 profile requires Model 1 plus 701–712 for the grid-support functions that CSIP then carries over IEEE 2030.5.</li>
+  </ul>
+
+  <div class="callout callout-warn">
+    <strong>Village metering context</strong>
+    <p>SunSpec is the <strong>generation / inverter track</strong>, not prepaid STS revenue metering. OpenAMI MQTT northbound is shaped like SunSpec JSON so a pole EMS can translate Modbus RTU, CAN, or RF into one payload. IEEE 2030.5 wrapping of that same model is <strong>Roadmap Phase 3</strong> (utility DERMS). Do not score SunSpec on Donsun/Calin/Inhemeter STS meter rows.</p>
+  </div>
+
+  <h2>How it came to be</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2009</div>
+      <div class="timeline-text"><strong>SunSpec Modbus</strong> — Alliance publishes inverter register maps (Models 1, 101–103, later 120–126 grid-support). One <code>SunS</code> marker, then a scan of model ID + length blocks.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2018</div>
+      <div class="timeline-text"><strong>IEEE 1547-2018 Annex E</strong> names SunSpec Modbus and IEEE 2030.5 as interoperable DER communications. Same functions, two encodings (local Modbus vs REST/XML over TLS).</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2018</div>
+      <div class="timeline-text"><strong>CSIP</strong> (Common Smart Inverter Profile) — SunSpec profile of IEEE 2030.5 for California Rule 21. Maps grid-support functions to <code>DERControl</code> / <code>DefaultDERControl</code> (Table 9).</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020–21</div>
+      <div class="timeline-text"><strong>700-series DER models</strong> (701–712) replace the 100-series for new IEEE 1547 / UL 1741 SB implementations. Canonical definitions move to JSON (SMDX XML still published).</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-text">Model JSON gains a <code>standards</code> array on each point. 701–712 points that implement 1547 behavior are tagged <code>"IEEE 1547-2018"</code> — the behavior standard those IEEE 2030.5 resources configure.</div>
+    </div>
+  </div>
+
+  <h2>The schema that covers IEEE 2030.5 compatibility</h2>
+
+  <p>Two files matter:</p>
+  <ol>
+    <li><strong><code>schema.json</code></strong> — JSON Schema (draft-07) for <em>how</em> every SunSpec model is written. The <code>standards</code> array on each point is where 1547/2030.5 alignment is declared.</li>
+    <li><strong>Models 1 + 701–712</strong> — the <em>instance</em> definitions that implement every CSIP/IEEE 2030.5 DER grid-support function. Official copies are vendored at <code>sunspec-models/json/</code> (Apache-2.0, <a href="https://github.com/sunspec/models" target="_blank" rel="noopener">sunspec/models</a>).</li>
+  </ol>
+
+  <p>IEEE 2030.5 does not get a second SunSpec model set. CSIP maps functions onto 2030.5 resources; the 700-series is the device-side schema for those same functions. Official point tags say <code>IEEE 1547-2018</code> (behavior). IEEE 2030.5 is the WAN protocol that writes the equivalent <code>DERControl</code> objects.</p>
+
+  <h3>Device map — Model 1 + 701–712</h3>
+
+  <div class="tree">
+    <div class="tree-title">☀️ SunSpec DER map (IEEE 1547-2018 profile) ↔ IEEE 2030.5 CSIP</div>
+    <div class="tree-block" style="background: var(--green-50); border: 2px solid var(--green);">
+      <strong>Model 1 · <span class="tree-id">common</span></strong>
+      Identity: <code>Mn</code> <code>Md</code> <code>Vr</code> <code>SN</code> — maps to IEEE 2030.5 <code>EndDevice</code> (lFDI/sFDI live on the cert, not in Modbus).
+    </div>
+    <div class="tree-block" style="background: var(--bg); border-left: 4px solid var(--blue);">
+      <strong>701 · <span class="tree-id">DERMeasureAC</span> — measurements</strong>
+      <code>St</code> <code>ConnSt</code> <code>Alrm</code> <code>W</code> <code>Var</code> <code>Hz</code> <code>LLV</code>/<code>LNV</code> + per-phase V/I/P → <code>DERStatus</code> / metering (<code>/mr</code>).
+    </div>
+    <div class="tree-block" style="background: var(--bg); border-left: 4px solid var(--teal);">
+      <strong>702 · <span class="tree-id">DERCapacity</span> — nameplate + settings</strong>
+      Ratings <code>WMaxRtg</code> <code>VAMaxRtg</code> <code>VarMaxInjRtg</code> + <code>CtrlModes</code> bitfield → <code>DERCapability</code> / <code>DERSettings</code>.
+    </div>
+    <div class="tree-block" style="background: var(--bg); border-left: 4px solid var(--amber);">
+      <strong>703 · <span class="tree-id">DEREnterService</span></strong>
+      <code>ES</code> permit enter service, V/Hz windows, delay/ramp → <code>opModEnergize</code> / connect.
+    </div>
+    <div class="tree-block" style="background: var(--bg); border-left: 4px solid var(--purple);">
+      <strong>704 · <span class="tree-id">DERCtlAC</span> — immediate controls</strong>
+      Fixed PF inj/abs, <code>WMaxLimPct</code>, <code>WSet</code>, <code>VarSet</code>, <code>WRmp</code> → <code>opModFixedPF</code>, <code>opModMaxLimW</code>, <code>opModFixedW</code> / <code>opModTargetW</code>, <code>opModFixedVar</code>, <code>setGradW</code>.
+    </div>
+    <div class="tree-block" style="background: var(--ieee-blue-50); border-left: 4px solid var(--ieee-blue);">
+      <strong>705–706 · curves</strong>
+      <span class="tree-id">DERVoltVar</span> → <code>opModVoltVar</code> · <span class="tree-id">DERVoltWatt</span> → <code>opModVoltWatt</code> (curve groups <code>Crv[]</code> / <code>Pt[]</code>).
+    </div>
+    <div class="tree-block" style="background: var(--red-50); border-left: 4px solid var(--red);">
+      <strong>707–710 · ride-through / trip curves</strong>
+      LV <span class="tree-id">DERTripLV</span> · HV <span class="tree-id">DERTripHV</span> · LF <span class="tree-id">DERTripLF</span> · HF <span class="tree-id">DERTripHF</span> — each with MustTrip / MayTrip / MomCess → <code>opModLVRT*</code> <code>opModHVRT*</code> <code>opModLFRT*</code> <code>opModHFRT*</code>.
+    </div>
+    <div class="tree-block" style="background: var(--bg); border-left: 4px solid var(--green);">
+      <strong>711–712 · frequency droop + watt-var</strong>
+      <span class="tree-id">DERFreqDroop</span> → <code>opModFreqDroop</code> / <code>opModFreqWatt</code> · <span class="tree-id">DERWattVar</span> → <code>opModWattVar</code> (IEEE 1547 Category B; CSIP Table 9 lists freq-watt, not always watt-var).
+    </div>
+  </div>
+
+  <h3>CSIP Table 9 → SunSpec 700-series</h3>
+
+  <p>Cited from the SunSpec <a href="https://sunspec.org/wp-content/uploads/2019/08/CSIPImplementationGuidev2.103-15-2018.pdf" target="_blank" rel="noopener">CSIP Implementation Guide v2.1</a> (Table 9) plus the official 701–712 JSON group names. Empty CSIP cells mean the function is default-only or not scheduled as a <code>DERControl</code> event.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Grid function (CSIP)</th>
+        <th>SunSpec model</th>
+        <th>IEEE 2030.5 DERControl</th>
+        <th>IEEE 2030.5 DefaultDERControl</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Identity / capability</td>
+        <td>1 <code>common</code> · 702 <code>DERCapacity</code></td>
+        <td><code>EndDevice</code> · <code>DERCapability</code></td>
+        <td><code>DERSettings</code></td>
+      </tr>
+      <tr>
+        <td>Status / metering</td>
+        <td>701 <code>DERMeasureAC</code></td>
+        <td><code>DERStatus</code> · <code>/mr</code></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Connect / disconnect · enter service</td>
+        <td>703 <code>DEREnterService</code> · 701 <code>ConnSt</code></td>
+        <td><code>opModEnergize</code></td>
+        <td><code>opModEnergize</code></td>
+      </tr>
+      <tr>
+        <td>Fixed power factor</td>
+        <td>704 <code>DERCtlAC</code> <code>PFWInj</code> / <code>PFWAbs</code></td>
+        <td><code>opModFixedPF</code></td>
+        <td><code>opModFixedPF</code></td>
+      </tr>
+      <tr>
+        <td>Real power output limit</td>
+        <td>704 <code>WMaxLimPct</code></td>
+        <td><code>opModMaxLimW</code></td>
+        <td><code>opModMaxLimW</code></td>
+      </tr>
+      <tr>
+        <td>Set active power (W or %)</td>
+        <td>704 <code>WSet</code> / <code>WSetPct</code></td>
+        <td><code>opModFixedW</code> · <code>opModTargetW</code></td>
+        <td><code>opModFixedW</code> · <code>opModTargetW</code></td>
+      </tr>
+      <tr>
+        <td>Ramp rate</td>
+        <td>704 <code>WRmp</code> / <code>WRmpRef</code></td>
+        <td>—</td>
+        <td><code>setGradW</code> · <code>setSoftGradW</code></td>
+      </tr>
+      <tr>
+        <td>Dynamic volt-var</td>
+        <td>705 <code>DERVoltVar</code></td>
+        <td><code>opModVoltVar</code></td>
+        <td><code>opModVoltVar</code></td>
+      </tr>
+      <tr>
+        <td>Volt-watt</td>
+        <td>706 <code>DERVoltWatt</code></td>
+        <td><code>opModVoltWatt</code></td>
+        <td><code>opModVoltWatt</code></td>
+      </tr>
+      <tr>
+        <td>Frequency-watt / droop</td>
+        <td>711 <code>DERFreqDroop</code></td>
+        <td><code>opModFreqWatt</code> · <code>opModFreqDroop</code></td>
+        <td><code>opModFreqWatt</code> · <code>opModFreqDroop</code></td>
+      </tr>
+      <tr>
+        <td>Low/high voltage ride-through</td>
+        <td>707 <code>DERTripLV</code> · 708 <code>DERTripHV</code></td>
+        <td><code>opModLVRTMustTrip</code> · <code>MayTrip</code> · <code>MomentaryCessation</code> (and HVRT twins)</td>
+        <td>same</td>
+      </tr>
+      <tr>
+        <td>Low/high frequency ride-through</td>
+        <td>709 <code>DERTripLF</code> · 710 <code>DERTripHF</code></td>
+        <td><code>opModLFRTMustTrip</code> · <code>MayTrip</code> (and HFRT twins)</td>
+        <td>same</td>
+      </tr>
+      <tr>
+        <td>Watt-var (1547 Cat. B; not in CSIP Table 9)</td>
+        <td>712 <code>DERWattVar</code></td>
+        <td><code>opModWattVar</code></td>
+        <td><code>opModWattVar</code></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Model 702 <code>CtrlModes</code> — advertised functions</h3>
+
+  <p>This bitfield is the SunSpec-side equivalent of IEEE 2030.5 <code>DERCapability.modesSupported</code>. Bits from official <code>model_702.json</code>:</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr><th>Bit</th><th>SunSpec symbol</th><th>Label</th><th>IEEE 2030.5 mode</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td><code>MAX_W</code></td><td>Limit maximum active power</td><td><code>opModMaxLimW</code></td></tr>
+      <tr><td>1</td><td><code>FIXED_W</code></td><td>Fixed active power</td><td><code>opModFixedW</code></td></tr>
+      <tr><td>2</td><td><code>FIXED_VAR</code></td><td>Fixed reactive power</td><td><code>opModFixedVar</code></td></tr>
+      <tr><td>3</td><td><code>FIXED_PF</code></td><td>Fixed power factor</td><td><code>opModFixedPFInjectW</code> / <code>opModFixedPFAbsorbW</code></td></tr>
+      <tr><td>4</td><td><code>VOLT_VAR</code></td><td>Volt-var</td><td><code>opModVoltVar</code></td></tr>
+      <tr><td>5</td><td><code>FREQ_WATT</code></td><td>Freq-watt</td><td><code>opModFreqWatt</code> / <code>opModFreqDroop</code></td></tr>
+      <tr><td>6</td><td><code>DYN_REACT_CURR</code></td><td>Dynamic reactive current</td><td>not a CSIP Table 9 mandatory; 2030.5 has no 1:1 CSIP name here</td></tr>
+      <tr><td>7</td><td><code>LV_TRIP</code></td><td>Low-voltage trip</td><td><code>opModLVRT*</code></td></tr>
+      <tr><td>8</td><td><code>HV_TRIP</code></td><td>High-voltage trip</td><td><code>opModHVRT*</code></td></tr>
+      <tr><td>9</td><td><code>WATT_VAR</code></td><td>Watt-var</td><td><code>opModWattVar</code></td></tr>
+      <tr><td>10</td><td><code>VOLT_WATT</code></td><td>Volt-watt</td><td><code>opModVoltWatt</code></td></tr>
+      <tr><td>11</td><td><code>SCHEDULED</code></td><td>Scheduling</td><td><code>DERProgram</code> / <code>DERControl</code> events</td></tr>
+      <tr><td>12</td><td><code>LF_TRIP</code></td><td>Low-frequency trip</td><td><code>opModLFRT*</code></td></tr>
+      <tr><td>13</td><td><code>HF_TRIP</code></td><td>High-frequency trip</td><td><code>opModHFRT*</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Exact JSON Schema (<code>schema.json</code>)</h2>
+
+  <p>This is the official SunSpec JSON Schema for model definitions — including the <code>standards</code> field used to mark IEEE 1547-2018 (and therefore IEEE 2030.5-compatible) points. Source: <a href="https://github.com/sunspec/models/blob/master/json/schema.json" target="_blank" rel="noopener">sunspec/models json/schema.json</a>.</p>
+
+  <div class="schema-toolbar">
+    <label for="sunspec-file">Show official file</label>
+    <select id="sunspec-file" aria-label="SunSpec JSON file">
+      <option value="schema.json">schema.json — definition language</option>
+      <option value="model_1.json">model_1.json — common (mandatory first model)</option>
+      <option value="model_701.json">model_701.json — DERMeasureAC</option>
+      <option value="model_702.json">model_702.json — DERCapacity</option>
+      <option value="model_703.json">model_703.json — DEREnterService</option>
+      <option value="model_704.json">model_704.json — DERCtlAC</option>
+      <option value="model_705.json">model_705.json — DERVoltVar</option>
+      <option value="model_706.json">model_706.json — DERVoltWatt</option>
+      <option value="model_707.json">model_707.json — DERTripLV</option>
+      <option value="model_708.json">model_708.json — DERTripHV</option>
+      <option value="model_709.json">model_709.json — DERTripLF</option>
+      <option value="model_710.json">model_710.json — DERTripHF</option>
+      <option value="model_711.json">model_711.json — DERFreqDroop</option>
+      <option value="model_712.json">model_712.json — DERWattVar</option>
+    </select>
+  </div>
+  <p class="schema-meta" id="sunspec-file-meta"><a href="sunspec-models/json/schema.json">sunspec-models/json/schema.json</a> — Apache-2.0 copy of sunspec/models</p>
+  <pre class="schema-pre" id="sunspec-json" tabindex="0">Loading schema.json…</pre>
+  <noscript><p>JavaScript off — open the files under <a href="sunspec-models/json/schema.json">sunspec-models/json/</a>.</p></noscript>
+
+  <h3>What <code>schema.json</code> requires</h3>
+
+  <div class="spec-grid">
+    <div class="spec-card">
+      <h4>Model root</h4>
+      <p>Required <code>id</code> (1–65535) and <code>group</code>. Optional <code>label</code>, <code>desc</code>, <code>detail</code>, <code>notes</code>, <code>comments</code>.</p>
+    </div>
+    <div class="spec-card">
+      <h4>Group</h4>
+      <p>Required <code>name</code> + <code>type</code> (<code>group</code> or <code>sync</code>). Nested <code>points[]</code> then <code>groups[]</code>. <code>count</code> is an integer or a point name (repeating curves).</p>
+    </div>
+    <div class="spec-card">
+      <h4>Point</h4>
+      <p>Required <code>name</code>, <code>type</code>, <code>size</code>. Optional <code>sf</code>, <code>units</code>, <code>access</code> (R/RW), <code>mandatory</code> (M/O), <code>static</code> (D/S), <code>symbols[]</code>.</p>
+    </div>
+    <div class="spec-card">
+      <h4>standards[]</h4>
+      <p>Array of strings on each point. 701–712 tags 1547-required points <code>"IEEE 1547-2018"</code>. That is the IEEE 2030.5-compatible subset — empty array means SunSpec-only / optional.</p>
+    </div>
+  </div>
+
+  <h3>Curve-group shape (Models 705–710, 712)</h3>
+
+  <p>IEEE 2030.5 <code>DERCurve</code> resources are this nested group, not a flat register list. Official Model 705 skeleton:</p>
+
+<pre class="schema-pre">{
+  "id": 705,
+  "group": {
+    "name": "DERVoltVar",
+    "label": "DER Volt-Var",
+    "type": "group",
+    "points": [
+      { "name": "ID", "value": 705, "type": "uint16", "mandatory": "M", "standards": ["IEEE 1547-2018"] },
+      { "name": "L", "type": "uint16", "mandatory": "M", "standards": ["IEEE 1547-2018"] },
+      { "name": "Ena", "type": "enum16", "access": "RW", "standards": ["IEEE 1547-2018"] },
+      { "name": "AdptCrvReq", "type": "uint16", "access": "RW", "standards": ["IEEE 1547-2018"] },
+      { "name": "NPt", "type": "uint16", "standards": ["IEEE 1547-2018"] },
+      { "name": "NCrv", "type": "uint16", "standards": ["IEEE 1547-2018"] }
+    ],
+    "groups": [
+      {
+        "name": "Crv",
+        "count": "NCrv",
+        "type": "group",
+        "points": [
+          { "name": "ActPt", "type": "uint16", "access": "RW", "standards": ["IEEE 1547-2018"] },
+          { "name": "DeptRef", "type": "enum16", "access": "RW", "standards": ["IEEE 1547-2018"] }
+        ],
+        "groups": [
+          {
+            "name": "Pt",
+            "count": "NPt",
+            "type": "group",
+            "points": [
+              { "name": "V", "type": "uint16", "units": "VNomPct", "access": "RW", "standards": ["IEEE 1547-2018"] },
+              { "name": "Var", "type": "int16", "units": "DeptRef", "access": "RW", "standards": ["IEEE 1547-2018"] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</pre>
+
+  <p>Use the file picker above for the full official <code>model_705.json</code> (symbols, scale factors, reversion timers). Ride-through models 707–710 nest three curves per stored set: <code>MustTrip</code>, <code>MayTrip</code>, <code>MomCess</code> — the three IEEE 2030.5 LVRT/HVRT/LFRT/HFRT mode families.</p>
+
+  <h2>Relationship to other standards</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Standard</th>
+        <th>Relationship to SunSpec</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="standard-ieee-1547.html"><strong>IEEE 1547-2018</strong></a></td>
+        <td>Defines DER <em>behavior</em>. Annex E names SunSpec Modbus as one of two interoperable interfaces. 701–712 points tagged <code>IEEE 1547-2018</code> are that interface.</td>
+      </tr>
+      <tr>
+        <td><a href="standard-ieee-2030-5.html"><strong>IEEE 2030.5</strong></a></td>
+        <td>WAN application protocol (HTTPS/XML, TLS, certs). DER function set is based on the SunSpec inverter control model. CSIP is the SunSpec profile of 2030.5.</td>
+      </tr>
+      <tr>
+        <td><strong>CSIP</strong></td>
+        <td>Which 2030.5 function sets are mandatory (Rule 21). Table 9 is the control mapping; 701–712 are the device schema behind it.</td>
+      </tr>
+      <tr>
+        <td><strong>Modbus RTU/TCP</strong></td>
+        <td>Transport for the register encoding. RS-485 carries the map; SunSpec is the map.</td>
+      </tr>
+      <tr>
+        <td><a href="standard-tls-1-2.html"><strong>TLS 1.2</strong></a></td>
+        <td>Required for IEEE 2030.5. Not required for local SunSpec Modbus on an isolated RS-485 bus (Phase 1–2).</td>
+      </tr>
+      <tr>
+        <td><strong>OpenAMI MQTT</strong></td>
+        <td>Village northbound. Payloads align to SunSpec JSON group/point names so a later 2030.5 gateway has a known model to wrap — not a second register language.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Relevance to village microgrids</h2>
+
+  <div class="callout">
+    <strong>When SunSpec matters for ISV deployments</strong>
+    <p>Use SunSpec on the <strong>inverter / hybrid / feeder EMS</strong> path (Victron, Enphase, Deye, Street Pole EMS). Do not expect STS keypad meters to speak it.</p>
+    <ul style="margin: 0.5rem 0 0;">
+      <li><strong>Phase 1–2:</strong> Modbus RTU + SunSpec JSON over MQTT. Models 1 + 701 (and 213/meter models if present) are enough for leakage/generation visibility. Skip 2030.5 certs.</li>
+      <li><strong>Phase 3:</strong> Keep the 701–712 map. Add an IEEE 2030.5 / CSIP gateway that translates those points to <code>DERControl</code> XML for the utility DERMS.</li>
+      <li><strong>Prepaid/STS:</strong> Unchanged. SunSpec does not vend tokens or replace DLMS/COSEM.</li>
+    </ul>
+  </div>
+
+  <h2>Key takeaways</h2>
+
+  <ul>
+    <li>SunSpec is the <strong>device schema</strong>; IEEE 2030.5 is one <strong>encoding + session</strong> of that schema for utilities.</li>
+    <li>The IEEE 2030.5-compatible set is <strong>Model 1 + Models 701–712</strong>, not the whole SunSpec catalog (101–103, 200-series meters, 802 batteries are adjacent).</li>
+    <li>Look at each point’s <code>standards: ["IEEE 1547-2018"]</code> array — that is the documented 1547/2030.5 subset. Empty means optional / SunSpec-only.</li>
+    <li>Canonical files: <code>sunspec-models/json/schema.json</code> and <code>model_701.json</code>…<code>model_712.json</code>.</li>
+    <li>For ISV: Phase 1–2 speak SunSpec JSON/Modbus; Phase 3 wraps the same points in 2030.5 CSIP.</li>
+  </ul>
+
+  <h2>Further reading</h2>
+
+  <ul>
+    <li><a href="https://github.com/sunspec/models" target="_blank" rel="noopener">sunspec/models (SMDX + JSON) ↗</a> — Apache-2.0 source of the files on this page</li>
+    <li><a href="https://sunspec.org/sunspec-modbus/" target="_blank" rel="noopener">SunSpec Modbus specifications ↗</a> — Device IM, DER IM, IEEE 1547-2018 profile</li>
+    <li><a href="https://sunspec.org/ieee-2030-5-common-smart-inverter-profile-csip-implementation-guide/" target="_blank" rel="noopener">CSIP implementation guide ↗</a></li>
+    <li><a href="https://sunspec.org/new-ieee-1547-model-definitions-now-supported-by-sunspec-modbus/" target="_blank" rel="noopener">700-series DER models (701–712) ↗</a></li>
+    <li><a href="standard-ieee-2030-5.html">IEEE 2030.5 deep-dive</a> · <a href="standard-ieee-1547.html">IEEE 1547 deep-dive</a></li>
+  </ul>
+
+  <div class="footer-nav">
+    <a href="standard-ieee-2030-5.html">← IEEE 2030.5</a>
+    <a href="index.html#standards">All standards</a>
+    <a href="standard-tls-1-2.html">TLS 1.2 →</a>
+  </div>
+</div>
+<script>
+(function () {
+  var sel = document.getElementById('sunspec-file');
+  var pre = document.getElementById('sunspec-json');
+  var meta = document.getElementById('sunspec-file-meta');
+  if (!sel || !pre) return;
+  function load(name) {
+    var url = 'sunspec-models/json/' + name;
+    meta.innerHTML = '<a href="' + url + '">' + url + '</a> — Apache-2.0 copy of sunspec/models json/' + name;
+    pre.textContent = 'Loading ' + url + '…';
+    fetch(url, { cache: 'no-cache' }).then(function (r) {
+      if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+      return r.json();
+    }).then(function (data) {
+      pre.textContent = JSON.stringify(data, null, 2);
+    }).catch(function (err) {
+      pre.textContent = 'Could not load ' + url + ' (' + err.message + ').\nOpen the file directly: ' + url;
+    });
+  }
+  sel.addEventListener('change', function () { load(sel.value); });
+  load(sel.value);
+})();
+</script>
+</body>
+</html>
