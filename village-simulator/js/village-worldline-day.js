@@ -2400,6 +2400,19 @@ function feederBufWidth(kind) {
   return 1.2;
 }
 
+/** Extra world units the selected-feeder rim sticks out past the fill. */
+const FEEDER_BUF_RIM = 0.22;
+
+function stampFeederSeg(dummy, s, y, w, h, lenPad) {
+  const dx = s.bx - s.ax;
+  const dz = s.bz - s.az;
+  const len = Math.hypot(dx, dz) || 0.2;
+  dummy.position.set((s.ax + s.bx) / 2, y, (s.az + s.bz) / 2);
+  dummy.rotation.set(0, Math.atan2(dx, dz), 0);
+  dummy.scale.set(w, h, len + w * lenPad);
+  dummy.updateMatrix();
+}
+
 function buildFeederBuffers() {
   feederBufById = {};
   const bufMat = new THREE.MeshBasicMaterial({
@@ -2411,6 +2424,13 @@ function buildFeederBuffers() {
     polygonOffset: true,
     polygonOffsetFactor: -2,
     polygonOffsetUnits: -2,
+  });
+  const outlineMat = new THREE.MeshBasicMaterial({
+    color: 0xeaffff,
+    transparent: true,
+    opacity: 0.95,
+    side: THREE.DoubleSide,
+    depthWrite: false,
   });
   const pickMat = new THREE.MeshBasicMaterial({
     color: ASSET.feeder,
@@ -2425,14 +2445,8 @@ function buildFeederBuffers() {
   const pickSegs = GRID_SEGS.filter((s) => s.feederId);
   feederPickMesh = new THREE.InstancedMesh(barGeo, pickMat, Math.max(1, pickSegs.length));
   pickSegs.forEach((s, i) => {
-    const dx = s.bx - s.ax;
-    const dz = s.bz - s.az;
-    const len = Math.hypot(dx, dz) || 0.2;
     const w = feederBufWidth(s.kind) * 0.72;
-    dummy.position.set((s.ax + s.bx) / 2, Y_FEEDER, (s.az + s.bz) / 2);
-    dummy.rotation.set(0, Math.atan2(dx, dz), 0);
-    dummy.scale.set(w, 0.04, len + w * 0.35);
-    dummy.updateMatrix();
+    stampFeederSeg(dummy, s, Y_FEEDER, w, 0.04, 0.35);
     feederPickMesh.setMatrixAt(i, dummy.matrix);
   });
   feederPickMesh.count = pickSegs.length;
@@ -2447,23 +2461,30 @@ function buildFeederBuffers() {
     g.visible = false;
     g.userData.feederId = f.id;
     if (segs.length) {
+      const rimRibbon = new THREE.InstancedMesh(barGeo, outlineMat.clone(), segs.length);
+      rimRibbon.userData.scope = { kind: "feeder", id: f.id };
+      rimRibbon.userData.feederOutline = true;
+      segs.forEach((s, i) => {
+        const w = feederBufWidth(s.kind) + FEEDER_BUF_RIM * 2;
+        stampFeederSeg(dummy, s, Y_FEEDER - 0.006, w, 0.03, 0.28);
+        rimRibbon.setMatrixAt(i, dummy.matrix);
+      });
+      rimRibbon.frustumCulled = false;
+      rimRibbon.renderOrder = 1;
+      g.add(rimRibbon);
+
       const ribbon = new THREE.InstancedMesh(barGeo, bufMat.clone(), segs.length);
       ribbon.userData.scope = { kind: "feeder", id: f.id };
       ribbon.userData.segs = segs;
       const idle = capacityColor(0);
       segs.forEach((s, i) => {
-        const dx = s.bx - s.ax;
-        const dz = s.bz - s.az;
-        const len = Math.hypot(dx, dz) || 0.2;
         const w = feederBufWidth(s.kind);
-        dummy.position.set((s.ax + s.bx) / 2, Y_FEEDER, (s.az + s.bz) / 2);
-        dummy.rotation.set(0, Math.atan2(dx, dz), 0);
-        dummy.scale.set(w, 0.045, len + w * 0.28);
-        dummy.updateMatrix();
+        stampFeederSeg(dummy, s, Y_FEEDER, w, 0.045, 0.28);
         ribbon.setMatrixAt(i, dummy.matrix);
         ribbon.setColorAt(i, idle);
       });
       ribbon.frustumCulled = false;
+      ribbon.renderOrder = 2;
       g.add(ribbon);
       const seen = new Set();
       const joints = [];
@@ -2477,8 +2498,24 @@ function buildFeederBuffers() {
         add(s.ax, s.az, s.kind);
         add(s.bx, s.bz, s.kind);
       }
+      const rimCaps = new THREE.InstancedMesh(capGeo, outlineMat.clone(), Math.max(1, joints.length));
+      rimCaps.userData.scope = { kind: "feeder", id: f.id };
+      rimCaps.userData.feederOutline = true;
+      joints.forEach((j, i) => {
+        dummy.position.set(j.x, Y_FEEDER - 0.002, j.z);
+        dummy.rotation.set(-Math.PI / 2, 0, 0);
+        dummy.scale.set(j.r + FEEDER_BUF_RIM, j.r + FEEDER_BUF_RIM, 1);
+        dummy.updateMatrix();
+        rimCaps.setMatrixAt(i, dummy.matrix);
+      });
+      rimCaps.count = joints.length;
+      rimCaps.frustumCulled = false;
+      rimCaps.renderOrder = 1;
+      g.add(rimCaps);
+
       const caps = new THREE.InstancedMesh(capGeo, bufMat.clone(), Math.max(1, joints.length));
       caps.userData.scope = { kind: "feeder", id: f.id };
+      caps.userData.feederCaps = true;
       joints.forEach((j, i) => {
         dummy.position.set(j.x, Y_FEEDER + 0.004, j.z);
         dummy.rotation.set(-Math.PI / 2, 0, 0);
@@ -2489,6 +2526,7 @@ function buildFeederBuffers() {
       });
       caps.count = joints.length;
       caps.frustumCulled = false;
+      caps.renderOrder = 2;
       g.add(caps);
     }
     scene.add(g);
@@ -3144,10 +3182,15 @@ function colorFeederBuffers(last, byFeeder, byXfmr) {
   if (!g) return;
   const deep = !!(state.scopeBoard || state.focus);
   for (const child of g.children) {
-    if (child.material && "opacity" in child.material) child.material.opacity = deep ? 0.58 : 0.44;
+    if (!child.material || !("opacity" in child.material)) continue;
+    if (child.userData.feederOutline) {
+      child.material.opacity = deep ? 1 : 0.92;
+      continue;
+    }
+    child.material.opacity = deep ? 0.58 : 0.44;
   }
   const ribbon = g.children.find((m) => m.userData.segs);
-  const caps = g.children.find((m) => m.geometry?.type === "CircleGeometry");
+  const caps = g.children.find((m) => m.userData.feederCaps);
   if (ribbon?.userData.segs && ribbon.instanceColor) {
     ribbon.userData.segs.forEach((s, i) => {
       const hit = outageCovers(s, state.nowMin);
