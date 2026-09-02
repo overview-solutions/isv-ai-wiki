@@ -24,7 +24,8 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(ROOT)
     httpd = ThreadingHTTPServer(("0.0.0.0", PORT), NoCacheHandler)
-    print(f"Simulator  → http://127.0.0.1:{PORT}/village-simulator/index.html")
+    print(f"Simulator  → https://circaevum.github.io/locus/")
+    print(f"Wiki shell → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
     print(f"Wiki shell → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
     print("Cache-Control: no-store")
     print("Press Ctrl+C to stop.")
