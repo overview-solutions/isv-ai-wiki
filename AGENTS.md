@@ -48,9 +48,9 @@ isv-ai-wiki/
 ├── meter-solutions-map.html      # Visual problem ↔ stack map (SteamaCo · SparkMeter · EnAccess · OpenAMI)
 ├── meter-village-scope.html      # Village definition · population · HDI (cited)
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
-├── village-simulator/            # Village Simulator (Three.js hypothetical prepaid day)
-│   ├── index.html
-│   └── js/                       # day + sim + layout + vendored Three
+├── village-simulator/            # Redirect stub → Circaevum Locus (old Three.js copy unused)
+│   ├── index.html                # bounce to circaevum.github.io/locus/village-simulator/
+│   └── js/                       # leftover local copy, not the wiki dest
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
@@ -152,7 +152,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator (Three.js hypothetical prepaid day). Wiki **iframe** loads in-repo `village-simulator/index.html?embed=1` (same-origin, flex-fit so 100dvh does not thrash). **Full page** opens Circaevum Locus `https://circaevum.github.io/locus/village-simulator/`. Size `?homes=100` or `?homes=1000` (default 1000). Role `?role=ops` / `tech` / `customer`. Customer id `?you=h0`. Feeder `?feeder=f-west`. Legacy `#village-metering/worldline-day` and `…/worldline-day-100` alias here (`worldline-day-100` appends `?homes=100`). |
+| `#village-metering/village-simulator` | Village Simulator — wiki iframe and Full page are **Circaevum Locus** (`https://circaevum.github.io/locus/village-simulator/`). In-repo `village-simulator/index.html` only redirects there. Size `?homes=100` or `?homes=1000` (default 1000). Legacy `#village-metering/worldline-day` and `…/worldline-day-100` alias here (`worldline-day-100` appends `?homes=100`). |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
@@ -170,7 +170,7 @@ Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` 
 - `meter-overview.html?embed=1` (default)
 - `meter-problems-today.html?embed=1` · `meter-village-scope.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
-- `#village-metering/village-simulator` → iframe `village-simulator/index.html?embed=1`. Full page → `https://circaevum.github.io/locus/village-simulator/`
+- `#village-metering/village-simulator` → iframe and Full page `https://circaevum.github.io/locus/village-simulator/`
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
 
