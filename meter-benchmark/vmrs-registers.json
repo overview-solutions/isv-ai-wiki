@@ -3,7 +3,7 @@
   "title": "Village Minimum Register Set (VMRS)",
   "version": "0.1-draft",
   "status": "draft-proposal",
-  "disclaimer": "ISV Tech Comm working subset — NOT an IEC or DLMS UA published profile. Validate OBIS-to-COSEM mappings with each vendor before procurement.",
+  "disclaimer": "ISV Tech Comm working subset — NOT an IEC, DLMS UA, or IDIS published profile. IDIS is a certified DLMS/COSEM companion spec (now under DLMS UA SMWG); VMRS does not copy IDIS object lists. Validate OBIS-to-COSEM mappings with each vendor before procurement.",
   "standard": "OBIS identification per IEC 62056-6-1 where noted; COSEM mappings per DLMS UA Blue Book where noted",
   "methodology": "Registers chosen from (1) universal billing/t metrology codes in IEC 62056-6-1, (2) objects commonly exposed on STS/DLMS prepay meters in vendor literature and utility AMI practice, (3) ISV field requirements from Tech Comm notes. Tier C entries need vendor confirmation.",
   "primaryArtifact": "meter-benchmark/northbound-mqtt-v0.1.json",

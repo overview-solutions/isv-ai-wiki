@@ -42,6 +42,9 @@ pre { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8
 .acronym-grid dt { font-weight: 600; font-family: var(--mono); font-size: 10px; color: var(--teal); display: inline; }
 .acronym-grid dt::after { content: " — "; font-family: var(--font); font-weight: 400; color: var(--text-3); }
 .acronym-grid dd { display: inline; margin: 0; color: var(--text-2); }
+.src { font-size: 10px; color: var(--text-3); white-space: nowrap; }
+.src a { color: var(--text-2); text-decoration: none; }
+.src a:hover { text-decoration: underline; color: var(--green); }
 html.embed .back { display: none; }
 @media (max-width: 720px) { .tier-row { grid-template-columns: 1fr; } }
 </style>
@@ -67,10 +70,37 @@ html.embed .back { display: none; }
 
   <div class="callout callout-warn">
     <strong>Before citing in an RFP</strong>
-    <p>VMRS is an ISV working checklist — not IEC, DLMS UA, or STS. Validate tier&nbsp;B registers against each vendor’s <strong>ICD</strong> (Interface Class Description); tier&nbsp;A OBIS codes are IEC-standard but still need a confirmed read path on the model you buy.</p>
+    <p>VMRS is an ISV working checklist — not IEC, DLMS UA, STS, or <a href="#idis">IDIS</a>. Validate tier&nbsp;B registers against each vendor’s <strong>ICD</strong> (Interface Class Description); tier&nbsp;A OBIS codes are IEC-standard but still need a confirmed read path on the model you buy.</p>
   </div>
 
   <p class="body-text">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has, plus tier&nbsp;B prepaid and control registers that vary by vendor.</p>
+
+  <h2 id="idis">IDIS · companion profile above OBIS</h2>
+  <p class="lead"><strong>IDIS</strong> (Interoperable Device Interface Specification) is not a second naming system for registers and is not VMRS. IEC 62056-6-1 <strong>OBIS</strong> names COSEM objects. DLMS says how to read them. Those standards still leave options, manufacturer extensions, and media choices. A <strong>companion specification</strong> picks one configuration so two vendors’ meters actually interoperate. IDIS is that companion-spec layer for DLMS/COSEM smart meters — use-case-driven object models plus a certification label. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></p>
+  <p class="body-text">Large utilities write that companion spec themselves (ERDF LINKY, Iberdrola PRIME). IDIS was founded so smaller utilities could buy multi-vendor equipment against a shared, tested profile instead of a single OEM’s ICD. Semantic model: COSEM / IEC 62056-6-1 and 62056-6-2. Syntax and security: DLMS/COSEM application layer IEC 62056-5-3. The functional model is kept separate from the wire so a new PLC or IP stack can land without renaming <code>1.8.0</code>. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></p>
+
+  <div class="tier-row">
+    <div class="tier-cell"><strong>Package 1 · 2011</strong>Secured S-FSK PLC per IEC 61334-5-1. Use cases in the founding papers include registration, tariff download, scheduled/on-demand reads (electricity, gas, heat, water), disconnect/reconnect, clock sync, quality of supply, load management, firmware update, and authenticated/enciphered access. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></div>
+    <div class="tier-cell"><strong>Package 2 · 2013</strong>Same IDIS functions over IP-based access — Ethernet, GPRS, and other telecom media — so PLC and IP meters can sit in one multi-vendor park. <span class="src">[<a href="#idis-s2">2</a>]</span></div>
+    <div class="tier-cell"><strong>Package 3 · current cert</strong>Third baseline package (use cases and media differ). New Package 1 / 2 certificates are closed; recertifications only. Package 3 runs through the <strong>DLMS UA</strong> qualification portal. <span class="src">[<a href="#idis-s3">3</a>]</span></div>
+  </div>
+
+  <p class="body-text">November 2021: the IDIS Industry Association (Zug) merged into the DLMS User Association <strong>Smart Metering Working Group</strong>. Legacy IDIS packages stay supported. New work is <strong>Generic Companion Profiles</strong> (electricity, heat, water, gas) plus interoperability testing. That is the same “pick the options, then certify” method — now under DLMS UA, not a separate IDIS org. <span class="src">[<a href="#idis-s4">4</a>] [<a href="#idis-s5">5</a>]</span></p>
+
+  <div class="callout">
+    <strong>Village / VMRS — do not conflate</strong>
+    <p>IDIS is a <strong>utility AMI</strong> companion profile (European rollout, PLC/IP, lab certificate). Score it on the <em>meter / DCU</em> row when a vendor shows an IDIS or DLMS UA Package&nbsp;3 certificate — not on the cloud/HES row, and not as proof that a cheap STS keypad meter speaks the same object set.</p>
+    <p>VMRS is the same <em>idea</em> at village scale: a short named subset so one northbound JSON survives OEM swap. It is <strong>not</strong> an IDIS package, not a Generic Companion Profile, and not certified. An IDIS object-model / ICD can <em>fill</em> VMRS tier&nbsp;B faster than a brochure. Do not mark a VMRS cell <code>doc</code> from an IDIS logo alone, and do not copy IDIS event-code tables into <code>vmrs-registers.json</code> without the vendor ICD in hand.</p>
+  </div>
+
+  <p class="body-text" id="idis-sources" style="font-size:11px">Sources:
+    <span id="idis-s1">[1] Landis+Gyr, <a href="https://www.landisgyr.eu/webfoo/wp-content/uploads/2012/11/IDIS_WhitePaper.pdf" target="_blank" rel="noopener">IDIS white paper</a> (founding association · Package 1 S-FSK / IEC 61334-5-1 · use cases).</span>
+    <span id="idis-s2">[2] Landis+Gyr, <a href="https://www.landisgyr.eu/webfoo/wp-content/uploads/2014/06/rz001_White-Paper_24072014.pdf" target="_blank" rel="noopener">IDIS interoperability white paper</a> (2014) — companion spec vs open standard; Package 1 (2011) / Package 2 IP (2013); COSEM IEC 62056-6-1/6-2 + DLMS IEC 62056-5-3.</span>
+    <span id="idis-s3">[3] DNV, <a href="https://www.dnv.com/services/power-grids/digital-system-operations/protocol-testing-for-robust-and-compliant-smart-grids/idis-certification-tests/" target="_blank" rel="noopener">IDIS certification tests</a> — three packages; P1/P2 new certs closed; Package 3 via DLMS UA.</span>
+    <span id="idis-s4">[4] DLMS UA, <a href="https://www.dlms.com/dlms-user-association-and-the-idis-association-announce-merger-agreement-to-strengthen-interoperability-and-open-standards/" target="_blank" rel="noopener">merger announcement</a> (22 Nov 2021) — IDIS → SMWG; legacy packages + Generic Companion Profiles.</span>
+    <span id="idis-s5">[5] DLMS UA HelpDesk, <a href="https://support.dlms.com/support/solutions/articles/77000581978-what-is-the-relationship-between-idis-and-dlms-ua-" target="_blank" rel="noopener">IDIS and DLMS UA</a> (updated 12 May 2025).</span>
+    Related: <a href="https://www.dlms.com/produit/ac-electricity-smart-meter-gcp/" target="_blank" rel="noopener">AC Electricity Smart Meter GCP</a> (post-merger profile; lists prepayment among use cases — not VMRS).
+  </p>
 
   <div class="tier-row">
     <div class="tier-cell"><strong class="cert-a">Tier A · IEC OBIS</strong><code>1.8.0</code>, <code>32.7.0</code>, etc. Universal — cite in JSON, don’t reinvent.</div>
@@ -106,6 +136,7 @@ html.embed .back { display: none; }
       <div><dt>DCU</dt><dd>Data concentrator / field gateway</dd></div>
       <div><dt>DLMS</dt><dd>Protocol for smart meter communication</dd></div>
       <div><dt>ICD</dt><dd>Vendor COSEM object map — required for tier B</dd></div>
+      <div><dt>IDIS</dt><dd>Interoperable Device Interface Specification — DLMS/COSEM companion profile + cert (now under DLMS UA SMWG); not VMRS</dd></div>
       <div><dt>MDMS</dt><dd>Utility meter data management (L7)</dd></div>
       <div><dt>OBIS</dt><dd>Register semantics (e.g. <code>1.8.0</code> = import kWh)</dd></div>
       <div><dt>STS</dt><dd>Prepaid token scheme (L6/L3) — not a wire protocol</dd></div>
@@ -137,7 +168,7 @@ html.embed .back { display: none; }
     <summary>Excluded from VMRS · sources · validation gaps</summary>
     <ul style="font-size:12px;color:var(--text-2);margin:0.5rem 0 0;padding-left:1.2rem">
       <li>Profile Generic buffers, full COSEM ICD, STSA/KMC key mgmt, SunSpec inverter registers</li>
-      <li>Sources: IEC 62056-6-1, IEC 62055, DLMS UA Blue Book, vendor study tables, <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a></li>
+      <li>Sources: IEC 62056-6-1, IEC 62055, DLMS UA Blue Book, IDIS companion packages (see <a href="#idis">IDIS</a>), vendor study tables, <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a></li>
       <li>Not yet done: hands-on ICD extraction, DLMS conformance, STSA harmonization</li>
     </ul>
   </details>

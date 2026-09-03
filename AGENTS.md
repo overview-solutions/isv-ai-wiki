@@ -148,7 +148,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/village-scope` | Village definition · population · HDI · modernization fork (cited) |
 | `#village-metering/problems` | Field problems (Problem · Why it hurts) |
 | `#village-metering/solutions-map` | Visual problem ↔ stack diagram (SteamaCo · SparkMeter · EnAccess · OpenAMI) · `meter-benchmark/problem-solution-map.json` |
-| `#village-metering/vmrs` | Register checklist (OBIS · VMRS) |
+| `#village-metering/vmrs` | Register checklist (OBIS · VMRS) · IDIS companion-profile note |
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
