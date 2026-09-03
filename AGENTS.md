@@ -152,7 +152,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator — wiki iframe embeds **Circaevum Locus** (`https://circaevum.github.io/locus/`), not `village-simulator/` in this repo. Size `?homes=100` or `?homes=1000` (default 1000) on the Locus URL. Legacy `#village-metering/worldline-day` and `…/worldline-day-100` alias here (`worldline-day-100` appends `?homes=100`). Local `village-simulator/` remains in-repo for development. |
+| `#village-metering/village-simulator` | Village Simulator (Three.js hypothetical prepaid day). Size `?homes=100` or `?homes=1000` (default 1000). Role `?role=ops` / `tech` / `customer`. Customer id `?you=h0`. Feeder `?feeder=f-west`. Click a line/pole/EMS/home to highlight that feeder (ground buffer) and open the EMS×customer grid. Legacy `#village-metering/worldline-day` and `…/worldline-day-100` alias here |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
@@ -170,11 +170,10 @@ Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` 
 - `meter-overview.html?embed=1` (default)
 - `meter-problems-today.html?embed=1` · `meter-village-scope.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
-- `#village-metering/village-simulator` → **external** iframe `https://circaevum.github.io/locus/` (not `village-simulator/index.html?embed=1`)
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
 
-The village-metering iframe guard must detect the wiki shell by DOM (`#meter-study-frame`), never by `/index.html$`. That regex also matches `village-simulator/index.html` and reload-loops the sim. Cross-origin Locus embeds skip the guard (`contentDocument` is null).
+The village-metering iframe guard must detect the wiki shell by DOM (`#meter-study-frame`), never by `/index.html$`. That regex also matches `village-simulator/index.html` and reload-loops the sim.
 
 ### Registries in `index.html` (edit these when adding content)
 
