@@ -329,6 +329,50 @@ body {
 .home-primary-title a:hover { color: var(--green); }
 .home-primary-desc { font-size: 14px; color: var(--text-2); margin: 0; line-height: 1.55; }
 
+.home-whats-new {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg-2);
+  max-width: 52rem;
+}
+.home-whats-new-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.35rem;
+}
+.home-whats-new h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 0.45rem;
+  border: 0;
+  padding: 0;
+}
+.home-whats-new p {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0 0 0.65rem;
+  line-height: 1.5;
+}
+.home-whats-new ul {
+  margin: 0 0 0.65rem;
+  padding-left: 1.15rem;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.home-whats-new li { margin-bottom: 0.28rem; }
+.home-whats-new a { color: var(--green); }
+.home-whats-new .whats-new-git {
+  font-size: 12px;
+  color: var(--text-3);
+  margin: 0;
+}
+
 .home-blocks {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1540,6 +1584,21 @@ code {
         <p class="home-primary-desc">Bill each home, cut off non-payers, catch stolen power — without city-scale AMI cost. <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('village-scope');return false">Village scope</a> · <a href="#" onclick="showMeterPage('tc20-review');return false">TC2.0 review</a>.</p>
       </div>
 
+      <div class="home-whats-new" id="whats-new">
+        <p class="home-whats-new-eyebrow">Since early July</p>
+        <h2>What’s new · 3 Jul – 1 Sep 2026</h2>
+        <p>No 7&nbsp;Jul commit on <code>main</code> — this list is the <strong>3&nbsp;Jul</strong> push through the <strong>1&nbsp;Sep</strong> push. Pages and features, not every simulator camera tweak. If you last opened the wiki in early July, start here.</p>
+        <ul>
+          <li><a href="#" onclick="showMeterPage('village-simulator');return false">Village Simulator</a> — 3D hypothetical prepaid day (feeder grid, leak spans, roles). Wiki iframe is same-origin; <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Full page · Circaevum Locus ↗</a></li>
+          <li><a href="#" onclick="showMeterPage('roadmap');return false">Roadmap</a> · <a href="#" onclick="showMeterPage('tc20-review');return false">TC2.0 review</a> · <a href="meter-solutions-map.html">Solutions map</a> (vendor stacks, not phases)</li>
+          <li>Meeting note <a href="#" onclick="showNote('tech-comm-2026-08-11');return false">11 Aug 2026 · OMS / SparkMeter</a></li>
+          <li>Standards deep-dives: <a href="standard-ieee-1547.html">IEEE 1547</a> · <a href="standard-ieee-2030-5.html">2030.5</a> · <a href="standard-ieee-2030-10.html">2030.10</a> · <a href="standard-tls-1-2.html">TLS 1.2</a> · <a href="standard-sunspec.html">SunSpec 701–712</a> · <a href="grid-cybersecurity-layers.html">grid cybersecurity</a></li>
+          <li><a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Power Africa 2026 workshop</a> — two-day plan + Luma</li>
+        </ul>
+        <p>Since 1&nbsp;Sep: <a href="#" onclick="showMeterPage('vmrs');return false">IDIS on the VMRS page</a>. Simulator Full page is Locus; the wiki iframe stays on this origin (Cloudflare <code>frame-src</code> blocks github.io).</p>
+        <p class="whats-new-git"><a href="https://github.com/overview-solutions/isv-ai-wiki/compare/1be87fa...1ae09cd" target="_blank" rel="noopener">GitHub compare 3 Jul → 1 Sep ↗</a> · <a href="https://github.com/overview-solutions/isv-ai-wiki/compare/1ae09cd...main" target="_blank" rel="noopener">1 Sep → main ↗</a> · permalink <a href="#whats-new">#whats-new</a></p>
+      </div>
+
       <div class="home-blocks">
         <div class="home-block">
           <div class="home-block-title">Who this site is for</div>
@@ -2591,6 +2650,11 @@ function initFromHash() {
   }
   if (raw === 'tech') {
     showSection('home', { skipHash: true });
+    return;
+  }
+  if (raw === 'whats-new' || raw === 'since') {
+    showSection('home', { skipHash: true, scrollTo: 'whats-new' });
+    history.replaceState(null, '', '#whats-new');
     return;
   }
   if (raw === 'village-metering' || raw.startsWith('village-metering/') || raw === 'meter-study' || raw.startsWith('meter-study/')) {

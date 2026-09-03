@@ -135,6 +135,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | Hash | Lands on |
 |------|----------|
 | `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
+| `#whats-new` | Home · “What’s new” box (3 Jul – 1 Sep 2026 window; `#since` alias) |
 | `#about` | Mission, volunteer structure |
 | `#supported` | Field-program map (Tech Comm support on request) |
 | `#mission`, `#committees` | Legacy — scroll to anchors on `#about` |
