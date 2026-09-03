@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Comm — Brownfield / greenfield · OpenAMI keys · 27 Aug 2026 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/isv-tasks.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.75rem; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem; font-size: 14px; line-height: 1.55; }
+.callout > strong:first-child { display: block; margin-bottom: 0.35rem; font-weight: 500; color: var(--teal); }
+.callout p { margin: 0; font-size: 14px; line-height: 1.55; }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn > strong:first-child { color: var(--amber); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.45rem; }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Brownfield vs greenfield · OpenAMI key custody</h1>
+  <p class="sub">ISV Technology Committee · 27 August 2026 · installed-base vs new OpenAMI sites · who holds prepaid keys</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#notes/tech-comm-2026-08-27" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meeting Notes</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div id="follow-ups-panel"></div>
+
+  <div class="callout">
+    <strong>Call capture</strong>
+    <p>Core feedback: <strong>keep brownfield and greenfield work apart</strong> — do not mash installed SparkMeter / STS / ThunderCloud-OMS paths with new OpenAMI / Street-EMS sites in the same diagram, vendor row, or “standard” claim. Second: the new OpenAMI work has to answer <strong>who keeps the keys</strong> (prepaid token / STS trust), not only MQTT registers.</p>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>Open — do not fill from memory</strong>
+    <p>Tech Comm did <em>not</em> name a key holder for OpenAMI on this call. Wiki tables below list candidate roles and what is already documented. Empty / unknown stays empty until a cited decision (OpenAMI text, STSA/KMC path, or operator ICD).</p>
+  </div>
+
+  <h2>Separate the two tracks</h2>
+  <p class="body-text">Same village problems (revenue, theft, feeder loss) — different starting hardware and trust. Mixing them makes OpenAMI look like a drop-in for meters that already have an OEM KMC, and makes brownfield OMS look like it needs MeshEMS on day one.</p>
+  <table>
+    <thead>
+      <tr><th></th><th>Brownfield</th><th>Greenfield</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>What it is</strong></td>
+        <td>Meters, gateways, and vending already in the village. Keep billing running.</td>
+        <td>New site or new feeder slice. Choose open stack before lock-in.</td>
+      </tr>
+      <tr>
+        <td><strong>Wiki phase</strong></td>
+        <td><a href="index.html#village-metering/roadmap">Phase 1</a> — installed-base interop (STS / OpenPAYGO / DLMS / ThunderCloud / MPM)</td>
+        <td><a href="index.html#village-metering/roadmap">Phase 2</a> — Street-EMS / MeshEMS / OpenAMI MQTT / geo loss model</td>
+      </tr>
+      <tr>
+        <td><strong>Typical stack (as already on wiki)</strong></td>
+        <td>SparkMeter USB Gateway + GroundBolt / ThunderCloud under A2EI OMS; SteamaCo Nimbus peer; STS token path on existing meters</td>
+        <td>OpenAMI northbound + MeshEMS pole + MPM or other HES composed on VMRS — <em>not</em> a new token scheme</td>
+      </tr>
+      <tr>
+        <td><strong>Keys today</strong></td>
+        <td>Already assigned: STSA/KMC (STS meters), OEM wallet/CIU (SparkMeter — not STS), Nimbus universal SGC (as heard 11 Aug)</td>
+        <td><strong>Not decided</strong> for “OpenAMI the standard” — see next section</td>
+      </tr>
+      <tr>
+        <td><strong>Do not</strong></td>
+        <td>Require OpenAMI MQTT or MeshEMS to keep an existing prepaid site alive</td>
+        <td>Assume the brownfield OEM or KMC will vend tokens for a new OpenAMI feeder</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="body-text">Phase 3 (IEEE 2030.5 / OpenADR / 1547) is a third pile — utility/aggregator arrival — not brownfield village prepaid and not greenfield mini-grid core. Keep it labeled Phase 3.</p>
+
+  <h2>Who keeps the keys? (OpenAMI — unanswered)</h2>
+  <p class="body-text">Prepaid without a named key holder is still OEM lock-in. <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a> already puts <strong>STS key management on a separate STSA/KMC track</strong> — MQTT does not carry token keys. That split is correct; it does not say <em>who</em> runs the KMC when the site is greenfield OpenAMI.</p>
+  <table>
+    <thead>
+      <tr><th>Candidate holder</th><th>What would that mean</th><th>Documented here?</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Village operator / REI</td>
+        <td>Operator (or their OMS) holds SGC / KMC access; can change vending software</td>
+        <td>Not specified for OpenAMI</td>
+      </tr>
+      <tr>
+        <td>Meter OEM / existing KMC</td>
+        <td>Same as brownfield STS — vendor or STSA-licensed KMC keeps keys; OpenAMI only reads meters</td>
+        <td>STS brownfield: yes (STSA hierarchy). OpenAMI greenfield: not specified</td>
+      </tr>
+      <tr>
+        <td>A2EI OMS (ThunderCloud / Nimbus class)</td>
+        <td>HES/OMS is the vending authority; meters enrolled into that SGC</td>
+        <td>Nimbus universal SGC noted <a href="index.html#notes/tech-comm-2026-08-11">11 Aug</a> — OMS, not OpenAMI MQTT</td>
+      </tr>
+      <tr>
+        <td>OpenAMI Alliance / EnAccess program</td>
+        <td>Alliance or MPM as shared KMC for greenfield kits</td>
+        <td>Alliance scope heard 11 Aug was premium (carbon, theft, VPP) — not KMC</td>
+      </tr>
+      <tr>
+        <td>STSA Key Management Centre (dedicated path)</td>
+        <td>Greenfield still STS-compliant; request self-management / KMC access (see catalog STSA correspondence item)</td>
+        <td>Catalog indexes the ask; no ISV decision that OpenAMI <em>is</em> that path</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="body-text">Related facts already on the wiki (do not upgrade these to an OpenAMI key decision):</p>
+  <ul>
+    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html">25 Jun</a> — STS provides key management for prepaid tokens; VMRS/MQTT exclude STSA operations; token path stays SMS/USSD/CIU.</li>
+    <li><a href="tech-comm-2026-05-28-metering-topology.html">28 May</a> — STS, OEM, and DLMS use <strong>different</strong> key hierarchies. Mixing stacks mixes keys.</li>
+    <li><a href="tech-comm-2026-08-11-oms-sparkmeter.html">11 Aug</a> — do not redo STS vending on the Open Code path; SparkMeter credit is GroundBolt wallet / CIU, not STS/OpenPAYGO.</li>
+    <li>Roadmap OpenAMI “could” — compose MPM / OpenPAYGO on VMRS + MQTT; <strong>not a new token scheme</strong>.</li>
+  </ul>
+
+  <h2>Wiki hygiene from this call</h2>
+  <ul>
+    <li>Label pages and diagrams <strong>brownfield</strong> or <strong>greenfield</strong> (or Phase 1 vs Phase 2) when both appear.</li>
+    <li>Vendor study / simulator / OMS notes stay brownfield unless the row is a new OpenAMI feeder.</li>
+    <li>OpenAMI page and MQTT profile stay greenfield telemetry + leakage; key custody is a tracked unknown, not a silent OEM default.</li>
+  </ul>
+
+  <h2>Follow-ups</h2>
+  <ul>
+    <li>Write a one-page OpenAMI key-custody options brief (operator vs OEM KMC vs OMS vs STSA) — decision, not a new crypto design.</li>
+    <li>Ask EnAccess / OpenAMI text: does the standard name a KMC role, or only MQTT/geo?</li>
+    <li>Keep brownfield STS/OMS work on Phase 1 pages; do not fold it into “OpenAMI standard” until keys are named.</li>
+  </ul>
+
+  <p class="meter-footer" style="margin-top:1.5rem;font-size:12px;color:var(--text-3)">
+    Related: <a href="index.html#village-metering/roadmap">Roadmap</a> ·
+    <a href="index.html#village-metering/openami">OpenAMI</a> ·
+    <a href="index.html#notes/tech-comm-2026-08-11">11 Aug OMS</a> ·
+    <a href="meter-benchmark/northbound-mqtt-v0.1.json">Northbound MQTT v0.1</a>
+  </p>
+</div>
+<script src="js/isv-tasks.js?v=20260629"></script>
+</body>
+</html>

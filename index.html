@@ -1462,6 +1462,7 @@ code {
       Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
+      <div class="nav-sub-item" data-note="tech-comm-2026-08-27" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-27')">27 Aug 2026 · Brownfield / OpenAMI keys</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-08-11" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-11')">11 Aug 2026 · OMS / SparkMeter</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-06-25" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-06-25')">25 Jun 2026 · AI Wiki Orientation</div>
       <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
@@ -1897,7 +1898,7 @@ code {
         <div class="standard-icon">🗺️</div>
         <div>
           <div class="resource-name">Village Metering · Roadmap</div>
-          <div class="resource-desc"><a href="#" onclick="showMeterPage('roadmap');return false">Three phases</a> — installed-base interop · microgrid core · grid connectivity. Phase&nbsp;1 includes ThunderCloud open under EarthSpark.</div>
+          <div class="resource-desc"><a href="#" onclick="showMeterPage('roadmap');return false">Three phases</a> — Phase&nbsp;1 brownfield (installed-base) · Phase&nbsp;2 greenfield (OpenAMI core) · Phase&nbsp;3 grid. Phase&nbsp;1 includes ThunderCloud open under EarthSpark.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -1989,6 +1990,13 @@ code {
         <div>
           <div class="resource-name">IEEE Smart Village Wiki</div>
           <div class="resource-desc"><a href="http://wiki.smartvillage.ieee.org/" target="_blank">wiki.smartvillage.ieee.org</a> — DokuWiki with technologies (SunBlazer, PBK), standards, working group pages, and field documentation.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📡</div>
+        <div>
+          <div class="resource-name">Tech Comm — Brownfield vs greenfield · OpenAMI keys (27 Aug 2026)</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('tech-comm-2026-08-27');return false">Open in Meeting Notes</a> — keep installed-base (OMS / STS) apart from new OpenAMI sites; who holds prepaid keys in OpenAMI is still open.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2249,7 +2257,7 @@ const ABOUT_SCROLL_ALIASES = {
 const SUPPORTED_SECTION_HASH = 'projects';
 const SUPPORTED_SECTION_ALIASES = ['projects', 'supported', 'funded', 'field-programs'];
 const NOTE_GROUPS = {
-  'tech-comm': { section: 'notes', defaultNote: 'tech-comm-2026-06-25' },
+  'tech-comm': { section: 'notes', defaultNote: 'tech-comm-2026-08-27' },
   'events': { section: 'events', defaultNote: 'open-energy-hackathon-2025' }
 };
 const METER_PAGE_ALIASES = {
@@ -2275,8 +2283,8 @@ const METER_BENCHMARK_PAGES = {
   },
   'roadmap': {
     title: 'Roadmap',
-    sub: 'Phase 1 installed-base · Phase 2 microgrid core · Phase 3 grid connect',
-    src: 'meter-roadmap.html?embed=1&v=20260812d',
+    sub: 'Phase 1 brownfield · Phase 2 greenfield · Phase 3 grid connect',
+    src: 'meter-roadmap.html?embed=1&v=20260827bf',
     standalone: 'meter-roadmap.html'
   },
   'tc20-review': {
@@ -2305,8 +2313,8 @@ const METER_BENCHMARK_PAGES = {
   },
   'openami': {
     title: 'OpenAMI',
-    sub: 'Actionable telemetry · leakage visibility · stack · Discord',
-    src: 'openami.html?embed=1&v=20260811',
+    sub: 'Greenfield Phase 2 · leakage · key custody still open',
+    src: 'openami.html?embed=1&v=20260827bf',
     standalone: 'openami.html'
   },
   'meshems': {
@@ -2324,6 +2332,14 @@ const METER_BENCHMARK_PAGES = {
 };
 let activeMeterPageId = 'overview';
 const MEETING_NOTES = {
+  'tech-comm-2026-08-27': {
+    group: 'tech-comm',
+    title: 'Brownfield vs greenfield · OpenAMI keys',
+    date: '27 Aug 2026',
+    sub: 'Installed-base vs new OpenAMI sites · STS/KMC custody still open',
+    src: 'tech-comm-2026-08-27-brownfield-greenfield-keys.html?embed=1&v=20260827',
+    standalone: 'tech-comm-2026-08-27-brownfield-greenfield-keys.html'
+  },
   'tech-comm-2026-08-11': {
     group: 'tech-comm',
     title: 'OMS · SparkMeter stack',

@@ -50,7 +50,12 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h1>OpenAMI</h1>
   <p class="sub">Hardware thread within ISV Village Metering · EnAccess · Energy IoT · NESL</p>
-  <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends.</p>
+  <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends. This page is the <strong>greenfield</strong> (Phase&nbsp;2) thread — not a drop-in for brownfield SparkMeter / STS sites already on OMS.</p>
+
+  <div class="callout">
+    <strong>Key custody · open</strong>
+    <p>Tech Comm (27 Aug 2026): OpenAMI still has to name <strong>who keeps the prepaid keys</strong> (operator, OEM/STSA KMC, OMS, Alliance). Northbound MQTT does <em>not</em> carry STSA/KMC operations. Do not assume an OEM KMC by silence. <a href="index.html#notes/tech-comm-2026-08-27">Meeting note</a>.</p>
+  </div>
 
   <div class="callout">
     <strong>Community · Discord</strong>
@@ -68,7 +73,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       <tr><td><strong>Street Pole EMS</strong></td><td>Pole gateway</td><td><a href="https://github.com/energy-iot/ems-dev/" target="_blank" rel="noopener">ems-dev</a> firmware · Phase&nbsp;2</td></tr>
       <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry</td><td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; <strong>leakage visible at every layer</strong> · Phase&nbsp;2 (Phase&nbsp;1 feeds it)</td></tr>
       <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>Village backend option · Phase&nbsp;1–2</td></tr>
-      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open)</td><td>ThunderCloud / GroundBolt — <a href="index.html#village-metering/roadmap">Phase&nbsp;1 roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview)</td></tr>
+      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open)</td><td><strong>Brownfield / Phase&nbsp;1</strong> OMS (GroundBolt / ThunderCloud) — listed for contrast, not as OpenAMI KMC. <a href="index.html#village-metering/roadmap">Roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview)</td></tr>
       <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology</td><td>Maps feeder → branch → meter so loss can be compared at each point · Phase&nbsp;2</td></tr>
       <tr><td><strong>OpenADR</strong></td><td>Price / DR signals</td><td><strong>Phase&nbsp;3</strong> — utility VTN/VEN programs after grid/aggregator arrival; not year-one prepaid</td></tr>
     </tbody>
@@ -76,7 +81,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h2>ISV wiki threads</h2>
   <ul class="link-list">
-    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — Phase&nbsp;1 installed-base · Phase&nbsp;2 microgrid core · Phase&nbsp;3 grid connect</li>
+    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — Phase&nbsp;1 brownfield (installed-base) · Phase&nbsp;2 greenfield (microgrid core) · Phase&nbsp;3 grid connect</li>
+    <li><a href="index.html#notes/tech-comm-2026-08-27">27 Aug 2026 notes · brownfield vs greenfield · OpenAMI keys</a></li>
     <li><a href="index.html#village-metering/overview">Village Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
     <li><a href="index.html#village-metering/meshems">MeshEMS board</a> — NESL PCB · OpenAMI-aligned hardware</li>
     <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 notes · MeshEMS board distribution</a></li>
