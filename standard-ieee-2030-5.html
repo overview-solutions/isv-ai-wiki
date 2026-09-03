@@ -300,8 +300,8 @@ td { color: var(--text-2); font-size: 13px; }
         <td>1547 defines <em>behavior</em> (volt-VAR curves, ride-through). 2030.5 is the <em>protocol</em> to configure and monitor that behavior remotely.</td>
       </tr>
       <tr>
-        <td><strong>SunSpec Modbus</strong></td>
-        <td>Alternative device-level protocol. Many inverters support <em>both</em> — SunSpec for local access (installer laptop), 2030.5 for remote utility control.</td>
+        <td><a href="standard-sunspec.html"><strong>SunSpec</strong></a></td>
+        <td>Device information model. IEEE 2030.5 DER function set is based on the SunSpec inverter control model. 701–712 is the schema CSIP maps to <code>DERControl</code>. Many inverters speak both — SunSpec Modbus locally, 2030.5 remotely.</td>
       </tr>
       <tr>
         <td><strong>OpenADR</strong></td>
@@ -347,13 +347,14 @@ td { color: var(--text-2); font-size: 13px; }
     <li>RESTful HTTP/XML over TLS — resource-oriented (devices expose endpoints), certificate-based security</li>
     <li>Function sets: DER control/status, metering, pricing/tariffs, demand response, time sync</li>
     <li>For ISV: <strong>Phase 3 standard</strong> — relevant at utility interconnection, not for village-internal operations (Phase 1–2 use DLMS, Modbus, MQTT)</li>
-    <li>Complements IEEE 1547 (behavior) and SunSpec (device models) — the application layer above physical DER</li>
+    <li>Complements IEEE 1547 (behavior) and <a href="standard-sunspec.html">SunSpec</a> (device models 701–712) — the application layer above physical DER</li>
   </ul>
 
   <h2>Further reading</h2>
 
   <ul>
     <li><a href="https://standards.ieee.org/ieee/2030.5/5897/" target="_blank" rel="noopener">IEEE 2030.5-2018 standard (purchase) ↗</a></li>
+    <li><a href="standard-sunspec.html">SunSpec 701–712 schema</a> — device models CSIP / IEEE 2030.5 DER controls map onto</li>
     <li><a href="https://sunspec.org/ieee-2030-5-common-smart-inverter-profile-csip-implementation-guide/" target="_blank" rel="noopener">SunSpec CSIP implementation guide ↗</a></li>
     <li><a href="https://sunspec.org/certification/" target="_blank" rel="noopener">SunSpec Alliance IEEE 2030.5 certification ↗</a></li>
     <li><a href="https://www.cpuc.ca.gov/rule21/" target="_blank" rel="noopener">California Rule 21 (mandates 2030.5 for smart inverters) ↗</a></li>
@@ -362,6 +363,7 @@ td { color: var(--text-2); font-size: 13px; }
 
   <div class="footer-nav">
     <a href="standard-ieee-1547.html">← IEEE 1547</a>
+    <a href="standard-sunspec.html">SunSpec</a>
     <a href="index.html#standards">All standards</a>
     <a href="standard-ieee-2030-10.html">IEEE 2030.10 →</a>
   </div>
