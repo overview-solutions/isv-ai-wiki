@@ -34,13 +34,6 @@
     'village-simulator': 'village-simulator/index.html'
   };
 
-  var LOCUS_PAGES = 'https://circaevum.github.io/locus/';
-
-  function isDeployedWikiHost() {
-    var h = location.hostname;
-    return h === 'isv.wiki' || h === 'www.isv.wiki' || h === 'overview-solutions.github.io';
-  }
-
   var ID_BY_FILE = Object.keys(PAGE_BY_ID).reduce(function (acc, id) {
     acc[PAGE_BY_ID[id]] = id;
     return acc;
@@ -77,9 +70,7 @@
   }
 
   function meterSrc(pageId) {
-    var id = resolvePageId(pageId);
-    var dest = PAGE_BY_ID[id] || PAGE_BY_ID.overview;
-    if (id === 'village-simulator' && isDeployedWikiHost()) dest = LOCUS_PAGES;
+    var dest = PAGE_BY_ID[resolvePageId(pageId)] || PAGE_BY_ID.overview;
     if (/^https?:\/\//.test(dest)) return dest;
     return dest + '?embed=1';
   }

@@ -837,10 +837,16 @@ function boot() {
   renderer.setAnimationLoop(tick);
 }
 
+let lastStageW = 0;
+let lastStageH = 0;
+
 function resize() {
   const stage = document.getElementById("wl-stage");
   const w = stage.clientWidth || 640;
   const h = stage.clientHeight || 480;
+  if (w === lastStageW && h === lastStageH) return;
+  lastStageW = w;
+  lastStageH = h;
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   renderer.setSize(w, h, false);

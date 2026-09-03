@@ -190,10 +190,14 @@ body {
   padding-bottom: 0.75rem;
 }
 #sec-village-metering.sim-stage-first .section-header { display: none; }
-#sec-village-metering.sim-stage-first .notes-embed { margin-top: 0; }
+#sec-village-metering.sim-stage-first .notes-embed {
+  margin-top: 0;
+  overflow: hidden;
+}
 #sec-village-metering.sim-stage-first .notes-embed iframe {
-  height: calc(100vh - 5.25rem);
+  height: calc(100dvh - 5.25rem);
   min-height: 560px;
+  overflow: hidden;
 }
 #sec-village-metering.sim-stage-first #meter-study-toolbar-json { display: none; }
 
@@ -2314,10 +2318,8 @@ const METER_BENCHMARK_PAGES = {
   'village-simulator': {
     title: 'Village Simulator',
     sub: 'Circaevum Locus',
-    src: 'village-simulator/index.html?embed=1&v=20260901step',
-    standalone: 'village-simulator/index.html',
-    remoteSrc: 'https://circaevum.github.io/locus/',
-    remoteStandalone: 'https://circaevum.github.io/locus/'
+    src: 'village-simulator/index.html?embed=1&v=20260903fit',
+    standalone: 'https://circaevum.github.io/locus/village-simulator/'
   }
 };
 let activeMeterPageId = 'overview';
@@ -2513,16 +2515,11 @@ function showNote(noteId, updateHash = true) {
   if (updateHash) history.replaceState(null, '', `#${sectionId}/${noteId}`);
 }
 
-function isDeployedWikiHost() {
-  const h = location.hostname;
-  return h === 'isv.wiki' || h === 'www.isv.wiki' || h === 'overview-solutions.github.io';
-}
-
-function meterPageUrls(page, pageId) {
-  if (pageId === 'village-simulator' && isDeployedWikiHost() && page.remoteSrc) {
-    return { src: page.remoteSrc, standalone: page.remoteStandalone || page.remoteSrc };
-  }
-  return { src: page.src, standalone: page.standalone };
+function setMeterFrameSrc(frame, src) {
+  const abs = new URL(src, location.href).href;
+  if (frame.dataset.meterSrc === abs) return;
+  frame.dataset.meterSrc = abs;
+  frame.src = src;
 }
 
 function refreshMeterPreview(pageId, requested) {
@@ -2537,16 +2534,14 @@ function refreshMeterPreview(pageId, requested) {
   const toolbar = document.getElementById('meter-study-toolbar-standalone');
   if (frame) {
     bindMeterStudyFrameGuard(frame);
-    const urls = meterPageUrls(page, pageId);
-    let src = urls.src;
+    let src = page.src;
     if (requested === 'worldline-day-100') src += (src.includes('?') ? '&' : '?') + 'homes=100';
-    frame.src = src;
+    setMeterFrameSrc(frame, src);
   }
   if (label) label.textContent = page.title;
   if (sub) sub.textContent = page.sub || '';
   if (toolbar) {
-    const urls = meterPageUrls(page, pageId);
-    toolbar.href = requested === 'worldline-day-100' ? `${urls.standalone}?homes=100` : urls.standalone;
+    toolbar.href = requested === 'worldline-day-100' ? `${page.standalone}?homes=100` : page.standalone;
     toolbar.textContent = 'Full page';
   }
   const sec = document.getElementById('sec-village-metering');
@@ -2569,7 +2564,7 @@ function bindMeterStudyFrameGuard(frame) {
       const nestedWiki = !!doc.getElementById('meter-study-frame');
       const page = METER_BENCHMARK_PAGES[activeMeterPageId];
       if (nestedWiki && page) {
-        const next = meterPageUrls(page, activeMeterPageId).src;
+        const next = page.src;
         const here = doc.location.pathname + doc.location.search;
         if (here.indexOf(next.split('?')[0]) === -1) frame.src = next;
       }
