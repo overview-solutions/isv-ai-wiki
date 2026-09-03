@@ -135,7 +135,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | Hash | Lands on |
 |------|----------|
 | `#home` | Landing page — Knowledge Base intro + Tech Comm hub (default) |
-| `#whats-new` | Home · “What’s new” box (3 Jul – 1 Sep 2026 window; `#since` alias) |
+| `#whats-new` | Home · “What’s new” page list (prose catch-up; `#since` alias). Text-only git diff: `python3 scripts/content-diff.py OLD NEW` |
 | `#about` | Mission, volunteer structure |
 | `#supported` | Field-program map (Tech Comm support on request) |
 | `#mission`, `#committees` | Legacy — scroll to anchors on `#about` |
@@ -321,6 +321,8 @@ When editing this repo:
 | New Tech Comm note | `tech-comm-YYYY-MM-DD-topic.html`, `index.html` → `MEETING_NOTES` |
 | Workshop / event plan | `power-africa-*.html`, `NOTE_GROUPS` / `MEETING_NOTES` |
 | Index external report | `technical-notes/catalog.json` |
+| Prose-only diff between commits | `python3 scripts/content-diff.py OLD NEW` — skips CSS, vendor, `<style>` / `<script>` |
+| Home “what’s new” page list | `index.html` `#whats-new` — bump when a **page** lands, not when CSS moves |
 | Update topology diagram | `technical-notes/diagrams/metering-topology.svg`, `EDITING.md` |
 | Deploy | Push to `main` — `.github/workflows/deploy.yml` |
 
