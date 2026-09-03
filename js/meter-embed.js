@@ -31,7 +31,7 @@
     'vendor-study': 'meter-vendor-study.html',
     openami: 'openami.html',
     meshems: 'meshems.html',
-    'village-simulator': 'village-simulator/index.html'
+    'village-simulator': 'https://circaevum.github.io/locus/village-simulator/'
   };
 
   var ID_BY_FILE = Object.keys(PAGE_BY_ID).reduce(function (acc, id) {
@@ -70,7 +70,9 @@
   }
 
   function meterSrc(pageId) {
-    return (PAGE_BY_ID[resolvePageId(pageId)] || PAGE_BY_ID.overview) + '?embed=1';
+    var dest = PAGE_BY_ID[resolvePageId(pageId)] || PAGE_BY_ID.overview;
+    if (/^https?:\/\//.test(dest)) return dest;
+    return dest + '?embed=1';
   }
 
   document.addEventListener('click', function (e) {

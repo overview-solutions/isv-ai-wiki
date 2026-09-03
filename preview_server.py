@@ -7,7 +7,7 @@ import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 18765
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
 
 
 class NoCacheHandler(SimpleHTTPRequestHandler):
@@ -24,8 +24,8 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(ROOT)
     httpd = ThreadingHTTPServer(("0.0.0.0", PORT), NoCacheHandler)
-    print(f"Simulator  → http://127.0.0.1:{PORT}/village-simulator/index.html")
-    print(f"Wiki shell → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
+    print(f"Wiki + Full page → https://circaevum.github.io/locus/village-simulator/")
+    print(f"Wiki shell       → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
     print("Cache-Control: no-store")
     print("Press Ctrl+C to stop.")
     httpd.serve_forever()
