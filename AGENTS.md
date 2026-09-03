@@ -70,7 +70,7 @@ isv-ai-wiki/
 
 **Live base URL:** `https://isv.wiki/` (GitHub Pages mirror: `https://overview-solutions.github.io/isv-ai-wiki/`)
 
-**Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`).
+**Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`). **`frame-src` is `'self' https://player.vimeo.com https://docs.google.com`.** Circaevum Locus (`https://circaevum.github.io`) is not on that list, so the Village Metering iframe cannot load it (Chrome: “This content is blocked”). Wiki iframe dest is same-origin `village-simulator/index.html`. Full page may still open Locus in a new tab. To iframe Locus, add `https://circaevum.github.io` to `frame-src` on that Transform Rule.
 
 **Local preview:** `./preview.sh` → `http://localhost:8765/index.html`
 
@@ -152,7 +152,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator — wiki iframe and Full page are **Circaevum Locus** (`https://circaevum.github.io/locus/village-simulator/`). In-repo `village-simulator/index.html` only redirects there. Size `?homes=100` or `?homes=1000` (default 1000). Legacy `#village-metering/worldline-day` and `…/worldline-day-100` alias here (`worldline-day-100` appends `?homes=100`). |
+| `#village-metering/village-simulator` | Village Simulator. Wiki **iframe** is same-origin `village-simulator/index.html` (Cloudflare `frame-src` blocks `circaevum.github.io`). **Full page** opens Circaevum Locus. Size `?homes=100` or `?homes=1000`. Legacy `#village-metering/worldline-day` aliases here. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
@@ -170,11 +170,11 @@ Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` 
 - `meter-overview.html?embed=1` (default)
 - `meter-problems-today.html?embed=1` · `meter-village-scope.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
-- `#village-metering/village-simulator` → iframe and Full page `https://circaevum.github.io/locus/village-simulator/`
+- `#village-metering/village-simulator` → iframe `village-simulator/index.html?embed=1` (same-origin; CSP). Full page → Circaevum Locus
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
 
-The village-metering iframe guard must detect the wiki shell by DOM (`#meter-study-frame`), never by `/index.html$`. That regex also matches `village-simulator/index.html` and reload-loops the sim. Cross-origin Locus embeds skip the guard (`contentDocument` is null).
+The village-metering iframe guard must detect the wiki shell by DOM (`#meter-study-frame`), never by `/index.html$`. That regex also matches `village-simulator/index.html` and reload-loops the sim.
 
 ### Registries in `index.html` (edit these when adding content)
 
