@@ -96,6 +96,10 @@ ul { padding-left: 1.25rem; margin-bottom: 1rem; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
 th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
 th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+tr.session-intro td {
+  background: color-mix(in srgb, var(--text-3) 10%, var(--bg));
+  color: var(--text-2);
+}
 tr.food-break td {
   background: color-mix(in srgb, var(--text-3) 28%, var(--bg));
   color: var(--text-3);
@@ -217,7 +221,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <table>
     <thead><tr><th>Time</th><th>Duration</th><th>Session</th><th>Instructors</th></tr></thead>
     <tbody>
-      <tr><td><strong>10:15–10:30</strong></td><td><strong>15 min</strong></td><td><strong>Intro — high-level workshop overview</strong><br>How Day 1 / Day 2 fit together.</td><td>Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor<br><em>Ivory Room</em></td></tr>
+      <tr class="session-intro"><td><strong>10:15–10:30</strong></td><td><strong>15 min</strong></td><td><strong>Intro — high-level workshop overview</strong><br>How Day 1 / Day 2 fit together.</td><td>Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor<br><em>Ivory Room</em></td></tr>
       <tr><td><strong>10:30–11:30</strong></td><td><strong>1 hr</strong></td><td><strong>Block 1 — Legacy Focus</strong><br>SteamaCo and SparkMeter — commercial AMI / prepaid stacks in the field today.</td><td>Warren Scott-White (SteamaCo) · SparkMeter</td></tr>
       <tr class="food-break"><td>11:30–13:00</td><td>1.5 hr</td><td>Lunch / rest of the <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV track ↗</a></td><td>—</td></tr>
       <tr><td><strong>13:00–15:00</strong></td><td><strong>2 hr</strong></td><td><strong>Block 2 — Next Gen</strong><br>Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>). OpenAMI / MeshEMS cabinet assembly and config. DitroniX and CircuitSetup. Planned: RFP for intelligent feeder options for ISV Smart Village projects.</td><td>Sandra Kwak (10 Power) · Dave Williams (DitroniX) · CircuitSetup · Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor</td></tr>
