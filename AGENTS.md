@@ -159,6 +159,9 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
+| `#standards` | Standards list — village relevant vs larger grid integration |
+| `#standards-village` | Village-relevant standards (2030.10, DLMS, OBIS, SunSpec, …) |
+| `#standards-grid` | Larger-grid integration (1547, 2030.5, OpenADR, 2800, P4200, …) |
 | `#mission`, `#funded`, `#committees`, `#home`, … | Top-level sections (`#tech` → `#home`; `#funded` → `#supported`) |
 
 **For agents:** Prefer hash links when citing wiki pages. Prefer **standalone HTML** (`meter-vendor-study.html`) when scraping full content — iframes omit chrome but duplicate body.
@@ -195,7 +198,7 @@ Read sources in this order when answering technical questions:
 1. **Cited benchmark tables** — [`meter-vendor-study.html`](meter-vendor-study.html) (numbered `[s1]`… bibliography).
 2. **Tech Comm meeting notes** — problem framing, topology, action items (e.g. [`tech-comm-2026-05-28-metering-topology.html`](tech-comm-2026-05-28-metering-topology.html)).
 3. **Technical reports** — list built live from openami-smart-village `reports/index.html`; enrichments in `catalog.json` (`isvRelevance`, `relatedMeetingNotes`, **provenance**: `sourceKind`, `authorship`, `reviewStatus`). Full docs on [Cottonspace](https://sattal.cottonspace.com/reports) or external PDFs. Defaults: Dev Labs → AI-assisted draft; ISV wiki → human reviewed; external → index-only.
-4. **Standards section** in `index.html` — quick reference (DLMS, STS, SunSpec, IEEE 2030.5).
+4. **Standards section** in `index.html` — split **village relevant** (`#standards-village`: 2030.10, 2030.7, DLMS, OBIS, RS-485, SunSpec, OpenAMI GeoJSON) vs **larger grid integration** (`#standards-grid`: 1547, 2030.5, OpenADR, 2800, P4200, TLS, grid cybersecurity, Esri UN). Do not score DLMS at the transmission-IBR row.
 5. **ISV-internal** — DokuWiki PDFs, prior outreach contacts. Tag as **ISV**, not independent verification.
 6. **Legacy DokuWiki** — `http://34.125.138.210/...` (migration source; may be stale).
 
