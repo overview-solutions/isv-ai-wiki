@@ -21,15 +21,63 @@ h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 .lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 48rem; line-height: 1.5; }
 h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
-.callout > strong:first-child { color: var(--teal); }
-.stack-table td:first-child { font-weight: 500; }
-.stack-table .out-of-scope { color: var(--text-3); font-style: italic; }
-.link-list { font-size: 13px; line-height: 1.6; margin-bottom: 1rem; }
-.link-list li { margin-bottom: 0.35rem; }
+.callout > strong:first-child { color: var(--teal); display: block; margin-bottom: 0.2rem; }
+.callout p { margin: 0; }
+.callout--amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout--amber > strong:first-child { color: var(--amber); }
+.partner-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.partner-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  background: var(--bg-2);
+}
+.partner-card .k { font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.2rem; }
+.partner-card .n { font-size: 13px; font-weight: 500; }
+.partner-card .d { font-size: 12px; color: var(--text-2); line-height: 1.4; margin-top: 0.2rem; }
+.cap-grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 0.85rem; }
+.cap-card {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  background: var(--bg-2);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.cap-num { font-size: 13px; font-weight: 500; color: var(--green); line-height: 1.3; }
+.cap-card h3 { margin: 0 0 0.2rem; font-size: 12px; font-weight: 500; color: var(--text); }
+.cap-card p { margin: 0; color: var(--text-2); }
+.pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.85rem; }
+.pill-row a {
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  text-decoration: none;
+  color: var(--text);
+}
+.pill-row a:hover { border-color: var(--green); color: var(--green); }
+.source { font-size: 11px; color: var(--text-3); line-height: 1.45; margin-top: 0.35rem; }
 html.embed .back { display: none; }
 html.embed .wrap { padding-top: 0.75rem; }
 html.embed h1 { font-size: 18px; }
+@media (min-width: 700px) {
+  .partner-grid { grid-template-columns: repeat(3, 1fr); }
+  .cap-grid { grid-template-columns: 1fr 1fr; }
+  .cap-card:last-child { grid-column: 1 / -1; }
+}
 </style>
 </head>
 <body>
@@ -41,58 +89,201 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 <div class="isv-topbar">
   <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
   <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   </button>
 </div>
 <div class="wrap">
   <div class="back"><a href="index.html#village-metering/openami">← Village Metering</a></div>
 
   <h1>OpenAMI</h1>
-  <p class="sub">Hardware thread within ISV Village Metering · EnAccess · Energy IoT · NESL</p>
-  <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends.</p>
+  <p class="sub">Open Advanced Metering Infrastructure · EnAccess program page · ISV Village Metering thread</p>
+  <p class="lead">An open-source smart metering suite <strong>designed with mini-grid developers, not just for them</strong>. Goal: replace lock-in to a handful of proprietary vendors with openly documented, field-tested tools operators can own and adapt.</p>
 
-  <div class="callout">
-    <strong>Community · Discord</strong>
-    <p>OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.</p>
+  <div class="partner-grid">
+    <div class="partner-card">
+      <div class="k">Lead</div>
+      <div class="n">REIc</div>
+      <div class="d">Renewable Energy Innovators Cameroon — field operator and test partner.</div>
+    </div>
+    <div class="partner-card">
+      <div class="k">Lead</div>
+      <div class="n">IEEE Smart Village</div>
+      <div class="d">Neutral coordination, cited specs, and this wiki’s Village Metering thread.</div>
+    </div>
+    <div class="partner-card">
+      <div class="k">Lead</div>
+      <div class="n">EnAccess</div>
+      <div class="d">OSS energy-access tools (MPM, OpenPAYGO) and the public OpenAMI program page.</div>
+    </div>
   </div>
 
-  <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>. The <a href="index.html#village-metering/meshems">MeshEMS board</a> is aligned hardware for learning that stack in the field — multi-tenant edge metering at the upstream/downstream boundary, documented openly for community operators.</p>
+  <div class="callout">
+    <strong>Community · OSEA Discord</strong>
+    <p>Project chat lives on the <strong>OSEA</strong> (Open Source Energy Access) Discord, managed by EnAccess. Join <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. ISV Tech Comm goal: show up more — introduce work, answer integration questions, share wiki artifacts.</p>
+  </div>
 
-  <h2>Stack layers (working definitions)</h2>
-  <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td><strong>OpenEMS</strong></td><td>EMS / Edge to cloud orchestration</td><td>More urban — grid present; stack can stop at the DCU. Often Phase&nbsp;2–3 depending on site.</td></tr>
-      <tr><td><strong>Street EMS</strong> (NESL)</td><td>NAN mesh</td><td>DCU mesh backhaul · <a href="index.html#village-metering/meshems">MeshEMS page</a> · <a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">Street EMS board</a> · Phase&nbsp;2</td></tr>
-      <tr><td><strong>MeshEMS</strong>(Energy IoT Open Source)</td><td>Street Pole gateway</td><td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshEMS </a>OpenAMI firmware · Phase&nbsp;2</td></tr>
-      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry</td><td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; <strong>leakage visible at every layer</strong> · Phase&nbsp;2 (Phase&nbsp;1 feeds it)</td></tr>
-      <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>Village backend option · Phase&nbsp;1–2</td></tr>
-      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open)</td><td>ThunderCloud / GroundBolt — <a href="index.html#village-metering/roadmap">Phase&nbsp;1 roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview)</td></tr>
-      <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology</td><td>Maps feeder → branch → meter so loss can be compared at each point · Phase&nbsp;2</td></tr>
-      <tr><td><strong>OpenADR</strong></td><td>Price / DR signals</td><td><strong>Phase&nbsp;3</strong> — utility VTN/VEN programs after grid/aggregator arrival; not year-one prepaid</td></tr>
-    </tbody>
-  </table>
+  <h2>Why OpenAMI</h2>
+  <p class="body-text">Smart metering is non-negotiable for mini-grids. Tools available to African developers have not kept pace. Most stacks are proprietary, expensive, and tied to one vendor’s roadmap.</p>
+  <div class="problem-grid">
+    <div>
+      <strong>Vendor coupling</strong>
+      <p>Opaque SLAs, unstable software, high SaaS fees, and sudden product pivots can disrupt service to whole communities.</p>
+    </div>
+    <div>
+      <strong>No fallback when it fails</strong>
+      <p>Platforms go down; connectivity dies without a local path; vendors change priorities without warning.</p>
+    </div>
+    <div>
+      <strong>Operating risk</strong>
+      <p>Higher opex risk and slower rollout of new mini-grids when the metering layer is closed.</p>
+    </div>
+    <div>
+      <strong>Trust erosion</strong>
+      <p>End users who depend on reliable power lose trust when vending or disconnect cannot run locally.</p>
+    </div>
+  </div>
 
-  <h2>ISV wiki threads</h2>
-  <ul class="link-list">
-    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — Phase&nbsp;1 installed-base · Phase&nbsp;2 microgrid core · Phase&nbsp;3 grid connect</li>
-    <li><a href="index.html#village-metering/overview">Village Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
-    <li><a href="index.html#village-metering/meshems">MeshEMS board</a> — NESL PCB · OpenAMI-aligned hardware</li>
-    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 notes · MeshEMS board distribution</a></li>
-    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 notes · MeshEMS power rails</a></li>
-    <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a></li>
-    <li><a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a></li>
-  </ul>
+  <h2>What it offers <span class="tag-draft">working toward</span></h2>
+  <p class="body-text">EnAccess describes sector alignments, standards, and a <strong>reference AMI architecture</strong> that can work across meter OEMs and comms. Results are meant to be collaborative and open-source end-to-end. Deploy locally, keep working during internet outages, and integrate existing OSS such as <a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a> and <a href="https://enaccess.org/materials/openpaygotoken/" target="_blank" rel="noopener">OpenPAYGO Token</a>. The five items below are capabilities the collaboration is <strong>working toward</strong> — not a shipped-feature checklist.</p>
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-num">1</div>
+      <div>
+        <h3>OEM-agnostic DLMS control</h3>
+        <p>Talk to DLMS (and other protocol) meters from more than one manufacturer. Avoid lock-in to a single proprietary AMI while still using proven metering hardware.</p>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">2</div>
+      <div>
+        <h3>Standard AMI features</h3>
+        <p>Load management, remote monitoring, vending, and billing on an open-source stack developers can extend.</p>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">3</div>
+      <div>
+        <h3>Local intelligence and vending</h3>
+        <p>A site command station that can manage distribution, local and contingency vending, and post-paid arrangements when backhaul is down.</p>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">4</div>
+      <div>
+        <h3>Cloud integration and mirroring</h3>
+        <p>Sync data and state to the cloud when the internet is up — remote oversight without sacrificing local autonomy.</p>
+      </div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">5</div>
+      <div>
+        <h3>Interoperable tokens and tariffs</h3>
+        <p>Token and tariff support that builds on OSS already used in the sector, not a new closed vending silo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--amber">
+    <strong>ISV reading (wiki, not the EnAccess page)</strong>
+    <p><strong>Actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility</strong> at feeder, branch, and customer so operators can locate loss and theft, not just see aggregate feeder imbalance. The <a href="index.html#village-metering/meshems">MeshEMS board</a> is aligned hardware for learning that stack in the field.</p>
+  </div>
+
+  <h2>ISV stack layers</h2>
+  <p class="body-text">Working definitions for how this wiki talks about the pieces. Phase tags follow the <a href="index.html#village-metering/roadmap">Village Metering roadmap</a>.</p>
+  <div class="tbl-wrap">
+    <table class="ps-table">
+      <thead>
+        <tr><th>Component</th><th>Role</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OpenEMS</td>
+          <td>EMS / edge-to-cloud orchestration</td>
+          <td>More urban — grid present; stack can stop at the DCU. Often Phase&nbsp;2–3 depending on site.</td>
+        </tr>
+        <tr>
+          <td>Street EMS (NESL)</td>
+          <td>NAN mesh</td>
+          <td>DCU mesh backhaul · <a href="index.html#village-metering/meshems">MeshEMS page</a> · <a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">Street EMS board</a> · Phase&nbsp;2</td>
+        </tr>
+        <tr>
+          <td>MeshEMS (Energy IoT)</td>
+          <td>Street-pole gateway</td>
+          <td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> firmware · Phase&nbsp;2</td>
+        </tr>
+        <tr>
+          <td>OpenAMI / MQTT</td>
+          <td>Actionable telemetry</td>
+          <td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; leakage visible at every layer · Phase&nbsp;2 (Phase&nbsp;1 feeds it)</td>
+        </tr>
+        <tr>
+          <td>EnAccess MPM</td>
+          <td>Operator backend</td>
+          <td>Village backend option · Phase&nbsp;1–2 · <a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">micropowermanager</a></td>
+        </tr>
+        <tr>
+          <td>EarthSpark ThunderCloud</td>
+          <td>Operator backend (open)</td>
+          <td>ThunderCloud / GroundBolt — <a href="index.html#village-metering/roadmap">Phase&nbsp;1 roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview)</td>
+        </tr>
+        <tr>
+          <td>OpenAMI geo model</td>
+          <td>Asset topology</td>
+          <td>Maps feeder → branch → meter so loss can be compared at each point · Phase&nbsp;2</td>
+        </tr>
+        <tr>
+          <td>OpenADR</td>
+          <td>Price / DR signals</td>
+          <td>Phase&nbsp;3 — utility VTN/VEN programs after grid/aggregator arrival; not year-one prepaid</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How to join</h2>
+  <p class="body-text">EnAccess is building OpenAMI as a community project. Code, documentation, and reference architectures are to be published so developers, implementers, and local partners can use and improve them. The team is sourcing extra hardware, connectivity, and engineering, and looking for users and contributors who can share requirements, test early versions, and bring the stack into new countries.</p>
+  <div class="dash-grid">
+    <div class="dash-card dash-card-primary">
+      <h3>Talk to the program</h3>
+      <ul>
+        <li><a href="https://enaccess.org/contact/" target="_blank" rel="noopener">enaccess.org/contact</a> — pilots, co-funding, questions</li>
+        <li>Published generic inbox: <a href="mailto:info@enaccess.org">info@enaccess.org</a></li>
+        <li>Mini-grid developers, utilities, IT firms, and donors invited</li>
+      </ul>
+    </div>
+    <div class="dash-card">
+      <h3>Code and materials</h3>
+      <ul>
+        <li><a href="https://github.com/enaccess" target="_blank" rel="noopener">github.com/enaccess</a></li>
+        <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a></li>
+        <li><a href="https://enaccess.org/materials/openpaygotoken/" target="_blank" rel="noopener">OpenPAYGO Token</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Wiki threads</h2>
+  <div class="pill-row">
+    <a href="index.html#village-metering/roadmap">Roadmap</a>
+    <a href="index.html#village-metering/overview">Overview</a>
+    <a href="index.html#village-metering/solutions-map">Solutions map</a>
+    <a href="index.html#village-metering/meshems">MeshEMS board</a>
+    <a href="index.html#village-metering/vmrs">OBIS · VMRS</a>
+    <a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 · board distribution</a>
+    <a href="power-africa-openami-presentation-2025.html">PAC 2025 deck</a>
+    <a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005</a>
+  </div>
 
   <h2>External links</h2>
-  <ul class="link-list">
-    <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a></li>
-    <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a></li>
-    <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a></li>
-    <li><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">EarthSpark · ThunderCloud</a> (Phase&nbsp;1 · developer preview)</li>
-    <li><a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> (Dev Labs reports)</li>
-  </ul>
+  <div class="pill-row">
+    <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI ↗</a>
+    <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord ↗</a>
+    <a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager ↗</a>
+    <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">ThunderCloud ↗</a>
+    <a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village ↗</a>
+  </div>
+
+  <p class="source">Program facts paraphrased from <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a> (retrieved 10 Sep 2026). Capabilities are listed as EnAccess “working toward,” not as shipped product claims. Leakage / MQTT / MeshEMS notes are ISV wiki framing.</p>
 </div>
 </body>
 </html>

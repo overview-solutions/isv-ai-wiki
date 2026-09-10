@@ -150,7 +150,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/solutions-map` | Visual problem ↔ stack diagram (SteamaCo · SparkMeter · EnAccess · OpenAMI) · `meter-benchmark/problem-solution-map.json` |
 | `#village-metering/vmrs` | Register checklist (OBIS · VMRS) · IDIS companion-profile note |
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
-| `#village-metering/openami` | OpenAMI stack · leakage visibility |
+| `#village-metering/openami` | OpenAMI · EnAccess program (REIc · ISV · EnAccess) · ISV stack · Discord |
 | `#village-metering/meshems` | MeshEMS board |
 | `#village-metering/village-simulator` | Village Simulator. Wiki **iframe** is same-origin `village-simulator/index.html` (Cloudflare `frame-src` blocks `circaevum.github.io`). **Full page** opens Circaevum Locus. Size `?homes=100` or `?homes=1000`. Legacy `#village-metering/worldline-day` aliases here. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
