@@ -1090,6 +1090,20 @@ body {
 
 .standard-row:last-child { border-bottom: none; }
 
+.standards-group { margin-top: 1.75rem; }
+.standards-group:first-of-type { margin-top: 0; }
+.standards-group h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+}
+.standards-group-lead {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0 0 0.35rem;
+}
+
 .standard-icon {
   width: 34px; height: 34px;
   border-radius: 8px;
@@ -1747,7 +1761,7 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title">Standards</div>
-        <div class="section-sub">Frameworks and protocols ISV develops and adopts</div>
+        <div class="section-sub">Village mini-grid vs larger grid integration — frameworks ISV develops and adopts</div>
       </div>
       <button class="edit-btn" onclick="toggleAI('standards')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
@@ -1755,95 +1769,118 @@ code {
       </button>
     </div>
     <div id="content-standards">
-      <div class="standard-row">
-        <div class="standard-icon">🔌</div>
-        <div>
-          <div class="standard-name"><a href="standard-ieee-1547.html">IEEE 1547-2018 — DER Interconnection</a></div>
-          <div class="standard-desc">Interconnection and interoperability of distributed energy resources with the grid — voltage ride-through, power quality, and export limits. Foundation for behind-the-meter solar, storage, and microgrid tie-in. <a href="standard-ieee-1547.html">Read full deep-dive →</a></div>
+      <div class="standards-group" id="standards-village">
+        <h3>Village relevant</h3>
+        <p class="standards-group-lead">Phase 1–2 village mini-grid: rural DC architecture, microgrid controllers, prepaid metering, field buses, inverter models at the pole, ISV spatial schema. Do not score these as utility bulk-power interconnection.</p>
+        <div class="standard-row">
+          <div class="standard-icon">🌍</div>
+          <div>
+            <div class="standard-name"><a href="standard-ieee-2030-10.html">IEEE 2030.10 — DC Microgrids for Rural Access</a></div>
+            <div class="standard-desc">Design and operation of extra-low voltage DC (ELVDC) microgrids for off-grid rural and remote electricity access. THE ISV standard — directly addresses village-scale solar+battery+DC distribution without utility grid. Phase 1–2 core architecture. <a href="standard-ieee-2030-10.html">Read full deep-dive →</a></div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">🏘️</div>
+          <div>
+            <div class="standard-name">IEEE 2030.7 — Microgrid Controllers</div>
+            <div class="standard-desc">Specification for microgrid controller functions: islanding, reconnection, load and DER coordination. Complements IEEE 2030.9 planning guidance for community-scale deployments.</div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">📊</div>
+          <div>
+            <div class="standard-name">DLMS/COSEM — IEC 62056</div>
+            <div class="standard-desc">Application-layer protocol for smart meter readout, prepaid/STS tokens, and remote disconnect. Required for vendor-interoperable AMI stacks; DCUs act as DLMS client to meters and server to the head-end system.</div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">🏷️</div>
+          <div>
+            <div class="standard-name">OBIS — IEC 62056-6-1</div>
+            <div class="standard-desc">Object Identification System codes that label every meter register — import/export energy, voltage, power factor, harmonics. Maps physical quantities to DLMS/COSEM data objects across meter vendors.</div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">↔️</div>
+          <div>
+            <div class="standard-name">TIA/EIA-485 (RS-485) — Differential Field Bus</div>
+            <div class="standard-desc">Physical-layer multipoint serial bus for noisy, long-run meter and inverter links. Carries Modbus RTU (and often DLMS HDLC) between DIN-rail meters, hybrid inverters, and pole EMS boards — e.g. MeshEMS HW-519 RS-485 master to DDS238 / CHD130 / DDSU666 southbound. Not an application protocol: pairs with Modbus or SunSpec register maps above it.</div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">☀️</div>
+          <div>
+            <div class="standard-name"><a href="standard-sunspec.html">SunSpec Alliance — Modbus / SunSpec JSON</a></div>
+            <div class="standard-desc">Device-level models (e.g. Model 1, 11, 213) for inverters, storage, and subpanel metering. Models 701–712 are the IEEE 1547-2018 DER schema that IEEE 2030.5 CSIP carries as <code>DERControl</code> resources. OpenAMI MQTT reporting aligns to SunSpec JSON — the common payload pole EMS gateways translate toward regardless of Modbus RTU over RS-485, CAN, or RF underneath. <a href="standard-sunspec.html">Read full deep-dive →</a></div>
+          </div>
+        </div>
+        <div class="standard-row">
+          <div class="standard-icon">🗺️</div>
+          <div>
+            <div class="standard-name">GeoJSON — OpenAMI Spatial Schema</div>
+            <div class="standard-desc">ISV-developed GeoJSON schema for microgrid asset mapping, topology, and grid interconnection data.</div>
+          </div>
         </div>
       </div>
-      <div class="standard-row">
-        <div class="standard-icon">🏘️</div>
-        <div>
-          <div class="standard-name">IEEE 2030.7 — Microgrid Controllers</div>
-          <div class="standard-desc">Specification for microgrid controller functions: islanding, reconnection, load and DER coordination. Complements IEEE 2030.9 planning guidance for community-scale deployments.</div>
+
+      <div class="standards-group" id="standards-grid">
+        <h3>Larger grid integration</h3>
+        <p class="standards-group-lead">Utility interconnection, transmission IBR, large-load sites, aggregator demand response, and PKI — Roadmap Phase 3. Do not compare these to village prepaid meters or LV feeder AMI without saying so.</p>
+        <div class="standard-row">
+          <div class="standard-icon">🔌</div>
+          <div>
+            <div class="standard-name"><a href="standard-ieee-1547.html">IEEE 1547-2018 — DER Interconnection</a></div>
+            <div class="standard-desc">Interconnection and interoperability of distributed energy resources with the grid — voltage ride-through, power quality, and export limits. Foundation for behind-the-meter solar, storage, and microgrid tie-in. <a href="standard-ieee-1547.html">Read full deep-dive →</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🌍</div>
-        <div>
-          <div class="standard-name"><a href="standard-ieee-2030-10.html">IEEE 2030.10 — DC Microgrids for Rural Access</a></div>
-          <div class="standard-desc">Design and operation of extra-low voltage DC (ELVDC) microgrids for off-grid rural and remote electricity access. THE ISV standard — directly addresses village-scale solar+battery+DC distribution without utility grid. Phase 1–2 core architecture. <a href="standard-ieee-2030-10.html">Read full deep-dive →</a></div>
+        <div class="standard-row">
+          <div class="standard-icon">⚡</div>
+          <div>
+            <div class="standard-name"><a href="standard-ieee-2030-5.html">IEEE 2030.5 — Smart Energy Profile</a></div>
+            <div class="standard-desc">RESTful protocol for DER communication between devices, gateways, and head-end systems. Core compatibility target for OpenAMI — the utility-facing layer above a village feeder when grid-connected. <a href="standard-ieee-2030-5.html">Read full deep-dive →</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">⚡</div>
-        <div>
-          <div class="standard-name"><a href="standard-ieee-2030-5.html">IEEE 2030.5 — Smart Energy Profile</a></div>
-          <div class="standard-desc">RESTful protocol for DER communication between devices, gateways, and head-end systems. Core compatibility target for OpenAMI — the utility-facing layer above a village feeder when grid-connected. <a href="standard-ieee-2030-5.html">Read full deep-dive →</a></div>
+        <div class="standard-row">
+          <div class="standard-icon">📡</div>
+          <div>
+            <div class="standard-name">OpenADR 2.0 / 3.0 — Automated Demand Response</div>
+            <div class="standard-desc">Open standard for price, event, and load-control signals between utilities (VTN) and customer sites or DER (VEN). <strong>Roadmap Phase&nbsp;3</strong> — grid/aggregator programs after interconnection; not year-one village prepaid. Complements IEEE 2030.5 device messaging when those programs exist.</div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">📡</div>
-        <div>
-          <div class="standard-name">OpenADR 2.0 / 3.0 — Automated Demand Response</div>
-          <div class="standard-desc">Open standard for price, event, and load-control signals between utilities (VTN) and customer sites or DER (VEN). <strong>Roadmap Phase&nbsp;3</strong> — grid/aggregator programs after interconnection; not year-one village prepaid. Complements IEEE 2030.5 device messaging when those programs exist.</div>
+        <div class="standard-row">
+          <div class="standard-icon">🌬️</div>
+          <div>
+            <div class="standard-name"><a href="https://standards.ieee.org/ieee/2800/10453/" target="_blank" rel="noopener">IEEE 2800-2022 — Transmission IBR Interconnection ↗</a></div>
+            <div class="standard-desc"><em>Active standard</em> (published 22 Apr 2022). Uniform minimum interconnection, capability, and lifetime performance for <strong>inverter-based resources</strong> on transmission and sub-transmission — voltage and frequency ride-through, active/reactive power control, dynamic support, power quality, negative-sequence current, and system protection. Also covers isolated IBR tied via dedicated VSC-HVDC as a combined facility. This is bulk-power IBR, not village prepaid or LV feeder AMI. IEEE 1547 is the distribution-DER counterpart. <a href="https://standards.ieee.org/ieee/2800/10453/" target="_blank" rel="noopener">IEEE SA standard page ↗</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">📊</div>
-        <div>
-          <div class="standard-name">DLMS/COSEM — IEC 62056</div>
-          <div class="standard-desc">Application-layer protocol for smart meter readout, prepaid/STS tokens, and remote disconnect. Required for vendor-interoperable AMI stacks; DCUs act as DLMS client to meters and server to the head-end system.</div>
+        <div class="standard-row">
+          <div class="standard-icon">🖥️</div>
+          <div>
+            <div class="standard-name"><a href="https://standards.ieee.org/ieee/4200/12632/" target="_blank" rel="noopener">IEEE P4200 — Data Center Interconnection ↗</a></div>
+            <div class="standard-desc"><em>Active PAR</em> (IEEE SA, approved 4 Jun 2026) — not a published standard yet. Draft title: electric T&amp;D interconnection functional, performance, and interoperability requirements for <strong>data centers</strong>. Ride-through, post-fault recovery, protection coordination, power quality, monitoring, and study models. Builds on IEEE 1547, IEEE 2800, and IEC 62786. Large-load sites other than data centers are out of scope — not a village prepaid or AMI spec. <a href="https://standards.ieee.org/ieee/4200/12632/" target="_blank" rel="noopener">IEEE SA project page ↗</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🏷️</div>
-        <div>
-          <div class="standard-name">OBIS — IEC 62056-6-1</div>
-          <div class="standard-desc">Object Identification System codes that label every meter register — import/export energy, voltage, power factor, harmonics. Maps physical quantities to DLMS/COSEM data objects across meter vendors.</div>
+        <div class="standard-row">
+          <div class="standard-icon">🔒</div>
+          <div>
+            <div class="standard-name"><a href="standard-tls-1-2.html">TLS 1.2 (RFC 5246) — Transport Layer Security</a></div>
+            <div class="standard-desc">Cryptographic protocol for encrypted network communication — mandatory for IEEE 2030.5, MQTT over TLS, and HTTPS APIs. Provides confidentiality (AES encryption), integrity (AEAD/HMAC), and mutual authentication (X.509 certificates). <strong>Phase 3</strong> requirement for utility interconnection; Phase 1–2 village-internal often uses physical security. <a href="standard-tls-1-2.html">Read full deep-dive →</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">↔️</div>
-        <div>
-          <div class="standard-name">TIA/EIA-485 (RS-485) — Differential Field Bus</div>
-          <div class="standard-desc">Physical-layer multipoint serial bus for noisy, long-run meter and inverter links. Carries Modbus RTU (and often DLMS HDLC) between DIN-rail meters, hybrid inverters, and pole EMS boards — e.g. MeshEMS HW-519 RS-485 master to DDS238 / CHD130 / DDSU666 southbound. Not an application protocol: pairs with Modbus or SunSpec register maps above it.</div>
+        <div class="standard-row">
+          <div class="standard-icon">🛡️</div>
+          <div>
+            <div class="standard-name"><a href="grid-cybersecurity-layers.html">Grid Cybersecurity — Defense-in-Depth Layers</a></div>
+            <div class="standard-desc">Sandia National Laboratories framework for power system communication security using Purdue Model + IEC 62443 zones & conduits. Seven layers: device (TLS, certs), network (OT segmentation), industrial DMZ, transport (encryption), intrusion detection (cyber-physical correlation), zero trust (SDN), physical security. Synthesizes 10+ years of DER/microgrid research (2014–2024) with village-scale implementation guidance. <a href="grid-cybersecurity-layers.html">Read full framework →</a></div>
+          </div>
         </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">☀️</div>
-        <div>
-          <div class="standard-name"><a href="standard-sunspec.html">SunSpec Alliance — Modbus / SunSpec JSON</a></div>
-          <div class="standard-desc">Device-level models (e.g. Model 1, 11, 213) for inverters, storage, and subpanel metering. Models 701–712 are the IEEE 1547-2018 DER schema that IEEE 2030.5 CSIP carries as <code>DERControl</code> resources. OpenAMI MQTT reporting aligns to SunSpec JSON — the common payload pole EMS gateways translate toward regardless of Modbus RTU over RS-485, CAN, or RF underneath. <a href="standard-sunspec.html">Read full deep-dive →</a></div>
-        </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🔒</div>
-        <div>
-          <div class="standard-name"><a href="standard-tls-1-2.html">TLS 1.2 (RFC 5246) — Transport Layer Security</a></div>
-          <div class="standard-desc">Cryptographic protocol for encrypted network communication — mandatory for IEEE 2030.5, MQTT over TLS, and HTTPS APIs. Provides confidentiality (AES encryption), integrity (AEAD/HMAC), and mutual authentication (X.509 certificates). <strong>Phase 3</strong> requirement for utility interconnection; Phase 1–2 village-internal often uses physical security. <a href="standard-tls-1-2.html">Read full deep-dive →</a></div>
-        </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🛡️</div>
-        <div>
-          <div class="standard-name"><a href="grid-cybersecurity-layers.html">Grid Cybersecurity — Defense-in-Depth Layers</a></div>
-          <div class="standard-desc">Sandia National Laboratories framework for power system communication security using Purdue Model + IEC 62443 zones & conduits. Seven layers: device (TLS, certs), network (OT segmentation), industrial DMZ, transport (encryption), intrusion detection (cyber-physical correlation), zero trust (SDN), physical security. Synthesizes 10+ years of DER/microgrid research (2014–2024) with village-scale implementation guidance. <a href="grid-cybersecurity-layers.html">Read full framework →</a></div>
-        </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🗺️</div>
-        <div>
-          <div class="standard-name">GeoJSON — OpenAMI Spatial Schema</div>
-          <div class="standard-desc">ISV-developed GeoJSON schema for microgrid asset mapping, topology, and grid interconnection data.</div>
-        </div>
-      </div>
-      <div class="standard-row">
-        <div class="standard-icon">🔗</div>
-        <div>
-          <div class="standard-name">Esri Utility Network — Electric Distribution &amp; Transmission</div>
-          <div class="standard-desc">Industry reference model for utility GIS topology — devices, junctions, lines, terminals, subnetworks, and connectivity rules for unbalanced distribution and transmission networks. ISV is developing an open-source equivalent aligned to OpenAMI GeoJSON, so microgrid operators get the same asset and connectivity semantics without ArcGIS lock-in.</div>
+        <div class="standard-row">
+          <div class="standard-icon">🔗</div>
+          <div>
+            <div class="standard-name">Esri Utility Network — Electric Distribution &amp; Transmission</div>
+            <div class="standard-desc">Industry reference model for utility GIS topology — devices, junctions, lines, terminals, subnetworks, and connectivity rules for unbalanced distribution and transmission networks. ISV is developing an open-source equivalent aligned to OpenAMI GeoJSON, so microgrid operators get the same asset and connectivity semantics without ArcGIS lock-in.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2246,6 +2283,10 @@ const ABOUT_SCROLL_ALIASES = {
   mission: 'about-mission',
   committees: 'about-structure'
 };
+const STANDARDS_SCROLL_ALIASES = {
+  'standards-village': 'standards-village',
+  'standards-grid': 'standards-grid'
+};
 const SUPPORTED_SECTION_HASH = 'projects';
 const SUPPORTED_SECTION_ALIASES = ['projects', 'supported', 'funded', 'field-programs'];
 const NOTE_GROUPS = {
@@ -2633,6 +2674,10 @@ function initFromHash() {
   }
   if (SUPPORTED_SECTION_ALIASES.includes(raw)) {
     showSection('supported', { skipHash: raw === SUPPORTED_SECTION_HASH });
+    return;
+  }
+  if (STANDARDS_SCROLL_ALIASES[raw]) {
+    showSection('standards', { skipHash: true, scrollTo: STANDARDS_SCROLL_ALIASES[raw] });
     return;
   }
   if (SECTIONS.includes(raw)) {
