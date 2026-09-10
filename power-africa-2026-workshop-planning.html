@@ -104,6 +104,40 @@ tr.food-break td {
   background: color-mix(in srgb, var(--text-3) 28%, var(--bg));
   color: var(--text-3);
 }
+tr.day-break td {
+  background: var(--green);
+  color: var(--green-50);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0.65rem 0.75rem;
+}
+.schedule-hero {
+  background: var(--green);
+  color: var(--green-50);
+  padding: 1.25rem 1.25rem 1.35rem;
+  border-radius: 10px;
+  margin: 1.5rem 0 2rem;
+}
+.schedule-hero h2 {
+  color: inherit;
+  border: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-size: 18px;
+}
+.schedule-hero .attend {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0.95;
+  margin: 0.7rem 0 0;
+}
+.schedule-hero .attend a { color: inherit; text-decoration: underline; }
+.schedule-hero table {
+  background: var(--bg);
+  color: var(--text);
+  margin-bottom: 0;
+}
+.schedule-hero table a { color: var(--green); }
 .actions { list-style: none; padding: 0; }
 .actions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; align-items: flex-start; }
 .actions li::before { content: "○"; color: var(--text-3); flex-shrink: 0; }
@@ -151,23 +185,23 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/power-africa-2026-workshop-planning" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
 
-  <div class="callout" style="background:var(--green);color:var(--green-50);border-color:var(--green);padding:1.5rem;margin:1.5rem 0 2rem">
-    <div style="font-size:18px;font-weight:600;margin-bottom:0.75rem">MAKE · CODE · INTEGRATE</div>
-    <div style="font-size:14px;opacity:0.95;line-height:1.5;margin-bottom:1rem">Two-day intensive — Nairobi, Kenya · 21 + 24 Sep 2026. Sits inside the IEEE PES &amp; IAS Power Africa Conference (conference day rate; no separate workshop fee). Day 1: intro 10:15 · Legacy Focus 10:30 · Next Gen 13:00 · Code Challenge 15:30. Day 2: code-challenge wrap-up 14:00–15:30. Rest of the ISV track: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">ieee-powerafrica.org/isv-program-2 ↗</a></div>
-    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
-      <div style="flex:1;min-width:180px;padding:0.75rem 1rem;background:rgba(255,255,255,0.14);border-radius:8px">
-        <div style="font-weight:600;font-size:15px">10:30–11:30</div>
-        <div style="font-size:13px;opacity:0.9;margin-top:0.25rem">Legacy Focus<br>SteamaCo · SparkMeter</div>
-      </div>
-      <div style="flex:1;min-width:180px;padding:0.75rem 1rem;background:rgba(255,255,255,0.14);border-radius:8px">
-        <div style="font-weight:600;font-size:15px">1:00–3:00</div>
-        <div style="font-size:13px;opacity:0.9;margin-top:0.25rem">Next Gen<br>10 Power · OpenAMI / cabinets</div>
-      </div>
-      <div style="flex:1;min-width:180px;padding:0.75rem 1rem;background:rgba(255,255,255,0.14);border-radius:8px">
-        <div style="font-weight:600;font-size:15px">3:30–6:00</div>
-        <div style="font-size:13px;opacity:0.9;margin-top:0.25rem">Code Challenge<br>Legacy + Next Gen, hands-on</div>
-      </div>
-    </div>
+  <div class="schedule-hero">
+    <h2>What you get</h2>
+    <table>
+      <thead><tr><th>Time</th><th>Duration</th><th>Session</th><th>Who</th></tr></thead>
+      <tbody>
+        <tr class="day-break"><td colspan="4">Day 1 · Monday 21 September 2026 · Ivory Room</td></tr>
+        <tr class="session-intro"><td><strong>10:15–10:30</strong></td><td>15 min</td><td><strong>Intro</strong> — high-level overview; how the two days fit together</td><td>ISV instructors</td></tr>
+        <tr><td><strong>10:30–11:30</strong></td><td>1 hr</td><td><strong>Block 1 — Legacy Focus</strong><br>SteamaCo and SparkMeter — commercial AMI / prepaid stacks in the field today</td><td>Warren Scott-White (SteamaCo) · SparkMeter</td></tr>
+        <tr class="food-break"><td>11:30–13:00</td><td>1.5 hr</td><td>Lunch / rest of the <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV track ↗</a></td><td>—</td></tr>
+        <tr><td><strong>13:00–15:00</strong></td><td>2 hr</td><td><strong>Block 2 — Next Gen</strong><br>Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>). OpenAMI / MeshEMS cabinet assembly. DitroniX and CircuitSetup. Planned: RFP for intelligent feeder options (intake TBA — this page is not the live RFP)</td><td>Sandra Kwak (10 Power) · Dave Williams (DitroniX) · CircuitSetup · ISV instructors</td></tr>
+        <tr class="food-break"><td>15:00–15:30</td><td>30 min</td><td>Tea &amp; Coffee Break</td><td>—</td></tr>
+        <tr><td><strong>15:30–18:00</strong></td><td>2.5 hr</td><td><strong>Block 3 — Code Challenge</strong><br>Hands-on Legacy + Next Gen. Cabinets, telemetry, <a href="index.html#village-metering/village-simulator">Village Simulator</a></td><td>ISV instructors</td></tr>
+        <tr class="day-break"><td colspan="4">Day 2 · Thursday 24 September 2026</td></tr>
+        <tr><td><strong>14:00–15:30</strong></td><td>1.5 hr</td><td><strong>Code challenge wrap-up</strong><br>Finish Monday’s challenge, show what ran, compare Legacy vs Next Gen (MQTT bridges, dashboards, cost / lock-in / sovereignty)</td><td>ISV instructors</td></tr>
+      </tbody>
+    </table>
+    <p class="attend">Conference day rate; no separate workshop fee. Register via <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org</a>. Rest of the ISV track: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a>. Laptop with SSH + browser. No prior experience required.</p>
   </div>
 
   <div id="follow-ups-panel"></div>
@@ -185,161 +219,42 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
     <div class="overview-card">
       <div class="overview-val">2 days</div>
-      <div class="overview-title">Make · Code · Integrate</div>
-      <div class="overview-detail">Day 1: Mon 21 Sep (Legacy Focus · Next Gen · Code Challenge) · Day 2: Thu 24 Sep 14:00–15:30 code-challenge wrap-up</div>
+      <div class="overview-title">Legacy · Next Gen · Challenge</div>
+      <div class="overview-detail">Mon 21 Sep blocks + Thu 24 Sep 14:00–15:30 wrap-up</div>
     </div>
   </div>
 
-  <div class="callout callout-pitch">
-    <strong>What you get</strong>
-    <p><strong>Intro (10:15–10:30):</strong> High-level workshop overview — how the two days fit together.</p>
-    <p><strong>10:30–11:30 — Legacy Focus:</strong> SteamaCo and SparkMeter — commercial AMI / prepaid stacks in the field today.</p>
-    <p><strong>13:00–15:00 — Next Gen:</strong> Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>) plus OpenAMI / MeshEMS cabinet work (DitroniX, CircuitSetup). Planned: launch an RFP for intelligent feeder options on ISV Smart Village projects.</p>
-    <p><strong>15:30–18:00 — Code Challenge:</strong> Hands-on Legacy + Next Gen — cabinets, telemetry, and the <a href="index.html#village-metering/village-simulator">Village Simulator</a>. Wrap-up Thursday 14:00–15:30.</p>
-    <p><strong>Thu 24 Sep 14:00–15:30 — Code challenge wrap-up:</strong> Close the challenge that opened Monday 15:30. Demos, MQTT bridges, dashboards, honest architecture comparison.</p>
-    <p><strong>How to attend:</strong> Register for the <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">IEEE PES &amp; IAS Power Africa Conference</a>. Rest of the ISV track: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a>. Conference day rate applies. No separate workshop fee.</p>
-  </div>
+  <p class="body-text">Hands-on Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> for in-country engineers on village mini-grids. Compare commercial AMI (SteamaCo, SparkMeter) with open OpenAMI cabinets. MQTT as the common bus — REST → MQTT bridges, not rip-and-replace. Cloudless LV feeder intelligence; IETF SIP (RFC 3261) is optional Phase 3, not year-one prepaid. AfCFTA / HS 9028.30 briefing for in-country assembly. See <a href="index.html#village-metering/openami">OpenAMI</a> · <a href="index.html#village-metering/vmrs">OBIS · VMRS</a> · <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
 
-  <p class="body-text">Mentoring-based, hands-on workshop for in-country engineers developing village electrification and community mini-grid solutions using the open-source <strong>Street-EMS</strong> platform. Focus: cloudless architectures, multi-tenant metering, sovereign &amp; resilient systems, edge intelligence at the LV feeder, and business-case sensitivity.</p>
+  <p class="body-text"><strong>Who:</strong> utility and distribution engineers, minigrid operators, metering people, founders, researchers, energy-access practitioners.</p>
 
-  <h2>Who should attend</h2>
+  <h2 id="workshop-vision">Code challenge</h2>
+  <p class="body-text">Opens Monday 15:30. Wrap-up Thursday 14:00–15:30.</p>
   <ul>
-    <li>Utility &amp; distribution engineers</li>
-    <li>Minigrid developers &amp; operators</li>
-    <li>Smart metering professionals</li>
-    <li>Startup founders &amp; innovators</li>
-    <li>Researchers, students &amp; educators</li>
-    <li>Energy access practitioners</li>
+    <li><strong>Multi-vendor aggregation</strong> — GroundBolt (SparkMeter) plus SteamaCo DCU and MeshEMS. REST → MQTT, one dashboard, compare streams.</li>
+    <li><strong>Mobile money</strong> — M-Pesa / Airtel Money (or similar) into prepaid vending: token, top-up, balance sync.</li>
+    <li><strong>Decision matrix</strong> — open MeshEMS/OpenAMI vs proprietary full-stack on cost, lock-in, sovereignty, comms, repair. Honest trade-offs.</li>
   </ul>
 
-  <h2 id="workshop-vision">Workshop vision</h2>
-  <p>Beyond cloud-centric hackathons, this IEEE ISV track pairs hands-on engineering with <strong>business-case sensitivity</strong> — in-country engineers on village electrification and community minigrids compare aggregation paths (table below) and leave with a decision matrix scoped to deploy, operate, and sustain solutions locally.</p>
-
-  <h2>Session schedule</h2>
-  
-  <h3>Day 1: Monday 21 September 2026</h3>
-  <table>
-    <thead><tr><th>Time</th><th>Duration</th><th>Session</th><th>Instructors</th></tr></thead>
-    <tbody>
-      <tr class="session-intro"><td><strong>10:15–10:30</strong></td><td><strong>15 min</strong></td><td><strong>Intro — high-level workshop overview</strong><br>How Day 1 / Day 2 fit together.</td><td>Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor<br><em>Ivory Room</em></td></tr>
-      <tr><td><strong>10:30–11:30</strong></td><td><strong>1 hr</strong></td><td><strong>Block 1 — Legacy Focus</strong><br>SteamaCo and SparkMeter — commercial AMI / prepaid stacks in the field today.</td><td>Warren Scott-White (SteamaCo) · SparkMeter</td></tr>
-      <tr class="food-break"><td>11:30–13:00</td><td>1.5 hr</td><td>Lunch / rest of the <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV track ↗</a></td><td>—</td></tr>
-      <tr><td><strong>13:00–15:00</strong></td><td><strong>2 hr</strong></td><td><strong>Block 2 — Next Gen</strong><br>Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>). OpenAMI / MeshEMS cabinet assembly and config. DitroniX and CircuitSetup. Planned: RFP for intelligent feeder options for ISV Smart Village projects.</td><td>Sandra Kwak (10 Power) · Dave Williams (DitroniX) · CircuitSetup · Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor</td></tr>
-      <tr class="food-break"><td>15:00–15:30</td><td>30 min</td><td>Tea &amp; Coffee Break</td><td>—</td></tr>
-      <tr><td><strong>15:30–18:00</strong></td><td><strong>2.5 hr</strong></td><td><strong>Block 3 — Code Challenge</strong><br>Hands-on Legacy + Next Gen. Cabinets, telemetry, and the <a href="index.html#village-metering/village-simulator">Village Simulator</a>. Wrap-up Thursday 14:00–15:30.</td><td>Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor</td></tr>
-    </tbody>
-  </table>
-  <p class="body-text"><strong>Day 1 total:</strong> 6 hr 15 min of session time (intro 15m · Legacy Focus 1h · Next Gen 2h · Code Challenge 2h 30m) — lunch and tea not counted</p>
-  <p class="body-text">Other ISV sessions, keynotes, and panels sit on the official program: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program at Power Africa ↗</a>.</p>
-
-  <h3>Day 2: Thursday 24 September 2026 — Code challenge wrap-up</h3>
-  <table>
-    <thead><tr><th>Time</th><th>Duration</th><th>Session</th><th>Instructors</th></tr></thead>
-    <tbody>
-      <tr><td><strong>14:00–15:30</strong></td><td><strong>1.5 hr</strong></td><td><strong>Wrap up the code challenge</strong><br>Challenge opened Monday 15:30 (Block 3). Thursday: finish work, show what ran, compare Legacy vs Next Gen paths (MQTT bridges, dashboards, cost / lock-in / sovereignty). Decision matrix for deployment planning.</td><td>Glenn Algie / Adam Sauer / Aaron Tushabe / Jude Numfor</td></tr>
-    </tbody>
-  </table>
-  <p class="body-text">See the <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a> for the rest of Thursday’s track.</p>
-
-  <h2>What we're building</h2>
-  
-  <h3>Intro — high-level overview (10:15–10:30)</h3>
-  <p class="body-text">Fifteen-minute frame: who this workshop is for, and what happens Monday vs Thursday. Not a vendor session.</p>
-
-  <h3>Block 1 — Legacy Focus (10:30–11:30)</h3>
-  <p class="body-text">SteamaCo and SparkMeter — the commercial AMI / prepaid stacks operators already run. Not a hardware lab.</p>
-
-  <h3>Block 2 — Next Gen (13:00–15:00)</h3>
-  <p class="body-text">Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>) plus OpenAMI / <a href="index.html#village-metering/meshems">MeshEMS v2.0</a> cabinet assembly and config. Featured hardware: <strong>DitroniX</strong> (Dave Williams) and <strong>CircuitSetup</strong>. Planned agenda item: launch an RFP for intelligent feeder options for ISV Smart Village projects (text and intake path TBA — do not treat this wiki page as the live RFP).</p>
-
-  <h3>Block 3 — Code Challenge (15:30–18:00)</h3>
-  <p class="body-text">The code challenge <strong>opens</strong> here. Hands-on Legacy + Next Gen on the bench and in the <a href="index.html#village-metering/village-simulator">Village Simulator</a> — leakage, load, topology, MQTT. Wrap-up is Thursday 14:00–15:30.</p>
-
-  <h3>Day 2: Code challenge wrap-up (14:00–15:30)</h3>
-  <p class="body-text"><strong>Challenge 1: Multi-vendor aggregation</strong> — Get <strong>GroundBolt</strong> (SparkMeter Gateway) talking to <strong>SteamaCo DCU</strong> and <strong>MeshEMS board</strong>. GroundBolt already speaks to SparkMeters — now extend it to aggregate SteamaCo (Nimbus AMI REST API) and OpenAMI/MeshEMS (native MQTT). Build the bridges, unified dashboard, compare what you see from each vendor's data stream.</p>
-
-  <p class="body-text"><strong>Challenge 2: Mobile payment integration</strong> — Demonstrate mobile money integration with GroundBolt. Connect M-Pesa, Airtel Money, or other mobile payment APIs to the prepaid vending workflow. Token generation, credit top-up, balance sync.</p>
-
-  <p class="body-text"><strong>Decision workshop:</strong> Compare open (MeshEMS/OpenAMI) vs proprietary full-stack (SteamaCo/SparkMeter) on cost, lock-in, sovereignty, comms requirements. Honest trade-offs — not marketing.</p>
-
-  <h2>Cloudless · sovereign architecture</h2>
-  <p class="body-text">One evolution of Street-EMS: embedded <strong>LV feeder distributed intelligence</strong> — measure at feeder, branch, and customer; MQTT for actionable telemetry (not archive dumps). IETF <strong>Session Initiation Protocol</strong> (SIP, RFC 3261) admission dialogs are an optional <strong>Phase&nbsp;3</strong> control-plane path (grid / aggregator era), not year-one prepaid. Shifts the LV feeder from “last kilometre” to the <strong>first kilometre</strong> of community-owned electrification. Ties to <a href="index.html#village-metering/openami">OpenAMI</a>, <a href="index.html#village-metering/vmrs">OBIS · VMRS</a>, and <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
-
-  <h2>Trade · logistics · in-country manufacturing</h2>
-  <p class="body-text">AfCFTA opportunities and <strong>Harmonized System (HS) codes</strong> for module/PCB import, local assembly, test, programming, repair, and export — briefing for in-country startups.</p>
-
-  <h2>Aggregation paths &amp; integration patterns</h2>
-  <table>
-    <thead><tr><th>Layer</th><th>Protocol/Pattern</th><th>Workshop Application</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Southbound (meter)</strong></td><td>DLMS/COSEM over RS-485</td><td>OpenAMI cabinet reads raw OBIS codes from vendor meters (if unlocked). Demonstrates vendor-agnostic metering.</td></tr>
-      <tr><td><strong>Northbound (aggregation)</strong></td><td>REST API → MQTT bridge</td><td><strong>Code-challenge wrap-up (Thu 14:00–15:30).</strong> Poll SteamaCo/SparkMeter REST APIs, publish to common MQTT broker. Python or Node-RED flows.</td></tr>
-      <tr><td><strong>Common data bus</strong></td><td>MQTT (publish/subscribe)</td><td>All cabinets speak MQTT (native or bridged). Grafana/InfluxDB subscribers consume unified stream. Vendor-agnostic.</td></tr>
-      <tr><td><strong>Edge intelligence</strong></td><td>ESP32 firmware (C++/Arduino)</td><td><strong>Day 1 Block 3 Code Challenge</strong> (Mon 15:30–18:00) plus Thu 14:00–15:30 wrap-up. Demand response, fraud detection, ML anomaly detection on MeshEMS. Modbus RTU for inverter control.</td></tr>
-      <tr><td><strong>Utility interconnect</strong></td><td>IEEE 2030.5 (future)</td><td>Proof-of-concept gateway: wrap MQTT in 2030.5 XML. Deferred to Phase 3 workshop (cert management overhead).</td></tr>
-      <tr><td><strong>Cloudless / sovereign</strong></td><td>Local MQTT broker + SIP dialogs</td><td>OpenAMI architecture: no mandatory cloud, local data sovereignty, optional IETF SIP (RFC 3261) for control-plane admission.</td></tr>
-    </tbody>
-  </table>
-
-  <p class="body-text"><strong>Key insight:</strong> MQTT as the <strong>common language</strong> enables multi-vendor integration without replacing existing systems. Participants learn the REST → MQTT bridging pattern applicable to any vendor (SteamaCo, SparkMeter, proprietary utility backends).</p>
-
-  <h2>Vendor comparison &amp; decision framework</h2>
-  <p class="body-text">Throughout workshop — participants compare SteamaCo (proprietary full-stack), SparkMeter (proprietary full-stack), and OpenAMI/MeshEMS (open-source sovereign) on deployment cost, scalability, lock-in risk, comms requirements (cellular vs local), and lifecycle sustainability (repair, HS import/export, local assembly). Hands-on experience with real hardware informs architecture selection for own deployments.</p>
-
-  <h2>Decision matrix — compare architectures across 5 axes</h2>
-  <p class="body-text"><strong>Block 1 Legacy Focus:</strong> Hear SteamaCo and SparkMeter as they run today. <strong>Block 2 Next Gen:</strong> 10 Power plus OpenAMI / MeshEMS cabinets. <strong>Block 3 Code Challenge:</strong> Put both on the bench and in the Village Simulator. <strong>Thu 14:00–15:30 wrap-up:</strong> Finish the challenge, show results, formalize comparison matrix across cost, scalability, sovereignty, comms requirements, lifecycle sustainability. Unified scoring grid illuminates trade-offs in device cost, backhaul opex, lock-in risk, maintenance skill, and utility-grid interconnect feasibility.</p>
-
-  <h2>Guests &amp; featured content</h2>
+  <h2>Guests</h2>
   <table>
     <thead><tr><th>Who</th><th>When</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>10:30–11:30 · Monday 21 Sep</td><td>Block 1 · Legacy Focus · commercial AMI stack (Ivory Room)</td></tr>
-      <tr><td><strong>SparkMeter</strong></td><td>10:30–11:30 · Monday 21 Sep</td><td>Block 1 · Legacy Focus · GroundBolt / AMI stack. Named speaker TBD.</td></tr>
-      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>13:00–15:00 · Monday 21 Sep</td><td>Block 2 · Next Gen · Haiti-based mini-grid operator · women-owned · creative business cases · field experience from the Americas</td></tr>
-      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>13:00–15:00 · Monday 21 Sep</td><td>Block 2 · Next Gen · electrical cabinet assembly / config</td></tr>
-      <tr><td><strong>CircuitSetup</strong></td><td>13:00–15:00 · Monday 21 Sep</td><td>Block 2 · Next Gen · meter / base boards · cabinet configuration. Named speaker TBD.</td></tr>
-      <tr><td><strong>Glenn Algie</strong></td><td>Workshop instructor</td><td>ISV Technical Committee · OpenAMI</td></tr>
-      <tr><td><strong>Adam Sauer</strong></td><td>Workshop instructor</td><td>ISV Technical Committee</td></tr>
-      <tr><td><strong>Aaron Tushabe</strong></td><td>Workshop instructor</td><td>ISV Technical Committee</td></tr>
-      <tr><td><strong>Jude Numfor</strong></td><td>Workshop instructor</td><td>ISV Technical Committee</td></tr>
-      <tr><td>EnAccess</td><td><span class="todo">Remote participation TBD</span></td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — unlikely on site (limited travel budget); coordination via OSEAS Kigali instead · see <a href="oseas-2026.html">OSEAS 2026</a></td></tr>
-      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach pending</span></td><td><a href="assets/documents/amda-pitch-one-page.pdf" target="_blank" rel="noopener">pitch PDF</a> · <a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">our-team</a> · <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
+      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>Mon 10:30–11:30</td><td>Block 1 Legacy Focus</td></tr>
+      <tr><td><strong>SparkMeter</strong></td><td>Mon 10:30–11:30</td><td>Block 1 Legacy Focus · named speaker TBD</td></tr>
+      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>Mon 13:00–15:00</td><td>Block 2 Next Gen · Haiti mini-grid operator</td></tr>
+      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>Mon 13:00–15:00</td><td>Block 2 Next Gen · cabinet hardware</td></tr>
+      <tr><td><strong>CircuitSetup</strong></td><td>Mon 13:00–15:00</td><td>Block 2 Next Gen · named speaker TBD</td></tr>
+      <tr><td>ISV instructors</td><td>Both days</td><td>Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor</td></tr>
+      <tr><td>EnAccess</td><td><span class="todo">Remote TBD</span></td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — unlikely on site; see <a href="oseas-2026.html">OSEAS 2026</a></td></tr>
+      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach pending</span></td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
     </tbody>
   </table>
 
-  <h2>Street-EMS hardware</h2>
-  <p class="body-text">Workshop kits: <strong>NESL 865B</strong> (MeshEMS v2.0). v1 at <a href="power-africa-openami-presentation-2025.html">Power Africa 2025</a> and <a href="open-energy-hackathon-2025.html">Oakland hackathon 2025</a>. Diagram, BOM, firmware: <a href="index.html#village-metering/meshems">MeshEMS board hub</a>.</p>
+  <h2>Kits &amp; organizer notes</h2>
+  <p class="body-text"><strong>Take-home:</strong> NESL 865B MeshEMS v2.0 (15–20 PCBs), 3–5 TC2.0 cabinets, DLMS meters, 100A CTs. BOM / firmware: <a href="index.html#village-metering/meshems">MeshEMS hub</a>. Room: 240V AC benches. Ship Nairobi · HS 9028.30. SparkMeter speaker TBD. SteamaCo DCU loan TBD — mock API if no Nimbus path. Code challenge displays TBD.</p>
 
-  <h2>Organizer checklist</h2>
-  
-  <h3>Hardware (confirmed)</h3>
-  <ul>
-    <li><strong>MeshEMS v2.0 PCBs</strong> — 15–20 units for take-home (NESL 865B)</li>
-    <li><strong>TC2.0 reference cabinet</strong> — EarthSpark design, DIN rail, contactors, breakers</li>
-    <li><strong>DLMS meters</strong> — 3–5 units for cabinet build (Donsun/Inhemeter/Hexing)</li>
-    <li><strong>Current transformers</strong> — 100A split-core CTs</li>
-    <li><strong>Materials</strong> — RS-485 adapters, wire, power rails (<a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun notes</a>)</li>
-    <li><strong>Room setup</strong> — 240V AC, bench layout, power outlets</li>
-    <li><strong>Shipping</strong> — Nairobi address from Albert · HS code 9028.30 (electricity meters)</li>
-  </ul>
-
-  <h3>Vendor coordination</h3>
-  <ul>
-    <li><strong>Intro (10:15–10:30):</strong> ISV instructors — high-level workshop overview only.</li>
-    <li><strong>Block 1 Legacy Focus (10:30–11:30):</strong> SteamaCo (Warren Scott-White) confirmed. SparkMeter speaker TBD.</li>
-    <li><strong>Block 2 Next Gen (13:00–15:00):</strong> 10 Power (Sandra Kwak). DitroniX (Dave Williams) and CircuitSetup on cabinet assembly / config. RFP for intelligent feeder options is a <em>planned</em> launch in this slot — copy and intake URL not published yet.</li>
-    <li><strong>Block 3 Code Challenge (15:30–18:00):</strong> Legacy + Next Gen · Village Simulator — room displays / laptops TBD. Wrap-up Thursday 14:00–15:30.</li>
-    <li><strong>Thu 14:00–15:30 code-challenge wrap-up:</strong> Close Monday’s challenge. SteamaCo hardware loan TBD — if a DCU / Nimbus path is available, demo REST → MQTT; if not, teach the pattern with a mock API.</li>
-  </ul>
-
-  <h3>Participant info</h3>
-  <ul>
-    <li><strong>How to attend:</strong> Conference registration via <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org</a>. Rest of the ISV track: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a>. Day rate applies; no separate workshop fee.</li>
-    <li><strong>What to bring:</strong> Laptop with SSH client + web browser</li>
-    <li><strong>Prior experience:</strong> None required</li>
-  </ul>
-
-  <h2>Action items (tracked)</h2>
+  <h2>Action items</h2>
   <table>
     <thead><tr><th>Task</th><th>Issue</th><th>Notes</th></tr></thead>
     <tbody>
@@ -349,17 +264,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p style="font-size:13px;color:var(--text-2);margin:0.75rem 0">See follow-up summary at the top of this page. Full board in <a href="index.html#tasks">Knowledge Base · Tasks</a> or <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>.</p>
 
   <h2>Related</h2>
-  <ul>
-    <li><a href="open-energy-hackathon-2025.html">Open Energy Hackathon 2025</a> · Apr 2025 · Port Labs, Oakland</li>
-    <li><a href="power-africa-openami-presentation-2025.html">OpenAMI @ Power Africa 2025</a> · Sep 2025 · Nairobi</li>
-    <li><a href="open-energy-hackathon-2026.html">Open Energy Hackathon 2026</a> · Apr 2026 · Port Labs · SF Climate Week</li>
-    <li><a href="power-africa-2026-conference.html">IEEE PES &amp; IAS Power Africa Conference 2026</a> · Nairobi · 21–25 Sep 2026</li>
-    <li><a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org</a> · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a></li>
-    <li><a href="index.html#village-metering/village-simulator">Village Simulator</a></li>
-    <li><a href="oseas-2026.html">OSEAS 2026</a> · Kigali · 26–27 Oct · <a href="https://www.oseas.org/" target="_blank" rel="noopener">oseas.org</a></li>
-    <li><a href="index.html#village-metering/meshems">MeshEMS board v2.0</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a> · <a href="https://github.com/nesl-admin/nesl-meshems" target="_blank" rel="noopener">NESL schematic</a></li>
-    <li><a href="index.html#notes/metering-2026-05-28">Tech Comm — Metering &amp; comms topology</a></li>
-  </ul>
+  <p class="body-text"><a href="power-africa-2026-conference.html">PAC 2026</a> · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a> · <a href="power-africa-openami-presentation-2025.html">OpenAMI @ PAC 2025</a> · <a href="index.html#village-metering/meshems">MeshEMS</a> · <a href="index.html#village-metering/village-simulator">Village Simulator</a> · <a href="oseas-2026.html">OSEAS 2026</a> · <a href="open-energy-hackathon-2026.html">Oakland 2026</a></p>
 </div>
 <script src="js/isv-tasks.js?v=20260629"></script>
 <script>ISVTasks.renderMeetingPanel('power-africa-2026-workshop-planning');</script>
