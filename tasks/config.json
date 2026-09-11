@@ -24,6 +24,14 @@
     "done": { "label": "Done", "short": "Done", "order": 4 }
   },
   "meetings": {
+    "tech-comm-2026-08-27": {
+      "title": "Brownfield vs greenfield · OpenAMI keys",
+      "date": "27 Aug 2026",
+      "group": "tech-comm",
+      "hash": "notes/tech-comm-2026-08-27",
+      "standalone": "tech-comm-2026-08-27-brownfield-greenfield-keys.html",
+      "label": "meeting-tech-comm-2026-08-27"
+    },
     "tech-comm-2026-06-25": {
       "title": "AI Wiki orientation",
       "date": "25 Jun 2026",
