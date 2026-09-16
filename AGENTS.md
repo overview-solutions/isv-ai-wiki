@@ -330,6 +330,29 @@ When editing this repo:
 
 ## Related repos and upstream
 
+### Village Simulator and Locus
+
+The wiki **still embeds** its local `village-simulator/index.html` through
+`METER_BENCHMARK_PAGES` (hashes `#village-metering/village-simulator`,
+`worldline-day`, `worldline-day-100`). That copy is a **frozen live snapshot**.
+Do not keep developing it.
+
+Canonical app: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)
+(local `ISV/smart-village-simulator/`, `npm start` → :5176). It consumes
+`@circaevum/locus` (`time` + `geo` subpaths). Graphics library:
+[Circaevum/locus](https://github.com/Circaevum/locus) (`CIR/yang/locus`).
+
+Cutover: after simulator GitHub Pages is verified with `?embed=1`, point
+`METER_BENCHMARK_PAGES['village-simulator'].src` at that URL. Keep hash aliases.
+Do not silently redirect before that check.
+
+Ownership: **Locus** = place/time graphics; **simulator** = energy behavior / UI;
+**this wiki** = docs, nav, embed. MapLibre + OpenFreeMap is a Locus example, not
+the wiki Mapbox funded-projects map.
+
+The supported-projects Mapbox map (`js/`, RemoteMonitorMap) is a separate feature
+from the simulator basemap. Its integration does not mean Mapbox is in Locus.
+
 | Resource | URL |
 |----------|-----|
 | This wiki (GitHub, **public**) | `https://github.com/overview-solutions/isv-ai-wiki` |
