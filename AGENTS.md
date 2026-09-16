@@ -54,11 +54,12 @@ isv-ai-wiki/
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
-├── tech-comm-*-*.html            # Meeting note pages (?embed=1 in iframe)
+├── power-africa-2026-workshop-planning.html # OpenAMI EMS Workshop (Nairobi · Mon 21 + Thu 24 Sep · EAT)
+├── power-africa-2026-conference.html        # IEEE PES & IAS Power Africa Conference 2026 links
 ├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
 ├── open-energy-hackathon-2025.html  # 2025 Open Energy Hackathon summary (Circles of Power)
 ├── open-energy-hackathon-2026.html  # 2026 hackathon planning (Earth Day · SF Climate Week · Port Labs)
-├── power-africa-*-*.html         # Workshop / event planning notes
+├── oseas-2026.html                  # OSEAS 2026 Kigali planning
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
 │   ├── catalog.json              # Report enrichments + wiki-only entries (ISV context)
@@ -156,6 +157,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
+| `#events/power-africa-2026-workshop-planning` | Power Africa 2026 workshop (Nairobi · EAT · UTC+3): Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Aaron Tushabe / Nearly Free Energy), Block 3 Business Case & Code Challenges (Sandra Kwak / 10 Power, multi-vendor MQTT, M-Pesa), Day 2 wrap-up. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
@@ -325,6 +327,24 @@ When editing this repo:
 | Index external report | `technical-notes/catalog.json` |
 | Update topology diagram | `technical-notes/diagrams/metering-topology.svg`, `EDITING.md` |
 | Deploy | Push to `main` — `.github/workflows/deploy.yml` |
+
+---
+
+## In-person events & workshops
+
+### Power Africa Conference 2026 — OpenAMI EMS Workshop
+
+- **Dates:** Monday 21 Sep 2026 (10:45–18:00) & Thursday 24 Sep 2026 (14:00–15:30)
+- **Time zone:** Nairobi, Kenya (`EAT · UTC+3`)
+- **Venue:** Safari Park Hotel, Ivory Room
+- **Instructors:** Glenn Algie, Adam Sauer, Aaron Tushabe, Jude Numfor
+- **Schedule structure:**
+  - **Block 1 (11:05–13:00):** *Stranded Legacy Updates* — AMI ecosystem and OMS updates, SteamaCo video talk (Warren Scott-White, 11:05–11:35), SparkMeter (on site/video).
+  - **Block 2 (14:00–16:00):** *Next Gen* — Feeder monitoring, MeshEMS v2.0 (NESL 865B), Aaron Tushabe / Nearly Free Energy (Uganda site layout & mini-grid operator), OpenAMI cabinets, DitroniX (Dave Williams, cabinet hardware).
+  - **Block 3 (16:15–17:50):** *Business Case and Code Challenges* — Sandra Kwak / 10 Power on mini-grid business cases, kickoff of hands-on multi-vendor aggregation challenge (GroundBolt + SteamaCo + MeshEMS via REST → MQTT), mobile money prepaid vending integration (M-Pesa), Village Simulator.
+  - **Day 2 (14:00–15:30):** *Code Challenge Wrap-up & Decision Matrix* — Finalize multi-vendor MQTT bridges and formalize 5-axis trade-off matrix (cost, lock-in, sovereignty, comms, repair).
+- **Take-home hardware:** 15–20 NESL 865B MeshEMS v2.0 controller PCBs, 3–5 TC2.0 reference cabinets (<25 lb).
+- **Standalone page:** `power-africa-2026-workshop-planning.html` (embeds with `?embed=1` at `#events/power-africa-2026-workshop-planning`).
 
 ---
 

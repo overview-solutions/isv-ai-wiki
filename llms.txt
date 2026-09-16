@@ -14,6 +14,10 @@
 - [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
 - [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
 - [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
+- [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop planning (Nairobi · EAT · UTC+3) — Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Nearly Free Energy), Block 3 Business Case & Code Challenges (10 Power, multi-vendor MQTT, mobile money)
+- [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 (NESL 865B) pole controller, BOM, schematic, Nearly Free Energy Uganda site layout lab
+- [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation (Circaevum Locus)
+- [Standards guide](https://isv.wiki/index.html#standards): Standards catalog split into village-relevant (2030.10, DLMS, OBIS, STS, SunSpec) and larger grid integration (1547, 2030.5, 2800, P4200, TLS, cybersecurity)
 - [Agent index (DNS-AID HTTP)](https://isv.wiki/.well-known/agents/index.json): Empty agent list + links to specs (no live MCP/A2A on this host)
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents
 

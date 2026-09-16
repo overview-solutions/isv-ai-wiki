@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RFP · Village microgrid designs · ISV Tech Comm</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 14px; color: var(--text); background: var(--bg); line-height: 1.45; }
+a { color: var(--green); }
+.wrap { max-width: 820px; margin: 0 auto; padding: 1.25rem 1.15rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.55rem; }
+.back a { text-decoration: none; }
+.kicker { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3); margin-bottom: 0.2rem; }
+h1 { font-size: 20px; font-weight: 500; margin-bottom: 0.2rem; }
+.sub { font-size: 12px; color: var(--text-2); margin-bottom: 0.7rem; }
+.lead { font-size: 13px; margin-bottom: 0.7rem; line-height: 1.45; }
+h2 { font-size: 12px; font-weight: 600; margin: 0.75rem 0 0.35rem; padding-bottom: 0.2rem; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-2); }
+p, li { font-size: 13px; margin-bottom: 0.35rem; }
+ul { padding-left: 1.15rem; margin-bottom: 0.45rem; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 0.4rem 0 0.55rem; }
+th, td { border: 1px solid var(--border); padding: 0.32rem 0.45rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--text-2); }
+.meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; margin: 0.55rem 0 0.7rem; }
+.meta div { border: 1px solid var(--border); border-radius: 8px; padding: 0.4rem 0.5rem; background: var(--bg-2); font-size: 11px; color: var(--text-2); }
+.meta strong { display: block; font-size: 12px; color: var(--text); font-weight: 500; }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.5rem 0.7rem; border-radius: 0 8px 8px 0; margin-bottom: 0.55rem; font-size: 12px; line-height: 1.4; }
+.callout > strong:first-child { color: var(--teal); }
+.foot { font-size: 11px; color: var(--text-3); margin-top: 0.7rem; padding-top: 0.45rem; border-top: 1px solid var(--border); }
+.page { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px dashed var(--border); }
+.page:last-of-type { border-bottom: none; margin-bottom: 0; }
+.phase-kicker { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--green); margin-bottom: 0.15rem; }
+.data-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.45rem; margin: 0.4rem 0 0.7rem; }
+.data-box { border-radius: 8px; padding: 0.45rem 0.5rem; font-size: 11px; line-height: 1.35; min-height: 6.5rem; }
+.data-box strong { display: block; font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.data-geo { background: var(--teal-50); border: 2px solid var(--teal); }
+.data-geo strong { color: var(--teal); }
+.data-ops { background: #e8f1fb; border: 2px solid #1b6ca8; }
+.data-ops strong { color: #1b6ca8; }
+.data-fin { background: #e8e8e8; border: 2px dashed #9a9a9a; color: #6a6a6a; opacity: 0.72; }
+.data-fin strong { color: #6a6a6a; }
+html.dark .data-fin { background: #3a3a3a; border-color: #6a6a6a; color: #a8a8a8; }
+.toc a { margin-right: 0.7rem; font-size: 12px; }
+html.embed .back { display: none; }
+@media print {
+  .isv-topbar, .back, .theme-toggle, .toc { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  body { font-size: 10.5pt; }
+  h1 { font-size: 14pt; }
+  a { color: inherit; text-decoration: none; }
+  .page { page-break-after: always; break-after: page; border-bottom: none; margin: 0; padding: 0; min-height: 0; }
+  .page:last-of-type { page-break-after: auto; }
+  .data-row, table { break-inside: avoid; }
+}
+@media (max-width: 640px) { .meta, .data-row { grid-template-columns: 1fr; } .data-box { min-height: 0; } }
+</style>
+</head>
+<body>
+<script>if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <p class="back"><a href="index.html#village-metering">← Village Metering</a></p>
+  <p class="toc"><a href="#overview">Overview</a><a href="#phase-1">Phase 1</a><a href="#phase-2">Phase 2</a><a href="#phase-3">Phase 3</a></p>
+
+  <section class="page" id="overview">
+  <p class="kicker">IEEE Smart Village · Technology Committee · working draft · overview</p>
+  <h1>Call for village microgrid designs</h1>
+  <p class="sub">Overview · then one page each: Phase 1 · Phase 2 · Phase 3</p>
+
+  <div class="meta">
+    <div><strong>Issuer</strong> ISV Technology Committee</div>
+    <div><strong>Closes</strong> TBD</div>
+    <div><strong>Contact</strong> Tech Comm Chair · <a href="mailto:adam.r.sauer@ieee.org">adam.r.sauer@ieee.org</a></div>
+  </div>
+
+  <h2>Introduction</h2>
+  <p>Recent developments in the ecosystem of rural village energy metering systems in Africa have pushed several large metering service providers to open-source their software to allow for fully off-grid rural operations. Instead of Remote Operations, it is shifting towards On-Site Operations with Remote Monitoring. They servers, token credit systems, and other relevant operational control systems are hosted on-site with no cloud dependencies.</p>
+
+  <h2>OMS and OpenCore</h2>
+  <p>The current understanding is that several of these open-sourced systems will be collectively referred to as the Open Meter Stack (OMS). The basic layer of this that is becoming available is currently referred to as OpenCore, which is the first layer of this system. OpenCore provides basic customer meter monitoring and relay toggle functionality from local teams, even if the grid is disconnected from the internet. ThunderCloud 2.0, published by EarthSpark on behalf of SparkMeter, is the first of potentially many implementations whose local deployment (referred to as GroundBolt when deployed locally) falls under the OpenCore framework. It is anticipated that other brands like SteamaCo will have their equivalent systems published under the OpenCore layer of OMS. We design this RFP for the purpose of documenting example deployments of these systems, effectively creating a snapshot of this pivotal moment in the industry.</p>
+
+  <h2>The ladder</h2>
+  <table>
+    <thead><tr><th>Phase</th><th>Award</th><th>What it is</th><th>Funded?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Phase 1</strong></td><td>$25k</td><td>Brownfield Village Upgrade — existing village onto OpenCore / OMS. Model it in the Tech Comm simulator.</td><td>Yes</td></tr>
+      <tr><td><strong>Phase 2</strong></td><td>Up to $50k</td><td>Greenfield Neighborhood Install — one new neighborhood, state how many customers, with a neighborhood broker.</td><td>Yes</td></tr>
+      <tr><td><strong>Phase 3</strong></td><td>$150–250k</td><td>Greenfield Village Install — compose proven neighborhoods under one village: generation, storage, local servers, telecom.</td><td>Later — gated on P1+P2 data</td></tr>
+    </tbody>
+  </table>
+  <h2>Three grains</h2>
+  <table>
+    <thead><tr><th>Grain</th><th>What to specify</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Customer</strong></td><td>The customer connection: meter, customer interface, prepaid/cutoff, WAN-down. Describe the billing plan; billing data is not required.</td></tr>
+      <tr><td><strong>Neighborhood</strong></td><td>One neighborhood circuit: trunk, poles, transformers, laterals, neighborhood-head monitor, neighborhood broker. State how many customers.</td></tr>
+      <tr><td><strong>Village</strong></td><td>Generation, storage, local servers (GroundBolt equivalent), reliable telecom. Local operations with remote monitoring. Cloud is sync, not the only brain.</td></tr>
+    </tbody>
+  </table>
+  <h2>Data access</h2>
+  <p>Every phase requires geospatial and operational access. Billing data is not required. Proposers still describe the billing plan — how prepaid, vending, and cutoff will work — without handing over ledgers, credentials, or source.</p>
+  <div class="data-row">
+    <div class="data-box data-geo"><strong>Geospatial · required</strong> GIS of all system components (customers, laterals, neighborhoods, poles, xfmrs, gen, storage, village head-end). Permission to document. ISV converts lat/long to x,y from the largest energy asset when sharing for education.</div>
+    <div class="data-box data-ops"><strong>Operational · required</strong> Read-only API or bulk export: customer reads, disconnects, outages, uptime. No write, no cutoff, no tariff change. Work with ISV to avoid PII.</div>
+    <div class="data-box data-fin"><strong>Billing data · not required</strong> Describe the billing plan: prepaid vs postpaid, vending path, WAN-down credit and cutoff, and how it sits beside OpenCore. Ledgers, ARPU, credentials, and source are not required.</div>
+  </div>
+  </section>
+
+  <section class="page" id="phase-1">
+  <p class="phase-kicker">Phase 1 of 3 · funded · Brownfield Village Upgrade</p>
+  <h1>Phase 1 — $25k · Brownfield Village Upgrade</h1>
+  <p>Phase 1 upgrades an existing village that is already in operation — typically on EarthSpark (SparkMeter) or SteamaCo — onto OpenCore. These sites run today. What is fickle is the stability of vendor support. Now is the best time to move them to locally functional deployments that are not restrained by vendor restrictions: on-site operations, prepaid and cutoff that still work when the wide-area link is down, remote monitoring as a complement rather than a dependency.</p>
+  <p>Hardware already in the ground stays. The $25,000 pays upgrade work, operator training, modeling the as-built village in the Technology Committee simulator, and the written OpenCore record — not new customers, not new generation, not new lines.</p>
+  <p>If your team does not already operate an affiliated site, ISV is working with these meter providers to identify eligible villages and can introduce you.</p>
+  <h2>Work</h2>
+  <ul>
+    <li><strong>Named operating village</strong> — operator consent, current stack, why support is unstable, existing maps. Site size is whatever is already built.</li>
+    <li><strong>Provider path</strong> — name your affiliated village, or work with ISV and the meter providers to pick an eligible site.</li>
+    <li><strong>Simulator</strong> — enter the as-built village in the Technology Committee simulator. ISV tutorials; maps must already exist.</li>
+    <li><strong>Upgrade record</strong> — what OpenCore includes, what ran on the prior stack, what changed, what was reused. WAN-down prepaid and cutoff specified.</li>
+    <li><strong>Billing plan</strong> — describe prepaid vs postpaid, vending, and cutoff on OpenCore. Billing data is not required.</li>
+    <li><strong>ThunderCloud 2.0</strong> — allowed as the reference OpenCore implementation (GroundBolt when local). Not a brand lock.</li>
+  </ul>
+  <h2>Score (this phase)</h2>
+  <table>
+    <thead><tr><th>Weight</th><th>Criterion</th></tr></thead>
+    <tbody>
+      <tr><td>25%</td><td><strong>Brownfield upgrade and model</strong> — named operating village, GIS in hand, EarthSpark or SteamaCo → OpenCore, in the simulator.</td></tr>
+      <tr><td>20%</td><td><strong>One-month reviews</strong> — prior ops and OpenCore ops, one month each.</td></tr>
+      <tr><td>15%</td><td><strong>WAN-down</strong> — credit and cutoff continue at the customer when the wide-area link is down.</td></tr>
+    </tbody>
+  </table>
+  <h2>Data access</h2>
+  <div class="data-row">
+    <div class="data-box data-geo"><strong>Geospatial · required</strong> As-built GIS of the operating village, already in hand. All components. Permission to document. ISV anonymizes lat/long to x,y from the largest generation or battery asset.</div>
+    <div class="data-box data-ops"><strong>Operational · required</strong> Read-only pre-upgrade API or export. Close Phase 1 with one month of historical ops and one month of OpenCore ops. No write, no cutoff, no tariff change.</div>
+    <div class="data-box data-fin"><strong>Billing data · not required</strong> Describe how billing will run after the upgrade. Ledgers, ARPU, credentials, and source are not required.</div>
+  </div>
+  </section>
+
+  <section class="page" id="phase-2">
+  <p class="phase-kicker">Phase 2 of 3 · funded · Greenfield Neighborhood Install</p>
+  <h1>Phase 2 — up to $50k · Greenfield Neighborhood Install</h1>
+  <p>One new neighborhood of the proposer’s own design, OpenCore-compatible. State how many customers that neighborhood will serve. Award up to $50,000. At about $707 per new connection (SEforALL 2024), $50k covers on the order of 70 customers — a typical neighborhood if that count is tens to about a hundred. If you plan more customers than $50k can buy, say what the award covers versus what is co-funded or already in the ground.</p>
+  <p><strong>Neighborhood broker</strong> — software and comms at neighborhood grain, not a second village cloud. It aggregates that neighborhood’s customers, localizes leakage and overload to the neighborhood trunk, can act on customer or board relays when WAN is down, and publishes northbound to the village OpenCore head-end. OpenAMI MQTT is an example path, not a mandated product.</p>
+  <h2>Work</h2>
+  <ul>
+    <li><strong>Itemized pack</strong> — specs and pricing at the customer, the neighborhood, the broker, and takeoff toward the village.</li>
+    <li><strong>Architecture note</strong> — how this neighborhood composes 100 / 1,000 / 10,000 customers on paper. Name standards used (IEEE 2030.10, DLMS, STS or OpenPAYGO, OpenAMI).</li>
+    <li><strong>Billing plan</strong> — describe vending, prepaid/cutoff, and settlement for this neighborhood and its customer count. Billing data is not required.</li>
+    <li><strong>Simulator</strong> — the funded neighborhood must be complete enough to enter in the Technology Committee simulator.</li>
+  </ul>
+  <h2>Score (this phase)</h2>
+  <table>
+    <thead><tr><th>Weight</th><th>Criterion</th></tr></thead>
+    <tbody>
+      <tr><td>20%</td><td><strong>Neighborhood and broker</strong> — customer count stated, priced and GIS-planned, OpenCore-compatible, up to $50k.</td></tr>
+      <tr><td>10%</td><td><strong>Ready for the simulator</strong> — the Phase 2 neighborhood can be documented there.</td></tr>
+      <tr><td>10%</td><td><strong>Honest cost</strong> — published industry bands; if $50k cannot cover the stated customer count, say what is co-funded or already built.</td></tr>
+    </tbody>
+  </table>
+  <h2>Data access</h2>
+  <div class="data-row">
+    <div class="data-box data-geo"><strong>Geospatial · required</strong> Detailed GIS plan of every specced part of that neighborhood: customers, laterals, trunk, pole transformers, neighborhood-head monitor, broker, takeoff toward the village, and any generation or storage in the $50k. Layers match the BOM. OpenAMI-aligned GeoJSON preferred.</div>
+    <div class="data-box data-ops"><strong>Operational · required</strong> Continued read-only ops access from Phase 1 and Phase 2 so Tech Comm can verify the investment and monitor reliability. Award stays in force only while that access continues.</div>
+    <div class="data-box data-fin"><strong>Billing data · not required</strong> Describe the billing plan for this neighborhood. Ledgers, ARPU, credentials, and source are not required.</div>
+  </div>
+  </section>
+
+  <section class="page" id="phase-3">
+  <p class="phase-kicker">Phase 3 of 3 · Greenfield Village Install · not funded in this call · gated on Phase 1 + 2 data</p>
+  <h1>Phase 3 — $150–250k · Greenfield Village Install</h1>
+  <p>Phase 3 copies the proven Phase 2 neighborhood under one village: generation, storage, local servers, and reliable telecom that a $50k neighborhood award cannot buy. Neighborhood brokers federate to a village broker that runs on those local servers. Local operations; remote monitoring as sync. Prefer attaching those neighborhoods to the Phase 1 upgraded village so existing customers and new plant share one OpenCore head-end. Indicative award $150,000–$250,000. A second OpenCore implementation on the same neighborhood may be a Phase 3 gate.</p>
+  <h2>What the village holds</h2>
+  <ul>
+    <li><strong>Primary energy assets</strong> — generation, storage, and village switchgear.</li>
+    <li><strong>Local servers</strong> — village OpenCore head-end and the village broker of neighborhood brokers. Prepaid and cutoff still specified to run when WAN is down.</li>
+    <li><strong>Reliable telecom</strong> — backhaul and neighborhood radios. WAN-down at the customer is still required; the village link is for sync, monitoring, and northbound ops data.</li>
+  </ul>
+  <h2>What to design now (paper)</h2>
+  <ul>
+    <li><strong>100 customers</strong> — how many of the proposer’s neighborhoods sit under one village, and what generation and storage sit with it.</li>
+    <li><strong>1,000 / 10,000 customers</strong> — how many villages, how they federate. Same neighborhood architecture as Phase 2.</li>
+    <li><strong>Billing plan</strong> — describe how the village vends across neighborhoods. Billing data is not required.</li>
+  </ul>
+  <h2>Data access</h2>
+  <div class="data-row">
+    <div class="data-box data-geo"><strong>Geospatial · required</strong> GIS of the village and every neighborhood that takes off from it: generation, storage, switchgear, local servers, telecom, takeoffs. Same anonymize rule (x,y from the largest energy asset).</div>
+    <div class="data-box data-ops"><strong>Operational · required</strong> Continued read-only ops access across Phase 1, the Phase 2 neighborhood, and the village. Reliability and investment success are judged on that stream. No write, no cutoff, no tariff change from ISV.</div>
+    <div class="data-box data-fin"><strong>Billing data · not required</strong> Describe the billing plan for the village. Ledgers, ARPU, credentials, and source are not required.</div>
+  </div>
+  <h2>Rights</h2>
+  <p>Proposers keep design IP. Tech Comm may document packs in the simulator for review, education, and (if later deployed with an ISV partner) an as-built overlay. Phase 2 and Phase 3 awards remain in force only while ISV maintains geospatial and operational access sufficient to verify success. Billing data is never a condition of award. Public wiki pages will not publish named customers, real quotes, or NDA material.</p>
+  <p class="foot">Working draft for ISV leadership / Tech Comm review — dates and weights freeze before public issue. Not legal advice; not an IEEE standards ballot. <a href="https://isv.wiki/">isv.wiki</a></p>
+  </section>
+</div>
+</body>
+</html>
