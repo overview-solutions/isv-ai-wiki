@@ -1,8 +1,52 @@
 # ISV Knowledge Base
 
-Static wiki for the IEEE Smart Village working group. **No install, no build step** — HTML files + GitHub Pages.
+Static wiki for the IEEE Smart Village working group. **No Node install for browsing** — HTML + one tiny local HTTP server.
 
-**AI assistants:** read [`AGENTS.md`](AGENTS.md) first — navigation, trust hierarchy, meter benchmark framework, and contributor rules.
+**AI assistants:** read [`AGENTS.md`](AGENTS.md) first.
+
+---
+
+## Offline in one go (start here)
+
+Need network **once** to clone. After that, wiki + Village Simulator work without internet (basemap tiles / live GitHub Issues / Mapbox map may be empty offline — core pages and the sim still load).
+
+```bash
+git clone https://github.com/overview-solutions/isv-ai-wiki.git
+cd isv-ai-wiki
+./preview.sh
+```
+
+Then open:
+
+| What | URL |
+|------|-----|
+| **Wiki home** | [http://127.0.0.1:8765/index.html](http://127.0.0.1:8765/index.html) |
+| **Village Simulator** (inside wiki) | [http://127.0.0.1:8765/index.html#village-metering/village-simulator](http://127.0.0.1:8765/index.html#village-metering/village-simulator) — hub page: how to run + frozen theater |
+| **Nairobi workshop / code challenges** | [http://127.0.0.1:8765/power-africa-2026-workshop-planning.html](http://127.0.0.1:8765/power-africa-2026-workshop-planning.html) |
+
+**Simulator lives in a separate GitHub repo** ([smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)), but the wiki ships a **frozen copy** under `village-simulator/` and embeds it. For offline browsing you **do not** clone that second repo.
+
+**Do not** double-click `index.html` in Finder/Explorer — `file://` breaks fetch, Tasks, and the sim iframe. Always use `./preview.sh` (needs Python 3, already on macOS/most Linux).
+
+### Optional — develop the *live* simulator
+
+Only if you are changing sim code (not just reading the wiki):
+
+```bash
+# sibling folder next to this clone, e.g. ../smart-village-simulator
+git clone https://github.com/overview-solutions/smart-village-simulator.git
+cd smart-village-simulator
+npm install && npm start   # http://127.0.0.1:5176
+```
+
+See that repo’s README for Locus / offline map packs. Do **not** edit the wiki’s frozen `village-simulator/` for product work.
+
+### Online (no clone)
+
+**Live site:** [isv.wiki](https://isv.wiki/) · [GitHub Pages mirror](https://overview-solutions.github.io/isv-ai-wiki/)  
+**Source:** [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) (MIT)
+
+---
 
 ## Public by default, private by necessity
 
@@ -12,23 +56,7 @@ This wiki is **open** — anyone can read it. A small amount of material (vendor
 - Contributors & AI assistants: the boundary is one-directional — private may inform public in the abstract, but no private fact, name, price, or NDA quote is ever copied into a public file. See [`AGENTS.md`](AGENTS.md) → *Public / private split*.
 - Editing both at once? Open [`isv-wiki.code-workspace`](isv-wiki.code-workspace) in Cursor/VS Code for a multi-root view of both repos as shared context.
 
-## Try it (30 seconds)
-
-**Live:** [overview-solutions.github.io/isv-ai-wiki](https://overview-solutions.github.io/isv-ai-wiki)
-
-**Source (open source):** [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) — MIT license, public repo. Clone, edit, pull request.
-
-**Local:**
-
-```bash
-git clone git@github.com:overview-solutions/isv-ai-wiki.git
-cd isv-ai-wiki
-./preview.sh
-```
-
-Open [http://localhost:8765/index.html](http://localhost:8765/index.html) — use the sidebar to browse.
-
-**Do not** double-click `index.html` in Finder — `file://` breaks the Tasks page (and other `fetch` calls). Always use `./preview.sh` or the [deployed site](https://overview-solutions.github.io/isv-ai-wiki/).
+## What’s inside
 
 | Section | What it is |
 |---------|------------|
@@ -44,7 +72,7 @@ Direct links (live site):
 
 - [Tasks board (wiki)](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) — filter by meeting, status, assignee
 - [GitHub Issues (source of truth)](https://github.com/overview-solutions/isv-ai-wiki/issues) — create, comment, assign, close
-- [Power Africa 2026 Workshop](https://overview-solutions.github.io/isv-ai-wiki/power-africa-2026-workshop-planning.html) — Nairobi schedule (EAT · UTC+3): Stranded Legacy, Next Gen (MeshEMS), Business Case & Code Challenges
+- [Power Africa 2026 Workshop](https://overview-solutions.github.io/isv-ai-wiki/power-africa-2026-workshop-planning.html) — Nairobi schedule (EAT · UTC+3): Stranded Legacy, Next Gen (MeshEMS), Business Case & six Code Challenge tracks (SparkNet→OpenAMI, DLMS/CircuitSetup, LV feeder add-on, PCB smoke, cal QR, simulator O&M)
 - [Metering topology meeting note](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)
 - [Meter vendor study](https://overview-solutions.github.io/isv-ai-wiki/meter-vendor-study.html) — cited benchmarks, STS, DLMS, industry bands
 - [Standards guide](https://overview-solutions.github.io/isv-ai-wiki/index.html#standards) — village microgrid standards vs larger grid integration
@@ -220,7 +248,7 @@ There is **no server to maintain** for the wiki itself: content is HTML, CSS, an
 
 **Write access (collaborator):** Anyone can fork and open PRs without being added to the repo. To be added as a **GitHub collaborator** (push directly, manage issues with full repo access), email **Adam Sauer**, Tech Comm Committee Chair, at [adam.r.sauer@ieee.org](mailto:adam.r.sauer@ieee.org).
 
-**Contribute code:** same flow. Local preview: `./preview.sh` (do not open `index.html` via `file://` — Tasks and other pages need HTTP).
+**Contribute code:** same flow. Local offline kit: `./preview.sh` (see top of this README). Do not open `index.html` via `file://`.
 
 First-time Pages setup (maintainers): repo **Settings → Pages → Source: GitHub Actions**.
 

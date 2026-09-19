@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Village Simulator · Run locally · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 48rem; line-height: 1.5; }
+h2 { font-size: 14px; font-weight: 500; margin: 1.15rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 13px; font-weight: 500; margin: 0.85rem 0 0.35rem; color: var(--text); }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem;
+  font-size: 12px; line-height: 1.45;
+}
+.callout > strong:first-child { color: var(--green); display: block; margin-bottom: 0.2rem; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+pre, code {
+  font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+  font-size: 12px;
+}
+pre {
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.75rem 0.9rem; overflow-x: auto; margin: 0 0 0.85rem; line-height: 1.45;
+  color: var(--text);
+}
+table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 0.85rem; max-width: 48rem; }
+th, td { border: 1px solid var(--border); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 11px; }
+.links { display: flex; flex-wrap: wrap; gap: 0.45rem 0.85rem; font-size: 13px; margin-bottom: 0.85rem; }
+.sim-embed {
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  background: var(--bg-2); margin: 0.5rem 0 0.35rem; min-height: 720px;
+}
+.sim-embed iframe { display: block; width: 100%; height: min(78vh, 900px); min-height: 640px; border: 0; background: #121214; }
+.sim-open { font-size: 11px; color: var(--text-3); margin: 0 0 0.85rem; }
+html.embed .back, html.embed .isv-topbar { display: none; }
+html.embed h1 { font-size: 18px; }
+html.embed .wrap { padding-top: 0.75rem; }
+html.embed .sim-embed iframe { height: min(70vh, 820px); min-height: 560px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
+
+  <h1>Village Simulator</h1>
+  <p class="sub">Schematic mini-grid day · prepaid · feeders · EMS · O&amp;M modes · Circaevum Locus graphics</p>
+  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Use it to plan, configure, and troubleshoot microgrid O&amp;M ideas. Product code lives in a <strong>separate GitHub repo</strong>; this wiki ships a <strong>frozen embed</strong> so offline browsing still works.</p>
+
+  <div class="callout">
+    <strong>Simplest offline path (no Node)</strong>
+    <p>Already viewing this page via <code>./preview.sh</code>? Scroll to the theater below — that <em>is</em> the offline sim. Fresh machine:</p>
+<pre>git clone https://github.com/overview-solutions/isv-ai-wiki.git
+cd isv-ai-wiki
+./preview.sh
+# → http://127.0.0.1:8765/index.html#village-metering/village-simulator</pre>
+    <p>Needs Python 3 only. <strong>Do not</strong> double-click HTML (<code>file://</code> breaks the iframe).</p>
+  </div>
+
+  <h2 id="what-you-see">What you are looking at</h2>
+  <table>
+    <thead><tr><th>Layer</th><th>Where</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>This wiki page</strong></td>
+        <td><code>meter-village-simulator.html</code></td>
+        <td>How to run · links · context</td>
+      </tr>
+      <tr>
+        <td><strong>Frozen theater</strong></td>
+        <td><code>village-simulator/</code> inside the wiki</td>
+        <td>Offline iframe snapshot — browse only; do not develop here</td>
+      </tr>
+      <tr>
+        <td><strong>Live app</strong></td>
+        <td><a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator ↗</a></td>
+        <td>BUILD / OPS / MAINT UX, Vite :5176 — edit and ship freezes from here</td>
+      </tr>
+      <tr>
+        <td><strong>Graphics library</strong></td>
+        <td><a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum/locus ↗</a></td>
+        <td>Place/time primitives (<code>LocusMap</code>, time→Y) — consumed by the live app</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="run-live">Run the live simulator locally (developers)</h2>
+  <p class="body-text">Use this when you are changing sim code, refreshing the wiki freeze, or need MapLibre packs / latest BUILD·MAINT modes. Separate clone from the wiki.</p>
+<pre>git clone https://github.com/overview-solutions/smart-village-simulator.git
+cd smart-village-simulator
+npm install
+npm start
+# → http://127.0.0.1:5176</pre>
+  <p class="body-text"><code>@circaevum/locus</code> is often a <code>file:</code> dep on a Circaevum workbench checkout. Standalone clones: point that dependency at <code>github:Circaevum/locus</code> (see the sim README). Offline basemaps: <code>npm run map:prepare</code> once while online, then <code>npm start</code>.</p>
+
+  <div class="callout callout-amber">
+    <strong>Do not edit the wiki’s <code>village-simulator/</code> tree for product work</strong>
+    <p>That folder is a frozen snapshot for Pages / offline. Change <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator</a>, then refresh the freeze when ready.</p>
+  </div>
+
+  <h2 id="links">Links</h2>
+  <div class="links">
+    <a href="https://github.com/overview-solutions/isv-ai-wiki#offline-in-one-go-start-here" target="_blank" rel="noopener">Wiki README · Offline in one go ↗</a>
+    <a href="https://github.com/overview-solutions/smart-village-simulator#offline-via-the-isv-wiki-start-here" target="_blank" rel="noopener">Sim README · Offline via wiki ↗</a>
+    <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator (source) ↗</a>
+    <a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum Locus ↗</a>
+    <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Hosted Locus theater (online) ↗</a>
+    <a href="village-simulator/index.html" target="_blank" rel="noopener">Frozen theater full page</a>
+    <a href="power-africa-2026-workshop-planning.html#workshop-vision">Nairobi · Code track 6 (sim O&amp;M UX)</a>
+    <a href="index.html#village-metering/meshems">MeshEMS hub</a>
+    <a href="index.html#village-metering/openami">OpenAMI</a>
+  </div>
+
+  <h2 id="theater">Frozen theater (offline embed)</h2>
+  <p class="body-text">Same-origin snapshot served with the wiki. Prefer Nature / Liberty basemaps offline; satellite needs internet.</p>
+  <div class="sim-embed">
+    <iframe
+      title="Village Simulator frozen theater"
+      src="village-simulator/index.html?embed=1&amp;v=20260919run"
+      loading="lazy"
+      allow="fullscreen"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <p class="sim-open">
+    <a href="village-simulator/index.html" target="_blank" rel="noopener">Open frozen theater full page ↗</a>
+    · <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Online Locus build ↗</a>
+    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local live app :5176</a> (only if you ran <code>npm start</code>)
+  </p>
+</div>
+</body>
+</html>

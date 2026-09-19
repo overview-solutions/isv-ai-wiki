@@ -1476,7 +1476,7 @@ code {
       Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
-      <div class="nav-sub-item" data-note="tech-comm-2026-08-11" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-11')">11 Aug 2026 · OMS / SparkMeter</div>
+      <div class="nav-sub-item" data-note="tech-comm-2026-08-11" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-11')">11 Aug 2026 · Open Metering Infrastructure / SparkMeter</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-06-25" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-06-25')">25 Jun 2026 · AI Wiki Orientation</div>
       <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
     </div>
@@ -2031,8 +2031,8 @@ code {
       <div class="resource-row">
         <div class="standard-icon">📡</div>
         <div>
-          <div class="resource-name">Tech Comm — OMS / SparkMeter stack (11 Aug 2026)</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('tech-comm-2026-08-11');return false">Open in Meeting Notes</a> — USB Gateway · Firefly/SparkNet as plugins · A2EI OMS · Nimbus peer · OpenAMI Alliance · OBIS back burner.</div>
+          <div class="resource-name">Tech Comm — Open Metering Infrastructure / SparkMeter (11 Aug 2026)</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('tech-comm-2026-08-11');return false">Open in Meeting Notes</a> — USB Gateway · Firefly/SparkNet as plugins · A2EI Open Metering Infrastructure · Nimbus peer · OpenAMI Alliance · OBIS back burner.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2358,20 +2358,20 @@ const METER_BENCHMARK_PAGES = {
   },
   'village-simulator': {
     title: 'Village Simulator',
-    sub: 'Circaevum Locus',
-    src: 'village-simulator/index.html?embed=1&v=20260903csp',
-    standalone: 'https://circaevum.github.io/locus/village-simulator/'
+    sub: 'Offline kit · live npm · Circaevum Locus',
+    src: 'meter-village-simulator.html?embed=1&v=20260919run',
+    standalone: 'meter-village-simulator.html'
   }
 };
 let activeMeterPageId = 'overview';
 const MEETING_NOTES = {
   'tech-comm-2026-08-11': {
     group: 'tech-comm',
-    title: 'OMS · SparkMeter stack',
+    title: 'Open Metering Infrastructure · SparkMeter',
     date: '11 Aug 2026',
-    sub: 'USB Gateway · Firefly/SparkNet plugins · A2EI OMS · Nimbus · OpenAMI Alliance',
-    src: 'tech-comm-2026-08-11-oms-sparkmeter.html?embed=1&v=20260811',
-    standalone: 'tech-comm-2026-08-11-oms-sparkmeter.html'
+    sub: 'USB Gateway · Firefly/SparkNet plugins · A2EI Open Metering Infrastructure · Nimbus · OpenAMI Alliance',
+    src: 'tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html?embed=1&v=20260919omi',
+    standalone: 'tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html'
   },
   'tech-comm-2026-06-25': {
     group: 'tech-comm',
@@ -2420,15 +2420,15 @@ const MEETING_NOTES = {
     title: 'Power Africa Conference 2026',
     date: 'Sep 2026',
     sub: 'Nairobi · IEEE PES & IAS · official site links',
-    src: 'power-africa-2026-conference.html?embed=1&v=20260916',
+    src: 'power-africa-2026-conference.html?embed=1&v=20260919moses',
     standalone: 'power-africa-2026-conference.html'
   },
   'power-africa-2026-workshop-planning': {
     group: 'events',
     title: 'OpenAMI EMS Workshop',
     date: 'Sep 2026',
-    sub: 'Nairobi · Open-Sourced · MAKE · CODE · INTEGRATE',
-    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260916',
+    sub: 'Nairobi · six code tracks · MAKE · CODE · INTEGRATE',
+    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260919omi',
     standalone: 'power-africa-2026-workshop-planning.html'
   },
   'oseas-2026': {
@@ -2587,9 +2587,9 @@ function refreshMeterPreview(pageId, requested) {
   }
   const sec = document.getElementById('sec-village-metering');
   const main = document.getElementById('main');
-  const isSim = pageId === 'village-simulator';
-  sec?.classList.toggle('sim-stage-first', isSim);
-  main?.classList.toggle('sim-stage-first', isSim);
+  // Village Simulator is a docs page with a nested theater — keep normal metering chrome.
+  sec?.classList.remove('sim-stage-first');
+  main?.classList.remove('sim-stage-first');
 }
 
 function bindMeterStudyFrameGuard(frame) {

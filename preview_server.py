@@ -24,8 +24,9 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(ROOT)
     httpd = ThreadingHTTPServer(("0.0.0.0", PORT), NoCacheHandler)
-    print(f"Wiki iframe → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
-    print(f"Full page   → https://circaevum.github.io/locus/village-simulator/")
-    print("Cache-Control: no-store")
-    print("Press Ctrl+C to stop.")
+    print(f"Serving {ROOT}")
+    print(f"  Home      → http://127.0.0.1:{PORT}/index.html")
+    print(f"  Simulator → http://127.0.0.1:{PORT}/index.html#village-metering/village-simulator")
+    print(f"  Workshop  → http://127.0.0.1:{PORT}/power-africa-2026-workshop-planning.html")
+    print("Cache-Control: no-store · Ctrl+C to stop")
     httpd.serve_forever()

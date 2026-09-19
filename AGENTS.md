@@ -48,9 +48,9 @@ isv-ai-wiki/
 ├── meter-solutions-map.html      # Visual problem ↔ stack map (SteamaCo · SparkMeter · EnAccess · OpenAMI)
 ├── meter-village-scope.html      # Village definition · population · HDI (cited)
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
-├── village-simulator/            # Redirect stub → Circaevum Locus (old Three.js copy unused)
-│   ├── index.html                # bounce to circaevum.github.io/locus/village-simulator/
-│   └── js/                       # leftover local copy, not the wiki dest
+├── village-simulator/            # Frozen theater snapshot (embed target; do not develop)
+│   └── index.html                # Offline Three/Locus-era snapshot for wiki iframe
+├── meter-village-simulator.html  # Sim hub: how to run offline/live + links + nested theater
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
@@ -73,7 +73,9 @@ isv-ai-wiki/
 
 **Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`). **`frame-src` is `'self' https://player.vimeo.com https://docs.google.com`.** Circaevum Locus (`https://circaevum.github.io`) is not on that list, so the Village Metering iframe cannot load it (Chrome: “This content is blocked”). Wiki iframe dest is same-origin `village-simulator/index.html`. Full page may still open Locus in a new tab. To iframe Locus, add `https://circaevum.github.io` to `frame-src` on that Transform Rule.
 
-**Local preview:** `./preview.sh` → `http://localhost:8765/index.html`
+**Local preview (offline kit):** `./preview.sh` → `http://127.0.0.1:8765/index.html`  
+Includes frozen Village Simulator at `#village-metering/village-simulator` — **no** second repo needed to browse.  
+Live/dev simulator: sibling [`smart-village-simulator`](https://github.com/overview-solutions/smart-village-simulator) → `npm start` (:5176). See README → *Offline in one go*.
 
 ---
 
@@ -153,11 +155,11 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator. Wiki **iframe** is same-origin `village-simulator/index.html` (Cloudflare `frame-src` blocks `circaevum.github.io`). **Full page** opens Circaevum Locus. Size `?homes=100` or `?homes=1000`. Legacy `#village-metering/worldline-day` aliases here. |
+| `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): offline kit, live `npm start` (:5176), links to source/Locus/workshop. Nested iframe = frozen `village-simulator/`. Size `?homes=` still on frozen theater URL. Legacy `#village-metering/worldline-day` aliases here. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
-| `#events/power-africa-2026-workshop-planning` | Power Africa 2026 workshop (Nairobi · EAT · UTC+3): Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Aaron Tushabe / Nearly Free Energy), Block 3 Business Case & Code Challenges (Sandra Kwak / 10 Power, multi-vendor MQTT, M-Pesa), Day 2 wrap-up. |
+| `#events/power-africa-2026-workshop-planning` | Power Africa 2026 workshop (Nairobi · EAT · UTC+3): Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Aaron Tushabe / Nearly Free Energy), Block 3 Business Case & six Code Challenge tracks (SparkNet→OpenAMI, DLMS hello + CircuitSetup, LV feeder leakage/neutral, PCB smoke MQTT, cal QR smart-start, simulator O&M), Day 2 wrap-up. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
@@ -175,7 +177,7 @@ Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` 
 - `meter-overview.html?embed=1` (default)
 - `meter-problems-today.html?embed=1` · `meter-village-scope.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
-- `#village-metering/village-simulator` → iframe `village-simulator/index.html?embed=1` (same-origin; CSP). Full page → Circaevum Locus
+- `#village-metering/village-simulator` → iframe `meter-village-simulator.html?embed=1` (run docs + nested frozen theater). Full page → same HTML. Live Locus: Circaevum Pages (link on hub).
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
 
@@ -339,10 +341,10 @@ When editing this repo:
 - **Venue:** Safari Park Hotel, Ivory Room
 - **Instructors:** Glenn Algie, Adam Sauer, Aaron Tushabe, Jude Numfor
 - **Schedule structure:**
-  - **Block 1 (11:05–13:00):** *Stranded Legacy Updates* — AMI ecosystem and OMS updates, SteamaCo video talk (Warren Scott-White, 11:05–11:35), SparkMeter (on site/video).
+  - **Block 1 (11:05–13:00):** *Stranded Legacy Updates* — AMI ecosystem and Open Metering Infrastructure updates, SteamaCo video talk (Warren Scott-White, 11:05–11:35), Moses (SparkMeter, in person).
   - **Block 2 (14:00–16:00):** *Next Gen* — Feeder monitoring, MeshEMS v2.0 (NESL 865B), Aaron Tushabe / Nearly Free Energy (Uganda site layout & mini-grid operator), OpenAMI cabinets, DitroniX (Dave Williams, cabinet hardware).
-  - **Block 3 (16:15–17:50):** *Business Case and Code Challenges* — Sandra Kwak / 10 Power on mini-grid business cases, kickoff of hands-on multi-vendor aggregation challenge (GroundBolt + SteamaCo + MeshEMS via REST → MQTT), mobile money prepaid vending integration (M-Pesa), Village Simulator.
-  - **Day 2 (14:00–15:30):** *Code Challenge Wrap-up & Decision Matrix* — Finalize multi-vendor MQTT bridges and formalize 5-axis trade-off matrix (cost, lock-in, sovereignty, comms, repair).
+  - **Block 3 (16:15–17:50):** *Business Case and Code Challenges* — Sandra Kwak / 10 Power on mini-grid business cases; kickoff of six tracks: (1) SparkNet-HTTP → MeshEMS/OpenAMI, (2) DLMS/COSEM-friendly hello world + CircuitSetup 6-port energy cache (`meshems-openami-metering`), (3) intelligent LV feeder add-on (neutral balance *or* leakage), (4) 15-min Street-EMS PCB smoke (LEDs + MQTT), (5) 3φ PSU + EMS calibration testhead / QR / smart-start factory file, (6) Village Simulator O&M UX. Shared wrap-up axes: cost · lock-in · sovereignty · comms · repair; mobile money optional stretch.
+  - **Day 2 (14:00–15:30):** *Code Challenge Wrap-up* — demos per track (smoke MQTT, cal QR, feeder LCOE vs opex, simulator UX).
 - **Take-home hardware:** 15–20 NESL 865B MeshEMS v2.0 controller PCBs, 3–5 TC2.0 reference cabinets (<25 lb).
 - **Standalone page:** `power-africa-2026-workshop-planning.html` (embeds with `?embed=1` at `#events/power-africa-2026-workshop-planning`).
 
@@ -352,10 +354,15 @@ When editing this repo:
 
 ### Village Simulator and Locus
 
-The wiki **still embeds** its local `village-simulator/index.html` through
-`METER_BENCHMARK_PAGES` (hashes `#village-metering/village-simulator`,
-`worldline-day`, `worldline-day-100`). That copy is a **frozen live snapshot**.
-Do not keep developing it.
+**Offline / workshop path:** clone this wiki only → `./preview.sh` → sidebar
+Village Metering → Village Simulator. Hub page is `meter-village-simulator.html`
+(how to run + links). Nested iframe loads same-origin frozen
+`village-simulator/index.html`. Humans should not need Node or the live sim repo
+to open it.
+
+The wiki **embeds** that local copy through `METER_BENCHMARK_PAGES` (hashes
+`#village-metering/village-simulator`, `worldline-day`, `worldline-day-100`).
+Do not keep developing the frozen tree.
 
 Canonical app: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)
 (local `ISV/smart-village-simulator/`, `npm start` → :5176). It consumes
