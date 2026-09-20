@@ -74,11 +74,29 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h1>Village Simulator</h1>
   <p class="sub">Schematic mini-grid day · prepaid · feeders · EMS · O&amp;M modes · Circaevum Locus graphics</p>
-  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Use it to plan, configure, and troubleshoot microgrid O&amp;M ideas. Product code lives in a <strong>separate GitHub repo</strong>; this wiki ships a <strong>frozen embed</strong> so offline browsing still works.</p>
+  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in a <strong>separate GitHub repo</strong>; this wiki ships a <strong>frozen embed</strong> so offline browsing still works.</p>
+
+  <h2 id="theater">Frozen theater</h2>
+  <p class="body-text">Same-origin snapshot served with the wiki. Prefer Nature / Liberty basemaps offline; satellite needs internet.</p>
+  <div class="sim-embed">
+    <iframe
+      title="Village Simulator frozen theater"
+      src="village-simulator/index.html?embed=1&amp;v=20260920top"
+      allow="fullscreen"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <p class="sim-open">
+    <a href="village-simulator/index.html" target="_blank" rel="noopener">Open frozen theater full page ↗</a>
+    · <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Online Locus build ↗</a>
+    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local live app :5176</a> (only if you ran <code>npm start</code>)
+  </p>
+
+  <h2 id="run">How to run</h2>
 
   <div class="callout">
     <strong>Simplest offline path (no Node)</strong>
-    <p>Already viewing this page via <code>./preview.sh</code>? Scroll to the theater below — that <em>is</em> the offline sim. Fresh machine:</p>
+    <p>Already viewing this page via <code>./preview.sh</code>? The theater above <em>is</em> the offline sim. Fresh machine:</p>
 <pre>git clone https://github.com/overview-solutions/isv-ai-wiki.git
 cd isv-ai-wiki
 ./preview.sh
@@ -93,7 +111,7 @@ cd isv-ai-wiki
       <tr>
         <td><strong>This wiki page</strong></td>
         <td><code>meter-village-simulator.html</code></td>
-        <td>How to run · links · context</td>
+        <td>Theater + how to run · links · context</td>
       </tr>
       <tr>
         <td><strong>Frozen theater</strong></td>
@@ -140,23 +158,6 @@ npm start
     <a href="index.html#village-metering/meshems">MeshEMS hub</a>
     <a href="index.html#village-metering/openami">OpenAMI</a>
   </div>
-
-  <h2 id="theater">Frozen theater (offline embed)</h2>
-  <p class="body-text">Same-origin snapshot served with the wiki. Prefer Nature / Liberty basemaps offline; satellite needs internet.</p>
-  <div class="sim-embed">
-    <iframe
-      title="Village Simulator frozen theater"
-      src="village-simulator/index.html?embed=1&amp;v=20260919run"
-      loading="lazy"
-      allow="fullscreen"
-      allowfullscreen
-    ></iframe>
-  </div>
-  <p class="sim-open">
-    <a href="village-simulator/index.html" target="_blank" rel="noopener">Open frozen theater full page ↗</a>
-    · <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Online Locus build ↗</a>
-    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local live app :5176</a> (only if you ran <code>npm start</code>)
-  </p>
 </div>
 </body>
 </html>
