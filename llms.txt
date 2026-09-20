@@ -20,6 +20,7 @@
 - [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 pole controller, BOM, schematic
 - [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation hub
 - [Standards guide](https://isv.wiki/index.html#standards): Standards catalog (village-relevant vs larger grid)
+- [Wireless telecom](https://isv.wiki/wireless-telecom.html): Leaf / NAN / WAN radio map — LoRaWAN, TVWS, Z-Wave, Matter, Bluetooth, Wi‑Fi, LTE, cellular, Starlink, GPS, AM, FM
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents
 
 ## Discovery (well-known)

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireless telecom for village energy · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem 2.5rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.95rem; }
+.lead { font-size: 15px; margin-bottom: 1rem; max-width: 56rem; line-height: 1.55; }
+h2 { font-size: 18px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--border); }
+h3 { font-size: 15px; font-weight: 500; margin: 1.35rem 0 0.6rem; color: var(--text); }
+p { font-size: 14px; color: var(--text-2); margin-bottom: 0.85rem; line-height: 1.6; max-width: 56rem; }
+ul, ol { margin: 0 0 0.95rem 1.5rem; color: var(--text-2); line-height: 1.65; }
+li { margin-bottom: 0.4rem; font-size: 14px; }
+code { font-family: var(--mono); font-size: 13px; background: var(--bg-2); padding: 0.15rem 0.45rem; border-radius: 4px; }
+strong { color: var(--text); }
+.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.15rem; font-size: 14px; line-height: 1.6; }
+.callout > strong:first-child { color: var(--teal); display: block; margin-bottom: 0.45rem; font-size: 14px; }
+.callout-key { border-left-color: var(--green); background: var(--green-50); }
+.callout-key > strong:first-child { color: var(--green); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn > strong:first-child { color: var(--amber); }
+.table-scroll { overflow-x: auto; margin-bottom: 1.25rem; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 880px; }
+th, td { border: 1px solid var(--border); padding: 0.55rem 0.65rem; text-align: left; vertical-align: top; line-height: 1.45; }
+th { background: var(--bg-2); font-size: 11px; font-weight: 600; color: var(--text); letter-spacing: 0.01em; white-space: nowrap; }
+td { color: var(--text-2); }
+td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+.tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.12rem 0.4rem; border-radius: 4px; margin-right: 0.25rem; }
+.tag-leaf { background: var(--green-50); color: var(--green); }
+.tag-nan { background: var(--teal-50); color: var(--teal); }
+.tag-wan { background: var(--purple-50); color: var(--purple); }
+.tag-pnt { background: var(--amber-50); color: var(--amber); }
+.tag-bcast { background: var(--bg-2); color: var(--text-2); }
+.role-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+@media (min-width: 760px) { .role-grid { grid-template-columns: repeat(2, 1fr); } }
+.role-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 0.95rem; background: var(--bg-2); font-size: 13px; line-height: 1.5; }
+.role-card h3 { margin: 0 0 0.4rem; font-size: 14px; }
+.role-card p { margin: 0; font-size: 13px; max-width: none; }
+.refs { font-size: 12px; color: var(--text-2); }
+.refs li { margin-bottom: 0.35rem; }
+.footer-nav { font-size: 13px; color: var(--text-2); margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+.footer-nav a { margin-right: 1.25rem; }
+.muted { color: var(--text-3); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#standards">← Standards</a></div>
+
+  <h1>Wireless telecom for village energy</h1>
+  <p class="sub">Spectrum layers · leaf / NAN / WAN roles · typical order-of-magnitude figures (not a lab cert)</p>
+
+  <p class="lead">Village metering and EMS need radios at <strong>different stack layers</strong>. A LoRaWAN leaf uplink is not a cellular backhaul; Wi‑Fi at the pole shed is not Matter in the home; Starlink can carry MQTT northbound but does not replace neighborhood RF. This page is a <strong>decision map</strong> — band, range class, throughput class, power, and where each tech usually sits on an ISV-style feeder.</p>
+
+  <div class="callout callout-key">
+    <strong>Score at the right layer</strong>
+    <p>Compare leaf → DCU, DCU → DCU (NAN), and site → cloud (WAN) separately. Mixing “LoRaWAN vs LTE vs Starlink” in one cell without a role is how RFPs get confused. Empty / “not verified” cells stay empty — do not invent country-specific licenses from memory.</p>
+  </div>
+
+  <div class="callout callout-warn">
+    <strong>Honest bounds</strong>
+    <p>Ranges and bitrates below are <strong>typical published classes</strong>, not guaranteed field results. Terrain, antenna height, duty cycle, and local regulation dominate. Always confirm spectrum rules with the national regulator before a pilot.</p>
+  </div>
+
+  <h2>Roles on a village feeder</h2>
+  <div class="role-grid">
+    <div class="role-card">
+      <h3><span class="tag tag-leaf">Leaf</span> Meter / sensor → pole</h3>
+      <p>Low duty-cycle uplinks: last-gasp, prepaid events, CT snapshots. Classic: <strong>LoRaWAN</strong>, sometimes proprietary sub‑GHz. Bluetooth / Matter more often inside a building than on a LV span.</p>
+    </div>
+    <div class="role-card">
+      <h3><span class="tag tag-nan">NAN</span> Pole ↔ pole / DCU mesh</h3>
+      <p>Neighborhood area: MeshEMS-style RF mesh, Wi‑Fi mesh, TV White Space bridges, short cellular hops. Higher availability than a single leaf.</p>
+    </div>
+    <div class="role-card">
+      <h3><span class="tag tag-wan">WAN</span> Site → cloud / ops</h3>
+      <p>Northbound MQTT/HTTPS: <strong>LTE / cellular</strong>, fixed wireless, or <strong>Starlink</strong> when terrestrial WAN is absent. Edge must keep working when WAN dies.</p>
+    </div>
+    <div class="role-card">
+      <h3><span class="tag tag-pnt">PNT</span> / <span class="tag tag-bcast">Broadcast</span></h3>
+      <p><strong>GPS</strong> (and other GNSS) gives time/position — not a data backhaul. <strong>AM / FM</strong> are one-way broadcast; useful for community info, not AMI command paths.</p>
+    </div>
+  </div>
+
+  <h2>Comparison matrix</h2>
+  <p class="muted">Throughput / range = order-of-magnitude class. “—” = not the primary use or not verified here.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Technology</th>
+          <th>Typical bands</th>
+          <th>Range class</th>
+          <th>Throughput class</th>
+          <th>Power / duty</th>
+          <th>Village role</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>LoRaWAN <span class="tag tag-leaf">Leaf</span></td>
+          <td>Sub‑GHz ISM (e.g. 868 / 915 MHz regional) <a href="#r1">[1]</a></td>
+          <td>km-class LOS; less in clutter</td>
+          <td>~0.3–50 kbps class (SF / BW)</td>
+          <td>Deep sleep; Class A uplink-first</td>
+          <td>Leaf meters, last-gasp, sparse telemetry</td>
+          <td>Star topology via gateway; not a high-rate mesh. ISV Heltec leaf firmware pattern fits here.</td>
+        </tr>
+        <tr>
+          <td>TV White Space <span class="tag tag-nan">NAN</span></td>
+          <td>UHF TV gaps (~470–698 MHz region-dependent) <a href="#r2">[2]</a></td>
+          <td>km–tens of km NLOS-friendly</td>
+          <td>~Mbps class (channel / std)</td>
+          <td>Always-on CPE / BS typical</td>
+          <td>Rural NAN / village–town bridge</td>
+          <td>Needs geolocation DB / license rules. Strong for foliage; availability varies by country.</td>
+        </tr>
+        <tr>
+          <td>Z-Wave <span class="tag tag-leaf">Leaf</span></td>
+          <td>Sub‑GHz (region SKU) <a href="#r3">[3]</a></td>
+          <td>~10–100 m indoor class</td>
+          <td>~40–100 kbps class</td>
+          <td>Battery sensors common</td>
+          <td>In-building / compound IoT</td>
+          <td>Mesh inside premises — not LV feeder span.</td>
+        </tr>
+        <tr>
+          <td>Matter <span class="tag tag-leaf">Leaf</span></td>
+          <td>IP over Thread / Wi‑Fi / Ethernet; BLE for commissioning <a href="#r4">[4]</a></td>
+          <td>Room / building (Thread mesh)</td>
+          <td>App-level; radio underlay varies</td>
+          <td>Border router usually mains</td>
+          <td>Smart-home / building edge</td>
+          <td>Application layer — not a WAN. Useful when customer premises devices must interop.</td>
+        </tr>
+        <tr>
+          <td>Bluetooth (Classic / LE) <span class="tag tag-leaf">Leaf</span></td>
+          <td>2.4 GHz ISM <a href="#r5">[5]</a></td>
+          <td>~10–100 m class (LE long-range variants longer)</td>
+          <td>kbps–Mbps class by PHY</td>
+          <td>Very low for LE sensors</td>
+          <td>Commissioning, local HMI, BLE beacons</td>
+          <td>Poor through walls at distance; not feeder backhaul.</td>
+        </tr>
+        <tr>
+          <td>Wi‑Fi (802.11) <span class="tag tag-nan">NAN</span></td>
+          <td>2.4 / 5 / 6 GHz <a href="#r6">[6]</a></td>
+          <td>~10–100+ m; mesh extends</td>
+          <td>Mbps–100s Mbps</td>
+          <td>Mains AP / CPE</td>
+          <td>Pole shed LAN, workshop demos, short NAN</td>
+          <td>High throughput; higher power and congestion vs LoRa. MeshEMS dashboards often over Wi‑Fi LAN.</td>
+        </tr>
+        <tr>
+          <td>LTE <span class="tag tag-wan">WAN</span></td>
+          <td>Licensed operator bands (FDD/TDD) <a href="#r7">[7]</a></td>
+          <td>Cell radius km-class</td>
+          <td>~Mbps–10s Mbps typical rural</td>
+          <td>Modem always / duty-cycled</td>
+          <td>Primary terrestrial WAN</td>
+          <td>SIM, coverage, and cost dominate. Cat‑M / NB‑IoT variants for low-rate IoT.</td>
+        </tr>
+        <tr>
+          <td>Cellular (2G–5G umbrella) <span class="tag tag-wan">WAN</span></td>
+          <td>Licensed MNO spectrum</td>
+          <td>Coverage-map dependent</td>
+          <td>From kbps (2G) to 5G broadband</td>
+          <td>Modem + antenna budget</td>
+          <td>WAN / fallback WAN</td>
+          <td>“Cellular” is a family — specify generation + IoT category in RFPs. 2G sunset risks exist in many markets.</td>
+        </tr>
+        <tr>
+          <td>Starlink <span class="tag tag-wan">WAN</span></td>
+          <td>Ku / Ka user terminal (LEO) <a href="#r8">[8]</a></td>
+          <td>Sky view → global service footprint</td>
+          <td>~10s–100+ Mbps class (service-dependent)</td>
+          <td>Dish + PoE / DC; not leaf-battery</td>
+          <td>Site WAN when terrestrial absent</td>
+          <td>Great northbound pipe; still need edge autonomy. Import / power / policy constraints apply per country.</td>
+        </tr>
+        <tr>
+          <td>GPS (GNSS) <span class="tag tag-pnt">PNT</span></td>
+          <td>L1 (~1575 MHz) + modernized signals <a href="#r9">[9]</a></td>
+          <td>Sky visibility (not a “range” link)</td>
+          <td>Navigation message — not user backhaul</td>
+          <td>Receiver-only (user)</td>
+          <td>Time sync, geotag assets, TVWS DB</td>
+          <td>One-way from space segment. Pair with NTP/PTP strategy; spoofing/jamming awareness for OT.</td>
+        </tr>
+        <tr>
+          <td>AM broadcast <span class="tag tag-bcast">Bcast</span></td>
+          <td>MF ~530–1700 kHz (regional plans) <a href="#r10">[10]</a></td>
+          <td>10s–100s km skywave/groundwave</td>
+          <td>Audio — not packet AMI</td>
+          <td>Transmitter site (utility / broadcaster)</td>
+          <td>Community info / emergency audio</td>
+          <td>One-way. Do not plan meter control over AM.</td>
+        </tr>
+        <tr>
+          <td>FM broadcast <span class="tag tag-bcast">Bcast</span></td>
+          <td>VHF ~87.5–108 MHz <a href="#r10">[10]</a></td>
+          <td>~10s km LOS class</td>
+          <td>Audio (+ limited RDS data)</td>
+          <td>Transmitter site</td>
+          <td>Community radio / alerts</td>
+          <td>RDS is low-rate side-channel — not a substitute for DLMS/MQTT.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How ISV usually stacks them</h2>
+  <ol>
+    <li><strong>Edge autonomy first</strong> — prepaid, relays, and pole EMS keep working when WAN drops (<a href="index.html#village-metering/overview">Village Metering overview</a>).</li>
+    <li><strong>Leaf RF</strong> — LoRaWAN or similar for sparse meter/sensor uplinks; RS‑485 / Modbus still common on the panel itself.</li>
+    <li><strong>NAN</strong> — Wi‑Fi LAN at the cabinet; optional mesh / TVWS / proprietary RF between poles (<a href="index.html#village-metering/meshems">MeshEMS</a>).</li>
+    <li><strong>WAN</strong> — LTE/cellular where coverage exists; Starlink (or other sat) when it does not — carry OpenAMI MQTT / HTTPS northbound.</li>
+    <li><strong>PNT</strong> — GPS for time and map twin geotags; not a control plane.</li>
+  </ol>
+
+  <h2>Quick pick guide</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Need</th>
+          <th>First look</th>
+          <th>Usually avoid as sole link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Battery leaf, km hop, tiny payload</td>
+          <td>LoRaWAN</td>
+          <td>Starlink dish per meter; AM/FM</td>
+        </tr>
+        <tr>
+          <td>Foliage / beyond-LOS village bridge</td>
+          <td>TV White Space (where legal)</td>
+          <td>2.4 GHz Wi‑Fi alone</td>
+        </tr>
+        <tr>
+          <td>In-home appliance interop</td>
+          <td>Matter / Thread / Wi‑Fi / BLE</td>
+          <td>Cellular SIM per bulb</td>
+        </tr>
+        <tr>
+          <td>Cloud MQTT from remote site</td>
+          <td>LTE / cellular; else Starlink</td>
+          <td>Bluetooth; GPS</td>
+        </tr>
+        <tr>
+          <td>Workshop demo map + dashboard</td>
+          <td>Wi‑Fi LAN + local ESP32 AP</td>
+          <td>Production reliance on demo AP SSID</td>
+        </tr>
+        <tr>
+          <td>Public emergency audio</td>
+          <td>FM / AM community radio</td>
+          <td>Using broadcast as AMI command path</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Related wiki pages</h2>
+  <ul>
+    <li><a href="grid-cybersecurity-layers.html">Grid cybersecurity layers</a> — encrypt / segment the conduits these radios create</li>
+    <li><a href="index.html#village-metering/meshems">MeshEMS board</a> — pole EMS + mesh backhaul context</li>
+    <li><a href="index.html#village-metering/openami">OpenAMI</a> — northbound profile over whatever WAN you pick</li>
+    <li><a href="rfp-village-microgrid-designs.html">Village microgrid RFP notes</a> — “reliable telecom” as a design requirement</li>
+  </ul>
+
+  <h2 id="refs">References</h2>
+  <ol class="refs">
+    <li id="r1">LoRa Alliance — <em>LoRaWAN</em> regional parameters / what is LoRaWAN. <a href="https://lora-alliance.org/" target="_blank" rel="noopener">lora-alliance.org</a> (V)</li>
+    <li id="r2">FCC / industry TV White Space overview (US regulatory model; other countries differ). Start: <a href="https://www.fcc.gov/general/white-space" target="_blank" rel="noopener">fcc.gov/general/white-space</a> (V/I)</li>
+    <li id="r3">Z-Wave Alliance — technology overview. <a href="https://z-wavealliance.org/" target="_blank" rel="noopener">z-wavealliance.org</a> (V)</li>
+    <li id="r4">Connectivity Standards Alliance — Matter. <a href="https://csa-iot.org/all-solutions/matter/" target="_blank" rel="noopener">csa-iot.org</a> (V)</li>
+    <li id="r5">Bluetooth SIG — Bluetooth technology overview. <a href="https://www.bluetooth.com/learn-about-bluetooth/tech-overview/" target="_blank" rel="noopener">bluetooth.com</a> (V)</li>
+    <li id="r6">IEEE 802.11 working group — WLAN standards. <a href="https://www.ieee802.org/11/" target="_blank" rel="noopener">ieee802.org/11</a> (V)</li>
+    <li id="r7">3GPP — LTE / cellular specifications portal. <a href="https://www.3gpp.org/" target="_blank" rel="noopener">3gpp.org</a> (V)</li>
+    <li id="r8">SpaceX Starlink — service / technology public pages. <a href="https://www.starlink.com/" target="_blank" rel="noopener">starlink.com</a> (V) — verify local availability separately</li>
+    <li id="r9">GPS.gov — GPS technical documentation. <a href="https://www.gps.gov/technical/" target="_blank" rel="noopener">gps.gov/technical</a> (V)</li>
+    <li id="r10">ITU Radio Regulations / national broadcast band plans — AM MF and FM VHF allocations are national implementations of ITU plans. Portal: <a href="https://www.itu.int/en/ITU-R/" target="_blank" rel="noopener">itu.int/ITU-R</a> (V)</li>
+  </ol>
+  <p class="muted">Tag key: V = vendor / SDO primary · I = industry regulator · ISV = internal note (none on this page yet).</p>
+
+  <div class="footer-nav">
+    <a href="index.html#standards">Standards</a>
+    <a href="grid-cybersecurity-layers.html">Cybersecurity layers</a>
+    <a href="index.html#village-metering/meshems">MeshEMS</a>
+  </div>
+</div>
+</body>
+</html>

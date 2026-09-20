@@ -69,6 +69,7 @@ isv-ai-wiki/
 ├── open-energy-hackathon-2025.html  # 2025 Open Energy Hackathon summary (Circles of Power)
 ├── open-energy-hackathon-2026.html  # 2026 hackathon planning (Earth Day · SF Climate Week · Port Labs)
 ├── oseas-2026.html                  # OSEAS 2026 Kigali planning
+├── wireless-telecom.html            # Leaf / NAN / WAN radio map (LoRaWAN, TVWS, LTE, Starlink, …)
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
 │   ├── catalog.json              # Report enrichments + wiki-only entries (ISV context)
