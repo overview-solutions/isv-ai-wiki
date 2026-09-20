@@ -1,0 +1,102 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "IEEE Smart Village Knowledge Base",
+    "identifier": "did:web:isv.wiki"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:isv.wiki:doc:agents",
+      "displayName": "AGENTS.md — AI navigation map",
+      "type": "text/markdown",
+      "url": "https://isv.wiki/AGENTS.md",
+      "representativeQueries": [
+        "how is the ISV wiki organized for agents",
+        "what is the trust hierarchy for meter vendor claims",
+        "where do I find Village Metering pages"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:doc:llms",
+      "displayName": "llms.txt — concise agent index",
+      "type": "text/markdown",
+      "url": "https://isv.wiki/llms.txt",
+      "representativeQueries": [
+        "list the main ISV wiki documents for AI",
+        "where is the meter vendor study",
+        "OpenAMI northbound MQTT profile URL"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:catalog:api",
+      "displayName": "RFC 9727 API catalog (linkset)",
+      "type": "application/linkset+json",
+      "url": "https://isv.wiki/.well-known/api-catalog",
+      "representativeQueries": [
+        "what machine-readable resources does isv.wiki expose",
+        "API catalog for the Smart Village wiki"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:skills:index",
+      "displayName": "Agent Skills discovery index",
+      "type": "application/json",
+      "url": "https://isv.wiki/.well-known/agent-skills/index.json",
+      "representativeQueries": [
+        "what agent skills does isv.wiki publish",
+        "skill for citing ISV wiki evidence"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:data:vmrs",
+      "displayName": "Village Minimum Register Set (VMRS) v0.1",
+      "type": "application/json",
+      "url": "https://isv.wiki/meter-benchmark/vmrs-registers.json",
+      "representativeQueries": [
+        "what OBIS registers are in the village minimum set",
+        "VMRS shortlist for mini-grid meters"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:data:northbound-mqtt",
+      "displayName": "OpenAMI northbound MQTT profile v0.1",
+      "type": "application/json",
+      "url": "https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json",
+      "representativeQueries": [
+        "OpenAMI village meter MQTT JSON profile",
+        "northbound interface for village meters"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:data:tech-catalog",
+      "displayName": "Technical reports catalog",
+      "type": "application/json",
+      "url": "https://isv.wiki/technical-notes/catalog.json",
+      "representativeQueries": [
+        "index of ISV technical reports with provenance",
+        "Dev Labs reports linked from the wiki"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:page:village-geojson",
+      "displayName": "Village GeoJSON · Map Twin schema",
+      "type": "text/html",
+      "url": "https://isv.wiki/meter-village-geojson-un.html",
+      "representativeQueries": [
+        "essential layers for a village digital twin GeoJSON pack",
+        "Map Twin vs Live Twin for mini-grids",
+        "Esri Utility Network semantics in open GeoJSON"
+      ]
+    },
+    {
+      "identifier": "urn:air:isv.wiki:auth:public",
+      "displayName": "auth.md — public site, no agent registration",
+      "type": "text/markdown",
+      "url": "https://isv.wiki/auth.md",
+      "representativeQueries": [
+        "do I need OAuth to read isv.wiki",
+        "how do agents authenticate to the ISV knowledge base"
+      ]
+    }
+  ]
+}

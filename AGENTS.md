@@ -39,9 +39,17 @@ We are **not** optimizing for: exhaustive vendor databases, real-time pricing, c
 
 ```
 isv-ai-wiki/
-├── index.html                    # Shell: sidebar, sections, hash routing, registries
+├── index.html                    # Shell: sidebar, sections, hash routing, registries, WebMCP tools
 ├── AGENTS.md                     # ← You are here (AI navigation)
+├── auth.md                       # Public site auth notes (no OAuth on this host)
+├── llms.txt                      # Concise agent URL index
+├── robots.txt                    # Content-Signal + Agentmap → ai-catalog
 ├── README.md                     # Human quickstart
+├── .well-known/
+│   ├── ai-catalog.json           # ARD capability manifest
+│   ├── agent-skills/             # Skills discovery index + SKILL.md files
+│   ├── api-catalog               # RFC 9727 linkset
+│   └── agents/index.json         # DNS-AID HTTP index (no live MCP/A2A)
 ├── meter-overview.html           # Village Metering — context, hardware threads (default embed)
 ├── meter-roadmap.html            # Three-phase development roadmap (+ ThunderCloud Phase 1 note)
 ├── meter-problems-today.html     # Field problems → solutions
@@ -64,6 +72,7 @@ isv-ai-wiki/
 ├── stonehenge-microgrid-topology.html
 ├── technical-notes/
 │   ├── catalog.json              # Report enrichments + wiki-only entries (ISV context)
+│   ├── AGENT-READINESS-CLOUDFLARE.md  # isitagentready checklist vs honest capabilities
 │   ├── sync-catalog.py           # Optional: refresh catalog.json stubs from Dev Labs index
 │   └── diagrams/                 # SVG for meeting notes (e.g. metering-topology.svg)
 ├── js/                           # Funded projects map (Mapbox)
@@ -72,6 +81,21 @@ isv-ai-wiki/
 
 **Live base URL:** `https://isv.wiki/` (GitHub Pages mirror: `https://overview-solutions.github.io/isv-ai-wiki/`)
 
+### Agent discovery (machine entrypoints)
+
+| Path | Role |
+|------|------|
+| `/AGENTS.md` | This map |
+| `/llms.txt` | Short URL index |
+| `/auth.md` | Public site — **no OAuth / no registration** on this host |
+| `/.well-known/ai-catalog.json` | ARD capability manifest |
+| `/.well-known/agent-skills/index.json` | Skills: navigate, cite-evidence, village-map-twin |
+| `/.well-known/api-catalog` | RFC 9727 linkset |
+| `/.well-known/agents/index.json` | DNS-AID HTTP index (empty live agents) |
+
+**Not published (would lie):** OAuth/OIDC discovery, OAuth protected-resource metadata, MCP server card — no auth server and no MCP on this host. See `technical-notes/AGENT-READINESS-CLOUDFLARE.md`.
+
+**Markdown `Accept: text/markdown` negotiation:** Cloudflare zone toggle only (Pile B), not a static-file feature.
 **Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`). **`frame-src` is `'self' https://player.vimeo.com https://docs.google.com`.** Circaevum Locus (`https://circaevum.github.io`) is not on that list, so the Village Metering iframe cannot load it (Chrome: “This content is blocked”). Wiki iframe dest is same-origin `village-simulator/index.html`. Full page may still open Locus in a new tab. To iframe Locus, add `https://circaevum.github.io` to `frame-src` on that Transform Rule.
 
 **Local preview (offline kit):** `./preview.sh` → `http://127.0.0.1:8765/index.html`  

@@ -5,21 +5,29 @@
 ## Docs
 
 - [AGENTS.md](https://isv.wiki/AGENTS.md): Navigation guide for AI assistants — trust hierarchy, file map, contributor rules
+- [auth.md](https://isv.wiki/auth.md): Public site — no OAuth / no agent registration on this host
 - [Overview](https://isv.wiki/index.html#village-metering/overview): Village Metering section entry — why ISV, gateway path, hardware threads
 - [Roadmap](https://isv.wiki/index.html#village-metering/roadmap): Three-phase development plan — installed-base interop, microgrid core, grid connectivity (ThunderCloud Phase 1 note)
 - [Village scope](https://isv.wiki/index.html#village-metering/village-scope): ISV operational village definition, global rural population, energy access, HDI, healthy vs unhealthy modernization (cited)
 - [Problems to solve](https://isv.wiki/index.html#village-metering/problems): Field metering problems for village mini-grids
 - [Solutions map](https://isv.wiki/index.html#village-metering/solutions-map): Interactive diagram linking problems to ISV-tracked approaches
 - [Meter vendor study](https://isv.wiki/meter-vendor-study.html): Cited vendor benchmark for village mini-grid metering
+- [Village GeoJSON · Map Twin](https://isv.wiki/meter-village-geojson-un.html): Essential vs nice-to-have open Utility Network–style layers
 - [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
 - [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
 - [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
-- [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop planning (Nairobi · EAT · UTC+3) — Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Nearly Free Energy), Block 3 Business Case & Code Challenges (10 Power, multi-vendor MQTT, mobile money)
-- [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 (NESL 865B) pole controller, BOM, schematic, Nearly Free Energy Uganda site layout lab
-- [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation (Circaevum Locus)
-- [Standards guide](https://isv.wiki/index.html#standards): Standards catalog split into village-relevant (2030.10, DLMS, OBIS, STS, SunSpec) and larger grid integration (1547, 2030.5, 2800, P4200, TLS, cybersecurity)
-- [Agent index (DNS-AID HTTP)](https://isv.wiki/.well-known/agents/index.json): Empty agent list + links to specs (no live MCP/A2A on this host)
+- [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop planning (Nairobi · EAT · UTC+3)
+- [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 pole controller, BOM, schematic
+- [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation hub
+- [Standards guide](https://isv.wiki/index.html#standards): Standards catalog (village-relevant vs larger grid)
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents
+
+## Discovery (well-known)
+
+- [ARD ai-catalog](https://isv.wiki/.well-known/ai-catalog.json): Capability manifest (docs, JSON specs, skills)
+- [Agent Skills index](https://isv.wiki/.well-known/agent-skills/index.json): navigate-isv-wiki · cite-evidence · village-map-twin
+- [API catalog](https://isv.wiki/.well-known/api-catalog): RFC 9727 linkset
+- [Agent index (DNS-AID HTTP)](https://isv.wiki/.well-known/agents/index.json): No live MCP/A2A on this host
 
 ## DNS-AID
 
@@ -28,3 +36,4 @@ Discovery (Cloudflare DNS, not in repo): `_index._agents.isv.wiki` HTTPS → `is
 ## Optional
 
 - [GitHub source](https://github.com/overview-solutions/isv-ai-wiki): MIT-licensed repo; push to `main` deploys the site
+- Cloudflare **Markdown for Agents** (Accept: text/markdown) is a zone dashboard toggle — see AGENT-READINESS-CLOUDFLARE.md

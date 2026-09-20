@@ -12,9 +12,24 @@
           "href": "https://isv.wiki/llms.txt",
           "type": "text/markdown",
           "title": "llms.txt — concise agent index of the knowledge base"
+        },
+        {
+          "href": "https://isv.wiki/auth.md",
+          "type": "text/markdown",
+          "title": "auth.md — public site; no OAuth or agent registration on this host"
         }
       ],
       "describedby": [
+        {
+          "href": "https://isv.wiki/.well-known/ai-catalog.json",
+          "type": "application/json",
+          "title": "ARD / ai-catalog — capability manifest for agents"
+        },
+        {
+          "href": "https://isv.wiki/.well-known/agent-skills/index.json",
+          "type": "application/json",
+          "title": "Agent Skills discovery index (RFC v0.2.0)"
+        },
         {
           "href": "https://isv.wiki/.well-known/agents/index.json",
           "type": "application/json",

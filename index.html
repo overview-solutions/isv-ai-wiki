@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IEEE Smart Village — Knowledge Base</title>
+<meta name="description" content="Volunteer IEEE Smart Village Technology Committee knowledge base — village metering, Map Twin GeoJSON, OpenAMI, meeting notes. Public read-only wiki for humans and agents.">
 <link rel="canonical" href="https://isv.wiki/">
+<link rel="describedby" href="https://isv.wiki/.well-known/ai-catalog.json" type="application/json" title="ARD ai-catalog">
+<link rel="describedby" href="https://isv.wiki/llms.txt" type="text/markdown" title="llms.txt">
+<link rel="service-doc" href="https://isv.wiki/AGENTS.md" type="text/markdown" title="AGENTS.md">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -3351,6 +3355,141 @@ updateApiStatus();
   if (id === 'meter-study-frame') bindMeterStudyFrameGuard(f);
   if (window.ISVTheme) ISVTheme.syncFrame(f);
 });
+
+/* WebMCP — expose real SPA navigation tools to browser agents (no backend). */
+(function initIsvWebMcp() {
+  const mc = navigator.modelContext;
+  if (!mc) return;
+
+  async function fetchText(path) {
+    const r = await fetch(path, { credentials: 'omit' });
+    if (!r.ok) throw new Error(path + ' HTTP ' + r.status);
+    return r.text();
+  }
+
+  const tools = [
+    {
+      name: 'list_wiki_routes',
+      description: 'List SPA sections and Village Metering page ids available on isv.wiki.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      async execute() {
+        return {
+          sections: SECTIONS.slice(),
+          villageMeteringPages: Object.keys(METER_BENCHMARK_PAGES),
+          agentDocs: ['/AGENTS.md', '/llms.txt', '/auth.md'],
+          discovery: [
+            '/.well-known/ai-catalog.json',
+            '/.well-known/agent-skills/index.json',
+            '/.well-known/api-catalog',
+          ],
+        };
+      },
+    },
+    {
+      name: 'navigate_wiki',
+      description: 'Navigate the wiki SPA by section and optional Village Metering page id (same as hash routing).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          section: {
+            type: 'string',
+            description: 'One of: home, about, supported, notes, tasks, events, village-metering, tech-notes, standards, resources',
+          },
+          meterPage: {
+            type: 'string',
+            description: 'Village Metering page id when section is village-metering (e.g. overview, village-geojson-un)',
+          },
+        },
+        required: ['section'],
+        additionalProperties: false,
+      },
+      async execute({ section, meterPage }) {
+        if (!SECTIONS.includes(section)) {
+          return { ok: false, error: 'unknown section', sections: SECTIONS.slice() };
+        }
+        if (section === 'village-metering') {
+          const page = meterPage && METER_BENCHMARK_PAGES[meterPage] ? meterPage : 'overview';
+          showMeterPage(page, true);
+          return { ok: true, hash: '#village-metering/' + page, title: METER_BENCHMARK_PAGES[page].title };
+        }
+        showSection(section, true);
+        return { ok: true, hash: '#' + section };
+      },
+    },
+    {
+      name: 'fetch_agent_doc',
+      description: 'Fetch a same-origin agent markdown/text doc (AGENTS.md, llms.txt, or auth.md).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          doc: { type: 'string', enum: ['AGENTS.md', 'llms.txt', 'auth.md'] },
+        },
+        required: ['doc'],
+        additionalProperties: false,
+      },
+      async execute({ doc }) {
+        const text = await fetchText('/' + doc);
+        return { doc, bytes: text.length, text };
+      },
+    },
+    {
+      name: 'fetch_json_resource',
+      description: 'Fetch a published JSON discovery or benchmark resource from isv.wiki.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          resource: {
+            type: 'string',
+            enum: [
+              'ai-catalog',
+              'agent-skills',
+              'agents-index',
+              'api-catalog',
+              'tech-catalog',
+              'vmrs',
+              'northbound-mqtt',
+            ],
+          },
+        },
+        required: ['resource'],
+        additionalProperties: false,
+      },
+      async execute({ resource }) {
+        const map = {
+          'ai-catalog': '/.well-known/ai-catalog.json',
+          'agent-skills': '/.well-known/agent-skills/index.json',
+          'agents-index': '/.well-known/agents/index.json',
+          'api-catalog': '/.well-known/api-catalog',
+          'tech-catalog': '/technical-notes/catalog.json',
+          'vmrs': '/meter-benchmark/vmrs-registers.json',
+          'northbound-mqtt': '/meter-benchmark/northbound-mqtt-v0.1.json',
+        };
+        const path = map[resource];
+        const r = await fetch(path, { credentials: 'omit' });
+        if (!r.ok) throw new Error(path + ' HTTP ' + r.status);
+        const data = await r.json();
+        return { resource, path, data };
+      },
+    },
+  ];
+
+  const ac = new AbortController();
+  window.__isvWebMcpAbort = ac;
+
+  if (typeof mc.registerTool === 'function') {
+    for (const t of tools) {
+      mc.registerTool({
+        name: t.name,
+        description: t.description,
+        inputSchema: t.inputSchema,
+        execute: t.execute,
+        signal: ac.signal,
+      });
+    }
+  } else if (typeof mc.provideContext === 'function') {
+    mc.provideContext({ tools });
+  }
+})();
 </script>
 </body>
 </html>

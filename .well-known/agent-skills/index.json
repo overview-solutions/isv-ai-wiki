@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "navigate-isv-wiki",
+      "type": "skill-md",
+      "description": "Navigate hash routes, AGENTS.md, and Village Metering page ids on isv.wiki.",
+      "url": "https://isv.wiki/.well-known/agent-skills/navigate-isv-wiki/SKILL.md",
+      "digest": "sha256:5b67a1b10e9d3ee9d06f9f8813be91523a8a5254edeb77dd6c05c80e1f89a6d7"
+    },
+    {
+      "name": "cite-evidence",
+      "type": "skill-md",
+      "description": "Cite ISV wiki sources with trust hierarchy; never invent prices or fill empty cells.",
+      "url": "https://isv.wiki/.well-known/agent-skills/cite-evidence/SKILL.md",
+      "digest": "sha256:f5346f2d9e780e9dbf83e5ef2bda1953498b1ccee409523e472b6b596c149b78"
+    },
+    {
+      "name": "village-map-twin",
+      "type": "skill-md",
+      "description": "Map Twin / Live Twin GeoJSON pack schema, essential layers, and demo-lv samples.",
+      "url": "https://isv.wiki/.well-known/agent-skills/village-map-twin/SKILL.md",
+      "digest": "sha256:73c748aa189bed614aafdc6b53fb0f0e76a6273239a3e36f818592b5dcb7a332"
+    }
+  ]
+}

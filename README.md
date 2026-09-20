@@ -2,7 +2,7 @@
 
 Static wiki for the IEEE Smart Village working group. **No Node install for browsing** — HTML + one tiny local HTTP server.
 
-**AI assistants:** read [`AGENTS.md`](AGENTS.md) first.
+**AI assistants:** read [`AGENTS.md`](AGENTS.md) first. Discovery: [`llms.txt`](llms.txt), [`auth.md`](auth.md), [`.well-known/ai-catalog.json`](.well-known/ai-catalog.json). Cloudflare dashboard steps (Markdown for Agents, headers): [`technical-notes/AGENT-READINESS-CLOUDFLARE.md`](technical-notes/AGENT-READINESS-CLOUDFLARE.md).
 
 ---
 

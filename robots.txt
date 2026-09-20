@@ -7,4 +7,7 @@ Allow: /
 # ai-train = yes : model makers may train on this content
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
+# ARD capability manifest (https://agenticresourcediscovery.org/)
+Agentmap: https://isv.wiki/.well-known/ai-catalog.json
+
 Sitemap: https://isv.wiki/sitemap.xml
