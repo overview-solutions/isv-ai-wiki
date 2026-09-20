@@ -51,6 +51,7 @@ isv-ai-wiki/
 ├── village-simulator/            # Frozen theater snapshot (embed target; do not develop)
 │   └── index.html                # Offline Three/Locus-era snapshot for wiki iframe
 ├── meter-village-simulator.html  # Sim hub: how to run offline/live + links + nested theater
+├── meter-village-geojson-un.html # Open Esri UN–style GeoJSON village pack (essential / nice-to-have)
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
@@ -156,6 +157,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
 | `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): offline kit, live `npm start` (:5176), links to source/Locus/workshop. Nested iframe = frozen `village-simulator/`. Size `?homes=` still on frozen theater URL. Legacy `#village-metering/worldline-day` aliases here. |
+| `#village-metering/village-geojson-un` | Open Utility Network GeoJSON pack: essential vs nice-to-have layers, joins, LOD, API bindings. Starter from `smart-village-simulator/villages`. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |

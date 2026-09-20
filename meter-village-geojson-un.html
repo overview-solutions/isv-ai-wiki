@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Village GeoJSON · open Utility Network model · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<script src="js/meter-embed.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--green); }
+.wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 2.5rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 48rem; line-height: 1.5; }
+h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 13px; font-weight: 500; margin: 0.85rem 0 0.35rem; }
+.body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
+.body-text strong { color: var(--text); font-weight: 500; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem;
+  font-size: 12px; line-height: 1.45;
+}
+.callout > strong:first-child { color: var(--green); display: block; margin-bottom: 0.2rem; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 0.85rem; max-width: 48rem; }
+th, td { border: 1px solid var(--border); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 11px; }
+code, pre { font-family: var(--font-mono, "DM Mono", ui-monospace, monospace); font-size: 12px; }
+pre {
+  background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.75rem 0.9rem; overflow-x: auto; margin: 0 0 0.85rem; line-height: 1.45;
+}
+.layer-diagram {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  margin: 0.75rem 0 1rem; max-width: 48rem;
+}
+@media (max-width: 640px) { .layer-diagram { grid-template-columns: 1fr; } }
+.layer-card {
+  border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 0.85rem;
+  background: var(--bg-2);
+}
+.layer-card h3 { margin-top: 0; font-size: 13px; }
+.layer-card.essential { border-color: color-mix(in srgb, var(--green) 55%, var(--border)); }
+.layer-card.nice { border-color: color-mix(in srgb, var(--amber) 45%, var(--border)); }
+.layer-card ul { margin: 0.35rem 0 0; padding-left: 1.1rem; font-size: 12px; color: var(--text-2); }
+.layer-card li { margin-bottom: 0.25rem; }
+.flow {
+  font-size: 12px; line-height: 1.55; padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2);
+  margin-bottom: 0.85rem; max-width: 48rem; font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+}
+html.embed .back, html.embed .isv-topbar { display: none; }
+html.embed h1 { font-size: 18px; }
+html.embed .wrap { padding-top: 0.75rem; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
+
+  <h1>Village map packs · open Utility Network GeoJSON</h1>
+  <p class="sub">Esri Utility Network semantics in open files · no ArcGIS lock-in · starter for ~100–1000 meter LV villages</p>
+  <p class="lead">IEEE Smart Village Technology Committee uses a <strong>GeoJSON + JSON</strong> pack so a mini-grid can be loaded offline into the Village Simulator, traced by feeder, and later bound to read-only metering application programming interfaces (APIs). Ideas borrow from Esri’s Utility Network (devices, junctions, lines, subnetworks, associations) without requiring Esri software.</p>
+
+  <div class="callout">
+    <strong>Source of truth (code)</strong>
+    <p>Living schema + demo pack:
+      <a href="https://github.com/overview-solutions/smart-village-simulator/tree/main/villages" target="_blank" rel="noopener">smart-village-simulator/villages ↗</a>
+      (<code>_schema/</code>, <code>_template/</code>, <code>demo-lv/</code>). This page is the human map of that contract.</p>
+  </div>
+
+  <h2 id="why">Why this shape</h2>
+  <p class="body-text"><strong>Geometry stays in files. Telemetry stays on demand by asset id.</strong> A thousand-meter village must not dump a year of kWh into GeoJSON. Map packs travel offline (USB, laptop, no cloud). When an asset is selected, a feed registry resolves that <code>id</code> to a read-only API or message topic.</p>
+
+  <h2 id="layers">Essential vs nice-to-have layers</h2>
+  <p class="body-text"><strong>How this split was defined:</strong> a Technology Committee <strong>Map Twin</strong> minimum — what you need to open a village offline in the Village Simulator, pick a feeder, and reach meters by stable <code>id</code>. Sized for ~100–1000 customer meters. Contract lives in <code>smart-village-simulator/villages/_schema</code>.</p>
+
+  <p class="body-text"><strong>Sample layers:</strong> the simulator ships <code>villages/demo-lv/</code> with at least one feature in every Essential file and every Nice-to-have class listed below (junctions, enclosure, disconnect, recloser, neutral, terminals, containment / attachment, and <code>feeds/registry.json</code>). Copy that pack or start from <code>villages/_template/</code>.</p>
+
+  <p class="body-text">Sized for a schematic village on the order of <strong>100–1000 customer meters</strong> (one island, a few feeders). Scale by repeating feeders and service laterals — do not invent a transmission model.</p>
+
+  <div class="layer-diagram" role="img" aria-label="Essential layers on the left, nice-to-have layers on the right">
+    <div class="layer-card essential">
+      <h3>Essential — Map Twin minimum</h3>
+      <ul>
+        <li><code>village.json</code> — site id, name, WGS84 origin, bbox, status</li>
+        <li><code>network/subnetworks.geojson</code> — island + each feeder</li>
+        <li><code>network/structure.geojson</code> — poles (cabinets optional here)</li>
+        <li><code>network/electric-lines.geojson</code> — trunk / primary / secondary / service</li>
+        <li><code>network/electric-devices.geojson</code> — meters, transformers, generation or station head, EMS cabinets if used</li>
+        <li><code>network/associations.json</code> — connectivity edges joining those ids</li>
+        <li>Every feature: stable <code>id</code>, <code>assetClass</code>, <code>assetGroup</code>, <code>subnetworkId</code></li>
+      </ul>
+    </div>
+    <div class="layer-card nice">
+      <h3>Nice-to-have — fuller UN completeness</h3>
+      <ul>
+        <li><code>network/electric-junctions.geojson</code> — bus, splice, tap, service_point (Esri Junction class)</li>
+        <li>Structure detail — pad, enclosure, cabinet; later StructureLine / boundary</li>
+        <li>Protection detail — fuse, breaker, disconnect, recloser as separate devices</li>
+        <li>Storage / inverter / DTM as explicit devices beyond gen+station</li>
+        <li>Separate <code>neutral</code> line class; multi-port <code>terminals[]</code> on transformers and EMS</li>
+        <li><code>phase</code>, <code>nominalKv</code>, <code>ratedA</code>, <code>globalId</code> (UUID)</li>
+        <li>Containment / attachment associations (meter in cabinet, xfmr on pole)</li>
+        <li><code>feeds/registry.json</code> — Live Twin API bindings by asset id (not required for a pure Map Twin)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>Alignment with Esri Utility Network</strong>
+    <p>The essential / nice-to-have split above is <strong>not</strong> an Esri label — Esri’s Utility Network does not publish that binary list. We borrow <em>semantics</em>, not ArcGIS files. Esri domain networks use Device, Line, Junction, Assembly, and SubnetLine classes, plus a Structure network and associations (connectivity, containment, attachment). See Esri’s <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/utility-network/domain-networks.htm" target="_blank" rel="noopener">domain networks ↗</a> and <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/utility-network/the-structure-network.htm" target="_blank" rel="noopener">structure network ↗</a>.</p>
+    <p><strong>Maps cleanly:</strong> our <code>electric-devices</code> ≈ Device (+ some Assembly roles); <code>electric-lines</code> ≈ Line; <code>structure</code> ≈ StructureJunction; <code>subnetworks</code> ≈ subnetwork / feeder identity (Esri also generates SubnetLine); <code>associations.json</code> ≈ association table.</p>
+    <p><strong>Deferred to nice-to-have for field practicality:</strong> a full Esri build expects Junction features wherever lines meet, Assembly containers, StructureLine / StructureBoundary, terminals on multi-port devices, and systematic containment / attachment. We allow those as richer packs so brownfield teams can ship a traceable meter map before digitizing every splice and vault.</p>
+  </div>
+
+  <div class="flow">
+island (subnetwork)
+  └─ station / gen head
+       └─ trunk → feeder heads
+            └─ feeder (subnetworkId)
+                 ├─ poles + primary / secondary lines
+                 ├─ xfmr → EMS (optional) → service laterals
+                 └─ meter ←── same id used later for read-only API
+  </div>
+
+  <h2 id="files">File layout</h2>
+<pre>villages/&lt;siteId&gt;/
+  village.json
+  network/
+    subnetworks.geojson
+    structure.geojson
+    electric-devices.geojson
+    electric-junctions.geojson   # optional
+    electric-lines.geojson
+    associations.json
+  feeds/
+    registry.json                 # Live Twin bindings; may be empty for Map Twin only
+</pre>
+
+  <h2 id="properties">Feature properties</h2>
+  <table>
+    <thead><tr><th>Field</th><th>Required?</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>Yes</td><td>Stable string. Same id used in associations and in API bindings.</td></tr>
+      <tr><td><code>assetClass</code></td><td>Yes</td><td>e.g. <code>meter</code>, <code>pole</code>, <code>xfmr</code>, <code>trunk</code>, <code>feeder</code></td></tr>
+      <tr><td><code>assetGroup</code></td><td>Yes</td><td><code>structure</code> · <code>electric_device</code> · <code>electric_junction</code> · <code>electric_line</code> · <code>subnetwork</code></td></tr>
+      <tr><td><code>subnetworkId</code></td><td>Yes (network features)</td><td>Feeder or island id for filter / LOD.</td></tr>
+      <tr><td><code>globalId</code></td><td>Recommended</td><td>UUID if ids are site-local.</td></tr>
+      <tr><td><code>terminals</code></td><td>Nice-to-have</td><td>Multi-port devices (transformer H/X, EMS north/south).</td></tr>
+      <tr><td><code>label</code>, <code>phase</code>, <code>status</code></td><td>Recommended</td><td>Human label; A/B/C or ABC; in-service flags.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="join">How assets join</h2>
+  <p class="body-text"><code>associations.json</code> holds the graph. Geometry does not imply connectivity by itself.</p>
+  <ul class="body-text" style="padding-left:1.25rem;margin-bottom:0.85rem">
+    <li><strong>connectivity</strong> — electrical path <code>fromId</code> → <code>toId</code> (optional terminals, phase, subnetworkId)</li>
+    <li><strong>containment</strong> — device inside structure (meter in cabinet)</li>
+    <li><strong>attachment</strong> — device on structure (transformer on pole)</li>
+  </ul>
+  <p class="body-text">Trace: walk connectivity within one <code>subnetworkId</code>, then climb toward the island controller. See <code>_schema/connectivity-rules.json</code> in the simulator repo.</p>
+
+  <h2 id="lod">Level of detail (load contract)</h2>
+  <table>
+    <thead><tr><th>LOD</th><th>When</th><th>Load</th><th>API</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>Region / multi-site</td><td><code>village.json</code> bbox + pin</td><td>none</td></tr>
+      <tr><td>1</td><td>Village open</td><td>subnetworks + trunk lines + poles</td><td>optional feeder rollups</td></tr>
+      <tr><td>2</td><td>Feeder selected</td><td>that feeder’s devices, junctions, laterals</td><td>EMS / feeder-head meter</td></tr>
+      <tr><td>3</td><td>Meter / house selected</td><td>service laterals already in pack</td><td><strong>that meter’s</strong> reads only</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="api">Live Twin — metering API binding</h2>
+  <p class="body-text"><code>feeds/registry.json</code> maps asset <code>id</code> → feed descriptor (URL template, topic, auth ref). Secrets stay out of the pack. Any metering vendor API is welcome; Technology Committee adapters grow over time (including SparkNet-HTTP, GroundBolt-class site stacks, MeshEMS message topics, and others).</p>
+
+  <div class="callout callout-amber">
+    <strong>Hypothetical vs as-built</strong>
+    <p><code>village.json</code> <code>status</code>: <code>hypothetical</code> · <code>survey</code> · <code>as-built</code> · <code>unverified</code>. Mock villages built in simulator BUILD mode and real field maps should live in separate stores until a review migrates a pack.</p>
+  </div>
+
+  <h2 id="related">Related</h2>
+  <p class="body-text">
+    <a href="index.html#village-metering/village-simulator">Village Simulator hub</a> ·
+    <a href="https://github.com/overview-solutions/smart-village-simulator/tree/main/villages" target="_blank" rel="noopener">villages schema ↗</a> ·
+    <a href="index.html#village-metering/openami">OpenAMI</a> ·
+    <a href="power-africa-2026-workshop-planning.html">Nairobi workshop</a> ·
+    <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/65" target="_blank" rel="noopener">GitHub issue #65 ↗</a>
+  </p>
+</div>
+</body>
+</html>
