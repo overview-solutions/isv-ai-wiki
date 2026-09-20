@@ -68,13 +68,13 @@ td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
   <div class="back"><a href="index.html#standards">← Standards</a></div>
 
   <h1>Wireless telecom for village energy</h1>
-  <p class="sub">Spectrum layers · leaf / NAN / WAN roles · typical order-of-magnitude figures (not a lab cert)</p>
+  <p class="sub">Cited radio roles · typical order-of-magnitude figures (not a lab cert)</p>
 
-  <p class="lead">Village metering and EMS need radios at <strong>different stack layers</strong>. A LoRaWAN leaf uplink is not a cellular backhaul; Wi‑Fi at the pole shed is not Matter in the home; Starlink can carry MQTT northbound but does not replace neighborhood RF. This page is a <strong>decision map</strong> — band, range class, throughput class, power, and where each tech usually sits on an ISV-style feeder.</p>
+  <p class="lead">Village metering and EMS need radios at <strong>different hops</strong>. A LoRaWAN meter uplink is not a cellular backhaul; Wi‑Fi at the pole shed is not Matter in the home; Starlink can carry MQTT northbound but does not replace neighborhood RF. This page is a <strong>decision map</strong> — band, range class, throughput class, power, and where each tech usually sits — using terms that appear in NIST / IEC metering architecture docs (cited below), not an invented “AMI stack.”</p>
 
   <div class="callout callout-key">
-    <strong>Score at the right layer</strong>
-    <p>Compare leaf → DCU, DCU → DCU (NAN), and site → cloud (WAN) separately. Mixing “LoRaWAN vs LTE vs Starlink” in one cell without a role is how RFPs get confused. Empty / “not verified” cells stay empty — do not invent country-specific licenses from memory.</p>
+    <strong>Score at the right hop</strong>
+    <p>Compare meter/sensor → concentrator, neighborhood mesh / access point, and site → head-end / cloud separately. Mixing “LoRaWAN vs LTE vs Starlink” in one cell without a hop is how RFPs get confused. Empty / “not verified” cells stay empty — do not invent country-specific licenses from memory.</p>
   </div>
 
   <div class="callout callout-warn">
@@ -82,15 +82,72 @@ td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
     <p>Ranges and bitrates below are <strong>typical published classes</strong>, not guaranteed field results. Terrain, antenna height, duty cycle, and local regulation dominate. Always confirm spectrum rules with the national regulator before a pilot.</p>
   </div>
 
+  <h2>Terminology (cited)</h2>
+  <p>These labels are <strong>not</strong> IEEE Smart Village inventions. Two legitimate sources use related names; they are <strong>not identical</strong>:</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Source</th>
+          <th>Meaning (quoted / paraphrased from source)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>NAN</strong> — Neighborhood Area Network</td>
+          <td>NIST <a href="#r11">[11]</a> <a href="#r12">[12]</a></td>
+          <td>NIST IR&nbsp;7761r1: “A network system intended to provide direct connectivity with Smart Grid end devices in a relatively small geographic area… a few blocks… or… several miles… in a rural environment.” NIST project page: last-mile from meters toward AMI head-end may consist of NAN and HAN.</td>
+        </tr>
+        <tr>
+          <td><strong>HAN</strong> — Home Area Network</td>
+          <td>NIST <a href="#r11">[11]</a> <a href="#r12">[12]</a></td>
+          <td>Listed with FAN/NAN/WAN as a Smart Grid communications sub-network in NIST IR&nbsp;7761r1 assessment matrices (indoor premises devices).</td>
+        </tr>
+        <tr>
+          <td><strong>FAN</strong> — Field Area Network</td>
+          <td>NIST <a href="#r11">[11]</a></td>
+          <td>NIST IR&nbsp;7761r1 glossary: connectivity to field distribution-automation devices (distinct from meter NAN in that document’s taxonomy).</td>
+        </tr>
+        <tr>
+          <td><strong>WAN</strong> — Wide Area Network</td>
+          <td>NIST <a href="#r11">[11]</a>; CEN/CLC/ETSI <a href="#r13">[13]</a></td>
+          <td>Longer-haul / head-end facing network in both NIST wireless guidance and European smart-metering functional architecture.</td>
+        </tr>
+        <tr>
+          <td><strong>NN</strong> — Neighbourhood Network<br><strong>NNAP</strong> — Neighbourhood Network Access Point</td>
+          <td>CEN/CLC/ETSI TR&nbsp;50572 <a href="#r13">[13]</a>; IEC 62056 NN profiles <a href="#r14">[14]</a></td>
+          <td>IEC / European metering architecture: optional Neighbourhood Network covering several premises; access via NNAP (often a gateway / data concentrator). Closest IEC counterpart to NIST “NAN” — <strong>different acronym</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>LN</strong> / <strong>LNAP</strong></td>
+          <td>CEN/CLC/ETSI TR&nbsp;50572 <a href="#r13">[13]</a></td>
+          <td>Local Network within the same premises; Local Network Access Point.</td>
+        </tr>
+        <tr>
+          <td><strong>Leaf</strong> (informal on this page)</td>
+          <td>—</td>
+          <td><strong>Not</strong> a NIST/IEC acronym here. Plain-language label for battery / Class&nbsp;A style end nodes (e.g. LoRaWAN end-device). Prefer “end device” / “meter” in formal RFPs.</td>
+        </tr>
+        <tr>
+          <td><strong>ONT</strong></td>
+          <td>—</td>
+          <td><strong>Not used on this page.</strong> In telecom, ONT usually means Optical Network Terminal (fiber FTTH CPE) — a different industry. Do not treat ONT as an AMI layer name.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <h2>Roles on a village feeder</h2>
+  <p class="muted">Role tags below map loosely to NIST NAN/WAN (and IEC NN/WAN). They are for comparison columns — not a claim that every ISV pilot implements full utility AMI.</p>
   <div class="role-grid">
     <div class="role-card">
       <h3><span class="tag tag-leaf">Leaf</span> Meter / sensor → pole</h3>
-      <p>Low duty-cycle uplinks: last-gasp, prepaid events, CT snapshots. Classic: <strong>LoRaWAN</strong>, sometimes proprietary sub‑GHz. Bluetooth / Matter more often inside a building than on a LV span.</p>
+      <p>Low duty-cycle uplinks: last-gasp, prepaid events, CT snapshots. Classic: <strong>LoRaWAN</strong>, sometimes proprietary sub‑GHz. Bluetooth / Matter more often inside a building than on a LV span. (Informal “leaf”; not a NIST term.)</p>
     </div>
     <div class="role-card">
-      <h3><span class="tag tag-nan">NAN</span> Pole ↔ pole / DCU mesh</h3>
-      <p>Neighborhood area: MeshEMS-style RF mesh, Wi‑Fi mesh, TV White Space bridges, short cellular hops. Higher availability than a single leaf.</p>
+      <h3><span class="tag tag-nan">NAN / NN</span> Neighborhood hop</h3>
+      <p>Per NIST: neighborhood connectivity for end devices <a href="#r11">[11]</a>. Per IEC: Neighbourhood Network via NNAP <a href="#r13">[13]</a>. Field examples: meter↔DCU RF/PLC, MeshEMS-style pole mesh, TV White Space bridges — verify tech against local regs.</p>
     </div>
     <div class="role-card">
       <h3><span class="tag tag-wan">WAN</span> Site → cloud / ops</h3>
@@ -103,7 +160,7 @@ td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
   </div>
 
   <h2>Comparison matrix</h2>
-  <p class="muted">Throughput / range = order-of-magnitude class. “—” = not the primary use or not verified here.</p>
+  <p class="muted">Throughput / range = order-of-magnitude class. “—” = not the primary use or not verified here. Role tags use NIST NAN / WAN where that match is reasonable.</p>
   <div class="table-scroll">
     <table>
       <thead>
@@ -233,8 +290,8 @@ td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
   <h2>How ISV usually stacks them</h2>
   <ol>
     <li><strong>Edge autonomy first</strong> — prepaid, relays, and pole EMS keep working when WAN drops (<a href="index.html#village-metering/overview">Village Metering overview</a>).</li>
-    <li><strong>Leaf RF</strong> — LoRaWAN or similar for sparse meter/sensor uplinks; RS‑485 / Modbus still common on the panel itself.</li>
-    <li><strong>NAN</strong> — Wi‑Fi LAN at the cabinet; optional mesh / TVWS / proprietary RF between poles (<a href="index.html#village-metering/meshems">MeshEMS</a>).</li>
+    <li><strong>End-device RF</strong> — LoRaWAN or similar for sparse meter/sensor uplinks; RS‑485 / Modbus still common on the panel itself.</li>
+    <li><strong>Neighborhood hop (NIST NAN / IEC NN)</strong> — Wi‑Fi LAN at the cabinet; optional mesh / TVWS / proprietary RF between poles (<a href="index.html#village-metering/meshems">MeshEMS</a>).</li>
     <li><strong>WAN</strong> — LTE/cellular where coverage exists; Starlink (or other sat) when it does not — carry OpenAMI MQTT / HTTPS northbound.</li>
     <li><strong>PNT</strong> — GPS for time and map twin geotags; not a control plane.</li>
   </ol>
@@ -304,6 +361,10 @@ td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
     <li id="r8">SpaceX Starlink — service / technology public pages. <a href="https://www.starlink.com/" target="_blank" rel="noopener">starlink.com</a> (V) — verify local availability separately</li>
     <li id="r9">GPS.gov — GPS technical documentation. <a href="https://www.gps.gov/technical/" target="_blank" rel="noopener">gps.gov/technical</a> (V)</li>
     <li id="r10">ITU Radio Regulations / national broadcast band plans — AM MF and FM VHF allocations are national implementations of ITU plans. Portal: <a href="https://www.itu.int/en/ITU-R/" target="_blank" rel="noopener">itu.int/ITU-R</a> (V)</li>
+    <li id="r11">NIST Interagency Report 7761r1 — <em>NIST Smart Grid Interoperability Panel Priority Action Plan 2: Guidelines for Assessing Wireless Standards for Smart Grid Applications</em> (2014). Glossary defines Neighborhood Area Network (NAN), Home Area Network (HAN), Field Area Network (FAN), Wide Area Network (WAN). PDF: <a href="https://nvlpubs.nist.gov/nistpubs/ir/2014/NIST.IR.7761r1.pdf" target="_blank" rel="noopener">nvlpubs.nist.gov … NIST.IR.7761r1.pdf</a> (V)</li>
+    <li id="r12">NIST — Neighborhood Area Communication Network project page (uses NAN and HAN for smart-grid last-mile toward AMI head-end). <a href="https://www.nist.gov/programs-projects/neighborhood-area-communication-network" target="_blank" rel="noopener">nist.gov/programs-projects/neighborhood-area-communication-network</a> (V)</li>
+    <li id="r13">CEN/CLC/ETSI TR 50572 — <em>Functional reference architecture for communications in smart metering systems</em> — defines Neighbourhood Network (NN), Local Network (LN), WAN, NNAP, LNAP. (European smart-metering architecture; IEC AMI materials align.) (V)</li>
+    <li id="r14">IEC 62056 series Neighbourhood Network profiles (e.g. IEC TS 62056-8-20 mesh NN; G3-PLC / HS-PLC NN profiles) — use abbreviation <strong>NN</strong> / <strong>NNAP</strong>, not “NAN.” IEC webstore / SyC Smart Energy AMI overview: <a href="https://syc-se.iec.ch/iec-63097-smart-energy-roadmap/advanced-metering-infrastructure/" target="_blank" rel="noopener">syc-se.iec.ch … advanced-metering-infrastructure</a> (V)</li>
   </ol>
   <p class="muted">Tag key: V = vendor / SDO primary · I = industry regulator · ISV = internal note (none on this page yet).</p>
 
