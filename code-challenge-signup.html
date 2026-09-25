@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Challenge Sign-up · OpenAMI EMS Workshop · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 1rem; }
+.callout {
+  border-left: 3px solid var(--teal); background: var(--teal-50);
+  padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
+  font-size: 14px; line-height: 1.55;
+}
+.callout > strong:first-child {
+  display: block; margin-bottom: 0.4rem; font-weight: 500; color: var(--teal);
+}
+.callout p:last-child { margin-bottom: 0; }
+.callout-amber {
+  border-left-color: var(--amber); background: var(--amber-50);
+}
+.callout-amber > strong:first-child { color: var(--amber); }
+.form-frame-wrap {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-2);
+  min-height: 720px;
+}
+.form-frame-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 920px;
+  border: 0;
+  background: #fff;
+}
+.privacy {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+.setup-list { padding-left: 1.25rem; margin: 0.5rem 0 0; }
+.setup-list li { font-size: 14px; margin-bottom: 0.4rem; color: var(--text); }
+code { font-family: var(--mono); font-size: 12px; background: var(--bg-3); padding: 0.1rem 0.35rem; border-radius: 4px; }
+html.embed .back,
+html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Code Challenge Sign-up</h1>
+  <p class="sub"><a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop</a> · Power Africa 2026 · Nairobi · six tracks</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="power-africa-2026-workshop-planning.html#workshop-vision" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to workshop · Code challenges</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div class="callout">
+    <strong>Interest form (not conference registration)</strong>
+    <p>Tell ISV you want a Code Challenge seat. Full conference registration still goes through <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org</a> (no separate workshop fee). Responses land in the linked Google Sheet (organizers only) — not in this public wiki repo.</p>
+  </div>
+
+  <!--
+    Wire-up: paste the published Google Form URL below (Send → <> embed, or viewform link).
+    Accepts:
+      https://docs.google.com/forms/d/e/XXXX/viewform
+      https://docs.google.com/forms/d/e/XXXX/viewform?embedded=true
+      https://forms.gle/XXXX
+  -->
+  <div id="form-host" hidden>
+    <div class="form-frame-wrap">
+      <iframe id="gform-frame" title="Code Challenge sign-up form" loading="lazy"></iframe>
+    </div>
+    <p class="body-text" style="margin-top:0.75rem">Form not loading? <a id="gform-open" href="#" target="_blank" rel="noopener">Open in a new tab ↗</a></p>
+  </div>
+
+  <div id="form-setup" class="callout callout-amber">
+    <strong>Organizer: Google Form URL not set yet</strong>
+    <p>Create the form (once), paste the public link into this page, then registrants use the embed. Field list:</p>
+    <ol class="setup-list">
+      <li><strong>Name</strong> — Short answer · Required</li>
+      <li><strong>Scope of use</strong> — Multiple choice · Required — options:
+        <code>1/ Personal residential use</code> ·
+        <code>2/ Commercial enterprise use</code> ·
+        <code>3/ Rural village minigrid use</code> ·
+        <code>4/ Urban village minigrid use</code> ·
+        <code>5/ Educational capstone project team</code> ·
+        <code>6/ Educational other</code> ·
+        <code>7/ Enterprise other</code> ·
+        <code>8/ Commercial other</code> ·
+        <code>9/ Residential other</code>
+      </li>
+      <li><strong>Contact</strong> — Short answer · Required (email / phone / WhatsApp)</li>
+      <li><strong>Where from</strong> — Short answer · Required (city / country)</li>
+      <li><strong>GitHub username</strong> — Short answer · Optional</li>
+      <li><strong>Comment</strong> — Paragraph · Optional</li>
+    </ol>
+    <p style="margin-top:0.75rem">Create at <a href="https://forms.google.com/create" target="_blank" rel="noopener">forms.google.com/create</a> → Responses → Link to Sheets. Then <strong>Send → link</strong> (or <code>&lt;&gt;</code> embed) and reply in chat with that URL — agent wires <code>GOOGLE_FORM_URL</code> below.</p>
+    <p style="margin-top:0.5rem">Interim: email Tech Comm Chair <a href="mailto:adam.r.sauer@ieee.org?subject=Code%20Challenge%20sign-up">adam.r.sauer@ieee.org</a> with the same fields.</p>
+  </div>
+
+  <p class="privacy">Contact details stay in Google Forms / Sheets for organizers. They are not written into the public wiki. Conference registration remains on the IEEE Power Africa site.</p>
+</div>
+<script>
+(function () {
+  // Resolved from https://forms.gle/coBHuQKwK6JsqbAu7
+  var GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd5_H2axR16j-IRr99tJ6ACkQaTkulbCTK1fDDIo_QpFQ3txw/viewform';
+  var GOOGLE_FORM_SHORT = 'https://forms.gle/coBHuQKwK6JsqbAu7';
+
+  var host = document.getElementById('form-host');
+  var setup = document.getElementById('form-setup');
+  var frame = document.getElementById('gform-frame');
+  var openLink = document.getElementById('gform-open');
+
+  if (!GOOGLE_FORM_URL) return;
+
+  var src = GOOGLE_FORM_URL;
+  if (/docs\.google\.com\/forms\//.test(src) && src.indexOf('embedded=true') === -1) {
+    src += (src.indexOf('?') === -1 ? '?' : '&') + 'embedded=true';
+  }
+
+  frame.src = src;
+  openLink.href = GOOGLE_FORM_SHORT || GOOGLE_FORM_URL.replace(/[?&]embedded=true/, '').replace(/\?$/, '') || GOOGLE_FORM_URL;
+  host.hidden = false;
+  setup.hidden = true;
+})();
+</script>
+</body>
+</html>
