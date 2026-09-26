@@ -63,7 +63,9 @@ isv-ai-wiki/
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
-├── power-africa-2026-workshop-planning.html # OpenAMI EMS Workshop (Nairobi · Mon 21 + Thu 24 Sep · EAT)
+├── power-africa-2026-workshop-planning.html # OpenAMI EMS Workshop results (Nairobi · 4 sessions ran · 21 + 24 Sep)
+├── oms-workshop-nairobi-2026.html           # OMS Workshop Nairobi (A2EI · EnAccess · 30 Sep–2 Oct)
+├── oms-training-skills.html                 # Training-task catalog (OMS pre-session + EMS workshop ask · modules TBD)
 ├── power-africa-2026-conference.html        # IEEE PES & IAS Power Africa Conference 2026 links
 ├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
 ├── open-energy-hackathon-2025.html  # 2025 Open Energy Hackathon summary (Circles of Power)
@@ -185,8 +187,10 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/village-geojson-un` | Open Utility Network GeoJSON pack: essential vs nice-to-have layers, joins, LOD, API bindings. Starter from `smart-village-simulator/villages`. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
-| `#events/{note-id}` | In-person event planning (workshops, hackathons; default: `power-africa-2026-workshop-planning`). Legacy `#power-africa/...` still resolves. |
-| `#events/power-africa-2026-workshop-planning` | Power Africa 2026 workshop (Nairobi · EAT · UTC+3): Block 1 Stranded Legacy Updates, Block 2 Next Gen (MeshEMS, Aaron Tushabe / Nearly Free Energy), Block 3 Business Case & six Code Challenge tracks (SparkNet→OpenAMI, DLMS hello + CircuitSetup, LV feeder leakage/neutral, PCB smoke MQTT, cal QR smart-start, simulator O&M), Day 2 wrap-up. |
+| `#events/{note-id}` | In-person events (workshops, hackathons; default: `open-energy-hackathon-2025`). Legacy `#power-africa/...` still resolves. |
+| `#events/power-africa-2026-workshop-planning` | OpenAMI EMS Workshop **results** (filename kept). All 4 sessions ran (3 Mon + 1 Thu). BUILD sim · Open Utility Network convention · PCB interest sheet / handwritten handout TBD. |
+| `#events/oms-workshop-nairobi-2026` | OMS Workshop Nairobi · 30 Sep–2 Oct 2026 · A2EI · EnAccess · draft agenda + online pre-session votes. Attendance not published. |
+| `#events/oms-training-skills` | Training-task catalog — village energy + OMS / metering skillsets across the lifecycle. Not a course. Demand from OMS pre-session + OpenAMI EMS workshop training ask. Modules TBD. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
 | `#tech-notes/...` | Legacy alias → still works |
@@ -361,19 +365,25 @@ When editing this repo:
 
 ## In-person events & workshops
 
-### Power Africa Conference 2026 — OpenAMI EMS Workshop
+### Power Africa Conference 2026 — OpenAMI EMS Workshop (results)
 
-- **Dates:** Monday 21 Sep 2026 (10:45–18:00) & Thursday 24 Sep 2026 (14:00–15:30)
+- **What ran:** all **4 sessions** — **3 Monday 21 Sep** (Ivory Room) + **1 Thursday 24 Sep** (14:00–15:30 wrap-up).
 - **Time zone:** Nairobi, Kenya (`EAT · UTC+3`)
 - **Venue:** Safari Park Hotel, Ivory Room
 - **Instructors:** Glenn Algie, Adam Sauer, Aaron Tushabe, Jude Numfor
-- **Schedule structure:**
-  - **Block 1 (11:05–13:00):** *Stranded Legacy Updates* — AMI ecosystem and Open Metering Infrastructure updates, SteamaCo video talk (Warren Scott-White, 11:05–11:35), Moses (SparkMeter, in person).
-  - **Block 2 (14:00–16:00):** *Next Gen* — Feeder monitoring, MeshEMS v2.0 (NESL 865B), Aaron Tushabe / Nearly Free Energy (Uganda site layout & mini-grid operator), OpenAMI cabinets, DitroniX (Dave Williams, cabinet hardware).
-  - **Block 3 (16:15–17:50):** *Business Case and Code Challenges* — Sandra Kwak / 10 Power on mini-grid business cases; kickoff of six tracks: (1) SparkNet-HTTP → MeshEMS/OpenAMI, (2) DLMS/COSEM-friendly hello world + CircuitSetup 6-port energy cache (`meshems-openami-metering`), (3) intelligent LV feeder add-on (neutral balance *or* leakage), (4) 15-min Street-EMS PCB smoke (LEDs + MQTT), (5) 3φ PSU + EMS calibration testhead / QR / smart-start factory file, (6) Village Simulator O&M UX. Shared wrap-up axes: cost · lock-in · sovereignty · comms · repair; mobile money optional stretch.
-  - **Day 2 (14:00–15:30):** *Code Challenge Wrap-up* — demos per track (smoke MQTT, cal QR, feeder LCOE vs opex, simulator UX).
-- **Take-home hardware:** 15–20 NESL 865B MeshEMS v2.0 controller PCBs, 3–5 TC2.0 reference cabinets (<25 lb).
-- **Standalone page:** `power-africa-2026-workshop-planning.html` (embeds with `?embed=1` at `#events/power-africa-2026-workshop-planning`).
+- **Sessions:** (1) Stranded Legacy Updates 11:05–13:00 · (2) Next Gen 14:00–16:00 · (3) Business Case and Code Challenges 16:15–17:50 · (4) Thursday wrap-up.
+- **Simulator:** BUILD mode — developers construct the microgrid; data auto-formats to **Open Utility Network convention** (not a standard). **LOADS** and **GENERATION** (Energy Assets). Main view **OPERATIONS** / **MAINTENANCE**.
+- **PCB follow-up:** interest sheet + form on the results page. Handwritten handout list TBD. Name list from sheet pending (no public CSV without login).
+- **Photos:** conference page (`power-africa-2026-conference.html`), not the workshop page.
+- **Standalone page:** `power-africa-2026-workshop-planning.html` (filename kept; embeds at `#events/power-africa-2026-workshop-planning`).
+
+### OMS Workshop Nairobi — 30 Sep–2 Oct 2026
+
+- **Hosts:** A2EI and EnAccess. Draft agenda in prep pack (may change).
+- **Online pre-session:** Tue 22 Sep 2026, 11:00–12:30 CEST · AMDA / A2EI / EnAccess · 50+ on the call (already ran).
+- **In-person attendance:** not published on this wiki.
+- **Standalone page:** `oms-workshop-nairobi-2026.html` · `#events/oms-workshop-nairobi-2026`.
+- **Training-task catalog** (not a course): `oms-training-skills.html` · `#events/oms-training-skills` — work that needs training, mapped to lifecycle phases. Modules TBD. No date / venue / sign-up.
 
 ---
 

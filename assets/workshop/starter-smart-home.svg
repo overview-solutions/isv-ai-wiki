@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-labelledby="t">
+  <title id="t">House with lamp, outlet, and a small energy monitor</title>
+  <rect width="320" height="200" fill="#EAF3DE"/>
+  <!-- house -->
+  <path d="M48 96 L160 28 L272 96" fill="#97C459" stroke="#3B6D11" stroke-width="1.6" stroke-linejoin="round"/>
+  <rect x="64" y="96" width="192" height="80" fill="#f7f6f3" stroke="#3B6D11" stroke-width="1.6"/>
+  <!-- door -->
+  <rect x="142" y="128" width="36" height="48" rx="2" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.3"/>
+  <circle cx="172" cy="154" r="2" fill="#3B6D11"/>
+  <!-- lamp -->
+  <circle cx="100" cy="128" r="12" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.4"/>
+  <path d="M100 116v-8" stroke="#BA7517" stroke-width="1.4"/>
+  <!-- wall outlet -->
+  <rect x="204" y="132" width="22" height="18" rx="2" fill="#ffffff" stroke="#5a5a55" stroke-width="1.2"/>
+  <rect x="209" y="137" width="4" height="8" rx="1" fill="#5a5a55"/>
+  <rect x="217" y="137" width="4" height="8" rx="1" fill="#5a5a55"/>
+  <!-- small monitor box on wall -->
+  <rect x="232" y="128" width="16" height="22" rx="2" fill="#0F6E56"/>
+  <rect x="235" y="132" width="10" height="6" rx="1" fill="#E1F5EE"/>
+</svg>

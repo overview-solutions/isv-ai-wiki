@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/isv-theme.css?v=20260926shot">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260926oms">
 <link rel="stylesheet" href="css/isv-tasks.css">
 <script src="js/isv-theme.js"></script>
 <script src="js/isv-tasks.js?v=20260629"></script>
@@ -1517,6 +1517,8 @@ code {
       <div class="nav-sub-item" data-note="open-energy-hackathon-2026" data-note-group="events" onclick="showNote('open-energy-hackathon-2026')">Apr 2026 · Open Energy Hackathon</div>
       <div class="nav-sub-item" data-note="power-africa-2026-conference" data-note-group="events" onclick="showNote('power-africa-2026-conference')">Sep 2026 · Power Africa Conference</div>
       <div class="nav-sub-item" data-note="power-africa-2026-workshop-planning" data-note-group="events" onclick="showNote('power-africa-2026-workshop-planning')">Sep 2026 · OpenAMI EMS Workshop</div>
+      <div class="nav-sub-item" data-note="oms-workshop-nairobi-2026" data-note-group="events" onclick="showNote('oms-workshop-nairobi-2026')">30 Sep–2 Oct 2026 · OMS Workshop Nairobi</div>
+      <div class="nav-sub-item" data-note="oms-training-skills" data-note-group="events" onclick="showNote('oms-training-skills')">Catalog · OMS / village training skills</div>
       <div class="nav-sub-item" data-note="oseas-2026" data-note-group="events" onclick="showNote('oseas-2026')">Oct 2026 · OSEAS</div>
     </div>
     <div class="nav-label nav-label-knowledge">Knowledge Base</div>
@@ -1985,6 +1987,27 @@ code {
         </div>
       </div>
       <div class="resource-row">
+        <div class="standard-icon">🛠️</div>
+        <div>
+          <div class="resource-name">OpenAMI EMS Workshop · Power Africa 2026</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('power-africa-2026-workshop-planning');return false">Results</a> — 4 sessions ran (3 Mon + 1 Thu). BUILD simulator · Open Utility Network convention. Photos on the <a href="#" onclick="showNote('power-africa-2026-conference');return false">conference page</a>.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📋</div>
+        <div>
+          <div class="resource-name">OMS Workshop Nairobi</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('oms-workshop-nairobi-2026');return false">Event page</a> — 30 Sep–2 Oct 2026 · A2EI · EnAccess · Open Metering Strategy. Online pre-session 22 Sep already ran. In-person attendance not listed here. Training-task catalog: <a href="#" onclick="showNote('oms-training-skills');return false">OMS / village training skills</a>.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📘</div>
+        <div>
+          <div class="resource-name">OMS / village training skills</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('oms-training-skills');return false">Catalog</a> — work that needs training across the energy + OMS / metering lifecycle. Not a course. Demand from the OMS pre-session (22 Sep) plus the OpenAMI EMS workshop training ask. Modules TBD.</div>
+        </div>
+      </div>
+      <div class="resource-row">
         <div class="standard-icon">📡</div>
         <div>
           <div class="resource-name">MeshEMS board — NESL</div>
@@ -2203,7 +2226,7 @@ code {
     <div class="section-header">
       <div>
         <div class="section-title" id="events-section-title">In-Person Events</div>
-        <div class="section-sub" id="events-section-sub">Workshops and hackathons · planning notes</div>
+        <div class="section-sub" id="events-section-sub">Workshops and hackathons · results and upcoming</div>
       </div>
     </div>
     <div id="content-events">
@@ -2383,13 +2406,13 @@ const METER_BENCHMARK_PAGES = {
   'meshems': {
     title: 'MeshEMS board',
     sub: 'Multi-tenant edge metering · workshops & deployments · OpenAMI',
-    src: 'meshems.html?embed=1&v=20260926tr',
+    src: 'meshems.html?embed=1&v=20260926oms',
     standalone: 'meshems.html'
   },
   'village-simulator': {
     title: 'Village Simulator',
     sub: 'Offline kit · live npm · Circaevum Locus',
-    src: 'meter-village-simulator.html?embed=1&v=20260920top',
+    src: 'meter-village-simulator.html?embed=1&v=20260926oms',
     standalone: 'meter-village-simulator.html'
   },
   'village-geojson-un': {
@@ -2456,23 +2479,39 @@ const MEETING_NOTES = {
     title: 'Power Africa Conference 2026',
     date: 'Sep 2026',
     sub: 'Nairobi · IEEE PES & IAS · official site links',
-    src: 'power-africa-2026-conference.html?embed=1&v=20260919moses',
+    src: 'power-africa-2026-conference.html?embed=1&v=20260926oms',
     standalone: 'power-africa-2026-conference.html'
   },
   'power-africa-2026-workshop-planning': {
     group: 'events',
     title: 'OpenAMI EMS Workshop',
     date: 'Sep 2026',
-    sub: 'Nairobi · six code tracks · MAKE · CODE · INTEGRATE',
-    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260922signup',
+    sub: 'Nairobi · 4 sessions ran · BUILD sim · PCB follow-up',
+    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260926psign',
     standalone: 'power-africa-2026-workshop-planning.html'
+  },
+  'oms-workshop-nairobi-2026': {
+    group: 'events',
+    title: 'OMS Workshop Nairobi',
+    date: '30 Sep–2 Oct 2026',
+    sub: 'A2EI · EnAccess · Open Metering Strategy · draft agenda',
+    src: 'oms-workshop-nairobi-2026.html?embed=1&v=20260926skill',
+    standalone: 'oms-workshop-nairobi-2026.html'
+  },
+  'oms-training-skills': {
+    group: 'events',
+    title: 'OMS / village training skills',
+    date: 'Catalog',
+    sub: 'Skillsets that need training · lifecycle timeline · modules TBD',
+    src: 'oms-training-skills.html?embed=1&v=20260926skill',
+    standalone: 'oms-training-skills.html'
   },
   'oseas-2026': {
     group: 'events',
     title: 'OSEAS 2026',
     date: 'Oct 2026',
     sub: 'Kigali · LV feeder EMS challenge · leakage or neutral balance',
-    src: 'oseas-2026.html?embed=1&v=20260702',
+    src: 'oseas-2026.html?embed=1&v=20260926oms',
     standalone: 'oseas-2026.html'
   }
 };

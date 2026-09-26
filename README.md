@@ -23,6 +23,7 @@ Then open:
 | **Wiki home** | [http://127.0.0.1:8765/index.html](http://127.0.0.1:8765/index.html) |
 | **Village Simulator** (inside wiki) | [http://127.0.0.1:8765/index.html#village-metering/village-simulator](http://127.0.0.1:8765/index.html#village-metering/village-simulator) — hub page: how to run + frozen theater |
 | **Nairobi workshop / code challenges** | [http://127.0.0.1:8765/power-africa-2026-workshop-planning.html](http://127.0.0.1:8765/power-africa-2026-workshop-planning.html) |
+| **OMS Workshop Nairobi** | [http://127.0.0.1:8765/oms-workshop-nairobi-2026.html](http://127.0.0.1:8765/oms-workshop-nairobi-2026.html) |
 
 **Simulator lives in a separate GitHub repo** ([smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)), but the wiki ships a **frozen copy** under `village-simulator/` and embeds it. For offline browsing you **do not** clone that second repo.
 
@@ -62,7 +63,7 @@ This wiki is **open** — anyone can read it. A small amount of material (vendor
 |---------|------------|
 | **Tasks** | Meeting follow-ups as [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) — live board in the wiki |
 | **Meeting notes** | Internal Tech Comm call notes (tables, action items, embedded diagrams) |
-| **Events & Workshops** | In-person event planning (e.g. Power Africa 2026 OpenAMI EMS workshop in Nairobi) |
+| **Events & Workshops** | In-person results and upcoming (Power Africa OpenAMI EMS workshop · OMS Nairobi · OSEAS) |
 | **Village Metering** | Benchmarks, roadmap, MeshEMS board, VMRS/OBIS registers, vendor study, Village Simulator |
 | **Technical reports** | Dev Labs + ISV reports (`catalog.json`) — summaries here, full docs linked |
 | **Standards** | Village-relevant (2030.10, DLMS, STS, SunSpec) vs larger grid integration (1547, 2030.5, 2800, P4200) |
@@ -72,7 +73,8 @@ Direct links (live site):
 
 - [Tasks board (wiki)](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) — filter by meeting, status, assignee
 - [GitHub Issues (source of truth)](https://github.com/overview-solutions/isv-ai-wiki/issues) — create, comment, assign, close
-- [Power Africa 2026 Workshop](https://overview-solutions.github.io/isv-ai-wiki/power-africa-2026-workshop-planning.html) — Nairobi schedule (EAT · UTC+3): Stranded Legacy, Next Gen (MeshEMS), Business Case & six Code Challenge tracks (SparkNet→OpenAMI, DLMS/CircuitSetup, LV feeder add-on, PCB smoke, cal QR, simulator O&M)
+- [Power Africa 2026 Workshop](https://overview-solutions.github.io/isv-ai-wiki/power-africa-2026-workshop-planning.html) — results: 4 sessions ran (3 Mon + 1 Thu); BUILD sim · Open Utility Network convention
+- [OMS Workshop Nairobi](https://overview-solutions.github.io/isv-ai-wiki/oms-workshop-nairobi-2026.html) — 30 Sep–2 Oct 2026 · A2EI · EnAccess
 - [Metering topology meeting note](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)
 - [Meter vendor study](https://overview-solutions.github.io/isv-ai-wiki/meter-vendor-study.html) — cited benchmarks, STS, DLMS, industry bands
 - [Standards guide](https://overview-solutions.github.io/isv-ai-wiki/index.html#standards) — village microgrid standards vs larger grid integration

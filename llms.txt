@@ -16,7 +16,9 @@
 - [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
 - [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
 - [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
-- [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop planning (Nairobi · EAT · UTC+3)
+- [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop results (Nairobi · 4 sessions ran · BUILD sim)
+- [OMS Workshop Nairobi](https://isv.wiki/oms-workshop-nairobi-2026.html): Open Metering Strategy · 30 Sep–2 Oct 2026 · A2EI · EnAccess
+- [OMS / village training skills](https://isv.wiki/oms-training-skills.html): Catalog of work that needs training (lifecycle timeline) — not a course; modules TBD
 - [Code Challenge sign-up](https://isv.wiki/code-challenge-signup.html): Interest form for workshop Code Challenge seats (name · scope · contact · where from · GitHub · comment)
 - [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 pole controller, BOM, schematic
 - [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation hub

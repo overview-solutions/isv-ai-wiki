@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training tasks · village energy + OMS / metering · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260926skill">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
+  font-size: 14px; line-height: 1.55;
+}
+.callout > strong:first-child { display: block; margin-bottom: 0.4rem; font-weight: 500; color: var(--green); }
+.callout p:last-child { margin-bottom: 0; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+.callout-teal { border-left-color: var(--teal); background: var(--teal-50); }
+.callout-teal > strong:first-child { color: var(--teal); }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 0.75rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.todo { color: var(--text-2); font-style: italic; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 13px; padding: 0.45rem 0.85rem; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+.links a:hover { border-color: var(--green); color: var(--green); }
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.65rem; }
+.pill {
+  font-size: 11px; line-height: 1.3; padding: 0.18rem 0.5rem; border-radius: 99px;
+  border: 1px solid var(--border); background: var(--bg-2); color: var(--text-2); white-space: nowrap;
+}
+.pill-layer { border-color: color-mix(in srgb, var(--ieee-blue) 35%, var(--border)); color: var(--blue); }
+.pill-phase { border-color: color-mix(in srgb, var(--green) 40%, var(--border)); color: var(--green); }
+.pill-status { border-color: color-mix(in srgb, var(--amber) 40%, var(--border)); color: var(--amber); }
+
+.skill {
+  border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2);
+  padding: 0.85rem 0.95rem; margin-bottom: 0.75rem;
+}
+.skill h3 { margin-top: 0; }
+.skill .meta { font-size: 12px; color: var(--text-2); margin-bottom: 0.45rem; }
+.skill ul { margin-bottom: 0.45rem; }
+
+.tl-note { font-size: 12px; color: var(--text-2); line-height: 1.4; margin-bottom: 0.65rem; }
+.tl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); }
+.tl-table { width: max-content; min-width: 100%; border-collapse: collapse; margin: 0; font-size: 11px; }
+.tl-table th, .tl-table td { border: 1px solid var(--border); padding: 0.35rem 0.3rem; text-align: center; vertical-align: middle; }
+.tl-table th { background: var(--bg-3); font-weight: 500; font-size: 10px; line-height: 1.25; min-width: 3.4rem; }
+.tl-table th.skill-col, .tl-table td.skill-col { text-align: left; min-width: 9.5rem; max-width: 11rem; font-size: 11px; position: sticky; left: 0; background: var(--bg-2); z-index: 1; }
+.tl-table th.skill-col { background: var(--bg-3); }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 99px; vertical-align: middle; }
+.dot-pri { background: var(--green); }
+.dot-span { background: var(--amber); }
+.dot-empty { background: transparent; border: 1px solid var(--border); }
+.tl-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 11px; color: var(--text-2); margin: 0.45rem 0 1rem; }
+.tl-legend i {
+  display: inline-block; width: 9px; height: 9px; border-radius: 99px;
+  margin-right: 0.3rem; vertical-align: -1px;
+}
+.leg-pri { background: var(--green); }
+.leg-span { background: var(--amber); }
+.leg-empty { background: transparent; border: 1px solid var(--border); }
+
+.phase-rail {
+  display: flex; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  margin-bottom: 0.85rem; padding-bottom: 0.25rem;
+}
+.phase-step {
+  flex: 0 0 auto; min-width: 5.6rem; max-width: 7.2rem;
+  padding: 0.45rem 0.5rem 0.55rem; border: 1px solid var(--border);
+  background: var(--bg-2); position: relative;
+}
+.phase-step + .phase-step { border-left: none; }
+.phase-step:first-child { border-radius: 8px 0 0 8px; }
+.phase-step:last-child { border-radius: 0 8px 8px 0; }
+.phase-n { display: block; font-size: 10px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.phase-name { display: block; font-size: 11px; font-weight: 500; line-height: 1.25; color: var(--text); }
+
+.tl-stack { display: none; }
+.tl-stack ol { padding-left: 1.2rem; margin-bottom: 1rem; }
+.tl-stack li { margin-bottom: 0.55rem; }
+.tl-stack strong { font-weight: 500; }
+
+@media (max-width: 640px) {
+  .tl-scroll { display: none; }
+  .tl-stack { display: block; }
+  .phase-step { min-width: 4.8rem; max-width: 5.6rem; }
+}
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>Training tasks · village energy + OMS / metering</h1>
+  <p class="sub">Catalog of <strong>work that needs training</strong> — not a course. Self-paced later is welcome. Custom training also possible later. Status: catalog only · modules TBD.</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/oms-training-skills" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
+
+  <div class="callout">
+    <strong>What this page is</strong>
+    <p>A list of <strong>skillsets</strong> operators and technical partners asked to be able to do across a village-scale energy + OMS / metering lifecycle. Friendly to a future self-paced path. Could become modules or a custom session later. <strong>No curricula, hours, certificates, dates, venues, or sign-up forms here.</strong></p>
+  </div>
+  <div class="callout callout-amber">
+    <strong>What this page is not</strong>
+    <p>Not a trained course. Not a complete survey. Not a vendor comparison (use the <a href="index.html#village-metering/vendor-study">vendor study</a>). Attendance names from the OMS pre-session are <strong>not published</strong>. Empty cells stay empty.</p>
+  </div>
+
+  <h2 id="demand">Source of demand</h2>
+  <p class="body-text">Named interest below came from the <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a> online pre-session (already ran): <strong>Tue 22 Sep 2026, 11:00–12:30 CEST</strong> · AMDA / A2EI / EnAccess · <strong>50+ on the call</strong>. Hosts of the in-person workshop (30 Sep–2 Oct 2026): A2EI and EnAccess. Hash: <a href="index.html#events/oms-workshop-nairobi-2026">#events/oms-workshop-nairobi-2026</a>. In-person attendance is not listed on this wiki.</p>
+  <p class="body-text">The OMS page already printed a feature-vote sheet (119 votes across 27 features). This catalog does <strong>not</strong> copy that table and does <strong>not</strong> invent extra poll numbers. Where a skillset matches a published top-cluster row, the vote count is cited from that page. “Upgrading systems” was stated with this catalog request — it is <strong>not</strong> a named row on the 27-feature sheet. The list is incomplete on purpose.</p>
+  <p class="body-text">Separate takeaway from the <a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop results</a> (Power Africa, Nairobi, 21 + 24 Sep 2026): people asked for a training session on OpenAMI EMS, the Village Simulator, and the workshop stack. The results page says ISV will run a session <strong>in a few weeks</strong>. No date, venue, or sign-up is published here.</p>
+
+  <h2 id="timeline">Lifecycle timeline — skills needed when</h2>
+  <p class="tl-note">Not a Gantt. No invented dates. Order is the work lifecycle. <strong>Green</strong> = primary phase for that skillset. <strong>Amber</strong> = the same skill honestly spans here too. Empty = not the main ask in that phase (does not mean “never needed”).</p>
+
+  <div class="phase-rail" role="list" aria-label="Lifecycle phases in order">
+    <div class="phase-step" role="listitem"><span class="phase-n">1</span><span class="phase-name">Conception</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">2</span><span class="phase-name">Planning</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">3</span><span class="phase-name">Procurement</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">4</span><span class="phase-name">Design</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">5</span><span class="phase-name">Construction</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">6</span><span class="phase-name">Commissioning</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">7</span><span class="phase-name">Operations</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">8</span><span class="phase-name">Maintenance</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">9</span><span class="phase-name">Transferring</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">10</span><span class="phase-name">Decommissioning</span></div>
+    <div class="phase-step" role="listitem"><span class="phase-n">11</span><span class="phase-name">Recycling</span></div>
+  </div>
+  <p class="tl-note"><strong>Procurement</strong> and <strong>transferring / handover</strong> sit on this rail because village metering work hits them even when the pre-session did not name those words. Decommissioning and recycling are later phases — almost empty here, on purpose.</p>
+
+  <div class="tl-scroll">
+    <table class="tl-table">
+      <thead>
+        <tr>
+          <th class="skill-col">Skillset</th>
+          <th>Conc.</th><th>Plan</th><th>Procure</th><th>Design</th><th>Build</th><th>Comm.</th><th>Ops</th><th>Maint.</th><th>Xfer</th><th>Decom.</th><th>Recyc.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="skill-col">Open-source CRM</td>
+          <td><span class="dot dot-span" title="Also: architecture class"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: customer-record handover"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Provision / commission meters</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: what you buy must be commissionable"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: install path"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: swap / re-commission"></span></td>
+          <td><span class="dot dot-span" title="Also: re-key on handover"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Data, API, bulk export</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: what you will need to leave with"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: archive before teardown"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Multi-site / multi-operator</td>
+          <td><span class="dot dot-span" title="Also: who operates which site"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Management tokens</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: first key / credit state"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: key change on handover"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Remote operations</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: backhaul assumption"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: DCU / WAN design"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Self-hosting</td>
+          <td><span class="dot dot-span" title="Also: hosted vs own IT"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: who runs the box"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: stand-up"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: keep it alive"></span></td>
+          <td><span class="dot dot-span" title="Also: move the host"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Upgrading systems</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: migration window"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">Monitoring &amp; reporting</td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: funder / regulator asks"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-span" title="Also: first live reads"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-pri" title="Primary"></span></td>
+          <td><span class="dot dot-span" title="Also: report pack on handover"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+          <td><span class="dot dot-empty" title="Empty"></span></td>
+        </tr>
+        <tr>
+          <td class="skill-col">And others</td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+          <td><span class="dot dot-span" title="Open"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tl-legend">
+    <span><i class="leg-pri"></i>Primary phase</span>
+    <span><i class="leg-span"></i>Also spans</span>
+    <span><i class="leg-empty"></i>Empty (not the main ask here)</span>
+  </div>
+
+  <div class="tl-stack">
+    <ol>
+      <li><strong>Conception</strong> — architecture class (prepaid vs AMI vs proprietary mesh) starts here. CRM / self-host / multi-operator choice can start here too.</li>
+      <li><strong>Planning</strong> — self-host, multi-site, CRM pick, data you must keep, monitoring/funder asks, upgrade/migration window.</li>
+      <li><strong>Procurement</strong> — what you buy must be commissionable without a vendor ticket. Hosting “who runs the box.” Vendor shortlist is wiki-tracked, not a pre-session named row.</li>
+      <li><strong>Design</strong> — CRM/API contract, open data schema, DCU/WAN for remote ops, self-host topology, what to monitor.</li>
+      <li><strong>Construction</strong> — physical install path; standing up a self-host; meters land before they commission.</li>
+      <li><strong>Commissioning</strong> — provision and commission meters (primary). First management-token / credit state. First live reads.</li>
+      <li><strong>Operations</strong> — CRM, API/export, multi-site RBAC, management tokens, remote connect/disconnect, self-host run, upgrades, monitoring.</li>
+      <li><strong>Maintenance</strong> — remote ops, management tokens, swap/re-commission, keep the host alive, upgrades, reporting.</li>
+      <li><strong>Transferring</strong> — customer records, bulk export, multi-operator handover, re-key / key-change, move the host, upgrade off a dying platform.</li>
+      <li><strong>Decommissioning</strong> — archive before teardown. Named pre-session list did not cover this. Empty on purpose.</li>
+      <li><strong>Recycling</strong> — hardware disposal / reuse not in the named interest list. Empty on purpose.</li>
+    </ol>
+  </div>
+
+  <h2 id="skillsets">Skillsets</h2>
+  <p class="body-text">Each block is work that needs training — not a lesson plan. Stack layer is scored where the work sits (meter / DCU / cloud / ops). Self-paced vs custom is a later-path hint, not a scheduled offering.</p>
+
+  <article class="skill" id="crm">
+    <h3>Integration with an open-source CRM</h3>
+    <div class="pills">
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">planning</span>
+      <span class="pill pill-phase">design</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">transferring</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Connect metering / vending events to a customer-account system you can read and leave. Pre-session top row on the OMS page: “Documented integration with an open-source CRM” — <strong>9 votes</strong> (cite that page; do not treat 9 as a headcount).</p>
+    <p><strong>Typical tasks to train.</strong> Map customer / account / meter IDs. Push payment and consumption events. Avoid a one-way vendor CRM lock. Handover of the customer book when the operator or platform changes.</p>
+    <p class="meta"><strong>Self-paced later:</strong> documentary (API docs, field maps) can be self-paced. <strong>Custom later:</strong> site-specific CRM and ID scheme. Wiki already names <a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager (MPM)</a> as an open mini-grid customer/asset OS (CRM + prepaid families). <a href="index.html#village-metering/openami">OpenAMI</a> lists MPM as one backend. Shared customer/account id across stacks: <span class="todo">unknown</span>. Do not claim a finished MPM↔OMS integration as fact.</p>
+  </article>
+
+  <article class="skill" id="commission">
+    <h3>Provisioning and commissioning meters</h3>
+    <div class="pills">
+      <span class="pill pill-layer">meter</span>
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">commissioning</span>
+      <span class="pill pill-phase">construction</span>
+      <span class="pill pill-phase">maintenance</span>
+      <span class="pill pill-phase">transferring</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Put a meter into service — identity, keys, tariff/credit start, NAN join — without waiting on a vendor ticket. OMS page: “Provision and commission meters yourself, without vendor support tickets” — <strong>7 votes</strong>.</p>
+    <p><strong>Typical tasks to train.</strong> Unbox → register → associate customer. Join RF / PLC / GSM path. Confirm a first read. Re-commission after swap. Re-key on handover. Layer stays at <strong>meter + DCU</strong>; do not score this as a cloud feature.</p>
+    <p class="meta"><strong>Self-paced later:</strong> checklists and OEM public docs. <strong>Custom later:</strong> feeder voltage, harmonic profile, OEM field tools. Related: <a href="meter-overview.html#problems">field problems</a> · <a href="index.html#village-metering/vendor-study">vendor study</a> · <a href="index.html#village-metering/tc20-review">TC 2.0 / GroundBolt</a>. Per-vendor ICD often NDA-gated — cite as ISV-internal; do not paste restricted text here.</p>
+  </article>
+
+  <article class="skill" id="data">
+    <h3>Data management, API integrations, and bulk exporting</h3>
+    <div class="pills">
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">design</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">transferring</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Own the data path: what is stored, who can call it, how you leave with it intact. OMS page top cluster: bulk export of historical consumption / payments / configuration — <strong>7</strong>; open API covering data and commands — <strong>7</strong>; open data schema — <strong>6</strong>.</p>
+    <p><strong>Typical tasks to train.</strong> Define export (CSV / JSON / API). Auth and scope for commands vs reads. Bulk pull for a site or a date range. Keep a copy that still loads after the head-end dies. Northbound contract is not the same as a meter register map.</p>
+    <p class="meta"><strong>Self-paced later:</strong> schema and API docs (good self-paced fit). <strong>Custom later:</strong> live credentials, rate limits, dirty historical tables. Wiki: <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound MQTT v0.1</a> · <a href="index.html#village-metering/vmrs">VMRS / OBIS checklist</a> (draft, not a published standard). “REST (partner login)” ≠ public OpenAPI — that warning already lives on the vendor study.</p>
+  </article>
+
+  <article class="skill" id="multisite">
+    <h3>Multi-site and multi-operator support</h3>
+    <div class="pills">
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">planning</span>
+      <span class="pill pill-phase">design</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">transferring</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> One person or org can see more than one village / concession, with role-based access — and a site can change operator without a full rebuild. OMS page: “Multi-site and multi-operator support with role-based access” — <strong>7 votes</strong>.</p>
+    <p><strong>Typical tasks to train.</strong> Tenant / site / role model. Who can vend, disconnect, or export. Handover of a single site out of a multi-site book. Audit trail: <span class="todo">unknown per platform</span>.</p>
+    <p class="meta"><strong>Self-paced later:</strong> role-matrix worksheets. <strong>Custom later:</strong> real org chart and concession contracts. How any one named platform implements RBAC is not verified here.</p>
+  </article>
+
+  <article class="skill" id="tokens">
+    <h3>Management tokens</h3>
+    <div class="pills">
+      <span class="pill pill-layer">meter</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">maintenance</span>
+      <span class="pill pill-phase">commissioning</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Privileged tokens that change meter state — not the same as a customer prepaid credit token. OMS page wording: “Management tokens — clear tamper, clear credit, set power limit” — <strong>6 votes</strong>.</p>
+    <p><strong>Typical tasks to train.</strong> Who may issue. Clear tamper / clear credit / set power limit. Store and rotate issuer keys. Offline path if WAN is down. <strong>Do not conflate</strong> with STS prepaid vending (IEC 62055) or OpenPAYGO credit tokens — those are a related but different skill (see <a href="#others">and others</a>).</p>
+    <p class="meta"><strong>Self-paced later:</strong> token-type list and who-can table (the OMS “WHO can generate and distribute tokens” row is still <span class="todo">TBD</span>). <strong>Custom later:</strong> live key ceremony, escrow, site SGC. Pre-session also recorded escrow-of-keys and EarthSpark key-option themes — process URLs stay on those orgs’ channels. Key-change tokens (move a meter to your own supply group) sat mid-table on the OMS sheet (3 votes) — related, not this row.</p>
+  </article>
+
+  <article class="skill" id="remote">
+    <h3>Remote operations</h3>
+    <div class="pills">
+      <span class="pill pill-layer">meter</span>
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">maintenance</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Act on a meter you are not standing next to: disconnect / reconnect, read status. OMS page: “Remote disconnect and reconnect; read meter status” — <strong>6 votes</strong>.</p>
+    <p><strong>Typical tasks to train.</strong> Confirm last-heard and relay state before a command. Fail safely when NAN/WAN is down (wiki: rural backhaul breaks cloud-first designs). Distinguish meter-level connect from DCU-level and cloud-level “online.” Log who sent the command.</p>
+    <p class="meta"><strong>Self-paced later:</strong> command list + failure modes. <strong>Custom later:</strong> that feeder’s radio and DCU. Related: <a href="index.html#notes/metering-2026-05-28">metering topology note</a> · <a href="wireless-telecom.html">wireless telecom map</a>. Do not score IEEE 2030.5 / OpenADR here — those are Phase 3 grid-facing on the <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
+  </article>
+
+  <article class="skill" id="selfhost">
+    <h3>Self-hosting</h3>
+    <div class="pills">
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">planning</span>
+      <span class="pill pill-phase">design</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Run the head-end / operator app on infrastructure you control. OMS page: “Self-hosting: containerised, documented, one-command deployment” — <strong>6 votes</strong>. Pre-session outcomes also recorded a <strong>self-host burden</strong>: operators who take hardware/software/cloud still need a shared open customer-management codebase rather than each rebuilding a full platform.</p>
+    <p><strong>Typical tasks to train.</strong> Choose hosted vs self-host vs hybrid. Stand up, back up, restore. Patch the host. Know what you still cannot do without keys. One-command deploy for <em>which</em> stack: <span class="todo">unknown — do not treat the vote wording as a shipping product</span>.</p>
+    <p class="meta"><strong>Self-paced later:</strong> public compose/docs once they exist. <strong>Custom later:</strong> that operator’s IT capacity (OMS hosted-OMS-service row had 1 vote; operator takeover of ThunderCloud 2.0 / Nimbus had 0 — cite the OMS page). Wiki: <a href="index.html#village-metering/tc20-review">TC 2.0</a> describes a ThunderCloud self-host path; <a href="index.html#village-metering/openami">OpenAMI</a> names MPM / OpenEMS / ThunderCloud as backends. OpenEMS on that page: no support yet for SparkNet aggregation, DLMS/COSEM, or STS.</p>
+  </article>
+
+  <article class="skill" id="upgrade">
+    <h3>Upgrading systems</h3>
+    <div class="pills">
+      <span class="pill pill-layer">meter</span>
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">maintenance</span>
+      <span class="pill pill-phase">transferring</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Move firmware, head-end, or platform version without bricking revenue collection. <strong>Demand source:</strong> stated with this catalog request. <strong>Not</strong> a named row on the 22 Sep 27-feature sheet — no vote number invented here. The OMS page does have a separate live poll on migration timeline (already printed there).</p>
+    <p><strong>Typical tasks to train.</strong> Backup before upgrade. Order of meter vs DCU vs cloud. Rollback. What breaks first if the old platform goes away (OMS poll themes: vending, free energy, no energy, data monitoring — counts stay on that page). Firmware update that needs encryption keys (pre-session EarthSpark / SparkNet-HTTP note).</p>
+    <p class="meta"><strong>Self-paced later:</strong> upgrade checklists once a stack publishes them. <strong>Custom later:</strong> that fleet’s mix (SparkNet / TC 2.0 / DLMS / STS-only). Do not invent a migration date or a certified upgrade path.</p>
+  </article>
+
+  <article class="skill" id="monitor">
+    <h3>Monitoring and reporting</h3>
+    <div class="pills">
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">design</span>
+      <span class="pill pill-phase">operations</span>
+      <span class="pill pill-phase">maintenance</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> See the fleet and produce reports someone else will actually use. On the OMS page this is a <strong>vote block</strong> (“Data, monitoring and reporting” — 32 · 27%), not one feature. A named row inside that block: aggregated monitoring and reporting export for funders — <strong>5 votes</strong>. Interval data (hourly or 15-minute) outscored 1-minute on that same sheet.</p>
+    <p><strong>Typical tasks to train.</strong> Choose resolution you can backhaul. Build a site / feeder / customer roll-up. Export a funder pack. Alarm on last-heard and tamper — at the correct layer. Do not treat unused high-resolution data as free (OMS draft Day 1 theme).</p>
+    <p class="meta"><strong>Self-paced later:</strong> report templates + VMRS field list. <strong>Custom later:</strong> that funder’s columns. Wiki: <a href="index.html#village-metering/vmrs">VMRS</a> · <a href="meter-benchmark/northbound-mqtt-v0.1.json">northbound MQTT</a> · <a href="index.html#village-metering/openami">OpenAMI leakage / telemetry</a>.</p>
+  </article>
+
+  <article class="skill" id="others">
+    <h3>And others</h3>
+    <div class="pills">
+      <span class="pill pill-layer">meter</span>
+      <span class="pill pill-layer">DCU</span>
+      <span class="pill pill-layer">cloud</span>
+      <span class="pill pill-layer">ops</span>
+      <span class="pill pill-phase">all phases — open</span>
+      <span class="pill pill-status">catalog only · modules TBD</span>
+    </div>
+    <p><strong>What it is.</strong> Room for skillsets the named list did not cover. Not a fake complete survey. Add a row when someone names the work — do not fill from memory.</p>
+    <p><strong>Already on the OMS mid-table</strong> (cite that page; not expanded into modules here): vendor-independent STS token generation · DLMS meters direct · SparkMeter legacy fleet (SparkNet &amp; TC 2.0) · time-of-use + load limits · convert meters to STS-only and drop comms · event push / webhooks · key-change tokens.</p>
+    <p><strong>Wiki-tracked work that may need training</strong> (not pre-session named rows):</p>
+    <ul>
+      <li><strong>Architecture class / procurement shortlist</strong> — prepaid vs AMI vs proprietary mesh; industry $/connection bands only. <a href="index.html#village-metering/vendor-study">Vendor study</a>. Lives in conception / planning / procurement.</li>
+      <li><strong>STS prepaid vending and key management</strong> — different from management tokens above. Topology note · OpenPAYGO listed as an open alternative. Escrow-of-keys was a pre-session theme, not a mandate.</li>
+      <li><strong>Field problems</strong> — theft, bypass, flat tariffs, DCU/backhaul. <a href="meter-overview.html#problems">Overview · Problems</a>.</li>
+      <li><strong>OpenAMI EMS / MeshEMS / Village Simulator</strong> — Power Africa workshop asked for a training session in a few weeks (no date here). <a href="power-africa-2026-workshop-planning.html">Workshop results</a> · <a href="index.html#village-metering/meshems">MeshEMS</a> · <a href="index.html#village-metering/village-simulator">Village Simulator</a>.</li>
+      <li><strong>Decommissioning and recycling</strong> — later phases. Hardware reuse, meter retirement, data retention after teardown: <span class="todo">not specified</span>.</li>
+    </ul>
+    <p class="meta"><strong>Self-paced later / custom later:</strong> open. Do not invent hours or a certificate track for this bucket.</p>
+  </article>
+
+  <h2 id="later">Later path (not scheduled)</h2>
+  <p class="body-text">This catalog is meant to stay usable if someone later cuts <strong>self-paced</strong> pages (one skillset, public docs, no live keys) or a <strong>custom</strong> session (one operator’s fleet, keys, and concession). Neither exists on this wiki yet. Power Africa’s “training session in a few weeks” is a separate ISV EMS / simulator ask — link only, no invented venue.</p>
+
+  <h2>Related on this wiki</h2>
+  <div class="links">
+    <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a>
+    <a href="power-africa-2026-workshop-planning.html">OpenAMI EMS Workshop results</a>
+    <a href="index.html#village-metering/overview">Village Metering overview</a>
+    <a href="index.html#village-metering/vendor-study">Vendor study</a>
+    <a href="index.html#village-metering/vmrs">VMRS</a>
+    <a href="index.html#village-metering/openami">OpenAMI</a>
+    <a href="index.html#village-metering/meshems">MeshEMS</a>
+    <a href="index.html#village-metering/tc20-review">TC 2.0</a>
+    <a href="index.html#village-metering/village-simulator">Village Simulator</a>
+    <a href="index.html#notes/metering-2026-05-28">Metering topology</a>
+  </div>
+</div>
+</body>
+</html>

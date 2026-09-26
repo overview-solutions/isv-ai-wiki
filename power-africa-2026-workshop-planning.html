@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260926psign">
 <link rel="stylesheet" href="css/isv-tasks.css">
 <script src="js/isv-theme.js"></script>
 <style>
@@ -28,16 +28,11 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
   gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
-.hero-overview {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  min-width: 0;
-}
 .overview-cards {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.6rem;
+  margin-bottom: 1.25rem;
 }
 .overview-card {
   border: 1px solid var(--border);
@@ -57,17 +52,8 @@ h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
   align-self: center;
   color: var(--green);
 }
-.overview-title {
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.35;
-}
-.overview-detail {
-  font-size: 12px;
-  color: var(--text-2);
-  line-height: 1.4;
-}
-.hero-overview .callout { margin-bottom: 0; }
+.overview-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+.overview-detail { font-size: 12px; color: var(--text-2); line-height: 1.4; }
 .callout {
   border-left: 3px solid var(--amber); background: var(--amber-50);
   padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
@@ -138,31 +124,62 @@ tr.day-break td {
   margin-bottom: 0;
 }
 .schedule-hero table a { color: var(--green); }
-.actions { list-style: none; padding: 0; }
-.actions li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.5rem; align-items: flex-start; }
-.actions li::before { content: "○"; color: var(--text-3); flex-shrink: 0; }
 .todo { color: var(--text-2); font-style: italic; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.links a {
+  display: inline-block; font-size: 13px; padding: 0.45rem 0.85rem; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg-2); text-decoration: none; color: var(--text);
+}
+.links a:hover { border-color: var(--green); color: var(--green); }
+.came-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1.25rem;
+}
+.came-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.came-card figure { margin: 0; }
+.came-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  background: var(--green-50);
+}
+.came-card figcaption { padding: 0.7rem 0.85rem 0.9rem; }
+.came-card strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+.came-card span {
+  display: block;
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+.came-starters {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+.came-starters h3 { margin-top: 0; }
 @media (min-width: 768px) {
-  .hero-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) min(280px, 34%);
-    align-items: start;
-    gap: 1.5rem;
-  }
-  .overview-cards { grid-template-columns: repeat(3, 1fr); }
+  .overview-cards { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+  .came-grid { grid-template-columns: repeat(3, 1fr); }
 }
 html.embed .back,
 html.embed #notes-back-btn { display: none; }
 html.embed .wrap { padding-top: 1rem; }
 html.embed h1 { font-size: 20px; }
-html.embed .hero-layout {
-  display: flex;
-  flex-direction: column;
-}
 html.embed .overview-cards { grid-template-columns: 1fr; }
-@media (min-width: 768px) {
-  .overview-cards { gap: 0.75rem; }
-}
 </style>
 </head>
 <body>
@@ -181,61 +198,123 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 <div class="wrap">
   <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
   <h1>OpenAMI Multitenant Metering EMS Workshop</h1>
-  <p class="sub">MAKE · CODE · INTEGRATE · <a href="power-africa-2026-conference.html">IEEE PES &amp; IAS Power Africa Conference</a> · Nairobi, Kenya (EAT · UTC+3) · 21 + 24 Sep 2026 · Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">Full ISV track ↗</a></p>
+  <p class="sub">Results · MAKE · CODE · INTEGRATE · <a href="power-africa-2026-conference.html">IEEE PES &amp; IAS Power Africa Conference</a> · Nairobi, Kenya (EAT · UTC+3) · 21 + 24 Sep 2026 · Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">Full ISV track ↗</a></p>
 
   <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#events/power-africa-2026-workshop-planning" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to In-Person Events</a> · <a href="index.html" style="font-size:14px">Home</a></p>
 
+  <div class="callout callout-pitch">
+    <strong>What ran</strong>
+    <p>All <strong>4 sessions</strong> ran: <strong>3 on Monday 21 Sep</strong> (Ivory Room) and <strong>1 on Thursday 24 Sep</strong>. Same hash and filename as the old planning page — this is the results page now. Conference photos land on the <a href="power-africa-2026-conference.html">Power Africa Conference page</a>, not here.</p>
+  </div>
+
+  <div class="overview-cards">
+    <div class="overview-card">
+      <div class="overview-val">4</div>
+      <div class="overview-title">Sessions ran</div>
+      <div class="overview-detail">3 Monday blocks + Thursday wrap-up</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-val">BUILD</div>
+      <div class="overview-title">Simulator progress</div>
+      <div class="overview-detail">Developers construct the microgrid · Open Utility Network convention</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-val">TBD</div>
+      <div class="overview-title">PCB handout list</div>
+      <div class="overview-detail">Handwritten list not transcribed yet</div>
+    </div>
+  </div>
+
   <div class="schedule-hero">
-    <h2>What you get</h2>
+    <h2>What ran</h2>
     <table>
-      <thead><tr><th>Time (EAT · UTC+3)</th><th>Duration</th><th>Session</th><th>Who</th></tr></thead>
+      <thead><tr><th>Time (EAT · UTC+3)</th><th>Duration</th><th>Session</th><th>Program</th></tr></thead>
       <tbody>
-        <tr class="day-break"><td colspan="4">Day 1 · Monday 21 September 2026 · Ivory Room (EAT · UTC+3)</td></tr>
+        <tr class="day-break"><td colspan="4">Monday 21 September 2026 · Ivory Room (EAT · UTC+3) · 3 sessions</td></tr>
         <tr class="food-break"><td>10:45–11:05</td><td>20 min</td><td>Tea &amp; Coffee Break</td><td>—</td></tr>
-        <tr><td><strong>11:05–13:00</strong></td><td>1:55</td><td><strong>Block 1 — Stranded Legacy Updates</strong><br>Intro folded in. Recent and upcoming changes in the AMI ecosystem, including Open Metering Infrastructure. SteamaCo on video. SparkMeter in person (Moses).</td><td>ISV instructors · Warren Scott-White (SteamaCo, video) · Moses (SparkMeter, in person)</td></tr>
+        <tr><td><strong>11:05–13:00</strong></td><td>1:55</td><td><strong>Session 1 — Stranded Legacy Updates</strong><br>AMI ecosystem and Open Metering Infrastructure. SteamaCo on video. SparkMeter on the program (Moses).</td><td>ISV instructors · Warren Scott-White (SteamaCo, video) · Moses (SparkMeter)</td></tr>
         <tr class="food-break"><td>13:00–14:00</td><td>1 hr</td><td>Lunch · Safari Park Hotel · rest of the <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV track ↗</a></td><td>—</td></tr>
-        <tr><td><strong>14:00–16:00</strong></td><td>2 hr</td><td><strong>Block 2 — Next Gen</strong><br>Glenn’s feeder system, <a href="index.html#village-metering/meshems">MeshEMS</a>, and others (Aaron with Nearly Free Energy, OpenAMI cabinets, DitroniX). Planned: RFP for intelligent feeder options (intake TBA — this page is not the live RFP)</td><td>Glenn Algie · Aaron Tushabe (Nearly Free Energy) · Dave Williams (DitroniX) · ISV instructors</td></tr>
+        <tr><td><strong>14:00–16:00</strong></td><td>2 hr</td><td><strong>Session 2 — Next Gen</strong><br>Feeder system, <a href="index.html#village-metering/meshems">MeshEMS</a>, Aaron Tushabe / Nearly Free Energy, OpenAMI cabinets, DitroniX.</td><td>Glenn Algie · Aaron Tushabe (Nearly Free Energy) · Dave Williams (DitroniX) · ISV instructors</td></tr>
         <tr class="food-break"><td>16:00–16:15</td><td>15 min</td><td>Tea &amp; Coffee Break</td><td>—</td></tr>
-        <tr><td><strong>16:15–17:50</strong></td><td>1:35</td><td><strong>Block 3 — Business Case and Code Challenges</strong><br>Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>) on minigrid business cases. Kickoff of six challenge tracks (SparkNet bridge · DLMS hello · intelligent feeder · PCB smoke · calibration QR · simulator O&amp;M). Closes Thursday.</td><td>Sandra Kwak (10 Power) · ISV instructors</td></tr>
+        <tr><td><strong>16:15–17:50</strong></td><td>1:35</td><td><strong>Session 3 — Business Case and Code Challenges</strong><br>Sandra Kwak (<a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a>) on minigrid business cases. Kickoff of six tracks. Closed Thursday.</td><td>Sandra Kwak (10 Power) · ISV instructors</td></tr>
         <tr class="food-break"><td>17:50–18:00</td><td>10 min</td><td>Transit Ivory Room → Jambo Room</td><td>—</td></tr>
-        <tr class="day-break"><td colspan="4">Day 2 · Thursday 24 September 2026 (EAT · UTC+3)</td></tr>
-        <tr><td><strong>14:00–15:30</strong></td><td>1.5 hr</td><td><strong>Code challenge wrap-up</strong><br>Demo what ran per track · LED/MQTT smoke results · cal QR + smart-start file · feeder add-on LCOE vs opex trade-off · simulator O&amp;M UX</td><td>ISV instructors</td></tr>
+        <tr class="day-break"><td colspan="4">Thursday 24 September 2026 (EAT · UTC+3) · 1 session</td></tr>
+        <tr><td><strong>14:00–15:30</strong></td><td>1.5 hr</td><td><strong>Session 4 — Code challenge wrap-up</strong><br>Demos per track · LED/MQTT smoke · cal QR + smart-start · feeder LCOE vs opex · simulator O&amp;M UX</td><td>ISV instructors</td></tr>
       </tbody>
     </table>
-    <p class="attend">Full conference registration; no separate workshop fee. Register via <a href="https://ieee-powerafrica.org/" target="_blank" rel="noopener">ieee-powerafrica.org</a>. Rest of the ISV track: <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a>. Laptop with SSH + browser. No prior experience required.</p>
+    <p class="attend">Program guests listed as billed. This page does not claim a room-by-room attendance roll. Photos: <a href="power-africa-2026-conference.html">conference page</a>.</p>
   </div>
 
   <div id="follow-ups-panel"></div>
 
-  <div class="overview-cards">
-    <div class="overview-card">
-      <div class="overview-val">15–20</div>
-      <div class="overview-title">EMS PCBs take-home</div>
-      <div class="overview-detail">Working Street-EMS controller for first workshop attendees</div>
-    </div>
-    <div class="overview-card">
-      <div class="overview-val">3–5</div>
-      <div class="overview-title">Reference cabinets</div>
-      <div class="overview-detail">Multi-tenant single &amp; 3φ cabinets (&lt;25&nbsp;lb) — built, donated for take-home</div>
-    </div>
-    <div class="overview-card">
-      <div class="overview-val">2 days</div>
-      <div class="overview-title">Legacy · Next Gen · Challenge</div>
-      <div class="overview-detail">Mon 21 Sep blocks + Thu 24 Sep 14:00–15:30 wrap-up</div>
-    </div>
+  <h2 id="review">Review</h2>
+  <p class="body-text">Hands-on Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> for in-country engineers on village mini-grids. Compare commercial AMI (SteamaCo, SparkMeter) with open OpenAMI cabinets. MQTT as the common bus. See <a href="index.html#village-metering/openami">OpenAMI</a> · <a href="index.html#village-metering/vmrs">OBIS · VMRS</a> · <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
+
+  <h3>What was covered</h3>
+  <ul>
+    <li><strong>Session 1</strong> — stranded-legacy AMI / Open Metering Infrastructure; commercial stacks on the program (SteamaCo video; SparkMeter).</li>
+    <li><strong>Session 2</strong> — next-gen feeder monitoring, MeshEMS v2.0 (NESL 865B), Nearly Free Energy site/operator thread, OpenAMI cabinets, DitroniX hardware.</li>
+    <li><strong>Session 3</strong> — mini-grid business case (10 Power) and six code-challenge tracks opened (SparkNet→OpenAMI · DLMS hello · LV feeder add-on · PCB smoke · cal QR · simulator O&amp;M).</li>
+    <li><strong>Session 4</strong> — Thursday wrap-up: show running work, not slide decks. Shared axes still cost · lock-in · sovereignty · comms · repair.</li>
+  </ul>
+
+  <h3 id="simulator">Village Simulator — BUILD</h3>
+  <p class="body-text">Workshop progress on the <a href="index.html#village-metering/village-simulator">Village Simulator</a> (code track 6): <strong>BUILD</strong> mode — microgrid developers construct the system. Constructed data auto-formats to the <strong>Open Utility Network</strong> convention (<em>not</em> a standard — see <a href="index.html#village-metering/village-geojson-un">Village GeoJSON</a>). Layers in play: <strong>LOADS</strong> and <strong>GENERATION</strong> (Energy Assets). Main view splits <strong>OPERATIONS</strong> and <strong>MAINTENANCE</strong>.</p>
+
+  <h3>Who signed up / PCB interest</h3>
+  <p class="body-text">Interest forms stay off this repo (no emails copied here). Name list from the sheet is <strong>pending</strong> — public CSV/HTML fetch failed without a Google login.</p>
+  <div class="links">
+    <a href="https://docs.google.com/spreadsheets/d/16GgSENSXXgDmxvgDp6TxNHoeYg-ed7ZE3h2oi7QAhpY/edit?usp=sharing" target="_blank" rel="noopener">PCB interest sheet ↗</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5_H2axR16j-IRr99tJ6ACkQaTkulbCTK1fDDIo_QpFQ3txw/viewform?usp=dialog" target="_blank" rel="noopener">More interest form ↗</a>
+    <a href="code-challenge-signup.html">Code Challenge sign-up (wiki form)</a>
+  </div>
+  <div class="callout">
+    <strong>Handwritten handout list TBD</strong>
+    <p>Who received NESL 865B / cabinet kits on paper is <strong>not transcribed yet</strong>. Empty until organizers type that list. Do not treat the Google sheet as proof of boards handed over.</p>
   </div>
 
-  <p class="body-text">Hands-on Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> for in-country engineers on village mini-grids. Compare commercial AMI (SteamaCo, SparkMeter) with open OpenAMI cabinets. MQTT as the common bus — REST → MQTT bridges, not rip-and-replace. Cloudless LV feeder intelligence; IETF SIP (RFC 3261) is optional Phase 3, not year-one prepaid. AfCFTA / HS 9028.30 briefing for in-country assembly. See <a href="index.html#village-metering/openami">OpenAMI</a> · <a href="index.html#village-metering/vmrs">OBIS · VMRS</a> · <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
-
-  <p class="body-text"><strong>Who:</strong> utility and distribution engineers, minigrid operators, metering people, founders, researchers, energy-access practitioners.</p>
-
-  <h2 id="workshop-vision">Code challenges</h2>
-  <p class="body-text">Opens Monday 16:15 (after Sandra Kwak). Teams pick <strong>one primary track</strong>; cross-pollinate welcome. Wrap-up Thursday 14:00–15:30 — show running demos, not slide decks. Hardware + firmware paths center on Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> and <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>.</p>
-
-  <div class="callout callout-pitch">
-    <strong>Code Challenge sign-up</strong>
-    <p>Interest form (name · scope of use · contact · GitHub · comment) — separate from conference registration: <a href="code-challenge-signup.html"><strong>Sign up for a Code Challenge seat →</strong></a></p>
+  <h2 id="personas">Personas</h2>
+  <div class="came-grid">
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-students.svg?v=20260926psign" alt="Stylized figure at a laptop with a notebook and small project board">
+        <figcaption>
+          <strong>Students</strong>
+          <span>use the system for a project</span>
+        </figcaption>
+      </figure>
+    </article>
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-founders.svg?v=20260926psign" alt="Stylized figure at a scale fork between a small cluster of houses and a larger cluster">
+        <figcaption>
+          <strong>Founders</strong>
+          <span>considering whether they can scale with this kind of system</span>
+        </figcaption>
+      </figure>
+    </article>
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-researchers.svg?v=20260926psign" alt="Stylized figure holding a clipboard beside stacked study notes and a chart">
+        <figcaption>
+          <strong>Researchers</strong>
+          <span>assist in conducting research studies</span>
+        </figcaption>
+      </figure>
+    </article>
   </div>
+
+  <h3>Follow-up — next few weeks</h3>
+  <ul>
+    <li>Transcribe the handwritten PCB / cabinet handout list onto this page (names + org only if the person already signed the public interest sheet).</li>
+    <li>Work the PCB interest sheet and the more-interest form — no emails published here.</li>
+    <li>Keep simulator BUILD → Open Utility Network convention (LOADS · GENERATION) and the OPERATIONS / MAINTENANCE split.</li>
+    <li>Carry MeshEMS / OpenAMI thread into the <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a> (30 Sep–2 Oct) and <a href="oseas-2026.html">OSEAS Kigali</a> (26–27 Oct).</li>
+    <li>AMDA outreach still open: <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a>.</li>
+  </ul>
+
+  <h2 id="workshop-vision">Code challenges (tracks that opened)</h2>
+  <p class="body-text">Opened Monday 16:15. Teams pick <strong>one primary track</strong>; wrap-up Thursday. Hardware + firmware paths: Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> and <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>.</p>
 
   <table>
     <thead><tr><th>#</th><th>Track</th><th>Goal</th><th>Done looks like</th></tr></thead>
@@ -243,78 +322,106 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       <tr>
         <td><strong>1</strong></td>
         <td><strong>SparkNet → MeshEMS / OpenAMI</strong></td>
-        <td>Figure out what <a href="index.html#village-metering/tc20-review">SparkNet-HTTP</a> (EarthSpark / SparkMeter site stack) can usefully feed into MeshEMS OpenAMI metering — without pretending SparkNet RF meters are DLMS.</td>
-        <td>Working REST/SSE → MQTT (or OpenAMI northbound) bridge sketch: at least one SparkMeter-class reading or command path visible beside a MeshEMS topic. Document limits (proprietary field radio vs open HES).</td>
+        <td>What <a href="index.html#village-metering/tc20-review">SparkNet-HTTP</a> can usefully feed into MeshEMS OpenAMI metering — without pretending SparkNet RF meters are DLMS.</td>
+        <td>REST/SSE → MQTT (or OpenAMI northbound) bridge sketch. Document limits (proprietary field radio vs open HES).</td>
       </tr>
       <tr>
         <td><strong>2</strong></td>
         <td><strong>DLMS/COSEM-friendly “hello world”</strong></td>
-        <td>Smallest credible energy telemetry on Street-EMS hardware + metering firmware/software. Includes CircuitSetup expansion-slot <strong>6-port</strong> ATM90E32 meter board — already treated as an energy-cache / SPI meter path in <code>meshems-openami-metering</code>.</td>
-        <td>Publish OBIS-shaped (or clearly mapped) P / V / I / energy on MQTT from the bench cabinet; note what is true DLMS vs CircuitSetup cache standing in for tenant meters.</td>
+        <td>Smallest credible energy telemetry on Street-EMS + CircuitSetup 6-port ATM90E32 energy-cache path in <code>meshems-openami-metering</code>.</td>
+        <td>OBIS-shaped (or clearly mapped) P / V / I / energy on MQTT; note true DLMS vs CircuitSetup cache.</td>
       </tr>
       <tr>
         <td><strong>3</strong></td>
         <td><strong>Intelligent LV feeder add-on</strong></td>
-        <td>Choose <strong>one</strong>: continuous <em>neutral-balance recovery</em> <strong>or</strong> <em>leakage detection</em> hardware integration. Partial support already in firmware (e.g. IVY-class leakage models / MQTT). Packable Street-EMS feature add-ons brought to the room.</td>
-        <td>Demo edge alert or actuation path before a street-cabinet safety breaker trips. One-pager trade-off: add-on may raise LCOE (¢/kWh) but cuts village opex, avoidable capex, and truck-roll outage time by catching issues earlier.</td>
+        <td>Choose <strong>one</strong>: continuous <em>neutral-balance recovery</em> <strong>or</strong> <em>leakage detection</em>.</td>
+        <td>Edge alert or actuation before a street-cabinet safety breaker trips. LCOE vs opex one-pager.</td>
       </tr>
       <tr>
         <td><strong>4</strong></td>
         <td><strong>15-minute PCB smoke test</strong></td>
-        <td>Assemble / bring-up <strong>one</strong> Street-EMS PCB on the test rig. Pass/fail once — no endless debug theater.</td>
-        <td>On-board LEDs show result; MQTT topic published for the node under test (identity + pass/fail + short diagnostic). Repeatable checklist others can copy.</td>
+        <td>Bring-up <strong>one</strong> Street-EMS PCB. Pass/fail once.</td>
+        <td>On-board LEDs + MQTT topic (identity + pass/fail + short diagnostic).</td>
       </tr>
       <tr>
         <td><strong>5</strong></td>
         <td><strong>Calibration testhead + QR “smart start”</strong></td>
-        <td>3-phase power-supply PCB + Street-EMS calibrated <strong>together</strong>. Each board gets a globally unique QR sticker. Factory calibration + diagnostic results written into a hosted <strong>smart-start</strong> factory file (life-of-product backup — host TBD for workshop).</td>
-        <td>Two PCBs + prewired cabinet QR storyboard: scan pair → pull cal record. Foreshadow future smartphone installer/repair app used when mounting on an LV feeder pole / pedestal.</td>
+        <td>3-phase PSU PCB + Street-EMS calibrated together. Unique QR. Factory file host still TBD.</td>
+        <td>Scan pair → pull cal record. Foreshadow installer/repair app on an LV feeder pole.</td>
       </tr>
       <tr>
         <td><strong>6</strong></td>
         <td><strong>Village Simulator · microgrid O&amp;M UX</strong></td>
-        <td>Improve <a href="index.html#village-metering/village-simulator">Village Simulator</a> for planning, configuring, troubleshooting, and other O&amp;M nuances — not another pretty dashboard for its own sake.</td>
-        <td>Concrete UX delta: e.g. BUILD completion / feeder health / fault early-warning flows that mirror Tracks 3–5; short note on what an operator would do differently after the change.</td>
+        <td>BUILD mode + OPERATIONS / MAINTENANCE — not another pretty dashboard.</td>
+        <td>Concrete UX delta an operator would use after the change.</td>
       </tr>
     </tbody>
   </table>
 
   <div class="callout callout-teal">
     <strong>Shared wrap-up axes (all tracks)</strong>
-    <p>Thursday still scores open MeshEMS/OpenAMI vs proprietary full-stack on <strong>cost · lock-in · sovereignty · comms · repair</strong>. Optional stretch: prepaid mobile-money (M-Pesa / Airtel Money) token path if a team has bandwidth after their primary track.</p>
+    <p>Open MeshEMS/OpenAMI vs proprietary full-stack on <strong>cost · lock-in · sovereignty · comms · repair</strong>. Optional stretch: prepaid mobile-money token path if a team had bandwidth after the primary track.</p>
   </div>
 
-  <h2>Guests</h2>
+  <h2>Program guests</h2>
   <table>
     <thead><tr><th>Who</th><th>When (EAT · UTC+3)</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>Mon 11:05–13:00</td><td>Block 1 Stranded Legacy Updates · video. PAC guest slot 11:05–11:35 (business-case talk) sits inside this block.</td></tr>
-      <tr><td><strong>Moses, SparkMeter</strong></td><td>Mon 11:05–13:00</td><td>Block 1 Stranded Legacy Updates · <strong>in person</strong></td></tr>
-      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>Mon 14:00–16:00</td><td>Block 2 Next Gen · cabinet hardware</td></tr>
-      <tr><td><strong>Aaron Tushabe, Nearly Free Energy</strong></td><td>Mon 14:00–16:00</td><td>Block 2 Next Gen · Uganda site layout &amp; mini-grid operator</td></tr>
-      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>Mon 16:15–17:50</td><td>Block 3 Business Case and Code Challenges · Haiti mini-grid operator</td></tr>
+      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · video. PAC guest slot 11:05–11:35 sat inside this block.</td></tr>
+      <tr><td><strong>Moses, SparkMeter</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · on the program in person</td></tr>
+      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · cabinet hardware</td></tr>
+      <tr><td><strong>Aaron Tushabe, Nearly Free Energy</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · Uganda site layout &amp; mini-grid operator</td></tr>
+      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>Mon 16:15–17:50</td><td>Session 3 · Haiti mini-grid operator</td></tr>
       <tr><td>ISV instructors</td><td>Both days</td><td>Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor</td></tr>
-      <tr><td>EnAccess</td><td><span class="todo">Remote TBD</span></td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — unlikely on site; see <a href="oseas-2026.html">OSEAS 2026</a></td></tr>
-      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach pending</span></td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
+      <tr><td>EnAccess</td><td>Remote / OSEAS</td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — see <a href="oseas-2026.html">OSEAS 2026</a> and the <a href="oms-workshop-nairobi-2026.html">OMS Workshop</a></td></tr>
+      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach still open</span></td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
     </tbody>
   </table>
 
-  <h2>Kits &amp; organizer notes</h2>
-  <p class="body-text"><strong>Take-home:</strong> NESL 865B MeshEMS v2.0 (15–20 PCBs), 3–5 TC2.0 cabinets, DLMS meters, CircuitSetup 6-port expansion meters, 100A CTs. BOM / firmware: <a href="index.html#village-metering/meshems">MeshEMS hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>. Room: 240V AC benches + smoke-test / calibration testhead stations. Packable LV feeder add-ons (neutral balance <em>or</em> leakage) available for Track 3. Ship Nairobi · HS 9028.30. SparkMeter in person (Moses) · SparkNet-HTTP path TBD (mock OK). SteamaCo DCU loan TBD — mock API if no Nimbus. Smart-start factory-file host TBD.</p>
+  <h2>Kits</h2>
+  <p class="body-text"><strong>Brought for take-home:</strong> NESL 865B MeshEMS v2.0 (15–20 PCBs planned), 3–5 TC2.0 cabinets, DLMS meters, CircuitSetup 6-port expansion meters, 100A CTs. BOM / firmware: <a href="index.html#village-metering/meshems">MeshEMS hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>. <strong>Who walked out with which board:</strong> handwritten handout list TBD.</p>
 
-  <h2>Action items</h2>
-  <table>
-    <thead><tr><th>Task</th><th>Issue</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>Reach out to AMDA</td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td><td><a href="https://www.africamda.org/our-team/" target="_blank" rel="noopener">our-team</a> · OBIS codes · open stack</td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:13px;color:var(--text-2);margin:0.75rem 0">See follow-up summary at the top of this page. Full board in <a href="index.html#tasks">Knowledge Base · Tasks</a> or <a href="https://github.com/overview-solutions/isv-ai-wiki/issues" target="_blank" rel="noopener">GitHub Issues ↗</a>.</p>
+  <h2 id="came-away">Came away with</h2>
+  <p class="body-text">Workshop left <strong>initial use-cases / starter projects</strong> to learn the system.</p>
+  <div class="callout callout-teal">
+    <strong>Training</strong>
+    <p>People at the workshop asked for a training session on OpenAMI EMS, the Village Simulator, and the workshop stack. ISV will run a training session in a few weeks. No date, venue, or sign-up on this wiki. Separate catalog of <strong>work that needs training</strong> (OMS pre-session interest + this ask): <a href="oms-training-skills.html">OMS / village training skills</a> — catalog only, modules TBD.</p>
+  </div>
+
+  <div class="came-starters">
+    <h3>Starter projects</h3>
+    <div class="came-grid">
+      <article class="came-card">
+        <figure>
+          <img src="assets/workshop/starter-smart-home.svg?v=20260926psign" alt="Line drawing of a house with a lamp, outlet, and small energy monitor">
+          <figcaption>
+            <strong>Smart Home project</strong>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="came-card">
+        <figure>
+          <img src="assets/workshop/starter-nonmetered.svg?v=20260926psign" alt="Line drawing of a solar array and battery with a clamp-on monitor on the cable, no revenue meter">
+          <figcaption>
+            <strong>Monitor for non-metered energy system</strong>
+          </figcaption>
+        </figure>
+      </article>
+      <article class="came-card">
+        <figure>
+          <img src="assets/workshop/starter-industrial.svg?v=20260926psign" alt="Line drawing of three-phase bus bars, a DIN-rail controller, and a circuit monitor">
+          <figcaption>
+            <strong>Industrial circuit monitor/controller</strong>
+          </figcaption>
+        </figure>
+      </article>
+    </div>
+  </div>
 
   <h2>Related</h2>
-  <p class="body-text"><a href="power-africa-2026-conference.html">PAC 2026</a> · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a> · <a href="code-challenge-signup.html">Code Challenge sign-up</a> · <a href="power-africa-openami-presentation-2025.html">OpenAMI @ PAC 2025</a> · <a href="index.html#village-metering/meshems">MeshEMS</a> · <a href="index.html#village-metering/village-simulator">Village Simulator</a> · <a href="oseas-2026.html">OSEAS 2026</a> · <a href="open-energy-hackathon-2026.html">Oakland 2026</a></p>
+  <p class="body-text"><a href="power-africa-2026-conference.html">PAC 2026 · photos live there</a> · <a href="https://ieee-powerafrica.org/isv-program-2/" target="_blank" rel="noopener">ISV program ↗</a> · <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a> · <a href="oms-training-skills.html">OMS / village training skills</a> · <a href="code-challenge-signup.html">Code Challenge sign-up</a> · <a href="power-africa-openami-presentation-2025.html">OpenAMI @ PAC 2025</a> · <a href="index.html#village-metering/meshems">MeshEMS</a> · <a href="index.html#village-metering/village-simulator">Village Simulator</a> · <a href="oseas-2026.html">OSEAS 2026</a> · <a href="open-energy-hackathon-2026.html">Oakland 2026</a></p>
 </div>
-<script src="js/isv-tasks.js?v=20260629"></script>
+<script src="js/isv-tasks.js?v=20260926psign"></script>
 <script>ISVTasks.renderMeetingPanel('power-africa-2026-workshop-planning');</script>
 </body>
 </html>
