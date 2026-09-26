@@ -21,11 +21,11 @@ Then open:
 | What | URL |
 |------|-----|
 | **Wiki home** | [http://127.0.0.1:8765/index.html](http://127.0.0.1:8765/index.html) |
-| **Village Simulator** (inside wiki) | [http://127.0.0.1:8765/index.html#village-metering/village-simulator](http://127.0.0.1:8765/index.html#village-metering/village-simulator) — hub page: how to run + frozen theater |
+| **Village Simulator** (inside wiki) | [http://127.0.0.1:8765/index.html#village-metering/village-simulator](http://127.0.0.1:8765/index.html#village-metering/village-simulator) — hub: live Pages embed + v1 freeze link |
 | **Nairobi workshop / code challenges** | [http://127.0.0.1:8765/power-africa-2026-workshop-planning.html](http://127.0.0.1:8765/power-africa-2026-workshop-planning.html) |
 | **OMS Workshop Nairobi** | [http://127.0.0.1:8765/oms-workshop-nairobi-2026.html](http://127.0.0.1:8765/oms-workshop-nairobi-2026.html) |
 
-**Live simulator (current Vite app):** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) — open in a new tab. isv.wiki **cannot iframe** that origin (Cloudflare `frame-src` is `'self'` + Vimeo + Google Docs only). Source: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator). The wiki ships a **frozen copy** under `village-simulator/` for the same-origin iframe and offline `./preview.sh`. Do **not** develop in that freeze.
+**Live simulator (current Vite app):** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) — hub nested iframe dest. Cloudflare Transform Rule `isv-wiki-security-headers` **must add `https://overview-solutions.github.io` to `frame-src`** or Chrome blocks (“This content is blocked”). Today `frame-src` is `'self'` + Vimeo + Google Docs only. Source: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator). **v1** freeze: `village-simulator/` (link only, offline `./preview.sh`). Do **not** develop in that freeze.
 
 **Do not** double-click `index.html` in Finder/Explorer — `file://` breaks fetch, Tasks, and the sim iframe. Always use `./preview.sh` (needs Python 3, already on macOS/most Linux).
 
@@ -45,7 +45,7 @@ See that repo’s README for Locus / offline map packs. Do **not** edit the wiki
 ### Online (no clone)
 
 **Live site:** [isv.wiki](https://isv.wiki/) · [GitHub Pages mirror](https://overview-solutions.github.io/isv-ai-wiki/)  
-**Live Village Simulator:** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) (new tab; not iframed from the wiki)  
+**Live Village Simulator:** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) (wiki hub iframe dest; needs Cloudflare `frame-src`)  
 **Source:** [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) (MIT)
 
 ---

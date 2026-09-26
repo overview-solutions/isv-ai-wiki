@@ -31,4 +31,4 @@ Example: `https://isv.wiki/index.html#village-metering/village-geojson-un`
 
 ## Offline
 
-Clone the repo and run `./preview.sh` → `http://127.0.0.1:8765/index.html`. Frozen Village Simulator ships inside the wiki (same-origin iframe). Live Vite app: `https://overview-solutions.github.io/smart-village-simulator/?embed=1` (new tab — isv.wiki cannot iframe github.io). Local/dev: sibling `smart-village-simulator` repo.
+Clone the repo and run `./preview.sh` → `http://127.0.0.1:8765/index.html`. Hub `#village-metering/village-simulator` nested iframe dest is live Pages `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. Blank iframe = Cloudflare `isv-wiki-security-headers` must add `https://overview-solutions.github.io` to `frame-src`. v1 freeze: `village-simulator/index.html` (link only). Local/dev: sibling `smart-village-simulator` repo.

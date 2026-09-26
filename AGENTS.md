@@ -56,9 +56,9 @@ isv-ai-wiki/
 ├── meter-solutions-map.html      # Visual problem ↔ stack map (SteamaCo · SparkMeter · EnAccess · OpenAMI)
 ├── meter-village-scope.html      # Village definition · population · HDI (cited)
 ├── meter-vendor-study.html       # Cited vendor benchmark (standalone + embed)
-├── village-simulator/            # Frozen theater snapshot (embed target; do not develop)
-│   └── index.html                # Offline Three/Locus-era snapshot for wiki iframe
-├── meter-village-simulator.html  # Sim hub: how to run offline/live + links + nested theater
+├── village-simulator/            # v1 frozen / offline snapshot (do not develop; not the primary embed)
+│   └── index.html                # Three/Locus-era snapshot — one link from hub
+├── meter-village-simulator.html  # Sim hub: nested iframe = live Pages sim
 ├── meter-village-geojson-un.html # Open Esri UN–style GeoJSON village pack (essential / nice-to-have)
 ├── meter-benchmark/
 │   ├── vmrs-registers.json       # Machine-readable VMRS register set v0.1
@@ -99,11 +99,10 @@ isv-ai-wiki/
 **Not published (would lie):** OAuth/OIDC discovery, OAuth protected-resource metadata, MCP server card — no auth server and no MCP on this host. See `technical-notes/AGENT-READINESS-CLOUDFLARE.md`.
 
 **Markdown `Accept: text/markdown` negotiation:** Cloudflare zone toggle only (Pile B), not a static-file feature.
-**Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`). **`frame-src` is `'self' https://player.vimeo.com https://docs.google.com`.** Neither Circaevum Locus (`https://circaevum.github.io`) nor the live sim (`https://overview-solutions.github.io`) is on that list — Chrome blocks those iframes (“This content is blocked”). Wiki iframe dest stays same-origin `village-simulator/index.html`. Humans open the live app in a **new tab**: `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. To iframe Pages or Locus, add that origin to `frame-src` on the Transform Rule (dashboard; not this repo).
+**Map CSP:** Cloudflare Transform Rule `isv-wiki-security-headers` must allow Mapbox GL. Embed uses `mapbox-gl-csp.js` + `mapbox-gl-csp-worker.js` because `blob:` workers are blocked. Keep `script-src` / `connect-src` including `https://api.mapbox.com`. Project GeoJSON must come from `raw.githubusercontent.com` (github.io is not in `connect-src`). **`frame-src` today is `'self' https://player.vimeo.com https://docs.google.com`.** Cutover: hub nested iframe dest is `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. **Must add `https://overview-solutions.github.io` to `frame-src`** on that Transform Rule or Chrome blocks (“This content is blocked”). Circaevum Locus (`https://circaevum.github.io`) still not on the list. Dashboard change; not this repo. v1 freeze stays on disk at `village-simulator/` (link only).
 
 **Local preview (offline kit):** `./preview.sh` → `http://127.0.0.1:8765/index.html`  
-Includes frozen Village Simulator at `#village-metering/village-simulator` — **no** second repo needed to browse.  
-Live hosted app: [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) (new tab). Local/dev: sibling [`smart-village-simulator`](https://github.com/overview-solutions/smart-village-simulator) → `npm start` (:5176). See README → *Offline in one go*.
+Hub at `#village-metering/village-simulator` iframes github.io (needs net + CSP). Offline v1: `village-simulator/index.html` — **no** second repo. Local/dev live app: sibling [`smart-village-simulator`](https://github.com/overview-solutions/smart-village-simulator) → `npm start` (:5176). See README → *Offline in one go*.
 
 ---
 
@@ -183,7 +182,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): **live Pages** (new tab, `?embed=1`), offline kit, local `npm start` (:5176), links to source/Locus/workshop. Nested iframe = same-origin frozen `village-simulator/` — **not** github.io (Cloudflare `frame-src`). Size `?homes=` still on frozen theater URL. Legacy `#village-metering/worldline-day` aliases here. |
+| `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): nested iframe = live Pages `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. **Requires** Cloudflare `frame-src` include `https://overview-solutions.github.io` or Chrome blocks. v1 frozen snapshot: `village-simulator/` (one link, not a second stage). Local `npm start` (:5176). Legacy `#village-metering/worldline-day` aliases here. |
 | `#village-metering/village-geojson-un` | Open Utility Network GeoJSON pack: essential vs nice-to-have layers, joins, LOD, API bindings. Starter from `smart-village-simulator/villages`. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
@@ -208,7 +207,7 @@ Standalone pages accept `?embed=1` to hide back-navigation chrome (`html.embed` 
 - `meter-overview.html?embed=1` (default)
 - `meter-problems-today.html?embed=1` · `meter-village-scope.html?embed=1` · `meter-vmrs.html?embed=1` · `meter-vendor-study.html?embed=1`
 - `MEETING_NOTES[noteId].src` (also `?embed=1`)
-- `#village-metering/village-simulator` → iframe `meter-village-simulator.html?embed=1` (hub + nested **same-origin** frozen theater). Full page → same HTML. Live Vite app: new-tab `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. Do **not** set the wiki iframe `src` to github.io until `frame-src` includes that origin.
+- `#village-metering/village-simulator` → iframe `meter-village-simulator.html?embed=1` (hub). Nested iframe dest = live Pages `https://overview-solutions.github.io/smart-village-simulator/?embed=1` (cutover done). Cloudflare Transform Rule `isv-wiki-security-headers` **must** add `https://overview-solutions.github.io` to `frame-src` or Chrome: “This content is blocked”. v1: `village-simulator/index.html` (link only).
 
 When **creating** a new note page, copy an existing `tech-comm-*.html`, keep the embed script, and register in `MEETING_NOTES`.
 
@@ -391,21 +390,17 @@ When editing this repo:
 
 ### Village Simulator and Locus
 
-**Offline / workshop path:** clone this wiki only → `./preview.sh` → sidebar
-Village Metering → Village Simulator. Hub page is `meter-village-simulator.html`
-(live Pages CTA + how to run). Nested iframe loads same-origin frozen
-`village-simulator/index.html`. Humans should not need Node or the live sim repo
-to open the freeze.
+**Cutover (done):** hub nested iframe dest is the live Pages Vite app
+`https://overview-solutions.github.io/smart-village-simulator/?embed=1`.
+`METER_BENCHMARK_PAGES['village-simulator'].src` stays `meter-village-simulator.html`
+(same-origin hub). Hashes `#village-metering/village-simulator`, `worldline-day`,
+`worldline-day-100` still land on the hub. **Cloudflare Transform Rule
+`isv-wiki-security-headers` must add `https://overview-solutions.github.io` to
+`frame-src`** or Chrome blocks the nested iframe.
 
-The wiki **embeds** that local copy through `METER_BENCHMARK_PAGES` (hashes
-`#village-metering/village-simulator`, `worldline-day`, `worldline-day-100`).
-Do not keep developing the frozen tree.
-
-**Live hosted app (Pages verified, Vite build):**
-[overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1)
-— open **new tab**. `METER_BENCHMARK_PAGES['village-simulator'].src` stays
-`meter-village-simulator.html` (same-origin hub). Pointing the iframe at github.io
-would be blocked by current `frame-src`. Keep hash aliases.
+**v1 (frozen / offline snapshot):** `village-simulator/` stays on disk. One link
+from the hub — not a second equal theater. Do not develop that tree. Offline:
+`./preview.sh` then open `village-simulator/index.html` (no Node, no live repo).
 
 Canonical source: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)
 (local `ISV/smart-village-simulator/`, `npm start` → :5176). It consumes

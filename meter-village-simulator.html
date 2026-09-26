@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Village Simulator · Run locally · ISV</title>
+<title>Village Simulator · Live · ISV</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="css/meter-focus.css">
@@ -73,42 +73,37 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
 
   <h1>Village Simulator</h1>
-  <p class="sub">Live Vite app on GitHub Pages · frozen iframe here (CSP) · Circaevum Locus graphics</p>
-  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator</a>. Open the <strong>live Pages app</strong> in a new tab; this wiki iframe is a same-origin freeze only.</p>
+  <p class="sub">Live Vite app embedded from GitHub Pages · Circaevum Locus graphics</p>
+  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator</a>. Stage below is the <strong>current</strong> Pages app (BUILD / OPERATIONS / MAINTENANCE).</p>
 
-  <div class="callout">
-    <strong>Open the live simulator (new tab)</strong>
-    <p><a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">overview-solutions.github.io/smart-village-simulator/?embed=1 ↗</a> — current BUILD / OPERATIONS / MAINTENANCE Vite app. Use this for workshop and product work.</p>
-    <p>isv.wiki <strong>cannot iframe</strong> that origin. Cloudflare Transform Rule <code>isv-wiki-security-headers</code> <code>frame-src</code> is <code>'self' https://player.vimeo.com https://docs.google.com</code> only. Adding <code>https://overview-solutions.github.io</code> there is a dashboard change, not a repo edit.</p>
-  </div>
-
-  <h2 id="theater">Frozen theater (same-origin iframe)</h2>
-  <p class="body-text">Older snapshot shipped with the wiki so <code>./preview.sh</code> and Pages still show <em>a</em> theater offline. Prefer Nature / Liberty basemaps offline; satellite needs internet. Do not treat numbers here as the live app.</p>
+  <h2 id="theater">Live simulator</h2>
+  <p class="body-text">Current Vite app, iframed from GitHub Pages. Prefer this for workshop and product work. <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Open full page ↗</a></p>
   <div class="sim-embed">
     <iframe
-      title="Village Simulator frozen theater"
-      src="village-simulator/index.html?embed=1&amp;v=20260920top"
+      title="Village Simulator — live"
+      src="https://overview-solutions.github.io/smart-village-simulator/?embed=1"
       allow="fullscreen"
       allowfullscreen
     ></iframe>
   </div>
+  <p class="sim-open">Blank iframe on isv.wiki = Cloudflare Transform Rule <code>isv-wiki-security-headers</code> missing <code>https://overview-solutions.github.io</code> in <code>frame-src</code> (today <code>'self' https://player.vimeo.com https://docs.google.com</code>) — not a dead sim. Dashboard change, not this repo.</p>
   <p class="sim-open">
-    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live Pages app ↗</a>
-    · <a href="village-simulator/index.html" target="_blank" rel="noopener">Frozen theater full page ↗</a>
-    · <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Online Locus build ↗</a>
-    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local live app :5176</a> (only if you ran <code>npm start</code>)
+    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live full page ↗</a>
+    · <a href="village-simulator/index.html" target="_blank" rel="noopener">v1 (frozen / offline snapshot)</a>
+    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local :5176</a> (only if you ran <code>npm start</code>)
   </p>
 
   <h2 id="run">How to run</h2>
 
   <div class="callout">
-    <strong>Simplest offline path (no Node)</strong>
-    <p>Already viewing this page via <code>./preview.sh</code>? The theater above <em>is</em> the offline sim. Fresh machine:</p>
+    <strong>Offline / no-Node path (v1 snapshot)</strong>
+    <p>Live iframe above needs internet + Cloudflare <code>frame-src</code>. For a same-origin freeze, open <a href="village-simulator/index.html">v1 (frozen / offline snapshot)</a>. Fresh machine:</p>
 <pre>git clone https://github.com/overview-solutions/isv-ai-wiki.git
 cd isv-ai-wiki
 ./preview.sh
-# → http://127.0.0.1:8765/index.html#village-metering/village-simulator</pre>
-    <p>Needs Python 3 only. <strong>Do not</strong> double-click HTML (<code>file://</code> breaks the iframe).</p>
+# live hub: http://127.0.0.1:8765/index.html#village-metering/village-simulator
+# v1 freeze:  http://127.0.0.1:8765/village-simulator/index.html</pre>
+    <p>Needs Python 3 only. <strong>Do not</strong> double-click HTML (<code>file://</code> breaks the iframe). Do not treat v1 numbers as the live app.</p>
   </div>
 
   <h2 id="what-you-see">What you are looking at</h2>
@@ -118,17 +113,17 @@ cd isv-ai-wiki
       <tr>
         <td><strong>This wiki page</strong></td>
         <td><code>meter-village-simulator.html</code></td>
-        <td>How to run · live link · frozen iframe (CSP)</td>
+        <td>How to run · nested live iframe · one v1 link</td>
       </tr>
       <tr>
-        <td><strong>Frozen theater</strong></td>
-        <td><code>village-simulator/</code> inside the wiki</td>
-        <td>Same-origin iframe only — Cloudflare blocks github.io in <code>frame-src</code></td>
-      </tr>
-      <tr>
-        <td><strong>Live app</strong></td>
+        <td><strong>Live app (stage)</strong></td>
         <td><a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">GitHub Pages ↗</a> · <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">source ↗</a></td>
-        <td>Current Vite app — open new tab. Local: <code>npm start</code> :5176</td>
+        <td>Current Vite app — nested iframe dest. Local: <code>npm start</code> :5176</td>
+      </tr>
+      <tr>
+        <td><strong>v1 (frozen / offline snapshot)</strong></td>
+        <td><a href="village-simulator/index.html"><code>village-simulator/</code></a> inside the wiki</td>
+        <td>Kept on disk. Link only — not the primary embed. Do not develop.</td>
       </tr>
       <tr>
         <td><strong>Graphics library</strong></td>
@@ -153,18 +148,18 @@ npm start
 
   <div class="callout callout-amber">
     <strong>Do not edit the wiki’s <code>village-simulator/</code> tree for product work</strong>
-    <p>That folder is a frozen snapshot for Pages / offline. Change <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator</a>, then refresh the freeze when ready.</p>
+    <p>That folder is v1 (frozen / offline snapshot) — link only. Change <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator</a>. Do not develop the freeze.</p>
   </div>
 
   <h2 id="links">Links</h2>
   <div class="links">
     <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live Pages simulator ↗</a>
+    <a href="village-simulator/index.html">v1 (frozen / offline snapshot)</a>
     <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator (source) ↗</a>
     <a href="https://github.com/overview-solutions/isv-ai-wiki#offline-in-one-go-start-here" target="_blank" rel="noopener">Wiki README · Offline in one go ↗</a>
     <a href="index.html#village-metering/village-geojson-un">Village GeoJSON · open Utility Network</a>
     <a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum Locus ↗</a>
     <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Hosted Locus theater (online) ↗</a>
-    <a href="village-simulator/index.html" target="_blank" rel="noopener">Frozen theater full page</a>
     <a href="power-africa-2026-workshop-planning.html#simulator">Nairobi workshop · BUILD / OPERATIONS · MAINTENANCE</a>
     <a href="index.html#village-metering/meshems">MeshEMS hub</a>
     <a href="index.html#village-metering/openami">OpenAMI</a>
