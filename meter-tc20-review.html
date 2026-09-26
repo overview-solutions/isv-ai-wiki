@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/meter-focus.css">
 <script src="js/isv-theme.js"></script>
 <script src="js/meter-embed.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
@@ -103,6 +104,36 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   background: var(--bg); border: 1px dashed var(--border);
   margin: 0.75rem 0 1rem; max-width: 52rem; font-family: ui-monospace, monospace;
 }
+.obj-view-bar { margin: 0 0 0 auto; }
+.obj-force-hint { font-size: 12px; color: var(--text-2); margin-bottom: 0.55rem; max-width: none; }
+.force-controls {
+  display: flex; gap: 0.65rem; align-items: center; margin-bottom: 0.55rem; flex-wrap: wrap;
+}
+.force-frame {
+  border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
+  height: 520px; overflow: hidden; position: relative;
+}
+.force-frame svg { width: 100%; height: 100%; display: block; }
+.force-node { cursor: grab; stroke: #fff; stroke-width: 2; }
+.force-node:active { cursor: grabbing; }
+.force-node:hover { stroke-width: 3; }
+.force-label { font-size: 11px; fill: var(--text); pointer-events: none; text-anchor: middle; font-weight: 600; }
+.force-elabel { font-size: 9px; fill: var(--text-2); pointer-events: none; text-anchor: middle; }
+.force-link { fill: none; stroke-width: 1.6; }
+.force-link-fk { stroke: #3B6D11; }
+.force-link-wire { stroke: #175CD3; }
+.force-link-un { stroke: #BA7517; stroke-dasharray: 4 3; }
+.force-link-unk { stroke: #888; stroke-dasharray: 1.5 2.5; }
+.force-tooltip {
+  position: absolute; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.45rem 0.6rem; font-size: 11px; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+  box-shadow: var(--shadow); z-index: 100; max-width: 240px; color: var(--text-2); line-height: 1.4;
+}
+.force-tooltip.show { opacity: 1; }
+.force-tooltip strong { display: block; margin-bottom: 0.2rem; color: var(--text); }
+html.dark .force-frame { background: #f7f6f3; }
+html.dark .force-label { fill: #333; }
+html.dark .force-elabel { fill: #666; }
 </style>
 </head>
 <body>
@@ -355,15 +386,33 @@ html.dark .diagram-wrap { background: #f7f6f3; }
     MeshEMS is a complementary Phase&nbsp;2 track — <strong>not</strong> a TC2.0 table.
     Diagram below draws those collections and every ID hop this page already named.
     Unknown hops stay labeled unknown.
+    Toggle <strong>Force</strong> for the same nodes as a drag-able graph — no extra FKs.
   </p>
 
   <div class="panel">
     <div class="panel-head">
       <span>Collections · ID hops</span>
-      <a href="technical-notes/diagrams/tc20-data-objects.svg" download style="margin-left:auto;font-size:11px;font-weight:500">Download</a>
+      <div class="host-bar obj-view-bar">
+        <button type="button" class="btn active" id="btn-obj-boxes">Boxes</button>
+        <button type="button" class="btn" id="btn-obj-force">Force</button>
+      </div>
+      <a href="technical-notes/diagrams/tc20-data-objects.svg" download style="font-size:11px;font-weight:500">Download</a>
     </div>
     <div class="panel-body">
-      <div class="diagram-wrap svg-wide" id="host-objects"></div>
+      <div id="obj-boxes-view">
+        <div class="diagram-wrap svg-wide" id="host-objects"></div>
+      </div>
+      <div id="obj-force-view" hidden>
+        <p class="obj-force-hint">
+          Same collections and hops as the boxes. Drag pins a node. Scroll to zoom. Reset unpins. Unknown hops stay dashed and unlabeled.
+        </p>
+        <div class="force-controls">
+          <button type="button" class="btn" id="obj-force-reset">Reset</button>
+        </div>
+        <div class="force-frame" id="obj-force-frame">
+          <svg id="obj-force-svg" aria-label="TC2.0 data objects as a force-directed graph"></svg>
+        </div>
+      </div>
       <div class="legend">
         <span><i class="green"></i> Stored join / FK</span>
         <span><i class="blue"></i> SparkNet-HTTP wire</span>
@@ -548,7 +597,8 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   </ul>
 
   <p class="foot">
-    Technical report. Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code> · <code>tc20-data-objects.svg</code>.
+    Technical report. Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code> · <code>tc20-data-objects.svg</code>
+    (boxes + force).
     Objects from the public TC2.0 tree + village UN pack already on this wiki — no invented tables.
   </p>
 </div>
@@ -611,7 +661,207 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 
   load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20260811b', function (s) { stackSvg = s; });
   load('host-map', 'technical-notes/diagrams/village-meter-topology.svg?v=20260811j', function (s) { mapSvg = s; });
-  load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926obj', function () {});
+  load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926force', function () {});
+
+  /* Same collections + hops as tc20-data-objects.svg. No invented FKs. */
+  var OBJ_GRAPH = {
+    nodes: [
+      { id: 'site', label: 'Site', fill: '#3B6D11', r: 16, note: 'ground / ground_private / address / grounds_addresses' },
+      { id: 'meter', label: 'Meter', fill: '#3B6D11', r: 16, note: 'meter / customer (1:1) / meter_config / meter_system_info / meter_billing / sparkmac_node' },
+      { id: 'wallet', label: 'Wallet', fill: '#BA7517', r: 16, note: 'wallet / transactions / sales_account — wallet = meter XOR sales_account' },
+      { id: 'tariff', label: 'Tariff', fill: '#BA7517', r: 16, note: 'tariff (flat | blockrate). Stored FK to meter: unknown. configure_meter is a command, not a stored FK.' },
+      { id: 'reading', label: 'Reading', fill: '#175CD3', r: 16, note: 'reading — unique (meter, heartbeat window). hops[] dropped.' },
+      { id: 'user', label: 'User / ACL', fill: '#534AB7', r: 16, note: 'user / role / roles_users / users_grounds / sales_accounts_users' },
+      { id: 'event', label: 'Event / SMS', fill: '#888', r: 16, note: 'event / sms_config / sms_message / snapshot. FK to meter: unknown.' },
+      { id: 'ops', label: 'Ops / sym_*', fill: '#BA7517', r: 16, note: 'config_parameter / system_* / alembic_version / SymmetricDS sym_*. Not meter telemetry.' },
+      { id: 'sparknet', label: 'SparkNet-HTTP', fill: '#0F6E56', r: 14, note: 'Wire objects, not extra Postgres tables. SSE add_reading → reading.' },
+      { id: 'un', label: 'UN pack', fill: '#BA7517', r: 14, note: 'village.json / electric-devices / associations / feeds/registry.json. Geometry, not telemetry.' },
+      { id: 'meshems', label: 'MeshEMS', fill: '#5a5a55', r: 14, note: 'Phase 2 board. No GroundBolt table. Device id to meter: unknown.' },
+      { id: 'mpm', label: 'MPM', fill: '#5a5a55', r: 14, note: 'CRM + STS / OpenPAYGO. POST /api/v0/transaction/ → wallet. Shared customer / account id: unknown.' }
+    ],
+    links: [
+      { source: 'site', target: 'user', kind: 'fk', label: 'users_grounds' },
+      { source: 'meter', target: 'reading', kind: 'fk', label: '(meter, heartbeat)' },
+      { source: 'meter', target: 'wallet', kind: 'fk', label: 'XOR' },
+      { source: 'user', target: 'wallet', kind: 'fk', label: 'sales_accounts_users' },
+      { source: 'sparknet', target: 'reading', kind: 'wire', label: 'SSE → reading' },
+      { source: 'meter', target: 'un', kind: 'un', label: 'meter id can later bind' },
+      { source: 'mpm', target: 'wallet', kind: 'unk', label: 'POST /api/v0/transaction/' },
+      { source: 'site', target: 'un', kind: 'unk', label: '' },
+      { source: 'tariff', target: 'meter', kind: 'unk', label: '' },
+      { source: 'event', target: 'meter', kind: 'unk', label: '' },
+      { source: 'meshems', target: 'meter', kind: 'unk', label: '' }
+    ]
+  };
+
+  var objForceReady = false;
+  var objSim = null;
+  var objZoom = null;
+
+  function switchObjView(view) {
+    var boxes = document.getElementById('obj-boxes-view');
+    var force = document.getElementById('obj-force-view');
+    document.getElementById('btn-obj-boxes').classList.toggle('active', view === 'boxes');
+    document.getElementById('btn-obj-force').classList.toggle('active', view === 'force');
+    boxes.hidden = view !== 'boxes';
+    force.hidden = view !== 'force';
+    if (view === 'force') buildObjForce();
+  }
+
+  document.getElementById('btn-obj-boxes').addEventListener('click', function () {
+    switchObjView('boxes');
+  });
+  document.getElementById('btn-obj-force').addEventListener('click', function () {
+    switchObjView('force');
+  });
+
+  function buildObjForce() {
+    var frame = document.getElementById('obj-force-frame');
+    if (!window.d3) {
+      frame.innerHTML = '<p class="err">d3-force failed to load (CDN).</p>';
+      return;
+    }
+    if (objForceReady) {
+      if (objSim) objSim.alpha(0.3).restart();
+      return;
+    }
+    objForceReady = true;
+
+    var width = frame.clientWidth || 720;
+    var height = frame.clientHeight || 520;
+    var nodes = OBJ_GRAPH.nodes.map(function (n) { return Object.assign({}, n); });
+    var links = OBJ_GRAPH.links.map(function (l) { return Object.assign({}, l); });
+
+    var svg = d3.select('#obj-force-svg');
+    svg.selectAll('*').remove();
+    svg.attr('viewBox', '0 0 ' + width + ' ' + height);
+
+    var defs = svg.append('defs');
+    [
+      { id: 'arr-obj-fk', color: '#3B6D11' },
+      { id: 'arr-obj-wire', color: '#175CD3' },
+      { id: 'arr-obj-un', color: '#BA7517' },
+      { id: 'arr-obj-unk', color: '#888' }
+    ].forEach(function (m) {
+      defs.append('marker')
+        .attr('id', m.id)
+        .attr('viewBox', '0 0 8 8')
+        .attr('markerWidth', 8)
+        .attr('markerHeight', 8)
+        .attr('refX', 7)
+        .attr('refY', 4)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,0 L8,4 L0,8 Z')
+        .attr('fill', m.color);
+    });
+
+    var g = svg.append('g');
+    objZoom = d3.zoom()
+      .scaleExtent([0.4, 2.5])
+      .filter(function (event) {
+        if (event.type === 'wheel') return true;
+        return event.target === svg.node();
+      })
+      .on('zoom', function (event) { g.attr('transform', event.transform); });
+    svg.call(objZoom);
+    svg.on('dblclick.zoom', null);
+
+    objSim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
+        return d.kind === 'fk' ? 90 : 120;
+      }))
+      .force('charge', d3.forceManyBody().strength(-280))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collide', d3.forceCollide().radius(function (d) { return d.r + 18; }));
+
+    var link = g.append('g')
+      .selectAll('line')
+      .data(links)
+      .join('line')
+      .attr('class', function (d) { return 'force-link force-link-' + d.kind; })
+      .attr('marker-end', function (d) { return 'url(#arr-obj-' + d.kind + ')'; });
+
+    var elabel = g.append('g')
+      .selectAll('text')
+      .data(links.filter(function (d) { return d.label; }))
+      .join('text')
+      .attr('class', 'force-elabel')
+      .text(function (d) { return d.label; });
+
+    var node = g.append('g')
+      .selectAll('circle')
+      .data(nodes)
+      .join('circle')
+      .attr('class', 'force-node')
+      .attr('r', function (d) { return d.r; })
+      .attr('fill', function (d) { return d.fill; })
+      .call(d3.drag()
+        .on('start', dragstarted)
+        .on('drag', dragged)
+        .on('end', dragended));
+
+    var label = g.append('g')
+      .selectAll('text')
+      .data(nodes)
+      .join('text')
+      .attr('class', 'force-label')
+      .attr('dy', function (d) { return d.r + 13; })
+      .text(function (d) { return d.label; });
+
+    var tip = d3.select(frame).append('div').attr('class', 'force-tooltip');
+    node.on('mouseover', function (event, d) {
+      tip.html('<strong>' + d.label + '</strong>' + d.note)
+        .style('left', (event.offsetX + 12) + 'px')
+        .style('top', (event.offsetY - 8) + 'px')
+        .classed('show', true);
+    }).on('mousemove', function (event) {
+      tip.style('left', (event.offsetX + 12) + 'px').style('top', (event.offsetY - 8) + 'px');
+    }).on('mouseout', function () {
+      tip.classed('show', false);
+    });
+
+    function endPoint(d, which) {
+      var dx = d.target.x - d.source.x;
+      var dy = d.target.y - d.source.y;
+      var len = Math.sqrt(dx * dx + dy * dy) || 1;
+      if (which === 'x1') return d.source.x + (dx / len) * d.source.r;
+      if (which === 'y1') return d.source.y + (dy / len) * d.source.r;
+      return (which === 'x2' ? d.target.x : d.target.y) - ((which === 'x2' ? dx : dy) / len) * (d.target.r + 4);
+    }
+
+    objSim.on('tick', function () {
+      link
+        .attr('x1', function (d) { return endPoint(d, 'x1'); })
+        .attr('y1', function (d) { return endPoint(d, 'y1'); })
+        .attr('x2', function (d) { return endPoint(d, 'x2'); })
+        .attr('y2', function (d) { return endPoint(d, 'y2'); });
+      node.attr('cx', function (d) { return d.x; }).attr('cy', function (d) { return d.y; });
+      label.attr('x', function (d) { return d.x; }).attr('y', function (d) { return d.y; });
+      elabel
+        .attr('x', function (d) { return (d.source.x + d.target.x) / 2; })
+        .attr('y', function (d) { return (d.source.y + d.target.y) / 2 - 5; });
+    });
+
+    function dragstarted(event, d) {
+      if (!event.active) objSim.alphaTarget(0.25).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+    function dragged(event, d) {
+      d.fx = event.x;
+      d.fy = event.y;
+    }
+    function dragended(event, d) {
+      if (!event.active) objSim.alphaTarget(0);
+    }
+
+    document.getElementById('obj-force-reset').addEventListener('click', function () {
+      nodes.forEach(function (n) { n.fx = null; n.fy = null; });
+      objSim.alpha(1).restart();
+      svg.transition().duration(600).call(objZoom.transform, d3.zoomIdentity);
+    });
+  }
 })();
 </script>
 </body>
