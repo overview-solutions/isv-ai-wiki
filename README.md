@@ -25,7 +25,7 @@ Then open:
 | **Nairobi workshop / code challenges** | [http://127.0.0.1:8765/power-africa-2026-workshop-planning.html](http://127.0.0.1:8765/power-africa-2026-workshop-planning.html) |
 | **OMS Workshop Nairobi** | [http://127.0.0.1:8765/oms-workshop-nairobi-2026.html](http://127.0.0.1:8765/oms-workshop-nairobi-2026.html) |
 
-**Simulator lives in a separate GitHub repo** ([smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator)), but the wiki ships a **frozen copy** under `village-simulator/` and embeds it. For offline browsing you **do not** clone that second repo.
+**Live simulator (current Vite app):** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) — open in a new tab. isv.wiki **cannot iframe** that origin (Cloudflare `frame-src` is `'self'` + Vimeo + Google Docs only). Source: [smart-village-simulator](https://github.com/overview-solutions/smart-village-simulator). The wiki ships a **frozen copy** under `village-simulator/` for the same-origin iframe and offline `./preview.sh`. Do **not** develop in that freeze.
 
 **Do not** double-click `index.html` in Finder/Explorer — `file://` breaks fetch, Tasks, and the sim iframe. Always use `./preview.sh` (needs Python 3, already on macOS/most Linux).
 
@@ -45,6 +45,7 @@ See that repo’s README for Locus / offline map packs. Do **not** edit the wiki
 ### Online (no clone)
 
 **Live site:** [isv.wiki](https://isv.wiki/) · [GitHub Pages mirror](https://overview-solutions.github.io/isv-ai-wiki/)  
+**Live Village Simulator:** [overview-solutions.github.io/smart-village-simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1) (new tab; not iframed from the wiki)  
 **Source:** [github.com/overview-solutions/isv-ai-wiki](https://github.com/overview-solutions/isv-ai-wiki) (MIT)
 
 ---

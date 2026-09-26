@@ -39,4 +39,5 @@ There is **no agent registration endpoint** on isv.wiki. To contribute, open a p
 ## Related (separate hosts)
 
 - IEEE Smart Village program site: https://smartvillage.ieee.org/
-- Live Village Simulator source (sibling repo): https://github.com/overview-solutions/smart-village-simulator
+- Live Village Simulator (GitHub Pages, new tab): https://overview-solutions.github.io/smart-village-simulator/?embed=1
+- Live Village Simulator source: https://github.com/overview-solutions/smart-village-simulator

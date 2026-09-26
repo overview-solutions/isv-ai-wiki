@@ -21,7 +21,8 @@
 - [OMS / village training skills](https://isv.wiki/oms-training-skills.html): Catalog of work that needs training (lifecycle timeline) — not a course; modules TBD
 - [Code Challenge sign-up](https://isv.wiki/code-challenge-signup.html): Interest form for workshop Code Challenge seats (name · scope · contact · where from · GitHub · comment)
 - [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 pole controller, BOM, schematic
-- [Village Simulator](https://isv.wiki/index.html#village-metering/village-simulator): Hypothetical 3D prepaid village microgrid simulation hub
+- [Village Simulator hub](https://isv.wiki/index.html#village-metering/village-simulator): Wiki hub — frozen same-origin iframe + how to run (isv.wiki cannot iframe github.io)
+- [Live Village Simulator](https://overview-solutions.github.io/smart-village-simulator/?embed=1): Current Vite app on GitHub Pages — open new tab
 - [Standards guide](https://isv.wiki/index.html#standards): Standards catalog (village-relevant vs larger grid)
 - [Wireless telecom](https://isv.wiki/wireless-telecom.html): Leaf / NAN / WAN radio map — LoRaWAN, TVWS, Z-Wave, Matter, Bluetooth, Wi‑Fi, LTE, cellular, Starlink, GPS, AM, FM
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents

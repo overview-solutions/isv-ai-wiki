@@ -31,4 +31,4 @@ Example: `https://isv.wiki/index.html#village-metering/village-geojson-un`
 
 ## Offline
 
-Clone the repo and run `./preview.sh` → `http://127.0.0.1:8765/index.html`. Frozen Village Simulator ships inside the wiki; live sim is the sibling `smart-village-simulator` repo.
+Clone the repo and run `./preview.sh` → `http://127.0.0.1:8765/index.html`. Frozen Village Simulator ships inside the wiki (same-origin iframe). Live Vite app: `https://overview-solutions.github.io/smart-village-simulator/?embed=1` (new tab — isv.wiki cannot iframe github.io). Local/dev: sibling `smart-village-simulator` repo.

@@ -73,11 +73,17 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
 
   <h1>Village Simulator</h1>
-  <p class="sub">Schematic mini-grid day · prepaid · feeders · EMS · O&amp;M modes · Circaevum Locus graphics</p>
-  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in a <strong>separate GitHub repo</strong>; this wiki ships a <strong>frozen embed</strong> so offline browsing still works.</p>
+  <p class="sub">Live Vite app on GitHub Pages · frozen iframe here (CSP) · Circaevum Locus graphics</p>
+  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator</a>. Open the <strong>live Pages app</strong> in a new tab; this wiki iframe is a same-origin freeze only.</p>
 
-  <h2 id="theater">Frozen theater</h2>
-  <p class="body-text">Same-origin snapshot served with the wiki. Prefer Nature / Liberty basemaps offline; satellite needs internet.</p>
+  <div class="callout">
+    <strong>Open the live simulator (new tab)</strong>
+    <p><a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">overview-solutions.github.io/smart-village-simulator/?embed=1 ↗</a> — current BUILD / OPERATIONS / MAINTENANCE Vite app. Use this for workshop and product work.</p>
+    <p>isv.wiki <strong>cannot iframe</strong> that origin. Cloudflare Transform Rule <code>isv-wiki-security-headers</code> <code>frame-src</code> is <code>'self' https://player.vimeo.com https://docs.google.com</code> only. Adding <code>https://overview-solutions.github.io</code> there is a dashboard change, not a repo edit.</p>
+  </div>
+
+  <h2 id="theater">Frozen theater (same-origin iframe)</h2>
+  <p class="body-text">Older snapshot shipped with the wiki so <code>./preview.sh</code> and Pages still show <em>a</em> theater offline. Prefer Nature / Liberty basemaps offline; satellite needs internet. Do not treat numbers here as the live app.</p>
   <div class="sim-embed">
     <iframe
       title="Village Simulator frozen theater"
@@ -87,7 +93,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     ></iframe>
   </div>
   <p class="sim-open">
-    <a href="village-simulator/index.html" target="_blank" rel="noopener">Open frozen theater full page ↗</a>
+    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live Pages app ↗</a>
+    · <a href="village-simulator/index.html" target="_blank" rel="noopener">Frozen theater full page ↗</a>
     · <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Online Locus build ↗</a>
     · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local live app :5176</a> (only if you ran <code>npm start</code>)
   </p>
@@ -111,17 +118,17 @@ cd isv-ai-wiki
       <tr>
         <td><strong>This wiki page</strong></td>
         <td><code>meter-village-simulator.html</code></td>
-        <td>Theater + how to run · links · context</td>
+        <td>How to run · live link · frozen iframe (CSP)</td>
       </tr>
       <tr>
         <td><strong>Frozen theater</strong></td>
         <td><code>village-simulator/</code> inside the wiki</td>
-        <td>Offline iframe snapshot — browse only; do not develop here</td>
+        <td>Same-origin iframe only — Cloudflare blocks github.io in <code>frame-src</code></td>
       </tr>
       <tr>
         <td><strong>Live app</strong></td>
-        <td><a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator ↗</a></td>
-        <td>BUILD / OPS / MAINT UX, Vite :5176 — edit and ship freezes from here</td>
+        <td><a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">GitHub Pages ↗</a> · <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">source ↗</a></td>
+        <td>Current Vite app — open new tab. Local: <code>npm start</code> :5176</td>
       </tr>
       <tr>
         <td><strong>Graphics library</strong></td>
@@ -151,10 +158,10 @@ npm start
 
   <h2 id="links">Links</h2>
   <div class="links">
-    <a href="https://github.com/overview-solutions/isv-ai-wiki#offline-in-one-go-start-here" target="_blank" rel="noopener">Wiki README · Offline in one go ↗</a>
-    <a href="https://github.com/overview-solutions/smart-village-simulator#offline-via-the-isv-wiki-start-here" target="_blank" rel="noopener">Sim README · Offline via wiki ↗</a>
-    <a href="index.html#village-metering/village-geojson-un">Village GeoJSON · open Utility Network</a>
+    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live Pages simulator ↗</a>
     <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator (source) ↗</a>
+    <a href="https://github.com/overview-solutions/isv-ai-wiki#offline-in-one-go-start-here" target="_blank" rel="noopener">Wiki README · Offline in one go ↗</a>
+    <a href="index.html#village-metering/village-geojson-un">Village GeoJSON · open Utility Network</a>
     <a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum Locus ↗</a>
     <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Hosted Locus theater (online) ↗</a>
     <a href="village-simulator/index.html" target="_blank" rel="noopener">Frozen theater full page</a>
