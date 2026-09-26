@@ -68,46 +68,46 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">First-km hardware (meter / DCU / NAN)</h3>
   <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>Street EMS</strong> (Hardware · NESL)</td><td>NAN mesh</td><td>Hardware supported by NESL · DCU mesh backhaul · <a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">Street EMS board</a> · Phase&nbsp;2</td></tr>
-      <tr><td><strong>MeshEMS</strong> (Software · E-IOT)</td><td>Street Pole gateway</td><td>Software supported by E-IOT · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshEMS</a> OpenAMI firmware · Phase&nbsp;2</td></tr>
-      <tr><td><strong>DLMS/COSEM meters</strong></td><td>Revenue meters</td><td>OEM utility-grade meters (Inhemeter, Donsun, etc.) — interop via DLMS at DCU; VMRS registers northbound · Phase&nbsp;1–2</td></tr>
-      <tr><td><strong>SparkMeter hardware</strong></td><td>Revenue meters + RF mesh</td><td>SparkNet RF NAN · proprietary but widely deployed · Phase&nbsp;1</td></tr>
+      <tr><td><strong>Street EMS</strong> (Hardware)</td><td>NAN mesh · DCU mesh backhaul</td><td>NESL</td><td><a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">STREET-EMS</a></td></tr>
+      <tr><td><strong>MeshEMS</strong> (Software)</td><td>Street Pole gateway · OpenAMI firmware</td><td>E-IOT</td><td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a></td></tr>
+      <tr><td><strong>DLMS/COSEM meters</strong></td><td>Revenue meters · interop via DLMS at DCU · VMRS registers northbound</td><td>OEM vendors (Inhemeter, Donsun, etc.)</td><td>—</td></tr>
+      <tr><td><strong>SparkMeter hardware</strong></td><td>Revenue meters + RF mesh · SparkNet RF NAN</td><td>SparkMeter</td><td>—</td></tr>
     </tbody>
   </table>
 
   <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Aggregation hubs (same hierarchy level)</h3>
   <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>SparkNet Hub</strong></td><td>SparkMeter aggregation</td><td>USB Gateway + SparkNet-HTTP plugin · aggregates SparkMeter RF mesh · feeds GroundBolt or alternate HES · Phase&nbsp;1</td></tr>
-      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry</td><td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; <strong>leakage visible at every layer</strong> · Phase&nbsp;2 (Phase&nbsp;1 feeds it)</td></tr>
+      <tr><td><strong>SparkNet Hub</strong></td><td>SparkMeter aggregation · USB Gateway + SparkNet-HTTP plugin · feeds GroundBolt or alternate HES</td><td>EarthSpark / SparkMeter</td><td><a href="https://github.com/EarthSpark/sparknet-http" target="_blank" rel="noopener">sparknet-http</a></td></tr>
+      <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry · normalize OEM/DLMS to registers operators can bill, vend, and disconnect on · <strong>leakage visible at every layer</strong></td><td>EnAccess / E-IOT / ISV</td><td><a href="https://github.com/enaccess/openami" target="_blank" rel="noopener">openami</a></td></tr>
     </tbody>
   </table>
 
   <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Backend alternatives (pick one)</h3>
   <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>Village backend option — prepaid billing, CRM, mobile money · supports MQTT/OpenAMI integration · Phase&nbsp;1–2</td></tr>
-      <tr><td><strong>OpenEMS</strong></td><td>Linux end-to-end backend</td><td>Under active development by Arila (iteration &lt; 60 days) · lightweight village use · can swap Raspberry Pi meter for first-km MeshEMS fan-in · <strong>No support yet for SparkNet aggregation, DLMS/COSEM, or STS</strong> · more urban/grid-present · Phase&nbsp;2–3</td></tr>
-      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open)</td><td>ThunderCloud / GroundBolt — <a href="index.html#village-metering/roadmap">Phase&nbsp;1 roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview) · SparkNet-HTTP native</td></tr>
+      <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend · prepaid billing, CRM, mobile money · supports MQTT/OpenAMI integration</td><td>EnAccess Foundation</td><td><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">micropowermanager</a></td></tr>
+      <tr><td><strong>OpenEMS</strong></td><td>Linux end-to-end backend · under active development by Arila (iteration &lt; 60 days) · lightweight village use · can swap Raspberry Pi meter for first-km MeshEMS fan-in · <strong>No support yet for SparkNet aggregation, DLMS/COSEM, or STS</strong> · more urban/grid-present</td><td>E-IOT (Arila Barnes)</td><td><a href="https://github.com/openems/openems" target="_blank" rel="noopener">openems</a></td></tr>
+      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open) · ThunderCloud / GroundBolt · dev preview · SparkNet-HTTP native</td><td>EarthSpark</td><td><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">thundercloud</a></td></tr>
     </tbody>
   </table>
 
   <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Cross-cutting</h3>
   <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
+    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology</td><td>Maps feeder → branch → meter so loss can be compared at each point · Phase&nbsp;2</td></tr>
-      <tr><td><strong>OpenADR</strong></td><td>Price / DR signals</td><td><strong>Phase&nbsp;3</strong> — utility VTN/VEN programs after grid/aggregator arrival; not year-one prepaid</td></tr>
+      <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology · maps feeder → branch → meter so loss can be compared at each point</td><td>ISV / EnAccess</td><td>—</td></tr>
+      <tr><td><strong>OpenADR</strong></td><td>Price / DR signals · utility VTN/VEN programs after grid/aggregator arrival · not year-one prepaid</td><td>OpenADR Alliance</td><td><a href="https://github.com/OpenADRAlliance" target="_blank" rel="noopener">OpenADRAlliance</a></td></tr>
     </tbody>
   </table>
 
   <h2>ISV wiki threads</h2>
   <ul class="link-list">
-    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — Phase&nbsp;1 installed-base · Phase&nbsp;2 microgrid core · Phase&nbsp;3 grid connect</li>
+    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — installed-base · microgrid core · grid connect</li>
     <li><a href="index.html#village-metering/overview">Village IOT Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
     <li><a href="index.html#village-metering/meshems">MeshEMS</a> — software supported by E-IOT</li>
     <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 notes · MeshEMS board distribution</a></li>
@@ -121,7 +121,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a></li>
     <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a></li>
     <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a></li>
-    <li><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">EarthSpark · ThunderCloud</a> (Phase&nbsp;1 · developer preview)</li>
+    <li><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">EarthSpark · ThunderCloud</a> (developer preview)</li>
     <li><a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> (Dev Labs reports)</li>
   </ul>
 </div>
