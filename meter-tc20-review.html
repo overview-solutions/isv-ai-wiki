@@ -83,10 +83,30 @@ li { margin-bottom: 0.35rem; }
 .legend i.power { border-color: #4a4a4a; }
 .legend i.teal { border-color: #0F6E56; }
 .legend i.gray { border-color: #888; border-top-style: dotted; }
+.legend i.nid,
+.legend i.nid-un {
+  width: 22px; height: 12px; border-radius: 3px;
+  border: 1.5px solid #3B6D11; background: #fff;
+  border-top: 1.5px solid #3B6D11;
+  position: relative; vertical-align: middle;
+}
+.legend i.nid::after,
+.legend i.nid-un::after {
+  content: ''; position: absolute; left: 3px; top: 2px;
+  width: 6px; height: 6px; border-radius: 1px;
+  border: 1.2px solid #3B6D11; background: #3B6D11;
+}
+.legend i.nid-un { border-color: #BA7517; background: #FFF8EE; border-top-style: dashed; }
+.legend i.nid-un::after { border-color: #BA7517; background: #BA7517; }
 .legend i.cover {
   width: 12px; height: 12px; border-radius: 50%;
   border: 1px solid #BA7517; background: rgba(186,117,23,0.2);
   border-top: 1px solid #BA7517;
+}
+.legend i.bubble {
+  width: 16px; height: 12px; border-radius: 40%;
+  border: 1px solid #3B6D11; background: rgba(59,109,17,0.14);
+  border-top: 1px solid #3B6D11;
 }
 .link-list { list-style: none; margin-left: 0; }
 .link-list li { margin-bottom: 0.45rem; }
@@ -114,16 +134,52 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   height: 520px; overflow: hidden; position: relative;
 }
 .force-frame svg { width: 100%; height: 100%; display: block; }
-.force-node { cursor: grab; stroke: #fff; stroke-width: 2; }
+.force-node { cursor: grab; }
 .force-node:active { cursor: grabbing; }
-.force-node:hover { stroke-width: 3; }
+.force-card-body { fill: #fff; stroke-width: 1.6; }
+.force-card-head { stroke: none; }
+.force-card-row { stroke: #ddd; stroke-width: 1; }
+.force-node-hex, .force-node-folder { stroke: #fff; stroke-width: 2; }
+.force-node-sys { stroke: #fff; stroke-width: 3.2; }
+.force-node:hover .force-card-body { stroke-width: 2.6; }
+.force-node:hover .force-node-hex,
+.force-node:hover .force-node-folder { stroke-width: 3; }
+.force-node:hover .force-node-sys { stroke-width: 4; }
 .force-label { font-size: 11px; fill: var(--text); pointer-events: none; text-anchor: middle; font-weight: 600; }
+.force-label-in { fill: #fff; font-size: 10px; }
 .force-elabel { font-size: 9px; fill: var(--text-2); pointer-events: none; text-anchor: middle; }
 .force-link { fill: none; stroke-width: 1.6; }
-.force-link-fk { stroke: #3B6D11; }
-.force-link-wire { stroke: #175CD3; }
-.force-link-un { stroke: #BA7517; stroke-dasharray: 4 3; }
+.force-link-fk { stroke: #3B6D11; stroke-width: 2.3; }
+.force-link-wire { stroke: #175CD3; stroke-width: 1.8; }
+.force-link-un { stroke: #BA7517; stroke-dasharray: 4 3; stroke-width: 1.9; }
 .force-link-unk { stroke: #888; stroke-dasharray: 1.5 2.5; }
+.force-id-chip { fill: #fff; stroke: #3B6D11; stroke-width: 1.5; }
+.force-id-glyph-out { fill: none; stroke: #3B6D11; stroke-width: 1.15; }
+.force-id-glyph-in { fill: #3B6D11; stroke: none; }
+.force-id-chip-text {
+  font-size: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  fill: #3B6D11; pointer-events: none;
+}
+.force-id-chip-un .force-id-chip { stroke: #BA7517; fill: #FFF8EE; }
+.force-id-chip-un .force-id-glyph-out { stroke: #BA7517; }
+.force-id-chip-un .force-id-glyph-in { fill: #BA7517; }
+.force-id-chip-un .force-id-chip-text { fill: #BA7517; }
+.force-nest-chip { pointer-events: none; }
+.force-bubble { pointer-events: none; stroke-width: 1.45; }
+.force-bubble-groundbolt { fill: rgba(59,109,17,0.10); stroke: rgba(59,109,17,0.38); }
+.force-bubble-sparknet { fill: rgba(15,110,86,0.10); stroke: rgba(15,110,86,0.40); }
+.force-bubble-un { fill: rgba(186,117,23,0.10); stroke: rgba(186,117,23,0.42); }
+.force-bubble-meshems { fill: rgba(90,90,85,0.10); stroke: rgba(90,90,85,0.40); }
+.force-bubble-mpm { fill: rgba(90,90,85,0.09); stroke: rgba(90,90,85,0.38); }
+.force-bubble-label {
+  font-size: 10px; font-weight: 650; text-anchor: middle;
+  pointer-events: none;
+}
+.force-bubble-label-groundbolt { fill: #3B6D11; }
+.force-bubble-label-sparknet { fill: #0F6E56; }
+.force-bubble-label-un { fill: #BA7517; }
+.force-bubble-label-meshems,
+.force-bubble-label-mpm { fill: #5a5a55; }
 .force-tooltip {
   position: absolute; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
   padding: 0.45rem 0.6rem; font-size: 11px; pointer-events: none; opacity: 0; transition: opacity 0.15s;
@@ -133,6 +189,7 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 .force-tooltip strong { display: block; margin-bottom: 0.2rem; color: var(--text); }
 html.dark .force-frame { background: #f7f6f3; }
 html.dark .force-label { fill: #333; }
+html.dark .force-label-in { fill: #fff; }
 html.dark .force-elabel { fill: #666; }
 </style>
 </head>
@@ -385,7 +442,8 @@ html.dark .force-elabel { fill: #666; }
     <a href="index.html#village-metering/village-geojson-un">UN GeoJSON convention</a>.
     MeshEMS is a complementary Phase&nbsp;2 track — <strong>not</strong> a TC2.0 table.
     Diagram below draws those collections and every ID hop this page already named.
-    Unknown hops stay labeled unknown.
+    A key chip <em>inside</em> the table-card is the nested unique ID that collection stores (join table, unique key, or pack id) — not on the hop line.
+    Unknown hops stay dashed and unlabeled. Wire (SSE) is not stored.
     Toggle <strong>Force</strong> for the same nodes as a drag-able graph — no extra FKs.
   </p>
 
@@ -404,7 +462,7 @@ html.dark .force-elabel { fill: #666; }
       </div>
       <div id="obj-force-view" hidden>
         <p class="obj-force-hint">
-          Same collections and hops as the boxes. Drag pins a node. Scroll to zoom. Reset unpins. Unknown hops stay dashed and unlabeled.
+          Same collections and hops as the boxes. Soft bubble = one DB or system — every node in that store sits inside. <strong>Key chip</strong> sits inside the card that stores that nested unique ID (join table, unique key, or pack id) — not on the stroke. Green = nested unique ID link. Blue = SSE wire, not stored. Dashed gray = unknown. Amber dashed = UN asset id (can later). Cards = GroundBolt tables. Hex = SparkNet-HTTP. Folder = UN pack. Thick box = MeshEMS / MPM. Drag pins a node. Scroll to zoom. Reset unpins.
         </p>
         <div class="force-controls">
           <button type="button" class="btn" id="obj-force-reset">Reset</button>
@@ -414,10 +472,11 @@ html.dark .force-elabel { fill: #666; }
         </div>
       </div>
       <div class="legend">
-        <span><i class="green"></i> Stored join / FK</span>
-        <span><i class="blue"></i> SparkNet-HTTP wire</span>
-        <span><i class="amber"></i> UN bind (can later)</span>
-        <span><i class="gray"></i> Complementary / unknown</span>
+        <span><i class="nid"></i> nested unique ID</span>
+        <span><i class="gray"></i> unknown</span>
+        <span><i class="blue"></i> wire (SSE) · not stored</span>
+        <span><i class="nid-un"></i> UN asset id (can later)</span>
+        <span><i class="bubble"></i> one DB / system</span>
       </div>
     </div>
   </div>
@@ -661,31 +720,39 @@ html.dark .force-elabel { fill: #666; }
 
   load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20260811b', function (s) { stackSvg = s; });
   load('host-map', 'technical-notes/diagrams/village-meter-topology.svg?v=20260811j', function (s) { mapSvg = s; });
-  load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926force', function () {});
+  load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926in', function () {});
 
-  /* Same collections + hops as tc20-data-objects.svg. No invented FKs. */
+  /* Same collections + hops as tc20-data-objects.svg. No invented FKs.
+     cluster = one DB / system bubble — not a hop. */
+  var OBJ_CLUSTERS = [
+    { id: 'groundbolt', label: 'GroundBolt / TC2.0 Postgres' },
+    { id: 'sparknet', label: 'SparkNet-HTTP' },
+    { id: 'un', label: 'UN pack' },
+    { id: 'meshems', label: 'MeshEMS' },
+    { id: 'mpm', label: 'MPM' }
+  ];
   var OBJ_GRAPH = {
     nodes: [
-      { id: 'site', label: 'Site', fill: '#3B6D11', r: 16, note: 'ground / ground_private / address / grounds_addresses' },
-      { id: 'meter', label: 'Meter', fill: '#3B6D11', r: 16, note: 'meter / customer (1:1) / meter_config / meter_system_info / meter_billing / sparkmac_node' },
-      { id: 'wallet', label: 'Wallet', fill: '#BA7517', r: 16, note: 'wallet / transactions / sales_account — wallet = meter XOR sales_account' },
-      { id: 'tariff', label: 'Tariff', fill: '#BA7517', r: 16, note: 'tariff (flat | blockrate). Stored FK to meter: unknown. configure_meter is a command, not a stored FK.' },
-      { id: 'reading', label: 'Reading', fill: '#175CD3', r: 16, note: 'reading — unique (meter, heartbeat window). hops[] dropped.' },
-      { id: 'user', label: 'User / ACL', fill: '#534AB7', r: 16, note: 'user / role / roles_users / users_grounds / sales_accounts_users' },
-      { id: 'event', label: 'Event / SMS', fill: '#888', r: 16, note: 'event / sms_config / sms_message / snapshot. FK to meter: unknown.' },
-      { id: 'ops', label: 'Ops / sym_*', fill: '#BA7517', r: 16, note: 'config_parameter / system_* / alembic_version / SymmetricDS sym_*. Not meter telemetry.' },
-      { id: 'sparknet', label: 'SparkNet-HTTP', fill: '#0F6E56', r: 14, note: 'Wire objects, not extra Postgres tables. SSE add_reading → reading.' },
-      { id: 'un', label: 'UN pack', fill: '#BA7517', r: 14, note: 'village.json / electric-devices / associations / feeds/registry.json. Geometry, not telemetry.' },
-      { id: 'meshems', label: 'MeshEMS', fill: '#5a5a55', r: 14, note: 'Phase 2 board. No GroundBolt table. Device id to meter: unknown.' },
-      { id: 'mpm', label: 'MPM', fill: '#5a5a55', r: 14, note: 'CRM + STS / OpenPAYGO. POST /api/v0/transaction/ → wallet. Shared customer / account id: unknown.' }
+      { id: 'site', label: 'Site', fill: '#3B6D11', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', idFields: [{ text: 'grounds_addresses', kind: 'fk' }], note: 'ground / ground_private / address / grounds_addresses' },
+      { id: 'meter', label: 'Meter', fill: '#3B6D11', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', idFields: [{ text: 'customer 1:1', kind: 'fk' }], note: 'meter / customer (1:1) / meter_config / meter_system_info / meter_billing / sparkmac_node' },
+      { id: 'wallet', label: 'Wallet', fill: '#BA7517', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', idFields: [{ text: 'XOR', kind: 'fk' }], note: 'wallet / transactions / sales_account — wallet = meter XOR sales_account' },
+      { id: 'tariff', label: 'Tariff', fill: '#BA7517', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', note: 'tariff (flat | blockrate). Stored FK to meter: unknown. configure_meter is a command, not a stored FK.' },
+      { id: 'reading', label: 'Reading', fill: '#175CD3', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', idFields: [{ text: '(meter, window)', kind: 'fk' }], note: 'reading — unique (meter, heartbeat window). hops[] dropped.' },
+      { id: 'user', label: 'User / ACL', fill: '#534AB7', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', idFields: [{ text: 'users_grounds', kind: 'fk' }, { text: 'sales_accounts_users', kind: 'fk' }], note: 'user / role / roles_users / users_grounds / sales_accounts_users' },
+      { id: 'event', label: 'Event / SMS', fill: '#888', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', note: 'event / sms_config / sms_message / snapshot. FK to meter: unknown.' },
+      { id: 'ops', label: 'Ops / sym_*', fill: '#BA7517', shape: 'table', w: 92, h: 38, cluster: 'groundbolt', note: 'config_parameter / system_* / alembic_version / SymmetricDS sym_*. Not meter telemetry.' },
+      { id: 'sparknet', label: 'SparkNet-HTTP', fill: '#0F6E56', shape: 'hex', r: 26, cluster: 'sparknet', note: 'Wire objects, not extra Postgres tables. SSE add_reading → reading.' },
+      { id: 'un', label: 'UN pack', fill: '#BA7517', shape: 'folder', w: 86, h: 42, cluster: 'un', idFields: [{ text: 'fromId → toId', kind: 'fk' }, { text: 'feeds/registry id', kind: 'un' }], note: 'village.json / electric-devices / associations / feeds/registry.json. Geometry, not telemetry. assoc fromId → toId (same feature id).' },
+      { id: 'meshems', label: 'MeshEMS', fill: '#5a5a55', shape: 'sys', w: 88, h: 36, cluster: 'meshems', note: 'Phase 2 board. No GroundBolt table. Device id to meter: unknown.' },
+      { id: 'mpm', label: 'MPM', fill: '#5a5a55', shape: 'sys', w: 80, h: 36, cluster: 'mpm', note: 'CRM + STS / OpenPAYGO. POST /api/v0/transaction/ → wallet. Shared customer / account id: unknown.' }
     ],
     links: [
-      { source: 'site', target: 'user', kind: 'fk', label: 'users_grounds' },
-      { source: 'meter', target: 'reading', kind: 'fk', label: '(meter, heartbeat)' },
-      { source: 'meter', target: 'wallet', kind: 'fk', label: 'XOR' },
-      { source: 'user', target: 'wallet', kind: 'fk', label: 'sales_accounts_users' },
+      { source: 'site', target: 'user', kind: 'fk' },
+      { source: 'meter', target: 'reading', kind: 'fk' },
+      { source: 'meter', target: 'wallet', kind: 'fk' },
+      { source: 'user', target: 'wallet', kind: 'fk' },
       { source: 'sparknet', target: 'reading', kind: 'wire', label: 'SSE → reading' },
-      { source: 'meter', target: 'un', kind: 'un', label: 'meter id can later bind' },
+      { source: 'meter', target: 'un', kind: 'un' },
       { source: 'mpm', target: 'wallet', kind: 'unk', label: 'POST /api/v0/transaction/' },
       { source: 'site', target: 'un', kind: 'unk', label: '' },
       { source: 'tariff', target: 'meter', kind: 'unk', label: '' },
@@ -729,8 +796,25 @@ html.dark .force-elabel { fill: #666; }
 
     var width = frame.clientWidth || 720;
     var height = frame.clientHeight || 520;
-    var nodes = OBJ_GRAPH.nodes.map(function (n) { return Object.assign({}, n); });
+    var nodes = OBJ_GRAPH.nodes.map(function (n) {
+      return Object.assign({}, n, { idFields: (n.idFields || []).map(function (f) { return Object.assign({}, f); }) });
+    });
     var links = OBJ_GRAPH.links.map(function (l) { return Object.assign({}, l); });
+
+    function chipWidth(s) {
+      return Math.ceil(22 + (s ? s.length : 0) * 5.15);
+    }
+
+    nodes.forEach(function (d) {
+      var fields = d.idFields || [];
+      if (!fields.length) return;
+      var maxChip = 0;
+      fields.forEach(function (f) { maxChip = Math.max(maxChip, chipWidth(f.text)); });
+      d.w = Math.max(d.w || 92, maxChip + 12);
+      var n = fields.length;
+      var head = d.shape === 'folder' ? 12 : 16;
+      d.h = Math.max(d.h || 38, head + 8 + n * 16 + (n - 1) * 3 + 6);
+    });
 
     var svg = d3.select('#obj-force-svg');
     svg.selectAll('*').remove();
@@ -767,13 +851,186 @@ html.dark .force-elabel { fill: #666; }
     svg.call(objZoom);
     svg.on('dblclick.zoom', null);
 
+    var CLUSTER_HOME = {
+      groundbolt: { cx: width * 0.38, cy: height * 0.50 },
+      sparknet: { cx: width * 0.78, cy: height * 0.18 },
+      un: { cx: width * 0.82, cy: height * 0.50 },
+      meshems: { cx: width * 0.78, cy: height * 0.84 },
+      mpm: { cx: width * 0.16, cy: height * 0.18 }
+    };
+    nodes.forEach(function (d, i) {
+      var home = CLUSTER_HOME[d.cluster] || { cx: width / 2, cy: height / 2 };
+      var spread = d.cluster === 'groundbolt' ? 78 : 6;
+      var a = (i / Math.max(nodes.length, 1)) * Math.PI * 2;
+      d.x = home.cx + Math.cos(a) * spread;
+      d.y = home.cy + Math.sin(a) * spread;
+    });
+
+    function hitR(d) {
+      if (d.shape === 'hex') return (d.r || 24) + 4;
+      return Math.max(d.w || 80, d.h || 36) / 2 + 4;
+    }
+
+    function linkEnds(d) {
+      var s = d.source, t = d.target;
+      var sid = typeof s === 'object' ? s.cluster : null;
+      var tid = typeof t === 'object' ? t.cluster : null;
+      return { same: sid && tid && sid === tid };
+    }
+
     objSim = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
-        return d.kind === 'fk' ? 90 : 120;
+      .force('link', d3.forceLink(links).id(function (d) { return d.id; })
+        .distance(function (d) {
+          if (!linkEnds(d).same) return 190;
+          return d.kind === 'fk' ? 112 : 140;
+        })
+        .strength(function (d) {
+          if (!linkEnds(d).same) return 0.12;
+          return d.kind === 'fk' ? 0.68 : 0.32;
+        }))
+      .force('charge', d3.forceManyBody().strength(-200))
+      .force('x', d3.forceX(function (d) {
+        return (CLUSTER_HOME[d.cluster] || CLUSTER_HOME.groundbolt).cx;
+      }).strength(function (d) {
+        return d.cluster === 'groundbolt' ? 0.07 : 0.18;
       }))
-      .force('charge', d3.forceManyBody().strength(-280))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collide', d3.forceCollide().radius(function (d) { return d.r + 18; }));
+      .force('y', d3.forceY(function (d) {
+        return (CLUSTER_HOME[d.cluster] || CLUSTER_HOME.groundbolt).cy;
+      }).strength(function (d) {
+        return d.cluster === 'groundbolt' ? 0.07 : 0.18;
+      }))
+      .force('collide', d3.forceCollide().radius(function (d) { return hitR(d) + 14; }));
+
+    function clusterMembers(cid) {
+      return nodes.filter(function (n) { return n.cluster === cid; });
+    }
+
+    function nodeOrbitPts(d, pad) {
+      var pts = [];
+      var n = 8;
+      var rx, ry, i, a;
+      if (d.shape === 'hex') {
+        rx = ry = (d.r || 24) + pad;
+      } else {
+        rx = (d.w || 80) / 2 + pad;
+        ry = (d.h || 36) / 2 + pad;
+        if (d.shape === 'folder' || d.shape === 'sys') ry += 12;
+      }
+      for (i = 0; i < n; i++) {
+        a = (i / n) * Math.PI * 2;
+        pts.push([d.x + rx * Math.cos(a), d.y + ry * Math.sin(a)]);
+      }
+      return pts;
+    }
+
+    function clusterGeom(cid) {
+      var members = clusterMembers(cid);
+      var pad = 26;
+      var pts = [];
+      members.forEach(function (d) {
+        if (d.x == null || d.y == null) return;
+        nodeOrbitPts(d, pad).forEach(function (p) { pts.push(p); });
+      });
+      if (!pts.length) return null;
+      if (members.length === 1) {
+        var d0 = members[0];
+        var rx = (d0.shape === 'hex' ? (d0.r || 24) : (d0.w || 80) / 2) + pad;
+        var ry = (d0.shape === 'hex' ? (d0.r || 24) : (d0.h || 36) / 2) + pad;
+        if (d0.shape === 'folder' || d0.shape === 'sys') ry += 12;
+        return { kind: 'ellipse', x: d0.x, y: d0.y, rx: rx, ry: ry, cx: d0.x, top: d0.y - ry };
+      }
+      var hull = d3.polygonHull(pts);
+      if (!hull || hull.length < 3) {
+        var cx = d3.mean(members, function (m) { return m.x; });
+        var cy = d3.mean(members, function (m) { return m.y; });
+        return { kind: 'ellipse', x: cx, y: cy, rx: 56, ry: 44, cx: cx, top: cy - 44 };
+      }
+      return {
+        kind: 'hull',
+        hull: hull,
+        cx: d3.polygonCentroid(hull)[0],
+        top: d3.min(hull, function (p) { return p[1]; })
+      };
+    }
+
+    function clusterPath(cid) {
+      var geom = clusterGeom(cid);
+      if (!geom) return '';
+      if (geom.kind === 'ellipse') {
+        return 'M' + (geom.x - geom.rx) + ',' + geom.y +
+          ' a' + geom.rx + ',' + geom.ry + ' 0 1,0 ' + (geom.rx * 2) + ',0' +
+          ' a' + geom.rx + ',' + geom.ry + ' 0 1,0 ' + (-geom.rx * 2) + ',0';
+      }
+      return d3.line().curve(d3.curveCatmullRomClosed.alpha(0.7))(geom.hull);
+    }
+
+    var hullPath = g.append('g').attr('class', 'force-bubbles')
+      .selectAll('path')
+      .data(OBJ_CLUSTERS)
+      .join('path')
+      .attr('class', function (d) { return 'force-bubble force-bubble-' + d.id; });
+
+    var hullLabel = g.append('g').attr('class', 'force-bubble-labels')
+      .selectAll('text')
+      .data(OBJ_CLUSTERS)
+      .join('text')
+      .attr('class', function (d) { return 'force-bubble-label force-bubble-label-' + d.id; })
+      .text(function (d) { return d.label; });
+
+    function paintHulls() {
+      hullPath.attr('d', function (d) { return clusterPath(d.id); });
+      hullLabel
+        .attr('x', function (d) {
+          var geom = clusterGeom(d.id);
+          return geom ? geom.cx : 0;
+        })
+        .attr('y', function (d) {
+          var geom = clusterGeom(d.id);
+          return geom ? geom.top + 12 : 0;
+        });
+    }
+
+    function drawChip(parent, text, kind, datum, extraClass) {
+      var w = chipWidth(text);
+      var cg = parent.append('g')
+        .attr('class', 'force-id-chip-g force-id-chip-' + (kind || 'fk') + (extraClass ? ' ' + extraClass : ''));
+      if (datum) cg.datum(datum);
+      cg.append('rect').attr('class', 'force-id-chip')
+        .attr('x', -w / 2).attr('y', -8).attr('width', w).attr('height', 16).attr('rx', 3);
+      cg.append('rect').attr('class', 'force-id-glyph-out')
+        .attr('x', -w / 2 + 3).attr('y', -5).attr('width', 8).attr('height', 8).attr('rx', 1.2);
+      cg.append('rect').attr('class', 'force-id-glyph-in')
+        .attr('x', -w / 2 + 5.2).attr('y', -2.8).attr('width', 3.6).attr('height', 3.6).attr('rx', 0.6);
+      cg.append('text').attr('class', 'force-id-chip-text')
+        .attr('x', -w / 2 + 14).attr('y', 3.2)
+        .text(text);
+      return cg;
+    }
+
+    function hexPath(r) {
+      var d = '', i, a;
+      for (i = 0; i < 6; i++) {
+        a = -Math.PI / 2 + i * Math.PI / 3;
+        d += (i ? 'L' : 'M') + (r * Math.cos(a)).toFixed(1) + ',' + (r * Math.sin(a)).toFixed(1);
+      }
+      return d + 'Z';
+    }
+
+    function folderPath(w, h) {
+      var tabH = 9;
+      var tabW = Math.round(w * 0.4);
+      var l = -w / 2, rgt = w / 2, t = -h / 2, b = h / 2;
+      return [
+        'M', l, t + tabH,
+        'V', t,
+        'H', l + tabW,
+        'L', l + tabW + 7, t + tabH,
+        'H', rgt,
+        'V', b,
+        'H', l,
+        'Z'
+      ].join(' ');
+    }
 
     var link = g.append('g')
       .selectAll('line')
@@ -789,27 +1046,92 @@ html.dark .force-elabel { fill: #666; }
       .attr('class', 'force-elabel')
       .text(function (d) { return d.label; });
 
+    function paintIdFields(el, d, y0) {
+      (d.idFields || []).forEach(function (f, i) {
+        drawChip(el, f.text, f.kind, f)
+          .attr('transform', 'translate(0,' + (y0 + i * 19) + ')');
+      });
+    }
+
     var node = g.append('g')
-      .selectAll('circle')
+      .selectAll('g')
       .data(nodes)
-      .join('circle')
-      .attr('class', 'force-node')
-      .attr('r', function (d) { return d.r; })
-      .attr('fill', function (d) { return d.fill; })
+      .join('g')
+      .attr('class', function (d) { return 'force-node force-node-' + d.shape; })
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
         .on('end', dragended));
 
-    var label = g.append('g')
-      .selectAll('text')
-      .data(nodes)
-      .join('text')
-      .attr('class', 'force-label')
-      .attr('dy', function (d) { return d.r + 13; })
-      .text(function (d) { return d.label; });
+    node.each(function (d) {
+      var el = d3.select(this);
+      var fields = d.idFields || [];
+      if (d.shape === 'table') {
+        el.append('rect').attr('class', 'force-card-body')
+          .attr('x', -d.w / 2).attr('y', -d.h / 2)
+          .attr('width', d.w).attr('height', d.h).attr('rx', 5)
+          .attr('stroke', d.fill);
+        el.append('rect').attr('class', 'force-card-head')
+          .attr('x', -d.w / 2).attr('y', -d.h / 2)
+          .attr('width', d.w).attr('height', 16).attr('rx', 5)
+          .attr('fill', d.fill);
+        el.append('rect').attr('class', 'force-card-head')
+          .attr('x', -d.w / 2).attr('y', -d.h / 2 + 10)
+          .attr('width', d.w).attr('height', 6)
+          .attr('fill', d.fill);
+        if (!fields.length) {
+          el.append('line').attr('class', 'force-card-row')
+            .attr('x1', -d.w / 2 + 8).attr('x2', d.w / 2 - 8)
+            .attr('y1', 4).attr('y2', 4);
+          el.append('line').attr('class', 'force-card-row')
+            .attr('x1', -d.w / 2 + 8).attr('x2', d.w / 2 - 8)
+            .attr('y1', 11).attr('y2', 11);
+        }
+        el.append('text').attr('class', 'force-label force-label-in')
+          .attr('y', -d.h / 2 + 12)
+          .text(d.label);
+        paintIdFields(el, d, -d.h / 2 + 28);
+      } else if (d.shape === 'hex') {
+        el.append('path').attr('class', 'force-node-hex')
+          .attr('d', hexPath(d.r)).attr('fill', d.fill);
+        el.append('text').attr('class', 'force-label')
+          .attr('y', d.r + 13)
+          .text(d.label);
+      } else if (d.shape === 'folder') {
+        el.append('path').attr('class', 'force-node-folder')
+          .attr('d', folderPath(d.w, d.h)).attr('fill', d.fill);
+        el.append('text').attr('class', 'force-label')
+          .attr('y', d.h / 2 + 13)
+          .text(d.label);
+        paintIdFields(el, d, -d.h / 2 + 22);
+      } else {
+        el.append('rect').attr('class', 'force-node-sys')
+          .attr('x', -d.w / 2).attr('y', -d.h / 2)
+          .attr('width', d.w).attr('height', d.h).attr('rx', 10)
+          .attr('fill', d.fill);
+        el.append('text').attr('class', 'force-label')
+          .attr('y', d.h / 2 + 13)
+          .text(d.label);
+      }
+    });
 
     var tip = d3.select(frame).append('div').attr('class', 'force-tooltip');
+    node.selectAll('.force-id-chip-g').on('mouseover', function (event, d) {
+      event.stopPropagation();
+      var kindNote = d.kind === 'un'
+        ? 'Named pack id — can later bind. Not a stored GroundBolt FK.'
+        : 'Nested unique ID this page already named. Stored on this collection.';
+      tip.html('<strong>nested unique ID</strong><code>' + d.text + '</code><br>' + kindNote)
+        .style('left', (event.offsetX + 12) + 'px')
+        .style('top', (event.offsetY - 8) + 'px')
+        .classed('show', true);
+    }).on('mousemove', function (event) {
+      event.stopPropagation();
+      tip.style('left', (event.offsetX + 12) + 'px').style('top', (event.offsetY - 8) + 'px');
+    }).on('mouseout', function (event) {
+      event.stopPropagation();
+      tip.classed('show', false);
+    });
     node.on('mouseover', function (event, d) {
       tip.html('<strong>' + d.label + '</strong>' + d.note)
         .style('left', (event.offsetX + 12) + 'px')
@@ -821,26 +1143,38 @@ html.dark .force-elabel { fill: #666; }
       tip.classed('show', false);
     });
 
-    function endPoint(d, which) {
-      var dx = d.target.x - d.source.x;
-      var dy = d.target.y - d.source.y;
+    function nodeEdge(node, towardX, towardY, extra) {
+      var dx = towardX - node.x;
+      var dy = towardY - node.y;
       var len = Math.sqrt(dx * dx + dy * dy) || 1;
-      if (which === 'x1') return d.source.x + (dx / len) * d.source.r;
-      if (which === 'y1') return d.source.y + (dy / len) * d.source.r;
-      return (which === 'x2' ? d.target.x : d.target.y) - ((which === 'x2' ? dx : dy) / len) * (d.target.r + 4);
+      var ux = dx / len, uy = dy / len;
+      var dist;
+      if (node.shape === 'hex') {
+        var ang = Math.atan2(uy, ux);
+        var a = ((ang + Math.PI / 2) % (Math.PI / 3) + Math.PI / 3) % (Math.PI / 3);
+        dist = (node.r || 24) * Math.cos(Math.PI / 6) / Math.cos(a - Math.PI / 6);
+      } else {
+        var hw = (node.w || 80) / 2;
+        var hh = (node.h || 36) / 2;
+        var tx = Math.abs(ux) < 1e-6 ? 1e6 : hw / Math.abs(ux);
+        var ty = Math.abs(uy) < 1e-6 ? 1e6 : hh / Math.abs(uy);
+        dist = Math.min(tx, ty);
+      }
+      dist += extra || 0;
+      return { x: node.x + ux * dist, y: node.y + uy * dist };
     }
 
     objSim.on('tick', function () {
       link
-        .attr('x1', function (d) { return endPoint(d, 'x1'); })
-        .attr('y1', function (d) { return endPoint(d, 'y1'); })
-        .attr('x2', function (d) { return endPoint(d, 'x2'); })
-        .attr('y2', function (d) { return endPoint(d, 'y2'); });
-      node.attr('cx', function (d) { return d.x; }).attr('cy', function (d) { return d.y; });
-      label.attr('x', function (d) { return d.x; }).attr('y', function (d) { return d.y; });
+        .attr('x1', function (d) { return nodeEdge(d.source, d.target.x, d.target.y, 0).x; })
+        .attr('y1', function (d) { return nodeEdge(d.source, d.target.x, d.target.y, 0).y; })
+        .attr('x2', function (d) { return nodeEdge(d.target, d.source.x, d.source.y, 4).x; })
+        .attr('y2', function (d) { return nodeEdge(d.target, d.source.x, d.source.y, 4).y; });
+      node.attr('transform', function (d) { return 'translate(' + d.x + ',' + d.y + ')'; });
       elabel
         .attr('x', function (d) { return (d.source.x + d.target.x) / 2; })
         .attr('y', function (d) { return (d.source.y + d.target.y) / 2 - 5; });
+      paintHulls();
     });
 
     function dragstarted(event, d) {
