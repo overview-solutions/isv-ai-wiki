@@ -46,10 +46,10 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </button>
 </div>
 <div class="wrap">
-  <div class="back"><a href="index.html#village-metering/openami">← Village Metering</a></div>
+  <div class="back"><a href="index.html#village-metering/openami">← Village IOT Metering</a></div>
 
   <h1>OpenAMI</h1>
-  <p class="sub">Hardware thread within ISV Village Metering · EnAccess · Energy IoT · NESL</p>
+  <p class="sub">Thread within ISV Village IOT Metering · EnAccess · E-IOT · NESL</p>
   <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends.</p>
 
   <div class="callout">
@@ -57,15 +57,15 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <p>OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.</p>
   </div>
 
-  <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>. The <a href="index.html#village-metering/meshems">MeshEMS board</a> is aligned hardware for learning that stack in the field — multi-tenant edge metering at the upstream/downstream boundary, documented openly for community operators.</p>
+  <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>. <a href="index.html#village-metering/meshems">MeshEMS</a> is software supported by E-IOT for learning that stack in the field — multi-tenant edge IOT Metering at the upstream/downstream boundary, documented openly for community operators.</p>
 
   <h2>Stack layers (working definitions)</h2>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td><strong>OpenEMS</strong></td><td>EMS / Edge to cloud orchestration</td><td>More urban — grid present; stack can stop at the DCU. Often Phase&nbsp;2–3 depending on site.</td></tr>
-      <tr><td><strong>Street EMS</strong> (NESL)</td><td>NAN mesh</td><td>DCU mesh backhaul · <a href="index.html#village-metering/meshems">MeshEMS page</a> · <a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">Street EMS board</a> · Phase&nbsp;2</td></tr>
-      <tr><td><strong>MeshEMS</strong>(Energy IoT Open Source)</td><td>Street Pole gateway</td><td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshEMS </a>OpenAMI firmware · Phase&nbsp;2</td></tr>
+      <tr><td><strong>Street EMS</strong> (Hardware · NESL)</td><td>NAN mesh</td><td>Hardware supported by NESL · DCU mesh backhaul · <a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">Street EMS board</a> · Phase&nbsp;2</td></tr>
+      <tr><td><strong>MeshEMS</strong> (Software · E-IOT)</td><td>Street Pole gateway</td><td>Software supported by E-IOT · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshEMS</a> OpenAMI firmware · Phase&nbsp;2</td></tr>
       <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry</td><td>Northbound contract — normalize OEM/DLMS to registers operators can bill, vend, and disconnect on; <strong>leakage visible at every layer</strong> · Phase&nbsp;2 (Phase&nbsp;1 feeds it)</td></tr>
       <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>Village backend option · Phase&nbsp;1–2</td></tr>
       <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open)</td><td>ThunderCloud / GroundBolt — <a href="index.html#village-metering/roadmap">Phase&nbsp;1 roadmap</a> · <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> (dev preview)</td></tr>
@@ -77,8 +77,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2>ISV wiki threads</h2>
   <ul class="link-list">
     <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — Phase&nbsp;1 installed-base · Phase&nbsp;2 microgrid core · Phase&nbsp;3 grid connect</li>
-    <li><a href="index.html#village-metering/overview">Village Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
-    <li><a href="index.html#village-metering/meshems">MeshEMS board</a> — NESL PCB · OpenAMI-aligned hardware</li>
+    <li><a href="index.html#village-metering/overview">Village IOT Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
+    <li><a href="index.html#village-metering/meshems">MeshEMS</a> — software supported by E-IOT</li>
     <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 notes · MeshEMS board distribution</a></li>
     <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 notes · MeshEMS power rails</a></li>
     <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a></li>
