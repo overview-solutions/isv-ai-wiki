@@ -11,6 +11,10 @@
 <script src="js/meter-embed.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --yellow: #f59e0b;
+  --yellow-50: #fef3c7;
+}
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
 a { color: var(--green); }
 .wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
@@ -23,6 +27,9 @@ h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
 .callout > strong:first-child { color: var(--teal); }
+.stack-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 12px; }
+.stack-table th { text-align: left; font-weight: 500; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--border); background: var(--bg-2); }
+.stack-table td { padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
 .stack-table td:first-child { font-weight: 500; }
 .stack-table .out-of-scope { color: var(--text-3); font-style: italic; }
 .link-list { font-size: 13px; line-height: 1.6; margin-bottom: 1rem; }
@@ -49,24 +56,39 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="back"><a href="index.html#village-metering/openami">← Village IOT Metering</a></div>
 
   <h1>OpenAMI</h1>
-  <p class="sub">Thread within ISV Village IOT Metering · EnAccess · E-IOT · NESL</p>
-  <p class="lead"><strong>OpenAMI is driving actionable energy telemetry</strong> — per-customer reads, credit, tamper, and disconnect semantics operators can bill and act on, not utility-scale archive data alone. <strong>Leakage visibility at every part of the system</strong> — feeder, branch, and customer — so operators can locate loss and theft, not just see aggregate feeder imbalance. Affordable open stack for mini-grids: vendor-agnostic gateways, MQTT northbound interop, geo asset topology, and operator backends.</p>
+  <p class="sub">Open-Source Advanced Metering Infrastructure for Rural Energy Access</p>
 
-  <div class="callout">
-    <strong>Community · Discord</strong>
-    <p>OpenAMI discussions live on the <strong>OSEA</strong> (Open Source Energy Access) Discord server managed by EnAccess. Join: <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">discord.osea-community.org</a> · <a href="https://enaccess.org/support/community-support/" target="_blank" rel="noopener">how to join ↗</a>. <em>ISV Tech Comm goal: participate more actively</em> — introduce work, answer integration questions, share wiki artifacts.</p>
+  <div class="callout" style="background: var(--yellow-50); border-left-color: var(--yellow);">
+    <strong style="color: var(--yellow);">⚠ OMS Workshop · Sept 30–Oct 2, 2026 · Nairobi</strong>
+    <p>The <strong>Open Metering System (OMS) Workshop</strong> convenes mini-grid operators, funders, and technology providers to chart a path forward after the SparkMeter/SteamaCo disruptions. OpenAMI is a key building block in this strategy. <a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord: Smart Metering Crisis Response ↗</a></p>
   </div>
 
-  <p class="body-text">Program overview: <a href="https://enaccess.org/openami/" target="_blank" rel="noopener">enaccess.org/openami</a>. <a href="index.html#village-metering/meshems">MeshEMS</a> is software supported by E-IOT for learning that stack in the field — multi-tenant edge IOT Metering at the upstream/downstream boundary, documented openly for community operators.</p>
+  <h2 style="margin-top: 1.5rem;">What is OpenAMI?</h2>
+  <p class="lead">OpenAMI brings <strong>actionable energy telemetry</strong> to village mini-grids — per-customer reads, credit balance, tamper alerts, and remote disconnect. Not just aggregate data, but <strong>leakage visibility at every layer</strong> (feeder → branch → customer) so operators can locate theft and loss, not just see imbalance.</p>
+  
+  <p class="body-text"><strong>Why it matters now:</strong> Proprietary vendor lock-in left operators stranded when platforms shut down. OpenAMI provides a vendor-agnostic path: open gateways, MQTT northbound interop, geo asset topology, and operator backends you can self-host or migrate between providers.</p>
 
-  <div class="callout">
-    <strong>Architecture note</strong>
-    <p>OpenAMI is <strong>not</strong> an any-to-any solution matrix. Operators must pick compatible components at each layer: <strong>First-km hardware</strong> (meter/DCU) → <strong>Aggregation hub</strong> (SparkNet / MeshEMS / other) → <strong>Backend</strong> (MPM / OpenEMS / ThunderCloud) → <strong>Billing &amp; O&amp;M</strong>. Not every backend supports every aggregation path; integrations are evolving.</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+    <div class="callout">
+      <strong>The Problem</strong>
+      <p style="font-size: 12px; margin-top: 0.5rem;">Metering capex rivals generation costs. Proprietary stacks lock operators in. When vendors exit, meters become bricks. Rural backhaul is fragile. Protocol fragmentation (STS, DLMS, Modbus, OEM mesh) blocks swap and scale.</p>
+    </div>
+    <div class="callout">
+      <strong>OpenAMI Solution</strong>
+      <p style="font-size: 12px; margin-top: 0.5rem;">Vendor-agnostic gateways at the pole. MQTT/JSON northbound contract. DLMS/COSEM at the meter. Open backends (MPM, ThunderCloud 2.0, OpenEMS). Geo topology for loss mapping. Community-maintained integration.</p>
+    </div>
   </div>
 
-  <h2>Stack components</h2>
+  <div class="callout">
+    <strong>⚠ Architecture Reality Check</strong>
+    <p>OpenAMI is <strong>not</strong> an any-to-any solution matrix. You must pick compatible components: <strong>First-km hardware</strong> (meter/DCU) → <strong>Aggregation hub</strong> (SparkNet / MeshEMS / MQTT gateway) → <strong>Backend</strong> (MPM / OpenEMS / ThunderCloud) → <strong>Billing &amp; O&amp;M</strong>. Integrations are evolving; not every backend supports every meter type yet.</p>
+  </div>
 
-  <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">First-km hardware (meter / DCU / NAN)</h3>
+  <h2 style="margin-top: 2rem;">How to Build an OpenAMI Stack</h2>
+  <p class="body-text">Pick one component from each layer. Not every combination is supported yet — check integration status with your chosen backend provider.</p>
+
+  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--green);">1️⃣ First-km Hardware (meter / DCU / NAN)</h3>
+  <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">This is what sits in the field — meters at customer premises, pole gateways, and mesh networking.</p>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
@@ -77,7 +99,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </tbody>
   </table>
 
-  <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Aggregation hubs (same hierarchy level)</h3>
+  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--teal);">2️⃣ Aggregation Hub (pick one)</h3>
+  <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">Aggregation hubs collect meter data and push it upstream. They normalize vendor protocols into a common northbound format.</p>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
@@ -86,7 +109,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </tbody>
   </table>
 
-  <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Backend alternatives (pick one)</h3>
+  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--blue);">3️⃣ Backend Platform (pick one)</h3>
+  <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">The backend manages billing, CRM, mobile money, and O&amp;M. These are <strong>alternatives</strong> — you run one, not all three.</p>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
@@ -96,7 +120,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </tbody>
   </table>
 
-  <h3 style="font-size: 13px; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-2);">Cross-cutting</h3>
+  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--text-3);">4️⃣ Cross-Cutting Tools</h3>
+  <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">These work across different stack combinations and may be adopted later as grids mature.</p>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
@@ -105,24 +130,41 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </tbody>
   </table>
 
-  <h2>ISV wiki threads</h2>
+  <h2 style="margin-top: 2rem;">Getting Started</h2>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 1.5rem;">
+    <div style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 6px;">
+      <strong style="font-size: 13px; display: block; margin-bottom: 0.5rem;">🔧 For Operators</strong>
+      <ul style="font-size: 12px; line-height: 1.5; margin: 0; padding-left: 1.25rem;">
+        <li><a href="index.html#village-metering/vendor-study">Vendor comparison</a> — benchmark meters, pricing, DLMS support</li>
+        <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — installed-base · microgrid core · grid connect</li>
+        <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord ↗</a> — Smart Metering Crisis Response channel</li>
+      </ul>
+    </div>
+    <div style="padding: 0.85rem; border: 1px solid var(--border); border-radius: 6px;">
+      <strong style="font-size: 13px; display: block; margin-bottom: 0.5rem;">💻 For Developers</strong>
+      <ul style="font-size: 12px; line-height: 1.5; margin: 0; padding-left: 1.25rem;">
+        <li><a href="https://github.com/enaccess/openami" target="_blank" rel="noopener">OpenAMI GitHub ↗</a></li>
+        <li><a href="index.html#village-metering/meshems">MeshEMS</a> — pole gateway firmware & hardware</li>
+        <li><a href="index.html#village-metering/vmrs">VMRS registers</a> — northbound MQTT/JSON contract</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Background & Context</h2>
   <ul class="link-list">
-    <li><a href="index.html#village-metering/roadmap">Development roadmap</a> — installed-base · microgrid core · grid connect</li>
-    <li><a href="index.html#village-metering/overview">Village IOT Metering · Overview</a> · <a href="index.html#village-metering/overview">Problems</a></li>
-    <li><a href="index.html#village-metering/meshems">MeshEMS</a> — software supported by E-IOT</li>
-    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-distribution">25 Jun 2026 notes · MeshEMS board distribution</a></li>
-    <li><a href="tech-comm-2026-06-25-ai-wiki-orientation.html#meshems-power">25 Jun 2026 notes · MeshEMS power rails</a></li>
-    <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a></li>
+    <li><a href="index.html#village-metering/overview">Village IOT Metering · Overview</a> — why metering is hard in rural mini-grids</li>
+    <li><a href="index.html#village-metering/problems">Problems today</a> — theft, cost, protocols, lock-in</li>
+    <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a> — stakeholder overview</li>
     <li><a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a></li>
   </ul>
 
-  <h2>External links</h2>
+  <h2>External Resources</h2>
   <ul class="link-list">
-    <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI</a></li>
-    <li><a href="https://discord.osea-community.org/" target="_blank" rel="noopener">OSEA Discord</a></li>
-    <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager</a></li>
-    <li><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">EarthSpark · ThunderCloud</a> (developer preview)</li>
-    <li><a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">openami-smart-village</a> (Dev Labs reports)</li>
+    <li><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">EnAccess · OpenAMI Program ↗</a></li>
+    <li><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">MicroPowerManager (MPM) ↗</a></li>
+    <li><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">EarthSpark · ThunderCloud 2.0 ↗</a> (dev preview · Apache-2.0)</li>
+    <li><a href="https://github.com/rahulbhargavain/openami-smart-village" target="_blank" rel="noopener">Dev Labs OpenAMI reports ↗</a></li>
   </ul>
 </div>
 </body>
