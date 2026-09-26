@@ -27,6 +27,8 @@ h2 { font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding-bottom
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem; font-size: 13px; line-height: 1.45; }
 .callout > strong:first-child { color: var(--teal); }
+.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-warn > strong:first-child { color: var(--amber); }
 .stack-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 12px; }
 .stack-table th { text-align: left; font-weight: 500; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--border); background: var(--bg-2); }
 .stack-table td { padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -74,7 +76,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
   </div>
 
-  <div class="callout">
+  <div class="callout callout-warn">
     <strong>⚠ Architecture Reality Check</strong>
     <p>OpenAMI is <strong>not</strong> an any-to-any solution matrix. You must pick compatible components: <strong>First-km hardware</strong> (meter/DCU) → <strong>Aggregation hub</strong> (SparkNet / MeshEMS / MQTT gateway) → <strong>Backend</strong> (MPM / OpenEMS / ThunderCloud) → <strong>Billing &amp; O&amp;M</strong>. Integrations are evolving; not every backend supports every meter type yet.</p>
   </div>
