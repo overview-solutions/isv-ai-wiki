@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ThunderCloud 2.0 review · Village Metering · ISV</title>
+<title>TC 2.0 technical report · Village Metering · ISV</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="stylesheet" href="css/isv-theme.css?v=20260629">
 <link rel="stylesheet" href="css/meter-focus.css">
@@ -89,6 +89,10 @@ li { margin-bottom: 0.35rem; }
 .link-list { list-style: none; margin-left: 0; }
 .link-list li { margin-bottom: 0.45rem; }
 .link-list code { font-size: 12px; }
+table.obj { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.65rem 0 1rem; max-width: 52rem; }
+table.obj th, table.obj td { border: 1px solid var(--border); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+table.obj th { background: var(--bg-2); font-weight: 600; font-size: 12px; }
+table.obj code { font-size: 12px; }
 .foot { margin-top: 1.5rem; font-size: 12px; color: var(--text-2); }
 .err { font-size: 13px; color: var(--text-2); padding: 1rem; }
 html.embed .back { display: none; }
@@ -111,27 +115,23 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 <div class="wrap">
   <div class="back">
     <a href="index.html#village-metering">← Village Metering</a> ·
-    <a href="meter-roadmap.html">Roadmap</a> ·
     <a href="meter-overview.html">Overview</a> ·
     <a href="meter-roadmap.html">Roadmap</a>
   </div>
 
-  <h1>ThunderCloud 2.0 · comprehensive review</h1>
+  <h1>TC 2.0 technical report</h1>
   <p class="lede">
-    How the open EarthSpark / SparkMeter stack should work in an ideal village install:
-    meters and <strong>CIUs</strong> (Customer Interface Units) in the field on a 2.4&nbsp;GHz mesh,
-    a <strong>USB Gateway</strong> as the RF bridge (works on a laptop),
-    <strong>GroundBolt</strong> as the on-site brain talking to meters via that Gateway,
-    optional <strong>ThunderCloud</strong> (= GroundBolt in the cloud).
-    Diagrams below share the same layers — toggle site-only vs site+cloud once for both views.
+    Technical report on the open EarthSpark / SparkMeter stack
+    (<strong>ThunderCloud&nbsp;2.0</strong> / <strong>GroundBolt</strong>):
+    field meters and <strong>CIUs</strong> (Customer Interface Units) on a 2.4&nbsp;GHz mesh,
+    a <strong>USB Gateway</strong> as the RF bridge,
+    <strong>SparkNet-HTTP</strong> and <strong>Firefly</strong> as software plugins (not standalone radios),
+    GroundBolt as the on-site <strong>HES</strong> (head-end system),
+    optional <strong>ThunderCloud</strong> (same app in the cloud).
+    Objects below are those this review already named or drew — GroundBolt Postgres / wire objects,
+    village UN GeoJSON packs, and complementary MeshEMS / OpenAMI — not invented tables.
+    Diagrams share one hosting toggle (site-only vs site+cloud).
   </p>
-
-  <div class="callout">
-    <strong>Aug 2026 stack correction</strong>
-    <p>Meeting notes (<a href="index.html#notes/tech-comm-2026-08-11">11 Aug 2026</a>): <strong>SparkNet-HTTP</strong> and <strong>Firefly</strong> are software plugins — not standalone RF radios.
-    Physical RF interface = <strong>USB Gateway</strong>. Meters = 2.4&nbsp;GHz (encrypted / hidden SSID). Village SVGs may still show older “Firefly coverage discs”; treat those as provisional pending redraw.
-    Public check: <a href="https://github.com/EarthSpark/sparknet-http" target="_blank" rel="noopener"><code>sparknet-http</code></a> is a software repo; marketing still says meters have built-in RF mesh.</p>
-  </div>
 
   <h2 id="origin">How ThunderCloud 2.0 (TC2.0) came to be</h2>
   <p>
@@ -241,7 +241,7 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   <h2>Visual 1 · Stack beside village</h2>
   <p>
     Left = software / protocol stack. Right = simplified village with the same horizontal bands.
-    Gray = LV power. Amber discs on current SVG still labeled “Firefly coverage” — <strong>provisional</strong>; RF bridge is the USB Gateway per <a href="index.html#notes/tech-comm-2026-08-11">11 Aug notes</a>. Green = site backhaul. Blue dashed = optional WAN to ThunderCloud.
+    Gray = LV power. Amber discs on current SVG still labeled “Firefly coverage” — <strong>provisional</strong>; RF bridge is the USB Gateway. Green = site backhaul. Blue dashed = optional WAN to ThunderCloud.
   </p>
 
   <div class="host-bar" role="tablist" aria-label="Hosting path">
@@ -345,12 +345,65 @@ html.dark .diagram-wrap { background: #f7f6f3; }
     <li>Command queue is in-memory asyncio. Crash drops in-flight jobs; boot <code>reconcile_all()</code> rebuilds the provider roster from Postgres. Hard request→job-ID correlation still under community discussion.</li>
   </ul>
 
-  <h3>What lives where</h3>
+  <h2 id="data-objects">Data objects</h2>
+  <p>
+    Objects this report accounts for. GroundBolt / ThunderCloud names come from the public
+    <a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener"><code>thundercloud</code></a>
+    tree (same pass that produced the stack + village SVGs). Village pack names come from the
+    <a href="index.html#village-metering/village-geojson-un">UN GeoJSON convention</a>.
+    MeshEMS is a complementary Phase&nbsp;2 track — <strong>not</strong> a TC2.0 table.
+  </p>
+
+  <h3>GroundBolt Postgres (system of record)</h3>
+  <p>Readings sync ground→cloud only. SymmetricDS is optional after the site loop works. No Account entity — wallet is meter XOR sales account.</p>
+  <table class="obj">
+    <thead><tr><th>Domain</th><th>Objects</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Site</td>
+        <td><code>ground</code> · <code>ground_private</code> · <code>address</code> · <code>grounds_addresses</code></td>
+        <td>One GroundBolt box = one ground row. Address is place, not GIS geometry.</td>
+      </tr>
+      <tr>
+        <td>Meter cluster</td>
+        <td><code>meter</code> · <code>customer</code> (1:1) · <code>meter_config</code> · <code>meter_system_info</code> · <code>meter_billing</code> · <code>sparkmac_node</code> · <code>meter_models</code> · <code>meter_scalars</code> · <code>meter_tag</code> / <code>meters_tags</code> · <code>meter_view</code></td>
+        <td>Customer is 1:1 with meter. Config (desired) vs system_info (gateway-reported) stay split.</td>
+      </tr>
+      <tr>
+        <td>Money</td>
+        <td><code>wallet</code> · <code>transactions</code> · <code>transaction_sources</code> (<code>cash</code> | <code>bonus</code>) · <code>sales_account</code></td>
+        <td>HES wallet is system of record. No mobile-money plugin in-repo.</td>
+      </tr>
+      <tr>
+        <td>Tariff</td>
+        <td><code>tariff</code> (flat | blockrate; optional plan / TOU / load-limit JSON nests)</td>
+        <td>Price + limits pushed toward <code>configure_meter</code>.</td>
+      </tr>
+      <tr>
+        <td>Reading</td>
+        <td><code>reading</code> — energy, volts, watts, credit snapshot, state. Unique (meter, heartbeat window).</td>
+        <td>No hop list. <code>hops[]</code> from a legacy emulator is dropped here.</td>
+      </tr>
+      <tr>
+        <td>People / ACL</td>
+        <td><code>user</code> · <code>role</code> · <code>roles_users</code> · <code>users_grounds</code> · <code>sales_accounts_users</code></td>
+        <td>Operator login. Cloud can map one user to many grounds.</td>
+      </tr>
+      <tr>
+        <td>Events / SMS</td>
+        <td><code>event</code> · <code>sms_config</code> · <code>sms_message</code> · <code>snapshot</code></td>
+        <td>Audit + low-balance SMS (once per threshold). Snapshot is content-addressed JSON.</td>
+      </tr>
+      <tr>
+        <td>Ops / sync</td>
+        <td><code>config_parameter</code> · <code>system_version</code> · <code>system_state</code> · <code>dashboard_daily_tariff_summary</code> · <code>alembic_version</code> · SymmetricDS <code>sym_*</code></td>
+        <td>Bootstrap + optional ground↔cloud catalog. Not meter telemetry.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Wire objects (SparkNet-HTTP / plugins)</h3>
   <div class="grid-2">
-    <div class="card">
-      <h3>Postgres (system of record)</h3>
-      <p>Meter, Customer, Address, MeterConfig, SparkmacNode, Wallet, Transaction, Tariff, Reading, Event, User. Readings sync ground→cloud only. SymmetricDS is optional after the site loop works.</p>
-    </div>
     <div class="card">
       <h3>SSE in — what GroundBolt consumes</h3>
       <p><code>meter_reading</code> / <code>meter_reading_phased</code> → <code>add_reading</code>. <code>heartbeat_summary</code> → watchdog log. <code>log</code> → Python logging. Neighbor / network-health / command-lifecycle events exist on the wire; GroundBolt does not persist them.</p>
@@ -360,10 +413,46 @@ html.dark .diagram-wrap { background: #f7f6f3; }
       <p><code>configure_provider</code> (heartbeat 900&nbsp;s), <code>register_meter</code>, <code>configure_meter</code> (enable/disable, limits), <code>set_balance</code>, <code>unregister_meter</code>. Fire-and-forget via SparkNet-HTTP <code>POST /v1/commands</code>.</p>
     </div>
     <div class="card">
+      <h3>On-demand mesh (not stored)</h3>
+      <p><code>query_meter_neighbors</code> → SSE <code>meter_neighbors</code> (<code>neighbor_id</code>, RSSI, link quality). <code>query_network_health</code> = packet counts + latency, not a path. CLI: <code>meter get-neighborlists</code>.</p>
+    </div>
+    <div class="card">
       <h3>SparkMAC config, not a route log</h3>
-      <p><code>sparkmac_node</code> stores forwarding mode (default <code>flooding</code>), optional <code>static_routes</code>, TTL. Site UI “Routing Algorithm” is still an empty TODO. That is desired-state pushed to meters — not a hop list per heartbeat.</p>
+      <p><code>sparkmac_node</code> stores forwarding mode (default <code>flooding</code>), optional <code>static_routes</code>, TTL. Site UI “Routing Algorithm” is still an empty TODO. Desired-state pushed to meters — not a hop list per heartbeat.</p>
     </div>
   </div>
+
+  <h3>Village UN GeoJSON pack (geometry, not telemetry)</h3>
+  <p>
+    Separate convention — Esri Utility Network <em>semantics</em> in open files. Same meter <code>id</code> can later bind
+    <code>feeds/registry.json</code> to SparkNet-HTTP / GroundBolt. Geometry stays in files; kWh stays on demand.
+    Full split: <a href="index.html#village-metering/village-geojson-un">Village GeoJSON · UN</a>.
+  </p>
+  <table class="obj">
+    <thead><tr><th>Class</th><th>Files / objects</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Essential</td>
+        <td><code>village.json</code> · <code>network/subnetworks.geojson</code> · <code>structure.geojson</code> · <code>electric-lines.geojson</code> · <code>electric-devices.geojson</code> (meters, transformers, gen/station, EMS cabinets if used) · <code>associations.json</code> (connectivity edges)</td>
+      </tr>
+      <tr>
+        <td>Nice-to-have</td>
+        <td><code>electric-junctions.geojson</code> · enclosure / disconnect / recloser detail · containment / attachment associations · <code>feeds/registry.json</code> (Live Twin API bindings)</td>
+      </tr>
+      <tr>
+        <td>Feature keys</td>
+        <td>stable <code>id</code> · <code>assetClass</code> · <code>assetGroup</code> · <code>subnetworkId</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>MeshEMS / OpenAMI / MPM — complementary, not TC2.0 tables</h3>
+  <p>
+    <strong>MeshEMS</strong> (NESL 865B board) and Phase&nbsp;2 OpenAMI MQTT / Street-EMS are a different track from GroundBolt Postgres.
+    See <a href="index.html#village-metering/meshems">MeshEMS board</a> · <a href="index.html#village-metering/openami">OpenAMI</a>.
+    <strong>MPM</strong> (MicroPowerManager) owns CRM + other prepaid families (STS, OpenPAYGO).
+    Posting <code>/api/v0/transaction/</code> from MPM into GroundBolt can share a wallet; two systems of record without a split double-count.
+  </p>
 
   <h3>Can you trace mesh routing per meter?</h3>
   <p>
@@ -429,6 +518,8 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   <h3>ISV Village Metering</h3>
   <ul class="link-list">
     <li><a href="meter-roadmap.html">Roadmap</a> — Phase 1–3 · ThunderCloud update section</li>
+    <li><a href="index.html#village-metering/village-geojson-un">Village GeoJSON · UN</a> — pack layers + <code>associations.json</code></li>
+    <li><a href="index.html#village-metering/meshems">MeshEMS board</a> — complementary Phase 2 hardware, not a TC2.0 table</li>
     <li><a href="index.html#village-metering/village-simulator">Village Simulator</a> — Circaevum Locus (hypothetical 3D prepaid day; GroundBolt rules, not live telemetry)</li>
     <li><a href="index.html#notes/tech-comm-2026-08-11">11 Aug 2026 meeting notes</a> — USB Gateway · Firefly/SparkNet plugins · A2EI Open Metering Infrastructure · Nimbus</li>
     <li><a href="meter-overview.html#solutions-map">Overview · solutions map</a> — problem → SteamaCo / SparkMeter / EnAccess / OpenAMI</li>
@@ -438,8 +529,8 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   </ul>
 
   <p class="foot">
-    Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code>
-    · last review pass for ISV Phase&nbsp;1 open-operator path + GroundBolt HES notes from the public TC2.0 tree (Aug&nbsp;2026).
+    Technical report. Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code>.
+    Objects from the public TC2.0 tree + village UN pack already on this wiki — no invented tables.
   </p>
 </div>
 <script>

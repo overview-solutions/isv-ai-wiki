@@ -242,7 +242,7 @@ This wiki is **fully open source** and hosted for free on **GitHub Pages**.
 | **Tasks / follow-ups** | [GitHub Issues](https://github.com/overview-solutions/isv-ai-wiki/issues) on the same repo |
 | **Deploy** | Push to `main` → GitHub Actions (`.github/workflows/deploy.yml`) publishes static files |
 
-There is **no server to maintain** for the wiki itself: content is HTML, CSS, and JSON in git. GitHub builds and serves the site with HTTPS. Mapbox token (optional) is the only deploy secret — for the funded-projects map embed.
+There is **no server to maintain** for the wiki itself: content is HTML, CSS, and JSON in git. GitHub builds and serves the site with HTTPS. Supported Projects shows a static map screenshot that links to the live [RemoteMonitorMap](https://overview-solutions.github.io/RemoteMonitorMap/). Mapbox token (optional) is only needed if you still deploy `map-embed.html`.
 
 **Contribute content:** fork or branch → edit files → open a pull request. Meeting notes, catalog entries, and task labels/issues all live in this repository.
 
@@ -266,7 +266,7 @@ Site URL: `https://overview-solutions.github.io/isv-ai-wiki`
 
 **AI editing** — sidebar status dot → paste an [Anthropic API key](https://console.anthropic.com) → **Edit with AI** on any section. Key stays in your browser only.
 
-**Mapbox** — embedded funded-projects map needs `MAPBOX_PUBLIC_TOKEN` as a GitHub Actions secret (see `deploy.yml`). Without it, the map shows a setup message.
+**Mapbox** — optional. Supported Projects no longer iframes the live map. `MAPBOX_PUBLIC_TOKEN` is only needed if you still deploy `map-embed.html` (see `deploy.yml`). Without it, that standalone page shows a setup message.
 
 ---
 

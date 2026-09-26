@@ -80,8 +80,9 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
 
   <h1>Village map packs · open Utility Network GeoJSON</h1>
-  <p class="sub">Esri Utility Network semantics in open files · no ArcGIS lock-in · starter for ~100–1000 meter LV villages</p>
+  <p class="sub">Convention, not a standard · Esri Utility Network semantics in open files · no ArcGIS lock-in · starter for ~100–1000 meter LV villages</p>
   <p class="lead">IEEE Smart Village Technology Committee uses a <strong>GeoJSON + JSON</strong> pack so a mini-grid can be loaded offline into the Village Simulator, traced by feeder, and later bound to read-only metering application programming interfaces (APIs). Ideas borrow from Esri’s Utility Network (devices, junctions, lines, subnetworks, associations) without requiring Esri software.</p>
+  <p class="body-text">This pack is a convention, not a standard. Esri Utility Network is Esri’s schema; the ISV/open pack is GeoJSON layers plus associations, not an OGC standard.</p>
 
   <div class="callout">
     <strong>Source of truth (code)</strong>
@@ -94,7 +95,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p class="body-text"><strong>Geometry stays in files. Telemetry stays on demand by asset id.</strong> A thousand-meter village must not dump a year of kWh into GeoJSON. Map packs travel offline (USB, laptop, no cloud). When an asset is selected, a feed registry resolves that <code>id</code> to a read-only API or message topic.</p>
 
   <h2 id="layers">Essential vs nice-to-have layers</h2>
-  <p class="body-text"><strong>How this split was defined:</strong> a Technology Committee <strong>Map Twin</strong> minimum — what you need to open a village offline in the Village Simulator, pick a feeder, and reach meters by stable <code>id</code>. Sized for ~100–1000 customer meters. Contract lives in <code>smart-village-simulator/villages/_schema</code>.</p>
+  <p class="body-text"><strong>How this split was defined:</strong> a Technology Committee <strong>Digital Twin</strong> minimum — what you need to open a village offline in the Village Simulator, pick a feeder, and reach meters by stable <code>id</code>. Sized for ~100–1000 customer meters. Contract lives in <code>smart-village-simulator/villages/_schema</code>.</p>
 
   <p class="body-text"><strong>Sample layers:</strong> the simulator ships <code>villages/demo-lv/</code> with at least one feature in every Essential file and every Nice-to-have class listed below (junctions, enclosure, disconnect, recloser, neutral, terminals, containment / attachment, and <code>feeds/registry.json</code>). Copy that pack or start from <code>villages/_template/</code>.</p>
 
@@ -102,7 +103,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="layer-diagram" role="img" aria-label="Essential layers on the left, nice-to-have layers on the right">
     <div class="layer-card essential">
-      <h3>Essential — Map Twin minimum</h3>
+      <h3>Essential — Digital Twin minimum</h3>
       <ul>
         <li><code>village.json</code> — site id, name, WGS84 origin, bbox, status</li>
         <li><code>network/subnetworks.geojson</code> — island + each feeder</li>
@@ -123,13 +124,14 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
         <li>Separate <code>neutral</code> line class; multi-port <code>terminals[]</code> on transformers and EMS</li>
         <li><code>phase</code>, <code>nominalKv</code>, <code>ratedA</code>, <code>globalId</code> (UUID)</li>
         <li>Containment / attachment associations (meter in cabinet, xfmr on pole)</li>
-        <li><code>feeds/registry.json</code> — Live Twin API bindings by asset id (not required for a pure Map Twin)</li>
+        <li><code>feeds/registry.json</code> — Live Twin API bindings by asset id (not required for a pure Digital Twin)</li>
       </ul>
     </div>
   </div>
 
   <div class="callout callout-amber">
     <strong>Alignment with Esri Utility Network</strong>
+    <p>This is a convention, not a standard — not OGC, not a certified profile.</p>
     <p>The essential / nice-to-have split above is <strong>not</strong> an Esri label — Esri’s Utility Network does not publish that binary list. We borrow <em>semantics</em>, not ArcGIS files. Esri domain networks use Device, Line, Junction, Assembly, and SubnetLine classes, plus a Structure network and associations (connectivity, containment, attachment). See Esri’s <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/utility-network/domain-networks.htm" target="_blank" rel="noopener">domain networks ↗</a> and <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/utility-network/the-structure-network.htm" target="_blank" rel="noopener">structure network ↗</a>.</p>
     <p><strong>Maps cleanly:</strong> our <code>electric-devices</code> ≈ Device (+ some Assembly roles); <code>electric-lines</code> ≈ Line; <code>structure</code> ≈ StructureJunction; <code>subnetworks</code> ≈ subnetwork / feeder identity (Esri also generates SubnetLine); <code>associations.json</code> ≈ association table.</p>
     <p><strong>Deferred to nice-to-have for field practicality:</strong> a full Esri build expects Junction features wherever lines meet, Assembly containers, StructureLine / StructureBoundary, terminals on multi-port devices, and systematic containment / attachment. We allow those as richer packs so brownfield teams can ship a traceable meter map before digitizing every splice and vault.</p>
@@ -156,7 +158,7 @@ island (subnetwork)
     electric-lines.geojson
     associations.json
   feeds/
-    registry.json                 # Live Twin bindings; may be empty for Map Twin only
+    registry.json                 # Live Twin bindings; may be empty for Digital Twin only
 </pre>
 
   <h2 id="properties">Feature properties</h2>
@@ -206,6 +208,7 @@ island (subnetwork)
     <a href="index.html#village-metering/village-simulator">Village Simulator hub</a> ·
     <a href="https://github.com/overview-solutions/smart-village-simulator/tree/main/villages" target="_blank" rel="noopener">villages schema ↗</a> ·
     <a href="index.html#village-metering/openami">OpenAMI</a> ·
+    <a href="index.html#village-metering/tc20-review">TC 2.0 review</a> (SparkNet-HTTP / GroundBolt feed binding) ·
     <a href="power-africa-2026-workshop-planning.html">Nairobi workshop</a> ·
     <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/65" target="_blank" rel="noopener">GitHub issue #65 ↗</a>
   </p>

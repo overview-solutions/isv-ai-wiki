@@ -101,7 +101,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <thead><tr><th>Component</th><th>Role</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td><strong>OpenEMS</strong></td><td>EMS / edge orchestration</td><td>More <strong>urban</strong> — grid present (e.g. Aaron’s grid in Uganda). Stack can <strong>stop at the DCU</strong> when that is enough.</td></tr>
-      <tr><td><strong>MeshEMS</strong></td><td>NAN mesh</td><td>Lets DCUs form a mesh when pole-to-pole RF backhaul is needed.</td></tr>
+      <tr><td><strong>MeshEMS</strong></td><td>mesh</td><td>Lets DCUs form a mesh when pole-to-pole RF backhaul is needed.</td></tr>
       <tr><td><strong>OpenAMI / MQTT</strong></td><td>Actionable telemetry · interop</td><td>Northbound contract — normalize southbound OEM/DLMS at gateway to registers operators can bill, vend, and disconnect on; ISV <a href="index.html#village-metering/overview">Village Metering</a> thread.</td></tr>
       <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend</td><td>MicroPowerManager as HES/billing layer — <strong>instead of</strong> OpenEMS backend in village deployments.</td></tr>
       <tr><td><strong>OpenAMI</strong> (geo + asset model)</td><td>Networking / topology semantics</td><td>Asset and connectivity layer above gateways — complements MQTT register payloads.</td></tr>

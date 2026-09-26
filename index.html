@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260926shot">
 <link rel="stylesheet" href="css/isv-tasks.css">
 <script src="js/isv-theme.js"></script>
 <script src="js/isv-tasks.js?v=20260629"></script>
@@ -583,6 +583,17 @@ body {
   min-height: 280px;
 }
 
+.tech-detail-embed {
+  display: block;
+  width: 100%;
+  min-height: 70vh;
+  height: calc(100dvh - 14rem);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  margin: 0.75rem 0 0;
+}
+
 .tech-notes-detail-empty {
   color: var(--text-3);
   font-size: 13px;
@@ -876,11 +887,19 @@ body {
   background: var(--bg-2);
 }
 
-.map-embed iframe {
+.map-embed a.map-shot {
+  display: block;
+  line-height: 0;
+}
+.map-embed img {
   display: block;
   width: 100%;
-  height: 420px;
+  height: auto;
   border: 0;
+}
+.map-embed a.map-shot:hover img,
+.map-embed a.map-shot:focus img {
+  opacity: 0.92;
 }
 
 .map-embed-toolbar {
@@ -1467,7 +1486,6 @@ code {
     <div class="nav-sub" id="nav-sub-village-metering">
       <div class="nav-sub-item" data-meter-page="overview" onclick="showMeterPage('overview')">Overview</div>
       <div class="nav-sub-item" data-meter-page="roadmap" onclick="showMeterPage('roadmap')">Roadmap</div>
-      <div class="nav-sub-item" data-meter-page="tc20-review" onclick="showMeterPage('tc20-review')">TC2.0 review</div>
       <div class="nav-sub-item" data-meter-page="village-scope" onclick="showMeterPage('village-scope')">Village scope</div>
       <div class="nav-sub-item" data-meter-page="vmrs" onclick="showMeterPage('vmrs')">Register checklist</div>
       <div class="nav-sub-item" data-meter-page="vendor-study" onclick="showMeterPage('vendor-study')">Vendor Study</div>
@@ -1556,7 +1574,7 @@ code {
       <div class="home-primary-focus">
         <p class="home-primary-eyebrow">Primary endeavor · Tech Comm 2026</p>
         <h2 class="home-primary-title"><a href="#" onclick="showMeterPage('overview');return false">Village Metering</a></h2>
-        <p class="home-primary-desc">Bill each home, cut off non-payers, catch stolen power — without city-scale AMI cost. <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('village-scope');return false">Village scope</a> · <a href="#" onclick="showMeterPage('tc20-review');return false">TC2.0 review</a>.</p>
+        <p class="home-primary-desc">Bill each home, cut off non-payers, catch stolen power — without city-scale AMI cost. <a href="#" onclick="showMeterPage('overview');return false">Overview</a> · <a href="#" onclick="showMeterPage('village-scope');return false">Village scope</a> · <a href="#" onclick="showTechNote('tc20-review');return false">TC 2.0 technical report</a>.</p>
       </div>
 
       <div class="home-blocks">
@@ -1733,17 +1751,20 @@ code {
         <span class="stat-chip">Loading map data…</span>
       </div>
       <div class="map-embed">
-        <iframe
-          title="IEEE Smart Village project map"
-          src="map-embed.html?v=20260817csp"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a class="map-shot" href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank" rel="noopener">
+          <img
+            src="assets/smart_village_map.png?v=20260926shot"
+            width="1920"
+            height="1080"
+            alt="IEEE Smart Village field-program map (screenshot) — open live map"
+            loading="lazy">
+        </a>
         <div class="map-embed-toolbar">
           <span>Site locations on OpenStreetMap power infrastructure</span>
           <span>
-            <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">Full map</a>
+            <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank" rel="noopener">Open live map ↗</a>
             ·
-            <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank">Source</a>
+            <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank" rel="noopener">GitHub</a>
           </span>
         </div>
       </div>
@@ -1856,7 +1877,7 @@ code {
           <div class="standard-icon">📡</div>
           <div>
             <div class="standard-name">OpenADR 2.0 / 3.0 — Automated Demand Response</div>
-            <div class="standard-desc">Open standard for price, event, and load-control signals between utilities (VTN) and customer sites or DER (VEN). <strong>Roadmap Phase&nbsp;3</strong> — grid/aggregator programs after interconnection; not year-one village prepaid. Complements IEEE 2030.5 device messaging when those programs exist.</div>
+            <div class="standard-desc">Utility demand-response (VTN/VEN). Grid-tied utility DR only — not first-order for rural village IOT Metering / OpenAMI, and not a required OpenAMI hop.</div>
           </div>
         </div>
         <div class="standard-row">
@@ -1953,7 +1974,7 @@ code {
         <div class="standard-icon">☁️</div>
         <div>
           <div class="resource-name">EarthSpark · ThunderCloud</div>
-          <div class="resource-desc"><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> — open operator app (ThunderCloud / GroundBolt), Apache-2.0 · <strong>developer preview</strong> · Phase&nbsp;1 on <a href="#" onclick="showMeterPage('roadmap');return false">roadmap</a> · org <a href="https://github.com/EarthSpark" target="_blank" rel="noopener">EarthSpark</a>.</div>
+          <div class="resource-desc"><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">github.com/EarthSpark/thundercloud</a> — open operator app (ThunderCloud / GroundBolt), Apache-2.0 · <strong>developer preview</strong> · <a href="#" onclick="showTechNote('tc20-review');return false">TC 2.0 technical report</a> · Phase&nbsp;1 on <a href="#" onclick="showMeterPage('roadmap');return false">roadmap</a> · org <a href="https://github.com/EarthSpark" target="_blank" rel="noopener">EarthSpark</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2051,14 +2072,14 @@ code {
         <div class="standard-icon">📡</div>
         <div>
           <div class="resource-name">Tech Comm — Metering &amp; comms topology (28 May 2026)</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting Notes</a> — STS/SMS token path, redundant NAN channels, CIU/phone relay proposal, and call action items.</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('metering-2026-05-28');return false">Open in Meeting Notes</a> — STS/SMS token path, redundant last-mile channels, CIU/phone relay proposal, and call action items.</div>
         </div>
       </div>
       <div class="resource-row">
         <div class="standard-icon">🗺️</div>
         <div>
           <div class="resource-name">Smart Village Project Map</div>
-          <div class="resource-desc">Stable <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank">RemoteMonitorMap</a> deployment — passive pin updates when field partners report site changes. Embedded on <a href="#" onclick="showSection('supported');return false">Supported Projects</a>.</div>
+          <div class="resource-desc">Stable <a href="https://overview-solutions.github.io/RemoteMonitorMap/" target="_blank" rel="noopener">RemoteMonitorMap</a> deployment — passive pin updates when field partners report site changes. Screenshot + links on <a href="#" onclick="showSection('supported');return false">Supported Projects</a> · <a href="https://github.com/overview-solutions/RemoteMonitorMap" target="_blank" rel="noopener">GitHub</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2309,11 +2330,14 @@ const METER_PAGE_ALIASES = {
   'problems-today': 'overview',
   problems: 'overview',
   'solutions-map': 'overview',
-  'tc20-stack': 'tc20-review',
-  'village-topology': 'tc20-review',
   scope: 'village-scope',
   'worldline-day': 'village-simulator',
   'worldline-day-100': 'village-simulator'
+};
+const METER_PAGE_TECH_NOTES = {
+  'tc20-review': 'tc20-review',
+  'tc20-stack': 'tc20-review',
+  'village-topology': 'tc20-review'
 };
 function resolveMeterPageId(id) {
   if (!id) return 'overview';
@@ -2329,14 +2353,8 @@ const METER_BENCHMARK_PAGES = {
   'roadmap': {
     title: 'Roadmap',
     sub: 'Phase 1 installed-base · Phase 2 microgrid core · Phase 3 grid connect',
-    src: 'meter-roadmap.html?embed=1&v=20260812d',
+    src: 'meter-roadmap.html?embed=1&v=20260926tr',
     standalone: 'meter-roadmap.html'
-  },
-  'tc20-review': {
-    title: 'TC2.0 review',
-    sub: 'Ideal architecture · GroundBolt HES · stack + village',
-    src: 'meter-tc20-review.html?embed=1&v=20260813gb',
-    standalone: 'meter-tc20-review.html'
   },
   'village-scope': {
     title: 'Village scope',
@@ -2347,7 +2365,7 @@ const METER_BENCHMARK_PAGES = {
   'vmrs': {
     title: 'Register checklist',
     sub: 'Minimum meter reads for billing and control (OBIS · VMRS)',
-    src: 'meter-vmrs.html?embed=1&v=20260903idis',
+    src: 'meter-vmrs.html?embed=1&v=20260926tr',
     standalone: 'meter-vmrs.html'
   },
   'vendor-study': {
@@ -2359,13 +2377,13 @@ const METER_BENCHMARK_PAGES = {
   'openami': {
     title: 'OpenAMI',
     sub: 'Actionable telemetry · leakage visibility · stack · Discord',
-    src: 'openami.html?embed=1&v=20260925',
+    src: 'openami.html?embed=1&v=20260926tr',
     standalone: 'openami.html'
   },
   'meshems': {
     title: 'MeshEMS board',
     sub: 'Multi-tenant edge metering · workshops & deployments · OpenAMI',
-    src: 'meshems.html?embed=1&v=20260629',
+    src: 'meshems.html?embed=1&v=20260926tr',
     standalone: 'meshems.html'
   },
   'village-simulator': {
@@ -2376,8 +2394,8 @@ const METER_BENCHMARK_PAGES = {
   },
   'village-geojson-un': {
     title: 'Village GeoJSON · open Utility Network',
-    sub: 'Essential vs nice-to-have layers · Esri UN semantics in open files',
-    src: 'meter-village-geojson-un.html?embed=1&v=20260919unesrisample',
+    sub: 'Convention, not a standard · essential vs nice-to-have layers · Esri UN semantics in open files',
+    src: 'meter-village-geojson-un.html?embed=1&v=20260926tr',
     standalone: 'meter-village-geojson-un.html'
   }
 };
@@ -2403,7 +2421,7 @@ const MEETING_NOTES = {
     group: 'tech-comm',
     title: 'Metering & comms topology',
     date: '28 May 2026',
-    sub: 'STS · SMS · DLMS · redundant NAN · CIU/phone relay',
+    sub: 'STS · SMS · DLMS · redundant last-mile · CIU/phone relay',
     src: 'tech-comm-2026-05-28-metering-topology.html?embed=1&v=20260811',
     standalone: 'tech-comm-2026-05-28-metering-topology.html',
     diagramSvg: 'technical-notes/diagrams/metering-topology.svg',
@@ -2458,7 +2476,7 @@ const MEETING_NOTES = {
     standalone: 'oseas-2026.html'
   }
 };
-const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json';
+const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json?v=20260926tr';
 const COTTONSPACE_REPORTS_URL = 'https://sattal.cottonspace.com/reports';
 const DEV_LABS_GITHUB_REPO = 'https://github.com/rahulbhargavain/openami-smart-village';
 const DEV_LABS_GITHUB_REPORTS = `${DEV_LABS_GITHUB_REPO}/tree/main/reports`;
@@ -2634,6 +2652,11 @@ function bindMeterStudyFrameGuard(frame) {
 
 function showMeterPage(pageId, updateHash = true) {
   const requested = pageId;
+  const techNoteId = METER_PAGE_TECH_NOTES[requested] || METER_PAGE_TECH_NOTES[resolveMeterPageId(requested)];
+  if (techNoteId) {
+    showTechNote(techNoteId, true);
+    return;
+  }
   pageId = resolveMeterPageId(pageId);
   if (!METER_BENCHMARK_PAGES[pageId]) return;
   activeMeterPageId = pageId;
@@ -2655,6 +2678,10 @@ function initFromHash() {
   if (raw === 'village-metering' || raw.startsWith('village-metering/') || raw === 'meter-study' || raw.startsWith('meter-study/')) {
     const rawPage = raw.split('/')[1];
     const pageId = resolveMeterPageId(rawPage);
+    if (METER_PAGE_TECH_NOTES[rawPage] || METER_PAGE_TECH_NOTES[pageId]) {
+      showMeterPage(rawPage, false);
+      return;
+    }
     if (METER_BENCHMARK_PAGES[pageId]) showMeterPage(rawPage || 'overview', false);
     else showMeterPage('overview', false);
     return;
@@ -2855,12 +2882,15 @@ function getTechNoteCategories() {
 function renderTechnicalNotesNav() {
   const nav = document.getElementById('nav-sub-tech-notes');
   if (!nav) return;
-  nav.innerHTML = techNotesCatalog.slice(0, 8).map(item => (
+  const pinned = techNotesCatalog.filter(item => item.sourceCatalog === 'isv-wiki' || item.navPin);
+  const rest = techNotesCatalog.filter(item => !(item.sourceCatalog === 'isv-wiki' || item.navPin));
+  nav.innerHTML = [...pinned, ...rest].slice(0, 8).map(item => (
     `<div class="nav-sub-item${item.id === activeTechNoteId ? ' active' : ''}" data-tech-note="${item.id}" onclick="showTechNote('${item.id}')">${escapeHtml(shortNavTitle(item))}</div>`
   )).join('');
 }
 
 function shortNavTitle(item) {
+  if (item.navTitle) return item.navTitle;
   const cat = item.category || 'Report';
   const t = item.title || 'Untitled';
   const short = t.length > 28 ? `${t.slice(0, 25)}…` : t;
@@ -3033,6 +3063,7 @@ function renderTechnicalNoteDetail(id) {
       <div class="tech-detail-label">Why ISV cares</div>
       <div class="tech-detail-body">${escapeHtml(item.isvRelevance || '')}</div>
     </div>
+    ${item.embedSrc ? `<iframe class="tech-detail-embed" title="${escapeHtml(item.title)}" src="${escapeHtml(item.embedSrc)}"></iframe>` : ''}
     <div class="tech-detail-actions">
       ${item.url ? `<a class="btn-primary-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open full report ↗</a>` : ''}
       ${item.mediumUrl ? `<a class="btn-secondary-link" href="${escapeHtml(item.mediumUrl)}" target="_blank" rel="noopener">Original Medium post ↗</a>` : ''}

@@ -173,7 +173,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering` | Village Metering — default: overview |
 | `#village-metering/overview` | Why ISV · gateway path · hardware threads (section entry) |
 | `#village-metering/roadmap` | Three-phase development roadmap (installed-base · microgrid core · grid connect) |
-| `#village-metering/tc20-review` | ThunderCloud 2.0 review · GroundBolt as site HES |
+| `#village-metering/tc20-review` | TC 2.0 technical report · GroundBolt HES · data objects |
 | `#village-metering/village-scope` | Village definition · population · HDI · modernization fork (cited) |
 | `#village-metering/problems` | Field problems (Problem · Why it hurts) |
 | `#village-metering/solutions-map` | Visual problem ↔ stack diagram (SteamaCo · SparkMeter · EnAccess · OpenAMI) · `meter-benchmark/problem-solution-map.json` |
@@ -404,8 +404,11 @@ Ownership: **Locus** = place/time graphics; **simulator** = energy behavior / UI
 **this wiki** = docs, nav, embed. MapLibre + OpenFreeMap is a Locus example, not
 the wiki Mapbox funded-projects map.
 
-The supported-projects Mapbox map (`js/`, RemoteMonitorMap) is a separate feature
-from the simulator basemap. Its integration does not mean Mapbox is in Locus.
+The supported-projects map (`#supported`) is a static screenshot
+(`assets/smart_village_map.png`, from RemoteMonitorMap `Img/`) linking out to
+the live Pages map. Do not iframe `map-embed.html` there — the live map shows
+all OSM power layers. Mapbox `js/` + `map-embed.html` stay for optional
+standalone use. Separate from the simulator basemap; Mapbox is not in Locus.
 
 | Resource | URL |
 |----------|-----|

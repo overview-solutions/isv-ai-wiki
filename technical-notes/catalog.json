@@ -405,6 +405,37 @@
       ]
     },
     {
+      "id": "tc20-review",
+      "reportCode": "ISV-TRD-001",
+      "navTitle": "TC 2.0 report",
+      "title": "TC 2.0 technical report",
+      "publisher": "ISV Technology Committee",
+      "published": "Sep 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [
+        "ThunderCloud",
+        "GroundBolt",
+        "SparkMeter",
+        "EarthSpark",
+        "SparkNet-HTTP",
+        "HES"
+      ],
+      "url": "meter-tc20-review.html",
+      "embedSrc": "meter-tc20-review.html?embed=1&v=20260926tr",
+      "githubUrl": "https://github.com/overview-solutions/isv-ai-wiki/blob/main/meter-tc20-review.html",
+      "sourceCatalog": "isv-wiki",
+      "syncProtected": true,
+      "sourceKind": "isv-wiki",
+      "authorship": "human-primary",
+      "reviewStatus": "draft",
+      "summary": "Technical report on the open EarthSpark / SparkMeter stack (ThunderCloud 2.0 / GroundBolt): USB Gateway as RF bridge, SparkNet-HTTP and Firefly as software plugins, GroundBolt as on-site HES, optional ThunderCloud cloud host. Covers data objects, village topology binding, and what TC 2.0 opens versus what stays proprietary SparkNet.",
+      "isvRelevance": "Phase 1 installed-base path: open HES/site software eases soft-lock for operators who can self-host, while SparkNet RF meters stay proprietary. Complements OpenAMI / MeshEMS (Phase 2) rather than replacing them.",
+      "relatedMeetingNotes": [
+        "tech-comm-2026-08-11"
+      ]
+    },
+    {
       "id": "isv-hck-2025-circles-of-power",
       "reportCode": "ISV-HCK-001",
       "title": "Circles of Power: Village Metering Economics & Open DER Stack",

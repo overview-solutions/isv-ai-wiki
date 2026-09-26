@@ -82,15 +82,15 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2 style="margin-top: 2rem;">How to Build an OpenAMI Stack</h2>
   <p class="body-text">Pick one component from each layer. Not every combination is supported yet — check integration status with your chosen backend provider.</p>
 
-  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--green);">1️⃣ First-km Hardware (meter / DCU / NAN)</h3>
+  <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--green);">1️⃣ First-km Hardware (meter / DCU / mesh)</h3>
   <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">This is what sits in the field — meters at customer premises, pole gateways, and mesh networking.</p>
   <table class="stack-table">
     <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>Street EMS</strong> (Hardware)</td><td>NAN mesh · DCU mesh backhaul</td><td>NESL</td><td><a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">STREET-EMS</a></td></tr>
+      <tr><td><strong>Street EMS</strong> (Hardware)</td><td>pole-to-meter mesh · DCU mesh backhaul</td><td>NESL</td><td><a href="https://github.com/nesl-admin/STREET-EMS" target="_blank" rel="noopener">STREET-EMS</a></td></tr>
       <tr><td><strong>MeshEMS</strong> (Software)</td><td>Street Pole gateway · OpenAMI firmware</td><td>E-IOT</td><td><a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering</a></td></tr>
       <tr><td><strong>DLMS/COSEM meters</strong></td><td>Revenue meters · interop via DLMS at DCU · VMRS registers northbound</td><td>OEM vendors (Inhemeter, Donsun, etc.)</td><td>—</td></tr>
-      <tr><td><strong>SparkMeter hardware</strong></td><td>Revenue meters + RF mesh · SparkNet RF NAN</td><td>SparkMeter</td><td>—</td></tr>
+      <tr><td><strong>SparkMeter hardware</strong></td><td>Revenue meters + RF mesh · SparkNet field radio</td><td>SparkMeter</td><td>—</td></tr>
     </tbody>
   </table>
 
@@ -111,19 +111,19 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <tbody>
       <tr><td><strong>EnAccess MPM</strong></td><td>Operator backend · prepaid billing, CRM, mobile money · supports MQTT/OpenAMI integration</td><td>EnAccess Foundation</td><td><a href="https://github.com/enaccess/micropowermanager" target="_blank" rel="noopener">micropowermanager</a></td></tr>
       <tr><td><strong>OpenEMS</strong></td><td>Linux end-to-end backend · under active development by Arila (iteration &lt; 60 days) · lightweight village use · can swap Raspberry Pi meter for first-km MeshEMS fan-in · <strong>No support yet for SparkNet aggregation, DLMS/COSEM, or STS</strong> · more urban/grid-present</td><td>E-IOT (Arila Barnes)</td><td><a href="https://github.com/openems/openems" target="_blank" rel="noopener">openems</a></td></tr>
-      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open) · ThunderCloud / GroundBolt · dev preview · SparkNet-HTTP native</td><td>EarthSpark</td><td><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">thundercloud</a></td></tr>
+      <tr><td><strong>EarthSpark ThunderCloud</strong></td><td>Operator backend (open) · ThunderCloud / GroundBolt · dev preview · SparkNet-HTTP native · <a href="index.html#village-metering/tc20-review">TC 2.0 technical report</a></td><td>EarthSpark</td><td><a href="https://github.com/EarthSpark/thundercloud" target="_blank" rel="noopener">thundercloud</a></td></tr>
     </tbody>
   </table>
 
   <h3 style="font-size: 14px; font-weight: 500; margin: 1.25rem 0 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-2); border-left: 3px solid var(--text-3);">4️⃣ Cross-Cutting Tools</h3>
   <p class="body-text" style="font-size: 12px; margin-bottom: 0.75rem;">These work across different stack combinations and may be adopted later as grids mature.</p>
   <table class="stack-table">
-    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>GitHub Link</th></tr></thead>
+    <thead><tr><th>Component</th><th>Role</th><th>Supported By</th><th>Link</th></tr></thead>
     <tbody>
-      <tr><td><strong>OpenAMI geo model</strong></td><td>Asset topology · maps feeder → branch → meter so loss can be compared at each point</td><td>ISV / EnAccess</td><td>—</td></tr>
-      <tr><td><strong>OpenADR</strong></td><td>Price / DR signals · utility VTN/VEN programs after grid/aggregator arrival · not year-one prepaid</td><td>OpenADR Alliance</td><td><a href="https://github.com/OpenADRAlliance" target="_blank" rel="noopener">OpenADRAlliance</a></td></tr>
+      <tr><td><strong>Utility Network</strong></td><td>Asset topology convention · GeoJSON layers + associations · maps feeder → branch → meter so loss can be compared at each point</td><td>ISV</td><td><a href="index.html#village-metering/village-geojson-un">Village GeoJSON · UN</a></td></tr>
     </tbody>
   </table>
+  <p class="body-text">Esri Utility Network is Esri’s schema. The ISV/open pack is a convention (GeoJSON layers + associations), not an OGC standard. IEC CIM is a heavier cousin for the same topology idea.</p>
 
   <h2 style="margin-top: 2rem;">Getting Started</h2>
 
@@ -149,6 +149,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2>Background & Context</h2>
   <ul class="link-list">
     <li><a href="index.html#village-metering/overview">Village IOT Metering · Overview</a> — why metering is hard in rural mini-grids</li>
+    <li><a href="index.html#village-metering/tc20-review">TC 2.0 review</a> — installed-base stack (USB Gateway · SparkNet-HTTP · GroundBolt)</li>
     <li><a href="index.html#village-metering/problems">Problems today</a> — theft, cost, protocols, lock-in</li>
     <li><a href="power-africa-openami-presentation-2025.html">Power Africa OpenAMI deck (Sep 2025)</a> — stakeholder overview</li>
     <li><a href="index.html#tech-reports/emg-trd-005-openami-trd">EMG-TRD-005 · OpenAMI TRD</a></li>
