@@ -29,8 +29,8 @@
   <g id="col-site">
     <rect x="28" y="80" width="268" height="136" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
     <text x="162" y="100" text-anchor="middle" font-size="12" font-weight="600">Site</text>
-    <text x="42" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">ground</tspan> · <tspan font-family="ui-monospace, monospace">ground_private</tspan></text>
-    <text x="42" y="134" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">address</tspan> · <tspan font-family="ui-monospace, monospace">grounds_addresses</tspan></text>
+    <text x="42" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">ground</tspan> / <tspan font-family="ui-monospace, monospace">ground_private</tspan></text>
+    <text x="42" y="134" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">address</tspan> / <tspan font-family="ui-monospace, monospace">grounds_addresses</tspan></text>
     <text x="42" y="154" font-size="9" fill="#666">1 GroundBolt box = 1 ground row</text>
     <text x="42" y="168" font-size="9" fill="#666">address = place, not GIS geometry</text>
     <text x="42" y="182" font-size="9" fill="#666">join: grounds_addresses</text>
@@ -40,18 +40,18 @@
   <g id="col-meter">
     <rect x="312" y="80" width="268" height="136" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.75"/>
     <text x="446" y="100" text-anchor="middle" font-size="12" font-weight="600">Meter</text>
-    <text x="326" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter</tspan> · <tspan font-family="ui-monospace, monospace">customer</tspan> (1:1)</text>
-    <text x="326" y="134" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_config</tspan> · <tspan font-family="ui-monospace, monospace">meter_system_info</tspan></text>
-    <text x="326" y="150" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_billing</tspan> · <tspan font-family="ui-monospace, monospace">sparkmac_node</tspan></text>
-    <text x="326" y="166" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_models</tspan> · <tspan font-family="ui-monospace, monospace">meter_scalars</tspan></text>
-    <text x="326" y="182" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_tag</tspan> / <tspan font-family="ui-monospace, monospace">meters_tags</tspan> · <tspan font-family="ui-monospace, monospace">meter_view</tspan></text>
-    <text x="326" y="200" font-size="9" fill="#666">config = desired · system_info = gateway</text>
+    <text x="326" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter</tspan> / <tspan font-family="ui-monospace, monospace">customer</tspan> (1:1)</text>
+    <text x="326" y="134" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_config</tspan> / <tspan font-family="ui-monospace, monospace">meter_system_info</tspan></text>
+    <text x="326" y="150" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_billing</tspan> / <tspan font-family="ui-monospace, monospace">sparkmac_node</tspan></text>
+    <text x="326" y="166" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_models</tspan> / <tspan font-family="ui-monospace, monospace">meter_scalars</tspan></text>
+    <text x="326" y="182" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">meter_tag</tspan> / <tspan font-family="ui-monospace, monospace">meters_tags</tspan> / <tspan font-family="ui-monospace, monospace">meter_view</tspan></text>
+    <text x="326" y="200" font-size="9" fill="#666">config = desired / system_info = gateway</text>
   </g>
 
   <g id="col-wallet">
     <rect x="596" y="80" width="268" height="136" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
     <text x="730" y="100" text-anchor="middle" font-size="12" font-weight="600">Wallet</text>
-    <text x="610" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">wallet</tspan> · <tspan font-family="ui-monospace, monospace">transactions</tspan></text>
+    <text x="610" y="118" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">wallet</tspan> / <tspan font-family="ui-monospace, monospace">transactions</tspan></text>
     <text x="610" y="134" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">transaction_sources</tspan> (cash | bonus)</text>
     <text x="610" y="150" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">sales_account</tspan></text>
     <text x="610" y="170" font-size="9" fill="#666">HES wallet is system of record</text>
@@ -72,12 +72,12 @@
   <g id="col-user">
     <rect x="28" y="248" width="268" height="136" rx="6" fill="#EEEDFE" stroke="#534AB7"/>
     <text x="162" y="268" text-anchor="middle" font-size="12" font-weight="600">User / ACL</text>
-    <text x="42" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">user</tspan> · <tspan font-family="ui-monospace, monospace">role</tspan> · <tspan font-family="ui-monospace, monospace">roles_users</tspan></text>
+    <text x="42" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">user</tspan> / <tspan font-family="ui-monospace, monospace">role</tspan> / <tspan font-family="ui-monospace, monospace">roles_users</tspan></text>
     <text x="42" y="302" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">users_grounds</tspan></text>
     <text x="42" y="318" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">sales_accounts_users</tspan></text>
     <text x="42" y="338" font-size="9" fill="#666">operator login</text>
     <text x="42" y="352" font-size="9" fill="#666">cloud: one user, many grounds</text>
-    <text x="42" y="368" font-size="9" fill="#3B6D11">joins: users_grounds · sales_accounts_users</text>
+    <text x="42" y="368" font-size="9" fill="#3B6D11">joins: users_grounds / sales_accounts_users</text>
   </g>
 
   <g id="col-reading">
@@ -86,7 +86,7 @@
     <text x="326" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">reading</tspan> -- energy, volts, watts,</text>
     <text x="326" y="302" font-size="10" fill="#333">credit snapshot, state</text>
     <text x="326" y="322" font-size="9" fill="#3B6D11">unique (meter, heartbeat window)</text>
-    <text x="326" y="338" font-size="9" fill="#666">no hop list · hops[] dropped</text>
+    <text x="326" y="338" font-size="9" fill="#666">no hop list / hops[] dropped</text>
     <text x="326" y="354" font-size="9" fill="#175CD3">filled by SSE add_reading</text>
     <text x="326" y="368" font-size="9" fill="#666">sync: ground to cloud only</text>
   </g>
@@ -94,8 +94,8 @@
   <g id="col-event">
     <rect x="596" y="248" width="268" height="136" rx="6" fill="#f7f6f3" stroke="#ccc"/>
     <text x="730" y="268" text-anchor="middle" font-size="12" font-weight="600">Event / SMS</text>
-    <text x="610" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">event</tspan> · <tspan font-family="ui-monospace, monospace">sms_config</tspan></text>
-    <text x="610" y="302" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">sms_message</tspan> · <tspan font-family="ui-monospace, monospace">snapshot</tspan></text>
+    <text x="610" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">event</tspan> / <tspan font-family="ui-monospace, monospace">sms_config</tspan></text>
+    <text x="610" y="302" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">sms_message</tspan> / <tspan font-family="ui-monospace, monospace">snapshot</tspan></text>
     <text x="610" y="322" font-size="9" fill="#666">audit + low-balance SMS (once / threshold)</text>
     <text x="610" y="338" font-size="9" fill="#666">snapshot = content-addressed JSON</text>
     <text x="610" y="368" font-size="9" fill="#888">FK to meter: unknown</text>
@@ -103,13 +103,13 @@
 
   <g id="col-sym">
     <rect x="880" y="248" width="268" height="136" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
-    <text x="1014" y="268" text-anchor="middle" font-size="12" font-weight="600">Ops / sync · sym_*</text>
-    <text x="894" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">config_parameter</tspan> · <tspan font-family="ui-monospace, monospace">system_version</tspan></text>
-    <text x="894" y="302" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">system_state</tspan> · <tspan font-family="ui-monospace, monospace">alembic_version</tspan></text>
+    <text x="1014" y="268" text-anchor="middle" font-size="12" font-weight="600">Ops / sync / sym_*</text>
+    <text x="894" y="286" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">config_parameter</tspan> / <tspan font-family="ui-monospace, monospace">system_version</tspan></text>
+    <text x="894" y="302" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">system_state</tspan> / <tspan font-family="ui-monospace, monospace">alembic_version</tspan></text>
     <text x="894" y="318" font-size="10" fill="#333"><tspan font-family="ui-monospace, monospace">dashboard_daily_tariff_summary</tspan></text>
     <text x="894" y="334" font-size="10" fill="#333">SymmetricDS <tspan font-family="ui-monospace, monospace">sym_*</tspan></text>
     <text x="894" y="354" font-size="9" fill="#666">bootstrap + optional ground/cloud catalog</text>
-    <text x="894" y="368" font-size="9" fill="#666">not meter telemetry · same app in cloud</text>
+    <text x="894" y="368" font-size="9" fill="#666">not meter telemetry / same app in cloud</text>
   </g>
 
   <line x1="162" y1="216" x2="162" y2="248" stroke="#3B6D11" stroke-width="1.75" marker-end="url(#arr-fk)"/>
@@ -124,7 +124,7 @@
   <path d="M 250 248 L 250 232 L 730 232 L 730 216" fill="none" stroke="#3B6D11" stroke-width="1.5" marker-end="url(#arr-fk)"/>
   <text x="490" y="228" text-anchor="middle" font-size="8" fill="#3B6D11">sales_accounts_users -&gt; sales_account</text>
 
-  <text x="20" y="418" fill="#9a9990" font-size="11">HOW IDs HOP -- SparkNet-HTTP wire · UN pack · complementary systems (not TC2.0 tables)</text>
+  <text x="20" y="418" fill="#9a9990" font-size="11">HOW IDs HOP -- SparkNet-HTTP wire / UN pack / complementary systems (not TC2.0 tables)</text>
 
   <g id="hop-sparknet">
     <rect x="12" y="428" width="380" height="318" rx="6" fill="rgba(15,110,86,0.05)" stroke="rgba(15,110,86,0.22)"/>
@@ -139,21 +139,21 @@
 
     <text x="26" y="568" font-size="10" font-weight="600" fill="#888">On wire, not persisted</text>
     <text x="26" y="584" font-size="9" fill="#666">neighbor / network-health / command-lifecycle</text>
-    <text x="26" y="598" font-size="9" fill="#666"><tspan font-family="ui-monospace, monospace">hops[]</tspan> dropped · no path in <tspan font-family="ui-monospace, monospace">reading</tspan></text>
+    <text x="26" y="598" font-size="9" fill="#666"><tspan font-family="ui-monospace, monospace">hops[]</tspan> dropped / no path in <tspan font-family="ui-monospace, monospace">reading</tspan></text>
 
-    <text x="26" y="620" font-size="10" font-weight="600" fill="#3B6D11">Commands out · POST /v1/commands</text>
+    <text x="26" y="620" font-size="10" font-weight="600" fill="#3B6D11">Commands out / POST /v1/commands</text>
     <text x="26" y="636" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">configure_provider</tspan> (heartbeat 900 s)</text>
-    <text x="26" y="650" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">register_meter</tspan> · <tspan font-family="ui-monospace, monospace">configure_meter</tspan></text>
-    <text x="26" y="664" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">set_balance</tspan> · <tspan font-family="ui-monospace, monospace">unregister_meter</tspan></text>
+    <text x="26" y="650" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">register_meter</tspan> / <tspan font-family="ui-monospace, monospace">configure_meter</tspan></text>
+    <text x="26" y="664" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">set_balance</tspan> / <tspan font-family="ui-monospace, monospace">unregister_meter</tspan></text>
     <text x="26" y="684" font-size="9" fill="#888">wire meter-id field name: unknown</text>
     <text x="26" y="698" font-size="9" fill="#666"><tspan font-family="ui-monospace, monospace">sparkmac_node</tspan> = desired flood/TTL, not a hop log</text>
-    <text x="26" y="728" font-size="9" fill="#888">CIU display via set_balance · wallet stays SoR</text>
+    <text x="26" y="728" font-size="9" fill="#888">CIU display via set_balance / wallet stays SoR</text>
   </g>
 
   <g id="hop-un">
     <rect x="400" y="428" width="380" height="318" rx="6" fill="rgba(186,117,23,0.05)" stroke="rgba(186,117,23,0.22)"/>
     <text x="590" y="450" text-anchor="middle" font-size="12" font-weight="600" fill="#BA7517">UN GeoJSON pack</text>
-    <text x="590" y="464" text-anchor="middle" font-size="9" fill="#666">geometry, not telemetry · Esri UN semantics</text>
+    <text x="590" y="464" text-anchor="middle" font-size="9" fill="#666">geometry, not telemetry / Esri UN semantics</text>
 
     <text x="414" y="486" font-size="10" font-weight="600" fill="#333">Files</text>
     <text x="414" y="502" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">village.json</tspan> -- site id, name, WGS84 origin</text>
@@ -163,7 +163,7 @@
     <text x="414" y="558" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">feeds/registry.json</tspan> -- Live Twin bindings</text>
 
     <text x="414" y="580" font-size="10" font-weight="600" fill="#333">IDs inside the pack</text>
-    <text x="414" y="596" font-size="9" fill="#333">feature <tspan font-family="ui-monospace, monospace">id</tspan> · <tspan font-family="ui-monospace, monospace">assetClass</tspan> · <tspan font-family="ui-monospace, monospace">assetGroup</tspan></text>
+    <text x="414" y="596" font-size="9" fill="#333">feature <tspan font-family="ui-monospace, monospace">id</tspan> / <tspan font-family="ui-monospace, monospace">assetClass</tspan> / <tspan font-family="ui-monospace, monospace">assetGroup</tspan></text>
     <text x="414" y="610" font-size="9" fill="#333"><tspan font-family="ui-monospace, monospace">subnetworkId</tspan> -- feeder / island filter</text>
     <text x="414" y="624" font-size="9" fill="#333">assoc: <tspan font-family="ui-monospace, monospace">fromId</tspan> -&gt; <tspan font-family="ui-monospace, monospace">toId</tspan> (same feature id)</text>
     <text x="414" y="638" font-size="9" fill="#666"><tspan font-family="ui-monospace, monospace">globalId</tspan> UUID = nice-to-have, not a GB column</text>
@@ -189,7 +189,7 @@
     <text x="802" y="562" font-size="9" fill="#666">two systems of record, no split = double-count</text>
 
     <text x="802" y="586" font-size="10" font-weight="600" fill="#333">MeshEMS (NESL 865B)</text>
-    <text x="802" y="602" font-size="9" fill="#666">Phase 2 board · no GroundBolt table</text>
+    <text x="802" y="602" font-size="9" fill="#666">Phase 2 board / no GroundBolt table</text>
     <text x="802" y="616" font-size="9" fill="#666">registry may name MeshEMS topics (UN convention)</text>
     <text x="802" y="632" font-size="9" fill="#888">MeshEMS device id to meter: unknown</text>
 
@@ -198,7 +198,7 @@
     <text x="802" y="686" font-size="9" fill="#888">stored OpenAMI FK: none / unknown</text>
 
     <text x="802" y="710" font-size="9" fill="#666">ThunderCloud = same <tspan font-family="ui-monospace, monospace">sparkmeter</tspan> app in cloud</text>
-    <text x="802" y="724" font-size="9" fill="#666">via optional SymmetricDS · keys stay on GroundBolt</text>
+    <text x="802" y="724" font-size="9" fill="#666">via optional SymmetricDS / keys stay on GroundBolt</text>
     <text x="802" y="738" font-size="9" fill="#888">meter PK == UN feature id: not a stored claim</text>
   </g>
 

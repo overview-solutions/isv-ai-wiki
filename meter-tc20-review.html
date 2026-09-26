@@ -81,6 +81,7 @@ li { margin-bottom: 0.35rem; }
 .legend i.amber { border-color: #BA7517; border-top-style: dashed; }
 .legend i.power { border-color: #4a4a4a; }
 .legend i.teal { border-color: #0F6E56; }
+.legend i.gray { border-color: #888; border-top-style: dotted; }
 .legend i.cover {
   width: 12px; height: 12px; border-radius: 50%;
   border: 1px solid #BA7517; background: rgba(186,117,23,0.2);
@@ -352,7 +353,25 @@ html.dark .diagram-wrap { background: #f7f6f3; }
     tree (same pass that produced the stack + village SVGs). Village pack names come from the
     <a href="index.html#village-metering/village-geojson-un">UN GeoJSON convention</a>.
     MeshEMS is a complementary Phase&nbsp;2 track — <strong>not</strong> a TC2.0 table.
+    Diagram below draws those collections and every ID hop this page already named.
+    Unknown hops stay labeled unknown.
   </p>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span>Collections · ID hops</span>
+      <a href="technical-notes/diagrams/tc20-data-objects.svg" download style="margin-left:auto;font-size:11px;font-weight:500">Download</a>
+    </div>
+    <div class="panel-body">
+      <div class="diagram-wrap svg-wide" id="host-objects"></div>
+      <div class="legend">
+        <span><i class="green"></i> Stored join / FK</span>
+        <span><i class="blue"></i> SparkNet-HTTP wire</span>
+        <span><i class="amber"></i> UN bind (can later)</span>
+        <span><i class="gray"></i> Complementary / unknown</span>
+      </div>
+    </div>
+  </div>
 
   <h3>GroundBolt Postgres (system of record)</h3>
   <p>Readings sync ground→cloud only. SymmetricDS is optional after the site loop works. No Account entity — wallet is meter XOR sales account.</p>
@@ -529,7 +548,7 @@ html.dark .diagram-wrap { background: #f7f6f3; }
   </ul>
 
   <p class="foot">
-    Technical report. Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code>.
+    Technical report. Diagrams: <code>tc20-stack-village.svg</code> · <code>village-meter-topology.svg</code> · <code>tc20-data-objects.svg</code>.
     Objects from the public TC2.0 tree + village UN pack already on this wiki — no invented tables.
   </p>
 </div>
@@ -592,6 +611,7 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 
   load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20260811b', function (s) { stackSvg = s; });
   load('host-map', 'technical-notes/diagrams/village-meter-topology.svg?v=20260811j', function (s) { mapSvg = s; });
+  load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926obj', function () {});
 })();
 </script>
 </body>
