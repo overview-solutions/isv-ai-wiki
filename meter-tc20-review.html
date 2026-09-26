@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/meter-focus.css">
 <script src="js/isv-theme.js"></script>
 <script src="js/meter-embed.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="js/vendor/d3/d3.v7.min.js?v=20260926d3"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
@@ -129,6 +129,10 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 .force-controls {
   display: flex; gap: 0.65rem; align-items: center; margin-bottom: 0.55rem; flex-wrap: wrap;
 }
+.force-controls .btn {
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+}
 .force-frame {
   border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
   height: 520px; overflow: hidden; position: relative;
@@ -139,12 +143,18 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 .force-card-body { fill: #fff; stroke-width: 1.6; }
 .force-card-head { stroke: none; }
 .force-card-row { stroke: #ddd; stroke-width: 1; }
-.force-node-hex, .force-node-folder { stroke: #fff; stroke-width: 2; }
-.force-node-sys { stroke: #fff; stroke-width: 3.2; }
+path.force-node-hex, path.force-node-folder { stroke: #fff; stroke-width: 2; }
+rect.force-node-sys { stroke: #fff; stroke-width: 3.2; }
 .force-node:hover .force-card-body { stroke-width: 2.6; }
-.force-node:hover .force-node-hex,
-.force-node:hover .force-node-folder { stroke-width: 3; }
-.force-node:hover .force-node-sys { stroke-width: 4; }
+.force-node:hover path.force-node-hex,
+.force-node:hover path.force-node-folder { stroke-width: 3; }
+.force-node:hover rect.force-node-sys { stroke-width: 4; }
+.force-frame text {
+  stroke: none;
+  stroke-width: 0;
+  paint-order: fill;
+  -webkit-text-stroke: 0;
+}
 .force-label { font-size: 11px; fill: var(--text); pointer-events: none; text-anchor: middle; font-weight: 600; }
 .force-label-in { fill: #fff; font-size: 10px; }
 .force-elabel { font-size: 9px; fill: var(--text-2); pointer-events: none; text-anchor: middle; }
@@ -187,10 +197,14 @@ html.dark .diagram-wrap { background: #f7f6f3; }
 }
 .force-tooltip.show { opacity: 1; }
 .force-tooltip strong { display: block; margin-bottom: 0.2rem; color: var(--text); }
-html.dark .force-frame { background: #f7f6f3; }
-html.dark .force-label { fill: #333; }
-html.dark .force-label-in { fill: #fff; }
-html.dark .force-elabel { fill: #666; }
+html[data-theme="dark"] .force-label { fill: #ecebe6; }
+html[data-theme="dark"] .force-label-in { fill: #fff; }
+html[data-theme="dark"] .force-elabel { fill: #a8a7a0; }
+html[data-theme="dark"] .force-bubble-label-groundbolt { fill: #97C459; }
+html[data-theme="dark"] .force-bubble-label-sparknet { fill: #3d9e84; }
+html[data-theme="dark"] .force-bubble-label-un { fill: #d4923a; }
+html[data-theme="dark"] .force-bubble-label-meshems,
+html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
 </style>
 </head>
 <body>
@@ -785,7 +799,7 @@ html.dark .force-elabel { fill: #666; }
   function buildObjForce() {
     var frame = document.getElementById('obj-force-frame');
     if (!window.d3) {
-      frame.innerHTML = '<p class="err">d3-force failed to load (CDN).</p>';
+      frame.innerHTML = '<p class="err">d3-force failed to load (local).</p>';
       return;
     }
     if (objForceReady) {

@@ -1,0 +1,4 @@
+d3@7.9.0
+Vendored so isv.wiki CSP (script-src 'self' 'unsafe-inline') can load force graphs.
+Source: https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js
+License: ISC
