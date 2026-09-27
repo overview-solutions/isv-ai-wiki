@@ -166,9 +166,9 @@ tr.day-break td {
   line-height: 1.4;
 }
 .came-starters {
-  margin-top: 2.5rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
 }
 .came-starters h3 { margin-top: 0; }
 @media (min-width: 768px) {
@@ -250,68 +250,20 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <h2 id="review">Review</h2>
   <p class="body-text">Hands-on Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> for in-country engineers on village mini-grids. Compare commercial AMI (SteamaCo, SparkMeter) with open OpenAMI cabinets. MQTT as the common bus. See <a href="index.html#village-metering/openami">OpenAMI</a> · <a href="index.html#village-metering/vmrs">OBIS · VMRS</a> · <a href="index.html#village-metering/roadmap">roadmap</a>.</p>
 
-  <h3>What was covered</h3>
-  <ul>
-    <li><strong>Session 1</strong> — stranded-legacy AMI / Open Metering Infrastructure; commercial stacks on the program (SteamaCo video; SparkMeter).</li>
-    <li><strong>Session 2</strong> — next-gen feeder monitoring, MeshEMS v2.0 (NESL 865B), Nearly Free Energy site/operator thread, OpenAMI cabinets, DitroniX hardware.</li>
-    <li><strong>Session 3</strong> — mini-grid business case (10 Power) and six code-challenge tracks opened (SparkNet→OpenAMI · DLMS hello · LV feeder add-on · PCB smoke · cal QR · simulator O&amp;M).</li>
-    <li><strong>Session 4</strong> — Thursday wrap-up: show running work, not slide decks. Shared axes still cost · lock-in · sovereignty · comms · repair.</li>
-  </ul>
-
-  <h3 id="simulator">Village Simulator — BUILD</h3>
-  <p class="body-text">Workshop progress on the <a href="index.html#village-metering/village-simulator">Village Simulator</a> (code track 6): <strong>BUILD</strong> mode — microgrid developers construct the system. Constructed data auto-formats to the <strong>Open Utility Network</strong> convention (<em>not</em> a standard — see <a href="index.html#village-metering/village-geojson-un">Village GeoJSON</a>). Layers in play: <strong>LOADS</strong> and <strong>GENERATION</strong> (Energy Assets). Main view splits <strong>OPERATIONS</strong> and <strong>MAINTENANCE</strong>. Live app (wiki embed + new tab): <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">overview-solutions.github.io/smart-village-simulator ↗</a>. Blank iframe = Cloudflare <code>frame-src</code> missing <code>https://overview-solutions.github.io</code>.</p>
-
-  <h3>Who signed up / PCB interest</h3>
-  <p class="body-text">Interest forms stay off this repo (no emails copied here). Name list from the sheet is <strong>pending</strong> — public CSV/HTML fetch failed without a Google login.</p>
-  <div class="links">
-    <a href="https://docs.google.com/spreadsheets/d/16GgSENSXXgDmxvgDp6TxNHoeYg-ed7ZE3h2oi7QAhpY/edit?usp=sharing" target="_blank" rel="noopener">PCB interest sheet ↗</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5_H2axR16j-IRr99tJ6ACkQaTkulbCTK1fDDIo_QpFQ3txw/viewform?usp=dialog" target="_blank" rel="noopener">More interest form ↗</a>
-    <a href="code-challenge-signup.html">Code Challenge sign-up (wiki form)</a>
-  </div>
-  <div class="callout">
-    <strong>Handwritten handout list TBD</strong>
-    <p>Who received NESL 865B / cabinet kits on paper is <strong>not transcribed yet</strong>. Empty until organizers type that list. Do not treat the Google sheet as proof of boards handed over.</p>
-  </div>
-
-  <h2 id="personas">Personas</h2>
-  <div class="came-grid">
-    <article class="came-card">
-      <figure>
-        <img src="assets/workshop/persona-students.svg?v=20260926live" alt="Stylized figure at a laptop with a notebook and small project board">
-        <figcaption>
-          <strong>Students</strong>
-          <span>use the system for a project</span>
-        </figcaption>
-      </figure>
-    </article>
-    <article class="came-card">
-      <figure>
-        <img src="assets/workshop/persona-founders.svg?v=20260926live" alt="Stylized figure at a scale fork between a small cluster of houses and a larger cluster">
-        <figcaption>
-          <strong>Founders</strong>
-          <span>considering whether they can scale with this kind of system</span>
-        </figcaption>
-      </figure>
-    </article>
-    <article class="came-card">
-      <figure>
-        <img src="assets/workshop/persona-researchers.svg?v=20260926live" alt="Stylized figure holding a clipboard beside stacked study notes and a chart">
-        <figcaption>
-          <strong>Researchers</strong>
-          <span>assist in conducting research studies</span>
-        </figcaption>
-      </figure>
-    </article>
-  </div>
-
-  <h3>Follow-up — next few weeks</h3>
-  <ul>
-    <li>Transcribe the handwritten PCB / cabinet handout list onto this page (names + org only if the person already signed the public interest sheet).</li>
-    <li>Work the PCB interest sheet and the more-interest form — no emails published here.</li>
-    <li>Keep simulator BUILD → Open Utility Network convention (LOADS · GENERATION) and the OPERATIONS / MAINTENANCE split.</li>
-    <li>Carry MeshEMS / OpenAMI thread into the <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a> (30 Sep–2 Oct) and <a href="oseas-2026.html">OSEAS Kigali</a> (26–27 Oct).</li>
-    <li>AMDA outreach still open: <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a>.</li>
-  </ul>
+  <h2 id="guests">Program guests</h2>
+  <table>
+    <thead><tr><th>Who</th><th>When (EAT · UTC+3)</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · video. PAC guest slot 11:05–11:35 sat inside this block.</td></tr>
+      <tr><td><strong>Moses, SparkMeter</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · on the program in person</td></tr>
+      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · cabinet hardware</td></tr>
+      <tr><td><strong>Aaron Tushabe, Nearly Free Energy</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · Uganda site layout &amp; mini-grid operator</td></tr>
+      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>Mon 16:15–17:50</td><td>Session 3 · Haiti mini-grid operator</td></tr>
+      <tr><td>ISV instructors</td><td>Both days</td><td>Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor</td></tr>
+      <tr><td>EnAccess</td><td>Remote / OSEAS</td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — see <a href="oseas-2026.html">OSEAS 2026</a> and the <a href="oms-workshop-nairobi-2026.html">OMS Workshop</a></td></tr>
+      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach still open</span></td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
+    </tbody>
+  </table>
 
   <h2 id="workshop-vision">Code challenges (tracks that opened)</h2>
   <p class="body-text">Opened Monday 16:15. Teams pick <strong>one primary track</strong>; wrap-up Thursday. Hardware + firmware paths: Street-EMS / <a href="index.html#village-metering/meshems">MeshEMS</a> and <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>.</p>
@@ -363,31 +315,66 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <p>Open MeshEMS/OpenAMI vs proprietary full-stack on <strong>cost · lock-in · sovereignty · comms · repair</strong>. Optional stretch: prepaid mobile-money token path if a team had bandwidth after the primary track.</p>
   </div>
 
-  <h2>Program guests</h2>
-  <table>
-    <thead><tr><th>Who</th><th>When (EAT · UTC+3)</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Warren Scott-White, SteamaCo</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · video. PAC guest slot 11:05–11:35 sat inside this block.</td></tr>
-      <tr><td><strong>Moses, SparkMeter</strong></td><td>Mon 11:05–13:00</td><td>Session 1 · on the program in person</td></tr>
-      <tr><td><strong>Dave Williams, DitroniX</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · cabinet hardware</td></tr>
-      <tr><td><strong>Aaron Tushabe, Nearly Free Energy</strong></td><td>Mon 14:00–16:00</td><td>Session 2 · Uganda site layout &amp; mini-grid operator</td></tr>
-      <tr><td><strong>Sandra Kwak, <a href="https://10pwr.com/" target="_blank" rel="noopener">10 Power</a></strong></td><td>Mon 16:15–17:50</td><td>Session 3 · Haiti mini-grid operator</td></tr>
-      <tr><td>ISV instructors</td><td>Both days</td><td>Glenn Algie · Adam Sauer · Aaron Tushabe · Jude Numfor</td></tr>
-      <tr><td>EnAccess</td><td>Remote / OSEAS</td><td><a href="https://enaccess.org/openami/" target="_blank" rel="noopener">OpenAMI</a> — see <a href="oseas-2026.html">OSEAS 2026</a> and the <a href="oms-workshop-nairobi-2026.html">OMS Workshop</a></td></tr>
-      <tr><td><a href="https://www.africamda.org/" target="_blank" rel="noopener">AMDA</a></td><td><span class="todo">Outreach still open</span></td><td><a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a></td></tr>
-    </tbody>
-  </table>
+  <h2 id="simulator">Village Simulator — BUILD</h2>
+  <p class="body-text">Workshop progress on the <a href="index.html#village-metering/village-simulator">Village Simulator</a> (code track 6): <strong>BUILD</strong> mode — microgrid developers construct the system. Constructed data auto-formats to the <strong>Open Utility Network</strong> convention (<em>not</em> a standard — see <a href="index.html#village-metering/village-geojson-un">Village GeoJSON</a>). Layers in play: <strong>LOADS</strong> and <strong>GENERATION</strong> (Energy Assets). Main view splits <strong>OPERATIONS</strong> and <strong>MAINTENANCE</strong>. Live app (wiki embed + new tab): <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">overview-solutions.github.io/smart-village-simulator ↗</a>. Blank iframe = Cloudflare <code>frame-src</code> missing <code>https://overview-solutions.github.io</code>.</p>
+
+  <h2 id="signup">Who signed up / PCB interest</h2>
+  <p class="body-text">Interest forms stay off this repo (no emails copied here). Name list from the sheet is <strong>pending</strong> — public CSV/HTML fetch failed without a Google login.</p>
+  <div class="links">
+    <a href="https://docs.google.com/spreadsheets/d/16GgSENSXXgDmxvgDp6TxNHoeYg-ed7ZE3h2oi7QAhpY/edit?usp=sharing" target="_blank" rel="noopener">PCB interest sheet ↗</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5_H2axR16j-IRr99tJ6ACkQaTkulbCTK1fDDIo_QpFQ3txw/viewform?usp=dialog" target="_blank" rel="noopener">More interest form ↗</a>
+    <a href="code-challenge-signup.html">Code Challenge sign-up (wiki form)</a>
+  </div>
+  <div class="callout">
+    <strong>Handwritten handout list TBD</strong>
+    <p>Who received NESL 865B / cabinet kits on paper is <strong>not transcribed yet</strong>. Empty until organizers type that list. Do not treat the Google sheet as proof of boards handed over.</p>
+  </div>
+
+  <h2 id="personas">Personas</h2>
+  <div class="came-grid">
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-students.svg?v=20260926live" alt="Stylized figure at a laptop with a notebook and small project board">
+        <figcaption>
+          <strong>Students</strong>
+          <span>use the system for a project</span>
+        </figcaption>
+      </figure>
+    </article>
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-founders.svg?v=20260926live" alt="Stylized figure at a scale fork between a small cluster of houses and a larger cluster">
+        <figcaption>
+          <strong>Founders</strong>
+          <span>considering whether they can scale with this kind of system</span>
+        </figcaption>
+      </figure>
+    </article>
+    <article class="came-card">
+      <figure>
+        <img src="assets/workshop/persona-researchers.svg?v=20260926live" alt="Stylized figure holding a clipboard beside stacked study notes and a chart">
+        <figcaption>
+          <strong>Researchers</strong>
+          <span>assist in conducting research studies</span>
+        </figcaption>
+      </figure>
+    </article>
+  </div>
+
+  <h3>Follow-up — next few weeks</h3>
+  <ul>
+    <li>Transcribe the handwritten PCB / cabinet handout list onto this page (names + org only if the person already signed the public interest sheet).</li>
+    <li>Work the PCB interest sheet and the more-interest form — no emails published here.</li>
+    <li>Keep simulator BUILD → Open Utility Network convention (LOADS · GENERATION) and the OPERATIONS / MAINTENANCE split.</li>
+    <li>Carry MeshEMS / OpenAMI thread into the <a href="oms-workshop-nairobi-2026.html">OMS Workshop Nairobi</a> (30 Sep–2 Oct) and <a href="oseas-2026.html">OSEAS Kigali</a> (26–27 Oct).</li>
+    <li>AMDA outreach still open: <a href="https://github.com/overview-solutions/isv-ai-wiki/issues/14" target="_blank" rel="noopener">#14</a>.</li>
+  </ul>
 
   <h2>Kits</h2>
   <p class="body-text"><strong>Brought for take-home:</strong> NESL 865B MeshEMS v2.0 (15–20 PCBs planned), 3–5 TC2.0 cabinets, DLMS meters, CircuitSetup 6-port expansion meters, 100A CTs. BOM / firmware: <a href="index.html#village-metering/meshems">MeshEMS hub</a> · <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">meshems-openami-metering ↗</a>. <strong>Who walked out with which board:</strong> handwritten handout list TBD.</p>
 
   <h2 id="came-away">Came away with</h2>
   <p class="body-text">Workshop left <strong>initial use-cases / starter projects</strong> to learn the system.</p>
-  <div class="callout callout-teal">
-    <strong>Training</strong>
-    <p>People at the workshop asked for a training session on OpenAMI EMS, the Village Simulator, and the workshop stack. ISV will run a training session in a few weeks. No date, venue, or sign-up on this wiki. Separate catalog of <strong>work that needs training</strong> (OMS pre-session interest + this ask): <a href="oms-training-skills.html">OMS / village training skills</a> — catalog only, modules TBD.</p>
-  </div>
-
   <div class="came-starters">
     <h3>Starter projects</h3>
     <div class="came-grid">
@@ -416,6 +403,10 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
         </figure>
       </article>
     </div>
+  </div>
+  <div class="callout callout-teal">
+    <strong>Training</strong>
+    <p>People at the workshop asked for a training session on OpenAMI EMS, the Village Simulator, and the workshop stack. ISV will run a training session in a few weeks. No date, venue, or sign-up on this wiki. Separate catalog of <strong>work that needs training</strong> (OMS pre-session interest + this ask): <a href="oms-training-skills.html">OMS / village training skills</a> — catalog only, modules TBD.</p>
   </div>
 
   <h2>Related</h2>
