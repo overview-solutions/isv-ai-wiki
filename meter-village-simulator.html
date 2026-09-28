@@ -23,14 +23,28 @@ h2 { font-size: 14px; font-weight: 500; margin: 1.15rem 0 0.5rem; padding-bottom
 h3 { font-size: 13px; font-weight: 500; margin: 0.85rem 0 0.35rem; color: var(--text); }
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
 .body-text strong { color: var(--text); font-weight: 500; }
+ol.run { font-size: 13px; color: var(--text-2); margin: 0 0 0.85rem 1.25rem; line-height: 1.55; max-width: 48rem; }
+ol.run li { margin-bottom: 0.35rem; }
+ol.run strong { color: var(--text); font-weight: 500; }
 .callout {
   border-left: 3px solid var(--green); background: var(--green-50);
   padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.85rem;
-  font-size: 12px; line-height: 1.45;
+  font-size: 13px; line-height: 1.5; max-width: 48rem;
 }
 .callout > strong:first-child { color: var(--green); display: block; margin-bottom: 0.2rem; }
 .callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
 .callout-amber > strong:first-child { color: var(--amber); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.btn {
+  display: inline-block; padding: 0.55rem 0.9rem; border-radius: 8px;
+  background: var(--green); color: #fff !important; text-decoration: none;
+  font-size: 14px; font-weight: 500;
+}
+.btn-2 {
+  display: inline-block; padding: 0.55rem 0.9rem; border-radius: 8px;
+  border: 1px solid var(--border); color: var(--text) !important; text-decoration: none;
+  font-size: 14px; background: var(--bg-2);
+}
 pre, code {
   font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
   font-size: 12px;
@@ -49,7 +63,7 @@ th { background: var(--bg-2); font-weight: 500; font-size: 11px; }
   background: var(--bg-2); margin: 0.5rem 0 0.35rem; min-height: 720px;
 }
 .sim-embed iframe { display: block; width: 100%; height: min(78vh, 900px); min-height: 640px; border: 0; background: #121214; }
-.sim-open { font-size: 11px; color: var(--text-3); margin: 0 0 0.85rem; }
+.sim-open { font-size: 12px; color: var(--text-3); margin: 0 0 0.85rem; }
 html.embed .back, html.embed .isv-topbar { display: none; }
 html.embed h1 { font-size: 18px; }
 html.embed .wrap { padding-top: 0.75rem; }
@@ -73,11 +87,25 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <div class="back"><a href="index.html#village-metering">← Village Metering</a></div>
 
   <h1>Village Simulator</h1>
-  <p class="sub">Live Vite app embedded from GitHub Pages · Circaevum Locus graphics</p>
-  <p class="lead">Hypothetical GroundBolt-style prepaid day — <strong>not</strong> live village telemetry. Product code lives in <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator</a>. Stage below is the <strong>current</strong> Pages app (BUILD / OPERATIONS / MAINTENANCE).</p>
+  <p class="sub">3D village energy app · open in a browser · no account</p>
+  <p class="lead">A teaching theater for mini-grids: draw the grid, seed customers, watch a prepaid day. <strong>Not</strong> live meters from a real village. You do not need AI, Node, or a GitHub account to <em>use</em> it — only a browser and internet.</p>
 
-  <h2 id="theater">Live simulator</h2>
-  <p class="body-text">Current Vite app, iframed from GitHub Pages. Prefer this for workshop and product work. <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Open full page ↗</a></p>
+  <div class="btn-row">
+    <a class="btn" href="https://overview-solutions.github.io/smart-village-simulator/" target="_blank" rel="noopener">Open the live simulator</a>
+    <a class="btn-2" href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">Source on GitHub</a>
+  </div>
+
+  <h2 id="use">1. Just use it (no install)</h2>
+  <ol class="run">
+    <li>Click <strong>Open the live simulator</strong> above. A new tab is the most reliable view.</li>
+    <li>Wait a few seconds for the 3D scene. Top strip: <strong>File · Untitled · Build · Operations · Loads · Energy Assets · Maintenance</strong>.</li>
+    <li>Demo village is a schematic of Voundou (Cameroon) — hypothetical layout, not a survey.</li>
+    <li>Try <strong>Build</strong> (place feeders and poles), then <strong>Seed customers</strong>, then <strong>Operations</strong> (play the day).</li>
+  </ol>
+  <p class="body-text">Need a map under the village: leave <strong>Nature</strong> selected (uses an online map). <strong>Satellite</strong> also needs internet. This is not billed telemetry and not a CRM.</p>
+
+  <h2 id="theater">On this page</h2>
+  <p class="body-text">Same live app, in a frame. If the box is blank or blocked, ignore it and use the green button (new tab).</p>
   <div class="sim-embed">
     <iframe
       title="Village Simulator — live"
@@ -86,83 +114,83 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       allowfullscreen
     ></iframe>
   </div>
-  <p class="sim-open">Blank iframe on isv.wiki = Cloudflare Transform Rule <code>isv-wiki-security-headers</code> missing <code>https://overview-solutions.github.io</code> in <code>frame-src</code> (today <code>'self' https://player.vimeo.com https://docs.google.com</code>) — not a dead sim. Dashboard change, not this repo.</p>
   <p class="sim-open">
-    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live full page ↗</a>
-    · <a href="village-simulator/index.html" target="_blank" rel="noopener">v1 (frozen / offline snapshot)</a>
-    · <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">Local :5176</a> (only if you ran <code>npm start</code>)
+    <a href="https://overview-solutions.github.io/smart-village-simulator/" target="_blank" rel="noopener">Live full page ↗</a>
+    · <a href="village-simulator/index.html">Older offline snapshot (v1)</a>
   </p>
 
-  <h2 id="run">How to run</h2>
+  <h2 id="run">2. Run it on your computer</h2>
+  <p class="body-text">Only if you want to change code or work without GitHub Pages. Need <strong>Git</strong> and <strong>Node.js 18 or newer</strong> (20+ is fine). Terminal on Mac/Linux. No AI required. No Circaevum workbench required.</p>
+<pre>git clone https://github.com/overview-solutions/smart-village-simulator.git
+cd smart-village-simulator
+npm install
+npm start</pre>
+  <p class="body-text">Your browser should open <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">http://127.0.0.1:5176/</a>. Leave that terminal window open. Stop with Ctrl+C.</p>
+  <p class="body-text">First <code>npm install</code> needs internet (it pulls the Locus graphics library from GitHub). After that, the app runs locally. Online maps still need internet unless you later run <code>npm run map:prepare</code> once (optional, for offline map files).</p>
 
   <div class="callout">
-    <strong>Offline / no-Node path (v1 snapshot)</strong>
-    <p>Live iframe above needs internet + Cloudflare <code>frame-src</code>. For a same-origin freeze, open <a href="village-simulator/index.html">v1 (frozen / offline snapshot)</a>. Fresh machine:</p>
-<pre>git clone https://github.com/overview-solutions/isv-ai-wiki.git
-cd isv-ai-wiki
-./preview.sh
-# live hub: http://127.0.0.1:8765/index.html#village-metering/village-simulator
-# v1 freeze:  http://127.0.0.1:8765/village-simulator/index.html</pre>
-    <p>Needs Python 3 only. <strong>Do not</strong> double-click HTML (<code>file://</code> breaks the iframe). Do not treat v1 numbers as the live app.</p>
+    <strong>Check it worked</strong>
+    <p>You should see the same top strip as the live site, and a 3D ground. If the port is busy, the terminal will say so — close the other copy or pick the URL it prints.</p>
   </div>
 
-  <h2 id="what-you-see">What you are looking at</h2>
+  <h2 id="first-clicks">3. First session (either live or local)</h2>
+  <ol class="run">
+    <li><strong>File → New project…</strong> — empty canvas, or stay on the demo village.</li>
+    <li><strong>Build</strong> — generation → station → lines → LV. Click a feeder when you want to work on one street.</li>
+    <li><strong>Seed customers</strong> — needs LV poles. Then open <strong>Loads</strong> to see use classes.</li>
+    <li><strong>Operations</strong> — playhead, prepaid day, outages. <strong>Maintenance</strong> — faults and leaks, no clock.</li>
+    <li><strong>Energy Assets</strong> — diesel / solar / wind / battery on the demo overlay.</li>
+  </ol>
+  <p class="body-text">Full notes: <a href="https://github.com/overview-solutions/smart-village-simulator#first-session" target="_blank" rel="noopener">simulator README → First session</a>.</p>
+
+  <h2 id="wiki-offline">Wiki only (no simulator source)</h2>
+  <p class="body-text">To read this knowledge base on a laptop with no extra tools except Python 3:</p>
+<pre>git clone https://github.com/overview-solutions/isv-ai-wiki.git
+cd isv-ai-wiki
+./preview.sh</pre>
+  <p class="body-text">Then <a href="http://127.0.0.1:8765/index.html#village-metering/village-simulator">http://127.0.0.1:8765/index.html#village-metering/village-simulator</a>. Do not double-click HTML files (<code>file://</code> breaks the page). The live simulator in the frame still needs internet. For a no-network picture of an older build, open <a href="village-simulator/index.html">v1 snapshot</a> — do not treat those numbers as the current app, and do not edit that folder.</p>
+
+  <h2 id="what">What sits where</h2>
   <table>
-    <thead><tr><th>Layer</th><th>Where</th><th>Role</th></tr></thead>
+    <thead><tr><th></th><th>Open this</th><th>When</th></tr></thead>
     <tbody>
       <tr>
+        <td><strong>Live app</strong></td>
+        <td><a href="https://overview-solutions.github.io/smart-village-simulator/" target="_blank" rel="noopener">github.io/smart-village-simulator</a></td>
+        <td>Look, click, workshop, share a URL</td>
+      </tr>
+      <tr>
         <td><strong>This wiki page</strong></td>
-        <td><code>meter-village-simulator.html</code></td>
-        <td>How to run · nested live iframe · one v1 link</td>
+        <td><code>meter-village-simulator.html</code> · hash <code>#village-metering/village-simulator</code></td>
+        <td>How to run · frame · links</td>
       </tr>
       <tr>
-        <td><strong>Live app (stage)</strong></td>
-        <td><a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">GitHub Pages ↗</a> · <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">source ↗</a></td>
-        <td>Current Vite app — nested iframe dest. Local: <code>npm start</code> :5176</td>
+        <td><strong>Source</strong></td>
+        <td><a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">overview-solutions/smart-village-simulator</a></td>
+        <td>Change the product</td>
       </tr>
       <tr>
-        <td><strong>v1 (frozen / offline snapshot)</strong></td>
-        <td><a href="village-simulator/index.html"><code>village-simulator/</code></a> inside the wiki</td>
-        <td>Kept on disk. Link only — not the primary embed. Do not develop.</td>
-      </tr>
-      <tr>
-        <td><strong>Graphics library</strong></td>
-        <td><a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum/locus ↗</a></td>
-        <td>Place/time primitives (<code>LocusMap</code>, time→Y) — consumed by the live app</td>
+        <td><strong>v1 snapshot</strong></td>
+        <td><a href="village-simulator/index.html"><code>village-simulator/</code></a> in the wiki</td>
+        <td>Offline wiki clone only. Do not develop.</td>
       </tr>
     </tbody>
   </table>
 
-  <h2 id="run-live">Run the live simulator locally (developers)</h2>
-  <p class="body-text">Use this when you are changing sim code, refreshing the wiki freeze, or need MapLibre packs / latest BUILD·MAINT modes. Separate clone from the wiki.</p>
-  <div class="callout">
-    <strong>One-click (macOS workbench)</strong>
-    <p>In <code>ISV/smart-village-simulator/</code>, double-click <code>Start Simulator.command</code> (or Desktop <strong>Start Village Simulator</strong>). Opens <a href="http://127.0.0.1:5176/" target="_blank" rel="noopener">http://127.0.0.1:5176/</a>. Needs Node + sibling <code>CIR/yang/locus</code>.</p>
-  </div>
-<pre>git clone https://github.com/overview-solutions/smart-village-simulator.git
-cd smart-village-simulator
-npm install
-npm start
-# → http://127.0.0.1:5176</pre>
-  <p class="body-text"><code>@circaevum/locus</code> is often a <code>file:</code> dep on a Circaevum workbench checkout. Standalone clones: point that dependency at <code>github:Circaevum/locus</code> (see the sim README). Offline basemaps: <code>npm run map:prepare</code> once while online, then <code>npm start</code>.</p>
-
   <div class="callout callout-amber">
-    <strong>Do not edit the wiki’s <code>village-simulator/</code> tree for product work</strong>
-    <p>That folder is v1 (frozen / offline snapshot) — link only. Change <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator</a>. Do not develop the freeze.</p>
+    <strong>Do not edit the wiki’s <code>village-simulator/</code> folder</strong>
+    <p>That is an old freeze. All product work goes in <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator</a>.</p>
   </div>
 
   <h2 id="links">Links</h2>
   <div class="links">
-    <a href="https://overview-solutions.github.io/smart-village-simulator/?embed=1" target="_blank" rel="noopener">Live Pages simulator ↗</a>
-    <a href="village-simulator/index.html">v1 (frozen / offline snapshot)</a>
-    <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">smart-village-simulator (source) ↗</a>
-    <a href="https://github.com/overview-solutions/isv-ai-wiki#offline-in-one-go-start-here" target="_blank" rel="noopener">Wiki README · Offline in one go ↗</a>
-    <a href="index.html#village-metering/village-geojson-un">Village GeoJSON · open Utility Network</a>
-    <a href="https://github.com/Circaevum/locus" target="_blank" rel="noopener">Circaevum Locus ↗</a>
-    <a href="https://circaevum.github.io/locus/village-simulator/" target="_blank" rel="noopener">Hosted Locus theater (online) ↗</a>
-    <a href="power-africa-2026-workshop-planning.html#simulator">Nairobi workshop · BUILD / OPERATIONS · MAINTENANCE</a>
-    <a href="index.html#village-metering/meshems">MeshEMS hub</a>
+    <a href="https://overview-solutions.github.io/smart-village-simulator/" target="_blank" rel="noopener">Live simulator ↗</a>
+    <a href="https://github.com/overview-solutions/smart-village-simulator" target="_blank" rel="noopener">Source ↗</a>
+    <a href="village-simulator/index.html">v1 snapshot</a>
+    <a href="power-africa-2026-workshop-planning.html#simulator">Nairobi workshop · BUILD</a>
+    <a href="index.html#village-metering/village-geojson-un">Village GeoJSON</a>
     <a href="index.html#village-metering/openami">OpenAMI</a>
+    <a href="index.html#village-metering/meshems">MeshEMS</a>
   </div>
 </div>
 </body>

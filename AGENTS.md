@@ -182,7 +182,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
-| `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): nested iframe = live Pages `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. **Requires** Cloudflare `frame-src` include `https://overview-solutions.github.io` or Chrome blocks. v1 frozen snapshot: `village-simulator/` (one link, not a second stage). Local `npm start` (:5176). Legacy `#village-metering/worldline-day` aliases here. |
+| `#village-metering/village-simulator` | Village Simulator hub (`meter-village-simulator.html`): **Open live app** (GitHub Pages) · how to run with Git+Node, no AI · nested iframe `https://overview-solutions.github.io/smart-village-simulator/?embed=1`. Blank frame → use new tab. v1 freeze: `village-simulator/` (link only). |
 | `#village-metering/village-geojson-un` | Open Utility Network GeoJSON pack: essential vs nice-to-have layers, joins, LOD, API bindings. Starter from `smart-village-simulator/villages`. |
 | `#meter-study/...` | Legacy — same as `#village-metering/...` (`problems-today` → `problems`, `scope` → `village-scope`) |
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
