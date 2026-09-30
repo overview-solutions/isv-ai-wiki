@@ -1499,6 +1499,7 @@ code {
       Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
+      <div class="nav-sub-item" data-note="oms-workshop-nairobi-2026-day1" data-note-group="tech-comm" onclick="showNote('oms-workshop-nairobi-2026-day1')">30 Sep 2026 · OMS Workshop Day 1</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-08-11" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-11')">11 Aug 2026 · Open Metering Infrastructure / SparkMeter</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-06-25" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-06-25')">25 Jun 2026 · AI Wiki Orientation</div>
       <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
@@ -1997,7 +1998,7 @@ code {
         <div class="standard-icon">📋</div>
         <div>
           <div class="resource-name">OMS Workshop Nairobi</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('oms-workshop-nairobi-2026');return false">Event page</a> — 30 Sep–2 Oct 2026 · A2EI · EnAccess · Open Metering Strategy. Online pre-session 22 Sep already ran. In-person attendance not listed here. Training-task catalog: <a href="#" onclick="showNote('oms-training-skills');return false">OMS / village training skills</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('oms-workshop-nairobi-2026');return false">Event page</a> — 30 Sep–2 Oct 2026 · A2EI · EnAccess · Open Metering Strategy. Online pre-session 22 Sep already ran. <a href="#" onclick="showNote('oms-workshop-nairobi-2026-day1');return false">Day 1 note</a> is in Meeting Notes. Training-task catalog: <a href="#" onclick="showNote('oms-training-skills');return false">OMS / village training skills</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2418,7 +2419,7 @@ const METER_BENCHMARK_PAGES = {
   'village-geojson-un': {
     title: 'Village GeoJSON · open Utility Network',
     sub: 'Convention, not a standard · essential vs nice-to-have layers · Esri UN semantics in open files',
-    src: 'meter-village-geojson-un.html?embed=1&v=20260926tr',
+    src: 'meter-village-geojson-un.html?embed=1&v=20260930nea',
     standalone: 'meter-village-geojson-un.html'
   }
 };
@@ -2497,6 +2498,14 @@ const MEETING_NOTES = {
     sub: 'A2EI · EnAccess · Open Metering Strategy · draft agenda',
     src: 'oms-workshop-nairobi-2026.html?embed=1&v=20260926skill',
     standalone: 'oms-workshop-nairobi-2026.html'
+  },
+  'oms-workshop-nairobi-2026-day1': {
+    group: 'tech-comm',
+    title: 'OMS Workshop · Day 1',
+    date: '30 Sep 2026',
+    sub: 'Nairobi · stack, lock-in, scope',
+    src: 'oms-workshop-nairobi-2026-day1.html?embed=1&v=20260930d1b',
+    standalone: 'oms-workshop-nairobi-2026-day1.html'
   },
   'oms-training-skills': {
     group: 'events',

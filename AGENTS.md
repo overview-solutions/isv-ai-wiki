@@ -65,6 +65,7 @@ isv-ai-wiki/
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
 ├── power-africa-2026-workshop-planning.html # OpenAMI EMS Workshop results (Nairobi · 4 sessions ran · 21 + 24 Sep)
 ├── oms-workshop-nairobi-2026.html           # OMS Workshop Nairobi (A2EI · EnAccess · 30 Sep–2 Oct)
+├── oms-workshop-nairobi-2026-day1.html      # Day 1 note (30 Sep · Meeting Notes)
 ├── oms-training-skills.html                 # Training-task catalog (OMS pre-session + EMS workshop ask · modules TBD)
 ├── power-africa-2026-conference.html        # IEEE PES & IAS Power Africa Conference 2026 links
 ├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
@@ -189,6 +190,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#events/{note-id}` | In-person events (workshops, hackathons; default: `open-energy-hackathon-2025`). Legacy `#power-africa/...` still resolves. |
 | `#events/power-africa-2026-workshop-planning` | OpenAMI EMS Workshop **results** (filename kept). All 4 sessions ran (3 Mon + 1 Thu). BUILD sim · Open Utility Network convention · PCB interest sheet / handwritten handout TBD. |
 | `#events/oms-workshop-nairobi-2026` | OMS Workshop Nairobi · 30 Sep–2 Oct 2026 · A2EI · EnAccess · draft agenda + online pre-session votes. Attendance not published. |
+| `#notes/oms-workshop-nairobi-2026-day1` | Day 1 note · 30 Sep 2026 · stack, lock-in, three scope cuts. Roster stays in `isv-ai-wiki-private`. |
 | `#events/oms-training-skills` | Training-task catalog — village energy + OMS / metering skillsets across the lifecycle. Not a course. Demand from OMS pre-session + OpenAMI EMS workshop training ask. Modules TBD. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
@@ -380,7 +382,8 @@ When editing this repo:
 
 - **Hosts:** A2EI and EnAccess. Draft agenda in prep pack (may change).
 - **Online pre-session:** Tue 22 Sep 2026, 11:00–12:30 CEST · AMDA / A2EI / EnAccess · 50+ on the call (already ran).
-- **In-person attendance:** not published on this wiki.
+- **In-person attendance:** not published on this wiki. Working roster (name + org from the organizer sheet, not a checked room roll) is ISV-internal.
+- **Day 1 note:** `oms-workshop-nairobi-2026-day1.html` · `#notes/oms-workshop-nairobi-2026-day1` — discussion from 30 Sep. Roster stays in `isv-ai-wiki-private`.
 - **Standalone page:** `oms-workshop-nairobi-2026.html` · `#events/oms-workshop-nairobi-2026`.
 - **Training-task catalog** (not a course): `oms-training-skills.html` · `#events/oms-training-skills` — work that needs training, mapped to lifecycle phases. Modules TBD. No date / venue / sign-up.
 

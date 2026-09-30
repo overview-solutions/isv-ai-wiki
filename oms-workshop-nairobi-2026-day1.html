@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMS Workshop Nairobi · Day 1 · 30 Sep 2026 · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260930d1">
+<script src="js/isv-theme.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
+  font-size: 14px; line-height: 1.55;
+}
+.callout > strong:first-child { display: block; margin-bottom: 0.4rem; font-weight: 500; color: var(--green); }
+.callout p:last-child { margin-bottom: 0; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+.body-text { font-size: 14px; color: var(--text-2); line-height: 1.55; margin-bottom: 0.75rem; }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.todo { color: var(--text-2); font-style: italic; }
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+figure { margin: 0 0 1.25rem; }
+figure img { width: 100%; height: auto; display: block; border: 1px solid var(--border); background: var(--bg); }
+figcaption { font-size: 12px; color: var(--text-2); margin-top: 0.35rem; }
+.stack { border: 1px solid var(--border); margin: 0.5rem 0 1rem; }
+.band { padding: 0.65rem 0.8rem; border-top: 1px solid var(--border); }
+.band:first-child { border-top: 0; }
+.band h3 { font-size: 14px; font-weight: 500; margin: 0 0 0.2rem; padding: 0; border: 0; }
+.band p { margin: 0; color: var(--text-2); }
+.seam { padding: 0.55rem 0.8rem; border-top: 1px solid var(--border); border-left: 4px solid var(--green); background: var(--green-50); }
+.seam.plain { border-left-color: var(--border); background: var(--bg-2); }
+.seam strong { display: block; margin-bottom: 0.15rem; font-weight: 500; }
+.seam p { margin: 0; color: var(--text-2); font-size: 13px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+ol { padding-left: 1.25rem; margin-bottom: 0.75rem; }
+@media (max-width: 640px) { .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>OMS Workshop · Day 1</h1>
+  <p class="sub">Open Metering Strategy · Wednesday 30 September 2026 · Nairobi · hosts A2EI and EnAccess</p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#notes/oms-workshop-nairobi-2026-day1" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meeting Notes</a> · <a href="oms-workshop-nairobi-2026.html" style="font-size:14px">Workshop page</a></p>
+
+  <figure>
+    <img src="assets/oms-day1-org-logos.png" alt="Logos of organisations on the Day 1 participant sheet">
+    <figcaption>Organisations on the participant sheet.</figcaption>
+  </figure>
+
+  <h2>Stack the room described</h2>
+  <p>Mini-grid platforms bundle these into one product. That sells. It also locks the operator in.</p>
+  <div class="stack">
+    <div class="band">
+      <h3>OMS, CRM, revenue, outage</h3>
+      <p>Sit above the MDMS.</p>
+    </div>
+    <div class="band">
+      <h3>MDMS</h3>
+      <p>Processes, cleans, and organizes raw meter data.</p>
+    </div>
+    <div class="band">
+      <h3>Headend</h3>
+      <p>Command center. Wallets, credit countdown, time-of-use, customer list. SparkMeter runs this on site: offline, then sync when the link returns. SteamaCo runs it in the cloud: the meter waits for a remote command, and an outage blocks that.</p>
+    </div>
+    <div class="seam">
+      <strong>Gateway to cloud</strong>
+      <p>Priority hop named in the room. Afternoon also left three scope cuts open, below.</p>
+    </div>
+    <div class="band">
+      <h3>Gateway</h3>
+      <p>Collects meters, because a meter often cannot reach the cloud from a rural site. Local, cloud, or hybrid.</p>
+    </div>
+    <div class="seam plain">
+      <strong>SparkNet HTTP — two descriptions</strong>
+      <p>Room: proprietary library for gateway-to-meter communication. Free to use. Open above it, proprietary below it. TC 2.0 diagram: driver from the USB gateway into GroundBolt. <a href="meter-tc20-review.html?host=full">TC 2.0 full host</a>.</p>
+    </div>
+    <div class="band">
+      <h3>Meter</h3>
+      <p>Registers electricity flow. Can open or close the customer connection.</p>
+    </div>
+  </div>
+
+  <h2>Lock-in is three failures</h2>
+  <table>
+    <thead><tr><th>Level</th><th>What fails</th><th>Matching response from the afternoon</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1 — blackout</td>
+        <td>Vendor system down. Operators see errors. Meters unreachable.</td>
+        <td>Escrow is the fallback when a vendor stops operating.</td>
+      </tr>
+      <tr>
+        <td>2 — stranded hardware</td>
+        <td>Operator wants to leave. Meters stay tied to the old platform.</td>
+        <td>Migration means new software, same meters. Possible in theory for some stacks. Not proven at scale.</td>
+      </tr>
+      <tr>
+        <td>3 — mixed fleet</td>
+        <td>Operator wants another brand under one platform.</td>
+        <td>Universal headend, or one management system with a driver per meter type.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Hardware lock-in and software lock-in were split on purpose.</p>
+  <ul>
+    <li>Business ceases operating: third-party escrow holds keys, or a continuity clause. The room’s question was why have an escrow at all. The answer that landed: fallback if a vendor stops operating.</li>
+    <li>Do not want the SaaS fee: run the meters on other software.</li>
+    <li>Want a new brand: universal headend or multi-driver.</li>
+  </ul>
+  <p>Phone analogy used in the room: a vendor can keep proprietary hardware if the interface above it is open. Hidden registers make the meter a brick when the vendor stops.</p>
+
+  <h2>Three places scope can be cut</h2>
+  <table>
+    <thead><tr><th>Cut</th><th>What it builds</th><th>Limit named in the room</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Above the headend</td>
+        <td>Open MDMS, CRM, outage and revenue management on an existing headend.</td>
+        <td>Still locked at the hardware and gateway.</td>
+      </tr>
+      <tr>
+        <td>The headend</td>
+        <td>One headend that can speak SparkMeter, Calin, and others.</td>
+        <td>Called boiling the ocean. DLMS named as the possible lever.</td>
+      </tr>
+      <tr>
+        <td>Below the headend</td>
+        <td>Free meter-to-gateway comms: registers, a SparkNet equivalent, LoRaWAN.</td>
+        <td>High complexity. Needs operator skill or a strong open effort.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Tests proposed for any cut: which lock-in it addresses, whether it reinvents a commercial-scale standard, and how much burden lands on the operator.</p>
+
+  <div class="callout callout-amber">
+    <strong>Two framings still on the table</strong>
+    <p>One: write the standard for new meters. Priority hop is gateway to cloud. Start with DLMS, upgraded for this ecosystem.</p>
+    <p>The other: open connectors for SparkMeter and SteamaCo fleets already in the ground. DLMS as leverage for a universal headend, and as manufacturer register codes.</p>
+    <p>On this wiki, DLMS/COSEM sits at the meter and the DCU. The DCU is client to the meter and server toward the head-end.</p>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h3 style="font-size:15px;font-weight:500;margin:0 0 0.4rem">Data the morning said it needs</h3>
+      <ol>
+        <li>Vending transactions, number and size. Bankability.</li>
+        <li>Daily totals by customer group. Planning.</li>
+        <li>Profiles every 5–15 minutes. Grid control.</li>
+      </ol>
+      <p>Raw data can stop at the feeder. Alarms still need a near-real-time signal. Reversed CTs and negative SparkMeter totals already made datasets unusable.</p>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:500;margin:0 0 0.4rem">Operator path</h3>
+      <ol>
+        <li>Vending. STS, collect revenue.</li>
+        <li>Monitoring. Usage and events.</li>
+        <li>Control. Run the grid.</li>
+      </ol>
+      <p>STS is a vending standard, not a comms standard. It does not give remote monitoring or control.</p>
+    </div>
+  </div>
+
+  <h2>Where tomorrow starts</h2>
+  <p>Near-term baseline: open connectors for existing SparkMeter and SteamaCo fleets. Keep the work already done. Other meters in urgent need can be added. One open management system, a pluggable driver per meter type, gateways that can hold more than one driver, connectors for known OEMs, room for third parties to add more. Runs on site and in the cloud. IEEE formal standard is a later milestone. KPLC, at about 8 million meters, can impose interoperability on manufacturers. A mini-grid operator does that only together with others.</p>
+  <p>Thursday 1 October, 9:00. Scope is what the open core will expose. Share the Thundercloud 2.0 laptop test in that project’s Discord. Another team read frequency, voltage, and consumption from 5 meters through an off-the-shelf gateway and a normal cloud path (Azure and MQTT were the example). Readable registers mean the data can move.</p>
+
+  <h2>Rest of the day, short</h2>
+  <p>Duopoly named as SteamaCo and Smart Meter hardware. Lock-in came from survival businesses, not a plot. Goals: no lock-in, interoperability, affordability. Open core, not full open source. OMS is the metering minimum. Companies sell what sits on top. Some unlocking work is already underway.</p>
+  <p>M300 figure used: about 23 million connections. Needs private capital. ARPU bands named were $4, $11, $15. Naira example: about 5× in 3 years. Consumption data tied to local-currency finance, RECs, and carbon. Many smart meters are there because a funder or a government required them. One Uganda case swapped SparkMeter for STS at about $50 after the vendor crisis. Farm and anchor meters stayed smart. Household STS plus a bulk meter for about 6 customers was the hybrid for alarms. Open question: when is a smart meter actually required?</p>
+  <p>Survey: 13 answers, about 20 people. Sticky notes, up to 3 points, weak without cost and impact. Migration means new software, same meters (Thundercloud to SteamaCo or Lightning were the examples). Thundercloud 2.0 and Groundbolt are open. SteamaCo’s migration path is still being built. DLMS register codes come from the manufacturer on request, and they are not always right.</p>
+  <p>Mapping: <a href="https://www.nrecainternational.coop/liberianea/">Liberia National Electrification Analysis</a>. Country-scale electrification map.</p>
+</div>
+</body>
+</html>
