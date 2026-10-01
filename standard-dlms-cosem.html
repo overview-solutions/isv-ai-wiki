@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLMS/COSEM — IEC 62056 · Standards · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="stylesheet" href="css/isv-theme.css?v=20260629">
+<link rel="stylesheet" href="css/meter-focus.css">
+<script src="js/isv-theme.js"></script>
+<style>
+:root, html[data-theme="light"] {
+  --device: #6E3A62;
+  --device-50: #F6F0F4;
+  --object: #6F6459;
+  --object-50: #F3EFE9;
+  --wire: #4A5560;
+  --wire-50: #EEF0F2;
+  --orange: #D4650A;
+  --orange-50: #FFF1E6;
+}
+html[data-theme="dark"] {
+  --device: #E0A8C8;
+  --device-50: #261820;
+  --object: #C8BBA8;
+  --object-50: #241f1a;
+  --wire: #A8B0BA;
+  --wire-50: #1a1d22;
+  --orange: #f08a3c;
+  --orange-50: #2a1608;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
+a { color: var(--text); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
+.back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
+.back a { text-decoration: none; }
+h1 { font-size: 24px; font-weight: 500; margin-bottom: 0.25rem; }
+.sub { font-size: 13px; color: var(--text-2); margin-bottom: 0.85rem; }
+.lead { font-size: 14px; margin-bottom: 0.85rem; max-width: 54rem; line-height: 1.5; }
+h2 { font-size: 16px; font-weight: 500; margin: 1.5rem 0 0.65rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 14px; font-weight: 500; margin: 1.1rem 0 0.5rem; color: var(--text); }
+p { font-size: 14px; color: var(--text-2); margin-bottom: 0.75rem; line-height: 1.55; max-width: 54rem; }
+ul { margin: 0 0 0.85rem 1.25rem; color: var(--text-2); }
+li { margin-bottom: 0.35rem; font-size: 14px; }
+code { font-family: var(--mono); font-size: 12px; background: var(--bg-2); padding: 0.1rem 0.35rem; border-radius: 4px; }
+.callout { border-left: 3px solid var(--text-3); background: var(--bg-2); padding: 0.75rem 0.95rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; font-size: 13px; line-height: 1.5; }
+.callout > strong:first-child { color: var(--text); display: block; margin-bottom: 0.35rem; }
+.callout-key { border-left-color: var(--text-3); background: var(--bg-2); }
+.callout-key > strong:first-child { color: var(--text); }
+.callout-warn { border-left-color: var(--text-3); background: var(--bg-2); }
+.callout-warn > strong:first-child { color: var(--text); }
+.pair { display: grid; grid-template-columns: 1fr; gap: 0.65rem; margin: 0.5rem 0 1rem; }
+@media (min-width: 720px) { .pair { grid-template-columns: 1fr 1fr; } }
+.card { border: 1px solid var(--border); background: var(--bg-2); padding: 0.75rem 0.85rem; border-left-width: 4px; }
+.card h3 { margin: 0 0 0.35rem; }
+.card p { font-size: 13px; margin: 0; }
+.card.cosem, .card.dlms { border-left-color: var(--border-2); }
+figure.schema { margin: 0 0 1rem; }
+figcaption { font-size: 12px; color: var(--text-2); margin-bottom: 0.45rem; }
+.tree { border: 1px solid var(--border); padding: 0.75rem 0.85rem; background: var(--bg); }
+.node { border-left: 3px solid var(--device); margin: 0.35rem 0 0.35rem 0.35rem; padding: 0.35rem 0.45rem 0.35rem 0.7rem; background: var(--device-50); }
+.node .k { display: block; font-size: 13px; font-weight: 500; color: var(--text); }
+.node .d { display: block; font-size: 12px; color: var(--text-2); }
+.read { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 0.6rem; font-size: 12px; margin-top: 0.55rem; }
+.read span:nth-child(odd) { color: var(--text-3); }
+.read code { color: var(--text); }
+.read code.ln { background: var(--blue-50); border-left: 3px solid var(--blue); padding-left: 0.35rem; }
+.read code.val { background: var(--green-50); border-left: 3px solid var(--green); padding-left: 0.35rem; }
+.obis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.35rem; margin-bottom: 0.45rem; }
+.cell { border: 1px solid var(--border); background: var(--bg-2); padding: 0.4rem 0.3rem; text-align: center; border-top-width: 3px; }
+.cell b { display: block; font-family: var(--mono); font-size: 16px; font-weight: 500; color: var(--text); }
+.cell span { display: block; font-size: 10px; color: var(--text-2); line-height: 1.3; margin-top: 0.2rem; }
+.cell.name { border-top-color: var(--blue); background: var(--blue-50); }
+.ic { display: grid; grid-template-columns: 1fr; gap: 0.45rem; margin-bottom: 0.75rem; }
+@media (min-width: 720px) { .ic { grid-template-columns: repeat(3, 1fr); } }
+.ic div { border: 1px solid var(--border); border-left-width: 4px; padding: 0.55rem 0.65rem; font-size: 12px; color: var(--text-2); line-height: 1.4; background: var(--bg-2); }
+.ic strong { display: block; color: var(--text); font-size: 12px; margin-bottom: 0.2rem; }
+.ic .object { border-left-color: var(--object); background: var(--object-50); }
+.ic .assoc { border-left-color: var(--purple); background: var(--purple-50); }
+.ic .disc { border-left-color: var(--red); background: var(--red-50); }
+.nest { max-width: 22rem; margin: 0 0 1rem; font-size: 12px; color: var(--text); }
+.nest b { display: block; font-size: 11px; font-weight: 500; }
+.nest-sess, .nest-model, .nest-obj, .nest-addr, .nest-val, .nest-off, .nest-disc, .nest-wire { border: 1px solid var(--border); border-left-width: 4px; padding: 0.35rem 0.45rem; }
+.nest-sess { background: var(--purple-50); border-left-color: var(--purple); margin-bottom: 0.3rem; }
+.nest-model { background: var(--device-50); border-left-color: var(--device); margin: 0.35rem 0; }
+.nest-obj { background: var(--object-50); border-left-color: var(--object); margin: 0.35rem 0; }
+.nest-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; }
+.nest-addr { background: var(--blue-50); border-left-color: var(--blue); }
+.nest-val { background: var(--green-50); border-left-color: var(--green); }
+.nest-off { background: var(--orange-50); border-left-color: var(--orange); }
+.nest-disc { background: var(--red-50); border-left-color: var(--red); }
+.nest-wire { background: var(--wire-50); border-left-color: var(--wire); }
+.xchg { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.35rem 0.5rem; align-items: center; border: 1px solid var(--border); padding: 0.65rem; background: var(--bg); }
+.xchg .who { font-size: 11px; font-weight: 500; padding: 0.2rem 0.4rem; }
+.xchg .who { color: var(--text); background: var(--bg-2); }
+.xchg .msg { font-size: 12px; color: var(--text); padding: 0.35rem 0.45rem; background: var(--bg-2); }
+.xchg .msg.req { background: var(--blue-50); border-left: 3px solid var(--blue); }
+.xchg .msg.res { background: var(--green-50); border-left: 3px solid var(--green); }
+.xchg .msg.sess { background: var(--purple-50); border-left: 3px solid var(--purple); }
+.xchg .msg.disc { background: var(--red-50); border-left: 3px solid var(--red); }
+.xchg .arr { font-family: var(--mono); color: var(--wire); text-align: center; font-weight: 500; }
+.pick { border-left: 3px solid var(--border-2); margin: 0.35rem 0 0 0.35rem; padding: 0.35rem 0.45rem 0.35rem 0.7rem; background: var(--bg-2); }
+.pick.on { border-left-color: var(--object); background: var(--object-50); }
+.shape { font-size: 13px; color: var(--text); margin-bottom: 0.85rem; }
+.shape b, .part b { display: block; font-size: 13px; font-weight: 500; }
+.shape > span, .lv > span, .part span { display: block; font-size: 12px; color: var(--text-2); font-weight: 400; margin-top: 0.15rem; }
+.lv { border: 1px solid var(--border); border-left-width: 4px; padding: 0.45rem 0.55rem; margin-top: 0.35rem; }
+.model { background: var(--device-50); border-left-color: var(--device); }
+.object { background: var(--object-50); border-left-color: var(--object); }
+.job-addr { background: var(--blue-50); border-left-color: var(--blue); }
+.job-val { background: var(--green-50); border-left-color: var(--green); }
+.job-sess { background: var(--purple-50); border-left-color: var(--purple); }
+.job-off { background: var(--orange-50); border-left-color: var(--orange); }
+.job-disc { background: var(--red-50); border-left-color: var(--red); }
+.shape .pair { margin-top: 0.35rem; }
+.part { border: 1px solid var(--border); border-left-width: 4px; padding: 0.35rem 0.45rem; }
+.chip { display: inline; padding: 0 0.25rem; border-left: 3px solid transparent; }
+.chip.job-addr { color: var(--text); border-left-color: var(--blue); }
+.ex { margin: 0.85rem 0 0; }
+.ex h3 { margin: 0 0 0.2rem; }
+.ex .meta { font-family: var(--mono); font-size: 11px; color: var(--text-2); margin-bottom: 0.35rem; }
+.ex table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 0.35rem 0 0; }
+.ex th, .ex td { border-bottom: 1px solid var(--border); padding: 0.3rem 0.35rem; text-align: left; vertical-align: top; }
+.ex th { font-size: 10px; font-weight: 500; color: var(--text-3); background: transparent; }
+.ex td { color: var(--text-2); font-size: 12px; }
+.ex code { font-family: var(--mono); font-size: 11px; color: var(--text); }
+.ex td.ln { background: var(--blue-50); box-shadow: inset 3px 0 0 var(--blue); }
+.ex td.role.job-val { background: var(--green-50); box-shadow: inset 3px 0 0 var(--green); }
+.ex td.role.job-sess { background: var(--purple-50); box-shadow: inset 3px 0 0 var(--purple); }
+.ex td.role.job-off { background: var(--orange-50); box-shadow: inset 3px 0 0 var(--orange); }
+.ex td.role.job-disc { background: var(--red-50); box-shadow: inset 3px 0 0 var(--red); }
+.ex td.role.object { background: var(--object-50); box-shadow: inset 3px 0 0 var(--object); }
+.pick .k { display: block; font-size: 13px; color: var(--text); }
+.pick .d { display: block; font-size: 12px; color: var(--text-2); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-size: 11px; font-weight: 500; }
+td { color: var(--text-2); font-size: 13px; }
+.footer-nav { font-size: 13px; color: var(--text-2); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.footer-nav a { margin-right: 1rem; }
+@media (max-width: 640px) {
+  .obis { grid-template-columns: repeat(3, 1fr); }
+  .xchg { grid-template-columns: 1fr; }
+  .xchg .arr { text-align: left; }
+  .nest-pair { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back"><a href="index.html#standards-village">← Standards</a></div>
+
+  <h1>DLMS/COSEM</h1>
+  <p class="sub">IEC 62056 · COSEM object model and DLMS messages on one page · meter and DCU</p>
+
+  <p class="lead">One meter, two jobs. <strong>COSEM</strong> is the shape of the data: which objects exist and what they are called. <strong>DLMS</strong> is the conversation that reads and writes those objects. OBIS codes are the names inside COSEM. A companion profile such as <a href="meter-vmrs.html#idis">IDIS</a> picks which of those objects a certified meter must carry.</p>
+
+  <div class="nest" aria-label="How these colors nest on this page">
+    <div class="nest-sess">
+      <b>session</b>
+      <div class="nest-model">
+        <b>device</b>
+        <div class="nest-obj">
+          <b>object</b>
+          <div class="nest-pair">
+            <div class="nest-addr"><b>address</b></div>
+            <div class="nest-val"><b>value</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="nest-pair">
+        <div class="nest-off"><b>other action</b></div>
+        <div class="nest-disc"><b>disconnect</b></div>
+      </div>
+    </div>
+    <div class="nest-wire"><b>wire</b></div>
+  </div>
+
+  <div class="pair">
+    <div class="card cosem">
+      <h3>COSEM</h3>
+      <p>Companion Specification for Energy Metering. Interface classes and instances. <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Blue Book</a>, IEC 62056-6-2, plus OBIS in IEC 62056-6-1. The model stays put when the wire changes.</p>
+    </div>
+    <div class="card dlms">
+      <h3>DLMS</h3>
+      <p>Device Language Message Specification. Application messages: associate, then GET, SET, or ACTION. <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Green Book</a>, IEC 62056-5-3. The DCU is the client. The meter is the server.</p>
+    </div>
+  </div>
+
+  <h2 id="cosem">Where a COSEM object sits</h2>
+  <p>Indent is depth. Color is the job in the nest above. The physical device and the logical device are not COSEM objects. The physical device holds logical devices. The logical device holds a flat list of objects. Those objects are siblings. An object does not hold the devices above it, and it does not hold another object. A few objects hold a flat list of names, and those names point at siblings.</p>
+
+  <div class="shape lv model" aria-label="Physical device holds logical devices. A logical device holds a flat list of COSEM objects.">
+    <b>Physical device</b>
+    <span>Not a COSEM object. The meter. It holds one or more logical devices. One management logical device is always there.</span>
+    <div class="lv model">
+      <b>Logical device</b>
+      <span>Not a COSEM object. Its service access point is an <span class="chip job-addr">address</span>. It holds the object list.</span>
+      <div class="lv object">
+        <b>Object · Register</b>
+        <span>class 3 · OBIS <span class="chip job-addr">1-0:1.8.0*255</span>. One row in the list.</span>
+        <div class="pair">
+          <div class="part job-addr">
+            <b>Attribute 1 · name</b>
+            <span>The logical name. This is the OBIS code.</span>
+          </div>
+          <div class="part job-val">
+            <b>Attribute 2 · value</b>
+            <span>The reading. Attribute 3 is the scaler and unit.</span>
+          </div>
+        </div>
+      </div>
+      <div class="lv job-disc">
+        <b>Object · Disconnect control</b>
+        <span>class 70 · OBIS <span class="chip job-addr">0-0:96.3.10*255</span>. Same list. Sibling of the register, not inside it. Method 1 opens the breaker.</span>
+      </div>
+    </div>
+    <div class="read" aria-label="Address of one read">
+      <span>class_id</span><code class="ln">3</code>
+      <span>OBIS</span><code class="ln">1-0:1.8.0*255</code>
+      <span>attribute</span><code class="ln">2</code>
+      <span>that read is</span><code class="val">Register value · active import energy · current</code>
+    </div>
+  </div>
+
+  <h3>Three lists of names</h3>
+  <p>Each box is one COSEM object. The table is the attribute that holds the list. Every row is another object that already sits in the logical device. The OBIS cell stays blue. A cell that names an object uses the object color. Green is only the reading, attribute 2. Purple, orange, and red replace that object color when the job is the session, another action, or the disconnect.</p>
+
+  <div class="ex lv job-sess">
+    <h3>Current association</h3>
+    <p class="meta">class 15 · version 3 · <code>0-0:40.0.0*255</code> · attribute 2 object_list</p>
+    <table>
+      <thead><tr><th>class</th><th>OBIS</th><th>object named</th></tr></thead>
+      <tbody>
+        <tr><td>3</td><td class="ln"><code>1-0:1.8.0*255</code></td><td class="role object">Active import energy register</td></tr>
+        <tr><td>8</td><td class="ln"><code>0-0:1.0.0*255</code></td><td class="role object">Clock</td></tr>
+        <tr><td>70</td><td class="ln"><code>0-0:96.3.10*255</code></td><td class="role job-disc">Disconnect control</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ex lv object">
+    <h3>Load profile</h3>
+    <p class="meta">class 7 · <code>1-0:99.1.0*255</code> · attribute 3 capture_objects</p>
+    <table>
+      <thead><tr><th>class</th><th>OBIS</th><th>attribute captured</th></tr></thead>
+      <tbody>
+        <tr><td>8</td><td class="ln"><code>0-0:1.0.0*255</code></td><td class="role job-val">2 · time</td></tr>
+        <tr><td>3</td><td class="ln"><code>1-0:1.8.0*255</code></td><td class="role job-val">2 · active import energy</td></tr>
+        <tr><td>3</td><td class="ln"><code>1-0:32.7.0*255</code></td><td class="role job-val">2 · voltage L1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ex lv job-off">
+    <h3>Disconnect script table</h3>
+    <p class="meta">class 9 · <code>0-0:10.0.106*255</code> · attribute 2 scripts · one action</p>
+    <table>
+      <thead><tr><th>service</th><th>class</th><th>OBIS</th><th>method</th></tr></thead>
+      <tbody>
+        <tr><td>execute</td><td>70</td><td class="ln"><code>0-0:96.3.10*255</code></td><td class="role job-disc">1 · remote_disconnect</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Three meters, three lists</h3>
+  <p>The meter’s list is attribute 2 of the current association. These are shapes, not a vendor ICD. This wiki does not hold those ICDs.</p>
+
+  <div class="ex">
+    <h3>STS keypad meter</h3>
+    <p class="meta">no COSEM server · list length 0</p>
+    <p>The token and the credit live in the keypad scheme (IEC 62055). There is no class 15 object list to read.</p>
+  </div>
+
+  <div class="ex lv model">
+    <h3>Small DLMS prepaid meter</h3>
+    <p class="meta">often tens of rows · illustration of the usual names</p>
+    <table>
+      <thead><tr><th>class</th><th>OBIS</th><th>what it is</th></tr></thead>
+      <tbody>
+        <tr><td>15</td><td class="ln"><code>0-0:40.0.0*255</code></td><td class="role job-sess">Current association, which holds this list</td></tr>
+        <tr><td>1</td><td class="ln"><code>0-0:96.1.1*255</code></td><td class="role object">Serial, when the maker uses this name. <code>96.1.0</code> is the billing-period counter, not the serial</td></tr>
+        <tr><td>8</td><td class="ln"><code>0-0:1.0.0*255</code></td><td class="role object">Clock</td></tr>
+        <tr><td>3</td><td class="ln"><code>1-0:1.8.0*255</code></td><td class="role object">Active import energy</td></tr>
+        <tr><td>3</td><td class="ln"><code>1-0:32.7.0*255</code></td><td class="role object">Voltage L1</td></tr>
+        <tr><td>1 or 3</td><td class="ln">maker-specific</td><td class="role object">Remaining credit</td></tr>
+        <tr><td>1</td><td class="ln">maker-specific</td><td class="role object">Tamper bitmap</td></tr>
+        <tr><td>70</td><td class="ln"><code>0-0:96.3.10*255</code></td><td class="role job-disc">Disconnect control</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ex lv model">
+    <h3>Companion-profile electricity meter</h3>
+    <p class="meta">IDIS or a DLMS UA Generic Companion Profile · often one to a few hundred rows</p>
+    <table>
+      <thead><tr><th>group the certificate fills</th><th>one name inside it</th></tr></thead>
+      <tbody>
+        <tr><td class="role object">Billing registers, per tariff</td><td class="ln"><code>1-0:1.8.0*255</code> and <code>1-0:1.8.1*255</code> …</td></tr>
+        <tr><td class="role object">Instantaneous voltage and current</td><td class="ln"><code>1-0:32.7.0*255</code></td></tr>
+        <tr><td class="role object">Load profile and event logs</td><td class="ln"><code>1-0:99.1.0*255</code></td></tr>
+        <tr><td class="role job-disc">Disconnect</td><td class="ln"><code>0-0:96.3.10*255</code></td></tr>
+        <tr><td class="role job-off">Push and firmware image transfer, when that package includes them</td><td class="ln">named by the certificate, not by this page</td></tr>
+      </tbody>
+    </table>
+    <p>A field note on a Landis+Gyr E650 (short-name referencing) read tariff register <code>1.1.1.8.1.255</code> and voltage <code>32.7.0</code> only after the association view was read. The short name is an address in that firmware. It is not computed from the OBIS code, and it can change when the firmware changes. Gurux forum, “how to read objects using LN and the object list on a SN meter?”</p>
+  </div>
+
+  <h3 id="obis">OBIS — six groups in the name</h3>
+  <figure class="schema">
+    <figcaption>Full code for the import-energy register the <a href="meter-vmrs.html">register checklist</a> writes as <code>1.8.0</code>. Groups A–F. Reduced form drops channel 0 and historical 255.</figcaption>
+    <div class="obis">
+      <div class="cell name"><b>1</b><span>A · medium<br>electricity</span></div>
+      <div class="cell name"><b>0</b><span>B · channel<br>none</span></div>
+      <div class="cell name"><b>1</b><span>C · quantity<br>active import</span></div>
+      <div class="cell name"><b>8</b><span>D · processing<br>time integral</span></div>
+      <div class="cell name"><b>0</b><span>E · tariff<br>total</span></div>
+      <div class="cell name"><b>255</b><span>F · history<br>current value</span></div>
+    </div>
+    <p>Printed form: <code>1-0:1.8.0*255</code>. Checklist short form: <code>1.8.0</code>.</p>
+  </figure>
+
+  <h3>Interface classes a village read actually touches</h3>
+  <div class="ic">
+    <div class="object"><strong>1 · Data</strong>A named value with no scaler. Used for identifiers and flags when a Register is the wrong class.</div>
+    <div class="object"><strong>3 · Register</strong>Value, scaler, unit. Import kWh, voltage, instantaneous power.</div>
+    <div class="object"><strong>7 · Profile generic</strong>A buffer of captured objects. Load profiles live here. The village checklist leaves the full buffer out of the northbound payload.</div>
+    <div class="object"><strong>8 · Clock</strong>Meter time. Readings without a clock are hard to audit.</div>
+    <div class="assoc"><strong>15 · Association LN</strong>The open session: who the client is, and which objects that client may see.</div>
+    <div class="disc"><strong>70 · Disconnect control</strong>Output state, plus methods to open and close the customer connection.</div>
+  </div>
+  <p>Class numbers are the public COSEM interface-class identifiers (IEC 62056-6-2). A manufacturer still chooses which instances to expose. That list is the vendor ICD, or an IDIS / Generic Companion Profile certificate when the meter has one. See <a href="meter-vmrs.html#focus">where register work goes</a>.</p>
+
+  <h2 id="dlms">DLMS — the messages</h2>
+  <figure class="schema">
+    <figcaption>DCU is the client. Meter is the server. Association first, then a read or an action. Same object address as the COSEM tree above.</figcaption>
+    <div class="xchg">
+      <div class="who client">DCU · client</div>
+      <div class="arr" aria-hidden="true"></div>
+      <div class="who server">Meter · server</div>
+
+      <div class="msg sess">AARQ — open an association</div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="msg sess">AARE — accept, with the context</div>
+
+      <div class="msg req">GET class 3, <code>1-0:1.8.0*255</code>, attribute 2</div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="msg res">GET response — value. Scaler and unit are attribute 3.</div>
+
+      <div class="msg disc">ACTION on class 70 — open or close</div>
+      <div class="arr" aria-hidden="true">→</div>
+      <div class="msg">ACTION response — result</div>
+    </div>
+  </figure>
+  <p>SET writes an attribute. GET and SET also have with-list forms so one exchange carries several registers. A block transfer carries a long profile buffer. Event notification and data notification let the meter push without a fresh GET.</p>
+
+  <h2 id="idis">IDIS — how it shows up in the schema</h2>
+  <figure class="schema">
+    <figcaption>Same object either way. IDIS is a mark on the instance, not a new class, not a seventh OBIS group, and not a field inside the value.</figcaption>
+    <div class="tree">
+      <div class="node">
+        <span class="k">Logical device</span>
+        <span class="d">After association, class 15 attribute 2 is the object list: every instance this meter exposes.</span>
+        <div class="pick on">
+          <span class="k">Register · class 3 · <code>1-0:1.8.0*255</code></span>
+          <span class="d">Required by the companion profile. Two certified meters expose this same instance.</span>
+        </div>
+        <div class="pick on">
+          <span class="k">Clock</span>
+          <span class="d">Same pattern. The profile names the use case. The schema is still class + OBIS + attribute.</span>
+        </div>
+        <div class="pick">
+          <span class="k">Manufacturer instance</span>
+          <span class="d">May sit in the same object list. The certificate does not cover it. Read it from that model’s ICD.</span>
+        </div>
+      </div>
+      <div class="read" aria-label="What a GET returns">
+        <span>GET address</span><code class="ln">class 3 · 1-0:1.8.0*255 · attr 2</code>
+        <span>response</span><code class="val">the energy value</code>
+        <span>IDIS in that response</span><code>nowhere — the mark is which instance had to be there</code>
+      </div>
+    </div>
+  </figure>
+  <p>Event tables in an IDIS package are values inside an existing event or alarm object, not a new OBIS group. Package history stays on the <a href="meter-vmrs.html#idis">register checklist</a>.</p>
+
+  <h2>Documents</h2>
+  <table>
+    <thead><tr><th>Piece</th><th>Where it is written</th><th>What you use it for</th></tr></thead>
+    <tbody>
+      <tr><td>OBIS names</td><td>IEC 62056-6-1 · <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Blue Book</a></td><td>Which code is import energy, voltage, clock</td></tr>
+      <tr><td>Interface classes</td><td>IEC 62056-6-2 · <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Blue Book</a></td><td>Attributes and methods of Register, Clock, Profile, Disconnect</td></tr>
+      <tr><td>Application messages</td><td>IEC 62056-5-3 · <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Green Book</a></td><td>Associate, GET, SET, ACTION</td></tr>
+      <tr><td>Which objects this meter has</td><td>Vendor ICD, or an IDIS / DLMS UA companion certificate</td><td>The gap between “DLMS” and a second manufacturer’s meter</td></tr>
+      <tr><td>Conformance tests</td><td><a href="https://www.dlms.com/qualification/" target="_blank" rel="noopener">Yellow Book</a></td><td>Lab proof, separate from a brochure claim</td></tr>
+    </tbody>
+  </table>
+  <p>Full Blue and Green Books are on the <a href="https://www.dlms.com/specifications-shop/" target="_blank" rel="noopener">DLMS UA shop</a> and in the member portal. Free excerpts are on the <a href="https://www.dlms.com/knowledge-hub/" target="_blank" rel="noopener">knowledge hub</a>. The Yellow Book is the qualification process, for members.</p>
+
+  <div class="callout callout-key">
+    <strong>Where this sits on a village feeder</strong>
+    <p>Score DLMS/COSEM on the meter and the DCU. The DCU is client toward the meter and server toward the head-end. Northbound of the gateway, the <a href="meter-vmrs.html">register checklist</a> is a short JSON list of OBIS keys, not a second COSEM model. Site-to-cloud sync is a different hop.</p>
+  </div>
+
+  <div class="callout callout-warn" id="sts">
+    <strong>STS is a different standard</strong>
+    <p>Prepaid tokens are IEC 62055 (STS). A COSEM object can hold remaining credit and a disconnect method. The token cipher and the vending receipt are not DLMS messages. A keypad meter can vend with the uplink down. A DLMS read cannot.</p>
+  </div>
+
+  <p>A certified read is still a COSEM address inside a DLMS GET. The package catalog stays on the register checklist.</p>
+
+  <p class="footer-nav">
+    <a href="#cosem">COSEM object</a>
+    <a href="meter-vmrs.html">Register checklist</a>
+    <a href="meter-vmrs.html#idis">IDIS</a>
+    <a href="index.html#standards-village">Village standards</a>
+    <a href="https://www.dlms.com/" target="_blank" rel="noopener">DLMS User Association ↗</a>
+  </p>
+</div>
+</body>
+</html>

@@ -436,6 +436,37 @@
       ]
     },
     {
+      "id": "steamaco-nimbus-jackalope",
+      "reportCode": "ISV-TRD-002",
+      "navTitle": "SteamaCo / Nimbus",
+      "title": "SteamaCo, Jackalope, and Nimbus",
+      "publisher": "ISV Technology Committee",
+      "published": "Oct 2026",
+      "type": "technical-reference",
+      "category": "Technical Reference",
+      "tags": [
+        "SteamaCo",
+        "Jackalope",
+        "Nimbus",
+        "Savi",
+        "HES",
+        "STS"
+      ],
+      "url": "meter-steamaco-nimbus.html",
+      "embedSrc": "meter-steamaco-nimbus.html?embed=1&v=20261001tr",
+      "githubUrl": "https://github.com/overview-solutions/isv-ai-wiki/blob/main/meter-steamaco-nimbus.html",
+      "sourceCatalog": "isv-wiki",
+      "syncProtected": true,
+      "sourceKind": "isv-wiki",
+      "authorship": "human-primary",
+      "reviewStatus": "draft",
+      "summary": "Jackalope Limited (17120801, incorporated 27 Mar 2026) operates steama.co and trades as SteamaCo. Nimbus AMI is the cloud HES/MDMS that site describes. STEAMA COMPANY LIMITED (08081185, formerly Access Global Limited) is in administration. This pass did not read an asset-transfer deed between the two numbers.",
+      "isvRelevance": "Phase 1 installed-base path for SteamaCo fleets. Nimbus stays a closed head-end in the vendor study. Pairs with the TC 2.0 report on the SparkMeter side of Open Metering Infrastructure.",
+      "relatedMeetingNotes": [
+        "tech-comm-2026-08-11"
+      ]
+    },
+    {
       "id": "isv-hck-2025-circles-of-power",
       "reportCode": "ISV-HCK-001",
       "title": "Circles of Power: Village Metering Economics & Open DER Stack",

@@ -16,6 +16,7 @@
 - [VMRS registers](https://isv.wiki/meter-benchmark/vmrs-registers.json): Draft Village Minimum Register Set (OBIS shortlist)
 - [Northbound MQTT v0.1](https://isv.wiki/meter-benchmark/northbound-mqtt-v0.1.json): OpenAMI village meter northbound JSON/MQTT profile
 - [Technical reports catalog](https://isv.wiki/technical-notes/catalog.json): Report index with provenance (Dev Labs, ISV wiki, external)
+- [ISV-TRD-002 SteamaCo / Nimbus](https://isv.wiki/meter-steamaco-nimbus.html): Jackalope Limited trades as SteamaCo · Nimbus AMI · STEAMA COMPANY LIMITED in administration · no transfer deed read
 - [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop results (Nairobi · 4 sessions ran · BUILD sim)
 - [OMS Workshop Nairobi](https://isv.wiki/oms-workshop-nairobi-2026.html): Open Metering Strategy · 30 Sep–2 Oct 2026 · A2EI · EnAccess
 - [OMS Workshop Day 1](https://isv.wiki/oms-workshop-nairobi-2026-day1.html): 30 Sep 2026 Nairobi · stack, lock-in, scope
@@ -24,6 +25,7 @@
 - [MeshEMS v2.0](https://isv.wiki/index.html#village-metering/meshems): MeshEMS v2.0 pole controller, BOM, schematic
 - [Village Simulator hub](https://isv.wiki/index.html#village-metering/village-simulator): How to open/run the sim without AI. Nested iframe + new-tab live app.
 - [Live Village Simulator](https://overview-solutions.github.io/smart-village-simulator/): Current Vite app on GitHub Pages. Source: overview-solutions/smart-village-simulator. v1 freeze: `village-simulator/index.html` (link only)
+- [DLMS/COSEM](https://isv.wiki/standard-dlms-cosem.html): IEC 62056 messages, the job-color nest, and the COSEM object. Indent is depth. Color is that nest.
 - [Standards guide](https://isv.wiki/index.html#standards): Standards catalog (village-relevant vs larger grid)
 - [Wireless telecom](https://isv.wiki/wireless-telecom.html): Leaf / NAN / WAN radio map — LoRaWAN, TVWS, Z-Wave, Matter, Bluetooth, Wi‑Fi, LTE, cellular, Starlink, GPS, AM, FM
 - [Wiki home](https://isv.wiki/): Human UI shell — prefer direct file URLs above for agents

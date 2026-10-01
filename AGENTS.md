@@ -179,7 +179,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#village-metering/village-scope` | Village definition · population · HDI · modernization fork (cited) |
 | `#village-metering/problems` | Field problems (Problem · Why it hurts) |
 | `#village-metering/solutions-map` | Visual problem ↔ stack diagram (SteamaCo · SparkMeter · EnAccess · OpenAMI) · `meter-benchmark/problem-solution-map.json` |
-| `#village-metering/vmrs` | Register checklist (OBIS · VMRS) · IDIS companion-profile note |
+| `#village-metering/vmrs` | Register checklist (OBIS · VMRS) · IDIS shifts focus to the certificate vs the uncertified ICD gap |
 | `#village-metering/vendor-study` | Vendor pipeline + technical tables |
 | `#village-metering/openami` | OpenAMI stack · leakage visibility |
 | `#village-metering/meshems` | MeshEMS board |
@@ -191,6 +191,7 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#events/power-africa-2026-workshop-planning` | OpenAMI EMS Workshop **results** (filename kept). All 4 sessions ran (3 Mon + 1 Thu). BUILD sim · Open Utility Network convention · PCB interest sheet / handwritten handout TBD. |
 | `#events/oms-workshop-nairobi-2026` | OMS Workshop Nairobi · 30 Sep–2 Oct 2026 · A2EI · EnAccess · draft agenda + online pre-session votes. Attendance not published. |
 | `#notes/oms-workshop-nairobi-2026-day1` | Day 1 note · 30 Sep 2026 · stack, lock-in, three scope cuts. Roster stays in `isv-ai-wiki-private`. |
+| `#tech-reports/steamaco-nimbus-jackalope` | ISV-TRD-002 · `meter-steamaco-nimbus.html` · Jackalope Limited trades as SteamaCo · Nimbus AMI · STEAMA COMPANY LIMITED in administration. No asset-transfer deed in that pass. |
 | `#events/oms-training-skills` | Training-task catalog — village energy + OMS / metering skillsets across the lifecycle. Not a course. Demand from OMS pre-session + OpenAMI EMS workshop training ask. Modules TBD. |
 | `#tech-reports` | Technical reports list |
 | `#tech-reports/{pub-id}` | Single report detail (from `catalog.json`) |
@@ -234,7 +235,7 @@ Read sources in this order when answering technical questions:
 1. **Cited benchmark tables** — [`meter-vendor-study.html`](meter-vendor-study.html) (numbered `[s1]`… bibliography).
 2. **Tech Comm meeting notes** — problem framing, topology, action items (e.g. [`tech-comm-2026-05-28-metering-topology.html`](tech-comm-2026-05-28-metering-topology.html)).
 3. **Technical reports** — list built live from openami-smart-village `reports/index.html`; enrichments in `catalog.json` (`isvRelevance`, `relatedMeetingNotes`, **provenance**: `sourceKind`, `authorship`, `reviewStatus`). Full docs on [Cottonspace](https://sattal.cottonspace.com/reports) or external PDFs. Defaults: Dev Labs → AI-assisted draft; ISV wiki → human reviewed; external → index-only.
-4. **Standards section** in `index.html` — split **village relevant** (`#standards-village`: 2030.10, 2030.7, DLMS, OBIS, RS-485, SunSpec, OpenAMI GeoJSON) vs **larger grid integration** (`#standards-grid`: 1547, 2030.5, OpenADR, 2800, P4200, TLS, grid cybersecurity, Esri UN). Do not score DLMS at the transmission-IBR row.
+4. **Standards section** in `index.html` — split **village relevant** (`#standards-village`: 2030.10, 2030.7, DLMS/COSEM deep-dive `standard-dlms-cosem.html`, OBIS, RS-485, SunSpec, OpenAMI GeoJSON) vs **larger grid integration** (`#standards-grid`: 1547, 2030.5, OpenADR, 2800, P4200, TLS, grid cybersecurity, Esri UN). Do not score DLMS at the transmission-IBR row. Job colors (device, object, address, session, value, wire, other action, disconnect) stay on `standard-dlms-cosem.html` and `meter-vmrs.html`. Mulberry is the physical and logical device. Stone is the COSEM object. Cool gray is the wire. Green is the value inside that object. The COSEM object is on the DLMS page: indent is depth, color is that same nest. `standard-cosem-shape.html` redirects there.
 5. **ISV-internal** — DokuWiki PDFs, prior outreach contacts. Tag as **ISV**, not independent verification.
 6. **Legacy DokuWiki** — `http://34.125.138.210/...` (migration source; may be stale).
 

@@ -84,7 +84,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </figure>
 
   <h2>Stack the room described</h2>
-  <p>Mini-grid platforms bundle these into one product. That sells. It also locks the operator in.</p>
+  <p>Mini-grid platforms bundle these into one product. That sells. It also locks the operator in. <a href="meter-overview.html">Village Metering</a> draws the same split: <a href="meter-solutions-map.html?track=steamaco">SteamaCo</a>, <a href="meter-solutions-map.html?track=sparkmeter">SparkMeter</a>, EnAccess, and an OpenAMI path.</p>
   <div class="stack">
     <div class="band">
       <h3>OMS, CRM, revenue, outage</h3>
@@ -96,7 +96,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
     <div class="band">
       <h3>Headend</h3>
-      <p>Command center. Wallets, credit countdown, time-of-use, customer list. SparkMeter runs this on site: offline, then sync when the link returns. SteamaCo runs it in the cloud: the meter waits for a remote command, and an outage blocks that.</p>
+      <p>Command center. Wallets, credit countdown, time-of-use, customer list. <a href="meter-tc20-review.html?host=full">SparkMeter</a> runs this on site: offline, then sync when the link returns. <a href="meter-vendor-study.html">SteamaCo</a> runs it in the cloud: the meter waits for a remote command, and an outage blocks that.</p>
     </div>
     <div class="seam">
       <strong>Gateway to cloud</strong>
@@ -104,7 +104,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
     <div class="band">
       <h3>Gateway</h3>
-      <p>Collects meters, because a meter often cannot reach the cloud from a rural site. Local, cloud, or hybrid.</p>
+      <p>Collects meters, because a meter often cannot reach the cloud from a rural site. Local, cloud, or hybrid. Stack notes: <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">Open Metering Infrastructure · SparkMeter</a>.</p>
     </div>
     <div class="seam plain">
       <strong>SparkNet HTTP — two descriptions</strong>
@@ -112,7 +112,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     </div>
     <div class="band">
       <h3>Meter</h3>
-      <p>Registers electricity flow. Can open or close the customer connection.</p>
+      <p>Registers electricity flow. Can open or close the customer connection. Names and the disconnect object: <a href="meter-vmrs.html">register checklist</a> · <a href="standard-dlms-cosem.html">DLMS/COSEM</a>.</p>
     </div>
   </div>
 
@@ -143,7 +143,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <li>Do not want the SaaS fee: run the meters on other software.</li>
     <li>Want a new brand: universal headend or multi-driver.</li>
   </ul>
-  <p>Phone analogy used in the room: a vendor can keep proprietary hardware if the interface above it is open. Hidden registers make the meter a brick when the vendor stops.</p>
+  <p>Phone analogy used in the room: a vendor can keep proprietary hardware if the interface above it is open. Hidden registers make the meter a brick when the vendor stops. That gap is what the <a href="meter-vmrs.html">register checklist</a> is for.</p>
 
   <h2>Three places scope can be cut</h2>
   <table>
@@ -156,12 +156,12 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       </tr>
       <tr>
         <td>The headend</td>
-        <td>One headend that can speak SparkMeter, Calin, and others.</td>
-        <td>Called boiling the ocean. DLMS named as the possible lever.</td>
+        <td>One headend that can speak SparkMeter, Calin, and others. Both are in the <a href="meter-vendor-study.html">vendor study</a>.</td>
+        <td>Called boiling the ocean. <a href="standard-dlms-cosem.html">DLMS</a> named as the possible lever.</td>
       </tr>
       <tr>
         <td>Below the headend</td>
-        <td>Free meter-to-gateway comms: registers, a SparkNet equivalent, LoRaWAN.</td>
+        <td>Free meter-to-gateway comms: <a href="meter-vmrs.html">registers</a>, a SparkNet equivalent (<a href="meter-tc20-review.html?host=full">TC 2.0</a>), <a href="wireless-telecom.html">LoRaWAN</a>.</td>
         <td>High complexity. Needs operator skill or a strong open effort.</td>
       </tr>
     </tbody>
@@ -170,9 +170,9 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="callout callout-amber">
     <strong>Two framings still on the table</strong>
-    <p>One: write the standard for new meters. Priority hop is gateway to cloud. Start with DLMS, upgraded for this ecosystem.</p>
-    <p>The other: open connectors for SparkMeter and SteamaCo fleets already in the ground. DLMS as leverage for a universal headend, and as manufacturer register codes.</p>
-    <p>On this wiki, DLMS/COSEM sits at the meter and the DCU. The DCU is client to the meter and server toward the head-end.</p>
+    <p>One: write the standard for new meters. Priority hop is gateway to cloud. Start with <a href="standard-dlms-cosem.html">DLMS</a>, upgraded for this ecosystem.</p>
+    <p>The other: open connectors for SparkMeter and SteamaCo fleets already in the ground. DLMS as leverage for a universal headend, and as manufacturer <a href="meter-vmrs.html">register codes</a>.</p>
+    <p>On this wiki, <a href="standard-dlms-cosem.html">DLMS/COSEM</a> sits at the meter and the DCU. The DCU is client to the meter and server toward the head-end. North of the gateway the payload is the <a href="meter-vmrs.html">register checklist</a>, not a second object model.</p>
   </div>
 
   <div class="cols">
@@ -181,30 +181,38 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
       <ol>
         <li>Vending transactions, number and size. Bankability.</li>
         <li>Daily totals by customer group. Planning.</li>
-        <li>Profiles every 5–15 minutes. Grid control.</li>
+        <li>Profiles every 5–15 minutes. Grid control. The <a href="meter-vmrs.html">checklist</a> leaves the full profile buffer out of the northbound payload.</li>
       </ol>
       <p>Raw data can stop at the feeder. Alarms still need a near-real-time signal. Reversed CTs and negative SparkMeter totals already made datasets unusable.</p>
     </div>
     <div>
       <h3 style="font-size:15px;font-weight:500;margin:0 0 0.4rem">Operator path</h3>
       <ol>
-        <li>Vending. STS, collect revenue.</li>
+        <li>Vending. <a href="tech-comm-2026-05-28-metering-topology.html">STS</a>, collect revenue.</li>
         <li>Monitoring. Usage and events.</li>
         <li>Control. Run the grid.</li>
       </ol>
-      <p>STS is a vending standard, not a comms standard. It does not give remote monitoring or control.</p>
+      <p><a href="standard-dlms-cosem.html#sts">STS</a> is a vending standard, not a comms standard. It does not give remote monitoring or control. The 28 May note is the token path, including SMS delivery.</p>
     </div>
   </div>
 
   <h2>Where tomorrow starts</h2>
-  <p>Near-term baseline: open connectors for existing SparkMeter and SteamaCo fleets. Keep the work already done. Other meters in urgent need can be added. One open management system, a pluggable driver per meter type, gateways that can hold more than one driver, connectors for known OEMs, room for third parties to add more. Runs on site and in the cloud. IEEE formal standard is a later milestone. KPLC, at about 8 million meters, can impose interoperability on manufacturers. A mini-grid operator does that only together with others.</p>
-  <p>Thursday 1 October, 9:00. Scope is what the open core will expose. Share the Thundercloud 2.0 laptop test in that project’s Discord. Another team read frequency, voltage, and consumption from 5 meters through an off-the-shelf gateway and a normal cloud path (Azure and MQTT were the example). Readable registers mean the data can move.</p>
+  <p>Near-term baseline: open connectors for existing SparkMeter and SteamaCo fleets. Keep the work already done. Other meters in urgent need can be added. One open management system, a pluggable driver per meter type, gateways that can hold more than one driver, connectors for known OEMs, room for third parties to add more. Runs on site and in the cloud. An <a href="index.html#standards-village">IEEE village standard</a> is a later milestone. KPLC, at about 8 million meters, can impose interoperability on manufacturers. A mini-grid operator does that only together with others.</p>
+  <p>Thursday 1 October, 9:00. Scope is what the open core will expose. Morning of that day: <a href="oms-workshop-nairobi-2026.html">Day 2 note</a>. Share the <a href="meter-tc20-review.html">ThunderCloud 2.0</a> laptop test in that project’s Discord. Another team read frequency, voltage, and consumption from 5 meters through an off-the-shelf gateway and a normal cloud path (Azure and MQTT were the example). Readable registers mean the data can move. <a href="meter-roadmap.html">Roadmap</a> Phase 1 is that installed base.</p>
 
   <h2>Rest of the day, short</h2>
-  <p>Duopoly named as SteamaCo and Smart Meter hardware. Lock-in came from survival businesses, not a plot. Goals: no lock-in, interoperability, affordability. Open core, not full open source. OMS is the metering minimum. Companies sell what sits on top. Some unlocking work is already underway.</p>
+  <p>Duopoly named as SteamaCo and Smart Meter hardware. Lock-in came from survival businesses, not a plot. Goals: no lock-in, interoperability, affordability. Open core, not full open source. OMS is the metering minimum. Companies sell what sits on top. Some unlocking work is already underway. <a href="meter-roadmap.html">Roadmap</a> Phase 2 is the open mini-grid core. <a href="openami.html">OpenAMI</a> is the telemetry hub on this wiki.</p>
   <p>M300 figure used: about 23 million connections. Needs private capital. ARPU bands named were $4, $11, $15. Naira example: about 5× in 3 years. Consumption data tied to local-currency finance, RECs, and carbon. Many smart meters are there because a funder or a government required them. One Uganda case swapped SparkMeter for STS at about $50 after the vendor crisis. Farm and anchor meters stayed smart. Household STS plus a bulk meter for about 6 customers was the hybrid for alarms. Open question: when is a smart meter actually required?</p>
-  <p>Survey: 13 answers, about 20 people. Sticky notes, up to 3 points, weak without cost and impact. Migration means new software, same meters (Thundercloud to SteamaCo or Lightning were the examples). Thundercloud 2.0 and Groundbolt are open. SteamaCo’s migration path is still being built. DLMS register codes come from the manufacturer on request, and they are not always right.</p>
-  <p>Mapping: <a href="https://www.nrecainternational.coop/liberianea/">Liberia National Electrification Analysis</a>. Country-scale electrification map.</p>
+  <p>Survey: 13 answers, about 20 people. Sticky notes, up to 3 points, weak without cost and impact. Migration means new software, same meters (Thundercloud to SteamaCo or Lightning were the examples). <a href="meter-tc20-review.html">ThunderCloud 2.0 and GroundBolt</a> are open. SteamaCo’s migration path is still being built. <a href="meter-vmrs.html">DLMS register codes</a> come from the manufacturer on request, and they are not always right.</p>
+  <p>Mapping: <a href="meter-village-geojson-un.html">Village GeoJSON</a> cites the <a href="https://www.nrecainternational.coop/liberianea/">Liberia National Electrification Analysis</a>. Country-scale electrification map. A village pack is a different scale.</p>
+
+  <h2>On this wiki</h2>
+  <ul>
+    <li><a href="meter-overview.html">Village Metering</a> · <a href="meter-solutions-map.html">solutions map</a> · <a href="meter-vendor-study.html">vendor study</a></li>
+    <li><a href="meter-tc20-review.html">TC 2.0 review</a> · <a href="meter-roadmap.html">roadmap</a> · <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">11 Aug SparkMeter / Nimbus</a></li>
+    <li><a href="standard-dlms-cosem.html">DLMS/COSEM</a> · <a href="meter-vmrs.html">register checklist</a> · <a href="tech-comm-2026-05-28-metering-topology.html">28 May STS topology</a> · <a href="wireless-telecom.html">wireless telecom</a></li>
+    <li><a href="openami.html">OpenAMI</a> · <a href="index.html#standards-village">village standards</a> · <a href="meter-village-geojson-un.html">Village GeoJSON</a> · <a href="oms-workshop-nairobi-2026.html">Day 2</a></li>
+  </ul>
 </div>
 </body>
 </html>

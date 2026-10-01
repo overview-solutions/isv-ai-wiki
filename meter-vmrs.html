@@ -10,9 +10,29 @@
 <script src="js/isv-theme.js"></script>
 <script src="js/meter-embed.js"></script>
 <style>
+:root, html[data-theme="light"] {
+  --device: #6E3A62;
+  --device-50: #F6F0F4;
+  --object: #6F6459;
+  --object-50: #F3EFE9;
+  --wire: #4A5560;
+  --wire-50: #EEF0F2;
+  --orange: #D4650A;
+  --orange-50: #FFF1E6;
+}
+html[data-theme="dark"] {
+  --device: #E0A8C8;
+  --device-50: #261820;
+  --object: #C8BBA8;
+  --object-50: #241f1a;
+  --wire: #A8B0BA;
+  --wire-50: #1a1d22;
+  --orange: #f08a3c;
+  --orange-50: #2a1608;
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.55; }
-a { color: var(--green); }
+a { color: var(--text); }
 .wrap { max-width: 960px; margin: 0 auto; padding: 1.5rem 1.25rem 2rem; }
 .back { font-size: 12px; color: var(--text-2); margin-bottom: 0.75rem; }
 .back a { text-decoration: none; }
@@ -21,32 +41,63 @@ h1 { font-size: 22px; font-weight: 500; margin-bottom: 0.25rem; }
 h2 { font-size: 14px; font-weight: 500; margin: 1rem 0 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
 .lead { font-size: 14px; margin-bottom: 0.75rem; line-height: 1.5; max-width: 48rem; }
 .body-text { font-size: 13px; color: var(--text-2); margin-bottom: 0.65rem; line-height: 1.5; max-width: 48rem; }
-.callout { border-left: 3px solid var(--teal); background: var(--teal-50); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.75rem; font-size: 12px; line-height: 1.45; }
-.callout > strong:first-child { color: var(--teal); }
-.callout-warn { border-left-color: var(--amber); background: var(--amber-50); }
-.callout-warn > strong:first-child { color: var(--amber); }
+.callout { border-left: 3px solid var(--text-3); background: var(--bg-2); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; margin-bottom: 0.75rem; font-size: 12px; line-height: 1.45; }
+.callout > strong:first-child { color: var(--text); }
+.callout-warn { border-left-color: var(--text-3); background: var(--bg-2); }
+.callout-warn > strong:first-child { color: var(--text); }
+.tag-draft { background: var(--bg-2); color: var(--text-2); border: 1px solid var(--border); }
 .tier-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; margin-bottom: 0.75rem; font-size: 11px; }
 .tier-cell { border: 1px solid var(--border); border-radius: 8px; padding: 0.55rem 0.65rem; background: var(--bg-2); line-height: 1.4; }
 .tier-cell strong { display: block; font-size: 10px; margin-bottom: 0.2rem; }
-.cert-a { color: var(--green); }
-.cert-b { color: var(--amber); }
-.cert-c { color: var(--text-3); font-style: italic; }
+.cert-a { color: var(--blue); }
+.cert-b { color: var(--orange); }
+.cert-c { color: var(--orange); font-style: italic; }
+.cert-d { color: var(--red); }
+.nest { max-width: 22rem; margin: 0 0 0.75rem; font-size: 12px; color: var(--text); }
+.nest b { display: block; font-size: 11px; font-weight: 500; }
+.nest-sess, .nest-model, .nest-obj, .nest-addr, .nest-val, .nest-off, .nest-disc, .nest-wire { border: 1px solid var(--border); border-left-width: 4px; padding: 0.35rem 0.45rem; }
+.nest-sess { background: var(--purple-50); border-left-color: var(--purple); margin-bottom: 0.3rem; }
+.nest-model { background: var(--device-50); border-left-color: var(--device); margin: 0.35rem 0; }
+.nest-obj { background: var(--object-50); border-left-color: var(--object); margin: 0.35rem 0; }
+.nest-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; }
+.nest-addr { background: var(--blue-50); border-left-color: var(--blue); }
+.nest-val { background: var(--green-50); border-left-color: var(--green); }
+.nest-off { background: var(--orange-50); border-left-color: var(--orange); }
+.nest-disc { background: var(--red-50); border-left-color: var(--red); }
+.nest-wire { background: var(--wire-50); border-left-color: var(--wire); }
+.tier-cell.addr { border-left: 4px solid var(--blue); background: var(--blue-50); }
+.tier-cell.val { border-left: 4px solid var(--green); background: var(--green-50); }
+.tier-cell.out { border-left: 4px solid var(--orange); background: var(--orange-50); }
+.tier-cell.wire { border-left: 4px solid var(--wire); background: var(--wire-50); }
+td.obis { background: var(--blue-50); box-shadow: inset 3px 0 0 var(--blue); }
+tr.val td.nm { background: var(--green-50); box-shadow: inset 3px 0 0 var(--green); }
+tr.out td.nm { background: var(--orange-50); box-shadow: inset 3px 0 0 var(--orange); }
+tr.disc td.nm { background: var(--red-50); box-shadow: inset 3px 0 0 var(--red); }
+.callout-addr { border-left-color: var(--blue); background: var(--blue-50); }
+.callout-addr > strong:first-child { color: var(--blue); }
+details.sip { border-left: 3px solid var(--purple); background: var(--purple-50); padding: 0.45rem 0.7rem; margin: 0.5rem 0; }
 table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 560px; }
 th, td { border-bottom: 1px solid var(--border); padding: 0.4rem 0.5rem; text-align: left; vertical-align: top; }
 th { background: var(--bg-2); font-size: 10px; }
 tr:last-child td { border-bottom: 0; }
 td code { font-family: var(--mono); font-size: 10px; }
 pre { background: var(--bg-2); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem; overflow-x: auto; font-family: var(--mono); font-size: 10px; line-height: 1.45; margin: 0.5rem 0; }
+pre .a { color: var(--blue); }
+pre .v { color: var(--green); }
+pre .s { color: var(--purple); }
 .acronym-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.35rem; font-size: 11px; margin-top: 0.5rem; }
 .acronym-grid div { padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
-.acronym-grid dt { font-weight: 600; font-family: var(--mono); font-size: 10px; color: var(--teal); display: inline; }
+.acronym-grid dt { font-weight: 600; font-family: var(--mono); font-size: 10px; color: var(--text); display: inline; }
+details summary { color: var(--text); }
+html.embed details summary { color: var(--text); }
+html.embed details.sip summary { color: var(--purple); }
 .acronym-grid dt::after { content: " — "; font-family: var(--font); font-weight: 400; color: var(--text-3); }
 .acronym-grid dd { display: inline; margin: 0; color: var(--text-2); }
 .src { font-size: 10px; color: var(--text-3); white-space: nowrap; }
 .src a { color: var(--text-2); text-decoration: none; }
-.src a:hover { text-decoration: underline; color: var(--green); }
+.src a:hover { text-decoration: underline; color: var(--text); }
 html.embed .back { display: none; }
-@media (max-width: 720px) { .tier-row { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .tier-row, .nest-pair { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -66,31 +117,60 @@ html.embed .back { display: none; }
   <p class="lead">Operators need a short list of meter values — kWh used, credit left, tamper flags, disconnect state — not a thousand utility registers. This page names that short list. New to Village Metering? Read <a href="index.html#village-metering/overview">Overview</a> first.</p>
   <p class="lead"><strong>OBIS</strong> (Object Identification System) is how the metering industry names registers — e.g. <code>1.8.0</code> always means cumulative active import energy (kWh). DLMS meters implement OBIS codes internally; vendors disagree on <em>which</em> codes they expose and how, not on what the codes mean.</p>
   <p class="lead"><strong>VMRS</strong> — the <strong>Village Minimum Register Set</strong> — is ISV’s draft shortlist of the OBIS keys a village feeder actually needs: import kWh, remaining credit, tamper, disconnect state, clock, and a handful of metrology reads. It is the register appendix for northbound JSON/MQTT at the gateway — roughly ten keys instead of a utility-scale COSEM ICD or MDMS profile. Operators cite VMRS in procurement; integrators map vendor ICDs to the same checklist; gateways publish a VMRS-shaped payload so one HES or MPM integration survives meter OEM changes.</p>
-  <p class="body-text">Machine-readable source: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a> · transport contract: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>.</p>
+  <p class="body-text">Machine-readable source: <a href="meter-benchmark/vmrs-registers.json"><code>vmrs-registers.json</code></a> · transport contract: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>. Same nest as the <a href="standard-dlms-cosem.html">DLMS/COSEM</a> page. Other pages keep their own.</p>
+
+  <div class="nest" aria-label="How these colors nest on this page">
+    <div class="nest-sess">
+      <b>session</b>
+      <div class="nest-model">
+        <b>device</b>
+        <div class="nest-obj">
+          <b>object</b>
+          <div class="nest-pair">
+            <div class="nest-addr"><b>address</b></div>
+            <div class="nest-val"><b>value</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="nest-pair">
+        <div class="nest-off"><b>other action</b></div>
+        <div class="nest-disc"><b>disconnect</b></div>
+      </div>
+    </div>
+    <div class="nest-wire"><b>wire</b></div>
+  </div>
 
   <div class="callout callout-warn">
     <strong>Before citing in an RFP</strong>
-    <p>VMRS is an ISV working checklist — not IEC, DLMS UA, STS, or <a href="#idis">IDIS</a>. Validate tier&nbsp;B registers against each vendor’s <strong>ICD</strong> (Interface Class Description); tier&nbsp;A OBIS codes are IEC-standard but still need a confirmed read path on the model you buy.</p>
+    <p>VMRS is an ISV working checklist — not IEC, DLMS UA, STS, or <a href="#idis">IDIS</a>. On a meter with an IDIS Package&nbsp;3 or DLMS UA Generic Companion Profile certificate, tier&nbsp;B comes from that package. On any other DLMS meter, validate tier&nbsp;B against that model’s <strong>ICD</strong>. Tier&nbsp;A OBIS codes stay IEC names either way.</p>
   </div>
 
-  <p class="body-text">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has, plus tier&nbsp;B prepaid and control registers that vary by vendor.</p>
+  <p class="body-text">Northbound JSON/MQTT at the gateway is the interoperability contract. VMRS names which OBIS keys should appear in that payload — mostly tier&nbsp;A codes every DLMS meter already has, plus tier&nbsp;B prepaid and control registers that vary by vendor until a companion certificate covers them.</p>
 
   <h2 id="idis">IDIS · companion profile above OBIS</h2>
   <p class="lead"><strong>IDIS</strong> (Interoperable Device Interface Specification) is not a second naming system for registers and is not VMRS. IEC 62056-6-1 <strong>OBIS</strong> names COSEM objects. DLMS says how to read them. Those standards still leave options, manufacturer extensions, and media choices. A <strong>companion specification</strong> picks one configuration so two vendors’ meters actually interoperate. IDIS is that companion-spec layer for DLMS/COSEM smart meters — use-case-driven object models plus a certification label. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></p>
   <p class="body-text">Large utilities write that companion spec themselves (ERDF LINKY, Iberdrola PRIME). IDIS was founded so smaller utilities could buy multi-vendor equipment against a shared, tested profile instead of a single OEM’s ICD. Semantic model: COSEM / IEC 62056-6-1 and 62056-6-2. Syntax and security: DLMS/COSEM application layer IEC 62056-5-3. The functional model is kept separate from the wire so a new PLC or IP stack can land without renaming <code>1.8.0</code>. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></p>
 
   <div class="tier-row">
-    <div class="tier-cell"><strong>Package 1 · 2011</strong>Secured S-FSK PLC per IEC 61334-5-1. Use cases in the founding papers include registration, tariff download, scheduled/on-demand reads (electricity, gas, heat, water), disconnect/reconnect, clock sync, quality of supply, load management, firmware update, and authenticated/enciphered access. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></div>
-    <div class="tier-cell"><strong>Package 2 · 2013</strong>Same IDIS functions over IP-based access — Ethernet, GPRS, and other telecom media — so PLC and IP meters can sit in one multi-vendor park. <span class="src">[<a href="#idis-s2">2</a>]</span></div>
-    <div class="tier-cell"><strong>Package 3 · current cert</strong>Third baseline package (use cases and media differ). New Package 1 / 2 certificates are closed; recertifications only. Package 3 runs through the <strong>DLMS UA</strong> qualification portal. <span class="src">[<a href="#idis-s3">3</a>]</span></div>
+    <div class="tier-cell wire"><strong>Package 1 · 2011</strong>Secured S-FSK PLC per IEC 61334-5-1. Use cases in the founding papers include registration, tariff download, scheduled/on-demand reads (electricity, gas, heat, water), disconnect/reconnect, clock sync, quality of supply, load management, firmware update, and authenticated/enciphered access. <span class="src">[<a href="#idis-s1">1</a>] [<a href="#idis-s2">2</a>]</span></div>
+    <div class="tier-cell wire"><strong>Package 2 · 2013</strong>Same IDIS functions over IP-based access — Ethernet, GPRS, and other telecom media — so PLC and IP meters can sit in one multi-vendor park. <span class="src">[<a href="#idis-s2">2</a>]</span></div>
+    <div class="tier-cell val"><strong>Package 3 · current cert</strong>Third baseline package (use cases and media differ). New Package 1 / 2 certificates are closed; recertifications only. Package 3 runs through the <strong>DLMS UA</strong> qualification portal. <span class="src">[<a href="#idis-s3">3</a>]</span></div>
   </div>
 
   <p class="body-text">November 2021: the IDIS Industry Association (Zug) merged into the DLMS User Association <strong>Smart Metering Working Group</strong>. Legacy IDIS packages stay supported. New work is <strong>Generic Companion Profiles</strong> (electricity, heat, water, gas) plus interoperability testing. That is the same “pick the options, then certify” method — now under DLMS UA, not a separate IDIS org. <span class="src">[<a href="#idis-s4">4</a>] [<a href="#idis-s5">5</a>]</span></p>
 
-  <div class="callout">
-    <strong>Village / VMRS — do not conflate</strong>
-    <p>IDIS is a <strong>utility AMI</strong> companion profile (European rollout, PLC/IP, lab certificate). Score it on the <em>meter / DCU</em> row when a vendor shows an IDIS or DLMS UA Package&nbsp;3 certificate — not on the cloud/HES row, and not as proof that a cheap STS keypad meter speaks the same object set.</p>
-    <p>VMRS is the same <em>idea</em> at village scale: a short named subset so one northbound JSON survives OEM swap. It is <strong>not</strong> an IDIS package, not a Generic Companion Profile, and not certified. An IDIS object-model / ICD can <em>fill</em> VMRS tier&nbsp;B faster than a brochure. Do not mark a VMRS cell <code>doc</code> from an IDIS logo alone, and do not copy IDIS event-code tables into <code>vmrs-registers.json</code> without the vendor ICD in hand.</p>
+  <h2 id="focus">Where register work goes now</h2>
+  <p class="lead">IDIS, and the DLMS UA Generic Companion Profiles that continue it, already pick the object model and test it. OBIS codes keep their names. The open job is no longer “which code means import kWh.”</p>
+  <div class="tier-row">
+    <div class="tier-cell val"><strong>Certified meter</strong>IDIS Package&nbsp;3 or a DLMS UA Generic Companion Profile certificate. Procurement asks for that certificate. Engineering maps the short VMRS list onto objects the package already contains. Disconnect, clock, and prepayment are IDIS use cases, and the AC Electricity Smart Meter GCP lists prepayment. A logo on a brochure is not the certificate.</div>
+    <div class="tier-cell out"><strong>DLMS, no companion cert</strong>This is the ICD job that remains. Tier&nbsp;B — remaining credit, tamper bitmap, disconnect control, serial — is where makers still diverge inside “DLMS.” One excerpt per model, mapped to the same northbound keys.</div>
+    <div class="tier-cell addr"><strong>Above the meter</strong>VMRS stays the village payload: about ten keys in northbound JSON so one head-end survives an OEM change. SparkNet and STS-only meters reach that payload through their own driver. Their register problem is the driver, not a new OBIS list.</div>
+  </div>
+  <p class="body-text">Score an IDIS or Package&nbsp;3 certificate on the meter / DCU row. The site-to-cloud hop stays a separate interface. VMRS is the village-sized subset of named keys. It is an ISV checklist, not an IDIS package and not a Generic Companion Profile. Leave IDIS event-code tables in the certified package. Copy a code into <code>vmrs-registers.json</code> only from the vendor ICD or from the published profile that the certificate names.</p>
+
+  <div class="callout callout-addr">
+    <strong>Village / VMRS</strong>
+    <p>Same idea as a companion profile, at village scale: one named subset so the gateway payload survives an OEM swap. An IDIS object model can fill tier&nbsp;B faster than a brochure when the certificate is in hand. Mark a VMRS cell <code>doc</code> only from that certificate or from the ICD, not from the logo.</p>
   </div>
 
   <p class="body-text" id="idis-sources" style="font-size:11px">Sources:
@@ -103,26 +183,26 @@ html.embed .back { display: none; }
   </p>
 
   <div class="tier-row">
-    <div class="tier-cell"><strong class="cert-a">Tier A · IEC OBIS</strong><code>1.8.0</code>, <code>32.7.0</code>, etc. Universal — cite in JSON, don’t reinvent.</div>
-    <div class="tier-cell"><strong class="cert-b">Tier B · ICD varies</strong>Credit, disconnect, serial, tamper — need vendor ICD excerpt per model.</div>
-    <div class="tier-cell"><strong class="cert-c">Tier C · optional</strong>Last-token audit — operator need, weak OBIS standardization.</div>
+    <div class="tier-cell addr"><strong class="cert-a">Tier A · IEC OBIS</strong><code>1.8.0</code>, <code>32.7.0</code>, etc. Universal — cite in JSON, don’t reinvent.</div>
+    <div class="tier-cell out"><strong class="cert-b">Tier B · cert or ICD</strong>Credit, disconnect, serial, tamper. Covered when the IDIS / GCP certificate includes them. Otherwise one ICD excerpt per model.</div>
+    <div class="tier-cell out"><strong class="cert-c">Tier C · optional</strong>Last-token audit — operator need, weak OBIS standardization.</div>
   </div>
 
   <div class="tbl-wrap">
     <table>
       <thead><tr><th>OBIS</th><th>Name</th><th>T</th><th>Req</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td><code>1.8.0</code></td><td>Active import kWh</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Standard billing register</td></tr>
-        <tr><td><code>2.8.0</code></td><td>Active export kWh</td><td><span class="cert-a">A</span></td><td>If net-metered</td><td>Omit on import-only</td></tr>
-        <tr><td><code>1.7.0</code></td><td>Instantaneous power</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Theft/load anomaly</td></tr>
-        <tr><td><code>32.7.0</code></td><td>Voltage L1</td><td><span class="cert-a">A</span></td><td>Yes</td><td>L2/L3 if wired</td></tr>
-        <tr><td><code>0.0.0</code></td><td>Clock</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Document UTC offset</td></tr>
-        <tr><td><code>0.0.96.1.1.255</code></td><td>Serial (typical)</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Logical name varies — use <code>meterSerial</code> northbound</td></tr>
-        <tr><td><code>96.1.0</code></td><td>Billing period counter</td><td><span class="cert-a">A</span></td><td>Opt</td><td><strong>Not</strong> serial number</td></tr>
-        <tr><td><code>96.5.0</code></td><td>Alarm / tamper</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Bit map per ICD</td></tr>
-        <tr><td><code>96.8.0</code></td><td>Remaining credit</td><td><span class="cert-b">B</span></td><td>Prepaid</td><td>CIU may be only source</td></tr>
-        <tr><td><code>0.0.96.3.10.255</code></td><td>Disconnect state</td><td><span class="cert-b">B</span></td><td>Yes</td><td>DLMS disconnect control pattern</td></tr>
-        <tr><td><code>96.11.5</code></td><td>Last token event</td><td><span class="cert-c">C</span></td><td>Opt</td><td>STS audit — confirm per vendor</td></tr>
+        <tr class="val"><td class="obis"><code>1.8.0</code></td><td class="nm">Active import kWh</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Standard billing register</td></tr>
+        <tr class="val"><td class="obis"><code>2.8.0</code></td><td class="nm">Active export kWh</td><td><span class="cert-a">A</span></td><td>If net-metered</td><td>Omit on import-only</td></tr>
+        <tr class="val"><td class="obis"><code>1.7.0</code></td><td class="nm">Instantaneous power</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Theft/load anomaly</td></tr>
+        <tr class="val"><td class="obis"><code>32.7.0</code></td><td class="nm">Voltage L1</td><td><span class="cert-a">A</span></td><td>Yes</td><td>L2/L3 if wired</td></tr>
+        <tr class="val"><td class="obis"><code>0.0.0</code></td><td class="nm">Clock</td><td><span class="cert-a">A</span></td><td>Yes</td><td>Document UTC offset</td></tr>
+        <tr class="out"><td class="obis"><code>0.0.96.1.1.255</code></td><td class="nm">Serial (typical)</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Logical name varies — use <code>meterSerial</code> northbound</td></tr>
+        <tr class="val"><td class="obis"><code>96.1.0</code></td><td class="nm">Billing period counter</td><td><span class="cert-a">A</span></td><td>Opt</td><td><strong>Not</strong> serial number</td></tr>
+        <tr class="out"><td class="obis"><code>96.5.0</code></td><td class="nm">Alarm / tamper</td><td><span class="cert-b">B</span></td><td>Yes</td><td>Bit map per ICD</td></tr>
+        <tr class="out"><td class="obis"><code>96.8.0</code></td><td class="nm">Remaining credit</td><td><span class="cert-b">B</span></td><td>Prepaid</td><td>CIU may be only source</td></tr>
+        <tr class="disc"><td class="obis"><code>0.0.96.3.10.255</code></td><td class="nm">Disconnect state</td><td><span class="cert-d">B</span></td><td>Yes</td><td>DLMS disconnect control pattern</td></tr>
+        <tr class="out"><td class="obis"><code>96.11.5</code></td><td class="nm">Last token event</td><td><span class="cert-c">C</span></td><td>Opt</td><td>STS audit — confirm per vendor</td></tr>
       </tbody>
     </table>
   </div>
@@ -135,7 +215,7 @@ html.embed .back { display: none; }
       <div><dt>COSEM</dt><dd>Application layer inside DLMS meters</dd></div>
       <div><dt>DCU</dt><dd>Data concentrator / field gateway</dd></div>
       <div><dt>DLMS</dt><dd>Protocol for smart meter communication</dd></div>
-      <div><dt>ICD</dt><dd>Vendor COSEM object map — required for tier B</dd></div>
+      <div><dt>ICD</dt><dd>Vendor COSEM object map — tier B when there is no IDIS / GCP certificate</dd></div>
       <div><dt>IDIS</dt><dd>Interoperable Device Interface Specification — DLMS/COSEM companion profile + cert (now under DLMS UA SMWG); not VMRS</dd></div>
       <div><dt>MDMS</dt><dd>Utility meter data management (L7)</dd></div>
       <div><dt>OBIS</dt><dd>Register semantics (e.g. <code>1.8.0</code> = import kWh)</dd></div>
@@ -145,20 +225,21 @@ html.embed .back { display: none; }
   </details>
 
   <h2>Northbound JSON example</h2>
-  <p style="font-size:12px;color:var(--text-2);margin:0 0 0.5rem">Gateway reads COSEM/OBIS locally, publishes MQTT envelope (<a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>):</p>
+  <p style="font-size:12px;color:var(--text-2);margin:0 0 0.5rem">Gateway reads COSEM/OBIS locally, publishes MQTT envelope (<a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a>). Colored fields use the key above. Envelope fields stay plain: a feeder id is not an OBIS code. The code stays blue even when the table marks that row outside the certificate.</p>
   <pre>{
   "schemaVersion": "0.1",
   "ts": "2026-06-22T14:30:00Z",
   "feederId": "feeder-north-paravur-01",
   "gatewayId": "pole-ems-0042",
   "meterSerial": "DDZ1513-88421",
+  "<span class="s">sipCallId</span>": "<span class="s">f81d4fae-7dec-11d0-a765-00a0c91e6bf6@pole-ems-0042</span>",
   "registers": [
-    { "obis": "1.8.0", "value": 1842.5, "unit": "kWh", "quality": "good" },
-    { "obis": "96.8.0", "value": 12.4, "unit": "kWh", "quality": "good" }
+    { "<span class="a">obis</span>": "<span class="a">1.8.0</span>", "<span class="v">value</span>": <span class="v">1842.5</span>, "unit": "kWh", "quality": "good" },
+    { "<span class="a">obis</span>": "<span class="a">96.8.0</span>", "<span class="v">value</span>": <span class="v">12.4</span>, "unit": "kWh", "quality": "good" }
   ]
 }</pre>
 
-  <details>
+  <details class="sip">
     <summary>POC playbook · SIP (RFC 3261)</summary>
     <p style="font-size:12px;color:var(--text-2);margin:0.5rem 0"><strong>POC ask:</strong> one feeder, 10–30 meters, <code>northbound-mqtt-v0.1</code> on schedule, STS vending unchanged, ICD gap matrix published. Ask vendor for DLMS/AMI engineer — not sales@.</p>
     <p style="font-size:12px;color:var(--text-2)"><strong>SIP</strong> = IETF <strong>Session Initiation Protocol</strong> (<a href="https://datatracker.ietf.org/doc/html/rfc3261" target="_blank" rel="noopener">RFC 3261</a>). Optional <strong>Phase&nbsp;3</strong> control-plane dialogs (admit tenant / authorize disconnect or settlement), correlating MQTT telemetry and commands with the SIP <code>Call-ID</code> (<code>sipCallId</code> in the northbound JSON). Not required for Phase&nbsp;1 prepaid or Phase&nbsp;2 OpenAMI MQTT. MQTT does not replace SIP; SIP does not replace OBIS/VMRS registers. Related discovery pattern (IPTV, SIP SUBSCRIBE/NOTIFY): <a href="https://www.itu.int/rec/T-REC-H.771" target="_blank" rel="noopener">ITU-T H.771</a> (<a href="https://www.itu.int/rec/dologin_pub.asp?lang=e&amp;id=T-REC-H.771-201105-I!!PDF-E&amp;type=items" target="_blank" rel="noopener">PDF</a>). Spec: <a href="meter-benchmark/northbound-mqtt-v0.1.json"><code>northbound-mqtt-v0.1.json</code></a> → <code>sip</code> · roadmap: <a href="index.html#village-metering/roadmap">Phase&nbsp;3</a>.</p>
@@ -168,7 +249,7 @@ html.embed .back { display: none; }
     <summary>Excluded from VMRS · sources · validation gaps</summary>
     <ul style="font-size:12px;color:var(--text-2);margin:0.5rem 0 0;padding-left:1.2rem">
       <li>Profile Generic buffers, full COSEM ICD, STSA/KMC key mgmt, SunSpec inverter registers</li>
-      <li>Sources: IEC 62056-6-1, IEC 62055, DLMS UA Blue Book, IDIS companion packages (see <a href="#idis">IDIS</a>), vendor study tables, <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a></li>
+      <li>Sources: IEC 62056-6-1, IEC 62055, <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">DLMS UA Blue Book</a>, IDIS companion packages (see <a href="#idis">IDIS</a>), vendor study tables, <a href="tech-comm-2026-05-28-metering-topology.html">May 2026 notes</a></li>
       <li>Not yet done: hands-on ICD extraction, DLMS conformance, STSA harmonization</li>
     </ul>
   </details>

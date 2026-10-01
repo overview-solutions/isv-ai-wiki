@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 1180 700" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="TC2.0 stack beside simplified village topology">
+<svg viewBox="0 0 1180 756" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="TC2.0 stack beside simplified village topology. MDMS sits above the headend.">
   <style>
     text { font-family: "DM Sans", system-ui, sans-serif; }
     .cloud-only { display: none; }
     svg.show-cloud .cloud-only { display: block; }
+    svg.show-cloud .site-feed { display: none; }
     .need-hl .node rect { opacity: 0.25; }
     .need-hl .node.hit rect { opacity: 1; stroke-width: 2; }
     .need-hl .node.hit text { opacity: 1; }
@@ -26,10 +27,28 @@
     <text x="720" y="28" font-size="11" fill="#666">Left = stack · Right = village (same layers)</text>
   </g>
 
+  <g id="mdms">
+    <text x="20" y="52" fill="#9a9990" font-size="11">ABOVE L6 · MDMS</text>
+    <rect x="12" y="58" width="664" height="52" rx="6" fill="none" stroke="#9a9990" stroke-dasharray="4 3"/>
+    <rect x="160" y="62" width="180" height="44" rx="6" fill="#f7f6f3" stroke="#5a5a55" stroke-dasharray="4 3"/>
+    <text x="250" y="80" text-anchor="middle" font-size="12" font-weight="600">MDMS</text>
+    <text x="250" y="94" text-anchor="middle" font-size="9" fill="#666">checks and stores reads</text>
+    <text x="356" y="88" font-size="9" fill="#9a9990">not in this tree</text>
+    <g class="cloud-only">
+      <path d="M262 138 L262 106" fill="none" stroke="#175CD3" stroke-width="2.25" stroke-dasharray="4 3"/>
+      <path d="M262 106 L268 118 L256 118 Z" fill="#175CD3"/>
+    </g>
+    <g class="site-feed">
+      <path d="M262 333 L262 106" fill="none" stroke="#175CD3" stroke-width="2.25" stroke-dasharray="4 3"/>
+      <path d="M262 106 L268 118 L256 118 Z" fill="#175CD3"/>
+    </g>
+  </g>
+  <g id="stack-body" transform="translate(0, 56)">
+
   <!-- band labels -->
-  <text class="cloud-only" x="20" y="62" fill="#9a9990" font-size="11">L6 - CLOUD / OPS</text>
+  <text class="cloud-only" x="20" y="62" fill="#9a9990" font-size="11">L6 - CLOUD HEADEND</text>
   <text class="cloud-only" x="20" y="172" fill="#9a9990" font-size="11">L5 - SYNC</text>
-  <text x="20" y="262" fill="#9a9990" font-size="11">L4 - ON-SITE APP</text>
+  <text x="20" y="262" fill="#9a9990" font-size="11">L4 - HEADEND</text>
   <text x="20" y="352" fill="#9a9990" font-size="11">L3 - DRIVER</text>
   <text x="20" y="442" fill="#9a9990" font-size="11">L2 - GATEWAY / MESH</text>
   <text x="20" y="532" fill="#9a9990" font-size="11">L1 - FIELD GEAR</text>
@@ -41,7 +60,7 @@
     <g class="node" data-needs="billing crm offline">
       <rect x="160" y="82" width="180" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/>
       <text x="250" y="102" text-anchor="middle" font-size="12" font-weight="600">ThunderCloud</text>
-      <text x="250" y="116" text-anchor="middle" font-size="9" fill="#666">remote ops / CRM</text>
+      <text x="250" y="116" text-anchor="middle" font-size="9" fill="#666">synced headend</text>
     </g>
     <g class="node" data-needs="billing crm">
       <rect x="360" y="82" width="130" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/>
@@ -71,7 +90,7 @@
     <g class="node" data-needs="billing cutoffs visibility tamper offline exit">
       <rect x="160" y="277" width="180" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.75"/>
       <text x="250" y="297" text-anchor="middle" font-size="12" font-weight="600">GroundBolt</text>
-      <text x="250" y="311" text-anchor="middle" font-size="9" fill="#666">site UI + Postgres</text>
+      <text x="250" y="311" text-anchor="middle" font-size="9" fill="#666">site headend</text>
     </g>
     <g class="node site-ops" data-needs="exit">
       <rect x="360" y="277" width="110" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/>
@@ -189,7 +208,7 @@
       <rect x="1036" y="298" width="18" height="3" fill="#6a9a4a"/>
       <rect x="1036" y="304" width="18" height="3" fill="#3B6D11"/>
       <text x="1065" y="298" font-size="10" font-weight="600" fill="#3B6D11">GroundBolt</text>
-      <text x="1065" y="310" font-size="8" fill="#3B6D11">local server</text>
+      <text x="1065" y="310" font-size="8" fill="#3B6D11">site headend</text>
     </g>
 
     <!-- L3: backhaul label -->
@@ -289,5 +308,6 @@
     <rect x="1097.3" y="573.7" width="10" height="8" rx="1" fill="#f7f6f3" stroke="#8a8680" stroke-width="0.7"/>
     <circle cx="1102.3" cy="577.7" r="1.8" fill="#2f2e2b"/>
     <text x="930" y="592" text-anchor="middle" font-size="9" fill="#666">homes · Meter / CIU</text>
+  </g>
   </g>
 </svg>

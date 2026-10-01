@@ -229,8 +229,9 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
     field meters and <strong>CIUs</strong> (Customer Interface Units) on a 2.4&nbsp;GHz mesh,
     a <strong>USB Gateway</strong> as the RF bridge,
     <strong>SparkNet-HTTP</strong> and <strong>Firefly</strong> as software plugins (not standalone radios),
-    GroundBolt as the on-site <strong>HES</strong> (head-end system),
-    optional <strong>ThunderCloud</strong> (same app in the cloud).
+    GroundBolt as the on-site <strong>headend</strong>,
+    optional <strong>ThunderCloud</strong> as that same headend in the cloud.
+    An <strong>MDMS</strong> keeps the history of those reads: it checks each one, drops or repairs a bad one, and files them by meter and time. It is not a box in this tree.
     Objects below are those this review already named or drew — GroundBolt Postgres / wire objects,
     village UN GeoJSON packs, and complementary MeshEMS / OpenAMI — not invented tables.
     Diagrams share one hosting toggle (site-only vs site+cloud).
@@ -395,14 +396,23 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
   </div>
 
   <h2>Layer cheat sheet</h2>
+  <p>
+    <strong>Headend</strong> is the command center on the meter-to-cloud path: reads, disconnect, config, and the prepaid wallet.
+    On this stack that is <strong>GroundBolt</strong> at the site. <strong>ThunderCloud</strong> is the same app after SymmetricDS sync, so the headend can be seen off site. Keys and the wallet system of record stay on GroundBolt.
+    <strong>MDMS</strong> is the next concept up. It keeps the history of reads the headend already collected: checks each read, drops or repairs a bad one, and files them by meter and time. Billing and reports use that file. <a href="oms-workshop-nairobi-2026-day1.html">Day 1</a> called this processing, cleaning, and organizing raw meter data, and put CRM, revenue, and outage above it. This tree does not ship a separate MDMS. On the diagram that box is dashed and sits above L6. Site + ThunderCloud draws the readings arrow from the cloud headend up into it. Site only draws the same arrow from GroundBolt.
+  </p>
   <div class="grid-2">
     <div class="card">
-      <h3>L6–L5 · Cloud + sync</h3>
-      <p><strong>ThunderCloud</strong> — remote ops / CRM. <strong>SymmetricDS</strong> — site↔cloud database sync. Optional after site loop works.</p>
+      <h3>Above L6 · MDMS</h3>
+      <p>Checks the headend’s reads, drops or repairs a bad one, and files the rest by meter and time. Not a process found in this tree. Day 1 places it above the headend. TC2.0 does not claim the CRM depth that sits above an MDMS.</p>
     </div>
     <div class="card">
-      <h3>L4 · On-site app</h3>
-      <p><strong>GroundBolt</strong> — site UI + Postgres at the ops building. Installer hub. Survives WAN outages for local control.</p>
+      <h3>L6–L5 · Headend, cloud copy</h3>
+      <p><strong>ThunderCloud</strong> — same headend app, off site. <strong>SymmetricDS</strong> — site↔cloud database sync. Optional after the site loop works.</p>
+    </div>
+    <div class="card">
+      <h3>L4 · Headend, on site</h3>
+      <p><strong>GroundBolt</strong> — site headend. UI + Postgres at the ops building. Wallet is the system of record. Survives WAN outages for local control.</p>
     </div>
     <div class="card">
       <h3>L3 · Driver / plugins</h3>
@@ -624,7 +634,8 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
     <div class="card">
       <p><strong>SparkMAC</strong> — SparkMeter NAN protocol on the 2.4&nbsp;GHz mesh (not Z-Wave).</p>
       <p><strong>AUTO</strong> — meter state: relay on iff HES credit (and plan) &gt; 0.</p>
-      <p><strong>HES</strong> — head-end system: utility software that commands and reads meters.</p>
+      <p><strong>HES</strong> — head-end system: utility software that commands and reads meters. Here, GroundBolt on site, ThunderCloud as the synced copy.</p>
+      <p><strong>MDMS</strong> — meter data management: checks the headend’s reads, drops or repairs a bad one, and files them by meter and time. Not a service in this tree.</p>
       <p><strong>CIU</strong> — Customer Interface Unit: prepaid keypad / balance display at the home.</p>
       <p><strong>USB Gateway</strong> — hardware RF interface (laptop/site) to the meter mesh.</p>
       <p><strong>NAN</strong> — neighborhood area network: local 2.4&nbsp;GHz mesh among meters (bridged by USB Gateway).</p>
@@ -732,7 +743,7 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
     });
   }
 
-  load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20260811b', function (s) { stackSvg = s; });
+  load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20261001n', function (s) { stackSvg = s; });
   load('host-map', 'technical-notes/diagrams/village-meter-topology.svg?v=20260811j', function (s) { mapSvg = s; });
   load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926in', function () {});
 

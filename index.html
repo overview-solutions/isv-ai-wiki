@@ -1818,8 +1818,8 @@ code {
         <div class="standard-row">
           <div class="standard-icon">📊</div>
           <div>
-            <div class="standard-name">DLMS/COSEM — IEC 62056</div>
-            <div class="standard-desc">Application-layer protocol for smart meter readout, prepaid/STS tokens, and remote disconnect. Required for vendor-interoperable AMI stacks; DCUs act as DLMS client to meters and server to the head-end system.</div>
+            <div class="standard-name"><a href="standard-dlms-cosem.html">DLMS/COSEM — IEC 62056</a></div>
+            <div class="standard-desc">COSEM is the object model (interface classes and OBIS names). DLMS is the application messages that read and act on those objects (GET, SET, ACTION). DCUs are the client; meters are the server. STS tokens are a separate standard (IEC 62055). <a href="standard-dlms-cosem.html">Read the schema and the message path →</a> The object tree is on that page. Indent is depth. Color is the same job nest.</div>
           </div>
         </div>
         <div class="standard-row">
@@ -2389,7 +2389,7 @@ const METER_BENCHMARK_PAGES = {
   'vmrs': {
     title: 'Register checklist',
     sub: 'Minimum meter reads for billing and control (OBIS · VMRS)',
-    src: 'meter-vmrs.html?embed=1&v=20260926tr',
+    src: 'meter-vmrs.html?embed=1&v=20261001color',
     standalone: 'meter-vmrs.html'
   },
   'vendor-study': {
@@ -2504,7 +2504,7 @@ const MEETING_NOTES = {
     title: 'OMS Workshop · Day 1',
     date: '30 Sep 2026',
     sub: 'Nairobi · stack, lock-in, scope',
-    src: 'oms-workshop-nairobi-2026-day1.html?embed=1&v=20260930d1b',
+    src: 'oms-workshop-nairobi-2026-day1.html?embed=1&v=20261001d1c',
     standalone: 'oms-workshop-nairobi-2026-day1.html'
   },
   'oms-training-skills': {
@@ -2524,7 +2524,7 @@ const MEETING_NOTES = {
     standalone: 'oseas-2026.html'
   }
 };
-const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json?v=20260926d3';
+const TECH_NOTES_CATALOG_URL = 'technical-notes/catalog.json?v=20261001tr';
 const COTTONSPACE_REPORTS_URL = 'https://sattal.cottonspace.com/reports';
 const DEV_LABS_GITHUB_REPO = 'https://github.com/rahulbhargavain/openami-smart-village';
 const DEV_LABS_GITHUB_REPORTS = `${DEV_LABS_GITHUB_REPO}/tree/main/reports`;

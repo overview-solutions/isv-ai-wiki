@@ -19,9 +19,9 @@
     <text x="418" y="28" font-size="11" fill="#175CD3" font-weight="600">Readings up</text>
     <text x="510" y="28" font-size="10" fill="#666">kWh / power / voltage / state / SSE</text>
   </g>
-<text class="cloud-only" x="20" y="62" fill="#9a9990" font-size="11">L6 - CLOUD / OPS</text>
+<text class="cloud-only" x="20" y="62" fill="#9a9990" font-size="11">L6 - CLOUD HEADEND</text>
   <text class="cloud-only" x="20" y="172" fill="#9a9990" font-size="11">L5 - SYNC</text>
-  <text x="20" y="262" fill="#9a9990" font-size="11">L4 - ON-SITE APP  (installer hub)</text>
+  <text x="20" y="262" fill="#9a9990" font-size="11">L4 - HEADEND</text>
   <text x="20" y="352" fill="#9a9990" font-size="11">L3 - DRIVER</text>
   <text x="20" y="442" fill="#9a9990" font-size="11">L2 - GATEWAY / MESH</text>
   <text x="20" y="532" fill="#9a9990" font-size="11">L1 - FIELD GEAR</text>
@@ -38,7 +38,7 @@
     <g class="node" data-needs="billing crm offline">
       <rect x="220" y="82" width="200" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/>
       <text x="320" y="102" text-anchor="middle" font-size="12" font-weight="600">ThunderCloud</text>
-      <text x="320" y="116" text-anchor="middle" font-size="9" fill="#666">remote ops / CRM</text>
+      <text x="320" y="116" text-anchor="middle" font-size="9" fill="#666">synced headend</text>
     </g>
     <g class="node" data-needs="billing crm">
       <rect x="450" y="82" width="150" height="44" rx="6" fill="#EFF8FF" stroke="#175CD3"/>
@@ -69,7 +69,7 @@
     <g class="node" data-needs="billing cutoffs visibility tamper offline exit">
       <rect x="220" y="277" width="200" height="44" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.75"/>
       <text x="320" y="297" text-anchor="middle" font-size="12" font-weight="600">GroundBolt</text>
-      <text x="320" y="311" text-anchor="middle" font-size="9" fill="#666">site UI + Postgres</text>
+      <text x="320" y="311" text-anchor="middle" font-size="9" fill="#666">site headend</text>
     </g>
     <g class="node site-ops" data-needs="exit">
       <rect x="450" y="277" width="120" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/>
