@@ -345,7 +345,7 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
   <h2>Visual 1 · Stack beside village</h2>
   <p>
     Left = software / protocol stack. Right = simplified village with the same horizontal bands.
-    Gray = LV power. Amber discs on current SVG still labeled “Firefly coverage” — <strong>provisional</strong>; RF bridge is the USB Gateway. Green = site backhaul. Blue dashed = optional WAN to ThunderCloud.
+    Gray = LV power. Amber discs = Firefly mesh among meters, under the Gateway / DCU band. Green = site backhaul. Blue dashed = optional WAN to ThunderCloud.
   </p>
 
   <div class="host-bar" role="tablist" aria-label="Hosting path">
@@ -419,8 +419,16 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
       <p><strong>SparkNet-HTTP</strong> + <strong>Firefly</strong> (software plugins) + <strong>meter-driver-spec</strong> — open contract for commands / SSE / meter capabilities (energy, power, voltage, enable/disable, tamper, …).</p>
     </div>
     <div class="card">
-      <h3>L2–L1 · Radio + field</h3>
-      <p><strong>USB Gateway</strong> = RF bridge to meter 2.4&nbsp;GHz mesh; <strong>SM meter / CIU</strong> at each prepaid home. Gray LV feeders carry power, not data.</p>
+      <h3>L2 · Gateway / DCU</h3>
+      <p><strong>Gateway / DCU</strong> — USB / serial bridge on site. One level. GroundBolt talks through it.</p>
+    </div>
+    <div class="card">
+      <h3>Mesh</h3>
+      <p>2.4&nbsp;GHz path among meters and up to the gateway. <strong>SparkNet RF / Firefly</strong> on that band.</p>
+    </div>
+    <div class="card">
+      <h3>L1 · Field gear</h3>
+      <p><strong>SM meter / CIU</strong> at each prepaid home. Gray LV feeders carry power, not data.</p>
     </div>
   </div>
 
@@ -743,7 +751,7 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
     });
   }
 
-  load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20261001n', function (s) { stackSvg = s; });
+  load('host-stack', 'technical-notes/diagrams/tc20-stack-village.svg?v=20261002a', function (s) { stackSvg = s; });
   load('host-map', 'technical-notes/diagrams/village-meter-topology.svg?v=20260811j', function (s) { mapSvg = s; });
   load('host-objects', 'technical-notes/diagrams/tc20-data-objects.svg?v=20260926in', function () {});
 
