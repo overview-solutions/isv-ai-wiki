@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMS Workshop Nairobi · open server · ISV</title>
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/isv-theme.css?v=20261002srv">
+<script src="js/isv-theme.js"></script>
+<style>
+:root, html[data-theme="light"] {
+  --orange: #D4650A;
+  --orange-50: #FFF1E6;
+}
+html[data-theme="dark"] {
+  --orange: #f08a3c;
+  --orange-50: #2a1608;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; color: var(--text); background: var(--bg); line-height: 1.65; }
+a { color: var(--green); }
+.wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.back { font-size: 13px; color: var(--text-2); margin-bottom: 1.5rem; }
+.back a { text-decoration: none; }
+.back a:hover { text-decoration: underline; }
+h1 { font-size: 26px; font-weight: 500; margin-bottom: 0.35rem; }
+.sub { font-size: 14px; color: var(--text-2); margin-bottom: 1.25rem; }
+.callout {
+  border-left: 3px solid var(--green); background: var(--green-50);
+  padding: 0.85rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.5rem;
+  font-size: 14px; line-height: 1.55;
+}
+.callout > strong:first-child { display: block; margin-bottom: 0.4rem; font-weight: 500; color: var(--green); }
+.callout p:last-child { margin-bottom: 0; }
+.callout-amber { border-left-color: var(--amber); background: var(--amber-50); }
+.callout-amber > strong:first-child { color: var(--amber); }
+h2 { font-size: 17px; font-weight: 500; margin: 2rem 0 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+h3 { font-size: 15px; font-weight: 500; margin: 1.1rem 0 0.4rem; }
+p, li { font-size: 14px; color: var(--text); margin-bottom: 0.5rem; }
+ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+ul ul { margin: 0.35rem 0 0.5rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 1rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-2); font-weight: 500; font-size: 12px; }
+.stack { border: 1px solid var(--border); margin: 0.5rem 0 1rem; }
+.band { padding: 0.65rem 0.8rem; border-top: 1px solid var(--border); }
+.band:first-child { border-top: 0; }
+.band h3 { font-size: 14px; font-weight: 500; margin: 0 0 0.2rem; padding: 0; border: 0; }
+.band p { margin: 0; color: var(--text-2); }
+.seam { padding: 0.55rem 0.8rem; border-top: 1px solid var(--border); border-left: 4px solid var(--green); background: var(--green-50); }
+.seam.plain { border-left-color: var(--border); background: var(--bg-2); }
+.seam strong { display: block; margin-bottom: 0.15rem; font-weight: 500; }
+.seam p { margin: 0; color: var(--text-2); font-size: 13px; }
+.chart { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.75rem; }
+.swatch { font-size: 12px; line-height: 1.35; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-left-width: 4px; border-radius: 0 6px 6px 0; }
+.swatch b { display: block; font-weight: 500; }
+.swatch.addr { border-left-color: var(--blue); background: var(--blue-50); }
+.swatch.val { border-left-color: var(--green); background: var(--green-50); }
+.swatch.out { border-left-color: var(--orange); background: var(--orange-50); }
+.swatch.disc { border-left-color: var(--red); background: var(--red-50); }
+table.marks td.obis { background: var(--blue-50); box-shadow: inset 3px 0 0 var(--blue); }
+table.marks tr.val td.nm { background: var(--green-50); box-shadow: inset 3px 0 0 var(--green); }
+table.marks tr.out td.nm { background: var(--orange-50); box-shadow: inset 3px 0 0 var(--orange); }
+table.marks tr.disc td.nm { background: var(--red-50); box-shadow: inset 3px 0 0 var(--red); }
+.ctrl { margin: 0.5rem 0 1.25rem; }
+.ctrl-h { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.65rem; }
+.ctrl-h span { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--text-2); }
+.grid { display: grid; grid-template-columns: 1fr; gap: 0.65rem; }
+.card { border: 1px solid var(--border); border-left-width: 4px; border-radius: 0 10px 10px 0; padding: 0.75rem 0.9rem 0.85rem; background: var(--bg); }
+.card h3 { font-size: 15px; font-weight: 500; margin: 0 0 0.4rem; }
+.card ul { margin: 0; padding-left: 1.1rem; }
+.card li { font-size: 13px; color: var(--text-2); margin-bottom: 0.2rem; }
+.field .card { border-left-color: var(--amber); }
+.cloud .card { border-left-color: var(--blue); }
+.field .ctrl-h { color: var(--amber); }
+.cloud .ctrl-h { color: var(--blue); }
+.wide { grid-column: 1 / -1; }
+html.embed .back, html.embed #notes-back-btn { display: none; }
+html.embed .wrap { padding-top: 1rem; }
+html.embed h1 { font-size: 20px; }
+figure { margin: 0 0 1.25rem; }
+figure img { width: 100%; height: auto; display: block; border: 1px solid var(--border); background: var(--bg); }
+figcaption { font-size: 12px; color: var(--text-2); margin-top: 0.35rem; }
+@media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<script>
+if (new URLSearchParams(location.search).get('embed') === '1') {
+  document.documentElement.classList.add('embed');
+}
+</script>
+<div class="isv-topbar">
+  <a class="isv-topbar-brand" href="index.html"><span class="isv-topbar-mark">ISV</span> IEEE Smart Village</a>
+  <button type="button" class="theme-toggle theme-toggle--icon" data-isv-theme-toggle aria-label="Switch to dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+<div class="wrap">
+  <div class="back" id="notes-back"><a href="index.html">← ISV Knowledge Base · Home</a></div>
+  <h1>OMS Workshop Nairobi · open server</h1>
+  <p class="sub">Open Metering Strategy · 30 Sep–1 Oct 2026 · Nairobi · hosts A2EI and EnAccess · <a href="oms-workshop-nairobi-2026.html">workshop page</a></p>
+
+  <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#notes/oms-workshop-nairobi-2026-open-server" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meeting Notes</a> · <a href="oms-workshop-nairobi-2026.html" style="font-size:14px">Workshop page</a></p>
+
+  <div class="callout">
+    <strong>The result</strong>
+    <p>Developing and maintaining an open-sourced server that can operate offline and in the cloud, and can talk to the various OEM gateways and DCUs.</p>
+  </div>
+
+  <figure>
+    <img src="assets/oms-day1-org-logos.png" alt="Logos of organisations on the Day 1 participant sheet">
+    <figcaption>Organisations on the participant sheet.</figcaption>
+  </figure>
+
+  <p>One open management system. A pluggable driver per meter type. Gateways that can hold more than one driver. Connectors for known OEMs, and room for third parties to add more. It runs on site and in the cloud. Near-term baseline: open connectors for SparkMeter and SteamaCo fleets already in the ground. Keep the work already done. Other meters in urgent need can be added. Open core, not full open source. OMS is the metering minimum. Companies sell what sits on top. <a href="meter-roadmap.html">Roadmap</a> Phase 1 is that installed base. Phase 2 is the open mini-grid core. An <a href="index.html#standards-village">IEEE village standard</a> is a later milestone.</p>
+
+  <h2>Offline and in the cloud</h2>
+  <p>The question was how operations continue when the internet is down. The room did not treat the two approaches as a permanent either/or. The lean was to make offline capability an option. One company can have sites with a link and sites without one at the same time. Start with a stage that works, and do not design the next stage out.</p>
+  <table>
+    <thead><tr><th></th><th>What it does</th><th>Cost named in the room</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Edge computing on the grid</td>
+        <td>An on-site system keeps operating while the link is down. <a href="meter-tc20-review.html">TC 2.0</a> already draws that for GroundBolt: the uplink can fail while local prepaid continues.</td>
+        <td>Higher complexity and cost.</td>
+      </tr>
+      <tr>
+        <td>Split continuity from live data</td>
+        <td>Accept gaps in the data. Sync when the link returns. Vending continues with <a href="standard-dlms-cosem.html#sts">STS</a> tokens, typed in by hand if needed. Token path, including SMS: <a href="tech-comm-2026-05-28-metering-topology.html">28 May topology</a>.</td>
+        <td>Narrower than a full edge system. Still needs the grid to be designed for that gap.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Where the headend sits is the same split. <a href="meter-tc20-review.html?host=full">SparkMeter</a> runs the command center on site: wallets, credit countdown, time-of-use, customer list. Offline, then sync when the link returns. <a href="meter-vendor-study.html">SteamaCo</a> runs it in the cloud: the meter waits for a remote command, and an outage blocks that. Cloud-first design was called a known failure for this sector. An outage stops vending, and it also stops onboarding, tariff changes, and other work that waits on the link. One Madagascar case was operators connecting about once a month to sync. Energy used without payment, or payment taken without energy, lands on the developer.</p>
+  <p>Keep the two offline stacks apart. GroundBolt keeps local prepaid when the uplink fails, and those SM meters do not decode STS. STS-through-the-gap is the other path. Both can sit in one company. Neither is monitoring. A control loop cannot use that gap. Service can continue while history waits.</p>
+
+  <h2>Talks to OEM gateways and DCUs</h2>
+  <p>Mini-grid platforms bundle the stack into one product. That sells. It also locks the operator in. The server this note is about is the headend, plus the hop from the gateway up to it. <a href="meter-overview.html">Village Metering</a> draws the same split: <a href="meter-solutions-map.html?track=steamaco">SteamaCo</a>, <a href="meter-solutions-map.html?track=sparkmeter">SparkMeter</a>, EnAccess, and an OpenAMI path.</p>
+  <div class="stack">
+    <div class="band">
+      <h3>OMS, CRM, revenue, outage</h3>
+      <p>Sit above the MDMS. Not the server.</p>
+    </div>
+    <div class="band">
+      <h3>MDMS</h3>
+      <p>Necessary for the head-end. Keeps the history of reads the headend collected, checks each read, drops or repairs a bad one, and files them by meter and time.</p>
+    </div>
+    <div class="band">
+      <h3>Headend</h3>
+      <p>The open server. Command center. On site, in the cloud, or both. One management system, a driver per meter type.</p>
+    </div>
+    <div class="seam">
+      <strong>Gateway to cloud</strong>
+      <p>Priority hop named in the room. This is the comms the server has to speak.</p>
+    </div>
+    <div class="band">
+      <h3>Gateway / DCU</h3>
+      <p>Collects meters, because a meter often cannot reach the cloud from a rural site. Local, cloud, or hybrid. Can hold more than one driver. Stack notes: <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">Open Metering Infrastructure · SparkMeter</a>.</p>
+    </div>
+    <div class="seam plain">
+      <strong>SparkNet HTTP — two descriptions</strong>
+      <p>Room: proprietary library for gateway-to-meter communication. Free to use. Open above it, proprietary below it. TC 2.0 diagram: driver from the USB gateway into GroundBolt. <a href="meter-tc20-review.html?host=full">TC 2.0 full host</a>.</p>
+    </div>
+    <div class="band">
+      <h3>Meter</h3>
+      <p>Registers electricity flow. Can open or close the customer connection. Names and the disconnect object: <a href="meter-vmrs.html">register checklist</a> · <a href="standard-dlms-cosem.html">DLMS/COSEM</a>.</p>
+    </div>
+  </div>
+  <p>Comms the server has to carry, from the priority-1 list on the <a href="https://docs.google.com/document/d/1LKvwqYPhLjN5jMHpt12fAY9g-dkbOaDkBFxT2bmiT6g/edit?tab=t.e7zm9cm7c654" target="_blank" rel="noopener">Features MVP shortlist</a>:</p>
+  <ul>
+    <li>OEM-agnostic infrastructure.</li>
+    <li>Robust communication: standards for hardware-OEM comms, a head-end sized for the loads, MDMS necessary for the head-end, and comms right-sized to the use case.</li>
+  </ul>
+  <p>On this wiki, <a href="standard-dlms-cosem.html">DLMS/COSEM</a> sits at the meter and the DCU. The DCU is client to the meter and server toward the head-end. North of the gateway the payload is the <a href="meter-vmrs.html">register checklist</a>, not a second object model. One northbound shape: the gateway publishes the same keys so a head-end survives a meter OEM change. VMRS is the draft of that shape. This work should not mint a second register standard. Ask for a short list, not a utility ICD. Tier A names are already settled. <code>1.8.0</code> is import kWh. Tier B is where makers still diverge inside “DLMS”: credit, tamper bitmap, disconnect, serial. Ask for the companion-profile certificate, or one ICD excerpt per model. A brochure logo is not the certificate. VMRS is a draft shortlist, not a published standard. <code>96.1.0</code> is the billing-period counter, not the serial.</p>
+  <p>Another team read frequency, voltage, and consumption from 5 meters through an off-the-shelf gateway and a normal cloud path. Azure and MQTT were the example. Readable registers mean the data can move.</p>
+
+  <h3>Lock-in the server is answering</h3>
+  <p>Hardware lock-in and software lock-in were split on purpose. A phone analogy used in the room: a vendor can keep proprietary hardware if the interface above it is open. Hidden registers make the meter a brick when the vendor stops. That gap is what the <a href="meter-vmrs.html">register checklist</a> is for.</p>
+  <table>
+    <thead><tr><th>Level</th><th>What fails</th><th>Matching response</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1 — blackout</td>
+        <td>Vendor system down. Operators see errors. Meters unreachable.</td>
+        <td>Escrow is the fallback when a vendor stops operating.</td>
+      </tr>
+      <tr>
+        <td>2 — stranded hardware</td>
+        <td>Operator wants to leave. Meters stay tied to the old platform.</td>
+        <td>Migration means new software, same meters. Possible in theory for some stacks. Not proven at scale.</td>
+      </tr>
+      <tr>
+        <td>3 — mixed fleet</td>
+        <td>Operator wants another brand under one platform.</td>
+        <td>Universal headend, or one management system with a driver per meter type. This is the server.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>A vendor switch uses a Key Change Token sequence, applied in order. It can go out remotely or be typed on the customer keypad. Provision that access when the meter is made, so the switch does not need a site visit. Each meter holds encryption keys tied to a Supply Group Code. The <a href="tech-comm-2026-05-28-metering-topology.html">28 May note</a> already separates STS keys from OEM keys and from DLMS keys. <a href="meter-tc20-review.html">ThunderCloud 2.0 and GroundBolt</a> are open. SteamaCo’s migration path is still being built. <a href="meter-vmrs.html">DLMS register codes</a> come from the manufacturer on request, and they are not always right.</p>
+
+  <h3>Where the work can be cut</h3>
+  <table>
+    <thead><tr><th>Cut</th><th>What it builds</th><th>Limit named in the room</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Above the headend</td>
+        <td>Open MDMS, CRM, outage and revenue management on an existing headend.</td>
+        <td>Still locked at the hardware and gateway.</td>
+      </tr>
+      <tr>
+        <td>The headend</td>
+        <td>One headend that can speak SparkMeter, Calin, and others. Both are in the <a href="meter-vendor-study.html">vendor study</a>.</td>
+        <td>Called boiling the ocean. <a href="standard-dlms-cosem.html">DLMS</a> named as the possible lever.</td>
+      </tr>
+      <tr>
+        <td>Below the headend</td>
+        <td>Free meter-to-gateway comms: <a href="meter-vmrs.html">registers</a>, a SparkNet equivalent (<a href="meter-tc20-review.html?host=full">TC 2.0</a>), <a href="wireless-telecom.html">LoRaWAN</a>.</td>
+        <td>High complexity. Needs operator skill or a strong open effort.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Tests proposed for any cut: which lock-in it addresses, whether it reinvents a commercial-scale standard, and how much burden lands on the operator.</p>
+  <div class="callout callout-amber">
+    <strong>Two framings, then the near-term cut</strong>
+    <p>One framing: write the standard for new meters. Priority hop is gateway to cloud. Start with <a href="standard-dlms-cosem.html">DLMS</a>, upgraded for this ecosystem.</p>
+    <p>The other: open connectors for SparkMeter and SteamaCo fleets already in the ground. DLMS as leverage for a universal headend, and as manufacturer <a href="meter-vmrs.html">register codes</a>.</p>
+    <p>The near-term baseline that landed is the second one. KPLC, at about 8 million meters, can impose interoperability on manufacturers. A mini-grid operator does that only together with others.</p>
+  </div>
+
+  <h2>Reads the server keeps</h2>
+  <p>Grid-control profiles every 5–15 minutes. The <a href="meter-vmrs.html">checklist</a> leaves the full profile buffer out of the northbound payload. On the pre-session vote sheet, hourly or 15-minute interval data (5) outscored event data (3), daily aggregates (3), and 1-minute or finer (2). Raw data can stop at the feeder. Alarms still need a near-real-time signal. Reversed CTs and negative SparkMeter totals already made datasets unusable.</p>
+  <p>MDMS keeps the history of reads the headend collected, checks each read, drops or repairs a bad one, and files them by meter and time. Billing and reports use that file. Day 1 called this processing, cleaning, and organizing raw meter data, and put OMS, CRM, revenue, and outage above it. The small group marked MDMS necessary for the head-end.</p>
+  <p>Score the reading at the layer that holds it. The meter holds the register. The pole gateway or DCU normalizes it. The headend collects it. The cloud syncs a copy, and that copy can lag. <a href="openami.html">OpenAMI</a> is that path: first-km hardware, then an aggregation hub, then a backend, then billing. A cloud chart does not prove the meter has the object.</p>
+  <p>What must come in near real time. The sheet’s note: flexibility to set what data comes in when, and from what. Use case decides.</p>
+  <ul>
+    <li>High-consumption customers</li>
+    <li>Operational assets</li>
+    <li>Hardware-generated alerts</li>
+    <li>Operational / situational awareness</li>
+    <li>Subhourly reporting</li>
+  </ul>
+  <p>Monitoring already in the ground: intelligent grid monitoring via existing infrastructure; GIS, started basic (the <a href="meter-village-geojson-un.html">village pack</a> is that map; a country building estimate such as <a href="meter-village-geojson-un.html#open-energy-maps">Open Energy Maps</a> sits above it); open data transparency (API).</p>
+  <p>Morning data the layers above still need from this file: vending transactions, number and size, for bankability; daily totals by customer group, for planning.</p>
+  <p>Reading marks. Row colors match the <a href="meter-vmrs.html">register checklist</a>. For each row the group was asked which layer holds it, and whether a day offline, or a month offline, still leaves it true.</p>
+  <div class="chart" aria-label="Colors on this table">
+    <div class="swatch addr"><b>address</b>OBIS cell</div>
+    <div class="swatch val"><b>value</b>kWh, power, voltage, clock</div>
+    <div class="swatch out"><b>other</b>serial, tamper, credit, last token</div>
+    <div class="swatch disc"><b>disconnect</b>relay state</div>
+  </div>
+  <table class="marks">
+    <thead><tr><th>Reading</th><th>OBIS on the checklist</th><th>Where it lives for the server</th></tr></thead>
+    <tbody>
+      <tr class="val"><td class="nm">Active import kWh</td><td class="obis"><code>1.8.0</code></td><td>Billing history can wait for the link. Say so if someone still settles it on site.</td></tr>
+      <tr class="val"><td class="nm">Instantaneous power</td><td class="obis"><code>1.7.0</code></td><td>Fresh if load limit follows generation. A monthly sync cannot close that loop.</td></tr>
+      <tr class="val"><td class="nm">Voltage L1</td><td class="obis"><code>32.7.0</code></td><td>Same loop. L2/L3 only if the service is wired that way.</td></tr>
+      <tr class="val"><td class="nm">Clock</td><td class="obis"><code>0.0.0</code></td><td>A late energy sync without a clock is an argument about whose timestamp.</td></tr>
+      <tr class="out"><td class="nm">Serial</td><td class="obis"><code>0.0.96.1.1.255</code> typical</td><td>Identity, not a stream. The name varies by maker. <code>96.1.0</code> is the billing-period counter, not the serial.</td></tr>
+      <tr class="out"><td class="nm">Alarm / tamper</td><td class="obis"><code>96.5.0</code></td><td>Bitmap comes from the ICD. Fresh only if someone on site can act on it.</td></tr>
+      <tr class="out"><td class="nm">Remaining credit</td><td class="obis"><code>96.8.0</code></td><td>Fresh if vending continues offline. The keypad (CIU) may be the only place it lives.</td></tr>
+      <tr class="disc"><td class="nm">Disconnect state</td><td class="obis"><code>0.0.96.3.10.255</code></td><td>A state, not a history. The customer already feels it. The cloud copy can lag.</td></tr>
+      <tr class="out"><td class="nm">Last token</td><td class="obis"><code>96.11.5</code></td><td>Optional. Hand it to the vending room unless this group is writing an audit.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Control: field vs cloud</h2>
+  <p>Local dynamic control landed as a real need: load limiting that follows generation, so a site stays commercially viable without an oversized plant. Meters have to answer those conditions. The loop uses a fresh local reading. Instantaneous power and voltage are that reading. The <a href="oms-workshop-nairobi-2026.html">workshop page</a> already recorded a pre-session vote for time-of-use and load limits. Outage and control split the same way as the server: field work continues offline; cloud work waits on the link.</p>
+
+  <section class="ctrl field">
+    <p class="ctrl-h">Field <span>· offline</span></p>
+    <div class="grid">
+      <article class="card">
+        <h3>Disconnect</h3>
+        <ul><li>Remote or local meter disconnect</li></ul>
+      </article>
+      <article class="card">
+        <h3>Turn off / turn on</h3>
+        <ul>
+          <li>Batch commands</li>
+          <li>By site, by feeder, or by load type</li>
+          <li>Load shedding</li>
+          <li>Demand response</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Deployment</h3>
+        <ul>
+          <li>Provisioning</li>
+          <li>Customer onboarding</li>
+          <li>Tariff assignment</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Feeder analytics</h3>
+        <ul>
+          <li>Non-technical loss detection</li>
+          <li>Theft alarms</li>
+          <li>Tamper seals</li>
+          <li>Tamper triggers</li>
+          <li>Zap things</li>
+        </ul>
+      </article>
+      <article class="card wide">
+        <h3>Local operator</h3>
+        <ul>
+          <li>Role-based definition</li>
+          <li>Customer interface, real time</li>
+          <li>Automatic reconfiguration</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="ctrl cloud">
+    <p class="ctrl-h">Cloud <span>· internet</span></p>
+    <div class="grid">
+      <article class="card">
+        <h3>Dispatch</h3>
+        <ul><li>Topology-aware dispatch of control messages</li></ul>
+      </article>
+      <article class="card">
+        <h3>Inventory</h3>
+        <ul><li>Inventory management</li></ul>
+      </article>
+      <article class="card">
+        <h3>Technician dispatch and ticket</h3>
+        <ul>
+          <li>Ticketing system</li>
+          <li>Prioritization</li>
+          <li>Payment of technicians</li>
+          <li>Hotline</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Workforce</h3>
+        <ul>
+          <li>Credentialing</li>
+          <li>Training management</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <h2>What sits above the server</h2>
+  <p>The open core does not hold all of the business logic. Tariffs, CRM, and payment rules sit above it. The core stays extensible so an operator can plug in their own modules. The infrastructure has to be able to carry the business model. How that model is built is the operator’s choice. After SteamaCo stopped mini-grid development in 2021, <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">Nimbus</a> became a pass-through. Customers, PowerGen among them, built their own layers above it. Nimbus in the <a href="meter-vendor-study.html">vendor study</a> is SteamaCo’s AMI head-end. Company filings and the product claims: <a href="meter-steamaco-nimbus.html">ISV-TRD-002</a>.</p>
+  <p>About ten tariff schemes have been built. About three are actually used. Requests for more elaborate tariffs came from developers and rarely ran at scale. The staged path that was endorsed: a tight first version, built so it can grow, then revisit.</p>
+  <p>Operator path, in order: vending (<a href="tech-comm-2026-05-28-metering-topology.html">STS</a>, collect revenue), then monitoring (usage and events), then control (run the grid). <a href="standard-dlms-cosem.html#sts">STS</a> is a vending standard, not a comms standard. It does not give remote monitoring or control. The interoperability gain named for standard STS: one system vends tokens for more than one meter brand.</p>
+  <p>2030 exercise. NRECA International was named as technical advisor and validator in the consortium, with A2EI and EnAccess. Silent write, then affinity clustering. Prompt: mini-grid operations in 2030. <a href="meter-roadmap.html">Roadmap</a> Phase 3 is a later grid-arrival path, not this feature list. Clusters on that sheet:</p>
+  <ul>
+    <li>Vending &amp; Tokens (tariff)</li>
+    <li>Billing/Accounting</li>
+    <li>Data/Monitoring/Analytics — the reads section above</li>
+    <li>Transparency/Reporting — who the story is for. A dashboard is not a reading.</li>
+    <li>Operational Control — the field and cloud cards above</li>
+    <li>User interface, customer awareness</li>
+  </ul>
+  <p>Data/Monitoring/Analytics and Operational Control are the server. Vending, billing, transparency, and the customer interface sit above it or beside it.</p>
+
+  <div class="callout callout-amber">
+    <strong>Still open</strong>
+    <p>If <a href="meter-tc20-review.html">GroundBolt</a> runs on site, what safeguards sit around meter keys and other sensitive data? Nearby on this wiki: <a href="tech-comm-2026-05-28-metering-topology.html">key hierarchies</a> and <a href="grid-cybersecurity-layers.html">defense-in-depth layers</a>.</p>
+    <p>And, from the scope talk: a local management engine, or the STS token stack alone?</p>
+  </div>
+
+  <h2>On this wiki</h2>
+  <ul>
+    <li><a href="oms-workshop-nairobi-2026.html">Workshop page</a> · <a href="meter-overview.html">Village Metering</a> · <a href="meter-solutions-map.html">solutions map</a> · <a href="meter-vendor-study.html">vendor study</a></li>
+    <li><a href="meter-tc20-review.html">TC 2.0 review</a> · <a href="meter-roadmap.html">roadmap</a> · <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">11 Aug SparkMeter / Nimbus</a> · <a href="meter-steamaco-nimbus.html">ISV-TRD-002</a></li>
+    <li><a href="standard-dlms-cosem.html">DLMS/COSEM</a> · <a href="meter-vmrs.html">register checklist</a> · <a href="tech-comm-2026-05-28-metering-topology.html">28 May STS topology</a> · <a href="wireless-telecom.html">wireless telecom</a></li>
+    <li><a href="openami.html">OpenAMI</a> · <a href="index.html#standards-village">village standards</a> · <a href="meter-village-geojson-un.html">Village GeoJSON</a> · <a href="meter-village-scope.html">village scope</a> · <a href="grid-cybersecurity-layers.html">grid cybersecurity layers</a></li>
+  </ul>
+</div>
+</body>
+</html>

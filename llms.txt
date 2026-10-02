@@ -19,6 +19,7 @@
 - [ISV-TRD-002 SteamaCo / Nimbus](https://isv.wiki/meter-steamaco-nimbus.html): Jackalope Limited trades as SteamaCo · Nimbus AMI · STEAMA COMPANY LIMITED in administration · no transfer deed read
 - [Power Africa 2026 Workshop](https://isv.wiki/power-africa-2026-workshop-planning.html): OpenAMI EMS workshop results (Nairobi · 4 sessions ran · BUILD sim)
 - [OMS Workshop Nairobi](https://isv.wiki/oms-workshop-nairobi-2026.html): Open Metering Strategy · 30 Sep–2 Oct 2026 · A2EI · EnAccess
+- [OMS Workshop · open server](https://isv.wiki/oms-workshop-nairobi-2026-open-server.html): 30 Sep–1 Oct 2026 Nairobi · open-sourced server, offline and cloud, OEM gateways and DCUs
 - [OMS Workshop Day 1](https://isv.wiki/oms-workshop-nairobi-2026-day1.html): 30 Sep 2026 Nairobi · stack, lock-in, scope
 - [OMS / village training skills](https://isv.wiki/oms-training-skills.html): Catalog of work that needs training (lifecycle timeline) — not a course; modules TBD
 - [Code Challenge sign-up](https://isv.wiki/code-challenge-signup.html): Interest form for workshop Code Challenge seats (name · scope · contact · where from · GitHub · comment)
