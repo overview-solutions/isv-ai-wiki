@@ -75,7 +75,7 @@ Direct links (live site):
 - [Tasks board (wiki)](https://overview-solutions.github.io/isv-ai-wiki/index.html#tasks) — filter by meeting, status, assignee
 - [GitHub Issues (source of truth)](https://github.com/overview-solutions/isv-ai-wiki/issues) — create, comment, assign, close
 - [Power Africa 2026 Workshop](https://overview-solutions.github.io/isv-ai-wiki/power-africa-2026-workshop-planning.html) — results: 4 sessions ran (3 Mon + 1 Thu); BUILD sim · Open Utility Network convention
-- [OMS Workshop Nairobi](https://overview-solutions.github.io/isv-ai-wiki/oms-workshop-nairobi-2026.html) — 30 Sep–2 Oct 2026 · A2EI · EnAccess
+- [OMS Workshop Nairobi](https://overview-solutions.github.io/isv-ai-wiki/oms-workshop-nairobi-2026.html) — results · 30 Sep–2 Oct 2026 · A2EI · EnAccess · open-server note holds the stack
 - [Metering topology meeting note](https://overview-solutions.github.io/isv-ai-wiki/index.html#notes/metering-2026-05-28)
 - [Meter vendor study](https://overview-solutions.github.io/isv-ai-wiki/meter-vendor-study.html) — cited benchmarks, STS, DLMS, industry bands
 - [Standards guide](https://overview-solutions.github.io/isv-ai-wiki/index.html#standards) — village microgrid standards vs larger grid integration

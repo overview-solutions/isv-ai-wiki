@@ -399,12 +399,12 @@ html[data-theme="dark"] .force-bubble-label-mpm { fill: #a8a7a0; }
   <p>
     <strong>Headend</strong> is the command center on the meter-to-cloud path: reads, disconnect, config, and the prepaid wallet.
     On this stack that is <strong>GroundBolt</strong> at the site. <strong>ThunderCloud</strong> is the same app after SymmetricDS sync, so the headend can be seen off site. Keys and the wallet system of record stay on GroundBolt.
-    <strong>MDMS</strong> is the next concept up. It keeps the history of reads the headend already collected: checks each read, drops or repairs a bad one, and files them by meter and time. Billing and reports use that file. <a href="oms-workshop-nairobi-2026-day1.html">Day 1</a> called this processing, cleaning, and organizing raw meter data, and put CRM, revenue, and outage above it. This tree does not ship a separate MDMS. On the diagram that box is dashed and sits above L6. Site + ThunderCloud draws the readings arrow from the cloud headend up into it. Site only draws the same arrow from GroundBolt.
+    <strong>MDMS</strong> is the next concept up. It keeps the history of reads the headend already collected: checks each read, drops or repairs a bad one, and files them by meter and time. Billing and reports use that file. The <a href="oms-workshop-nairobi-2026-open-server.html">open-server note</a> calls this processing, cleaning, and organizing raw meter data, and puts CRM, revenue, and outage above it. This tree does not ship a separate MDMS. On the diagram that box is dashed and sits above L6. Site + ThunderCloud draws the readings arrow from the cloud headend up into it. Site only draws the same arrow from GroundBolt.
   </p>
   <div class="grid-2">
     <div class="card">
       <h3>Above L6 · MDMS</h3>
-      <p>Checks the headend’s reads, drops or repairs a bad one, and files the rest by meter and time. Not a process found in this tree. Day 1 places it above the headend. TC2.0 does not claim the CRM depth that sits above an MDMS.</p>
+      <p>Checks the headend’s reads, drops or repairs a bad one, and files the rest by meter and time. Not a process found in this tree. The open-server note places it above the headend. TC2.0 does not claim the CRM depth that sits above an MDMS.</p>
     </div>
     <div class="card">
       <h3>L6–L5 · Headend, cloud copy</h3>

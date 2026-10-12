@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 830" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open Core stack. Violet boundary holds cloud headend, sync, local mirror, drivers, and the hop to the gateway.">
+  <style>
+    text { font-family: "DM Sans", system-ui, sans-serif; }
+    .cloud-only { display: block; }
+  </style>
+
+  <g id="key-top">
+    <rect x="12" y="8" width="876" height="32" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+    <path d="M32 27 L41 13 L23 13 Z" fill="#3B6D11"/>
+    <text x="50" y="28" font-size="11" fill="#3B6D11" font-weight="600">Control down</text>
+    <text x="148" y="28" font-size="10" fill="#666">enable / disable / config / tariff</text>
+    <path d="M430 13 L439 27 L421 27 Z" fill="#175CD3"/>
+    <text x="448" y="28" font-size="11" fill="#175CD3" font-weight="600">Readings up</text>
+    <text x="540" y="28" font-size="10" fill="#666">register checklist / state</text>
+  </g>
+
+  <text x="20" y="56" fill="#9a9990" font-size="11">ABOVE THE CORE</text>
+  <rect x="12" y="64" width="876" height="62" rx="6" fill="none" stroke="#9a9990" stroke-dasharray="4 3"/>
+  <g class="node">
+    <rect x="200" y="73" width="200" height="44" rx="6" fill="#f7f6f3" stroke="#5a5a55" stroke-dasharray="4 3"/>
+    <text x="300" y="91" text-anchor="middle" font-size="12" font-weight="600">Business modules</text>
+    <text x="300" y="105" text-anchor="middle" font-size="9" fill="#666">CRM, revenue, outage</text>
+  </g>
+  <g class="node">
+    <rect x="420" y="73" width="160" height="44" rx="6" fill="#f7f6f3" stroke="#5a5a55" stroke-dasharray="4 3"/>
+    <text x="500" y="91" text-anchor="middle" font-size="12" font-weight="600">Tariffs</text>
+    <text x="500" y="105" text-anchor="middle" font-size="9" fill="#666">operator modules</text>
+  </g>
+  <g class="node">
+    <rect x="600" y="73" width="170" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-dasharray="4 3"/>
+    <text x="685" y="91" text-anchor="middle" font-size="12" font-weight="600">STS vending</text>
+    <text x="685" y="105" text-anchor="middle" font-size="9" fill="#666">not a comms layer</text>
+  </g>
+  <path d="M300 160 L300 117" fill="none" stroke="#9a9990" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="308" y="142" font-size="9" fill="#9a9990">above</text>
+
+  <text x="20" y="148" fill="#9a9990" font-size="11">MDMS</text>
+  <rect x="12" y="156" width="876" height="56" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.08)"/>
+  <g class="node">
+    <rect x="200" y="162" width="220" height="44" rx="6" fill="#f7f6f3" stroke="#5a5a55"/>
+    <text x="310" y="180" text-anchor="middle" font-size="12" font-weight="600">MDMS</text>
+    <text x="310" y="194" text-anchor="middle" font-size="9" fill="#666">check, repair, file reads</text>
+  </g>
+  <text x="440" y="188" font-size="10" fill="#666">necessary for the headend</text>
+
+  <g id="open-core">
+    <rect x="6" y="218" width="888" height="340" rx="12" fill="#F4F0FC" stroke="#5B4DC7" stroke-width="2.5"/>
+    <text x="860" y="236" text-anchor="end" font-size="12" font-weight="600" fill="#5B4DC7">OPEN CORE</text>
+  </g>
+
+  <text class="cloud-only" x="20" y="230" fill="#9a9990" font-size="11">L6 - CLOUD HES</text>
+  <rect class="cloud-only" x="12" y="238" width="876" height="56" rx="6" fill="#F4F0FC" stroke="none"/>
+  <g id="l6" class="cloud-only">
+    <g class="node">
+      <rect x="200" y="244" width="220" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="310" y="262" text-anchor="middle" font-size="12" font-weight="600">Cloud HES</text>
+      <text x="310" y="276" text-anchor="middle" font-size="9" fill="#666">off site</text>
+    </g>
+    <g class="node">
+      <rect x="440" y="244" width="180" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="530" y="262" text-anchor="middle" font-size="12" font-weight="600">Linked sites</text>
+      <text x="530" y="276" text-anchor="middle" font-size="9" fill="#666">same server, remote</text>
+    </g>
+  </g>
+
+  <text class="cloud-only" x="20" y="310" fill="#9a9990" font-size="11">L5 - SYNC</text>
+  <rect class="cloud-only" x="12" y="318" width="876" height="56" rx="6" fill="#F4F0FC" stroke="none"/>
+  <g id="l5" class="cloud-only">
+    <g class="node">
+      <rect x="200" y="324" width="220" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="310" y="342" text-anchor="middle" font-size="12" font-weight="600">Sync</text>
+      <text x="310" y="356" text-anchor="middle" font-size="9" fill="#666">when the link returns</text>
+    </g>
+    <text x="440" y="350" font-size="10" fill="#666">history waits, service continues</text>
+  </g>
+
+  <text x="20" y="390" fill="#9a9990" font-size="11">L4 - SITE HEADEND</text>
+  <rect x="12" y="398" width="876" height="56" rx="6" fill="#F4F0FC" stroke="none"/>
+  <g id="l4">
+    <g class="node">
+      <rect x="200" y="404" width="220" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7" stroke-width="1.75"/>
+      <text x="310" y="422" text-anchor="middle" font-size="12" font-weight="600">Local mirror</text>
+      <text x="310" y="436" text-anchor="middle" font-size="9" fill="#666">on site</text>
+    </g>
+    <g class="node">
+      <rect x="440" y="404" width="190" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-dasharray="4 3"/>
+      <text x="535" y="422" text-anchor="middle" font-size="12" font-weight="600">Meter keys</text>
+      <text x="535" y="436" text-anchor="middle" font-size="9" fill="#666">where they sit: open</text>
+    </g>
+  </g>
+
+  <text x="20" y="470" fill="#9a9990" font-size="11">L3 - DRIVERS</text>
+  <rect x="12" y="478" width="876" height="56" rx="6" fill="#F4F0FC" stroke="none"/>
+  <g id="l3">
+    <g class="node">
+      <rect x="200" y="484" width="200" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="300" y="502" text-anchor="middle" font-size="12" font-weight="600">Pluggable driver</text>
+      <text x="300" y="516" text-anchor="middle" font-size="9" fill="#666">one per meter type</text>
+    </g>
+    <g class="node">
+      <rect x="420" y="484" width="120" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="480" y="502" text-anchor="middle" font-size="11" font-weight="600">SparkMeter</text>
+      <text x="480" y="516" text-anchor="middle" font-size="9" fill="#666">near-term</text>
+    </g>
+    <g class="node">
+      <rect x="550" y="484" width="120" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="610" y="502" text-anchor="middle" font-size="11" font-weight="600">SteamaCo</text>
+      <text x="610" y="516" text-anchor="middle" font-size="9" fill="#666">near-term</text>
+    </g>
+    <g class="node">
+      <rect x="680" y="484" width="150" height="44" rx="6" fill="#f7f6f3" stroke="#888" stroke-dasharray="4 3"/>
+      <text x="755" y="502" text-anchor="middle" font-size="11" font-weight="600">Other OEM</text>
+      <text x="755" y="516" text-anchor="middle" font-size="9" fill="#666">Calin, third party</text>
+    </g>
+  </g>
+
+  <text x="20" y="550" fill="#9a9990" font-size="11">L2 - GATEWAY / DCU</text>
+  <rect x="12" y="558" width="876" height="56" rx="6" fill="rgba(186,117,23,0.05)" stroke="rgba(186,117,23,0.15)"/>
+  <g id="l2">
+    <g class="node">
+      <rect x="200" y="564" width="220" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
+      <text x="310" y="582" text-anchor="middle" font-size="12" font-weight="600">Gateway / DCU</text>
+      <text x="310" y="596" text-anchor="middle" font-size="9" fill="#666">more than one driver</text>
+    </g>
+    <g class="node">
+      <rect x="440" y="564" width="200" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
+      <text x="540" y="582" text-anchor="middle" font-size="12" font-weight="600">DLMS client</text>
+      <text x="540" y="596" text-anchor="middle" font-size="9" fill="#666">server toward headend</text>
+    </g>
+  </g>
+
+  <text x="20" y="630" fill="#9a9990" font-size="11">LINK</text>
+  <rect x="12" y="638" width="876" height="56" rx="6" fill="rgba(138,90,16,0.06)" stroke="rgba(138,90,16,0.2)"/>
+  <g id="link">
+    <g class="node">
+      <rect x="200" y="644" width="280" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
+      <text x="340" y="662" text-anchor="middle" font-size="12" font-weight="600">Meter link</text>
+      <text x="340" y="676" text-anchor="middle" font-size="9" fill="#666">DLMS/COSEM. Radio stays with the OEM.</text>
+    </g>
+  </g>
+
+  <text x="20" y="710" fill="#9a9990" font-size="11">L1 - METER</text>
+  <rect x="12" y="718" width="876" height="56" rx="6" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)"/>
+  <g id="l1">
+    <g class="node">
+      <rect x="200" y="724" width="200" height="44" rx="6" fill="#f7f6f3" stroke="#888"/>
+      <text x="300" y="742" text-anchor="middle" font-size="12" font-weight="600">Meter</text>
+      <text x="300" y="756" text-anchor="middle" font-size="9" fill="#666">registers, disconnect</text>
+    </g>
+    <g class="node">
+      <rect x="430" y="724" width="170" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/>
+      <text x="515" y="742" text-anchor="middle" font-size="12" font-weight="600">CIU / keypad</text>
+      <text x="515" y="756" text-anchor="middle" font-size="9" fill="#666">STS credit, if used</text>
+    </g>
+  </g>
+  <path d="M400 746 L430 746" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="415" y="740" text-anchor="middle" font-size="9" fill="#534AB7">local</text>
+
+  <text x="20" y="800" fill="#9a9990" font-size="11">Violet boundary is Open Core: cloud HES, sync, site mirror, drivers, and the hop to the gateway.</text>
+
+  <g class="cloud-only" fill="none">
+    <path d="M250 244 L250 206" stroke="#175CD3" stroke-width="2.25" stroke-dasharray="4 3"/>
+    <path d="M250 206 L256 218 L244 218 Z" fill="#175CD3" stroke="none"/>
+  </g>
+
+  <g id="spine-control" fill="none" stroke-width="2.25" stroke-linecap="square">
+    <g class="cloud-only">
+      <path d="M292 286 L292 324" stroke="#3B6D11"/>
+      <path d="M292 305 L298 293.5 L286 293.5 Z" fill="#3B6D11" stroke="none"/>
+      <path d="M292 366 L292 404" stroke="#BA7517"/>
+      <path d="M292 385 L298 373.5 L286 373.5 Z" fill="#BA7517" stroke="none"/>
+      <text x="280" y="388" text-anchor="end" font-size="9" fill="#BA7517">sync</text>
+    </g>
+    <path d="M292 448 L292 484" stroke="#3B6D11"/>
+    <path d="M292 466 L298 454.5 L286 454.5 Z" fill="#3B6D11" stroke="none"/>
+    <text x="280" y="470" text-anchor="end" font-size="9" fill="#3B6D11">cmd</text>
+    <path d="M292 528 L292 564" stroke="#3B6D11"/>
+    <path d="M292 546 L298 534.5 L286 534.5 Z" fill="#3B6D11" stroke="none"/>
+    <text x="280" y="550" text-anchor="end" font-size="9" fill="#3B6D11">hop</text>
+    <path d="M292 608 L292 644" stroke="#BA7517"/>
+    <path d="M292 626 L298 614.5 L286 614.5 Z" fill="#BA7517" stroke="none"/>
+    <text x="280" y="630" text-anchor="end" font-size="9" fill="#BA7517">DLMS</text>
+    <path d="M292 688 L292 724" stroke="#BA7517"/>
+    <path d="M292 706 L298 694.5 L286 694.5 Z" fill="#BA7517" stroke="none"/>
+  </g>
+
+  <g id="spine-readings" fill="none" stroke-width="2.25" stroke-linecap="square">
+    <path d="M318 724 L318 688" stroke="#175CD3"/>
+    <path d="M318 706 L324 717.5 L312 717.5 Z" fill="#175CD3" stroke="none"/>
+    <path d="M318 644 L318 608" stroke="#175CD3"/>
+    <path d="M318 626 L324 637.5 L312 637.5 Z" fill="#175CD3" stroke="none"/>
+    <text x="330" y="630" font-size="9" fill="#175CD3">read</text>
+    <path d="M318 564 L318 528" stroke="#175CD3"/>
+    <path d="M318 546 L324 557.5 L312 557.5 Z" fill="#175CD3" stroke="none"/>
+    <text x="330" y="550" font-size="9" fill="#175CD3">hop</text>
+    <path d="M318 484 L318 448" stroke="#175CD3"/>
+    <path d="M318 466 L324 477.5 L312 477.5 Z" fill="#175CD3" stroke="none"/>
+    <text x="330" y="470" font-size="9" fill="#175CD3">reading</text>
+    <g class="cloud-only">
+      <path d="M318 404 L318 366" stroke="#BA7517"/>
+      <path d="M318 385 L324 396.5 L312 396.5 Z" fill="#BA7517" stroke="none"/>
+      <path d="M318 324 L318 286" stroke="#175CD3"/>
+      <path d="M318 305 L324 316.5 L312 316.5 Z" fill="#175CD3" stroke="none"/>
+      <text x="330" y="308" font-size="9" fill="#175CD3">remote</text>
+    </g>
+  </g>
+</svg>

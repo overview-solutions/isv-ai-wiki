@@ -1499,8 +1499,8 @@ code {
       Meeting Notes
     </div>
     <div class="nav-sub" id="nav-sub-notes">
-      <div class="nav-sub-item" data-note="oms-workshop-nairobi-2026-open-server" data-note-group="tech-comm" onclick="showNote('oms-workshop-nairobi-2026-open-server')">30 Sep–1 Oct 2026 · OMS open server</div>
-      <div class="nav-sub-item" data-note="oms-workshop-nairobi-2026-day1" data-note-group="tech-comm" onclick="showNote('oms-workshop-nairobi-2026-day1')">30 Sep 2026 · OMS Workshop Day 1</div>
+      <div class="nav-sub-item" data-note="tech-comm-2026-10-08" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-10-08')">8 Oct 2026 · Gateway vs requirement</div>
+      <div class="nav-sub-item" data-note="oms-workshop-nairobi-2026-open-server" data-note-group="tech-comm" onclick="showNote('oms-workshop-nairobi-2026-open-server')">30 Sep–2 Oct 2026 · OMS open server</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-08-11" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-08-11')">11 Aug 2026 · Open Metering Infrastructure / SparkMeter</div>
       <div class="nav-sub-item" data-note="tech-comm-2026-06-25" data-note-group="tech-comm" onclick="showNote('tech-comm-2026-06-25')">25 Jun 2026 · AI Wiki Orientation</div>
       <div class="nav-sub-item" data-note="metering-2026-05-28" data-note-group="tech-comm" onclick="showNote('metering-2026-05-28')">28 May 2026 · Metering Topology</div>
@@ -1999,7 +1999,7 @@ code {
         <div class="standard-icon">📋</div>
         <div>
           <div class="resource-name">OMS Workshop Nairobi</div>
-          <div class="resource-desc"><a href="#" onclick="showNote('oms-workshop-nairobi-2026');return false">Event page</a> — 30 Sep–2 Oct 2026 · A2EI · EnAccess · Open Metering Strategy. Online pre-session 22 Sep already ran. <a href="#" onclick="showNote('oms-workshop-nairobi-2026-open-server');return false">Open server note</a> is in Meeting Notes. Training-task catalog: <a href="#" onclick="showNote('oms-training-skills');return false">OMS / village training skills</a>.</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('oms-workshop-nairobi-2026');return false">Results</a> — 30 Sep–2 Oct 2026 · A2EI · EnAccess. MVP v1 pilot aim January/February 2027. <a href="#" onclick="showNote('oms-workshop-nairobi-2026-open-server');return false">Open server note</a> holds the stack. Prep votes stay on the event page. Training-task catalog: <a href="#" onclick="showNote('oms-training-skills');return false">OMS / village training skills</a>.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2084,6 +2084,13 @@ code {
         <div>
           <div class="resource-name">IEEE Smart Village Wiki</div>
           <div class="resource-desc"><a href="http://wiki.smartvillage.ieee.org/" target="_blank">wiki.smartvillage.ieee.org</a> — DokuWiki with technologies (SunBlazer, PBK), standards, working group pages, and field documentation.</div>
+        </div>
+      </div>
+      <div class="resource-row">
+        <div class="standard-icon">📡</div>
+        <div>
+          <div class="resource-name">Tech Comm — Gateway vs the requirement (8 Oct 2026)</div>
+          <div class="resource-desc"><a href="#" onclick="showNote('tech-comm-2026-10-08');return false">Open in Meeting Notes</a> — gateway is an engineer’s solution · requirement is legacy support and a minimal open-sourced frontend on A2EI’s cloud. Commercial points from the call are ISV-internal.</div>
         </div>
       </div>
       <div class="resource-row">
@@ -2426,6 +2433,14 @@ const METER_BENCHMARK_PAGES = {
 };
 let activeMeterPageId = 'overview';
 const MEETING_NOTES = {
+  'tech-comm-2026-10-08': {
+    group: 'tech-comm',
+    title: 'Gateway vs the requirement',
+    date: '8 Oct 2026',
+    sub: 'Gateway is the engineer path · legacy support · minimal open frontend on A2EI cloud',
+    src: 'tech-comm-2026-10-08.html?embed=1&v=20261008tc',
+    standalone: 'tech-comm-2026-10-08.html'
+  },
   'tech-comm-2026-08-11': {
     group: 'tech-comm',
     title: 'Open Metering Infrastructure · SparkMeter',
@@ -2489,32 +2504,24 @@ const MEETING_NOTES = {
     title: 'OpenAMI EMS Workshop',
     date: 'Sep 2026',
     sub: 'Nairobi · 4 sessions ran · BUILD sim · PCB follow-up',
-    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20260928run',
+    src: 'power-africa-2026-workshop-planning.html?embed=1&v=20261012pac',
     standalone: 'power-africa-2026-workshop-planning.html'
   },
   'oms-workshop-nairobi-2026': {
     group: 'events',
     title: 'OMS Workshop Nairobi',
     date: '30 Sep–2 Oct 2026',
-    sub: 'A2EI · EnAccess · Open Metering Strategy · draft agenda',
-    src: 'oms-workshop-nairobi-2026.html?embed=1&v=20261002srv',
+    sub: 'A2EI · EnAccess · results · MVP v1 pilot aim Jan/Feb 2027',
+    src: 'oms-workshop-nairobi-2026.html?embed=1&v=20261012evt',
     standalone: 'oms-workshop-nairobi-2026.html'
   },
   'oms-workshop-nairobi-2026-open-server': {
     group: 'tech-comm',
     title: 'OMS Workshop · open server',
-    date: '30 Sep–1 Oct 2026',
-    sub: 'Nairobi · offline and cloud · OEM gateways and DCUs',
-    src: 'oms-workshop-nairobi-2026-open-server.html?embed=1&v=20261002logo',
+    date: '30 Sep–2 Oct 2026',
+    sub: 'Nairobi · organizer summary · Open Core · pilot aim Jan/Feb 2027',
+    src: 'oms-workshop-nairobi-2026-open-server.html?embed=1&v=20261012draw',
     standalone: 'oms-workshop-nairobi-2026-open-server.html'
-  },
-  'oms-workshop-nairobi-2026-day1': {
-    group: 'tech-comm',
-    title: 'OMS Workshop · Day 1',
-    date: '30 Sep 2026',
-    sub: 'Nairobi · stack, lock-in, scope',
-    src: 'oms-workshop-nairobi-2026-day1.html?embed=1&v=20261001d1c',
-    standalone: 'oms-workshop-nairobi-2026-day1.html'
   },
   'oms-training-skills': {
     group: 'events',

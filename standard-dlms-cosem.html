@@ -339,6 +339,26 @@ td { color: var(--text-2); font-size: 13px; }
   </div>
   <p>Class numbers are the public COSEM interface-class identifiers (IEC 62056-6-2). A manufacturer still chooses which instances to expose. That list is the vendor ICD, or an IDIS / Generic Companion Profile certificate when the meter has one. See <a href="meter-vmrs.html#focus">where register work goes</a>.</p>
 
+  <h2 id="association-keepalive">Association and keep-alive</h2>
+  <p>The interface classes above are the easier part, once a driver is in place. Building that driver is the larger job. From the 30 Sep–1 Oct workshop: a pluggable driver per meter type can be pulled off the shelf for pre-approved meters, and each meter OEM has its own way through the heartbeat side of the login and heartbeat process. The <a href="oms-workshop-nairobi-2026-open-server.html">open-server note</a> records three outcomes: an OEM-agnostic head end, a local mirror inside the headend when the cloud is down, and talking to various gateways.</p>
+
+  <h3>Association</h3>
+  <p>Login is standardized. IEC 62056, through the <a href="https://www.dlms.com/core-specifications/" target="_blank" rel="noopener">Blue Book and Green Book</a>, defines one association-establishment procedure. The client sends AARQ. The meter answers with AARE. The exchange is ACSE (Association Control Service Element). Authentication is defined: no security, Low Level Security, or High Level Security and its algorithms. A DLMS-certified meter is supposed to implement this same handshake. Association is one of the more rigorously conformance-tested parts. <a href="https://www.dlms.com/qualification/" target="_blank" rel="noopener">Yellow Book</a> testing and the Qualification Program check it. The exchange is drawn under <a href="#dlms">DLMS — the messages</a>.</p>
+
+  <h3>Keep-alive</h3>
+  <p>Heartbeat is where the base standard leaves gaps. DLMS/COSEM does not mandate one universal heartbeat message.</p>
+  <ul>
+    <li>Push. Data notification and push are in later parts of the Green Book. Some manufacturers use them for a periodic “I’m alive”, or for event pushes. Interval, trigger, and which OBIS or push object are configurable. Those choices vary.</li>
+    <li>Transport keep-alive. The TCP/IP wrapper profile is IEC 62056-47. That is infrastructure, not one standardized application-layer message.</li>
+    <li>No single certifying body enforces one heartbeat payload format industry-wide.</li>
+  </ul>
+  <p>Integration still takes engineering effort between two DLMS-certified meters.</p>
+
+  <h3>Companion profiles</h3>
+  <p><a href="#idis">IDIS</a> locks the open choices of base DLMS/COSEM into a companion profile: device model, security setup, association behavior, event codes, firmware update, and the rest of that package. IDIS-certified meters from different manufacturers are meant to be plug-and-play against a compliant head-end, without a custom driver per vendor. The IDIS Association merged into DLMS UA in November 2021. Certification now runs through the DLMS UA qualification portal and DNV’s accredited lab. From the same workshop notes, that profile is the closest existing answer to the heartbeat gap. Sources and package history stay on the <a href="meter-vmrs.html#idis">register checklist</a>.</p>
+  <p>National companion specifications go further than base IEC 62056 for one market. The UK GB Companion Specification (GBCS) under SMETS, the Netherlands DSMR profile, and other national utility profiles pin security, association parameters, and sometimes push or keep-alive for that market. They do not necessarily align across countries.</p>
+  <p>The Qualification Program checks AARQ/AARE and general protocol conformance. The Yellow Book and the Conformance Test Tool (CTT) are that check. Conformance to the base standard still leaves vendor-specific options: extra OBIS codes, security variants, and event and push behavior. Head-end integration stays non-trivial.</p>
+
   <h2 id="dlms">DLMS — the messages</h2>
   <figure class="schema">
     <figcaption>DCU is the client. Meter is the server. Association first, then a read or an action. Same object address as the COSEM tree above.</figcaption>
@@ -418,6 +438,7 @@ td { color: var(--text-2); font-size: 13px; }
 
   <p class="footer-nav">
     <a href="#cosem">COSEM object</a>
+    <a href="#association-keepalive">Association and keep-alive</a>
     <a href="meter-vmrs.html">Register checklist</a>
     <a href="meter-vmrs.html#idis">IDIS</a>
     <a href="index.html#standards-village">Village standards</a>

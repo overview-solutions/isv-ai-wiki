@@ -65,8 +65,7 @@ isv-ai-wiki/
 │   └── northbound-mqtt-v0.1.json # Northbound JSON/MQTT profile + IETF SIP (RFC 3261) dialog correlation
 ├── power-africa-2026-workshop-planning.html # OpenAMI EMS Workshop results (Nairobi · 4 sessions ran · 21 + 24 Sep)
 ├── oms-workshop-nairobi-2026.html           # OMS Workshop Nairobi (A2EI · EnAccess · 30 Sep–2 Oct)
-├── oms-workshop-nairobi-2026-open-server.html  # Workshop note · open server, offline and cloud, OEM gateways/DCUs
-├── oms-workshop-nairobi-2026-day1.html      # Day 1 note (30 Sep · Meeting Notes) · still on disk
+├── oms-workshop-nairobi-2026-open-server.html  # Workshop highlight · Open Core includes cloud head end + local mirror
 ├── oms-training-skills.html                 # Training-task catalog (OMS pre-session + EMS workshop ask · modules TBD)
 ├── power-africa-2026-conference.html        # IEEE PES & IAS Power Africa Conference 2026 links
 ├── power-africa-openami-presentation-2025.html  # OpenAMI deck @ PowerAfrica Sep 2025
@@ -190,9 +189,8 @@ Registered sections (`SECTIONS` in `index.html`):
 | `#notes/{note-id}` | Tech Comm meeting note (default: `metering-2026-05-28`) |
 | `#events/{note-id}` | In-person events (workshops, hackathons; default: `open-energy-hackathon-2025`). Legacy `#power-africa/...` still resolves. |
 | `#events/power-africa-2026-workshop-planning` | OpenAMI EMS Workshop **results** (filename kept). All 4 sessions ran (3 Mon + 1 Thu). BUILD sim · Open Utility Network convention · PCB interest sheet / handwritten handout TBD. |
-| `#events/oms-workshop-nairobi-2026` | OMS Workshop Nairobi · 30 Sep–2 Oct 2026 · A2EI · EnAccess · draft agenda + online pre-session votes. Attendance not published. Points at the open-server note. |
-| `#notes/oms-workshop-nairobi-2026-open-server` | Workshop note · 30 Sep–1 Oct 2026 · open-sourced server, offline and cloud, OEM gateways and DCUs. This is the note to read. |
-| `#notes/oms-workshop-nairobi-2026-day1` | Day 1 page still registered · 30 Sep 2026 · stack, lock-in, three scope cuts. Roster stays in `isv-ai-wiki-private`. |
+| `#events/oms-workshop-nairobi-2026` | OMS Workshop Nairobi results · 30 Sep–2 Oct 2026 · A2EI · EnAccess · MVP v1 pilot aim Jan/Feb 2027. Prep agenda and votes sit under Pre-session record. Attendance not published. Points at the open-server note. |
+| `#notes/oms-workshop-nairobi-2026-open-server` | Workshop highlight · 30 Sep–2 Oct 2026 · organizer drawing (OMS head end beside OEM head end) · room-note stack with cloud head end inside Open Core, local mirror, OEM gateways and DCUs. |
 | `#tech-reports/steamaco-nimbus-jackalope` | ISV-TRD-002 · `meter-steamaco-nimbus.html` · Jackalope Limited trades as SteamaCo · Nimbus AMI · STEAMA COMPANY LIMITED in administration. No asset-transfer deed in that pass. |
 | `#events/oms-training-skills` | Training-task catalog — village energy + OMS / metering skillsets across the lifecycle. Not a course. Demand from OMS pre-session + OpenAMI EMS workshop training ask. Modules TBD. |
 | `#tech-reports` | Technical reports list |
@@ -379,15 +377,14 @@ When editing this repo:
 - **Simulator:** BUILD mode — developers construct the microgrid; data auto-formats to **Open Utility Network convention** (not a standard). **LOADS** and **GENERATION** (Energy Assets). Main view **OPERATIONS** / **MAINTENANCE**.
 - **PCB follow-up:** interest sheet + form on the results page. Handwritten handout list TBD. Name list from sheet pending (no public CSV without login).
 - **Photos:** conference page (`power-africa-2026-conference.html`), not the workshop page.
-- **Standalone page:** `power-africa-2026-workshop-planning.html` (filename kept; embeds at `#events/power-africa-2026-workshop-planning`).
+- **Standalone page:** `power-africa-2026-workshop-planning.html` (filename kept; embeds at `#events/power-africa-2026-workshop-planning`). Page leads with the six tracks. The clock and guest table sit below kits, personas, and starter projects.
 
 ### OMS Workshop Nairobi — 30 Sep–2 Oct 2026
 
-- **Hosts:** A2EI and EnAccess. Draft agenda in prep pack (may change).
+- **Hosts:** A2EI and EnAccess. Three days ran 30 Sep–2 Oct 2026. Event page leads with that result. Prep agenda, 22 Sep votes, and the resource list sit under Pre-session record.
 - **Online pre-session:** Tue 22 Sep 2026, 11:00–12:30 CEST · AMDA / A2EI / EnAccess · 50+ on the call (already ran).
 - **In-person attendance:** not published on this wiki. Working roster (name + org from the organizer sheet, not a checked room roll) is ISV-internal.
-- **Note to read:** `oms-workshop-nairobi-2026-open-server.html` · `#notes/oms-workshop-nairobi-2026-open-server` — open-sourced server, offline and in the cloud, OEM gateways and DCUs. 30 Sep–1 Oct discussion folded here.
-- **Day 1 page:** `oms-workshop-nairobi-2026-day1.html` · `#notes/oms-workshop-nairobi-2026-day1` — still registered. Roster stays in `isv-ai-wiki-private`.
+- **Note to read:** `oms-workshop-nairobi-2026-open-server.html` · `#notes/oms-workshop-nairobi-2026-open-server` — public highlight. Organizer drawing (summary PDF): OMS head end beside an OEM head end, CRM / MDMS / GIS / reporting above, STS beside, a local head end per site. Room-note SVG keeps one cloud head end inside Open Core, plus the local mirror. OEM gateways and DCUs sit outside the core. Digital Public Good. MVP v1 pilot aim January/February 2027. Day-by-day notes are not published here. Roster stays in `isv-ai-wiki-private`.
 - **Standalone page:** `oms-workshop-nairobi-2026.html` · `#events/oms-workshop-nairobi-2026`.
 - **Training-task catalog** (not a course): `oms-training-skills.html` · `#events/oms-training-skills` — work that needs training, mapped to lifecycle phases. Modules TBD. No date / venue / sign-up.
 
