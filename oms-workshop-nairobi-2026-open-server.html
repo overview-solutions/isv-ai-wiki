@@ -106,7 +106,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 
   <div class="callout">
     <strong>The ask</strong>
-    <p>One open head end your gateway can join, in the cloud and on site. Your meter, radio, and keypad stay yours.</p>
+    <p>One open head end the gateway can join, in the cloud and on site. Meter, radio, and keypad stay outside it.</p>
   </div>
 
   <p>Inhe Meters was the first OEM to vocally support this. They were in attendance.</p>
@@ -153,7 +153,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p>Thanks in the summary: Global Energy Alliance for People and Planet for the Nairobi venue, Good Energies for support to invite a wide group, NEFCO for support of the work that follows, NRECA for advice, OpenAMI and AMDA for convening members and technical experts, and EarthSpark and SteamaCo representatives for open participation.</p>
 
   <h2 id="open-core-stack">One stack</h2>
-  <p>Violet is the head end the group is building. It runs in the cloud and again on site, so service continues when the link is down. The group needs that head end to speak to your gateway. Amber and gray are what you already ship: gateway, radio, meter, keypad.</p>
+  <p>Violet is the head end the group is building. It runs in the cloud and again on site, so service continues when the link is down. The group needs that head end to speak to the gateway. Amber and gray are the field hardware: gateway, radio, meter, keypad.</p>
   <div class="panel">
     <div class="panel-head">
       <span id="panel-stack-title">Open Core</span>
@@ -279,7 +279,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 (function () {
   var el = document.getElementById('host-stack');
   el.innerHTML = '<p style="padding:1rem;font-size:13px;color:var(--text-2)">Loading…</p>';
-  fetch('technical-notes/diagrams/open-core-stack.svg?v=20261012oem').then(function (r) {
+  fetch('technical-notes/diagrams/open-core-stack.svg?v=20261022oem').then(function (r) {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.text();
   }).then(function (text) {
