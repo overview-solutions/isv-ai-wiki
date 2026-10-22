@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 900 830" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open Core stack. Violet boundary holds cloud headend, sync, local mirror, drivers, and the hop to the gateway.">
+<svg viewBox="0 0 900 830" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open Core is the head end the group is building. The OEM keeps the gateway, meter, and keypad.">
   <style>
     text { font-family: "DM Sans", system-ui, sans-serif; }
     .cloud-only { display: block; }
@@ -28,9 +28,9 @@
     <text x="500" y="105" text-anchor="middle" font-size="9" fill="#666">operator modules</text>
   </g>
   <g class="node">
-    <rect x="600" y="73" width="170" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-dasharray="4 3"/>
+    <rect x="600" y="73" width="170" height="44" rx="6" fill="#f7f6f3" stroke="#5a5a55" stroke-dasharray="4 3"/>
     <text x="685" y="91" text-anchor="middle" font-size="12" font-weight="600">STS vending</text>
-    <text x="685" y="105" text-anchor="middle" font-size="9" fill="#666">not a comms layer</text>
+    <text x="685" y="105" text-anchor="middle" font-size="9" fill="#666">above the head end</text>
   </g>
   <path d="M300 160 L300 117" fill="none" stroke="#9a9990" stroke-width="1.5" stroke-dasharray="4 3"/>
   <text x="308" y="142" font-size="9" fill="#9a9990">above</text>
@@ -54,13 +54,8 @@
   <g id="l6" class="cloud-only">
     <g class="node">
       <rect x="200" y="244" width="220" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
-      <text x="310" y="262" text-anchor="middle" font-size="12" font-weight="600">Cloud HES</text>
-      <text x="310" y="276" text-anchor="middle" font-size="9" fill="#666">off site</text>
-    </g>
-    <g class="node">
-      <rect x="440" y="244" width="180" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
-      <text x="530" y="262" text-anchor="middle" font-size="12" font-weight="600">Linked sites</text>
-      <text x="530" y="276" text-anchor="middle" font-size="9" fill="#666">same server, remote</text>
+      <text x="310" y="262" text-anchor="middle" font-size="12" font-weight="600">Cloud head end</text>
+      <text x="310" y="276" text-anchor="middle" font-size="9" fill="#666">Open Core, off site</text>
     </g>
   </g>
 
@@ -80,11 +75,11 @@
   <g id="l4">
     <g class="node">
       <rect x="200" y="404" width="220" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7" stroke-width="1.75"/>
-      <text x="310" y="422" text-anchor="middle" font-size="12" font-weight="600">Local mirror</text>
-      <text x="310" y="436" text-anchor="middle" font-size="9" fill="#666">on site</text>
+      <text x="310" y="422" text-anchor="middle" font-size="12" font-weight="600">On-site head end</text>
+      <text x="310" y="436" text-anchor="middle" font-size="9" fill="#666">same Open Core</text>
     </g>
     <g class="node">
-      <rect x="440" y="404" width="190" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-dasharray="4 3"/>
+      <rect x="440" y="404" width="190" height="44" rx="6" fill="#f7f6f3" stroke="#888" stroke-dasharray="4 3"/>
       <text x="535" y="422" text-anchor="middle" font-size="12" font-weight="600">Meter keys</text>
       <text x="535" y="436" text-anchor="middle" font-size="9" fill="#666">where they sit: open</text>
     </g>
@@ -94,24 +89,9 @@
   <rect x="12" y="478" width="876" height="56" rx="6" fill="#F4F0FC" stroke="none"/>
   <g id="l3">
     <g class="node">
-      <rect x="200" y="484" width="200" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
-      <text x="300" y="502" text-anchor="middle" font-size="12" font-weight="600">Pluggable driver</text>
-      <text x="300" y="516" text-anchor="middle" font-size="9" fill="#666">one per meter type</text>
-    </g>
-    <g class="node">
-      <rect x="420" y="484" width="120" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
-      <text x="480" y="502" text-anchor="middle" font-size="11" font-weight="600">SparkMeter</text>
-      <text x="480" y="516" text-anchor="middle" font-size="9" fill="#666">near-term</text>
-    </g>
-    <g class="node">
-      <rect x="550" y="484" width="120" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
-      <text x="610" y="502" text-anchor="middle" font-size="11" font-weight="600">SteamaCo</text>
-      <text x="610" y="516" text-anchor="middle" font-size="9" fill="#666">near-term</text>
-    </g>
-    <g class="node">
-      <rect x="680" y="484" width="150" height="44" rx="6" fill="#f7f6f3" stroke="#888" stroke-dasharray="4 3"/>
-      <text x="755" y="502" text-anchor="middle" font-size="11" font-weight="600">Other OEM</text>
-      <text x="755" y="516" text-anchor="middle" font-size="9" fill="#666">Calin, third party</text>
+      <rect x="200" y="484" width="430" height="44" rx="6" fill="#EDE7FA" stroke="#5B4DC7"/>
+      <text x="415" y="502" text-anchor="middle" font-size="12" font-weight="600">Driver for your meters</text>
+      <text x="415" y="516" text-anchor="middle" font-size="9" fill="#666">one per meter type, inside Open Core</text>
     </g>
   </g>
 
@@ -120,13 +100,8 @@
   <g id="l2">
     <g class="node">
       <rect x="200" y="564" width="220" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
-      <text x="310" y="582" text-anchor="middle" font-size="12" font-weight="600">Gateway / DCU</text>
-      <text x="310" y="596" text-anchor="middle" font-size="9" fill="#666">more than one driver</text>
-    </g>
-    <g class="node">
-      <rect x="440" y="564" width="200" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
-      <text x="540" y="582" text-anchor="middle" font-size="12" font-weight="600">DLMS client</text>
-      <text x="540" y="596" text-anchor="middle" font-size="9" fill="#666">server toward headend</text>
+      <text x="310" y="582" text-anchor="middle" font-size="12" font-weight="600">Your gateway</text>
+      <text x="310" y="596" text-anchor="middle" font-size="9" fill="#666">you keep this</text>
     </g>
   </g>
 
@@ -135,8 +110,8 @@
   <g id="link">
     <g class="node">
       <rect x="200" y="644" width="280" height="44" rx="6" fill="#FAEEDA" stroke="#BA7517"/>
-      <text x="340" y="662" text-anchor="middle" font-size="12" font-weight="600">Meter link</text>
-      <text x="340" y="676" text-anchor="middle" font-size="9" fill="#666">DLMS/COSEM. Radio stays with the OEM.</text>
+      <text x="340" y="662" text-anchor="middle" font-size="12" font-weight="600">Your radio</text>
+      <text x="340" y="676" text-anchor="middle" font-size="9" fill="#666">stays with your gateway</text>
     </g>
   </g>
 
@@ -145,19 +120,19 @@
   <g id="l1">
     <g class="node">
       <rect x="200" y="724" width="200" height="44" rx="6" fill="#f7f6f3" stroke="#888"/>
-      <text x="300" y="742" text-anchor="middle" font-size="12" font-weight="600">Meter</text>
-      <text x="300" y="756" text-anchor="middle" font-size="9" fill="#666">registers, disconnect</text>
+      <text x="300" y="742" text-anchor="middle" font-size="12" font-weight="600">Your meter</text>
+      <text x="300" y="756" text-anchor="middle" font-size="9" fill="#666">you keep this</text>
     </g>
     <g class="node">
-      <rect x="430" y="724" width="170" height="44" rx="6" fill="#EEEDFE" stroke="#534AB7"/>
-      <text x="515" y="742" text-anchor="middle" font-size="12" font-weight="600">CIU / keypad</text>
-      <text x="515" y="756" text-anchor="middle" font-size="9" fill="#666">STS credit, if used</text>
+      <rect x="430" y="724" width="170" height="44" rx="6" fill="#f7f6f3" stroke="#888"/>
+      <text x="515" y="742" text-anchor="middle" font-size="12" font-weight="600">Your keypad</text>
+      <text x="515" y="756" text-anchor="middle" font-size="9" fill="#666">you keep this</text>
     </g>
   </g>
-  <path d="M400 746 L430 746" fill="none" stroke="#534AB7" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="415" y="740" text-anchor="middle" font-size="9" fill="#534AB7">local</text>
+  <path d="M400 746 L430 746" fill="none" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="415" y="740" text-anchor="middle" font-size="9" fill="#666">local</text>
 
-  <text x="20" y="800" fill="#9a9990" font-size="11">Violet boundary is Open Core: cloud HES, sync, site mirror, drivers, and the hop to the gateway.</text>
+  <text x="20" y="800" fill="#9a9990" font-size="11">Violet is the head end the group is building. Your gateway, meter, and keypad stay outside it.</text>
 
   <g class="cloud-only" fill="none">
     <path d="M250 244 L250 206" stroke="#175CD3" stroke-width="2.25" stroke-dasharray="4 3"/>

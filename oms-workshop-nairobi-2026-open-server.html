@@ -105,12 +105,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p id="notes-back-btn" style="margin-bottom:1.25rem"><a href="index.html#notes/oms-workshop-nairobi-2026-open-server" style="display:inline-block;padding:0.55rem 1rem;border-radius:8px;background:var(--green);color:var(--green-50);text-decoration:none;font-size:14px;font-weight:500">← Back to Meeting Notes</a> · <a href="oms-workshop-nairobi-2026.html" style="font-size:14px">Workshop page</a></p>
 
   <div class="callout">
-    <strong>The result</strong>
-    <ol>
-      <li>An OEM-agnostic cloud head end. That head end is Open Core.</li>
-      <li>A mirror of that head end on site, inside the same Open Core. It keeps working when the cloud link is down.</li>
-      <li>Ability to talk to various gateways.</li>
-    </ol>
+    <strong>The ask</strong>
+    <p>One open head end your gateway can join, in the cloud and on site. Your meter, radio, and keypad stay yours.</p>
   </div>
 
   <p>Inhe Meters was the first OEM to vocally support this. They were in attendance.</p>
@@ -156,18 +152,8 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </table>
   <p>Thanks in the summary: Global Energy Alliance for People and Planet for the Nairobi venue, Good Energies for support to invite a wide group, NEFCO for support of the work that follows, NRECA for advice, OpenAMI and AMDA for convening members and technical experts, and EarthSpark and SteamaCo representatives for open participation.</p>
 
-  <h2 id="organizer-drawing">Organizer drawing</h2>
-  <p>From the architecture photo in the A2EI and EnAccess Workshop Summary, October 2026. The room-note stack below is a separate drawing. The Day 2 feature boards and the Day 3 governance board in that PDF are too small to read as a feature list, so they are not copied here.</p>
-  <ul>
-    <li>The cloud holds two head ends side by side: an OMS head end and an OEM head end.</li>
-    <li>Above them: CRM, MDMS, GIS, and reporting.</li>
-    <li>STS, token generation, and vending sit beside the head end.</li>
-    <li>Each site has its own local head end with DLMS drivers, then a DCU or gateway, then meters.</li>
-    <li>Sites reach the cloud over a WAN.</li>
-  </ul>
-
-  <h2 id="open-core-stack">Open Core stack</h2>
-  <p>The organizers’ October summary names this server Open Core. The drawing below is the room-note stack. The summary’s architecture photo is a second picture, listed here in words. The violet boundary is Open Core: the cloud head end, sync, the local mirror, drivers, and the hop down to the gateway. The cloud head end stays inside that line. Gateways sit outside it. <a href="meter-tc20-review.html">TC 2.0</a> draws this shape for one product (GroundBolt on site, ThunderCloud after sync). This drawing is that shape for the open server. The radio is not one mesh, so there is no village twin. Dashed boxes are still open, or sit outside the core.</p>
+  <h2 id="open-core-stack">One stack</h2>
+  <p>Violet is the head end the group is building. It runs in the cloud and again on site, so service continues when the link is down. The group needs that head end to speak to your gateway. Amber and gray are what you already ship: gateway, radio, meter, keypad.</p>
   <div class="panel">
     <div class="panel-head">
       <span id="panel-stack-title">Open Core</span>
@@ -179,45 +165,10 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
         <span><i class="core"></i> Open Core</span>
         <span><i class="green"></i> Control down</span>
         <span><i class="blue"></i> Readings up</span>
-        <span><i class="dashed"></i> Still open, or outside the core</span>
+        <span><i class="dashed"></i> Outside the head end, or still open</span>
       </div>
     </div>
   </div>
-  <div class="layers">
-    <article class="layer-card">
-      <h3>Above the core</h3>
-      <p>CRM, revenue, outage, tariffs, customer interface. STS vending sits here too. STS is a token standard, not the link to the meter.</p>
-    </article>
-    <article class="layer-card">
-      <h3>MDMS</h3>
-      <p>Necessary for the headend. Keeps the history, checks each read, drops or repairs a bad one, files by meter and time. Billing uses that file. The core does not hold this logic.</p>
-    </article>
-    <article class="layer-card">
-      <h3>L6–L5 · Cloud head end, sync</h3>
-      <p>Cloud head end is Open Core. Same server, off site. Sync when the link returns. History can lag. Service does not wait on it.</p>
-    </article>
-    <article class="layer-card">
-      <h3>L4 · Local mirror</h3>
-      <p>Same Open Core on site. Mirror of the cloud head end. Keeps operating when the cloud link is down. Where meter keys sit is still open.</p>
-    </article>
-    <article class="layer-card">
-      <h3>L3 · Drivers</h3>
-      <p>One driver per meter type. Near-term connectors: SparkMeter and SteamaCo. Room for Calin and third parties. Northbound shape is the register checklist, not a second object model.</p>
-    </article>
-    <article class="layer-card">
-      <h3>L2 · Gateway / DCU</h3>
-      <p>The priority hop is gateway to headend. A gateway can hold more than one driver. DLMS client to the meter, server toward the headend.</p>
-    </article>
-    <article class="layer-card">
-      <h3>Link · meter path</h3>
-      <p>DLMS/COSEM at the meter and the DCU. The radio stays with the OEM gateway. Not one mesh.</p>
-    </article>
-    <article class="layer-card">
-      <h3>L1 · Meter</h3>
-      <p>Registers flow. Can open or close the connection. The keypad holds STS credit when that path is the one in use.</p>
-    </article>
-  </div>
-
   <h2>When the cloud link is down</h2>
   <p>The headend holds a local mirror of the server. The site keeps operating while the link is down. The question was how operations continue when the internet is down. The room did not treat the two approaches as a permanent either/or. The lean was to make offline capability an option. One company can have sites with a link and sites without one at the same time. Start with a stage that works, and do not design the next stage out.</p>
   <table>
@@ -239,37 +190,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   <p>Keep the two offline stacks apart. GroundBolt keeps local prepaid when the uplink fails, and those SM meters do not decode STS. STS-through-the-gap is the other path. Both can sit in one company. Neither is monitoring. A control loop cannot use that gap. Service can continue while history waits.</p>
 
   <h2>Talks to OEM gateways and DCUs</h2>
-  <p>Mini-grid platforms bundle the stack into one product. That sells. It also locks the operator in. The server this note is about is the headend, plus the hop from the gateway up to it. The picture is the <a href="#open-core-stack">Open Core stack</a> above. <a href="meter-overview.html">Village Metering</a> draws the same split: <a href="meter-solutions-map.html?track=steamaco">SteamaCo</a>, <a href="meter-solutions-map.html?track=sparkmeter">SparkMeter</a>, EnAccess, and an OpenAMI path.</p>
-  <div class="stack">
-    <div class="band">
-      <h3>OMS, CRM, revenue, outage</h3>
-      <p>Sit above the MDMS. Not the server.</p>
-    </div>
-    <div class="band">
-      <h3>MDMS</h3>
-      <p>Necessary for the head-end. Keeps the history of reads the headend collected, checks each read, drops or repairs a bad one, and files them by meter and time.</p>
-    </div>
-    <div class="band">
-      <h3>Headend</h3>
-      <p>Cloud head end and the on-site mirror. Both are Open Core. OEM-agnostic. The site keeps operating when the cloud link is down. One management system, a driver per meter type.</p>
-    </div>
-    <div class="seam">
-      <strong>Gateway to cloud</strong>
-      <p>Priority hop named in the room. This is the comms the server has to speak.</p>
-    </div>
-    <div class="band">
-      <h3>Gateway / DCU</h3>
-      <p>Collects meters, because a meter often cannot reach the cloud from a rural site. Local, cloud, or hybrid. Can hold more than one driver. Stack notes: <a href="tech-comm-2026-08-11-open-metering-infrastructure-sparkmeter.html">Open Metering Infrastructure · SparkMeter</a>.</p>
-    </div>
-    <div class="seam plain">
-      <strong>SparkNet HTTP — two descriptions</strong>
-      <p>Room: proprietary library for gateway-to-meter communication. Free to use. Open above it, proprietary below it. TC 2.0 diagram: driver from the USB gateway into GroundBolt. <a href="meter-tc20-review.html?host=full">TC 2.0 full host</a>.</p>
-    </div>
-    <div class="band">
-      <h3>Meter</h3>
-      <p>Registers electricity flow. Can open or close the customer connection. Names and the disconnect object: <a href="meter-vmrs.html">register checklist</a> · <a href="standard-dlms-cosem.html">DLMS/COSEM</a>.</p>
-    </div>
-  </div>
+  <p>Mini-grid platforms bundle this into one product. Open Core is the head end and the hop up from the gateway. The picture is <a href="#open-core-stack">one stack</a> above. <a href="meter-overview.html">Village Metering</a> draws the same split for <a href="meter-solutions-map.html?track=steamaco">SteamaCo</a>, <a href="meter-solutions-map.html?track=sparkmeter">SparkMeter</a>, EnAccess, and an OpenAMI path.</p>
   <p>Comms the server has to carry, from the priority-1 list on the <a href="https://docs.google.com/document/d/1LKvwqYPhLjN5jMHpt12fAY9g-dkbOaDkBFxT2bmiT6g/edit?tab=t.e7zm9cm7c654" target="_blank" rel="noopener">Features MVP shortlist</a>:</p>
   <ul>
     <li>OEM-agnostic infrastructure.</li>
@@ -346,12 +267,6 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
   </ul>
   <p>Data/Monitoring/Analytics and Operational Control are the server. Vending, billing, transparency, and the customer interface sit above it or beside it.</p>
 
-  <div class="callout callout-amber">
-    <strong>Still open</strong>
-    <p>If <a href="meter-tc20-review.html">GroundBolt</a> runs on site, what safeguards sit around meter keys and other sensitive data? Nearby on this wiki: <a href="tech-comm-2026-05-28-metering-topology.html">key hierarchies</a> and <a href="grid-cybersecurity-layers.html">defense-in-depth layers</a>.</p>
-    <p>And, from the scope talk: a local management engine, or the STS token stack alone?</p>
-  </div>
-
   <h2>On this wiki</h2>
   <ul>
     <li><a href="oms-workshop-nairobi-2026.html">Workshop page</a> · <a href="technical-notes/diagrams/open-core-stack.svg">Open Core stack SVG</a> · <a href="meter-overview.html">Village Metering</a> · <a href="meter-solutions-map.html">solutions map</a> · <a href="meter-vendor-study.html">vendor study</a></li>
@@ -364,7 +279,7 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
 (function () {
   var el = document.getElementById('host-stack');
   el.innerHTML = '<p style="padding:1rem;font-size:13px;color:var(--text-2)">Loading…</p>';
-  fetch('technical-notes/diagrams/open-core-stack.svg?v=20261012cloud').then(function (r) {
+  fetch('technical-notes/diagrams/open-core-stack.svg?v=20261012oem').then(function (r) {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.text();
   }).then(function (text) {
