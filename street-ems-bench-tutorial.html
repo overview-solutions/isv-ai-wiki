@@ -35,6 +35,20 @@ nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 1rem 0 1.5rem; f
 figure { margin: 1rem 0; }
 figure img { display: block; max-width: 100%; height: auto; }
 figcaption { margin-top: 0.4rem; color: var(--text-2); font-size: 13px; }
+.training-step {
+  margin: 1.5rem 0;
+  padding: clamp(0.85rem, 3vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--step-accent);
+  border-radius: 8px;
+  background: var(--step-bg);
+}
+.training-step h2 { margin-top: 0; }
+.training-step > :last-child { margin-bottom: 0; }
+.training-step--flash { --step-bg: var(--blue-50); --step-accent: var(--blue); }
+.training-step--power { --step-bg: var(--green-50); --step-accent: var(--green); }
+.training-step--readings { --step-bg: #fff8d6; --step-accent: #9a690c; }
+html[data-theme="dark"] .training-step--readings { --step-bg: var(--amber-50); --step-accent: var(--amber); }
 </style>
 </head>
 <body>
@@ -61,48 +75,54 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <a href="#readings">3. Read current and power</a>
   </nav>
 
-  <h2 id="flash">1. Flash the ESP32 and join the hotspot</h2>
-  <ol>
-    <li>Check that your carrier is marked <strong>NESL 865B</strong> and your module matches the <strong>ESP32-S3 DevKitC-1</strong> target. For another revision or module, get its matching firmware and pin map before flashing. Save any device settings or calibration you need to restore.</li>
-    <li>With the external supply, meter and relays disconnected, plug the laptop into the DevKit's <strong>COM</strong> USB-C port using a data cable. Run <code>pio device list</code> before and after plugging in to identify the new port.</li>
-    <li>Open the <a href="https://github.com/energy-iot/meshems-openami-metering">OpenAMI metering firmware</a> in PlatformIO. Copy <code>include/secrets_example.h</code> to <code>include/secrets.h</code>. Set <code>WIFI_SSID</code> and <code>WIFI_PW</code> to your hotspot's exact name and password. Keep the secrets file local. Join the same hotspot from the laptop and use a network that lets devices reach each other.</li>
-    <li>In <code>platformio.ini</code>, keep <code>BOARD_VER_V3</code>, <code>ENABLE_WIFI</code> and <code>ENABLE_WEBSERVER</code>. Disable <code>ENABLE_RELAYS</code> for the bench. Start with <code>ENABLE_MQTT</code> disabled unless you have a reachable broker. For the ESP32-only exercise, disable <code>ENABLE_MODBUS_MASTER</code> and <code>METER_TYPE_ATM90E32</code>. For the CircuitSetup exercise, enable both and verify the SPI and chip-select assignments in <code>include/core/pins.h</code> against the carrier.</li>
-    <li>Run these commands from the firmware folder. Replace <code>PORT</code> with the port you found, such as <code>COM5</code> or <code>/dev/cu.usbserial-…</code>.</li>
-  </ol>
-  <pre><code>pio run -e esp32-s3-devkitc-1 -t upload --upload-port PORT
+  <section class="training-step training-step--flash" aria-labelledby="flash">
+    <h2 id="flash">1. Flash the ESP32 and join the hotspot</h2>
+    <ol>
+      <li>Check that your carrier is marked <strong>NESL 865B</strong> and your module matches the <strong>ESP32-S3 DevKitC-1</strong> target. For another revision or module, get its matching firmware and pin map before flashing. Save any device settings or calibration you need to restore.</li>
+      <li>With the external supply, meter and relays disconnected, plug the laptop into the DevKit's <strong>COM</strong> USB-C port using a data cable. Run <code>pio device list</code> before and after plugging in to identify the new port.</li>
+      <li>Open the <a href="https://github.com/energy-iot/meshems-openami-metering">OpenAMI metering firmware</a> in PlatformIO. Copy <code>include/secrets_example.h</code> to <code>include/secrets.h</code>. Set <code>WIFI_SSID</code> and <code>WIFI_PW</code> to your hotspot's exact name and password. Keep the secrets file local. Join the same hotspot from the laptop and use a network that lets devices reach each other.</li>
+      <li>In <code>platformio.ini</code>, keep <code>BOARD_VER_V3</code>, <code>ENABLE_WIFI</code> and <code>ENABLE_WEBSERVER</code>. Disable <code>ENABLE_RELAYS</code> for the bench. Start with <code>ENABLE_MQTT</code> disabled unless you have a reachable broker. For the ESP32-only exercise, disable <code>ENABLE_MODBUS_MASTER</code> and <code>METER_TYPE_ATM90E32</code>. For the CircuitSetup exercise, enable both and verify the SPI and chip-select assignments in <code>include/core/pins.h</code> against the carrier.</li>
+      <li>Run these commands from the firmware folder. Replace <code>PORT</code> with the port you found, such as <code>COM5</code> or <code>/dev/cu.usbserial-…</code>.</li>
+    </ol>
+    <pre><code>pio run -e esp32-s3-devkitc-1 -t upload --upload-port PORT
 pio device monitor --port PORT --baud 115200</code></pre>
-  <p>Reset the ESP32 with the monitor open and look for the assigned IP address in the Wi-Fi log. Close the monitor before retrying an upload. If the flasher cannot connect, hold <strong>BOOT</strong>, tap <strong>EN/RESET</strong>, then release <strong>BOOT</strong> and retry. After flashing, reset normally. <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32s3/advanced-topics/boot-mode-selection.html">Espressif bootloader guide</a></p>
+    <p>Reset the ESP32 with the monitor open and look for the assigned IP address in the Wi-Fi log. Close the monitor before retrying an upload. If the flasher cannot connect, hold <strong>BOOT</strong>, tap <strong>EN/RESET</strong>, then release <strong>BOOT</strong> and retry. After flashing, reset normally. <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32s3/advanced-topics/boot-mode-selection.html">Espressif bootloader guide</a></p>
 
-  <div class="callout">
-    <strong>Step 1 passes when your laptop gets a response from the ESP32</strong>
-    <p>With the laptop on the same hotspot, open <code>http://BOARD_IP/api/dashboard</code>, replacing <code>BOARD_IP</code> with the address printed in the serial log. A page of JSON confirms that the firmware is running, the board joined Wi-Fi, and your laptop can reach it. This works with the ESP32 alone. Use the board’s IP address because <code>localhost</code> points to your laptop. If you’ve also uploaded the dashboard files, open <code>http://BOARD_IP/</code> to see the interface.</p>
-  </div>
+    <div class="callout">
+      <strong>Step 1 passes when your laptop gets a response from the ESP32</strong>
+      <p>With the laptop on the same hotspot, open <code>http://BOARD_IP/api/dashboard</code>, replacing <code>BOARD_IP</code> with the address printed in the serial log. A page of JSON confirms that the firmware is running, the board joined Wi-Fi, and your laptop can reach it. This works with the ESP32 alone. Use the board’s IP address because <code>localhost</code> points to your laptop. If you’ve also uploaded the dashboard files, open <code>http://BOARD_IP/</code> to see the interface.</p>
+    </div>
+  </section>
 
-  <h2 id="power">2. Power the board away from the laptop</h2>
-  <p><strong>ESP32 only.</strong> Move the cable from the laptop to a regulated 5 V USB supply or power bank. The DevKit regulates USB power down to 3.3 V for the ESP32. Confirm that it rejoins the hotspot.</p>
-  <p><strong>ESP32 plus CircuitSetup.</strong> The meter's stack logic needs 3.3 V and a common ground with the ESP32. A regulated external 3.3 V supply can feed the ESP32 and meter together only when your carrier's documented jumper settings route that supply to both loads. The 865B diagram identifies the <strong>EX 3.3V</strong> input and the rail jumper bank above the USB connectors.</p>
-  <figure>
-    <a href="assets/street-ems-865b-circuitsetup.jpg"><img src="assets/street-ems-865b-circuitsetup.jpg" width="3300" height="2550" loading="lazy" alt="NESL 865B with CircuitSetup installed. The 3.3 V rail jumper bank is above the ESP32 USB ports and the external 3.3 V terminals are at lower left."></a>
-    <figcaption>865B board diagram with the six-channel CircuitSetup meter. <a href="https://github.com/energy-iot/meshems-openami-metering#board-diagrams">Energy IoT Open Source</a></figcaption>
-  </figure>
-  <div class="callout">
-    <strong>Confirm the jumper on the call before applying external 3.3 V</strong>
-    <p>Match the printed revisions on both boards to the schematic. With all power disconnected, have the presenter identify the external-supply jumper position and verify the path to the ESP32 and meter 3V3 pins. Confirm ground, polarity and that other supplies are isolated. Check the supply voltage before connecting it. Keep USB and the meter's AC adapter unplugged during the external 3.3 V bench run unless the exact setup has documented isolation. If the jumper path is uncertain, stay with the ESP32-only USB exercise. <a href="https://github.com/nesl-admin/STREET-EMS/blob/main/PCB865B-NESL-EMS-Controller-Schematic-Aug2026.pdf">NESL 865B schematic</a></p>
-  </div>
+  <section class="training-step training-step--power" aria-labelledby="power">
+    <h2 id="power">2. Power the board away from the laptop</h2>
+    <p><strong>ESP32 only.</strong> Move the cable from the laptop to a regulated 5 V USB supply or power bank. The DevKit regulates USB power down to 3.3 V for the ESP32. Confirm that it rejoins the hotspot.</p>
+    <p><strong>ESP32 plus CircuitSetup.</strong> The meter's stack logic needs 3.3 V and a common ground with the ESP32. A regulated external 3.3 V supply can feed the ESP32 and meter together only when your carrier's documented jumper settings route that supply to both loads. The 865B diagram identifies the <strong>EX 3.3V</strong> input and the rail jumper bank above the USB connectors.</p>
+    <figure>
+      <a href="assets/street-ems-865b-circuitsetup.jpg"><img src="assets/street-ems-865b-circuitsetup.jpg" width="3300" height="2550" loading="lazy" alt="NESL 865B with CircuitSetup installed. The 3.3 V rail jumper bank is above the ESP32 USB ports and the external 3.3 V terminals are at lower left."></a>
+      <figcaption>865B board diagram with the six-channel CircuitSetup meter. <a href="https://github.com/energy-iot/meshems-openami-metering#board-diagrams">Energy IoT Open Source</a></figcaption>
+    </figure>
+    <div class="callout">
+      <strong>Confirm the jumper on the call before applying external 3.3 V</strong>
+      <p>Match the printed revisions on both boards to the schematic. With all power disconnected, have the presenter identify the external-supply jumper position and verify the path to the ESP32 and meter 3V3 pins. Confirm ground, polarity and that other supplies are isolated. Check the supply voltage before connecting it. Keep USB and the meter's AC adapter unplugged during the external 3.3 V bench run unless the exact setup has documented isolation. If the jumper path is uncertain, stay with the ESP32-only USB exercise. <a href="https://github.com/nesl-admin/STREET-EMS/blob/main/PCB865B-NESL-EMS-Controller-Schematic-Aug2026.pdf">NESL 865B schematic</a></p>
+    </div>
+  </section>
 
-  <h2 id="readings">3. See amperage, then measure power</h2>
-  <ol>
-    <li>With the test circuit de-energized, plug a compatible CT into <strong>CT1</strong> and clamp it around one insulated conductor of an isolated low-voltage AC bench load. Verify the CT model, burden and calibration before running the load. Keep the CT connected to its burden while current is flowing. Keep mains off the workshop bench. <a href="https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#ct-compatibility-burden-resistors-and-jp1-jp6">CircuitSetup CT guidance</a></li>
-    <li>From the laptop on the same hotspot, open <code>http://BOARD_IP/api/circuitsetup</code>. Replace <code>BOARD_IP</code> with the address from the serial log or hotspot client list. Check <code>diagnostics.chips</code> for <code>initOk</code>, then compare the first entry in <code>latestAllAmps</code> with the load off and on. Refresh after each change. If the chip fails to initialize, check meter power, seating and SPI chip selects before interpreting zeros.</li>
-  </ol>
-  <h3>ESP32-hosted dashboard</h3>
-  <p>The JSON readout works without a separate dashboard upload. To serve the full dashboard at <code>http://BOARD_IP/</code>, close the serial monitor and upload the firmware's <code>data/</code> folder. The map view may require internet access.</p>
-  <pre><code>pio run -e esp32-s3-devkitc-1 -t uploadfs --upload-port PORT</code></pre>
-  <h3>MQTT on the bench network</h3>
-  <p>Run a broker on a host reachable from the ESP32. In <code>include/core/config.h</code>, set <code>MQTT_SERVER</code>, <code>MQTT_USER</code> and <code>MQTT_PW</code> locally, enable <code>ENABLE_MQTT</code> in <code>platformio.ini</code> and reflash. With the default topic prefix, subscribe using a client such as Mosquitto and look for <code>openami/DEVICE_ID/meter_N</code> and its <code>PhA</code> reading in amps. Allow about 30 seconds for a publish cycle. Add the broker's login options if required. <a href="https://github.com/energy-iot/meshems-openami-metering">Firmware source</a></p>
-  <pre><code>mosquitto_sub -h BROKER_IP -p 1883 -t 'openami/+/+' -v</code></pre>
-  <h3>From amps to watts</h3>
-  <p>Real AC power needs a calibrated, isolated voltage reference on the same phase as the CT and a measurement that accounts for the timing of voltage and current. <var>V</var><sub>RMS</sub> × <var>I</var><sub>RMS</sub> gives apparent power in VA. The current CircuitSetup firmware path puts that product into the MQTT watts field <code>PhW</code>. Treat it as an estimate until the firmware reads calibrated active power from the meter and the result is checked against a reference meter. <a href="https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#power-calculations-and-board-revisions">CircuitSetup voltage and power guidance</a></p>
+  <section class="training-step training-step--readings" aria-labelledby="readings">
+    <h2 id="readings">3. See amperage, then measure power</h2>
+    <ol>
+      <li>With the test circuit de-energized, plug a compatible CT into <strong>CT1</strong> and clamp it around one insulated conductor of an isolated low-voltage AC bench load. Verify the CT model, burden and calibration before running the load. Keep the CT connected to its burden while current is flowing. Keep mains off the workshop bench. <a href="https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#ct-compatibility-burden-resistors-and-jp1-jp6">CircuitSetup CT guidance</a></li>
+      <li>From the laptop on the same hotspot, open <code>http://BOARD_IP/api/circuitsetup</code>. Replace <code>BOARD_IP</code> with the address from the serial log or hotspot client list. Check <code>diagnostics.chips</code> for <code>initOk</code>, then compare the first entry in <code>latestAllAmps</code> with the load off and on. Refresh after each change. If the chip fails to initialize, check meter power, seating and SPI chip selects before interpreting zeros.</li>
+    </ol>
+    <h3>ESP32-hosted dashboard</h3>
+    <p>The JSON readout works without a separate dashboard upload. To serve the full dashboard at <code>http://BOARD_IP/</code>, close the serial monitor and upload the firmware's <code>data/</code> folder. The map view may require internet access.</p>
+    <pre><code>pio run -e esp32-s3-devkitc-1 -t uploadfs --upload-port PORT</code></pre>
+    <h3>MQTT on the bench network</h3>
+    <p>Run a broker on a host reachable from the ESP32. In <code>include/core/config.h</code>, set <code>MQTT_SERVER</code>, <code>MQTT_USER</code> and <code>MQTT_PW</code> locally, enable <code>ENABLE_MQTT</code> in <code>platformio.ini</code> and reflash. With the default topic prefix, subscribe using a client such as Mosquitto and look for <code>openami/DEVICE_ID/meter_N</code> and its <code>PhA</code> reading in amps. Allow about 30 seconds for a publish cycle. Add the broker's login options if required. <a href="https://github.com/energy-iot/meshems-openami-metering">Firmware source</a></p>
+    <pre><code>mosquitto_sub -h BROKER_IP -p 1883 -t 'openami/+/+' -v</code></pre>
+    <h3>From amps to watts</h3>
+    <p>Real AC power needs a calibrated, isolated voltage reference on the same phase as the CT and a measurement that accounts for the timing of voltage and current. <var>V</var><sub>RMS</sub> × <var>I</var><sub>RMS</sub> gives apparent power in VA. The current CircuitSetup firmware path puts that product into the MQTT watts field <code>PhW</code>. Treat it as an estimate until the firmware reads calibrated active power from the meter and the result is checked against a reference meter. <a href="https://github.com/CircuitSetup/Expandable-6-Channel-ESP32-Energy-Meter#power-calculations-and-board-revisions">CircuitSetup voltage and power guidance</a></p>
+  </section>
 
   <p><a href="index.html#events/power-africa-2026-workshop-planning">Power Africa workshop</a> · <a href="index.html#village-metering/meshems">Street EMS hardware and firmware</a></p>
 </main>
