@@ -1,0 +1,622 @@
+diff --git a/data/index.html b/data/index.html
+index b2c7fd3..348fe99 100644
+--- a/data/index.html
++++ b/data/index.html
+@@ -183,9 +183,9 @@
+       </div>
+ 
+       <div class="card">
+-        <h2>Tenant Controls</h2>
+-        <div class="muted">Board 0 channels 0-7 drive the IoTMug I2C SSR board (tenant supply).</div>
+-        <div class="map-help">Houses: <strong>● Meter</strong> = CircuitSetup chip for that CT online; <strong>○ Meter</strong> = offline. <strong>Green / red</strong> = tenant SSR ON / OFF (brighter when meter online, muted when offline). <strong>Cyan ring / cyan 3D</strong> = CT current on that channel.</div>
++        <h2>SSR Controls (8 channels)</h2>
++        <div class="muted">Board 0 channels 0-7 = IoTMug I2C SSR. Map: green = powered ON, red = OFF (southernmost 8 buildings).</div>
++        <div class="map-help">Houses: <strong>green</strong> = SSR ON (powered); <strong>red</strong> = SSR OFF. <strong>● Meter</strong> = CircuitSetup chip online. <strong>Cyan ring</strong> = CT current.</div>
+         <div id="relayStatus" class="muted"></div>
+         <div id="meterList" class="meter-list"></div>
+       </div>
+@@ -221,14 +221,16 @@
+     /** Free vector basemap (no token). OpenFreeMap serves JSON at /styles/{name} — not .../style.json. */
+     const MAPLIBRE_STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+ 
+-    let state = { payload: null, selectedBoard: 0, selectedMeter: 0, circuitSetupModalOpen: false };
+-    /** GeoJSON / JSON may encode relay as bool, 0/1, or strings — treat all as ON. */
+-    const MAP_RELAY_ON = ["any",
+-      ["==", ["get", "relayState"], true],
+-      ["==", ["get", "relayState"], "true"],
+-      ["==", ["get", "relayState"], 1],
+-      ["==", ["get", "relayState"], "1"]
+-    ];
++    let state = {
++      payload: null,
++      selectedBoard: 0,
++      selectedMeter: 0,
++      circuitSetupModalOpen: false,
++      // Survives /api/dashboard that only returns 6 meters (SSR ch 6-7 pad).
++      relayByCh: [false, false, false, false, false, false, false, false]
++    };
++    /** Live SSR power from feature-state (synced from state.relayByCh). */
++    const MAP_RELAY_ON = [">", ["coalesce", ["feature-state", "relayOn"], 0], 0];
+     /** Oblique startup view (not nadir). Re-applied after fitBounds. */
+     const MAP_INITIAL_PITCH = 56;
+     const MAP_INITIAL_BEARING = -42;
+@@ -296,32 +298,49 @@
+         return;
+       }
+       const src = "utility-geojson";
+-      state.payload.boards.forEach((board) => {
+-        const chips = state.payload.circuitSetupChipsOk || [];
+-        board.meters.forEach((m) => {
+-          const live =
+-            typeof m.liveAmps === "number" && Math.abs(m.liveAmps) > 0.03 ? 1 : 0;
++      const chips = state.payload.circuitSetupChipsOk || [];
++      const board = getBoard(state.selectedBoard);
++      const feats = (state.payload.utilityGeoJson && state.payload.utilityGeoJson.features) || [];
++
++      feats.forEach((f) => {
++        const p = f.properties || {};
++        if (p.assetType !== "house") {
++          return;
++        }
++        const meterId = Number(p.meterId);
++        const ch = Number(p.relayChannel != null ? p.relayChannel : meterId);
++        const fid = f.id != null ? f.id : ("hn-" + (p.boardId != null ? p.boardId : 0) + "-" + meterId);
++        const relayOn = ch >= 0 && ch < 8 && state.relayByCh[ch] ? 1 : 0;
++        const m = board
++          ? board.meters.find((x) => Number(x.meterId) === meterId || Number(x.relayChannel) === ch)
++          : null;
++        let live = 0;
++        let meterOk = 0;
++        if (m) {
++          live = typeof m.liveAmps === "number" && Math.abs(m.liveAmps) > 0.03 ? 1 : 0;
+           const ctCh =
+-            typeof m.ctChannel === "number" ? m.ctChannel : (Number(m.meterId) % 6 + 6) % 6;
+-          const chipIdx = Math.floor(ctCh / 3);
+-          const meterOk = chips[chipIdx] === true ? 1 : 0;
+-          const selected =
+-            Number(board.boardId) === Number(state.selectedBoard) &&
+-            Number(m.meterId) === Number(state.selectedMeter)
+-              ? 1
+-              : 0;
+-          const hid = "hn-" + board.boardId + "-" + m.meterId;
+-          const sid = "hs-" + board.boardId + "-" + m.meterId;
+-          try {
+-            map.setFeatureState({ source: src, id: hid }, { ctLive: live, meterOk: meterOk, selected: selected });
+-            map.setFeatureState({ source: src, id: sid }, { ctLive: live, meterOk: meterOk, selected: selected });
+-          } catch (e) { /* ignore */ }
+-        });
+-        const hub = Array.isArray(chips) && chips.some(Boolean) ? 1 : 0;
++            typeof m.ctChannel === "number" && m.ctChannel >= 0
++              ? m.ctChannel
++              : ((meterId % 6) + 6) % 6;
++          meterOk = chips[Math.floor(ctCh / 3)] === true ? 1 : 0;
++        }
++        const selected =
++          Number(p.boardId != null ? p.boardId : 0) === Number(state.selectedBoard) &&
++          meterId === Number(state.selectedMeter)
++            ? 1
++            : 0;
+         try {
+-          map.setFeatureState({ source: src, id: "pn-" + board.boardId }, { hubLive: hub });
++          map.setFeatureState(
++            { source: src, id: fid },
++            { relayOn: relayOn, ctLive: live, meterOk: meterOk, selected: selected }
++          );
+         } catch (e) { /* ignore */ }
+       });
++
++      const hub = Array.isArray(chips) && chips.some(Boolean) ? 1 : 0;
++      try {
++        map.setFeatureState({ source: src, id: "pn-" + state.selectedBoard }, { hubLive: hub });
++      } catch (e) { /* ignore */ }
+     }
+ 
+     const HISTORY_TENANT_COLORS = [
+@@ -568,9 +587,34 @@
+       return board ? board.meters.find((m) => m.meterId === meterId) : null;
+     }
+ 
++    function syncRelayByChFromPayload() {
++      if (!state.payload) {
++        return;
++      }
++      if (typeof state.payload.relayMaskLogical === "number") {
++        const mask = state.payload.relayMaskLogical & 0xff;
++        for (let ch = 0; ch < 8; ch++) {
++          state.relayByCh[ch] = !!(mask & (1 << ch));
++        }
++        return;
++      }
++      const board = getBoard(state.selectedBoard);
++      if (!board || !Array.isArray(board.meters)) {
++        return;
++      }
++      // Only overwrite channels the API actually sent — keep pad channels.
++      board.meters.forEach((m) => {
++        const ch = Number(m.relayChannel != null ? m.relayChannel : m.meterId);
++        if (ch >= 0 && ch < 8) {
++          state.relayByCh[ch] = !!m.relayState;
++        }
++      });
++    }
++
+     async function refreshData() {
+       const res = await fetch("/api/dashboard");
+       state.payload = await res.json();
++      syncRelayByChFromPayload();
+       document.getElementById("siteMeta").textContent =
+         "Site " + state.payload.siteId + " | source " + (state.payload.meterSource || "—") +
+         " | last update " + new Date().toLocaleTimeString();
+@@ -622,29 +666,60 @@
+       list.innerHTML = "";
+ 
+       const chipsOk = state.payload.circuitSetupChipsOk || [];
+-      board.meters.forEach((meter) => {
++      // Prefer API rows; if old firmware only sent 6, pad SSR ch 6-7 client-side.
++      // Button ON/OFF always from state.relayByCh (pad used to hardcode false → icons stuck).
++      const relayRows = [];
++      for (let ch = 0; ch < 8; ch++) {
++        const fromApi = board.meters.find((m) => Number(m.relayChannel) === ch || Number(m.meterId) === ch);
++        const relayState = state.relayByCh[ch] === true;
++        if (fromApi) {
++          relayRows.push(Object.assign({}, fromApi, { relayChannel: ch, relayState: relayState }));
++        } else {
++          relayRows.push({
++            meterId: ch,
++            relayChannel: ch,
++            tenantLabel: "SSR " + (ch + 1),
++            ctLabel: "relay-only",
++            ctChannel: -1,
++            relayState: relayState,
++            liveAmps: 0,
++            liveVolts: 0,
++            liveKwEst: 0,
++            dailyKwhTotal: 0
++          });
++        }
++      }
++      relayRows.forEach((meter) => {
+         const row = document.createElement("div");
+         row.className = "meter-row";
++        const relayOnly = Number(meter.ctChannel) < 0 || meter.ctLabel === "relay-only";
+         const live =
+-          typeof meter.liveAmps === "number"
++          !relayOnly && typeof meter.liveAmps === "number"
+             ? meter.liveAmps.toFixed(2) + " A · " + meter.liveVolts.toFixed(0) + " V · ~" + meter.liveKwEst.toFixed(2) + " kW · "
+             : "";
+         const ctCh =
+-          typeof meter.ctChannel === "number"
++          typeof meter.ctChannel === "number" && meter.ctChannel >= 0
+             ? meter.ctChannel
+             : ((Number(meter.meterId) % 6) + 6) % 6;
+-        const meterChipOk = chipsOk[Math.floor(ctCh / 3)] === true;
+-        const meterOn =
+-          meterChipOk
++        let meterOn = "";
++        let ctOn = "";
++        if (relayOnly) {
++          meterOn = "<span class='muted' style='font-size:11px;margin-left:4px'>relay-only</span>";
++        } else {
++          const meterChipOk = chipsOk[Math.floor(ctCh / 3)] === true;
++          meterOn = meterChipOk
+             ? "<span class='status-ok' style='font-size:11px;margin-left:4px'>● Meter</span>"
+             : "<span class='diag-err' style='font-size:11px;margin-left:4px'>○ Meter</span>";
+-        const ctOn =
+-          typeof meter.liveAmps === "number" && Math.abs(meter.liveAmps) > 0.03
+-            ? "<span class='status-ok' style='display:inline;margin-left:4px'>● CT</span>"
+-            : "<span class='muted' style='font-size:11px;margin-left:4px'>○ CT</span>";
++          ctOn =
++            typeof meter.liveAmps === "number" && Math.abs(meter.liveAmps) > 0.03
++              ? "<span class='status-ok' style='display:inline;margin-left:4px'>● CT</span>"
++              : "<span class='muted' style='font-size:11px;margin-left:4px'>○ CT</span>";
++        }
++        const kwh =
++          typeof meter.dailyKwhTotal === "number" ? meter.dailyKwhTotal.toFixed(2) : "0.00";
+         row.innerHTML =
+-          "<div>" + meter.tenantLabel + " (M" + meter.meterId + ") " + (meter.ctLabel || "") + meterOn + ctOn +
+-          "<br><span class='muted'>" + live + meter.dailyKwhTotal.toFixed(2) + " kWh/day sim</span></div>";
++          "<div>" + meter.tenantLabel + " (ch " + meter.relayChannel + ") " + (relayOnly ? "" : (meter.ctLabel || "")) + meterOn + ctOn +
++          "<br><span class='muted'>" + (relayOnly ? "SSR channel " + meter.relayChannel : live + kwh + " kWh/day sim") + "</span></div>";
+         if (Number(meter.meterId) === Number(state.selectedMeter)) {
+           row.classList.add("meter-row-selected");
+         }
+@@ -654,25 +729,31 @@
+         btn.onclick = async (ev) => {
+           ev.stopPropagation();
+           const status = document.getElementById("relayStatus");
+-          const next = meter.relayState ? 0 : 1;
++          const ch = Number(meter.relayChannel);
++          const next = state.relayByCh[ch] ? 0 : 1;
+           try {
+-            const rsp = await fetch("/api/relay?board=" + state.selectedBoard + "&channel=" + meter.relayChannel + "&state=" + next);
++            const rsp = await fetch("/api/relay?board=" + state.selectedBoard + "&channel=" + ch + "&state=" + next);
+             const data = await rsp.json();
+             if (!rsp.ok || !data.ok) {
+               throw new Error(data.error || ("HTTP " + rsp.status));
+             }
++            state.relayByCh[ch] = !!data.state;
+             status.className = "status-ok";
+             status.textContent = "Applied board " + data.board + " ch " + data.channel + " => " + (data.state ? "ON" : "OFF") + " (mask " + data.mask + ")";
++            renderRelays();
++            syncMeterFeatureState();
+             await refreshData();
+           } catch (err) {
+             status.className = "status-err";
+-            status.textContent = "Tenant control failed: " + err.message;
++            status.textContent = "SSR control failed: " + err.message;
+           }
+         };
+         row.appendChild(btn);
+         row.onclick = () => {
+           state.selectedMeter = meter.meterId;
+-          openCircuitSetupModal();
++          if (!relayOnly) {
++            openCircuitSetupModal();
++          }
+           renderRelays();
+           renderSelection();
+         };
+@@ -715,7 +796,7 @@
+         return;
+       }
+       if (!map.getSource(sourceId)) {
+-        map.addSource(sourceId, { type: "geojson", data: data });
++        map.addSource(sourceId, { type: "geojson", data: data, promoteId: "id" });
+         map.addLayer({
+           id: "court-layer",
+           type: "line",
+@@ -727,14 +808,14 @@
+           id: "line-layer",
+           type: "line",
+           source: sourceId,
+-          filter: ["==", ["get", "assetType"], "line"],
++          filter: ["in", ["get", "assetType"], ["literal", ["line", "circuit"]]],
+           paint: { "line-color": "#f59e0b", "line-width": 3, "line-opacity": 0.75 }
+         });
+         map.addLayer({
+           id: "pole-layer",
+           type: "circle",
+           source: sourceId,
+-          filter: ["==", ["get", "assetType"], "streetPoleEMS"],
++          filter: ["in", ["get", "assetType"], ["literal", ["streetPoleEMS", "pole"]]],
+           paint: {
+             "circle-radius": [
+               "case",
+@@ -767,59 +848,40 @@
+             "circle-radius": [
+               "case",
+               [">", ["coalesce", ["feature-state", "selected"], 0], 0],
+-              [
+-                "case",
+-                ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                8,
+-                [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+-                9,
+-                7
+-              ],
+-              [
+-                "case",
+-                ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                6,
+-                [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+-                7,
+-                5
+-              ]
++              10,
++              MAP_RELAY_ON,
++              8,
++              6
+             ],
+             "circle-color": [
+               "case",
+               MAP_RELAY_ON,
+-              [
+-                "case",
+-                ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                "#5a9e6a",
+-                "#22c55e"
+-              ],
+-              [
+-                "case",
+-                ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                "#a85656",
+-                "#ef4444"
+-              ]
++              "#22c55e",
++              "#ef4444"
++            ],
++            "circle-opacity": [
++              "case",
++              MAP_RELAY_ON,
++              0.9,
++              0.55
+             ],
+-            "circle-opacity": 0.55,
+             "circle-stroke-width": [
+               "case",
+               [">", ["coalesce", ["feature-state", "selected"], 0], 0],
+               4,
+-              ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-              3,
+-              [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+-              3,
++              MAP_RELAY_ON,
++              2,
+               1
+             ],
+             "circle-stroke-color": [
+               "case",
+               [">", ["coalesce", ["feature-state", "selected"], 0], 0],
+               "#fef08c",
+-              ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-              "#fb923c",
+               [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+               "#38bdf8",
+-              "#0f172a"
++              MAP_RELAY_ON,
++              "#14532d",
++              "#7f1d1d"
+             ]
+           }
+         });
+@@ -829,10 +891,15 @@
+           source: sourceId,
+           filter: ["==", ["get", "assetType"], "house"],
+           layout: {
+-            "text-field": ["get", "name"],
++            "text-field": [
++              "concat",
++              ["get", "name"],
++              "\n",
++              ["case", MAP_RELAY_ON, "POWERED", "OFF"]
++            ],
+             "text-font": ["Noto Sans Regular"],
+-            "text-size": 12,
+-            "text-offset": [0, 1.1],
++            "text-size": 11,
++            "text-offset": [0, 1.25],
+             "text-allow-overlap": true
+           },
+           paint: {
+@@ -840,14 +907,12 @@
+               "case",
+               [">", ["coalesce", ["feature-state", "selected"], 0], 0],
+               "#fef08c",
+-              ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-              "#fdba74",
+-              [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+-              "#7dd3fc",
+-              "#ffffff"
++              MAP_RELAY_ON,
++              "#86efac",
++              "#fca5a5"
+             ],
+             "text-halo-color": "#0f172a",
+-            "text-halo-width": 1
++            "text-halo-width": 1.2
+           }
+         });
+         map.addLayer({
+@@ -860,24 +925,9 @@
+               "case",
+               [">", ["coalesce", ["feature-state", "selected"], 0], 0],
+               "#fde68a",
+-              [">", ["coalesce", ["feature-state", "ctLive"], 0], 0],
+-              "#0e7490",
+-              [
+-                "case",
+-                MAP_RELAY_ON,
+-                [
+-                  "case",
+-                  ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                  "#2d4a36",
+-                  "#15803d"
+-                ],
+-                [
+-                  "case",
+-                  ["==", ["coalesce", ["feature-state", "meterOk"], 0], 0],
+-                  "#5c2626",
+-                  "#b91c1c"
+-                ]
+-              ]
++              MAP_RELAY_ON,
++              "#15803d",
++              "#b91c1c"
+             ],
+             "fill-extrusion-base": ["get", "extrudeBase"],
+             "fill-extrusion-height": ["get", "extrudeHeight"],
+diff --git a/data/utility.geojson b/data/utility.geojson
+new file mode 100644
+index 0000000..0cb2bf1
+--- /dev/null
++++ b/data/utility.geojson
+@@ -0,0 +1 @@
++{"type":"FeatureCollection","features":[{"type":"Feature","id":"court-0","properties":{"assetType":"court","boardId":0,"name":"Site outline (8 southern units)","note":"Hull of southernmost 8 OSM buildings \u2014 MeshEMS SSR map","id":"court-0"},"geometry":{"type":"LineString","coordinates":[[36.8839607,-1.2257654,0.5],[36.8838786,-1.225184,0.5],[36.8840332,-1.2252597,0.5],[36.884225,-1.2252724,0.5],[36.8845089,-1.2248729,0.5],[36.8844418,-1.2242287,0.5],[36.8824386,-1.224289,0.5],[36.8828684,-1.2247093,0.5],[36.8839607,-1.2257654,0.5]]}},{"type":"Feature","id":"cln-spine","properties":{"assetType":"circuit","circuitId":0,"boardId":0,"name":"Central feeder spine","role":"spine","feederId":"f-main","id":"cln-spine"},"geometry":{"type":"LineString","coordinates":[[36.883107372694106,-1.2233378199537932,6],[36.883348748906826,-1.223755677742829,6],[36.883360247289865,-1.2237755800406398,6],[36.883420254476356,-1.2238794338492158,6],[36.883588597990546,-1.2241709120471531,6],[36.88363881358523,-1.2242578489025902,6],[36.883666930725006,-1.2243064286022463,6],[36.88382934538544,-1.2245875937913182,6],[36.884099198062415,-1.2250547549999304,6],[36.88412435077531,-1.225098268660144,6],[36.88417097312529,-1.2251789634312675,6],[36.88422496162691,-1.225272413765988,6],[36.884425195187816,-1.225618804212885,6]]}},{"type":"Feature","id":"cln-ems","properties":{"assetType":"circuit","circuitId":0,"boardId":0,"name":"EMS \u2192 spine","role":"riser","feederId":"f-main","id":"cln-ems"},"geometry":{"type":"LineString","coordinates":[[36.88363584915835,-1.2243246120652462,6],[36.883651389941676,-1.2243155655662412,6],[36.883666930725006,-1.2243064286022463,6]]}},{"type":"Feature","id":"cln-feeder-6","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 West service block","role":"lateral","feederId":"f-main","meterId":6,"id":"cln-feeder-6"},"geometry":{"type":"LineString","coordinates":[[36.883348748906826,-1.223755677742829,6],[36.8824386,-1.224289,6]]}},{"type":"Feature","id":"cln-feeder-5","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 West garden block","role":"lateral","feederId":"f-main","meterId":5,"id":"cln-feeder-5"},"geometry":{"type":"LineString","coordinates":[[36.88363881358523,-1.2242578489025902,6],[36.8828684,-1.2247093,6]]}},{"type":"Feature","id":"cln-feeder-7","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 Northeast annex","role":"lateral","feederId":"f-main","meterId":7,"id":"cln-feeder-7"},"geometry":{"type":"LineString","coordinates":[[36.88382934538544,-1.2245875937913182,6],[36.8844418,-1.2242287,6]]}},{"type":"Feature","id":"cln-feeder-3","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 Main hotel wing","role":"lateral","feederId":"f-main","meterId":3,"id":"cln-feeder-3"},"geometry":{"type":"LineString","coordinates":[[36.884099198062415,-1.2250547549999304,6],[36.8838786,-1.225184,6]]}},{"type":"Feature","id":"cln-feeder-4","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 Northeast lodge","role":"lateral","feederId":"f-main","meterId":4,"id":"cln-feeder-4"},"geometry":{"type":"LineString","coordinates":[[36.88412435077531,-1.225098268660144,6],[36.8845089,-1.2248729,6]]}},{"type":"Feature","id":"cln-feeder-2","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 East wing A","role":"lateral","feederId":"f-main","meterId":2,"id":"cln-feeder-2"},"geometry":{"type":"LineString","coordinates":[[36.88417097312529,-1.2251789634312675,6],[36.8840332,-1.2252597,6]]}},{"type":"Feature","id":"cln-feeder-1","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 East wing B","role":"lateral","feederId":"f-main","meterId":1,"id":"cln-feeder-1"},"geometry":{"type":"LineString","coordinates":[[36.88422496162691,-1.225272413765988,6],[36.884225,-1.2252724,6]]}},{"type":"Feature","id":"cln-feeder-0","properties":{"assetType":"circuit","circuitId":1,"boardId":0,"name":"Feeder \u2192 Casino / pavilion cluster","role":"lateral","feederId":"f-main","meterId":0,"id":"cln-feeder-0"},"geometry":{"type":"LineString","coordinates":[[36.88437093719285,-1.2255249920182043,6],[36.8839607,-1.2257654,6]]}},{"type":"Feature","id":"pn-0","properties":{"assetType":"pole","boardId":0,"name":"StreetPoleEMS-0 \u00b7 spine mid","id":"pn-0"},"geometry":{"type":"Point","coordinates":[36.88363584915835,-1.2243246120652462,7.5]}},{"type":"Feature","id":"hn-0-0","properties":{"assetType":"house","boardId":0,"meterId":0,"relayChannel":0,"name":"Casino / pavilion cluster","tenantLabel":"Tenant 1 \u00b7 Casino / pavilion cluster","osmWayId":1076252099,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-0"},"geometry":{"type":"Point","coordinates":[36.8839607,-1.2257654,1.8]}},{"type":"Feature","id":"hn-0-1","properties":{"assetType":"house","boardId":0,"meterId":1,"relayChannel":1,"name":"East wing B","tenantLabel":"Tenant 2 \u00b7 East wing B","osmWayId":1076532873,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-1"},"geometry":{"type":"Point","coordinates":[36.884225,-1.2252724,1.8]}},{"type":"Feature","id":"hn-0-2","properties":{"assetType":"house","boardId":0,"meterId":2,"relayChannel":2,"name":"East wing A","tenantLabel":"Tenant 3 \u00b7 East wing A","osmWayId":1076252098,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-2"},"geometry":{"type":"Point","coordinates":[36.8840332,-1.2252597,1.8]}},{"type":"Feature","id":"hn-0-3","properties":{"assetType":"house","boardId":0,"meterId":3,"relayChannel":3,"name":"Main hotel wing","tenantLabel":"Tenant 4 \u00b7 Main hotel wing","osmWayId":1076252097,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-3"},"geometry":{"type":"Point","coordinates":[36.8838786,-1.225184,1.8]}},{"type":"Feature","id":"hn-0-4","properties":{"assetType":"house","boardId":0,"meterId":4,"relayChannel":4,"name":"Northeast lodge","tenantLabel":"Tenant 5 \u00b7 Northeast lodge","osmWayId":1076252100,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-4"},"geometry":{"type":"Point","coordinates":[36.8845089,-1.2248729,1.8]}},{"type":"Feature","id":"hn-0-5","properties":{"assetType":"house","boardId":0,"meterId":5,"relayChannel":5,"name":"West garden block","tenantLabel":"Tenant 6 \u00b7 West garden block","osmWayId":1075695770,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-5"},"geometry":{"type":"Point","coordinates":[36.8828684,-1.2247093,1.8]}},{"type":"Feature","id":"hn-0-6","properties":{"assetType":"house","boardId":0,"meterId":6,"relayChannel":6,"name":"West service block","tenantLabel":"Tenant 7 \u00b7 West service block","osmWayId":1075692829,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-6"},"geometry":{"type":"Point","coordinates":[36.8824386,-1.224289,1.8]}},{"type":"Feature","id":"hn-0-7","properties":{"assetType":"house","boardId":0,"meterId":7,"relayChannel":7,"name":"Northeast annex","tenantLabel":"Tenant 8 \u00b7 Northeast annex","osmWayId":1076249806,"relayState":false,"dailyKwh":0,"feederId":"f-main","id":"hn-0-7"},"geometry":{"type":"Point","coordinates":[36.8844418,-1.2242287,1.8]}}]}
+\ No newline at end of file
+diff --git a/src/comms/webserver.cpp b/src/comms/webserver.cpp
+index 7580739..d799eca 100644
+--- a/src/comms/webserver.cpp
++++ b/src/comms/webserver.cpp
+@@ -22,11 +22,39 @@
+ 
+ static AsyncWebServer s_server(80);
+ 
++// Cached Safari Park Hotel workshop overlay (uploaded as /utility.geojson on SPIFFS).
++// Hypothetical LV feeder for MeshEMS demo — not surveyed infrastructure.
++static String s_utility_geojson;
++static bool s_utility_geojson_loaded = false;
++
++static void load_utility_geojson_once() {
++    if (s_utility_geojson_loaded) {
++        return;
++    }
++    s_utility_geojson_loaded = true;
++    if (!SPIFFS.exists("/utility.geojson")) {
++        Serial.println("WebServer: /utility.geojson missing — map overlay empty (pio run -t uploadfs)");
++        s_utility_geojson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
++        return;
++    }
++    File f = SPIFFS.open("/utility.geojson", "r");
++    if (!f) {
++        Serial.println("WebServer: failed to open /utility.geojson");
++        s_utility_geojson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
++        return;
++    }
++    s_utility_geojson = f.readString();
++    f.close();
++    Serial.printf("WebServer: loaded /utility.geojson (%u bytes)\n", (unsigned)s_utility_geojson.length());
++}
++
+ // ---------------------------------------------------------------------------
+ // /api/dashboard
+ // ---------------------------------------------------------------------------
+ 
+ static String build_dashboard_json() {
++    load_utility_geojson_once();
++
+     JsonDocument doc;
+ 
+     doc["siteId"]      = getDeviceID();
+@@ -42,59 +70,97 @@ static String build_dashboard_json() {
+     doc["circuitSetupChipsOk"].to<JsonArray>();
+ #endif
+ 
+-    // Village centre — override by placing a /data/site-config.json on SPIFFS
+-    // if you want the map to open on a real site. Defaults to Kampala area.
++    // Safari Park Casino — OSM building centroids (data/utility.geojson)
+     JsonObject center = doc["villageCenter"].to<JsonObject>();
+-    center["lat"]  = 0.3476;
+-    center["lon"]  = 32.5825;
+-    center["zoom"] = 14;
+-
+-    // GeoJSON overlay — empty by default; upload a features array via SPIFFS
+-    // to show pole/line/court assets on the map.
+-    JsonObject geo = doc["utilityGeoJson"].to<JsonObject>();
+-    geo["type"] = "FeatureCollection";
+-    geo["features"].to<JsonArray>();
++    center["lat"]  = -1.22448;
++    center["lon"]  = 36.88377;
++    center["zoom"] = 17;
++
++    // Prefer SPIFFS overlay; keep a typed object if file missing/corrupt.
++    {
++        JsonDocument geoDoc;
++        DeserializationError err = deserializeJson(geoDoc, s_utility_geojson);
++        if (!err && geoDoc["type"] == "FeatureCollection") {
++            doc["utilityGeoJson"] = geoDoc;
++        } else {
++            JsonObject geo = doc["utilityGeoJson"].to<JsonObject>();
++            geo["type"] = "FeatureCollection";
++            geo["features"].to<JsonArray>();
++        }
++    }
+ 
+-    // Boards → meters
++    // Boards → meters (boardId 0 matches dashboard default + GeoJSON house boardId)
+     JsonArray boards = doc["boards"].to<JsonArray>();
+     JsonObject board = boards.add<JsonObject>();
+-    board["boardId"] = 1;
++    board["boardId"] = 0;
++    board["name"] = "StreetPoleEMS-0";
++    board["hardwareMapped"] = true;
+     JsonArray meters = board["meters"].to<JsonArray>();
+ 
+-    for (int i = 0; i < MODBUS_NUM_METERS; i++) {
++    // Always expose all 8 IoTMug SSR channels. ATM90E32 only has 6 CTs; channels
++    // 6-7 are relay-only rows (no meter telemetry).
++    const int kSsrChannels = 8;
++    for (int i = 0; i < kSsrChannels; i++) {
+         JsonObject m = meters.add<JsonObject>();
+         m["meterId"]      = i;
+         m["relayChannel"] = i;
++        const bool hasMeter = (i < MODBUS_NUM_METERS);
+ 
+-        char label[20];
+-        snprintf(label, sizeof(label), "Tenant %d", i + 1);
++        char label[24];
++        if (hasMeter) {
++            snprintf(label, sizeof(label), "Tenant %d", i + 1);
++        } else {
++            snprintf(label, sizeof(label), "SSR %d", i + 1);
++        }
+         m["tenantLabel"] = label;
+ 
+-        int ctCh = i % 6;
+-        char ctLabel[8];
+-        snprintf(ctLabel, sizeof(ctLabel), "CT%d", ctCh + 1);
+-        m["ctLabel"]   = ctLabel;
+-        m["ctChannel"] = ctCh;
+-
+ #ifdef ENABLE_RELAYS
+         m["relayState"] = get_i2c_ssr_channel((uint8_t)i);
+ #else
+         m["relayState"] = false;
+ #endif
+ 
++        if (hasMeter) {
++            int ctCh = i % 6;
++            char ctLabel[8];
++            snprintf(ctLabel, sizeof(ctLabel), "CT%d", ctCh + 1);
++            m["ctLabel"]   = ctLabel;
++            m["ctChannel"] = ctCh;
++
+ #ifdef METER_TYPE_ATM90E32
+-        float amps  = circuitsetup_latest_amps(ctCh);
+-        float volts = circuitsetup_phase_voltage(ctCh);
+-        m["liveAmps"]    = amps;
+-        m["liveVolts"]   = volts;
+-        m["liveKwEst"]   = (amps * volts) / 1000.0f;
+-        m["dailyKwhTotal"] = readings[i].import_energy;
++            float amps  = circuitsetup_latest_amps(ctCh);
++            float volts = circuitsetup_phase_voltage(ctCh);
++            m["liveAmps"]      = amps;
++            m["liveVolts"]     = volts;
++            m["liveKwEst"]     = (amps * volts) / 1000.0f;
++            m["dailyKwhTotal"] = readings[i].import_energy;
+ #else
+-        m["liveAmps"]    = readings[i].current;
+-        m["liveVolts"]   = readings[i].voltage;
+-        m["liveKwEst"]   = readings[i].active_power;
+-        m["dailyKwhTotal"] = readings[i].import_energy;
++            m["liveAmps"]      = readings[i].current;
++            m["liveVolts"]     = readings[i].voltage;
++            m["liveKwEst"]     = readings[i].active_power;
++            m["dailyKwhTotal"] = readings[i].import_energy;
+ #endif
++        } else {
++            m["ctLabel"]       = "relay-only";
++            m["ctChannel"]     = -1;
++            m["liveAmps"]      = 0.0f;
++            m["liveVolts"]     = 0.0f;
++            m["liveKwEst"]     = 0.0f;
++            m["dailyKwhTotal"] = 0.0f;
++        }
++    }
++
++    // Logical channel bits 0-7 (not PCF8574 pin order). UI uses this for SSR 7/8.
++    {
++        uint8_t logicalMask = 0;
++#ifdef ENABLE_RELAYS
++        for (int i = 0; i < kSsrChannels; i++) {
++            if (get_i2c_ssr_channel((uint8_t)i)) {
++                logicalMask |= (uint8_t)(1u << i);
++            }
++        }
++#endif
++        doc["relayMaskLogical"] = logicalMask;
+     }
+ 
+     String out;
+@@ -152,8 +218,11 @@ void setup_webserver() {
+         doc["ok"]      = ok;
+         doc["board"]   = board;
+         doc["channel"] = channel;
+-        doc["state"]   = state;
++        doc["state"]   = get_i2c_ssr_channel((uint8_t)channel);
+         doc["mask"]    = get_i2c_ssr_mask();
++        if (!ok) {
++            doc["error"] = "I2C SSR write failed (no ACK). Check SSR 5V/GND/SDA/SCL and PCF8574 address; serial boot scan must show device.";
++        }
+ 
+         String out;
+         serializeJson(doc, out);

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 174" role="img">
+  <title>2. External 3.3 V bench power</title>
+  <rect width="860" height="174" rx="10" fill="#ffffff" />
+  <text x="26" y="25.5" fill="#17242c" font-size="19" font-family="system-ui, sans-serif" font-weight="650" text-anchor="start" dominant-baseline="middle">2. External 3.3 V bench power</text>
+  <rect x="135" y="72" width="156" height="48" rx="7" fill="#eaf3de" stroke="#3b6d11" />
+  <text x="213.0" y="96" fill="#17242c" font-size="15" font-family="system-ui, sans-serif" font-weight="650" text-anchor="middle" dominant-baseline="middle">Regulated supply</text>
+  <rect x="352" y="72" width="156" height="48" rx="7" fill="#eaf3de" stroke="#3b6d11" />
+  <text x="430.0" y="96" fill="#17242c" font-size="15" font-family="system-ui, sans-serif" font-weight="650" text-anchor="middle" dominant-baseline="middle">865B rail jumpers</text>
+  <rect x="569" y="72" width="156" height="48" rx="7" fill="#eaf3de" stroke="#3b6d11" />
+  <text x="647.0" y="96" fill="#17242c" font-size="15" font-family="system-ui, sans-serif" font-weight="650" text-anchor="middle" dominant-baseline="middle">ESP32 + meter</text>
+  <path d="M291 96H344" stroke="#3b6d11" stroke-width="2" />
+  <path d="M344 91L352 96L344 101Z" fill="#3b6d11" />
+  <text x="321.5" y="59.0" fill="#334451" font-size="12" font-family="system-ui, sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="middle">3.3 V DC</text>
+  <path d="M508 96H561" stroke="#3b6d11" stroke-width="2" />
+  <path d="M561 91L569 96L561 101Z" fill="#3b6d11" />
+  <text x="538.5" y="59.0" fill="#334451" font-size="12" font-family="system-ui, sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="middle">Verified 3V3 path</text>
+  <text x="26" y="147.0" fill="#334451" font-size="13" font-family="system-ui, sans-serif" font-weight="400" text-anchor="start" dominant-baseline="middle">Common ground. Confirm the jumper and supply isolation for your revision.</text>
+</svg>

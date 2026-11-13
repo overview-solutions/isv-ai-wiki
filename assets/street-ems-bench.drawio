@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="flash" name="1. Flash and join Wi-Fi">
+    <mxGraphModel page="1" pageWidth="860" pageHeight="174" grid="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="heading" value="1. Flash and join Wi-Fi" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#17242c;fontSize=19;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="26" y="12" width="808" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="box-0" value="Laptop" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eff8ff;strokeColor=#175cd3;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-1" value="ESP32-S3" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eff8ff;strokeColor=#175cd3;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="352" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-2" value="2.4 GHz hotspot" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eff8ff;strokeColor=#175cd3;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="569" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#175cd3;strokeWidth=2;" edge="1" parent="1" source="box-0" target="box-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-0" value="USB data · COM" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="257.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#175cd3;strokeWidth=2;" edge="1" parent="1" source="box-1" target="box-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-1" value="Wi-Fi · DHCP" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="474.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Laptop joins the same hotspot and opens http://BOARD_IP/api/dashboard." style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#334451;fontSize=13;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="26" y="133" width="808" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="power" name="2. External 3.3 V bench power">
+    <mxGraphModel page="1" pageWidth="860" pageHeight="174" grid="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="heading" value="2. External 3.3 V bench power" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#17242c;fontSize=19;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="26" y="12" width="808" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="box-0" value="Regulated supply" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eaf3de;strokeColor=#3b6d11;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-1" value="865B rail jumpers" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eaf3de;strokeColor=#3b6d11;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="352" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-2" value="ESP32 + meter" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#eaf3de;strokeColor=#3b6d11;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="569" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#3b6d11;strokeWidth=2;" edge="1" parent="1" source="box-0" target="box-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-0" value="3.3 V DC" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="257.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#3b6d11;strokeWidth=2;" edge="1" parent="1" source="box-1" target="box-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-1" value="Verified 3V3 path" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="474.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Common ground. Confirm the jumper and supply isolation for your revision." style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#334451;fontSize=13;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="26" y="133" width="808" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="readings" name="3. Current and telemetry">
+    <mxGraphModel page="1" pageWidth="860" pageHeight="174" grid="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="heading" value="3. Current and telemetry" style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#17242c;fontSize=19;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="26" y="12" width="808" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="box-0" value="CT1 on AC load" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#fff8d6;strokeColor=#9a690c;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="26" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-1" value="CircuitSetup meter" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#fff8d6;strokeColor=#9a690c;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="243" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-2" value="ESP32-S3" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#fff8d6;strokeColor=#9a690c;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="box-3" value="Laptop" style="rounded=1;arcSize=12;whiteSpace=wrap;html=0;fillColor=#fff8d6;strokeColor=#9a690c;fontColor=#17242c;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="677" y="72" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-0" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#9a690c;strokeWidth=2;" edge="1" parent="1" source="box-0" target="box-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-0" value="CT signal" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="148.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#9a690c;strokeWidth=2;" edge="1" parent="1" source="box-1" target="box-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-1" value="SPI" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="365.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" style="edgeStyle=none;endArrow=block;endFill=1;strokeColor=#9a690c;strokeWidth=2;" edge="1" parent="1" source="box-2" target="box-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="link-2" value="HTTP or MQTT*" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontColor=#334451;fontSize=12;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="582.5" y="49" width="128" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="*MQTT uses a reachable broker. Real watts also need a matched voltage reference." style="text;html=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#334451;fontSize=13;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="26" y="133" width="808" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
