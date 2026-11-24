@@ -81,8 +81,33 @@ if (new URLSearchParams(location.search).get('embed') === '1') {
     <figure>
       <a href="assets/street-ems-flash.svg"><img src="assets/street-ems-flash.svg" width="860" height="174" alt="Laptop connects to ESP32-S3 by USB. The ESP32 and laptop join the same 2.4 GHz hotspot."></a>
     </figure>
-    <h3 id="terminal-setup">Terminal setup</h3>
-    <p>Install Git even if you downloaded the firmware as a ZIP. PlatformIO uses Git to fetch some libraries. If you already use the PlatformIO extension in VS Code, use its built-in terminal for <code>pio</code> and skip the separate PlatformIO Core installation.</p>
+    <h3>Open the project in VS Code</h3>
+    <ol>
+      <li>In VS Code, open <strong>Extensions</strong>, search for <strong>PlatformIO IDE</strong> by PlatformIO, and install it. Let its initial setup finish, then reload VS Code if prompted.</li>
+      <li>Use <strong>Git: Clone</strong> from the Command Palette to clone <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">the firmware repository</a>. Open the cloned folder containing <code>platformio.ini</code> with <strong>File → Open Folder</strong>. Wait for PlatformIO to recognize the project.</li>
+    </ol>
+    <p>PlatformIO includes the tools used below and downloads the ESP32 toolchain and declared libraries during the first build. Keep internet access available for setup. Git must be installed for cloning and library downloads. Ubuntu/Debian users also need <code>python3-venv</code>. The platform-specific installation commands are in the dropdowns at the end of this section. <a href="https://docs.platformio.org/en/stable/integration/ide/vscode.html" target="_blank" rel="noopener">PlatformIO setup guide</a></p>
+    <h3>Configure and upload</h3>
+    <ol>
+      <li>Check that your carrier is marked <strong>NESL 865B</strong> and your module matches the <strong>ESP32-S3 DevKitC-1</strong> target. For another revision or module, get its matching firmware and pin map before flashing. Save any device settings or calibration you need to restore.</li>
+      <li>With the external supply, meter and relays disconnected, plug the laptop into the DevKit's <strong>COM</strong> USB-C port using a data cable. Open <strong>PlatformIO Home → Devices</strong> before and after plugging in to identify the new USB serial port.</li>
+      <li>In the VS Code Explorer, copy <code>include/secrets_example.h</code> to <code>include/secrets.h</code> if it doesn't already exist. Open <code>include/secrets.h</code> and replace the example values with your 2.4 GHz hotspot name and password.
+        <pre><code>#define WIFI_SSID "YourHotspotName"
+#define WIFI_PW "YourHotspotPassword"</code></pre>
+        Both values are case-sensitive. Keep <code>include/secrets.h</code> local and save it before uploading. Connect your laptop to the same hotspot and make sure the hotspot lets connected devices reach one another.
+      </li>
+      <li>In <code>platformio.ini</code>, keep <code>BOARD_VER_V3</code>, <code>ENABLE_WIFI</code> and <code>ENABLE_WEBSERVER</code>. Disable <code>ENABLE_RELAYS</code> for the bench. Start with <code>ENABLE_MQTT</code> disabled unless you have a reachable broker. For the ESP32-only exercise, disable <code>ENABLE_MODBUS_MASTER</code> and <code>METER_TYPE_ATM90E32</code>. For the CircuitSetup exercise, enable both and verify the SPI and chip-select assignments in <code>include/core/pins.h</code> against the carrier.</li>
+      <li>Save your changes. Click the PlatformIO icon in the Activity Bar and expand <strong>Project Tasks → esp32-s3-devkitc-1 → General</strong>. Run <strong>Build</strong>, then <strong>Upload</strong>. Wait for a successful upload. Repeat Upload whenever you change the Wi-Fi credentials.</li>
+      <li>Under the same environment, run <strong>Monitor</strong> to open the serial log at the configured <strong>115200 baud</strong>. If prompted, choose the USB serial port identified above. Typical names are <code>COM5</code> on Windows, <code>/dev/cu.usbmodem1101</code> on macOS, or <code>/dev/ttyUSB0</code> on Linux.</li>
+    </ol>
+    <p>With the monitor open at 115200 baud, tap <strong>EN/RESET</strong>. Look for a line like <code>wifi: YourHotspotName: 192.168.43.27</code>. The last value is the IP address assigned by your hotspot. If it says <code>FAILED</code>, check the hotspot band, name and password, then upload again if you changed the credentials. You can also find the assigned IP in your hotspot’s connected-device list. If the flasher cannot connect, hold <strong>BOOT</strong>, tap <strong>EN/RESET</strong>, then release <strong>BOOT</strong> and retry. After flashing, reset normally. <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32s3/advanced-topics/boot-mode-selection.html">Espressif bootloader guide</a></p>
+
+    <div class="callout">
+      <strong>Step 1 passes when your laptop gets a response from the ESP32</strong>
+      <p>With the laptop on the same hotspot, open <code>http://BOARD_IP/api/dashboard</code>, replacing <code>BOARD_IP</code> with the address printed in the serial log. The board’s web server uses HTTP port <strong>80</strong>, so <code>http://192.168.43.27:80/api/dashboard</code> and <code>http://192.168.43.27/api/dashboard</code> are equivalent for that example IP. The USB serial port is only used for uploading and reading logs. A page of JSON confirms that the firmware is running, the board joined Wi-Fi, and your laptop can reach it. This works with the ESP32 alone. Use the board’s IP address because <code>localhost</code> points to your laptop. If you’ve also uploaded the dashboard files, open <code>http://BOARD_IP/</code> to see the interface.</p>
+    </div>
+    <h3 id="terminal-setup">Other setup options</h3>
+    <p>Expand an option for standalone terminal setup or platform-specific prerequisites.</p>
     <details>
       <summary>macOS · Terminal with Homebrew</summary>
       <pre><code>brew install git platformio
@@ -109,27 +134,14 @@ $env:Path = "$env:USERPROFILE\street-ems-venv\Scripts;$env:Path"
 pio --version</code></pre>
       <p>Repeat the PATH line in each new PowerShell window. If plugging in the board creates no COM port, check Device Manager and install the USB-to-UART driver for your DevKit’s bridge chip if needed.</p>
     </details>
-    <p>From the folder containing <code>platformio.ini</code>, run the first build after setting the Wi-Fi credentials and build flags below. PlatformIO downloads the ESP32 toolchain and libraries declared in <code>lib_deps</code>, including the web server and metering dependencies. The first build needs internet access.</p>
-    <pre><code>pio run -e esp32-s3-devkitc-1</code></pre>
-    <ol>
-      <li>Check that your carrier is marked <strong>NESL 865B</strong> and your module matches the <strong>ESP32-S3 DevKitC-1</strong> target. For another revision or module, get its matching firmware and pin map before flashing. Save any device settings or calibration you need to restore.</li>
-      <li>With the external supply, meter and relays disconnected, plug the laptop into the DevKit's <strong>COM</strong> USB-C port using a data cable. Run <code>pio device list</code> before and after plugging in to identify the new port.</li>
-      <li>Clone or download the <a href="https://github.com/energy-iot/meshems-openami-metering" target="_blank" rel="noopener">OpenAMI metering firmware on GitHub</a> and open the folder containing <code>platformio.ini</code> in PlatformIO. Copy <code>include/secrets_example.h</code> to <code>include/secrets.h</code> if it doesn't already exist. Open <code>include/secrets.h</code> and replace the example values with your 2.4 GHz hotspot name and password.
-        <pre><code>#define WIFI_SSID "YourHotspotName"
-#define WIFI_PW "YourHotspotPassword"</code></pre>
-        Both values are case-sensitive. Keep <code>include/secrets.h</code> local and save it before uploading. Connect your laptop to the same hotspot and make sure the hotspot lets connected devices reach one another.
-      </li>
-      <li>In <code>platformio.ini</code>, keep <code>BOARD_VER_V3</code>, <code>ENABLE_WIFI</code> and <code>ENABLE_WEBSERVER</code>. Disable <code>ENABLE_RELAYS</code> for the bench. Start with <code>ENABLE_MQTT</code> disabled unless you have a reachable broker. For the ESP32-only exercise, disable <code>ENABLE_MODBUS_MASTER</code> and <code>METER_TYPE_ATM90E32</code>. For the CircuitSetup exercise, enable both and verify the SPI and chip-select assignments in <code>include/core/pins.h</code> against the carrier.</li>
-      <li>Open a PlatformIO terminal in the firmware folder. Replace <code>PORT</code> in both commands with the USB serial port you found, such as <code>COM5</code> on Windows, <code>/dev/cu.usbmodem1101</code> on macOS, or <code>/dev/ttyUSB0</code> on Linux. Close any open serial monitor, run the upload command, and wait for it to finish before starting the monitor. Repeat the upload whenever you change the Wi-Fi credentials.</li>
-    </ol>
-    <pre><code>pio run -e esp32-s3-devkitc-1 -t upload --upload-port PORT
+    <details>
+      <summary>Build, upload and monitor from the terminal</summary>
+      <p>In VS Code, open <strong>PlatformIO → Quick Access → Miscellaneous → PlatformIO Core CLI</strong>. It provides <code>pio</code> using the extension’s installed tools. Run these commands from the firmware folder, replacing <code>PORT</code> with your USB serial port. Close the monitor before uploading again.</p>
+      <pre><code>pio device list
+pio run -e esp32-s3-devkitc-1
+pio run -e esp32-s3-devkitc-1 -t upload --upload-port PORT
 pio device monitor --port PORT --baud 115200</code></pre>
-    <p>With the monitor open at 115200 baud, tap <strong>EN/RESET</strong>. Look for a line like <code>wifi: YourHotspotName: 192.168.43.27</code>. The last value is the IP address assigned by your hotspot. If it says <code>FAILED</code>, check the hotspot band, name and password, then upload again if you changed the credentials. You can also find the assigned IP in your hotspot’s connected-device list. If the flasher cannot connect, hold <strong>BOOT</strong>, tap <strong>EN/RESET</strong>, then release <strong>BOOT</strong> and retry. After flashing, reset normally. <a href="https://docs.espressif.com/projects/esptool/en/latest/esp32s3/advanced-topics/boot-mode-selection.html">Espressif bootloader guide</a></p>
-
-    <div class="callout">
-      <strong>Step 1 passes when your laptop gets a response from the ESP32</strong>
-      <p>With the laptop on the same hotspot, open <code>http://BOARD_IP/api/dashboard</code>, replacing <code>BOARD_IP</code> with the address printed in the serial log. The board’s web server uses HTTP port <strong>80</strong>, so <code>http://192.168.43.27:80/api/dashboard</code> and <code>http://192.168.43.27/api/dashboard</code> are equivalent for that example IP. The USB serial port is only used for uploading and reading logs. A page of JSON confirms that the firmware is running, the board joined Wi-Fi, and your laptop can reach it. This works with the ESP32 alone. Use the board’s IP address because <code>localhost</code> points to your laptop. If you’ve also uploaded the dashboard files, open <code>http://BOARD_IP/</code> to see the interface.</p>
-    </div>
+    </details>
   </section>
 
   <section class="training-step training-step--power" aria-labelledby="power">
@@ -168,7 +180,7 @@ pio device monitor --port PORT --baud 115200</code></pre>
     <pre><code>git switch -c safari-park-lab 2fed9b3f97ba1cb85de29c82f8c753cea67042ad
 git apply --check street-ems-safari-park.patch
 git apply street-ems-safari-park.patch</code></pre>
-    <p>Set your Wi-Fi credentials and build flags as in <a href="#flash">Step 1</a>. Enable <code>ENABLE_WEBSERVER</code> in <code>platformio.ini</code> and leave relay control disabled. Close the serial monitor and upload both the firmware and the dashboard files. Replace <code>PORT</code> with your USB serial port.</p>
+    <p>Set your Wi-Fi credentials and build flags as in <a href="#flash">Step 1</a>. Enable <code>ENABLE_WEBSERVER</code> in <code>platformio.ini</code> and leave relay control disabled. In VS Code’s PlatformIO Project Tasks for <strong>esp32-s3-devkitc-1</strong>, run <strong>General → Upload</strong>, then <strong>Platform → Upload Filesystem Image</strong>. Close the serial monitor first. The equivalent terminal commands are below, with <code>PORT</code> replaced by your USB serial port.</p>
     <pre><code>pio run -e esp32-s3-devkitc-1 -t upload --upload-port PORT
 pio run -e esp32-s3-devkitc-1 -t uploadfs --upload-port PORT</code></pre>
     <p>Read the board’s IP from the serial log and open <code>http://BOARD_IP/</code> from the same hotspot. The browser needs internet access to load the map and chart libraries. Check that the map opens at Safari Park. With a working CT on your bench, select the corresponding marker and watch its current change as you switch the test load. The hourly energy chart uses simulated data.</p>
